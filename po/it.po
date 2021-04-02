@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Taskbar 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-15 15:36+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mirko Brombin <send@mirko.pm>\n"
 "Language-Team: IT\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Contributori :"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Una Taskbar moderna e minimalista per XFCE."
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Nuova istanza"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Avvia"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Rimuovi"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Fissa"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Nuova istanza"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Avvia"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Chiudi tutto"
 
@@ -60,7 +61,7 @@ msgstr ""
 "Controlla le impostazioni di Xfce."
 
 #. namespace SettingsDialog
-#: ../src/taskbar.desktop.in.h:1
+#: ../src/docklike.desktop.in.h:1
 msgid "A modern, minimalist taskbar for XFCE"
 msgstr "Una Taskbar moderna e minimale per XFCE"
 
@@ -73,7 +74,8 @@ msgid "Behavior"
 msgstr "Comportamento"
 
 #: ../src/_dialogs.xml.h:3
-msgid "Show list also for a single window"
+#, fuzzy
+msgid "Don't show list for a single window"
 msgstr "Visualizza l'elenco anche per una singola finestra"
 
 #: ../src/_dialogs.xml.h:4
@@ -152,3 +154,9 @@ msgid ""
 msgstr ""
 "<b>Questa funzione è disabilitata.</b>\n"
 "Richiede l'estensione X11 XInput2.0 non presente nel sistema."
+
+#~ msgid "Contributors:"
+#~ msgstr "Contributori :"
+
+#~ msgid "Unpin"
+#~ msgstr "Rimuovi"

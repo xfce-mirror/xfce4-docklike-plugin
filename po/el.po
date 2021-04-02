@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 00:24+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: 2020-12-20 00:24+0200\n"
 "Last-Translator: Lucas Hadjilucas <puzzle@outlook.com>\n"
 "Language-Team: EL\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Συνεργάτες:"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το XFCE."
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Έναρξη νέας εφαρμογής"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Έναρξη εφαρμογής"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Ξεκαρφίτσωμα"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Καρφίτσωμα"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Έναρξη νέας εφαρμογής"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Έναρξη εφαρμογής"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Κλείσιμο όλων των εφαρμογών"
 
@@ -55,7 +56,9 @@ msgstr "<b>Μόνο τα πρώτα %u πλήκτρα πρόσβασης είν�
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
-msgstr "Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη εφαρμογή.\n"
+msgstr ""
+"Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη "
+"εφαρμογή.\n"
 "Παρακαλώ ελέγξτε τις ρυθμίσεις στο XFCE."
 
 #. namespace SettingsDialog
@@ -147,5 +150,13 @@ msgstr "Εναλλαγή στο τελευταίο παράθυρο με το π
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr "<b>Αυτή η λειτουργία είναι απενεργοποιημένη.</b>\n"
-"Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά σας."
+msgstr ""
+"<b>Αυτή η λειτουργία είναι απενεργοποιημένη.</b>\n"
+"Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά "
+"σας."
+
+#~ msgid "Contributors:"
+#~ msgstr "Συνεργάτες:"
+
+#~ msgid "Unpin"
+#~ msgstr "Ξεκαρφίτσωμα"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-10 16:27+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yamada Hayao <hayao@fascode.net>\n"
 "Language-Team: JA\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "貢献者:"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "XFCE用のモダンで小さなタスクバー"
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "新しいウィンドウで起動"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "アプリケーションを起動する"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "ピン留めを解除"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "タスクバーにピン留め"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "新しいウィンドウで起動"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "アプリケーションを起動する"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "全てのウィンドウを閉じる"
 
@@ -152,3 +153,9 @@ msgid ""
 msgstr ""
 "<b>この機能は無効化されています。</b>\n"
 "この機能はシステムから提供されていない X11 XInput2.0 extension が必要です。"
+
+#~ msgid "Contributors:"
+#~ msgstr "貢献者:"
+
+#~ msgid "Unpin"
+#~ msgstr "ピン留めを解除"

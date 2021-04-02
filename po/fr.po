@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-10 16:27+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Nicolas Szabo <nszabo@vivaldi.net>\n"
 "Language-Team: FR\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Contributeurs :"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Une barre des tâches moderne et minimaliste pour XFCE"
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Nouvelle instance"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Lancer"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Désépingler"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Épingler"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Nouvelle instance"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Lancer"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Tout fermer"
 
@@ -154,3 +155,9 @@ msgstr ""
 "<b>Cette fonction est désactivée.</b>\n"
 "Elle nécéssite l'extension X11 XInput2.0 qui n'est pas fournie par votre "
 "système."
+
+#~ msgid "Contributors:"
+#~ msgstr "Contributeurs :"
+
+#~ msgid "Unpin"
+#~ msgstr "Désépingler"

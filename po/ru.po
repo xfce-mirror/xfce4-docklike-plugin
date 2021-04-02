@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-10 16:27+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: 2020-09-13 16:13+0400\n"
 "Last-Translator: Dmitry K <dkabishchev@ya.ru>\n"
 "Language-Team: RU\n"
@@ -16,31 +16,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "При участии:"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Простая и современная панель задач для XFCE"
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Новое окно"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Запустить"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Открепить"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Закрепить"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Новое окно"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Запустить"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Закрыть все окна"
 
@@ -151,3 +152,9 @@ msgstr ""
 "<b>Эта функция недоступна.</b>\n"
 "Для её работы необходим X11 XInput2.0, который, вероятно, отсутствует в "
 "вашей системе."
+
+#~ msgid "Contributors:"
+#~ msgstr "При участии:"
+
+#~ msgid "Unpin"
+#~ msgstr "Открепить"

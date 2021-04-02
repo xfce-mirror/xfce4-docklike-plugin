@@ -7,42 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-10 16:27+0200\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: 2021-02-10 15:35+0100\n"
+"Last-Translator: Matthaiks\n"
 "Language-Team: \n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4\n"
-"Last-Translator: Matthaiks\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Współtwórcy:"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Nowoczesny, minimalistyczny pasek zadań dla XFCE."
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Uruchom kolejne"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Uruchom"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Odepnij"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Przypnij"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Uruchom kolejne"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Uruchom"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Zamknij wszystkie"
 
@@ -57,7 +59,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Wydaje się, że kombinacja &lt;SUPER&gt;+%u jest już używana przez inny proces.\n"
+"Wydaje się, że kombinacja &lt;SUPER&gt;+%u jest już używana przez inny "
+"proces.\n"
 "Sprawdź ustawienia Xfce."
 
 #. namespace SettingsDialog
@@ -151,4 +154,11 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Ta funkcja jest wyłączona.</b>\n"
-"Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten system."
+"Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten "
+"system."
+
+#~ msgid "Contributors:"
+#~ msgstr "Współtwórcy:"
+
+#~ msgid "Unpin"
+#~ msgstr "Odepnij"

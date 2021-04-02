@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 19:00-0300\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Santiago Soler <santiago.r.soler@gmail.com>\n"
 "Language-Team: DE\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Mitwirkende :"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Eine moderne und minimalistische Taskleiste für XFCE."
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Starte einen Weiteren"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Starten"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Lösen"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Anheften"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Starte einen Weiteren"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Starten"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Alle schließen"
 
@@ -56,7 +57,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Die Kombination &lt;SUPER&gt;+%u scheint bereits von einem anderen Prozess verwendet zu werden. \n"
+"Die Kombination &lt;SUPER&gt;+%u scheint bereits von einem anderen Prozess "
+"verwendet zu werden. \n"
 "Überprüfen Sie Ihre Xfce-Einstellungen."
 
 #. namespace SettingsDialog
@@ -151,4 +153,11 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Diese Funktion ist deaktiviert.</b>\n"
-"Es erfordert die X11 XInput2.0-Erweiterung, die nicht von Ihrem System bereitgestellt wird."
+"Es erfordert die X11 XInput2.0-Erweiterung, die nicht von Ihrem System "
+"bereitgestellt wird."
+
+#~ msgid "Contributors:"
+#~ msgstr "Mitwirkende :"
+
+#~ msgid "Unpin"
+#~ msgstr "Lösen"

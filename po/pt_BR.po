@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 15:25-0300\n"
+"POT-Creation-Date: 2021-04-02 01:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fábio Meneghetti <fabiom@riseup.net>\n"
 "Language-Team: PT_BR\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:78
-msgid "Contributors:"
-msgstr "Contribuidores"
-
-#: ../src/Plugin.cpp:89
+#: ../src/Plugin.cpp:101
 msgid "A modern, minimalist taskbar for XFCE."
 msgstr "Uma barra de tarefas moderna e minimalista para o Xfce."
 
-#: ../src/Wnck.cpp:185
-msgid "Launch another"
-msgstr "Iniciar outra"
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr ""
 
-#: ../src/Wnck.cpp:185
-msgid "Launch"
-msgstr "Iniciar"
-
-#: ../src/Wnck.cpp:200
-msgid "Unpin"
-msgstr "Desfixar"
-
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:208
 msgid "Pin"
 msgstr "Fixar"
 
-#: ../src/Wnck.cpp:223
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr ""
+
+#: ../src/Wnck.cpp:210
+#, fuzzy
+msgid "Launch Another"
+msgstr "Iniciar outra"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Iniciar"
+
+#: ../src/Wnck.cpp:247
 msgid "Close All"
 msgstr "Fechar todas"
 
@@ -55,7 +56,8 @@ msgstr "<b>Apenas o(s) %u primeiros atalhos estão habilitados.</b>\n"
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
-msgstr "A combinação &lt;SUPER&gt;+%u parece já estar em uso por outro processo.\n"
+msgstr ""
+"A combinação &lt;SUPER&gt;+%u parece já estar em uso por outro processo.\n"
 "Verifique as configurações do Xfce."
 
 #. namespace SettingsDialog
@@ -147,5 +149,12 @@ msgstr "Alternar para a última janela com <SUPER>"
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr "<b>Este recurso está desabilitado.</b>\n"
+msgstr ""
+"<b>Este recurso está desabilitado.</b>\n"
 "Ele requer a extensão X11 XInput2.0, que não é fornecida pelo seu sistema."
+
+#~ msgid "Contributors:"
+#~ msgstr "Contribuidores"
+
+#~ msgid "Unpin"
+#~ msgstr "Desfixar"
