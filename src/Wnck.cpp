@@ -202,26 +202,25 @@ namespace Wnck
 					}),
 					appInfo);
 			}
-			
+
 			if (group != NULL)
 			{
 				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned") : _("Pin"));
 				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit"));
 				GtkWidget* launchAnother = gtk_menu_item_new_with_label((groupWindow != NULL) ? _("Launch Another") : _("Launch"));
-				
+
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-				
+
 				/* TODO: Editing desktop items. Disabled for now. 
-				The changes won't appear until the panel is reloaded, 
-				and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
-				if you're editing something that was in /usr/share/applications (etc.).
-				This means pinned apps won't get updated and the user needs to relaunch/pin them.
-				*/
+				 * The changes won't appear until the panel is reloaded, 
+				 * and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
+				 * if you're editing something that was in /usr/share/applications (etc.).
+				 * This means pinned apps won't get updated and the user needs to relaunch/pin them. */
 				// gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
 				gtk_menu_attach(GTK_MENU(menu), launchAnother, 0, 1, 0, 1);
-				gtk_menu_attach(GTK_MENU(menu), pinToggle, 1, 2, 0, 1);		
-				
+				gtk_menu_attach(GTK_MENU(menu), pinToggle, 1, 2, 0, 1);
+
 				g_signal_connect(G_OBJECT(pinToggle), "toggled",
 					G_CALLBACK(+[](GtkCheckMenuItem* menuitem, Group* group) {
 						group->mPinned = !group->mPinned;
@@ -236,17 +235,17 @@ namespace Wnck
 						appInfo->edit();
 					}),
 					appInfo);
-				
+
 				g_signal_connect(G_OBJECT(launchAnother), "activate",
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
 						appInfo->launch();
 					}),
 					appInfo);
-				
+
 				if (group->mWindowsCount > 1)
 				{
 					GtkWidget* closeAll = gtk_menu_item_new_with_label(_("Close All"));
-					
+
 					gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 					gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
 
@@ -259,10 +258,10 @@ namespace Wnck
 			}
 
 			gtk_widget_show_all(menu);
-			
+
 			return menu;
 		}
-		
+
 		return FALSE;
 	}
 
