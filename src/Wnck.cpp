@@ -179,108 +179,90 @@ namespace Wnck
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
 		GtkWidget* menu = (groupWindow != NULL && !groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST)) ? wnck_action_menu_new(groupWindow->mWnckWindow) : gtk_menu_new();
-
 		AppInfo* appInfo = (groupWindow != NULL) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
 		{
-			GtkWidget* launchAnother = gtk_menu_item_new_with_label((groupWindow != NULL) ? _("Launch another") : _("Launch"));
+			for (int i = 0; appInfo->actions[i]; i++)
+			{
+				// Desktop actions get inserted into the menu above all the window manager controls.
+				// We need an extra separator only if the application is running.
+				if (i == 0 && group->mSOpened)
+					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
-			gtk_widget_show(launchAnother);
+				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
+				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i])));
 
-			gtk_menu_attach(GTK_MENU(menu), GTK_WIDGET(launchAnother), 0, 1, 0, 1);
+				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
+				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
 
-			g_signal_connect(G_OBJECT(launchAnother), "activate",
-				G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-					appInfo->launch();
-				}),
-				appInfo);
-
+				g_signal_connect(G_OBJECT(actionLauncher), "activate",
+					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
+						appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
+					}),
+					appInfo);
+			}
+			
 			if (group != NULL)
 			{
-				GtkWidget* separator = gtk_separator_menu_item_new();
-				GtkWidget* pinToggle = gtk_menu_item_new_with_label(group->mPinned ? _("Unpin") : _("Pin"));
-
-				gtk_widget_show(separator);
-				gtk_widget_show(pinToggle);
-
-				gtk_menu_attach(GTK_MENU(menu), GTK_WIDGET(separator), 1, 2, 0, 1);
-				gtk_menu_attach(GTK_MENU(menu), GTK_WIDGET(pinToggle), 1, 2, 0, 1);
-
-				g_signal_connect(G_OBJECT(pinToggle), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group) {
+				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned") : _("Pin"));
+				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit"));
+				GtkWidget* launchAnother = gtk_menu_item_new_with_label((groupWindow != NULL) ? _("Launch Another") : _("Launch"));
+				
+				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+				
+				/* TODO: Editing desktop items. Disabled for now. 
+				The changes won't appear until the panel is reloaded, 
+				and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
+				if you're editing something that was in /usr/share/applications (etc.).
+				This means pinned apps won't get updated and the user needs to relaunch/pin them.
+				*/
+				// gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+				gtk_menu_attach(GTK_MENU(menu), launchAnother, 0, 1, 0, 1);
+				gtk_menu_attach(GTK_MENU(menu), pinToggle, 1, 2, 0, 1);		
+				
+				g_signal_connect(G_OBJECT(pinToggle), "toggled",
+					G_CALLBACK(+[](GtkCheckMenuItem* menuitem, Group* group) {
 						group->mPinned = !group->mPinned;
 						if (!group->mPinned)
 							group->updateStyle();
 						Dock::savePinned();
 					}),
 					group);
-			}
 
-			if (group != NULL && group->mWindowsCount > 1)
-			{
-				GtkWidget* separator = gtk_separator_menu_item_new();
-				gtk_widget_show(separator);
-
-				GtkWidget* closeAll = gtk_menu_item_new_with_label(_("Close All"));
-				gtk_widget_show(closeAll);
-
-				gtk_menu_shell_append(GTK_MENU_SHELL(menu), separator);
-				gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
-
-				g_signal_connect(G_OBJECT(closeAll), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group) {
-						group->closeAll();
+				g_signal_connect(G_OBJECT(editLauncher), "activate",
+					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
+						appInfo->edit();
 					}),
-					group);
-			}
-
-			if (!appInfo->path.empty())
-			{
-				for (int i = 0; appInfo->actions[i]; i++)
+					appInfo);
+				
+				g_signal_connect(G_OBJECT(launchAnother), "activate",
+					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
+						appInfo->launch();
+					}),
+					appInfo);
+				
+				if (group->mWindowsCount > 1)
 				{
-					if (i == 0 && group->mSOpened)
-					{
-						GtkWidget* separator = gtk_separator_menu_item_new();
-						gtk_widget_show(separator);
-						gtk_menu_shell_insert(GTK_MENU_SHELL(menu), separator, 0);
-					}
+					GtkWidget* closeAll = gtk_menu_item_new_with_label(_("Close All"));
+					
+					gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+					gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
 
-					GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-					GtkWidget* m = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i])));
-
-					g_object_set_data((GObject*)m, "action", (gpointer)appInfo->actions[i]);
-					gtk_widget_show(m);
-					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), m, 0 + i);
-
-					g_signal_connect(G_OBJECT(m), "activate",
-						G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-							appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
+					g_signal_connect(G_OBJECT(closeAll), "activate",
+						G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group) {
+							group->closeAll();
 						}),
-						appInfo);
+						group);
 				}
 			}
 
-			/* TODO: The editing desktop files thing doesn't totally work. Disabled for now. 
-					 The changes won't appear until the panel is reloaded, 
-					 and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
-					 if you're editing something that was in /usr/share/applications (etc.).
-					 This means pinned apps won't get updated and the user needs to relaunch/pin them.
+			gtk_widget_show_all(menu);
 			
-			GtkWidget* m = gtk_menu_item_new_with_label(_("Edit"));
-			gtk_widget_show(m);
-			gtk_menu_shell_insert(GTK_MENU_SHELL(menu), m, 0);
-
-			g_signal_connect(G_OBJECT(m), "activate",
-				G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-					appInfo->edit();
-				}),
-				appInfo);
-			
-			*/
-
 			return menu;
 		}
+		
 		return FALSE;
 	}
 
