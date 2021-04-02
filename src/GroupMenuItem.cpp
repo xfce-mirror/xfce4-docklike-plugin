@@ -121,6 +121,11 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
+	/* TODO: 
+	 * Create a timeout to update the previews in the background 
+	 * Settings dialog: enable/disable and preview size
+	*/
+	
 	if (GDK_IS_X11_DISPLAY (Plugin::display))
 	{
 		gulong xid;
@@ -147,6 +152,5 @@ void GroupMenuItem::updatePreview()
 		}
 		else
 			gtk_image_clear(mPreview);
-		
 	}
 }
