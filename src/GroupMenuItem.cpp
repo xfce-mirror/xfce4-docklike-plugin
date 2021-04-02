@@ -35,6 +35,13 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
+	if (GDK_IS_X11_DISPLAY (Plugin::display))
+	{
+		mPreview = (GtkImage*)gtk_image_new();
+		gtk_widget_show(GTK_WIDGET(mPreview));
+		gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
+	}
+
 	g_object_ref(mItem);
 
 	mDragSwitchTimeout.setup(250, [this]() {
@@ -110,4 +117,36 @@ void GroupMenuItem::updateIcon()
 	GdkPixbuf* iconPixbuf = Wnck::getMiniIcon(mGroupWindow);
 	if (iconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
+}
+
+void GroupMenuItem::updatePreview()
+{
+	if (GDK_IS_X11_DISPLAY (Plugin::display))
+	{
+		gulong xid;
+		GdkWindow* win;
+		GdkPixbuf* tmp_pb;
+		GdkPixbuf* pb;
+		
+		xid = wnck_window_get_xid(mGroupWindow->mWnckWindow);
+		
+		if (xid)
+		{
+			win = gdk_x11_window_foreign_new_for_display(Plugin::display, xid);
+			tmp_pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+			
+			if (tmp_pb)
+			{
+				pb = gdk_pixbuf_scale_simple(tmp_pb, 240, 180, GDK_INTERP_BILINEAR);
+				gtk_image_set_from_pixbuf(mPreview, pb);
+			}
+			else
+				gtk_image_clear(mPreview);
+			
+			g_object_unref(tmp_pb);
+		}
+		else
+			gtk_image_clear(mPreview);
+		
+	}
 }

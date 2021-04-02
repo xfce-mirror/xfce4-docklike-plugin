@@ -25,6 +25,7 @@ class GroupMenuItem
 
 	void updateLabel();
 	void updateIcon();
+	void updatePreview();
 
 	GroupWindow* mGroupWindow;
 
@@ -33,6 +34,7 @@ class GroupMenuItem
 	GtkImage* mIcon;
 	GtkLabel* mLabel;
 	GtkButton* mCloseButton;
+	GtkImage* mPreview;
 
 	Help::Gtk::Timeout mDragSwitchTimeout;
 };

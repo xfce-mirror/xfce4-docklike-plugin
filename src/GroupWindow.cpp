@@ -79,6 +79,7 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	mGroupMenuItem->updateIcon();
 	mGroupMenuItem->updateLabel();
+	mGroupMenuItem->updatePreview();
 }
 
 GroupWindow::~GroupWindow()

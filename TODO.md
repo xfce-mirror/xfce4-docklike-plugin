@@ -1,6 +1,7 @@
 # TODO
 
 + Simplify Theme.cpp
++ Window previews configuration
 + Editing launchers with exo-desktop-item-edit
 + Exotic windows : Libreoffice / Openoffice (imply changing the group of a window)
 
