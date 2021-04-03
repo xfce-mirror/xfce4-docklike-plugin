@@ -71,9 +71,13 @@ Fast application switching : by hovering mouse while button pressed or scrolling
 
 ![screenshot](https://i.imgur.com/bpR1E6j.jpg)
 
+Window previews (disabled by default):
+
+![screenshot](https://imgur.com/GahMRuw.jpg)
+
 Use your Super key to start or switch applications extremely fast:
 
-![screenshot](https://i.imgur.com/OykcJlT.png)
+![screenshot](https://i.imgur.com/W69mmD2.png)
 
 Different indicator styles:
 
