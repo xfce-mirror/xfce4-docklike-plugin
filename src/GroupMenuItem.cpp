@@ -34,7 +34,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mCloseButton = (GtkButton*)gtk_button_new_with_label("⨯");
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
-	
+
 	mPreview = (GtkImage*)gtk_image_new();
 	gtk_widget_show(GTK_WIDGET(mPreview));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
@@ -125,14 +125,14 @@ void GroupMenuItem::updatePreview()
 		GdkWindow* win;
 		GdkPixbuf* tmp_pb;
 		GdkPixbuf* pb;
-		
+
 		xid = wnck_window_get_xid(mGroupWindow->mWnckWindow);
-		
+
 		if (xid)
 		{
 			win = gdk_x11_window_foreign_new_for_display(Plugin::display, xid);
 			tmp_pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
-			
+
 			if (tmp_pb)
 			{
 				pb = gdk_pixbuf_scale_simple(tmp_pb, 240, 180, GDK_INTERP_BILINEAR);

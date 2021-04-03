@@ -136,7 +136,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			me->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
 			});
-			
+
 			me->setStyle(Style::Hover, true);
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();

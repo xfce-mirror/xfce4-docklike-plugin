@@ -151,7 +151,7 @@ namespace SettingsDialog
 			iconSize);
 
 		// =====================================================================
-		
+
 		GObject* showPreviews = gtk_builder_get_object(builder, "c_showPreviews");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showPreviews), Settings::showPreviews);
 		g_signal_connect(showPreviews, "toggled",
@@ -159,7 +159,7 @@ namespace SettingsDialog
 				Settings::showPreviews.set(gtk_toggle_button_get_active(showPreviews));
 			}),
 			NULL);
-		
+
 		// =====================================================================
 
 		GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
@@ -182,7 +182,7 @@ namespace SettingsDialog
 				Settings::keyAloneActive.set(gtk_toggle_button_get_active(keyAloneActive));
 			}),
 			NULL);
-		
+
 		if (!Hotkeys::mXIExtAvailable)
 		{
 			gtk_widget_set_sensitive(GTK_WIDGET(keyAloneActive), false);

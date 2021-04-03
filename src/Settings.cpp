@@ -54,7 +54,6 @@ namespace Settings
 				g_key_file_set_boolean(mFile, "user", "showPreviews", showPreviews);
 				saveFile();
 			});
-		
 
 		indicatorOrientation.setup(g_key_file_get_integer(mFile, "user", "indicatorOrientation", NULL),
 			[](int indicatorOrientation) -> void {

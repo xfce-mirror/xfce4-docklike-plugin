@@ -200,7 +200,7 @@ void GroupWindow::updateState()
 	}
 	else
 		leaveGroup();
-	
+
 	// TODO: Delete me when timeout added
 	mGroupMenuItem->updatePreview();
 
