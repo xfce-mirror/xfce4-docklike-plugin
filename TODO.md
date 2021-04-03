@@ -1,5 +1,6 @@
 # TODO
 
++ Better defaults: set indicator orientation, turn on features
 + Simplify Theme.cpp
 + Investigate memory leakage with valgrind
 + Configurable thumbnail size

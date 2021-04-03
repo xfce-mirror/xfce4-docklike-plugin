@@ -1,6 +1,6 @@
 # Docklike Taskbar for XFCE
 
-A modern, docklike, minimalist taskbar for XFCE
+A modern, minimalist taskbar for XFCE
 
 ![screenshot](https://i.imgur.com/b4qDHCB.jpg)
 
