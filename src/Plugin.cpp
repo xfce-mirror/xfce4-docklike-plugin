@@ -5,10 +5,8 @@
  */
 
 #include "Plugin.hpp"
-
 #include "Helpers.hpp"
 
-/* the website url */
 #define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
 
 namespace Plugin
@@ -98,24 +96,13 @@ namespace Plugin
 		gtk_show_about_dialog(NULL,
 			"program-name", "Docklike Taskbar",
 			"logo-icon-name", "preferences-system-windows",
-			"comments", _("A modern, minimalist taskbar for XFCE."),
 			"version", PACKAGE_VERSION,
 			"copyright", "Copyright © 2019-2021",
-			"license", "This program is free software : you can redistribute it and / or modify it under\n"
-					   "the terms of the GNU General Public License as published by the Free Software\n"
-					   "Foundation, either version 3 of the License, or (at your option) any later version.\n\n"
-
-					   "This program is distributed in the hope that it will be useful, but WITHOUT ANY\n"
-					   "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS\n"
-					   "FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\n"
-
-					   "You should have received a copy of the GNU General Public License\n"
-					   "along with this program.  If not, see <https://www.gnu.org/licenses/>.",
+			"license-type", GTK_LICENSE_GPL_3_0,
 			"website", PLUGIN_WEBSITE,
-			"website-label", "xfce4-docklike-plugin",
+			"website-label", PLUGIN_WEBSITE,
 			"authors", authors,
 			"translator-credits", translators,
-			//"documenters", documenters,
 			NULL);
 	}
 
