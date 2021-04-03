@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Taskbar 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Mirko Brombin <send@mirko.pm>\n"
 "Language-Team: IT\n"
@@ -70,26 +70,25 @@ msgid "_Close"
 msgstr "Chiudi"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Comportamento"
-
-#: ../src/_dialogs.xml.h:3
 #, fuzzy
 msgid "Don't show list for a single window"
 msgstr "Visualizza l'elenco anche per una singola finestra"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Mostra solo le applicazioni dall'area di lavoro corrente"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Mostra solo le applicazioni dalla visualizzazione corrente"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-#, fuzzy
-msgid "Appearance"
-msgstr "Aspetto"
+msgid "Behavior"
+msgstr "Comportamento"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -136,8 +135,9 @@ msgid "Force icons size :"
 msgstr "Forza dimensione icone :"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Scarciatoie tastiera"
+#, fuzzy
+msgid "Appearance"
+msgstr "Aspetto"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -154,6 +154,10 @@ msgid ""
 msgstr ""
 "<b>Questa funzione è disabilitata.</b>\n"
 "Richiede l'estensione X11 XInput2.0 non presente nel sistema."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Scarciatoie tastiera"
 
 #~ msgid "Contributors:"
 #~ msgstr "Contributori :"

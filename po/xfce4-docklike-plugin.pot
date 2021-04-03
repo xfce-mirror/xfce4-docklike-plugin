@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,23 +67,23 @@ msgid "_Close"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr ""
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr ""
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
+msgid "Behavior"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:7
@@ -131,7 +131,7 @@ msgid "Force icons size :"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
+msgid "Appearance"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:19
@@ -146,4 +146,8 @@ msgstr ""
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
 msgstr ""

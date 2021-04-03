@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: 2021-02-10 15:35+0100\n"
 "Last-Translator: Matthaiks\n"
 "Language-Team: \n"
@@ -73,24 +73,24 @@ msgid "_Close"
 msgstr "_Zamknij"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Zachowanie"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Nie pokazuj listy dla pojedynczego okna"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Pokazuj tylko aplikacje z bieżącego obszaru roboczego"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Pokazuj tylko aplikacje z bieżącego ekranu"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
-msgstr "Wygląd"
+msgid "Behavior"
+msgstr "Zachowanie"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -137,8 +137,8 @@ msgid "Force icons size :"
 msgstr "Wymuś rozmiar ikon:"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Skróty klawiszowe"
+msgid "Appearance"
+msgstr "Wygląd"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -156,6 +156,10 @@ msgstr ""
 "<b>Ta funkcja jest wyłączona.</b>\n"
 "Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten "
 "system."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Skróty klawiszowe"
 
 #~ msgid "Contributors:"
 #~ msgstr "Współtwórcy:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: 2020-12-23 15:59+0000\n"
 "Last-Translator: Jan Kazemier <j.kazemier@gmail.com>\n"
 "Language-Team: NL\n"
@@ -70,24 +70,24 @@ msgid "_Close"
 msgstr "Sluiten"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Gedrag"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Toon geen lijst voor een enkel venster"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Alleen applicaties uit de huidige werkruimte tonen"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Alleen applicaties op het huidige beeldscherm tonen"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
-msgstr "Uiterlijk"
+msgid "Behavior"
+msgstr "Gedrag"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -134,8 +134,8 @@ msgid "Force icons size :"
 msgstr "Forceer icoongrootte:"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Sneltoetsen"
+msgid "Appearance"
+msgstr "Uiterlijk"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -153,6 +153,10 @@ msgstr ""
 "<b>Deze functie is niet beschikbaar.</b>\n"
 "Deze functie heeft de X11 XInput2.0-extentie nodig, welke niet op uw systeem "
 "beschikbaar is."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Sneltoetsen"
 
 #~ msgid "Contributors:"
 #~ msgstr "Bijdragers:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Fábio Meneghetti <fabiom@riseup.net>\n"
 "Language-Team: PT_BR\n"
@@ -70,24 +70,24 @@ msgid "_Close"
 msgstr "Fechar"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Comportamento"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Não mostrar lista para janela única"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Mostrar apenas aplicativos na área de trabalho atual"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Mostrar apenas aplicativos no monitor atual"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
-msgstr "Aparência"
+msgid "Behavior"
+msgstr "Comportamento"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -134,8 +134,8 @@ msgid "Force icons size :"
 msgstr "Forçar tamanho dos ícones:"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Atalhos de teclado"
+msgid "Appearance"
+msgstr "Aparência"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -152,6 +152,10 @@ msgid ""
 msgstr ""
 "<b>Este recurso está desabilitado.</b>\n"
 "Ele requer a extensão X11 XInput2.0, que não é fornecida pelo seu sistema."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Atalhos de teclado"
 
 #~ msgid "Contributors:"
 #~ msgstr "Contribuidores"

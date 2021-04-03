@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Adem Kürşat UZUN <ademkursatuzun@gmail.com>\n"
 "Language-Team: TR\n"
@@ -71,25 +71,24 @@ msgid "_Close"
 msgstr "_Kapat"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Davranış"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Listeyi tek pencerede gösterme"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Sadece mevcut çalışma alanındaki uygulamaları göster"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Sadece mevcut ekrandaki uygulamaları göster"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-#, fuzzy
-msgid "Appearance"
-msgstr "Görünüm"
+msgid "Behavior"
+msgstr "Davranış"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -136,8 +135,9 @@ msgid "Force icons size :"
 msgstr "Simgelerin boyutlarını zorla :"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Klavye kısayol tuşları"
+#, fuzzy
+msgid "Appearance"
+msgstr "Görünüm"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -154,6 +154,10 @@ msgid ""
 msgstr ""
 "<b>Bu özellik kapalı.</b>\n"
 "Sisteminiz tarafından sağlanmayan X11 XInput2.0 eklentisini gerektiriyor."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Klavye kısayol tuşları"
 
 #~ msgid "Contributors:"
 #~ msgstr "Katkıda bulunanlar :"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: 2020-09-13 16:13+0400\n"
 "Last-Translator: Dmitry K <dkabishchev@ya.ru>\n"
 "Language-Team: RU\n"
@@ -69,24 +69,24 @@ msgid "_Close"
 msgstr "Закрыть"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Поведение"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Скрыть выпадающий список для одинарных окон"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Показывать окна только с текущего рабочего места"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Показывать окна только с текущего монитора"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
-msgstr "Внешний вид"
+msgid "Behavior"
+msgstr "Поведение"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -133,8 +133,8 @@ msgid "Force icons size :"
 msgstr "Размер значков:"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Комбинации клавиш"
+msgid "Appearance"
+msgstr "Внешний вид"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -152,6 +152,10 @@ msgstr ""
 "<b>Эта функция недоступна.</b>\n"
 "Для её работы необходим X11 XInput2.0, который, вероятно, отсутствует в "
 "вашей системе."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Комбинации клавиш"
 
 #~ msgid "Contributors:"
 #~ msgstr "При участии:"

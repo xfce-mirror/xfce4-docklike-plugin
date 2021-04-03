@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 01:49-0700\n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
 "PO-Revision-Date: 2020-12-20 00:24+0200\n"
 "Last-Translator: Lucas Hadjilucas <puzzle@outlook.com>\n"
 "Language-Team: EL\n"
@@ -71,24 +71,24 @@ msgid "_Close"
 msgstr "_Κλείσιμο"
 
 #: ../src/_dialogs.xml.h:2
-msgid "Behavior"
-msgstr "Συμπεριφορά"
-
-#: ../src/_dialogs.xml.h:3
 msgid "Don't show list for a single window"
 msgstr "Μή εμφάνισή λίστας για ένα μόνο παράθυρο"
 
-#: ../src/_dialogs.xml.h:4
+#: ../src/_dialogs.xml.h:3
 msgid "Show only applications from the current workspace"
 msgstr "Εμφάνιση εφαρμογών μόνο απο την παρούσα επιφάνειας εργασίας"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:4
 msgid "Show only applications from the current display"
 msgstr "Εμφάνιση εφαρμογών μόνο απο την παρούσα οθόνη"
 
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr ""
+
 #: ../src/_dialogs.xml.h:6
-msgid "Appearance"
-msgstr "Παρουσίαση"
+msgid "Behavior"
+msgstr "Συμπεριφορά"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Indicator style :"
@@ -135,8 +135,8 @@ msgid "Force icons size :"
 msgstr "Περιορισμός μεγέθους εικονιδίων :"
 
 #: ../src/_dialogs.xml.h:18
-msgid "Keyboard hotkeys"
-msgstr "Συνδυασμοί πληκτρολογίου"
+msgid "Appearance"
+msgstr "Παρουσίαση"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -154,6 +154,10 @@ msgstr ""
 "<b>Αυτή η λειτουργία είναι απενεργοποιημένη.</b>\n"
 "Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά "
 "σας."
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Συνδυασμοί πληκτρολογίου"
 
 #~ msgid "Contributors:"
 #~ msgstr "Συνεργάτες:"
