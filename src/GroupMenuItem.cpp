@@ -34,13 +34,10 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mCloseButton = (GtkButton*)gtk_button_new_with_label("⨯");
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
-
-	if (GDK_IS_X11_DISPLAY (Plugin::display))
-	{
-		mPreview = (GtkImage*)gtk_image_new();
-		gtk_widget_show(GTK_WIDGET(mPreview));
-		gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
-	}
+	
+	mPreview = (GtkImage*)gtk_image_new();
+	gtk_widget_show(GTK_WIDGET(mPreview));
+	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
 
 	g_object_ref(mItem);
 
@@ -119,14 +116,10 @@ void GroupMenuItem::updateIcon()
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
 }
 
+//
 void GroupMenuItem::updatePreview()
 {
-	/* TODO: 
-	 * Create a timeout to update the previews in the background 
-	 * Settings dialog: enable/disable and preview size
-	*/
-	
-	if (GDK_IS_X11_DISPLAY (Plugin::display))
+	if (Settings::showPreviews)
 	{
 		gulong xid;
 		GdkWindow* win;
@@ -145,12 +138,14 @@ void GroupMenuItem::updatePreview()
 				pb = gdk_pixbuf_scale_simple(tmp_pb, 240, 180, GDK_INTERP_BILINEAR);
 				gtk_image_set_from_pixbuf(mPreview, pb);
 			}
-			else
-				gtk_image_clear(mPreview);
-			
+
+			gtk_widget_show(GTK_WIDGET(mPreview));
+
+			g_object_unref(pb);
 			g_object_unref(tmp_pb);
+			g_object_unref(win);
 		}
-		else
-			gtk_image_clear(mPreview);
 	}
+	else
+		gtk_widget_hide(GTK_WIDGET(mPreview));
 }

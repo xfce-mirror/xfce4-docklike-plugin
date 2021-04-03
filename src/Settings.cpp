@@ -25,6 +25,8 @@ namespace Settings
 	State<bool> keyComboActive;
 	State<bool> keyAloneActive;
 
+	State<bool> showPreviews;
+
 	State<std::list<std::string>> pinnedAppList;
 
 	void init()
@@ -46,6 +48,13 @@ namespace Settings
 
 			g_free(default_config);
 		}
+
+		showPreviews.setup(g_key_file_get_boolean(mFile, "user", "showPreviews", NULL),
+			[](bool showPreviews) -> void {
+				g_key_file_set_boolean(mFile, "user", "showPreviews", showPreviews);
+				saveFile();
+			});
+		
 
 		indicatorOrientation.setup(g_key_file_get_integer(mFile, "user", "indicatorOrientation", NULL),
 			[](int indicatorOrientation) -> void {

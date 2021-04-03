@@ -1,7 +1,8 @@
 # TODO
 
 + Simplify Theme.cpp
-+ Window previews configuration
++ Investigate memory leakage with valgrind
++ Configurable thumbnail size
 + Editing launchers with exo-desktop-item-edit
 + Exotic windows : Libreoffice / Openoffice (imply changing the group of a window)
 

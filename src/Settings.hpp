@@ -40,6 +40,8 @@ namespace Settings
 	extern State<bool> keyComboActive;
 	extern State<bool> keyAloneActive;
 
+	extern State<bool> showPreviews;
+
 	extern State<std::list<std::string>> pinnedAppList;
 
 }; // namespace Settings
