@@ -31,11 +31,13 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
-	mCloseButton = (GtkButton*)gtk_button_new_with_label("⨯");
+	mCloseButton = (GtkButton*)gtk_button_new_from_icon_name("close", GTK_ICON_SIZE_MENU);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
 	mPreview = (GtkImage*)gtk_image_new();
+	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
+	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
 	gtk_widget_show(GTK_WIDGET(mPreview));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
 
@@ -116,12 +118,12 @@ void GroupMenuItem::updateIcon()
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
 }
 
-//
 void GroupMenuItem::updatePreview()
 {
 	if (Settings::showPreviews)
 	{
 		gulong xid;
+		gint w, h;
 		GdkWindow* win;
 		GdkPixbuf* tmp_pb;
 		GdkPixbuf* pb;
@@ -135,7 +137,10 @@ void GroupMenuItem::updatePreview()
 
 			if (tmp_pb)
 			{
-				pb = gdk_pixbuf_scale_simple(tmp_pb, 240, 180, GDK_INTERP_BILINEAR);
+				w = gdk_pixbuf_get_width(tmp_pb) / 8;
+				h = gdk_pixbuf_get_height(tmp_pb) / 8;
+
+				pb = gdk_pixbuf_scale_simple(tmp_pb, w, h, GDK_INTERP_BILINEAR);
 				gtk_image_set_from_pixbuf(mPreview, pb);
 			}
 
