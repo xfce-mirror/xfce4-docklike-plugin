@@ -90,6 +90,10 @@ void GroupMenu::popup()
 		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		gtk_widget_show(mWindow);
 
+		mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+			w->mGroupMenuItem->updatePreview();
+		});
+
 		gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 
 		mVisible = true;

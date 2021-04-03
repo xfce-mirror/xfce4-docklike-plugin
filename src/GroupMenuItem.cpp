@@ -142,13 +142,12 @@ void GroupMenuItem::updatePreview()
 
 				pb = gdk_pixbuf_scale_simple(tmp_pb, w, h, GDK_INTERP_BILINEAR);
 				gtk_image_set_from_pixbuf(mPreview, pb);
+				gtk_widget_show(GTK_WIDGET(mPreview));
 			}
-
-			gtk_widget_show(GTK_WIDGET(mPreview));
-
-			g_object_unref(pb);
+			else
+				gtk_widget_hide(GTK_WIDGET(mPreview));
+			
 			g_object_unref(tmp_pb);
-			g_object_unref(win);
 		}
 	}
 	else

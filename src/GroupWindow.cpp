@@ -69,7 +69,6 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	mGroupMenuItem->updateIcon();
 	mGroupMenuItem->updateLabel();
-	mGroupMenuItem->updatePreview();
 }
 
 GroupWindow::~GroupWindow()
@@ -190,9 +189,6 @@ void GroupWindow::updateState()
 	}
 	else
 		leaveGroup();
-
-	// TODO: Delete me when timeout added
-	mGroupMenuItem->updatePreview();
 
 	gtk_widget_show(GTK_WIDGET(mGroupMenuItem->mItem));
 }
