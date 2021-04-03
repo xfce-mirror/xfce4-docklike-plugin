@@ -3,6 +3,7 @@
 + Simplify Theme.cpp
 + Investigate memory leakage with valgrind
 + Configurable thumbnail size
++ Rebindable keyboard shortcuts
 + Editing launchers with exo-desktop-item-edit
 + Exotic windows : Libreoffice / Openoffice (imply changing the group of a window)
 

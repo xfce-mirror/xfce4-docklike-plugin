@@ -59,9 +59,9 @@ sudo apt install xfce4-docklike-plugin
 
 ## Features & Screenshots
 
-Pinnable applications and grouped windows:
+Pinnable applications, grouped windows, and desktop actions:
 
-![screenshot](https://i.imgur.com/O0nvthj.jpg)
+![screenshot](https://imgur.com/oTGuqxC.png)
 
 Use Ctrl to reorder your applications or access the settings panel (with right click):
 
