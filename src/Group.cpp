@@ -209,7 +209,6 @@ void Group::add(GroupWindow* window)
 
 	if (mWindowsCount == 1 && !mPinned)
 	{
-		std::cout << "REORDER OK:" << 0 << std::endl;
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), GTK_WIDGET(mButton), -1);
 	}
 }

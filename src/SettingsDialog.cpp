@@ -116,7 +116,6 @@ namespace SettingsDialog
 		// =====================================================================
 
 		GObject* indicatorColor = gtk_builder_get_object(builder, "cp_indicatorColor");
-		std::cout << "COLOR :" << gdk_rgba_to_string(Settings::indicatorColor) << std::endl;
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor);
 		g_signal_connect(indicatorColor, "color-set",
 			G_CALLBACK(+[](GtkColorButton* indicatorColor, GtkWidget* g) {

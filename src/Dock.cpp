@@ -159,9 +159,6 @@ namespace Dock
 				mIconSize = mPanelSize * 0.8;
 		}
 
-		std::cout << "mPanelSize:" << mPanelSize << std::endl;
-		std::cout << "mIconSize:" << mIconSize << std::endl;
-
 		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void { g.second->resize(); });
 	}
 

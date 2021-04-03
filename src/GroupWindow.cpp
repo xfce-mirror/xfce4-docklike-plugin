@@ -18,16 +18,6 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	//--------------------------------------------------
 
-	/*std::cout << "SEARCHING GROUPNAME:" << groupName << std::endl;
-	if (appInfo == NULL)
-		std::cout << "NO MATCH:" << 0 << std::endl;
-	else
-	{
-		std::cout << "> APPINFO NAME:" << appInfo->name << std::endl;
-		std::cout << "> APPINFO PATH:" << appInfo->path << std::endl;
-		std::cout << "> APPINFO ICON:" << appInfo->icon << std::endl;
-	}*/
-
 	// signal connection
 	g_signal_connect(G_OBJECT(mWnckWindow), "name-changed",
 		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {

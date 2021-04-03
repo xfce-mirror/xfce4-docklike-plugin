@@ -139,8 +139,6 @@ namespace AppInfos
 
 	void* threadedXDGDirectoryWatcher(void* dirPath)
 	{
-		std::cout << "watch XDG dir: " << *(std::string*)dirPath << std::endl;
-
 		int fd = inotify_init();
 		int wd = inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
 
@@ -156,8 +154,6 @@ namespace AppInfos
 			while (i < len)
 			{
 				event = (struct inotify_event*)&buf[i];
-				std::cout << "new file detected:" << event->name << std::endl;
-
 				loadDesktopEntry(*(std::string*)dirPath, event->name);
 
 				i += sizeof(struct inotify_event) + event->len;
@@ -177,8 +173,6 @@ namespace AppInfos
 	{
 		for (std::string xdgDir : mXdgDataDirs)
 		{
-			std::cout << "XDGDirectories:" << xdgDir << std::endl;
-
 			DIR* directory = opendir(xdgDir.c_str());
 			if (directory == NULL)
 				continue;
