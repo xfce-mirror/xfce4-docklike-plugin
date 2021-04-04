@@ -10,6 +10,7 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 {
 	mWnckWindow = wnckWindow;
 	mGroupMenuItem = new GroupMenuItem(this);
+	mGroupAssociated = false;
 
 	std::string groupName = Wnck::getGroupName(this); // check here for exotic group association (like libreoffice)
 	AppInfo* appInfo = AppInfos::search(groupName);
@@ -156,6 +157,7 @@ void GroupWindow::updateState()
 		// Adapted from Xfce panel's tasklist-widget.c
 		gint x, y, w, h;
 		GdkWindow* window;
+		GdkMonitor* currentMonitor;
 
 		/* The tasklist itself. */
 		window = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
@@ -163,20 +165,23 @@ void GroupWindow::updateState()
 		/* The window we are making a button for. */
 		wnck_window_get_geometry(mWnckWindow, &x, &y, &w, &h);
 
-		GdkMonitor* currMonitor = gdk_display_get_monitor_at_point(Plugin::display, x + (w / 2), y + (h / 2));
+		currentMonitor = gdk_display_get_monitor_at_point(Plugin::display, x + (w / 2), y + (h / 2));
 
 		/* Ask Gdk if they are on the same monitor. */
-		if (gdk_display_get_monitor_at_window(Plugin::display, window) != currMonitor)
+		if (gdk_display_get_monitor_at_window(Plugin::display, window) != currentMonitor)
 			onScreen = false;
 
-		if (mMonitor != currMonitor)
+		if (mMonitor != currentMonitor)
 		{
 			if (mMonitor != NULL)
 				monitorChanged = true;
-			mMonitor = currMonitor;
+			mMonitor = currentMonitor;
 		}
 		else
 			monitorChanged = false;
+		
+		g_free(window);
+		g_free(currentMonitor);
 	}
 
 	bool onTasklist = !(mState & WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST);
