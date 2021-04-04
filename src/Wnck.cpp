@@ -190,8 +190,8 @@ namespace Wnck
 				if (i == 0 && group->mSOpened)
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
-				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i])));
+				GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
+				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(gAppInfo, appInfo->actions[i])));
 
 				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
@@ -201,6 +201,9 @@ namespace Wnck
 						appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
 					}),
 					appInfo);
+				
+				g_free(gAppInfo);
+				g_object_unref(actionLauncher);
 			}
 
 			if (group != NULL)
@@ -255,9 +258,14 @@ namespace Wnck
 						}),
 						group);
 				}
+
+				g_object_unref(pinToggle);
+				g_object_unref(editLauncher);
+				g_object_unref(launchAnother);
 			}
 
 			gtk_widget_show_all(menu);
+			g_object_unref(menu);
 
 			return menu;
 		}

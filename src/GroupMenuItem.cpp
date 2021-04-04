@@ -147,7 +147,9 @@ void GroupMenuItem::updatePreview()
 			else
 				gtk_widget_hide(GTK_WIDGET(mPreview));
 			
+			g_object_unref(pb);
 			g_object_unref(tmp_pb);
+			g_object_unref(win);
 		}
 	}
 	else
