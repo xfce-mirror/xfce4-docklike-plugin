@@ -128,6 +128,10 @@ void GroupMenuItem::updatePreview()
 		GdkPixbuf* tmp_pb;
 		GdkPixbuf* pb;
 
+		// Minimized windows don't need a new pewview
+		if (wnck_window_is_minimized(mGroupWindow->mWnckWindow))
+			return;
+
 		xid = wnck_window_get_xid(mGroupWindow->mWnckWindow);
 
 		if (xid)
