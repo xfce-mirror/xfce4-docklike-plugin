@@ -114,6 +114,7 @@ void GroupMenuItem::updateLabel()
 void GroupMenuItem::updateIcon()
 {
 	GdkPixbuf* iconPixbuf = Wnck::getMiniIcon(mGroupWindow);
+
 	if (iconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
 }
@@ -122,38 +123,29 @@ void GroupMenuItem::updatePreview()
 {
 	if (Settings::showPreviews)
 	{
-		gulong xid;
 		gint w, h;
 		GdkWindow* win;
-		GdkPixbuf* tmp_pb;
 		GdkPixbuf* pb;
 
-		// Minimized windows don't need a new pewview
-		if (wnck_window_is_minimized(mGroupWindow->mWnckWindow))
-			return;
-
-		xid = wnck_window_get_xid(mGroupWindow->mWnckWindow);
-
-		if (xid)
+		if (wnck_window_is_minimized(mGroupWindow->mWnckWindow) == false)
 		{
-			win = gdk_x11_window_foreign_new_for_display(Plugin::display, xid);
-			tmp_pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+			win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+			pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
 
-			if (tmp_pb)
+			if (pb)
 			{
-				w = gdk_pixbuf_get_width(tmp_pb) / 8;
-				h = gdk_pixbuf_get_height(tmp_pb) / 8;
+				w = gdk_pixbuf_get_width(pb) / 8;
+				h = gdk_pixbuf_get_height(pb) / 8;
 
-				pb = gdk_pixbuf_scale_simple(tmp_pb, w, h, GDK_INTERP_BILINEAR);
-				gtk_image_set_from_pixbuf(mPreview, pb);
-				gtk_widget_show(GTK_WIDGET(mPreview));
+				gtk_image_set_from_pixbuf(mPreview, gdk_pixbuf_scale_simple(pb, w, h, GDK_INTERP_BILINEAR));
 			}
-			else
-				gtk_widget_hide(GTK_WIDGET(mPreview));
-			
-			g_object_unref(tmp_pb);
+
+			g_object_unref(pb);
 		}
+
+		gtk_widget_show(GTK_WIDGET(mPreview));
 	}
+
 	else
 		gtk_widget_hide(GTK_WIDGET(mPreview));
 }
