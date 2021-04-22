@@ -12,18 +12,19 @@
 
 GroupMenu::GroupMenu(Group* dockButton)
 {
+	mGroup = dockButton;
+	mVisible = false;
+	mMouseHover = false;
 	mWindow = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
+	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mWindow), "stld");
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
+	
 	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(mWindow), 1, 1);
-	gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mWindow)), "stld");
-	mGroup = dockButton;
-
-	mVisible = mMouseHover = false;
-
-	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
-	gtk_widget_show(mBox);
+	gtk_widget_show(GTK_WIDGET(mBox));
 
 	//--------------------------------------------------
 
@@ -38,11 +39,11 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 	g_signal_connect(G_OBJECT(mWindow), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
-			int w;
-			int h;
+			gint w;
+			gint h;
 			gtk_window_get_size(GTK_WINDOW(me->mWindow), &w, &h);
-			int mx = ((GdkEventCrossing*)event)->x;
-			int my = ((GdkEventCrossing*)event)->y;
+			gint mx = ((GdkEventCrossing*)event)->x;
+			gint my = ((GdkEventCrossing*)event)->y;
 			if (mx >= 0 && mx < w && my >= 0 && my < h)
 				return true;
 
@@ -65,9 +66,7 @@ void GroupMenu::add(GroupMenuItem* menuItem)
 	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);
 
 	if (mGroup->mSHover)
-	{
 		popup();
-	}
 }
 
 void GroupMenu::remove(GroupMenuItem* menuItem)
@@ -84,26 +83,26 @@ void GroupMenu::popup()
 	if (mGroup->mWindowsCount >= (Settings::noWindowsListIfSingle ? 2 : 1))
 	{
 		gint wx, wy;
+		mVisible = true;
 
+		if (Settings::showPreviews)
+		{
+			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+				w->mGroupMenuItem->updatePreview();
+			});
+		}
+
+		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
-		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		gtk_widget_show(mWindow);
-
-		mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-			w->mGroupMenuItem->updatePreview();
-		});
-
-		gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
-
-		mVisible = true;
 	}
 }
 
 void GroupMenu::hide()
 {
-	gtk_widget_hide(mWindow);
 	mVisible = false;
+	gtk_widget_hide(mWindow);
 }
 
 uint GroupMenu::getPointerDistance()
@@ -115,7 +114,7 @@ uint GroupMenu::getPointerDistance()
 
 	Plugin::getPointerPosition(&px, &py);
 
-	uint dx, dy;
+	guint dx, dy;
 	dx = dy = 0;
 
 	if (px < wx)

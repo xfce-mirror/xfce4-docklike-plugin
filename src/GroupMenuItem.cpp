@@ -36,9 +36,9 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
 	mPreview = (GtkImage*)gtk_image_new();
+	gtk_widget_hide(GTK_WIDGET(mPreview));
 	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
 	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
-	gtk_widget_show(GTK_WIDGET(mPreview));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
 
 	g_object_ref(mItem);
@@ -121,31 +121,25 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	if (Settings::showPreviews)
+	gint w, h;
+	GdkWindow* win;
+	GdkPixbuf* pb;
+	
+	if (wnck_window_is_minimized(mGroupWindow->mWnckWindow))
+		return;
+
+	win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+	pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+
+	if (pb)
 	{
-		gint w, h;
-		GdkWindow* win;
-		GdkPixbuf* pb;
+		w = gdk_pixbuf_get_width(pb) / 8;
+		h = gdk_pixbuf_get_height(pb) / 8;
 
-		if (wnck_window_is_minimized(mGroupWindow->mWnckWindow) == false)
-		{
-			win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
-			pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
-
-			if (pb)
-			{
-				w = gdk_pixbuf_get_width(pb) / 8;
-				h = gdk_pixbuf_get_height(pb) / 8;
-
-				gtk_image_set_from_pixbuf(mPreview, gdk_pixbuf_scale_simple(pb, w, h, GDK_INTERP_BILINEAR));
-			}
-
-			g_object_unref(pb);
-		}
-
-		gtk_widget_show(GTK_WIDGET(mPreview));
+		gtk_image_set_from_pixbuf(mPreview, gdk_pixbuf_scale_simple(pb, w, h, GDK_INTERP_BILINEAR));
 	}
 
-	else
-		gtk_widget_hide(GTK_WIDGET(mPreview));
+	g_object_unref(pb);
+
+	gtk_widget_show(GTK_WIDGET(mPreview));
 }
