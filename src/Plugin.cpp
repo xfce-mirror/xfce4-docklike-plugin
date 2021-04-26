@@ -66,6 +66,12 @@ namespace Plugin
 				Plugin::aboutDialog();
 			}),
 			NULL);
+		
+		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
+			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) {
+				remoteEvent(name, value);
+			}),
+			NULL);
 	}
 
 	void getPointerPosition(gint* x, gint* y)
@@ -104,6 +110,14 @@ namespace Plugin
 			"authors", authors,
 			"translator-credits", translators,
 			NULL);
+	}
+
+	void remoteEvent(gchar* name, GValue* value)
+	{
+		if (g_strcmp0(name, "settings") == 0)
+			SettingsDialog::popup();
+		if (g_strcmp0(name, "about") == 0)
+			aboutDialog();
 	}
 
 } // namespace Plugin

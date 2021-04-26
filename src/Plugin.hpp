@@ -38,6 +38,7 @@ namespace Plugin
 
 	void getPointerPosition(gint* x, gint* y);
 	void aboutDialog();
+	void remoteEvent(gchar* name, GValue* value);
 } // namespace Plugin
 
 #endif
