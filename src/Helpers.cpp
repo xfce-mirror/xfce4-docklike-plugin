@@ -173,7 +173,7 @@ namespace Help
 
 		void Timeout::stop()
 		{
-			if (mTimeoutId)
+			if (mTimeoutId && mTimeoutId != 0)
 				g_source_remove(mTimeoutId);
 		}
 	} // namespace Gtk
