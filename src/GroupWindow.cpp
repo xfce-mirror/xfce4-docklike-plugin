@@ -179,7 +179,7 @@ void GroupWindow::updateState()
 		}
 		else
 			monitorChanged = false;
-		
+
 		g_free(window);
 		g_free(currentMonitor);
 	}

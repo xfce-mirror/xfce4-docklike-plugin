@@ -66,7 +66,7 @@ namespace Plugin
 				Plugin::aboutDialog();
 			}),
 			NULL);
-		
+
 		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) {
 				remoteEvent(name, value);
@@ -116,7 +116,7 @@ namespace Plugin
 	{
 		if (g_strcmp0(name, "settings") == 0)
 			SettingsDialog::popup();
-		if (g_strcmp0(name, "about") == 0)
+		else if (g_strcmp0(name, "about") == 0)
 			aboutDialog();
 	}
 

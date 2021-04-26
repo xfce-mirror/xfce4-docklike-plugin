@@ -20,7 +20,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mWindow), "stld");
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
-	
+
 	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(mWindow), 1, 1);
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);

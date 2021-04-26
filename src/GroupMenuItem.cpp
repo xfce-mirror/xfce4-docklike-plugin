@@ -124,7 +124,7 @@ void GroupMenuItem::updatePreview()
 	gint w, h;
 	GdkWindow* win;
 	GdkPixbuf* pb;
-	
+
 	if (wnck_window_is_minimized(mGroupWindow->mWnckWindow))
 		return;
 
