@@ -32,6 +32,7 @@ namespace Settings
 	extern State<bool> noWindowsListIfSingle;
 	extern State<bool> onlyDisplayVisible;
 	extern State<bool> onlyDisplayScreen;
+	extern State<bool> showPreviews;
 
 	extern State<int> indicatorOrientation;
 	extern State<int> indicatorStyle;
@@ -39,8 +40,6 @@ namespace Settings
 
 	extern State<bool> keyComboActive;
 	extern State<bool> keyAloneActive;
-
-	extern State<bool> showPreviews;
 
 	extern State<std::list<std::string>> pinnedAppList;
 }; // namespace Settings

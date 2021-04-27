@@ -142,7 +142,7 @@ namespace Hotkeys
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						if (toTrigger)
 							gdk_threads_add_idle(threadSafeSwitch, NULL);
-				else if (cookie->evtype == XI_RawKeyPress)
+				if (cookie->evtype == XI_RawKeyPress)
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						toTrigger = true;
 					else
@@ -156,8 +156,7 @@ namespace Hotkeys
 		if (mXIExtAvailable && start)
 			if (!mThread)
 				pthread_create(&mThread, NULL, threadedXIKeyListenner, NULL);
-		else
-			if (mThread)
+			else if (mThread)
 			{
 				pthread_cancel(mThread); //also close the XDisplay in the thread
 				void* ret = NULL;

@@ -7,8 +7,6 @@
 #include "Plugin.hpp"
 #include "Helpers.hpp"
 
-#define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
-
 namespace Plugin
 {
 	XfcePanelPlugin* mXfPlugin;

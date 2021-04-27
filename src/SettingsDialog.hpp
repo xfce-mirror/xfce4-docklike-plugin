@@ -12,8 +12,8 @@
 #include <string>
 
 #include "Helpers.hpp"
-#include "Settings.hpp"
 #include "Plugin.hpp"
+#include "Settings.hpp"
 
 namespace SettingsDialog
 {

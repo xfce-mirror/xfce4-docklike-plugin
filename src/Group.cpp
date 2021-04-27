@@ -783,7 +783,7 @@ void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selec
 void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time)
 {
 	GdkAtom dt = gtk_selection_data_get_data_type(selectionData);
-	Group* source = (Group*) gtk_selection_data_get_data(selectionData);
+	Group* source = (Group*)gtk_selection_data_get_data(selectionData);
 
 	Dock::moveButton(source, this);
 }

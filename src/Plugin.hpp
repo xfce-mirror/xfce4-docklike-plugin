@@ -7,6 +7,9 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
+#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
+
 #include <gtk/gtk.h>
 #include <libwnck/libwnck.h>
 
@@ -15,6 +18,7 @@
 #include <vector>
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "Hotkeys.hpp"
 #include "Settings.hpp"
 #include "SettingsDialog.hpp"
@@ -26,8 +30,6 @@ extern "C"
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 }
-
-#include "Dock.hpp"
 
 namespace Plugin
 {

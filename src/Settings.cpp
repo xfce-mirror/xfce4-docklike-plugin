@@ -17,6 +17,7 @@ namespace Settings
 	State<bool> noWindowsListIfSingle;
 	State<bool> onlyDisplayVisible;
 	State<bool> onlyDisplayScreen;
+	State<bool> showPreviews;
 
 	State<int> indicatorOrientation;
 	State<int> indicatorStyle;
@@ -25,13 +26,10 @@ namespace Settings
 	State<bool> keyComboActive;
 	State<bool> keyAloneActive;
 
-	State<bool> showPreviews;
-
 	State<std::list<std::string>> pinnedAppList;
 
 	void init()
 	{
-
 		mPath = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
 		mFile = g_key_file_new();
 
@@ -89,6 +87,7 @@ namespace Settings
 
 		gchar* colorString = g_key_file_get_string(mFile, "user", "indicatorColor", NULL);
 		GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+
 		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
 			gdk_rgba_parse(color, "rgb(76,166,230)");
 
@@ -135,12 +134,14 @@ namespace Settings
 			});
 
 		gchar** pinnedListBuffer = g_key_file_get_string_list(mFile, "user", "pinned", NULL, NULL);
+
 		pinnedAppList.setup(Help::Gtk::bufferToStdStringList(pinnedListBuffer),
 			[](std::list<std::string> list) -> void {
 				std::vector<char*> buf = Help::Gtk::stdToBufferStringList(list);
 				g_key_file_set_string_list(mFile, "user", "pinned", buf.data(), buf.size());
 				saveFile();
 			});
+
 		g_strfreev(pinnedListBuffer);
 	}
 

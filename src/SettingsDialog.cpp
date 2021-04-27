@@ -5,8 +5,7 @@
  */
 
 #include "SettingsDialog.hpp"
-
-#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
+#include "Plugin.hpp"
 
 namespace SettingsDialog
 {
