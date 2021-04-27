@@ -6,6 +6,8 @@
 
 #include "SettingsDialog.hpp"
 
+#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
+
 namespace SettingsDialog
 {
 	void updateKeyComboActiveWarning(GtkWidget* widget)
@@ -50,6 +52,13 @@ namespace SettingsDialog
 				gtk_widget_hide(dialogWindow);
 				gtk_dialog_response((GtkDialog*)dialogWindow, 0);
 				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
+			}),
+			dialog);
+
+		g_signal_connect(
+			gtk_builder_get_object(builder, "b_help"), "clicked",
+			G_CALLBACK(+[](GtkButton* button, GtkWindow* dialogWindow) {
+				gtk_show_uri_on_window(dialogWindow, HELP_WEBSITE, GDK_CURRENT_TIME, NULL);
 			}),
 			dialog);
 
