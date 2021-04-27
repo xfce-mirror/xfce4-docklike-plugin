@@ -23,8 +23,8 @@ void AppInfo::launch_action(const gchar* action)
 void AppInfo::edit()
 {
 	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
+
 	g_spawn_command_line_async(command, NULL);
-	g_free(command);
 }
 
 namespace AppInfos
@@ -44,18 +44,15 @@ namespace AppInfos
 	void findXDGDirectories()
 	{
 		char* var = getenv("XDG_DATA_DIRS");
+
 		if (var != NULL && var[0] != '\0')
-		{
 			Help::String::split(var, mXdgDataDirs, ':');
-		}
 
 		mXdgDataDirs.push_back("/usr/local/share");
 		mXdgDataDirs.push_back("/usr/share");
 
 		for (std::string& dirs : mXdgDataDirs)
-		{
 			dirs += "/applications/";
-		}
 
 		mXdgDataDirs.sort();
 		mXdgDataDirs.unique();
@@ -80,6 +77,7 @@ namespace AppInfos
 
 		std::string icon;
 		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
+
 		if (icon_ == NULL)
 		{
 			pthread_mutex_unlock(&AppInfosLock);
@@ -87,9 +85,9 @@ namespace AppInfos
 		}
 
 		icon = Help::String::trim(icon_);
-
 		std::string name;
 		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+
 		if (name_ != NULL)
 			name = name_;
 
@@ -103,11 +101,10 @@ namespace AppInfos
 		if (!name.empty())
 		{
 			name = Help::String::toLowercase(Help::String::trim(name));
+
 			if (name.find(' ') == std::string::npos)
-			{
 				if (name != id)
 					mAppInfoNames.set(name, info);
-			}
 		}
 
 		std::string exec;
@@ -117,11 +114,10 @@ namespace AppInfos
 			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
 
 			exec = Help::String::getWord(execLine, 0);
+
 			if (exec != "env" && exec != "exo-open")
-			{
 				if (exec != id && exec != name)
 					mAppInfoNames.set(Help::String::toLowercase(exec), info);
-			}
 		}
 
 		std::string wmclass;
@@ -182,7 +178,6 @@ namespace AppInfos
 			while ((entry = readdir(directory)) != NULL)
 			{
 				std::string filename = entry->d_name;
-
 				loadDesktopEntry(xdgDir, filename);
 			}
 
@@ -193,7 +188,6 @@ namespace AppInfos
 	void init()
 	{
 		pthread_mutex_init(&AppInfosLock, NULL);
-
 		findXDGDirectories();
 		loadXDGDirectories();
 	}
@@ -229,13 +223,14 @@ namespace AppInfos
 		if (pos != std::string::npos)
 		{
 			id = id.substr(0, pos);
-
 			ai = mAppInfoIds.get(id);
+
 			if (ai != NULL)
 				return ai;
 		}
 
 		ai = mAppInfoNames.get(id);
+
 		if (ai != NULL)
 			return ai;
 
@@ -243,8 +238,8 @@ namespace AppInfos
 		if (pos != std::string::npos)
 		{
 			id = id.substr(0, pos);
-
 			ai = mAppInfoNames.get(id);
+
 			if (ai != NULL)
 				return ai;
 		}
@@ -255,11 +250,11 @@ namespace AppInfos
 		{
 			std::string gioId = gioPath[0][0];
 			gioId = Help::String::toLowercase(gioId.substr(0, gioId.size() - 8));
-
 			ai = mAppInfoIds.get(gioId);
 
 			for (int i = 0; gioPath[i] != NULL; ++i)
 				g_strfreev(gioPath[i]);
+
 			g_free(gioPath);
 
 			if (ai != NULL)

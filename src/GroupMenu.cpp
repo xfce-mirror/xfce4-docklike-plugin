@@ -86,11 +86,9 @@ void GroupMenu::popup()
 		mVisible = true;
 
 		if (Settings::showPreviews)
-		{
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
 			});
-		}
 
 		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
@@ -108,14 +106,12 @@ void GroupMenu::hide()
 uint GroupMenu::getPointerDistance()
 {
 	gint wx, wy, ww, wh, px, py;
+	guint dx, dy;
+	dx = dy = 0;
 
 	gtk_window_get_position(GTK_WINDOW(mWindow), &wx, &wy);
 	gtk_window_get_size(GTK_WINDOW(mWindow), &ww, &wh);
-
 	Plugin::getPointerPosition(&px, &py);
-
-	guint dx, dy;
-	dx = dy = 0;
 
 	if (px < wx)
 		dx = wx - px;

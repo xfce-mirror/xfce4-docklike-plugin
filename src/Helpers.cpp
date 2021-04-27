@@ -16,9 +16,7 @@ namespace Help
 			std::stringstream ss(str);
 			std::string token;
 			while (std::getline(ss, token, delim))
-			{
 				list.push_back(token);
-			}
 		}
 
 		std::string toLowercase(std::string str)
@@ -173,7 +171,7 @@ namespace Help
 
 		void Timeout::stop()
 		{
-			if (mTimeoutId && mTimeoutId != 0)
+			if (mTimeoutId)
 				g_source_remove(mTimeoutId);
 		}
 	} // namespace Gtk

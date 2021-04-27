@@ -6,9 +6,6 @@
 
 #include "Group.hpp"
 
-#include "Dock.hpp"
-#include "GroupMenu.hpp"
-
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
@@ -19,14 +16,10 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	gtk_style_context_add_class(gtk_widget_get_style_context(mButton), "flat");
 
 	mIconPixbuf = NULL;
-
 	mAppInfo = appInfo;
 	mPinned = pinned;
-	mActive = false;
-
 	mTopWindowIndex = 0;
-
-	mSFocus = mSOpened = mSMany = mSHover = mSSuper = false;
+	mActive = mSFocus = mSOpened = mSMany = mSHover = mSSuper = false;
 
 	//--------------------------------------------------
 
@@ -36,8 +29,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			mWindows.findIf([&count](GroupWindow* e) -> bool {
 				if (!e->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
 				{
-				++count;
-				if (count == 2) return true;
+					++count;
+					if (count == 2) return true;
 				}
 			return false;
 		});
@@ -55,7 +48,6 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		}
 
 		mTolerablePointerDistance -= 10;
-
 		return true;
 	});
 
@@ -163,16 +155,13 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	//--------------------------------------------------
 
 	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
+	g_object_set_data(G_OBJECT(mButton), "group", this);
+	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
+	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
+	gtk_button_set_always_show_image(GTK_BUTTON(mButton), true);
 
 	if (mPinned)
 		gtk_widget_show(mButton);
-
-	g_object_set_data(G_OBJECT(mButton), "group", this);
-
-	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
-
-	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
-	gtk_button_set_always_show_image(GTK_BUTTON(mButton), true);
 
 	if (mAppInfo != NULL && !mAppInfo->icon.empty())
 	{
@@ -200,24 +189,17 @@ void Group::add(GroupWindow* window)
 {
 	mWindows.push(window);
 	mWindowsCount.updateState();
-
 	mGroupMenu.add(window->mGroupMenuItem);
 
 	if (mWindowsCount == 1 && !mPinned)
-	{
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), GTK_WIDGET(mButton), -1);
-	}
 }
 
 void Group::remove(GroupWindow* window)
 {
 	mWindows.pop(window);
 	mWindowsCount.updateState();
-
 	mGroupMenu.remove(window->mGroupMenuItem);
-
-	electNewTopWindow(); // TODEL
-
 	setStyle(Style::Focus, false);
 }
 
@@ -242,9 +224,7 @@ void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
 		return;
 
 	if (!mActive)
-	{
 		mWindows.get(mTopWindowIndex)->activate(timestamp);
-	}
 	else
 	{
 		if (direction == GDK_SCROLL_UP)
@@ -268,9 +248,8 @@ void Group::closeAll()
 
 void Group::resize()
 {
-	gtk_widget_set_size_request(mButton, (round((Dock::mPanelSize * 1.2) / 2) * 2), Dock::mPanelSize);
-
 	GtkWidget* img;
+	gtk_widget_set_size_request(mButton, (round((Dock::mPanelSize * 1.2) / 2) * 2), Dock::mPanelSize);
 
 	if (mIconPixbuf != NULL)
 	{
@@ -345,7 +324,6 @@ void Group::onDraw(cairo_t* cr)
 
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
-
 	double aBack = 0;
 
 	//hovers ===================================================================
@@ -412,6 +390,7 @@ void Group::onDraw(cairo_t* cr)
 		{
 			int pat0;
 			cairo_pattern_t* pat;
+
 			if (Settings::indicatorOrientation == 0 || Settings::indicatorOrientation == 2)
 			{
 				pat0 = (int)w * 0.88;
@@ -448,7 +427,6 @@ void Group::onDraw(cairo_t* cr)
 
 			cairo_set_source(cr, pat);
 			cairo_fill(cr);
-
 			cairo_pattern_destroy(pat);
 		}
 
@@ -627,8 +605,7 @@ void Group::onMouseEnter()
 	});
 
 	mGroupMenu.popup();
-
-	this->setStyle(Style::Hover, true);
+	setStyle(Style::Hover, true);
 }
 
 void Group::onMouseLeave()
@@ -661,6 +638,7 @@ void Group::updateStyle()
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, NULL);
+
 		setStyle(Style::Opened, true);
 	}
 	else
@@ -703,18 +681,20 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 	{
 		mActive = true;
 		setStyle(Style::Focus, true);
-
 		setTopWindow(groupWindow);
 	}
 }
 
 void Group::onWindowUnactivate()
 {
-	setStyle(Style::Focus, false);
 	mActive = false;
+	setStyle(Style::Focus, false);
 }
 
-void Group::setTopWindow(GroupWindow* groupWindow) { mTopWindowIndex = mWindows.getIndex(groupWindow); }
+void Group::setTopWindow(GroupWindow* groupWindow)
+{
+	mTopWindowIndex = mWindows.getIndex(groupWindow);
+}
 
 void Group::onButtonPress(GdkEventButton* event)
 {
@@ -732,6 +712,7 @@ void Group::onButtonPress(GdkEventButton* event)
 		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 		gtk_menu_attach_to_widget(GTK_MENU(menu), GTK_WIDGET(mButton), NULL);
 		gtk_menu_popup_at_widget(GTK_MENU(menu), GTK_WIDGET(mButton), GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+
 		mGroupMenu.hide();
 	}
 }
@@ -739,33 +720,26 @@ void Group::onButtonPress(GdkEventButton* event)
 void Group::onButtonRelease(GdkEventButton* event)
 {
 	if (event->button == 2)
-	{
 		closeAll();
-	}
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && mWindowsCount == 0))
-	{
 		mAppInfo->launch();
-	}
 	else if (mActive)
-	{
 		mWindows.get(mTopWindowIndex)->minimize();
-	}
 	else if (!mActive)
-	{
 		activate(event->time);
-	}
 }
 
 bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int y, guint time)
 {
 	GdkModifierType mask;
 	GdkDevice* device = gdk_drag_context_get_device(context);
-
 	gdk_window_get_device_position(gtk_widget_get_window(widget), device, NULL, NULL, &mask);
+
 	if (mask & GDK_CONTROL_MASK)
 		gtk_drag_cancel(context);
 
 	GList* tmp_list = gdk_drag_context_list_targets(context);
+
 	if (tmp_list != NULL)
 	{
 		char* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
@@ -777,7 +751,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 			if (mWindowsCount > 0)
 			{
 				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
-
 				groupWindow->activate(time);
 
 				if (!mGroupMenu.mVisible)
@@ -790,7 +763,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 	}
 
 	gtk_style_context_add_class(gtk_widget_get_style_context(mButton), "drop");
-
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
@@ -808,14 +780,15 @@ void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selec
 	gtk_selection_data_set(selectionData, gdk_atom_intern("button", false), 32, (const guchar*)me, sizeof(gpointer) * 32);
 }
 
-void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData,
-	guint info, guint time)
+void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time)
 {
 	GdkAtom dt = gtk_selection_data_get_data_type(selectionData);
-	// if(gdk_atom_name(dt) == "button")
+	Group* source = (Group*) gtk_selection_data_get_data(selectionData);
 
-	Group* source = (Group*)gtk_selection_data_get_data(selectionData);
 	Dock::moveButton(source, this);
 }
 
-void Group::onDragBegin(GdkDragContext* context) { gtk_drag_set_icon_name(context, mAppInfo->icon.c_str(), 0, 0); }
+void Group::onDragBegin(GdkDragContext* context)
+{
+	gtk_drag_set_icon_name(context, mAppInfo->icon.c_str(), 0, 0);
+}

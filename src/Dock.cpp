@@ -14,10 +14,6 @@ namespace Dock
 	int mPanelSize;
 	int mIconSize;
 
-	void onWnckWindowOpened(WnckWindow* wnckWindow);
-	void onWnckWindowClosed(WnckWindow* wnckWindow);
-	void onWnckWindowActivate(WnckWindow* wnckWindow);
-
 	void init()
 	{
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -27,6 +23,7 @@ namespace Dock
 		// pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
 		std::list<std::string>::iterator it = pinnedApps.begin();
+
 		while (it != pinnedApps.end())
 		{
 			AppInfo* appInfo = AppInfos::search(*it);
@@ -43,6 +40,7 @@ namespace Dock
 	Group* prepareGroup(AppInfo* appInfo)
 	{
 		Group* group = mGroups.get(appInfo);
+
 		if (group == NULL)
 		{
 			group = new Group(appInfo, false);
@@ -75,15 +73,14 @@ namespace Dock
 
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 		GList* child;
+
 		for (child = children; child; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
 			if (group->mPinned)
-			{
 				pinnedList.push_back(group->mAppInfo->path);
-			}
 		}
 
 		Settings::pinnedAppList.set(pinnedList);
@@ -98,9 +95,11 @@ namespace Dock
 	{
 		int grabbedKeys = Hotkeys::mGrabbedKeys;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+
 		for (GList* child = children; child && grabbedKeys; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
+
 			if (!gtk_widget_get_visible(widget))
 				continue;
 
@@ -114,19 +113,23 @@ namespace Dock
 	{
 		int i = 0;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+
 		for (GList* child = children; child; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
+
 			if (gtk_widget_get_visible(widget))
 				if (i == nb)
 				{
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
+
 					if (group->mSFocus)
 						group->scrollWindows(timestamp, GDK_SCROLL_DOWN);
 					else if (group->mWindowsCount > 0)
 						group->activate(timestamp);
 					else
 						group->mAppInfo->launch();
+
 					return;
 				}
 				else
@@ -142,9 +145,7 @@ namespace Dock
 		gtk_box_set_spacing(GTK_BOX(mBox), mPanelSize / 10);
 
 		if (Settings::forceIconSize)
-		{
 			mIconSize = Settings::iconSize;
-		}
 		else
 		{
 			if (mPanelSize <= 20)

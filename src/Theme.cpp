@@ -70,28 +70,10 @@ namespace Theme
 			"alpha(black, 0.2); }"
 			".stld .drop { border-left:0.5em solid slateblue; }";
 
-		/*"button { border:none; border-radius:0; background:none; text-shadow:none;
-    -gtk-icon-shadow:none; box-shadow:none; }" "button.docklike_menu {
-    min-height:1.3em; }" "button.docklike_menu:hover {
-    background-color:alpha(@dl_menu_bgcolor_hover,1);
-    color:@dl_menu_color_hover; border:none; }" "box { margin:0; padding:0; }"
-    ".drop { border-left:5px solid red; }";*/
-
 		if (!gtk_css_provider_load_from_data(mCssProvider, cssStyle.c_str(), -1, NULL))
-		{
 			std::cerr << "ERROR: CSS LOAD FAILED !" << std::endl;
-		}
 		else
-		{
 			gtk_style_context_add_provider_for_screen(mScreen, GTK_STYLE_PROVIDER(mCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		}
-
-		/*return	"@define-color dl_menu_bgcolor " + menuBg + ";"
-                    "@define-color dl_menu_item_color " + itemLabel + ";"
-                    "@define-color dl_menu_item_color_hover " + itemLabelHover +
-       ";"
-                    "@define-color dl_menu_item_bgcolor_hover " + itemBgHover +
-       ";";*/
 	}
 
 	void applyDefault(GtkWidget* widget)

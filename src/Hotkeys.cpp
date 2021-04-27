@@ -29,19 +29,13 @@ namespace Hotkeys
 		{
 		case ModifierChange:
 			if (GDK_MOD4_MASK & xevent->xkey.keycode)
-			{
 				Dock::hoverSupered(true);
-			}
 			else
-			{
 				Dock::hoverSupered(false);
-			}
 			break;
 		case KeyPress:
 			if (xevent->xkey.keycode >= m1Keycode && xevent->xkey.keycode <= m1Keycode + NbHotkeys)
-			{
 				Dock::activateGroup(xevent->xkey.keycode - m1Keycode, xevent->xkey.time);
-			}
 			break;
 		}
 		return GDK_FILTER_CONTINUE;
@@ -107,7 +101,8 @@ namespace Hotkeys
 	* The method used here to listen keyboard events globaly is taken from :
 	* github.com/anko/xkbcat
 	* It create a direct connection to X11 keyboard events without any grabbing,
-	* allowing us to determine the state (consumed or not) of the modifier key when released. */
+	* allowing us to determine the state (consumed or not) of the modifier key when released.
+	*/
 
 	gboolean threadSafeSwitch(gpointer data)
 	{
@@ -144,22 +139,14 @@ namespace Hotkeys
 			{
 				int keycode = ((XIRawEvent*)cookie->data)->detail;
 				if (cookie->evtype == XI_RawKeyRelease)
-				{
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
-					{
 						if (toTrigger)
-						{
 							gdk_threads_add_idle(threadSafeSwitch, NULL);
-						}
-					}
-				}
 				else if (cookie->evtype == XI_RawKeyPress)
-				{
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						toTrigger = true;
 					else
 						toTrigger = false;
-				}
 			}
 		}
 	}
@@ -167,12 +154,9 @@ namespace Hotkeys
 	void startStopXIKeyListenner(bool start)
 	{
 		if (mXIExtAvailable && start)
-		{
 			if (!mThread)
 				pthread_create(&mThread, NULL, threadedXIKeyListenner, NULL);
-		}
 		else
-		{
 			if (mThread)
 			{
 				pthread_cancel(mThread); //also close the XDisplay in the thread
@@ -180,7 +164,6 @@ namespace Hotkeys
 				pthread_join(mThread, &ret);
 				mThread = 0;
 			}
-		}
 	}
 
 	void checkXIExtension(Display* display)

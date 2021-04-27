@@ -13,7 +13,6 @@
 
 #include "Helpers.hpp"
 #include "Settings.hpp"
-
 #include "Plugin.hpp"
 
 namespace SettingsDialog
