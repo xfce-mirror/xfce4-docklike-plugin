@@ -31,7 +31,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
-	mCloseButton = (GtkButton*)gtk_button_new_from_icon_name("close", GTK_ICON_SIZE_MENU);
+	mCloseButton = (GtkButton*)gtk_button_new_from_icon_name("gtk-close", GTK_ICON_SIZE_MENU);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
