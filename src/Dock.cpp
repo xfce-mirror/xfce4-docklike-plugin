@@ -17,6 +17,7 @@ namespace Dock
 	void init()
 	{
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
 		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
 		gtk_widget_show(mBox);
 
@@ -88,6 +89,45 @@ namespace Dock
 
 	void redraw()
 	{
+		/*
+		// Remove old groups
+		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
+		     child != NULL;
+			 child = child->next)
+		{
+			gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
+		}
+
+		// pinned groups
+		std::list<std::string> pinnedApps = Settings::pinnedAppList;
+		std::list<std::string>::iterator it = pinnedApps.begin();
+
+		while (it != pinnedApps.end())
+		{
+			AppInfo* appInfo = AppInfos::search(*it);
+			Group* group = new Group(appInfo, true);
+
+			mGroups.push(appInfo, group);
+			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
+			++it;
+		}
+
+		// FIXME: why doesn't this work?
+		// already opened windows
+		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
+			 window_l != NULL;
+			 window_l = window_l->next)
+		{
+			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
+			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
+
+			Wnck::mGroupWindows.push(wnck_window_get_xid(wnckWindow), groupWindow);
+
+			groupWindow->leaveGroup();
+			groupWindow->updateState();
+		}
+		*/
+
 		gtk_widget_queue_draw(mBox);
 	}
 
