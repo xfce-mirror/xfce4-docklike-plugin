@@ -58,7 +58,7 @@ namespace Settings
 				g_key_file_set_integer(mFile, "user", "indicatorOrientation", indicatorOrientation);
 				saveFile();
 
-				Dock::redraw();
+				Dock::drawGroups();
 			});
 
 		forceIconSize.setup(g_key_file_get_boolean(mFile, "user", "forceIconSize", NULL),
@@ -82,7 +82,7 @@ namespace Settings
 				g_key_file_set_integer(mFile, "user", "indicatorStyle", indicatorStyle);
 				saveFile();
 
-				Dock::redraw();
+				Dock::drawGroups();
 			});
 
 		gchar* colorString = g_key_file_get_string(mFile, "user", "indicatorColor", NULL);
@@ -96,7 +96,7 @@ namespace Settings
 				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
 				saveFile();
 
-				Dock::redraw();
+				Dock::drawGroups();
 			});
 
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),

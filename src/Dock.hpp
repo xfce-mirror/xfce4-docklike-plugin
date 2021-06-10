@@ -30,7 +30,7 @@ namespace Dock
 
 	void moveButton(Group* moving, Group* dest);
 	void savePinned();
-	void redraw();
+	void drawGroups();
 
 	void hoverSupered(bool on);
 	void activateGroup(int nb, guint32 timestamp);
@@ -40,6 +40,7 @@ namespace Dock
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<AppInfo*, Group*> mGroups;
+	extern Help::Gtk::Timeout mDrawTimeout;
 
 	extern int mPanelSize;
 	extern int mIconSize;

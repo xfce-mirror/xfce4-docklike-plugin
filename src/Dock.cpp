@@ -10,6 +10,7 @@ namespace Dock
 {
 	GtkWidget* mBox;
 	Store::KeyStore<AppInfo*, Group*> mGroups;
+	Help::Gtk::Timeout mDrawTimeout;
 
 	int mPanelSize;
 	int mIconSize;
@@ -20,22 +21,18 @@ namespace Dock
 		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
 		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
 		gtk_widget_show(mBox);
+		drawGroups();
 
-		// pinned groups
-		std::list<std::string> pinnedApps = Settings::pinnedAppList;
-		std::list<std::string>::iterator it = pinnedApps.begin();
-
-		while (it != pinnedApps.end())
-		{
-			AppInfo* appInfo = AppInfos::search(*it);
-
-			Group* group = new Group(appInfo, true);
-			mGroups.push(appInfo, group);
-
-			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
-
-			++it;
-		}
+		// Redraw the panel items when the AppInfos have changed
+		mDrawTimeout.setup(250, []() {
+			if (AppInfos::modified)
+			{
+				drawGroups();
+				AppInfos::modified = false;
+			}
+			return true;
+		});
+		mDrawTimeout.start();
 	}
 
 	Group* prepareGroup(AppInfo* appInfo)
@@ -87,15 +84,19 @@ namespace Dock
 		Settings::pinnedAppList.set(pinnedList);
 	}
 
-	void redraw()
+	void drawGroups()
 	{
-		/*
-		// Remove old groups
-		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-		     child != NULL;
-			 child = child->next)
+		if (mGroups.size())
 		{
-			gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
+			// Remove old groups
+			for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
+				 child != NULL;
+				 child = child->next)
+			{
+				gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
+			}
+
+			mGroups.clear();
 		}
 
 		// pinned groups
@@ -112,7 +113,6 @@ namespace Dock
 			++it;
 		}
 
-		// FIXME: why doesn't this work?
 		// already opened windows
 		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
 			 window_l != NULL;
@@ -126,7 +126,6 @@ namespace Dock
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
 		}
-		*/
 
 		gtk_widget_queue_draw(mBox);
 	}

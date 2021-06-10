@@ -36,6 +36,8 @@ namespace AppInfos
 
 	pthread_mutex_t AppInfosLock;
 
+	bool modified;
+
 	std::string parseId(const std::string id)
 	{
 		return id.substr(0, id.size() - 8);
@@ -149,6 +151,8 @@ namespace AppInfos
 
 			while (i < len)
 			{
+				modified = true;
+
 				event = (struct inotify_event*)&buf[i];
 				loadDesktopEntry(*(std::string*)dirPath, event->name);
 
@@ -187,6 +191,7 @@ namespace AppInfos
 
 	void init()
 	{
+		modified = false;
 		pthread_mutex_init(&AppInfosLock, NULL);
 		findXDGDirectories();
 		loadXDGDirectories();

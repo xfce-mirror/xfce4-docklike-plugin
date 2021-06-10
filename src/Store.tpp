@@ -74,6 +74,8 @@ namespace Store
 			std::for_each(mList.begin(), mList.end(), funct);
 		}
 
+		void clear() { mList.clear(); }
+
 		uint size() { return mList.size(); }
 
 		V first() { return mList.front().second; }

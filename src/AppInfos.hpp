@@ -32,6 +32,7 @@ struct AppInfo
 namespace AppInfos
 {
 	void init();
+	extern bool modified;
 
 	AppInfo* search(std::string id);
 } // namespace AppInfos
