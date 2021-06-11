@@ -132,21 +132,28 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	GdkWindow* win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
+	// use gdk_pixbuf_get_from_surface in GTK4
+	// use gdk_device_get_window_at_position in Wayland
 
-	if (win != NULL && (mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) != WNCK_WINDOW_STATE_MINIMIZED)
+	if (GDK_IS_X11_DISPLAY(Plugin::display))
 	{
-		GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+		GdkWindow* win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
 
-		if (pb != NULL)
+		if (win != NULL && (mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) != WNCK_WINDOW_STATE_MINIMIZED)
 		{
-			gtk_image_set_from_pixbuf(mPreview,
-				gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
-					gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
+			GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+
+			if (pb != NULL)
+			{
+				gtk_image_set_from_pixbuf(mPreview,
+					gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
+						gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
+			}
+
+			g_object_unref(pb);
 		}
 
-		g_object_unref(pb);
+		g_object_unref(win);
 	}
-
-	g_object_unref(win);
 }
