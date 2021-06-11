@@ -128,6 +128,17 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			me->setStyle(Style::Hover, true);
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
+
+			me->mWindows.forEach([](GroupWindow* w) -> void {
+				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+
+				if (Settings::showPreviews)
+				{
+					w->mGroupMenuItem->updatePreview();
+					w->mGroupMenuItem->mPreviewTimeout.start();
+				}
+			});
+
 			return false;
 		}),
 		this);
@@ -141,6 +152,14 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 				me->onMouseLeave();
 			else
 				me->setMouseLeaveTimeout();
+
+			if (Settings::showPreviews)
+			{
+				me->mWindows.forEach([](GroupWindow* w) -> void {
+					w->mGroupMenuItem->mPreviewTimeout.stop();
+				});
+			}
+
 			return true;
 		}),
 		this);
@@ -319,9 +338,19 @@ void Group::setStyle(Style style, bool val)
 	}
 }
 
+void Group::onDrawNew(cairo_t* cr)
+{
+	int width = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
+	int height = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
+
+	double red = (*Settings::indicatorColor).red;
+	double green = (*Settings::indicatorColor).green;
+	double blue = (*Settings::indicatorColor).blue;
+	double alpha = 1;
+}
+
 void Group::onDraw(cairo_t* cr)
 {
-
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
 	double aBack = 0;

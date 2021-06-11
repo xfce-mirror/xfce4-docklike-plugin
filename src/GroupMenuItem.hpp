@@ -37,6 +37,7 @@ class GroupMenuItem
 	GtkImage* mPreview;
 
 	Help::Gtk::Timeout mDragSwitchTimeout;
+	Help::Gtk::Timeout mPreviewTimeout;
 };
 
 #endif

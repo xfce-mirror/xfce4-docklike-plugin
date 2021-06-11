@@ -48,6 +48,7 @@ class Group
 	void electNewTopWindow();
 
 	void onDraw(cairo_t* cr);
+	void onDrawNew(cairo_t* cr);
 
 	void onWindowActivate(GroupWindow* groupWindow);
 	void onWindowUnactivate();

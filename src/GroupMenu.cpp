@@ -33,6 +33,17 @@ GroupMenu::GroupMenu(Group* dockButton)
 			me->mGroup->setStyle(Group::Style::Hover, true);
 			me->mGroup->mLeaveTimeout.stop();
 			me->mMouseHover = true;
+
+			me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+
+				if (Settings::showPreviews)
+				{
+					w->mGroupMenuItem->updatePreview();
+					w->mGroupMenuItem->mPreviewTimeout.start();
+				}
+			});
+
 			return true;
 		}),
 		this);
@@ -49,6 +60,14 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 			me->mGroup->setMouseLeaveTimeout();
 			me->mMouseHover = false;
+
+			if (Settings::showPreviews)
+			{
+				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+					w->mGroupMenuItem->mPreviewTimeout.stop();
+				});
+			}
+
 			return true;
 		}),
 		this);
@@ -84,11 +103,6 @@ void GroupMenu::popup()
 	{
 		gint wx, wy;
 		mVisible = true;
-
-		if (Settings::showPreviews)
-			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-				w->mGroupMenuItem->updatePreview();
-			});
 
 		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);

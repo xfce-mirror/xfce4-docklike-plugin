@@ -15,6 +15,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mItem = (GtkEventBox*)gtk_event_box_new();
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "menu_item");
 	gtk_widget_show(GTK_WIDGET(mItem));
+	g_object_ref(mItem);
 
 	mGrid = (GtkGrid*)gtk_grid_new();
 	gtk_widget_show(GTK_WIDGET(mGrid));
@@ -36,12 +37,20 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
 	mPreview = (GtkImage*)gtk_image_new();
-	gtk_widget_hide(GTK_WIDGET(mPreview));
 	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
 	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
+	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
-	g_object_ref(mItem);
+	if (Settings::showPreviews)
+		updatePreview();
+
+	// Update the previews every second while the group is hovered
+	mPreviewTimeout.setup(1000, [this]() {
+		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+		updatePreview();
+		return true;
+	});
 
 	mDragSwitchTimeout.setup(250, [this]() {
 		mGroupWindow->activate(0);
@@ -103,6 +112,8 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 GroupMenuItem::~GroupMenuItem()
 {
+	mPreviewTimeout.stop();
+	gtk_widget_destroy(GTK_WIDGET(mPreview));
 	gtk_widget_destroy(GTK_WIDGET(mItem));
 }
 
@@ -121,25 +132,15 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	gint w, h;
-	GdkWindow* win;
-	GdkPixbuf* pb;
-
-	if (wnck_window_is_minimized(mGroupWindow->mWnckWindow))
-		return;
-
-	win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
-	pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+	GdkWindow* win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+	GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
 
 	if (pb)
 	{
-		w = gdk_pixbuf_get_width(pb) / 8;
-		h = gdk_pixbuf_get_height(pb) / 8;
+		gtk_image_set_from_pixbuf(mPreview,
+			gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
+				gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
 
-		gtk_image_set_from_pixbuf(mPreview, gdk_pixbuf_scale_simple(pb, w, h, GDK_INTERP_BILINEAR));
+		g_object_unref(pb);
 	}
-
-	g_object_unref(pb);
-
-	gtk_widget_show(GTK_WIDGET(mPreview));
 }
