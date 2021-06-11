@@ -45,8 +45,8 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	if (Settings::showPreviews)
 		updatePreview();
 
-	// Update the previews every second while the group is hovered
-	mPreviewTimeout.setup(1000, [this]() {
+	// Update the previews every second while the group or menu is hovered
+	mPreviewTimeout.setup(100, [this]() {
 		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
@@ -133,14 +133,20 @@ void GroupMenuItem::updateIcon()
 void GroupMenuItem::updatePreview()
 {
 	GdkWindow* win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
-	GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
 
-	if (pb)
+	if (win != NULL && (mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) != WNCK_WINDOW_STATE_MINIMIZED)
 	{
-		gtk_image_set_from_pixbuf(mPreview,
-			gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
-				gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
+		GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+
+		if (pb != NULL)
+		{
+			gtk_image_set_from_pixbuf(mPreview,
+				gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
+					gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
+		}
 
 		g_object_unref(pb);
 	}
+
+	g_object_unref(win);
 }
