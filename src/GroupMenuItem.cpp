@@ -46,7 +46,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		updatePreview();
 
 	// Update the previews every second while the group or menu is hovered
-	mPreviewTimeout.setup(100, [this]() {
+	mPreviewTimeout.setup(1000, [this]() {
 		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
