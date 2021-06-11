@@ -85,19 +85,7 @@ namespace Wnck
 			}),
 			NULL);
 
-		// already opened windows
-		for (GList* window_l = wnck_screen_get_windows(mWnckScreen);
-			 window_l != NULL;
-			 window_l = window_l->next)
-		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
-			mGroupWindows.push(wnck_window_get_xid(wnckWindow), groupWindow);
-
-			groupWindow->leaveGroup();
-			groupWindow->updateState();
-		}
-
+		Dock::drawGroups();
 		setActiveWindow();
 	}
 

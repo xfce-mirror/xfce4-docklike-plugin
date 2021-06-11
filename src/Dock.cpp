@@ -21,7 +21,6 @@ namespace Dock
 		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
 		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
 		gtk_widget_show(mBox);
-		drawGroups();
 
 		// Redraw the panel items when the AppInfos have changed
 		mDrawTimeout.setup(250, []() {
