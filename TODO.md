@@ -1,14 +1,23 @@
 # TODO
 
-+ Better defaults: set indicator orientation, etc.
-+ Investigate GLib-CRITICAL from g_source_remove in Helpers::Timeout::stop
++ Set initial indicator orientation based on panel orientation
++ Remove Launch Another: .desktop files have New Window etc. entries (menu is long)
++ Improve the Dots indicator style
++ Investigate why the hover state of groups is not cleared
++ New CSS indicator style, No indicator style
 + Configurable thumbnail size
 + Rebindable keyboard shortcuts
++ Make sure we are finding all the .desktop files
++ Associate new .desktop file in ~/.local/share/applications etc.
 + Editing launchers with exo-desktop-item-edit
-+ Exotic windows : Libreoffice / Openoffice (imply changing the group of a window)
++ Docs: write the help page and update screenshots
++ Memory: something(s) are not being freed/unrefd when a group is closed
++ Investigate GLib-CRITICAL from g_source_remove in Helpers::Timeout::stop
++ Can we still crash the plugin?
 
 ## DONE
 
+> + Simplify Theme.cpp
 > + Fix all build warnings
 > + Indicator orientation
 > + Basic orientation managing
