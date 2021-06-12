@@ -5,7 +5,6 @@ plugin_LTLIBRARIES = libdocklike.la
 
 libdocklike_la_SOURCES =							\
 		Hotkeys.cpp Hotkeys.hpp						\
-		Theme.cpp Theme.hpp							\
 		AppInfos.cpp AppInfos.hpp					\
 		Settings.cpp Settings.hpp					\
 		Group.cpp Group.hpp							\

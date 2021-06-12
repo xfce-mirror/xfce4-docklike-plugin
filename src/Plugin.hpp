@@ -22,7 +22,6 @@
 #include "Hotkeys.hpp"
 #include "Settings.hpp"
 #include "SettingsDialog.hpp"
-#include "Theme.hpp"
 
 extern "C"
 {

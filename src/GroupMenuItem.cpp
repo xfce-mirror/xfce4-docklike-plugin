@@ -13,7 +13,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mGroupWindow = groupWindow;
 
 	mItem = (GtkEventBox*)gtk_event_box_new();
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "menu_item");
 	gtk_widget_show(GTK_WIDGET(mItem));
 	g_object_ref(mItem);
 
@@ -33,6 +32,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
 	mCloseButton = (GtkButton*)gtk_button_new_from_icon_name("gtk-close", GTK_ICON_SIZE_MENU);
+	gtk_button_set_relief(mCloseButton, GTK_RELIEF_NONE);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
@@ -71,14 +71,12 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
 			if (event->state & GDK_BUTTON1_MASK)
 				me->mGroupWindow->activate(event->time);
-			Help::Gtk::cssClassAdd(GTK_WIDGET(me->mItem), "hover");
 			return true;
 		}),
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
-			Help::Gtk::cssClassRemove(GTK_WIDGET(me->mItem), "hover");
 			return true;
 		}),
 		this);
@@ -91,7 +89,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "drag-motion",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* w, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) {
 			if (!me->mDragSwitchTimeout.mTimeoutId)
 				me->mDragSwitchTimeout.start();
 
@@ -132,28 +130,38 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
+	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
+		return;
+
 	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
 	// use gdk_device_get_window_at_position in Wayland
+	// See here for some ideas:
+	// https://discourse.gnome.org/t/screenshot-test-helper-has-issues-with-synchronizing-rendering-assertion-in-cairo-surface-has-mime-data/1568
 
 	if (GDK_IS_X11_DISPLAY(Plugin::display))
 	{
-		GdkWindow* win = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+		GdkWindow* window;
+		GdkPixbuf* pixbuf;
+		GdkPixbuf* thumbnail;
 
-		if (win != NULL && (mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) != WNCK_WINDOW_STATE_MINIMIZED)
+		window = gdk_x11_window_foreign_new_for_display(Plugin::display, wnck_window_get_xid(mGroupWindow->mWnckWindow));
+
+		if (window != NULL)
 		{
-			GdkPixbuf* pb = gdk_pixbuf_get_from_window(win, 0, 0, gdk_window_get_width(win), gdk_window_get_height(win));
+			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window), gdk_window_get_height(window));
 
-			if (pb != NULL)
+			if (pixbuf != NULL)
 			{
-				gtk_image_set_from_pixbuf(mPreview,
-					gdk_pixbuf_scale_simple(pb, gdk_pixbuf_get_width(pb) / 8,
-						gdk_pixbuf_get_height(pb) / 8, GDK_INTERP_BILINEAR));
+				thumbnail = gdk_pixbuf_scale_simple(pixbuf, gdk_pixbuf_get_width(pixbuf) / 8, gdk_pixbuf_get_height(pixbuf) / 8, GDK_INTERP_BILINEAR);
+				gtk_image_set_from_pixbuf(mPreview, thumbnail);
+
+				g_object_unref(thumbnail);
 			}
 
-			g_object_unref(pb);
+			g_object_unref(pixbuf);
 		}
 
-		g_object_unref(win);
+		g_object_unref(window);
 	}
 }

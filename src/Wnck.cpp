@@ -87,6 +87,7 @@ namespace Wnck
 
 		Dock::drawGroups();
 		setActiveWindow();
+		Dock::mDrawTimeout.start();
 	}
 
 	gulong getActiveWindowXID()
