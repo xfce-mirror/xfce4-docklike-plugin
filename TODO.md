@@ -1,7 +1,6 @@
 # TODO
 
 + Better defaults: set indicator orientation, etc.
-+ Simplify Theme.cpp
 + Investigate GLib-CRITICAL from g_source_remove in Helpers::Timeout::stop
 + Configurable thumbnail size
 + Rebindable keyboard shortcuts
