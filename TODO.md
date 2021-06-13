@@ -11,6 +11,7 @@
 + Editing launchers with exo-desktop-item-edit
 + Docs: write the help page and update screenshots
 + Memory: something(s) are not being freed/unrefd when a group is closed
++ Test how well the updating thumbnails perform on a really slow system
 + Investigate GLib-CRITICAL from g_source_remove in Helpers::Timeout::stop
 + Can we still crash the plugin?
 

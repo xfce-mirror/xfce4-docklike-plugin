@@ -57,7 +57,7 @@ namespace Settings
 			[](int indicatorOrientation) -> void {
 				g_key_file_set_integer(mFile, "user", "indicatorOrientation", indicatorOrientation);
 				saveFile();
-				
+
 				gtk_widget_queue_draw(Dock::mBox);
 			});
 
@@ -81,7 +81,7 @@ namespace Settings
 			[](int indicatorStyle) -> void {
 				g_key_file_set_integer(mFile, "user", "indicatorStyle", indicatorStyle);
 				saveFile();
-				
+
 				gtk_widget_queue_draw(Dock::mBox);
 			});
 
@@ -95,7 +95,7 @@ namespace Settings
 			[](GdkRGBA* indicatorColor) -> void {
 				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
 				saveFile();
-				
+
 				gtk_widget_queue_draw(Dock::mBox);
 			});
 

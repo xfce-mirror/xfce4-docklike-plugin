@@ -28,6 +28,7 @@ class GroupMenuItem
 	void updatePreview();
 
 	GroupWindow* mGroupWindow;
+	bool mHover;
 
 	GtkEventBox* mItem;
 	GtkGrid* mGrid;

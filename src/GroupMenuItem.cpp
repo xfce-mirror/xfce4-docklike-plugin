@@ -11,12 +11,18 @@ static GtkTargetEntry entries[1] = {{(gchar*)"any", 0, 0}};
 GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 {
 	mGroupWindow = groupWindow;
+	mHover = false;
 
 	mItem = (GtkEventBox*)gtk_event_box_new();
 	gtk_widget_show(GTK_WIDGET(mItem));
 	g_object_ref(mItem);
 
 	mGrid = (GtkGrid*)gtk_grid_new();
+	gtk_grid_set_column_spacing(mGrid, 6);
+	gtk_widget_set_margin_start(GTK_WIDGET(mGrid), 6);
+	gtk_widget_set_margin_end(GTK_WIDGET(mGrid), 6);
+	gtk_widget_set_margin_top(GTK_WIDGET(mGrid), 2);
+	gtk_widget_set_margin_bottom(GTK_WIDGET(mGrid), 2);
 	gtk_widget_show(GTK_WIDGET(mGrid));
 	gtk_container_add(GTK_CONTAINER(mItem), GTK_WIDGET(mGrid));
 
@@ -45,8 +51,8 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	if (Settings::showPreviews)
 		updatePreview();
 
-	// Update the previews every second while the group or menu is hovered
-	mPreviewTimeout.setup(1000, [this]() {
+	// Update the previews while the group or menu is hovered
+	mPreviewTimeout.setup(250, [this]() {
 		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
@@ -71,12 +77,17 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
 			if (event->state & GDK_BUTTON1_MASK)
 				me->mGroupWindow->activate(event->time);
+			me->updatePreview();
+			me->mHover = true;
+			gtk_widget_queue_draw(widget);
 			return true;
 		}),
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
+			me->mHover = true;
+			gtk_widget_queue_draw(widget);
 			return true;
 		}),
 		this);
@@ -105,6 +116,18 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		}),
 		this);
 
+	g_signal_connect(G_OBJECT(mItem), "draw",
+		G_CALLBACK(+[](GtkEventBox* widget, cairo_t* cr, GroupMenuItem* me) {
+			if (me->mHover)
+			{
+			}
+			else
+			{
+			}
+			return false;
+		}),
+		this);
+
 	gtk_drag_dest_set(GTK_WIDGET(mItem), GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
 }
 
@@ -117,7 +140,10 @@ GroupMenuItem::~GroupMenuItem()
 
 void GroupMenuItem::updateLabel()
 {
-	gtk_label_set_text(mLabel, Wnck::getName(mGroupWindow).c_str());
+	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+		gtk_label_set_markup(mLabel, g_strdup_printf("<b>%s</b>", Wnck::getName(mGroupWindow).c_str()));
+	else
+		gtk_label_set_text(mLabel, Wnck::getName(mGroupWindow).c_str());
 }
 
 void GroupMenuItem::updateIcon()
@@ -130,8 +156,10 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
+	mPreviewTimeout.stop();
+
 	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
-		return;
+		return; // minimized windows never need a thumbnail
 
 	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
@@ -158,10 +186,9 @@ void GroupMenuItem::updatePreview()
 
 				g_object_unref(thumbnail);
 			}
-
 			g_object_unref(pixbuf);
 		}
-
 		g_object_unref(window);
 	}
+	mPreviewTimeout.start();
 }
