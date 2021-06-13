@@ -1,7 +1,6 @@
 # TODO
 
 + Set initial indicator orientation based on panel orientation
-+ Remove Launch Another: .desktop files have New Window etc. entries (menu is long)
 + Improve the Dots indicator style
 + Investigate why the hover state of groups is not cleared
 + New CSS indicator style, No indicator style
