@@ -145,15 +145,13 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	mPreviewTimeout.stop();
-
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
 	if (!Settings::showPreviews)
-		return; // we should not be here
+		return;
 
 	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
-		return; // minimized windows never need a thumbnail
+		return; // minimized windows never need a new thumbnail
 
 	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
@@ -182,5 +180,4 @@ void GroupMenuItem::updatePreview()
 		}
 		g_object_unref(window);
 	}
-	mPreviewTimeout.start();
 }
