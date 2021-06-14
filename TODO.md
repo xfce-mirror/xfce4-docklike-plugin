@@ -6,6 +6,7 @@
 + New CSS indicator style, No indicator style
 + Configurable thumbnail size
 + Rebindable keyboard shortcuts
++ Option to launch another rather than close all with middle click
 + Make sure we are finding all the .desktop files
 + Associate new .desktop file in ~/.local/share/applications etc.
 + Editing launchers with exo-desktop-item-edit
