@@ -45,15 +45,11 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mPreview = (GtkImage*)gtk_image_new();
 	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
 	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
-	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
+	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
-
-	if (Settings::showPreviews)
-		updatePreview();
 
 	// Update the previews while the group or menu is hovered
 	mPreviewTimeout.setup(250, [this]() {
-		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
 	});
@@ -77,8 +73,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
 			if (event->state & GDK_BUTTON1_MASK)
 				me->mGroupWindow->activate(event->time);
-			me->updatePreview();
-			me->mHover = true;
+			// set hover style class
 			gtk_widget_queue_draw(widget);
 			return true;
 		}),
@@ -86,7 +81,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
-			me->mHover = true;
+			// clear hover style class
 			gtk_widget_queue_draw(widget);
 			return true;
 		}),
@@ -118,12 +113,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mItem), "draw",
 		G_CALLBACK(+[](GtkEventBox* widget, cairo_t* cr, GroupMenuItem* me) {
-			if (me->mHover)
-			{
-			}
-			else
-			{
-			}
+			// paint hover style class
 			return false;
 		}),
 		this);
@@ -134,7 +124,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 GroupMenuItem::~GroupMenuItem()
 {
 	mPreviewTimeout.stop();
-	gtk_widget_destroy(GTK_WIDGET(mPreview));
 	gtk_widget_destroy(GTK_WIDGET(mItem));
 }
 
@@ -158,14 +147,17 @@ void GroupMenuItem::updatePreview()
 {
 	mPreviewTimeout.stop();
 
+	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+
+	if (!Settings::showPreviews)
+		return; // we should not be here
+
 	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
 		return; // minimized windows never need a thumbnail
 
 	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
 	// use gdk_device_get_window_at_position in Wayland
-	// See here for some ideas:
-	// https://discourse.gnome.org/t/screenshot-test-helper-has-issues-with-synchronizing-rendering-assertion-in-cairo-surface-has-mime-data/1568
 
 	if (GDK_IS_X11_DISPLAY(Plugin::display))
 	{
