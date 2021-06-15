@@ -70,7 +70,6 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	mGroupMenuItem->updateIcon();
 	mGroupMenuItem->updateLabel();
-	mGroupMenuItem->updatePreview();
 }
 
 GroupWindow::~GroupWindow()
@@ -102,7 +101,6 @@ void GroupWindow::onActivate()
 {
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mGroupMenuItem->mItem), "active");
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
-	mGroupMenuItem->updateLabel();
 
 	if (mGroupAssociated)
 		mGroup->onWindowActivate(this);
@@ -112,7 +110,6 @@ void GroupWindow::onUnactivate()
 {
 	Help::Gtk::cssClassRemove(GTK_WIDGET(mGroupMenuItem->mItem), "active");
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
-	mGroupMenuItem->updateLabel();
 
 	if (mGroupAssociated)
 		mGroup->onWindowUnactivate();

@@ -129,12 +129,15 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
-			if (Settings::showPreviews)
-			{
-				me->mWindows.forEach([](GroupWindow* w) -> void {
+			me->mWindows.forEach([](GroupWindow* w) -> void {
+				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+
+				if (Settings::showPreviews)
+				{
+					w->mGroupMenuItem->updatePreview();
 					w->mGroupMenuItem->mPreviewTimeout.start();
-				});
-			}
+				}
+			});
 
 			return false;
 		}),
