@@ -39,14 +39,14 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mPreview = (GtkImage*)gtk_image_new();
 	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
 	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
-	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 1, 1, 1, 1);
+	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
 	if (Settings::showPreviews)
 		updatePreview();
 
-	// Update the previews every second while the group or menu is hovered
-	mPreviewTimeout.setup(1000, [this]() {
+	// Update the previews while the group or menu is hovered
+	mPreviewTimeout.setup(250, [this]() {
 		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
@@ -113,7 +113,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 GroupMenuItem::~GroupMenuItem()
 {
 	mPreviewTimeout.stop();
-	gtk_widget_destroy(GTK_WIDGET(mPreview));
 	gtk_widget_destroy(GTK_WIDGET(mItem));
 }
 
@@ -132,6 +131,14 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
+	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+
+	if (!Settings::showPreviews)
+		return;
+
+	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
+		return; // minimized windows never need a new thumbnail
+
 	// TODO: This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
 	// use gdk_device_get_window_at_position in Wayland
