@@ -17,10 +17,13 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
 **Desktop (please complete the following information):**
  - OS: [e.g. Ubuntu 20.04]
  - Xfce [e.g. 4.14]
  - Plugin [in about dialog]
 
 **Additional context or images**
-Add any other context about the problem here.
+Add any other context or screenshots about the problem here.
