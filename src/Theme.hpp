@@ -18,8 +18,6 @@ namespace Theme
 {
 	void init();
 	void load();
-
-	void applyDefault(GtkWidget* widget);
 } // namespace Theme
 
 #endif

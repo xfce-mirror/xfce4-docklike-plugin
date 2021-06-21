@@ -21,11 +21,11 @@ namespace Dock
 		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
 		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
 		if (Settings::dockSize != 0)
-            		gtk_widget_set_size_request (mBox, Settings::dockSize, -1);
+			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
 		gtk_widget_show(mBox);
 
 		// Redraw the panel items when the AppInfos have changed
-		mDrawTimeout.setup(250, []() {
+		mDrawTimeout.setup(500, []() {
 			if (AppInfos::modified)
 			{
 				drawGroups();
@@ -122,6 +122,9 @@ namespace Dock
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
 			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
 
+			if (Wnck::getActiveWindowXID() == wnck_window_get_xid(wnckWindow))
+				Help::Gtk::cssClassAdd(GTK_WIDGET(groupWindow->mGroupMenuItem->mItem), "active_menu_item");
+
 			Wnck::mGroupWindows.push(wnck_window_get_xid(wnckWindow), groupWindow);
 
 			groupWindow->leaveGroup();
@@ -206,12 +209,13 @@ namespace Dock
 	void onPanelOrientationChange(GtkOrientation orientation)
 	{
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), orientation);
-	        if (Settings::dockSize != 0)
-        	{
-            		if (orientation == GTK_ORIENTATION_HORIZONTAL)
-                		gtk_widget_set_size_request (mBox, Settings::dockSize, -1);
-            		else
-                		gtk_widget_set_size_request (mBox, -1, Settings::dockSize);
-        	}
+
+		if (Settings::dockSize != 0)
+		{
+			if (orientation == GTK_ORIENTATION_HORIZONTAL)
+				gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
+			else
+				gtk_widget_set_size_request(mBox, -1, Settings::dockSize);
+		}
 	}
 } // namespace Dock

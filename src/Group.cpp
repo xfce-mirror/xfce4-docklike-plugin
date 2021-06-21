@@ -12,9 +12,7 @@ static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 {
 	mButton = gtk_button_new();
-	gtk_style_context_add_class(gtk_widget_get_style_context(mButton), "group");
-	gtk_style_context_add_class(gtk_widget_get_style_context(mButton), "flat");
-
+	Help::Gtk::cssClassAdd(mButton, "flat");
 	mIconPixbuf = NULL;
 	mAppInfo = appInfo;
 	mPinned = pinned;
@@ -26,17 +24,21 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	mWindowsCount.setup(
 		0, [this]() -> uint {
 			uint count = 0;
+			
 			mWindows.findIf([&count](GroupWindow* e) -> bool {
 				if (!e->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
 				{
 					++count;
-					if (count == 2) return true;
+					if (count == 2)
+						return true;
 				}
 			return false;
 		});
 
 		return count; },
-		[this](uint windowsCount) -> void { updateStyle(); });
+		[this](uint windowsCount) -> void {
+			updateStyle();
+		});
 
 	mLeaveTimeout.setup(40, [this]() {
 		uint distance = mGroupMenu.getPointerDistance();
@@ -129,15 +131,10 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
-			me->mWindows.forEach([](GroupWindow* w) -> void {
-				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
-
-				if (Settings::showPreviews)
-				{
-					w->mGroupMenuItem->updatePreview();
+			if (Settings::showPreviews)
+				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.start();
-				}
-			});
+				});
 
 			return false;
 		}),
@@ -148,17 +145,16 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			me->setStyle(Style::Hover, false);
 			me->mMenuShowTimeout.stop();
+
 			if (me->mPinned && me->mWindowsCount == 0)
 				me->onMouseLeave();
 			else
 				me->setMouseLeaveTimeout();
 
 			if (Settings::showPreviews)
-			{
 				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.stop();
 				});
-			}
 
 			return true;
 		}),
@@ -178,6 +174,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
 	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
 	gtk_button_set_always_show_image(GTK_BUTTON(mButton), true);
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "group");
 
 	if (mPinned)
 		gtk_widget_show(mButton);
@@ -209,6 +206,7 @@ void Group::add(GroupWindow* window)
 	mWindows.push(window);
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "open_group");
 
 	if (mWindowsCount == 1 && !mPinned)
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), GTK_WIDGET(mButton), -1);
@@ -220,6 +218,9 @@ void Group::remove(GroupWindow* window)
 	mWindowsCount.updateState();
 	mGroupMenu.remove(window->mGroupMenuItem);
 	setStyle(Style::Focus, false);
+
+	if (!mWindowsCount)
+		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
 }
 
 void Group::activate(guint32 timestamp)
@@ -338,17 +339,6 @@ void Group::setStyle(Style style, bool val)
 	}
 }
 
-void Group::onDrawNew(cairo_t* cr)
-{
-	int width = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
-	int height = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
-
-	double red = (*Settings::indicatorColor).red;
-	double green = (*Settings::indicatorColor).green;
-	double blue = (*Settings::indicatorColor).blue;
-	double alpha = 1;
-}
-
 void Group::onDraw(cairo_t* cr)
 {
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
@@ -378,19 +368,21 @@ void Group::onDraw(cairo_t* cr)
 
 	// indicators ==============================================================
 
-	double rgb[3];
+	double rgba[4];
 
 	if (mSFocus)
 	{
-		rgb[0] = (*Settings::indicatorColor).red;
-		rgb[1] = (*Settings::indicatorColor).green;
-		rgb[2] = (*Settings::indicatorColor).blue;
+		rgba[0] = (*Settings::indicatorColor).red;
+		rgba[1] = (*Settings::indicatorColor).green;
+		rgba[2] = (*Settings::indicatorColor).blue;
+		rgba[3] = (*Settings::indicatorColor).alpha;
 	}
 	else
 	{
-		rgb[0] = 0.7;
-		rgb[1] = 0.7;
-		rgb[2] = 0.7;
+		rgba[0] = (*Settings::inactiveColor).red;
+		rgba[1] = (*Settings::inactiveColor).green;
+		rgba[2] = (*Settings::inactiveColor).blue;
+		rgba[3] = (*Settings::inactiveColor).alpha;
 	}
 
 	switch (Settings::indicatorStyle)
@@ -401,7 +393,7 @@ void Group::onDraw(cairo_t* cr)
 
 		if (mSOpened)
 		{
-			cairo_set_source_rgba(cr, rgb[0], rgb[1], rgb[2], 1);
+			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
 			if (Settings::indicatorOrientation == 0) // Bottom
 				cairo_rectangle(cr, 0, round(h * BAR_WEIGHT), w, h - round(h * BAR_WEIGHT));
@@ -497,8 +489,8 @@ void Group::onDraw(cairo_t* cr)
 				}
 
 				cairo_pattern_t* pat = cairo_pattern_create_radial(x0, y0, 0, x0, y0, dotRadius);
-				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgb[0], rgb[1], rgb[2], 1);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgb[0], rgb[1], rgb[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x0, y0, dotRadius, 0.0, 2.0 * M_PI);
@@ -507,8 +499,8 @@ void Group::onDraw(cairo_t* cr)
 				cairo_pattern_destroy(pat);
 
 				pat = cairo_pattern_create_radial(x1, y1, 0, x1, y1, dotRadius);
-				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgb[0], rgb[1], rgb[2], 1);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgb[0], rgb[1], rgb[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x1, y1, dotRadius, 0.0, 2.0 * M_PI);
@@ -542,8 +534,8 @@ void Group::onDraw(cairo_t* cr)
 				}
 
 				cairo_pattern_t* pat = cairo_pattern_create_radial(x, y, 0, x, y, dotRadius);
-				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgb[0], rgb[1], rgb[2], 1);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgb[0], rgb[1], rgb[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x, y, dotRadius, 0.0, 2.0 * M_PI);
@@ -573,7 +565,7 @@ void Group::onDraw(cairo_t* cr)
 				int sep = vw / 11.;
 				sep = std::max(sep - (sep % 2) + (vw % 2), 2);
 
-				cairo_set_source_rgba(cr, rgb[0], rgb[1], rgb[2], 1);
+				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
 				if (Settings::indicatorOrientation == 0) // Bottom
 				{
@@ -604,7 +596,7 @@ void Group::onDraw(cairo_t* cr)
 				space = space + (space % 2) + (vw % 2);
 				int start = (vw - space) / 2;
 
-				cairo_set_source_rgba(cr, rgb[0], rgb[1], rgb[2], 1);
+				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
 				if (Settings::indicatorOrientation == 0) // Bottom
 					cairo_rectangle(cr, start, round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
@@ -620,6 +612,10 @@ void Group::onDraw(cairo_t* cr)
 		}
 
 		break;
+	}
+	case 3: // None
+	{
+		cairo_fill(cr);
 	}
 	}
 }
@@ -692,13 +688,11 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-		{
 			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
 			});
-		}
 
 		setTopWindow(newTopWindow);
 	}
@@ -711,6 +705,9 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		setStyle(Style::Focus, true);
 		setTopWindow(groupWindow);
+
+		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "active_group");
+		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "group");
 	}
 }
 
@@ -718,6 +715,9 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	setStyle(Style::Focus, false);
+
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "group");
+	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "active_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)
@@ -791,21 +791,19 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	gtk_style_context_add_class(gtk_widget_get_style_context(mButton), "drop");
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "drop_target");
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	gtk_style_context_remove_class(gtk_widget_get_style_context(mButton), "drop");
+	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "drop_target");
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
 {
 	Group* me = this;
-
-	// TODO is the source object copied or passed by a pointer ?
 	gtk_selection_data_set(selectionData, gdk_atom_intern("button", false), 32, (const guchar*)me, sizeof(gpointer) * 32);
 }
 

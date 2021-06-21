@@ -22,12 +22,13 @@ namespace Settings
 	State<int> indicatorOrientation;
 	State<int> indicatorStyle;
 	State<GdkRGBA*> indicatorColor;
+	State<GdkRGBA*> inactiveColor;
 
 	State<bool> keyComboActive;
 	State<bool> keyAloneActive;
 
 	State<std::list<std::string>> pinnedAppList;
-	
+
 	State<int> dockSize;
 
 	void init()
@@ -101,6 +102,20 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
+		colorString = g_key_file_get_string(mFile, "user", "inactiveColor", NULL);
+		color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+
+		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
+			gdk_rgba_parse(color, "rgb(76,166,230)");
+
+		inactiveColor.setup(color,
+			[](GdkRGBA* inactiveColor) -> void {
+				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(inactiveColor));
+				saveFile();
+
+				gtk_widget_queue_draw(Dock::mBox);
+			});
+
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),
 			[](bool noWindowsListIfSingle) -> void {
 				g_key_file_set_boolean(mFile, "user", "noWindowsListIfSingle", noWindowsListIfSingle);
@@ -146,11 +161,12 @@ namespace Settings
 
 		g_strfreev(pinnedListBuffer);
 
+		// HIDDEN SETTINGS:
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),
 			[](int dockSize) -> void {
 				g_key_file_set_integer(mFile, "user", "dockSize", dockSize);
 				saveFile();
-			});		
+			});
 	}
 
 	void saveFile()

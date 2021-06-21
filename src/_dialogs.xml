@@ -29,7 +29,6 @@
           <object class="GtkButtonBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="layout_style">edge</property>
             <child>
               <object class="GtkButton" id="b_help">
                 <property name="label" translatable="yes">_Help</property>
@@ -207,6 +206,7 @@
                           <item translatable="yes">Bars</item>
                           <item translatable="yes">Dots</item>
                           <item translatable="yes">Rectangles</item>
+                          <item translatable="yes">None</item>
                         </items>
                       </object>
                       <packing>
@@ -247,7 +247,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Indicator color :</property>
+                        <property name="label" translatable="yes">Active indicator :</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -259,6 +259,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="use_alpha">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -269,7 +270,7 @@
                       <object class="GtkCheckButton" id="c_forceIconSize">
                         <property name="label" translatable="yes">Force icons size :</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="halign">start</property>
                         <property name="use_underline">True</property>
@@ -277,7 +278,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
+                        <property name="top_attach">4</property>
                       </packing>
                     </child>
                     <child>
@@ -302,6 +303,30 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
+                        <property name="top_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="cp_inactiveColor">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_alpha">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Inactive indicator :</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
                         <property name="top_attach">3</property>
                       </packing>
                     </child>
@@ -389,7 +414,7 @@
 It requires X11 XInput2.0 extension which is is not provided by your system.</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
-                        <property name="stock">gtk-dialog-error</property>
+                        <property name="stock">gtk-dialog-warning</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

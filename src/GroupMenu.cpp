@@ -18,7 +18,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 	mWindow = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mWindow), "stld");
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
 
 	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
@@ -104,6 +103,12 @@ void GroupMenu::popup()
 		gint wx, wy;
 		mVisible = true;
 
+		// Update the previews before showing
+		if (Settings::showPreviews)
+			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+				w->mGroupMenuItem->updatePreview();
+			});
+
 		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
@@ -125,7 +130,7 @@ uint GroupMenu::getPointerDistance()
 
 	gtk_window_get_position(GTK_WINDOW(mWindow), &wx, &wy);
 	gtk_window_get_size(GTK_WINDOW(mWindow), &ww, &wh);
-	Plugin::getPointerPosition(&px, &py);
+	gdk_device_get_position(Plugin::mPointer, NULL, &px, &py);
 
 	if (px < wx)
 		dx = wx - px;

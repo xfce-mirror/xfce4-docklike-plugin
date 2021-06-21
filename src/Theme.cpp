@@ -8,6 +8,9 @@
 
 namespace Theme
 {
+	// This needs work to survive porting to GTK4.
+	// GdkScreen is removed, use GdkDisplay instead.
+
 	GdkScreen* mScreen;
 	GtkCssProvider* mCssProvider;
 	GtkStyleContext* mStyleContext;
@@ -20,82 +23,54 @@ namespace Theme
 		mCssProvider = gtk_css_provider_new();
 		mStyleContext = gtk_widget_get_style_context(Dock::mBox);
 
+		load();
+
 		g_signal_connect(G_OBJECT(mStyleContext), "changed",
 			G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }), NULL);
-
-		load();
 	}
 
 	void load()
 	{
-		GValue gv = G_VALUE_INIT;
-		GdkRGBA* rgba;
-		std::string bgColor;
+		std::string css = setupColors();
+		const gchar* filename;
+		FILE* f;
 
-		gtk_style_context_get_property(mStyleContext, "background-color", GTK_STATE_FLAG_NORMAL, &gv);
-		rgba = (GdkRGBA*)g_value_get_boxed(&gv);
-		rgba->red = 1 - rgba->red;
-		rgba->green = 1 - rgba->green;
-		rgba->blue = 1 - rgba->blue;
-		bgColor = gdk_rgba_to_string(rgba);
-
-		std::string cssStyle =
-			setupColors() +
-			".stld button { border:none; border-radius:0; background:none; "
-			"text-shadow:none; -gtk-icon-shadow:none; box-shadow:none; padding:0px;}"
-			//"grid { min-height:1.3em; background-color:red; }"
-
-			".menu_item image { margin-left:0.4em;  }"
-			".menu_item label { margin:0.5em 0.5em 0.4em 0.5em; }"
-			".menu_item button { margin:0; padding:0; color:@dl_menu_item_color; }"
-			".menu_item button label { margin:0.1em 0.7em 0 0.7em; padding:0; "
-			"font-weight:bold; }"
-			".menu_item grid button { background-color:transparent; }"
-
-			".menu_item { background-color:transparent; color:@dl_menu_item_color; "
-			"}"
-			".menu_item.hover grid { "
-			"background-color:alpha(@dl_menu_item_bgcolor_hover,0.5); }"
-			".menu_item.active grid { "
-			"background-color:@dl_menu_item_bgcolor_hover; "
-			"color:@dl_menu_item_color_hover; }"
-			".menu_item.active button { color:@dl_menu_item_color_hover; }"
-
-			".menu_item.active label { color:@dl_menu_item_color; }"
-
-			".menu_item button:hover { background-color:alpha(#888, 0.5); }"
-
-			".stld box { margin:0; padding:0; border:0; border-radius:0; }"
-			".menu { background-color:@dl_menu_bgcolor; box-shadow:inset 0 0 0 1px "
-			"alpha(black, 0.2); }"
-			".stld .drop { border-left:0.5em solid slateblue; }";
-
-		if (!gtk_css_provider_load_from_data(mCssProvider, cssStyle.c_str(), -1, NULL))
-			std::cerr << "ERROR: CSS LOAD FAILED !" << std::endl;
+		if (g_environ_getenv(g_get_environ(), "XDG_CONFIG_HOME") != NULL)
+			filename = g_build_filename(g_environ_getenv(g_get_environ(), "XDG_CONFIG_HOME"),
+				"xfce4-docklike-plugin/gtk.css", NULL);
 		else
-			gtk_style_context_add_provider_for_screen(mScreen, GTK_STYLE_PROVIDER(mCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	}
+			filename = g_build_filename(g_environ_getenv(g_get_environ(), "HOME"),
+				".config/xfce4-docklike-plugin/gtk.css", NULL);
 
-	void applyDefault(GtkWidget* widget)
-	{
-		gtk_style_context_remove_provider(gtk_widget_get_style_context(widget), GTK_STYLE_PROVIDER(mCssProvider));
+		if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
+			f = fopen(filename, "r");
+		else
+			return;
+
+		if (f != NULL)
+		{
+			int read_char;
+			while ((read_char = getc(f)) != EOF)
+				css += read_char;
+			fclose(f);
+		}
+
+		if (gtk_css_provider_load_from_data(mCssProvider, css.c_str(), -1, NULL))
+			gtk_style_context_add_provider_for_screen(mScreen, GTK_STYLE_PROVIDER(mCssProvider),
+				GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
 
 	std::string setupColors()
 	{
 		GtkWidget* menu = gtk_menu_new();
-
+		GtkWidget* item = gtk_menu_item_new();
 		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
 
 		GValue gv = G_VALUE_INIT;
 		gtk_style_context_get_property(sc, "background-color", GTK_STATE_FLAG_NORMAL, &gv);
 		GdkRGBA* rgba = (GdkRGBA*)g_value_get_boxed(&gv);
 		std::string menuBg = gdk_rgba_to_string(rgba);
-
-		GtkWidget* item = gtk_menu_item_new();
 		gtk_menu_attach(GTK_MENU(menu), item, 0, 1, 0, 1);
-
-		sc = gtk_widget_get_style_context(item);
 
 		gv = G_VALUE_INIT;
 		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
@@ -115,15 +90,6 @@ namespace Theme
 		gtk_widget_destroy(item);
 		gtk_widget_destroy(menu);
 
-		return "@define-color dl_menu_bgcolor " + menuBg +
-			";"
-			"@define-color dl_menu_item_color " +
-			itemLabel +
-			";"
-			"@define-color dl_menu_item_color_hover " +
-			itemLabelHover +
-			";"
-			"@define-color dl_menu_item_bgcolor_hover " +
-			itemBgHover + ";";
+		return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n";
 	}
 } // namespace Theme
