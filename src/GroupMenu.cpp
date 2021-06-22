@@ -82,9 +82,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 void GroupMenu::add(GroupMenuItem* menuItem)
 {
 	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);
-
-	if (mGroup->mSHover)
-		popup();
 }
 
 void GroupMenu::remove(GroupMenuItem* menuItem)

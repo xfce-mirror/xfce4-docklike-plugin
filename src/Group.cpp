@@ -136,7 +136,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 					w->mGroupMenuItem->mPreviewTimeout.start();
 				});
 
-			return false;
+			return true;
 		}),
 		this);
 
@@ -219,8 +219,9 @@ void Group::remove(GroupWindow* window)
 	mGroupMenu.remove(window->mGroupMenuItem);
 	setStyle(Style::Focus, false);
 
-	if (!mWindowsCount)
+	if (!mWindowsCount) {
 		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
+	}
 }
 
 void Group::activate(guint32 timestamp)
@@ -294,49 +295,35 @@ void Group::setStyle(Style style, bool val)
 	case Style::Focus:
 	{
 		if (mSFocus != val)
-		{
 			mSFocus = val;
-			gtk_widget_queue_draw(mButton);
-		}
 		break;
 	}
 	case Style::Opened:
 	{
 		if (mSOpened != val)
-		{
 			mSOpened = val;
-			gtk_widget_queue_draw(mButton);
-		}
 		break;
 	}
 	case Style::Many:
 	{
 		if (mSMany != val)
-		{
 			mSMany = val;
-			gtk_widget_queue_draw(mButton);
-		}
 		break;
 	}
 	case Style::Hover:
 	{
 		if (mSHover != val)
-		{
 			mSHover = val;
-			gtk_widget_queue_draw(mButton);
-		}
 		break;
 	}
 	case Style::Super:
 	{
 		if (mSSuper != val)
-		{
 			mSSuper = val;
-			gtk_widget_queue_draw(mButton);
-		}
 		break;
 	}
 	}
+	gtk_widget_queue_draw(mButton);
 }
 
 void Group::onDraw(cairo_t* cr)
@@ -636,10 +623,7 @@ void Group::onMouseEnter()
 void Group::onMouseLeave()
 {
 	if (!mGroupMenu.mMouseHover)
-	{
-		this->setStyle(Style::Hover, false);
 		mGroupMenu.hide();
-	}
 }
 
 void Group::setMouseLeaveTimeout()
