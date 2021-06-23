@@ -755,9 +755,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 	if (tmp_list != NULL)
 	{
-		char* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
-		std::string target = name;
-		g_free(name);
+		std::string target = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
 
 		if (target != "application/docklike_group")
 		{

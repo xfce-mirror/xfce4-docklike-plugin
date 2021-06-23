@@ -138,9 +138,8 @@ void GroupWindow::updateState()
 		}
 	}
 
-	if (Settings::onlyDisplayScreen)
+	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::display) > 1)
 	{
-		// Adapted from Xfce panel's tasklist-widget.c
 		gint x, y, w, h;
 
 		wnck_window_get_geometry(mWnckWindow, &x, &y, &w, &h);
@@ -153,15 +152,11 @@ void GroupWindow::updateState()
 
 		if (mMonitor != currentMonitor)
 		{
-			if (mMonitor != NULL)
-				monitorChanged = true;
+			monitorChanged = true;
 			mMonitor = currentMonitor;
 		}
 		else
 			monitorChanged = false;
-
-		g_free(pluginWindow);
-		g_free(currentMonitor);
 	}
 
 	if (onWorkspace && onTasklist && onScreen)
