@@ -88,7 +88,10 @@ namespace Wnck
 					{
 						GroupWindow* prevWindow = mGroupWindows.get(prevXID);
 						if (prevWindow != NULL)
+						{
+							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
+						}
 					}
 				}
 				setActiveWindow();
