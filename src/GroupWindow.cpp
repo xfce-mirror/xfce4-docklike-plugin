@@ -70,7 +70,7 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	mGroupMenuItem->updateLabel();
 }
 
-bool GroupWindow::getState(WnckWindowState flagMask) { return (mState & flagMask) != 0; }
+bool GroupWindow::getState(WnckWindowState flagMask) const { return (mState & flagMask) != 0; }
 void GroupWindow::activate(guint32 timestamp) { Wnck::activate(this, timestamp); }
 void GroupWindow::minimize() { Wnck::minimize(this); }
 
@@ -107,7 +107,7 @@ void GroupWindow::onActivate()
 		mGroup->onWindowActivate(this);
 }
 
-void GroupWindow::onUnactivate()
+void GroupWindow::onUnactivate() const
 {
 	Help::Gtk::cssClassRemove(GTK_WIDGET(mGroupMenuItem->mItem), "active");
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
@@ -129,7 +129,7 @@ void GroupWindow::updateState()
 	{
 		WnckWorkspace* windowWorkspace = wnck_window_get_workspace(mWnckWindow);
 
-		if (windowWorkspace != NULL)
+		if (windowWorkspace != nullptr)
 		{
 			WnckWorkspace* activeWorkspace = wnck_screen_get_active_workspace(Wnck::mWnckScreen);
 
