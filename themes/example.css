@@ -27,9 +27,6 @@
 */
 
 /* These define how the individual dock items are styled */
-.group {
-  box-shadow: inset 1px 0px 0px 0px grey;
-}
 .open_group {
   box-shadow: inset 4px 0px 0px 0px teal;
 }

@@ -24,15 +24,6 @@ class GroupWindow;
 class Group
 {
   public:
-	enum Style
-	{
-		Focus,
-		Opened,
-		Many,
-		Hover,
-		Super
-	};
-
 	Group(AppInfo* appInfo, bool pinned);
 
 	void add(GroupWindow* window);
@@ -43,12 +34,10 @@ class Group
 	void closeAll();
 
 	void resize();
-	void setStyle(Style style, bool val);
 	void updateStyle();
 	void electNewTopWindow();
 
-	void onDraw(cairo_t* cr);
-
+	void setTopWindow(GroupWindow* groupWindow);
 	void onWindowActivate(GroupWindow* groupWindow);
 	void onWindowUnactivate();
 
@@ -64,27 +53,21 @@ class Group
 	void onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time);
 	void onDragBegin(GdkDragContext* context);
 
-	bool mHover;
-	bool mPinned;
 	GtkWidget* mButton;
 	GdkPixbuf* mIconPixbuf;
 
+	AppInfo* mAppInfo;
 	GroupMenu mGroupMenu;
+	Store::List<GroupWindow*> mWindows;
+	LogicalState<uint> mWindowsCount;
+
+	uint mTopWindowIndex;
+	uint mTolerablePointerDistance;
+
+	bool mPinned;
 	bool mSFocus;
 	bool mSOpened;
 	bool mSMany;
-	bool mSHover;
-	bool mSSuper;
-	uint mTolerablePointerDistance;
-
-	LogicalState<uint> mWindowsCount;
-
-	AppInfo* mAppInfo;
-	Store::List<GroupWindow*> mWindows;
-	uint mTopWindowIndex;
-
-	void setTopWindow(GroupWindow* groupWindow);
-
 	bool mActive;
 
 	Help::Gtk::Timeout mLeaveTimeout;

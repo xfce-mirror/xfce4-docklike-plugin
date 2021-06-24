@@ -87,7 +87,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
 			gtk_widget_queue_draw(widget);
 			Help::Gtk::cssClassRemove(GTK_WIDGET(me->mItem), "hover_menu_item");
-			me->mGroupWindow->mGroup->mSHover = false;
 			gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);
 			return true;
 		}),
