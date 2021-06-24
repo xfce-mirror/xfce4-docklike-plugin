@@ -183,21 +183,15 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	if (mAppInfo != NULL && !mAppInfo->icon.empty())
 	{
-		GtkWidget* icon;
-
 		if (mAppInfo->icon[0] == '/')
 			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), NULL);
 		else
-		{
-			icon = gtk_image_new_from_icon_name(mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON);
-			gtk_button_set_image(GTK_BUTTON(mButton), icon);
-		}
+			gtk_button_set_image(GTK_BUTTON(mButton),
+				gtk_image_new_from_icon_name(mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON));
 	}
 	else
-	{
-		GtkWidget* icon = gtk_image_new_from_icon_name("application-x-executable", GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image(GTK_BUTTON(mButton), icon);
-	}
+		gtk_button_set_image(GTK_BUTTON(mButton),
+			gtk_image_new_from_icon_name("application-x-executable", GTK_ICON_SIZE_BUTTON));
 
 	resize();
 	updateStyle();
@@ -325,6 +319,9 @@ void Group::setStyle(Style style, bool val)
 
 void Group::onDraw(cairo_t* cr)
 {
+	if (Settings::indicatorStyle == 3) // None
+		return;
+
 	const float BAR_WEIGHT = 0.9231;
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
@@ -344,27 +341,6 @@ void Group::onDraw(cairo_t* cr)
 		rgba[1] = (*Settings::inactiveColor).green;
 		rgba[2] = (*Settings::inactiveColor).blue;
 		rgba[3] = (*Settings::inactiveColor).alpha;
-	}
-
-	// Hovers ==================================================================
-
-	if (mSHover || mSOpened)
-		gtk_widget_set_opacity(mButton, 1);
-	else
-		gtk_widget_set_opacity(mButton, 0.92);
-
-	if (mSSuper)
-		aBack += 0.25;
-	if (mSHover && mSFocus)
-		aBack = 0.8;
-	else if (mSHover || mSFocus)
-		aBack += 0.5;
-
-	if (aBack > 0)
-	{
-		cairo_set_source_rgba(cr, 0.5, 0.5, 0.5, aBack);
-		cairo_rectangle(cr, 0, 0, w, h);
-		cairo_fill(cr);
 	}
 
 	switch (Settings::indicatorStyle)
@@ -591,10 +567,6 @@ void Group::onDraw(cairo_t* cr)
 
 		break;
 	}
-	case 3: // None
-	{
-		break;
-	}
 	}
 }
 
@@ -680,9 +652,7 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		setStyle(Style::Focus, true);
 		setTopWindow(groupWindow);
-
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "active_group");
-		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "group");
 	}
 }
 
@@ -690,8 +660,6 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	setStyle(Style::Focus, false);
-
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "group");
 	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "active_group");
 }
 

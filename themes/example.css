@@ -35,25 +35,23 @@
 }
 .active_group {
   box-shadow: inset 4px 0px 0px 0px salmon;
+  background-color: alpha(@menu_item_bgcolor_hover, 0.35);
 }
 .hover_group {
   background-color: alpha(@menu_item_bgcolor_hover, 0.2);
 }
 
 /* These define how the individual menu items are styled */
-.active_menu_item {
-  background-color: darkmagenta;
-}
-.active_menu_item label {
-  color: white;
-}
 .hover_menu_item {
   background-color: alpha(@menu_item_color_hover, 0.2);
+}
+.hover_menu_item label {
+  color: @menu_item_color;
 }
 
 /* How the drop target is highlighted */
 .drop_target {
-  box-shadow: inset 4px 0px 0px 0px darkviolet;
+  box-shadow: inset 4px 0px 0px 0px darkmagenta;
 }
 
 /* An undecorated window with the current GTK theme's menu background color set */

@@ -12,10 +12,8 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	mGroupMenuItem = new GroupMenuItem(this);
 	mGroupAssociated = false;
 
-	// TODO: check here for exotic group association (like libreoffice)
 	std::string groupName = Wnck::getGroupName(this);
 	AppInfo* appInfo = AppInfos::search(groupName);
-
 	mGroup = Dock::prepareGroup(appInfo);
 
 	//--------------------------------------------------
@@ -99,7 +97,6 @@ void GroupWindow::leaveGroup()
 
 void GroupWindow::onActivate()
 {
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mGroupMenuItem->mItem), "active");
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
 	mGroupMenuItem->updateLabel();
 
@@ -109,7 +106,6 @@ void GroupWindow::onActivate()
 
 void GroupWindow::onUnactivate() const
 {
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mGroupMenuItem->mItem), "active");
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
 	mGroupMenuItem->updateLabel();
 
