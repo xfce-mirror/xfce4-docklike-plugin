@@ -128,6 +128,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			me->setStyle(Style::Hover, true);
+			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
@@ -144,6 +145,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			me->setStyle(Style::Hover, false);
+			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
 			me->mMenuShowTimeout.stop();
 
 			if (me->mPinned && me->mWindowsCount == 0)
@@ -219,9 +221,8 @@ void Group::remove(GroupWindow* window)
 	mGroupMenu.remove(window->mGroupMenuItem);
 	setStyle(Style::Focus, false);
 
-	if (!mWindowsCount) {
+	if (!mWindowsCount)
 		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
-	}
 }
 
 void Group::activate(guint32 timestamp)
@@ -286,6 +287,7 @@ void Group::resize()
 	}
 
 	gtk_widget_set_valign(img, GTK_ALIGN_CENTER);
+	gtk_widget_queue_draw(mButton);
 }
 
 void Group::setStyle(Style style, bool val)
@@ -294,32 +296,27 @@ void Group::setStyle(Style style, bool val)
 	{
 	case Style::Focus:
 	{
-		if (mSFocus != val)
-			mSFocus = val;
+		mSFocus = val;
 		break;
 	}
 	case Style::Opened:
 	{
-		if (mSOpened != val)
-			mSOpened = val;
+		mSOpened = val;
 		break;
 	}
 	case Style::Many:
 	{
-		if (mSMany != val)
-			mSMany = val;
+		mSMany = val;
 		break;
 	}
 	case Style::Hover:
 	{
-		if (mSHover != val)
-			mSHover = val;
+		mSHover = val;
 		break;
 	}
 	case Style::Super:
 	{
-		if (mSSuper != val)
-			mSSuper = val;
+		mSSuper = val;
 		break;
 	}
 	}
@@ -328,11 +325,28 @@ void Group::setStyle(Style style, bool val)
 
 void Group::onDraw(cairo_t* cr)
 {
+	const float BAR_WEIGHT = 0.9231;
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
 	double aBack = 0;
+	double rgba[4];
 
-	//hovers ===================================================================
+	if (mSFocus)
+	{
+		rgba[0] = (*Settings::indicatorColor).red;
+		rgba[1] = (*Settings::indicatorColor).green;
+		rgba[2] = (*Settings::indicatorColor).blue;
+		rgba[3] = (*Settings::indicatorColor).alpha;
+	}
+	else
+	{
+		rgba[0] = (*Settings::inactiveColor).red;
+		rgba[1] = (*Settings::inactiveColor).green;
+		rgba[2] = (*Settings::inactiveColor).blue;
+		rgba[3] = (*Settings::inactiveColor).alpha;
+	}
+
+	// Hovers ==================================================================
 
 	if (mSHover || mSOpened)
 		gtk_widget_set_opacity(mButton, 1);
@@ -353,31 +367,10 @@ void Group::onDraw(cairo_t* cr)
 		cairo_fill(cr);
 	}
 
-	// indicators ==============================================================
-
-	double rgba[4];
-
-	if (mSFocus)
-	{
-		rgba[0] = (*Settings::indicatorColor).red;
-		rgba[1] = (*Settings::indicatorColor).green;
-		rgba[2] = (*Settings::indicatorColor).blue;
-		rgba[3] = (*Settings::indicatorColor).alpha;
-	}
-	else
-	{
-		rgba[0] = (*Settings::inactiveColor).red;
-		rgba[1] = (*Settings::inactiveColor).green;
-		rgba[2] = (*Settings::inactiveColor).blue;
-		rgba[3] = (*Settings::inactiveColor).alpha;
-	}
-
 	switch (Settings::indicatorStyle)
 	{
 	case 0: //Bars -------------------------------------------------------------
 	{
-		const float BAR_WEIGHT = 0.9231;
-
 		if (mSOpened)
 		{
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
@@ -534,10 +527,8 @@ void Group::onDraw(cairo_t* cr)
 
 		break;
 	}
-	case 2: //Rectangles
+	case 2: // Rectangles
 	{
-		const float BAR_WEIGHT = 0.9231;
-
 		if (mSOpened)
 		{
 			int vw;
@@ -602,7 +593,7 @@ void Group::onDraw(cairo_t* cr)
 	}
 	case 3: // None
 	{
-		cairo_fill(cr);
+		break;
 	}
 	}
 }
@@ -785,16 +776,12 @@ void Group::onDragLeave(const GdkDragContext* context, guint time)
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
 {
-	Group* me = this;
-	gtk_selection_data_set(selectionData, gdk_atom_intern("button", false), 32, (const guchar*)me, sizeof(gpointer) * 32);
+	gtk_selection_data_set(selectionData, gdk_atom_intern("button", false), 32, (const guchar*)this, sizeof(gpointer) * 32);
 }
 
 void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time)
 {
-	GdkAtom dt = gtk_selection_data_get_data_type(selectionData);
-	Group* source = (Group*)gtk_selection_data_get_data(selectionData);
-
-	Dock::moveButton(source, this);
+	Dock::moveButton((Group*)gtk_selection_data_get_data(selectionData), this);
 }
 
 void Group::onDragBegin(GdkDragContext* context)

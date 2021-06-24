@@ -7,7 +7,6 @@
 + Configurable thumbnail size, update sleep
 + Rebindable keyboard shortcuts
 + Option to launch another rather than close all with middle click
-+ Option to set minimum width/height
 + Docs: write the help page and update screenshots
 + Memory: something is not getting freed/unrefd when a group is closed
 + Test how well the updating thumbnails perform on a really slow system
@@ -16,6 +15,7 @@
 
 ## DONE
 
+> + Option to set minimum width/height
 > + New CSS indicator style, No indicator style
 > + Make sure we are finding all the .desktop files
 > + Associate new .desktop file in ~/.local/share/applications etc.

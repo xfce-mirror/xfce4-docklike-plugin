@@ -43,17 +43,19 @@ namespace Theme
 				".config/xfce4-docklike-plugin/gtk.css", NULL);
 
 		if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
-			f = fopen(filename, "r");
-		else
-			return;
-
-		if (f != NULL)
 		{
-			int read_char;
-			while ((read_char = getc(f)) != EOF)
-				css += read_char;
-			fclose(f);
+			f = fopen(filename, "r");
+
+			if (f != NULL)
+			{
+				int read_char;
+				while ((read_char = getc(f)) != EOF)
+					css += read_char;
+				fclose(f);
+			}
 		}
+		else // Defaults from https://github.com/nsz32/docklike-plugin/blob/master/src/Theme.cpp
+			css += ".drop_target { box-shadow: inset 4px 0px 0px 0px darkviolet; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
 
 		if (gtk_css_provider_load_from_data(mCssProvider, css.c_str(), -1, NULL))
 			gtk_style_context_add_provider_for_screen(mScreen, GTK_STYLE_PROVIDER(mCssProvider),

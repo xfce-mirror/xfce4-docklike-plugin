@@ -15,9 +15,11 @@
   .group
   .open_group
   .active_group
+  .hover_group
   .menu
   .menu_item
   .active_menu_item
+  .hover_menu_item
 
   See for more details:
   https://developer.gnome.org/gtk3/stable/chap-css-overview.html
@@ -26,13 +28,16 @@
 
 /* These define how the individual dock items are styled */
 .group {
-  border-left: 1px solid grey;
+  box-shadow: inset 1px 0px 0px 0px grey;
 }
 .open_group {
-  border-left: 4px solid teal;
+  box-shadow: inset 4px 0px 0px 0px teal;
 }
 .active_group {
-  border-left: 4px solid salmon;
+  box-shadow: inset 4px 0px 0px 0px salmon;
+}
+.hover_group {
+  background-color: alpha(@menu_item_bgcolor_hover, 0.2);
 }
 
 /* These define how the individual menu items are styled */
@@ -41,6 +46,9 @@
 }
 .active_menu_item label {
   color: white;
+}
+.hover_menu_item {
+  background-color: alpha(@menu_item_color_hover, 0.2);
 }
 
 /* How the drop target is highlighted */
