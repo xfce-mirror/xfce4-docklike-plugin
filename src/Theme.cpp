@@ -45,29 +45,29 @@ void Theme::load()
 		switch (Settings::indicatorOrientation)
 		{
 		case 0: // Top
-			css += ".active_group { box-shadow: inset 0px -4px 0px 0px @indicator_color; }\n";
-			css += ".open_group { box-shadow: inset 0px -4px 0px 0px @inactive_color; }\n";
+			css += "#active_group { box-shadow: inset 0px -4px 0px 0px @indicator_color; }\n"
+				   ".open_group { box-shadow: inset 0px -4px 0px 0px @inactive_color; }\n";
 			break;
 		case 1: // Left
-			css += ".active_group { box-shadow: inset -4px 0px 0px 0px @indicator_color; }\n";
-			css += ".open_group { box-shadow: inset -4px 0px 0px 0px @inactive_color; }\n";
+			css += "#active_group { box-shadow: inset -4px 0px 0px 0px @indicator_color; }\n"
+				   ".open_group { box-shadow: inset -4px 0px 0px 0px @inactive_color; }\n";
 			break;
 		case 2: // Bottom
-			css += ".active_group { box-shadow: inset 0px 4px 0px 0px @indicator_color; }\n";
-			css += ".open_group { box-shadow: inset 0px 4px 0px 0px @inactive_color; }\n";
+			css += "#active_group { box-shadow: inset 0px 4px 0px 0px @indicator_color; }\n"
+				   ".open_group { box-shadow: inset 0px 4px 0px 0px @inactive_color; }\n";
 			break;
 		case 3: // Right
-			css += ".active_group { box-shadow: inset 4px 0px 0px 0px @indicator_color; }\n";
-			css += ".open_group { box-shadow: inset 4px 0px 0px 0px @inactive_color; }\n";
+			css += "#active_group { box-shadow: inset 4px 0px 0px 0px @indicator_color; }\n"
+				   ".open_group { box-shadow: inset 4px 0px 0px 0px @inactive_color; }\n";
 			break;
 		}
 
-		css += ".drop_target { background-color: alpha(@menu_item_color_hover, 0.9); }\n"
-			   ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n"
-			   ".hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n"
-			   ".active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.35); }\n"
-			   ".hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n";
-		".open_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n";
+		css += "#drop_target { background-color: alpha(@menu_item_color_hover, 0.9); }\n"
+			   "#active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.35); }\n"
+			   "#hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n"
+			   "#hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n"
+			   ".open_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n"
+			   ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n";
 	}
 
 	GtkCssProvider* css_provider = gtk_css_provider_new();

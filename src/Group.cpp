@@ -126,7 +126,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
+			gtk_widget_set_name(widget, "hover_group");
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
@@ -142,7 +142,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(
 		G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
+			gtk_widget_set_name(widget, "");
 			me->mMenuShowTimeout.stop();
 
 			if (me->mPinned && me->mWindowsCount == 0)
@@ -341,17 +341,17 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 	{
 		mActive = true;
 		setTopWindow(groupWindow);
-		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "active_group");
-		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
+		gtk_widget_set_name(mButton, "active_group");
+		Help::Gtk::cssClassRemove(mButton, "open_group");
 	}
 }
 
 void Group::onWindowUnactivate()
 {
 	mActive = false;
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "active_group");
+	gtk_widget_set_name(mButton, "");
 	if (Group::mWindowsCount)
-		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "open_group");
+		Help::Gtk::cssClassAdd(mButton, "open_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)
@@ -423,14 +423,14 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "drop_target");
+	gtk_widget_set_name(GTK_WIDGET(mButton), "drop_target");
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "drop_target");
+	gtk_widget_set_name(GTK_WIDGET(mButton), "");
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)

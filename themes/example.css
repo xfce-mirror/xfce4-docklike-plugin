@@ -32,24 +32,24 @@
 .open_group {
   box-shadow: inset 4px 0px 0px 0px @inactive_color;
 }
-.active_group {
+#active_group {
   box-shadow: inset 4px 0px 0px 0px @indicator_color;
   background-color: alpha(@menu_item_bgcolor_hover, 0.35);
 }
-.hover_group {
+#hover_group {
   background-color: alpha(@menu_item_bgcolor_hover, 0.2);
 }
 
 /* These define how the individual menu items are styled */
-.hover_menu_item {
+#hover_menu_item {
   background-color: alpha(@menu_item_color_hover, 0.2);
 }
-.hover_menu_item label {
+#hover_menu_item label {
   color: @menu_item_color;
 }
 
 /* How the drop target is highlighted */
-.drop_target {
+#drop_target {
   box-shadow: inset 4px 0px 0px 0px darkmagenta;
 }
 

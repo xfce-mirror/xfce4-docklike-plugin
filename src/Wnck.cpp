@@ -206,17 +206,12 @@ namespace Wnck
 			if (group != NULL)
 			{
 				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
-				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit"));
+				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
 				GtkWidget* launchAnother = gtk_menu_item_new_with_label((groupWindow != NULL) ? _("Launch Another") : _("Launch"));
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-				/* TODO: Editing desktop items. Disabled for now.
-				 * The changes won't appear until the panel is reloaded,
-				 * and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
-				 * if you're editing something that was in /usr/share/applications (etc.).
-				 * This means pinned apps won't get updated and the user needs to relaunch/pin them. */
-				// gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), launchAnother);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
@@ -230,10 +225,11 @@ namespace Wnck
 					group);
 
 				g_signal_connect(G_OBJECT(editLauncher), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-						appInfo->edit();
+					G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group) {
+						group->mAppInfo->edit();
+						// TODO: Update pinned apps?
 					}),
-					appInfo);
+					group);
 
 				g_signal_connect(G_OBJECT(launchAnother), "activate",
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
