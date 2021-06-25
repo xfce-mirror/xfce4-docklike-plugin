@@ -41,7 +41,7 @@ void Theme::load()
 		}
 	}
 	else // Defaults from https://github.com/nsz32/docklike-plugin/blob/master/src/Theme.cpp
-		css += ".drop_target { box-shadow: inset 4px 0px 0px 0px darkviolet; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n.active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.35); }\n.hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n";
+		css += ".drop_target { box-shadow: inset 4px 0px 0px 0px @indicator_color; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n.active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.35); }\n.hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n";
 
 	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
@@ -71,5 +71,8 @@ std::string Theme::get_theme_colors()
 
 	gtk_widget_destroy(menu);
 
-	return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n";
+	std::string indicatorColor = gdk_rgba_to_string(Settings::indicatorColor);
+	std::string inactiveColor = gdk_rgba_to_string(Settings::inactiveColor);
+
+	return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n@define-color indicator_color " + indicatorColor + ";\n@define-color inactive_color " + inactiveColor + ";\n";
 }
