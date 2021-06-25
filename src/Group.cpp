@@ -342,6 +342,7 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		setTopWindow(groupWindow);
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "active_group");
+		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
 	}
 }
 
@@ -349,6 +350,8 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "active_group");
+	if (Group::mWindowsCount)
+		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "open_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)

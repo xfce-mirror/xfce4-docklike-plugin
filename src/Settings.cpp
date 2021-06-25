@@ -20,7 +20,6 @@ namespace Settings
 	State<bool> showPreviews;
 
 	State<int> indicatorOrientation;
-	State<int> indicatorStyle;
 	State<GdkRGBA*> indicatorColor;
 	State<GdkRGBA*> inactiveColor;
 
@@ -59,7 +58,7 @@ namespace Settings
 			[](int indicatorOrientation) -> void {
 				g_key_file_set_integer(mFile, "user", "indicatorOrientation", indicatorOrientation);
 				saveFile();
-				Dock::drawGroups();
+				Theme::load();
 			});
 
 		forceIconSize.setup(g_key_file_get_boolean(mFile, "user", "forceIconSize", NULL),
@@ -76,13 +75,6 @@ namespace Settings
 				Dock::onPanelResize();
 			});
 
-		indicatorStyle.setup(g_key_file_get_integer(mFile, "user", "indicatorStyle", NULL),
-			[](int indicatorStyle) -> void {
-				g_key_file_set_integer(mFile, "user", "indicatorStyle", indicatorStyle);
-				saveFile();
-				Dock::drawGroups();
-			});
-
 		gchar* colorString = g_key_file_get_string(mFile, "user", "indicatorColor", NULL);
 		GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
 
@@ -94,7 +86,6 @@ namespace Settings
 				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
 				saveFile();
 				Theme::load();
-				Dock::drawGroups();
 			});
 
 		colorString = g_key_file_get_string(mFile, "user", "inactiveColor", NULL);
@@ -108,7 +99,6 @@ namespace Settings
 				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(inactiveColor));
 				saveFile();
 				Theme::load();
-				Dock::drawGroups();
 			});
 
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),

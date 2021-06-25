@@ -110,16 +110,6 @@ namespace SettingsDialog
 
 		// =====================================================================
 
-		GObject* indicatorStyle = gtk_builder_get_object(builder, "co_indicatorStyle");
-		gtk_combo_box_set_active(GTK_COMBO_BOX(indicatorStyle), Settings::indicatorStyle);
-		g_signal_connect(indicatorStyle, "changed",
-			G_CALLBACK(+[](GtkComboBox* indicatorStyle, GtkWidget* g) {
-				Settings::indicatorStyle.set(gtk_combo_box_get_active(GTK_COMBO_BOX(indicatorStyle)));
-			}),
-			dialog);
-
-		// =====================================================================
-
 		GObject* indicatorColor = gtk_builder_get_object(builder, "cp_indicatorColor");
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor);
 		g_signal_connect(indicatorColor, "color-set",
