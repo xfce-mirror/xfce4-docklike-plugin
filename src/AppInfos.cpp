@@ -9,21 +9,18 @@
 void AppInfo::launch()
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
 	g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
 }
 
 void AppInfo::launch_action(const gchar* action)
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
 	g_desktop_app_info_launch_action(info, action, NULL);
 }
 
 void AppInfo::edit()
 {
 	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
-
 	g_spawn_command_line_async(command, NULL);
 }
 
@@ -33,15 +30,8 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-
 	pthread_mutex_t AppInfosLock;
-
 	bool modified;
-
-	std::string parseId(const std::string id)
-	{
-		return id.substr(0, id.size() - 8);
-	}
 
 	void findXDGDirectories()
 	{
@@ -207,7 +197,6 @@ namespace AppInfos
 
 	void groupNameTransform(std::string& groupName)
 	{
-		// Rename from table
 		std::map<std::string, std::string>::iterator itRenamed;
 		if ((itRenamed = mGroupNameRename.find(groupName)) != mGroupNameRename.end())
 			groupName = itRenamed->second;
