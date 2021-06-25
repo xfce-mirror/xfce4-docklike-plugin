@@ -1,6 +1,7 @@
 /*
  * Docklike Taskbar - A modern, minimalist taskbar for XFCE
  * Copyright (c) 2019-2020 Nicolas Szabo <nszabo@vivaldi.net>
+ * Copyright (c) 2020-2021 David Keogh <davidtkeogh@gmail.com>
  * gnu.org/licenses/gpl-3.0
  */
 
@@ -159,13 +160,13 @@ void GroupMenuItem::updatePreview()
 	// use gdk_pixbuf_get_from_surface in GTK4
 	// use gdk_device_get_window_at_position in Wayland
 
-	if (GDK_IS_X11_DISPLAY(Plugin::display))
+	if (GDK_IS_X11_DISPLAY(Plugin::mDisplay))
 	{
 		GdkWindow* window;
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
-		window = gdk_x11_window_foreign_new_for_display(Plugin::display,
+		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			wnck_window_get_xid(mGroupWindow->mWnckWindow));
 
 		if (window != NULL)

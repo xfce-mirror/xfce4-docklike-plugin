@@ -12,9 +12,7 @@ namespace SettingsDialog
 	void updateKeyComboActiveWarning(GtkWidget* widget)
 	{
 		if (!Settings::keyComboActive || Hotkeys::mGrabbedKeys == Hotkeys::NbHotkeys)
-		{
 			gtk_widget_hide(widget);
-		}
 		else
 		{
 			std::string tooltip;
@@ -38,11 +36,11 @@ namespace SettingsDialog
 		/* Hook to make sure GtkBuilder knows are the XfceTitledDialog object */
 		if (xfce_titled_dialog_get_type() == 0)
 			return;
+
 		GtkBuilder* builder = gtk_builder_new_from_resource("/_dialogs.xml");
 		GtkWidget* dialog = (GtkWidget*)gtk_builder_get_object(builder, "dialog");
 
 		gtk_window_set_role(GTK_WINDOW(dialog), "xfce4-panel");
-
 		gtk_widget_show(dialog);
 
 		g_signal_connect(
@@ -204,7 +202,6 @@ namespace SettingsDialog
 		if (!Hotkeys::mXIExtAvailable)
 		{
 			gtk_widget_set_sensitive(GTK_WIDGET(keyAloneActive), false);
-
 			GObject* keyAloneActiveWarning = gtk_builder_get_object(builder, "c_keyAloneActiveWarning");
 			gtk_widget_show(GTK_WIDGET(keyAloneActiveWarning));
 		}

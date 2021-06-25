@@ -1,6 +1,7 @@
 /*
  * Docklike Taskbar - A modern, minimalist taskbar for XFCE
  * Copyright (c) 2019-2020 Nicolas Szabo <nszabo@vivaldi.net>
+ * Copyright (c) 2020-2021 David Keogh <davidtkeogh@gmail.com>
  * gnu.org/licenses/gpl-3.0
  */
 
@@ -11,7 +12,7 @@ namespace Plugin
 {
 	XfcePanelPlugin* mXfPlugin;
 	GdkDevice* mPointer;
-	GdkDisplay* display;
+	GdkDisplay* mDisplay;
 	GdkSeat* seat;
 
 	void init(XfcePanelPlugin* xfPlugin)
@@ -19,10 +20,8 @@ namespace Plugin
 		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, NULL);
 
 		mXfPlugin = xfPlugin;
-
-		display = gdk_display_get_default();
-		seat = gdk_display_get_default_seat(display);
-		mPointer = gdk_seat_get_pointer(seat);
+		mDisplay = gdk_display_get_default();
+		mPointer = gdk_seat_get_pointer(gdk_display_get_default_seat(mDisplay));
 
 		Settings::init();
 		AppInfos::init();
@@ -31,10 +30,7 @@ namespace Plugin
 		Theme::init();
 		Hotkeys::init();
 
-		//--------------------------------------------------
-
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), GTK_WIDGET(Dock::mBox));
-
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
 		xfce_panel_plugin_menu_show_about(mXfPlugin);
 

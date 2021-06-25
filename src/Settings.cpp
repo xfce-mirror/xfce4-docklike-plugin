@@ -46,7 +46,6 @@ namespace Settings
 
 			if (g_file_test(default_config, G_FILE_TEST_IS_REGULAR))
 				g_key_file_load_from_file(mFile, default_config, G_KEY_FILE_NONE, NULL);
-
 			g_free(default_config);
 		}
 
@@ -60,7 +59,6 @@ namespace Settings
 			[](int indicatorOrientation) -> void {
 				g_key_file_set_integer(mFile, "user", "indicatorOrientation", indicatorOrientation);
 				saveFile();
-
 				Dock::drawGroups();
 			});
 
@@ -68,7 +66,6 @@ namespace Settings
 			[](bool forceIconSize) -> void {
 				g_key_file_set_boolean(mFile, "user", "forceIconSize", forceIconSize);
 				saveFile();
-
 				Dock::onPanelResize();
 			});
 
@@ -76,7 +73,6 @@ namespace Settings
 			[](int iconSize) -> void {
 				g_key_file_set_integer(mFile, "user", "iconSize", iconSize);
 				saveFile();
-
 				Dock::onPanelResize();
 			});
 
@@ -84,7 +80,6 @@ namespace Settings
 			[](int indicatorStyle) -> void {
 				g_key_file_set_integer(mFile, "user", "indicatorStyle", indicatorStyle);
 				saveFile();
-
 				Dock::drawGroups();
 			});
 
@@ -98,7 +93,7 @@ namespace Settings
 			[](GdkRGBA* indicatorColor) -> void {
 				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
 				saveFile();
-
+				Theme::load();
 				Dock::drawGroups();
 			});
 
@@ -112,8 +107,8 @@ namespace Settings
 			[](GdkRGBA* inactiveColor) -> void {
 				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(inactiveColor));
 				saveFile();
-
-				gtk_widget_queue_draw(Dock::mBox);
+				Theme::load();
+				Dock::drawGroups();
 			});
 
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),
@@ -138,7 +133,6 @@ namespace Settings
 			[](bool keyComboActive) -> void {
 				g_key_file_set_boolean(mFile, "user", "keyComboActive", keyComboActive);
 				saveFile();
-
 				Hotkeys::updateSettings();
 			});
 
@@ -146,7 +140,6 @@ namespace Settings
 			[](bool keyAloneActive) -> void {
 				g_key_file_set_boolean(mFile, "user", "keyAloneActive", keyAloneActive);
 				saveFile();
-
 				Hotkeys::updateSettings();
 			});
 

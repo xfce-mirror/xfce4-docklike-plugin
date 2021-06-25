@@ -134,16 +134,16 @@ void GroupWindow::updateState()
 		}
 	}
 
-	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::display) > 1)
+	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::mDisplay) > 1)
 	{
 		gint x, y, w, h;
 
 		wnck_window_get_geometry(mWnckWindow, &x, &y, &w, &h);
 
 		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
-		GdkMonitor* currentMonitor = gdk_display_get_monitor_at_point(Plugin::display, x + (w / 2), y + (h / 2));
+		GdkMonitor* currentMonitor = gdk_display_get_monitor_at_point(Plugin::mDisplay, x + (w / 2), y + (h / 2));
 
-		if (gdk_display_get_monitor_at_window(Plugin::display, pluginWindow) != currentMonitor)
+		if (gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow) != currentMonitor)
 			onScreen = false;
 
 		if (mMonitor != currentMonitor)

@@ -1,6 +1,7 @@
 /*
  * Docklike Taskbar - A modern, minimalist taskbar for XFCE
  * Copyright (c) 2019-2020 Nicolas Szabo <nszabo@vivaldi.net>
+ * Copyright (c) 2020-2021 David Keogh <davidtkeogh@gmail.com>
  * gnu.org/licenses/gpl-3.0
  */
 
@@ -35,8 +36,7 @@ namespace Plugin
 {
 	extern XfcePanelPlugin* mXfPlugin;
 	extern GdkDevice* mPointer;
-	extern GdkDisplay* display;
-	extern GdkSeat* seat;
+	extern GdkDisplay* mDisplay;
 
 	void aboutDialog();
 	void remoteEvent(gchar* name, GValue* value);

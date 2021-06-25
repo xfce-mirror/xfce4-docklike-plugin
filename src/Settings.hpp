@@ -23,7 +23,6 @@
 namespace Settings
 {
 	void init();
-
 	void saveFile();
 
 	extern State<bool> forceIconSize;
@@ -41,9 +40,10 @@ namespace Settings
 
 	extern State<bool> keyComboActive;
 	extern State<bool> keyAloneActive;
-	extern State<int> dockSize;
 
 	extern State<std::list<std::string>> pinnedAppList;
+
+	extern State<int> dockSize;
 }; // namespace Settings
 
 #endif
