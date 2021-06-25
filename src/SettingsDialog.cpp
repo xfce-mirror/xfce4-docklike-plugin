@@ -47,8 +47,7 @@ namespace SettingsDialog
 			gtk_builder_get_object(builder, "b_close"), "clicked",
 			G_CALLBACK(+[](GtkButton* button, GtkWidget* dialogWindow) {
 				gtk_widget_hide(dialogWindow);
-				gtk_dialog_response((GtkDialog*)dialogWindow, 0);
-				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
+				gtk_dialog_response(GTK_DIALOG(dialogWindow), GTK_RESPONSE_CLOSE);
 			}),
 			dialog);
 
