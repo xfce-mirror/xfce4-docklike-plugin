@@ -28,16 +28,19 @@ void Theme::load()
 		filename = g_build_filename(g_environ_getenv(g_get_environ(), "HOME"),
 			".config/xfce4-docklike-plugin/gtk.css", NULL);
 
-	if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
+	if (filename != NULL)
 	{
-		FILE* f = fopen(filename, "r");
-
-		if (f != NULL)
+		if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
 		{
-			int read_char;
-			while ((read_char = getc(f)) != EOF)
-				css += read_char;
-			fclose(f);
+			FILE* f = fopen(filename, "r");
+
+			if (f != NULL)
+			{
+				int read_char;
+				while ((read_char = getc(f)) != EOF)
+					css += read_char;
+				fclose(f);
+			}
 		}
 	}
 	else // Defaults from https://github.com/nsz32/docklike-plugin/blob/master/src/Theme.cpp
