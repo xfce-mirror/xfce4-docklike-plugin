@@ -30,6 +30,7 @@ namespace Plugin
 		Wnck::init();
 		Theme::init();
 		Hotkeys::init();
+		Garcon::init();
 
 		//--------------------------------------------------
 

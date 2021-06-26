@@ -1,4 +1,4 @@
-AM_CXXFLAGS = -DWNCK_I_KNOW_THIS_IS_UNSTABLE -DPACKAGE_LOCALE_DIR=\"$(localedir)\" $(GTK_CFLAGS) $(CAIRO_CFLAGS) $(WNCK_CFLAGS) $(SENSORS_CFLAGS) --std=c++11
+AM_CXXFLAGS = -DWNCK_I_KNOW_THIS_IS_UNSTABLE -DPACKAGE_LOCALE_DIR=\"$(localedir)\" $(GTK_CFLAGS) $(CAIRO_CFLAGS) $(GARCON_CFLAGS) $(WNCK_CFLAGS) $(SENSORS_CFLAGS) --std=c++11
 
 plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = libdocklike.la
@@ -17,6 +17,7 @@ libdocklike_la_SOURCES =							\
 		Dock.cpp Dock.hpp							\
 		Wnck.cpp Wnck.hpp							\
 		SettingsDialog.cpp SettingsDialog.hpp		\
+		Garcon.cpp Garcon.hpp						\
 		State.tpp 									\
 		Store.tpp									\
 		register.c									\
@@ -30,7 +31,7 @@ libdocklike_la_CPPFLAGS = @LIBXFCE4PANEL_CFLAGS@ @LIBXFCE4UI_CFLAGS@ $(X11_CFLAG
 
 libdocklike_la_LDFLAGS = -avoid-version -module -no-undefined -export-symbols-regex '^xfce_panel_module_(preinit|init|construct)'
 
-libdocklike_la_LIBADD = @LIBXFCE4PANEL_LIBS@ @LIBXFCE4UI_LIBS@ $(X11_LIBS) $(GTK_LIBS) $(CAIRO_LIBS) $(WNCK_LIBS)
+libdocklike_la_LIBADD = @LIBXFCE4PANEL_LIBS@ @LIBXFCE4UI_LIBS@ $(X11_LIBS) $(GTK_LIBS) $(CAIRO_LIBS) $(WNCK_LIBS) $(GARCON_LIBS)
 
 pluginsdir = $(datadir)/xfce4/panel/plugins
 plugins_in_files = docklike.desktop.in

@@ -23,6 +23,7 @@
 #include "Settings.hpp"
 #include "SettingsDialog.hpp"
 #include "Theme.hpp"
+#include "Garcon.hpp"
 
 extern "C"
 {
