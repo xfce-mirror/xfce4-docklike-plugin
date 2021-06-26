@@ -292,6 +292,10 @@ void Group::onMouseLeave()
 {
 	if (!mGroupMenu.mMouseHover)
 		mGroupMenu.hide();
+	if (mWindowsCount)
+		Help::Gtk::cssClassAdd(mButton, "open_group");
+	else
+	 	Help::Gtk::cssClassRemove(mButton, "open_group");
 }
 
 void Group::setMouseLeaveTimeout()
@@ -352,7 +356,7 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	gtk_widget_set_name(mButton, "");
-	if (Group::mWindowsCount)
+	if (mWindowsCount)
 		Help::Gtk::cssClassAdd(mButton, "open_group");
 }
 
