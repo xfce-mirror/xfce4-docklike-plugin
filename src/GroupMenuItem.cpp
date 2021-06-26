@@ -87,7 +87,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
 			gtk_widget_queue_draw(widget);
-			gtk_widget_set_name(widget, "hover_menu_item");
+			gtk_widget_set_name(widget, "");
 			gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);
 			return true;
 		}),
