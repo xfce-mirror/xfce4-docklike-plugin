@@ -19,7 +19,7 @@ namespace Theme
 {
 	void init();
 	void load();
-	std::string get_theme_colors();
+	std::string getThemeColors();
 } // namespace Theme
 
 #endif

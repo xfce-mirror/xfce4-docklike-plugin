@@ -159,9 +159,11 @@ namespace Wnck
 
 	void setVisibleGroups()
 	{
-		for (GList* window_l = wnck_screen_get_windows(mWnckScreen); window_l != NULL; window_l = window_l->next)
+		for (GList* windowL = wnck_screen_get_windows(mWnckScreen);
+			 windowL != NULL;
+			 windowL = windowL->next)
 		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
+			WnckWindow* wnckWindow = WNCK_WINDOW(windowL->data);
 			GroupWindow* groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
 
 			groupWindow->leaveGroup();
@@ -190,8 +192,8 @@ namespace Wnck
 				if (i == 0 && group->mSOpened)
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
-				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i])));
+				GDesktopAppInfo* gdAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
+				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(gdAppInfo, appInfo->actions[i])));
 
 				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);

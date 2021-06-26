@@ -21,9 +21,9 @@ namespace Hotkeys
 
 	// =========================================================================
 
-	GdkFilterReturn hotkeysHandler(GdkXEvent* gdk_xevent, GdkEvent* event, gpointer data)
+	GdkFilterReturn hotkeysHandler(GdkXEvent* gdkXevent, GdkEvent* event, gpointer data)
 	{
-		XEvent* xevent = (XEvent*)gdk_xevent;
+		XEvent* xevent = (XEvent*)gdkXevent;
 
 		switch (xevent->type)
 		{
@@ -143,10 +143,12 @@ namespace Hotkeys
 						if (toTrigger)
 							gdk_threads_add_idle(threadSafeSwitch, NULL);
 				if (cookie->evtype == XI_RawKeyPress)
+				{
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						toTrigger = true;
 					else
 						toTrigger = false;
+				}
 			}
 		}
 	}
@@ -154,6 +156,7 @@ namespace Hotkeys
 	void startStopXIKeyListenner(bool start)
 	{
 		if (mXIExtAvailable && start)
+		{
 			if (!mThread)
 				pthread_create(&mThread, NULL, threadedXIKeyListenner, NULL);
 			else if (mThread)
@@ -163,6 +166,7 @@ namespace Hotkeys
 				pthread_join(mThread, &ret);
 				mThread = 0;
 			}
+		}
 	}
 
 	void checkXIExtension(Display* display)

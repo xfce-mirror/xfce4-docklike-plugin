@@ -115,11 +115,11 @@ namespace Dock
 		}
 
 		// already opened windows
-		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
-			 window_l != NULL;
-			 window_l = window_l->next)
+		for (GList* windowL = wnck_screen_get_windows(Wnck::mWnckScreen);
+			 windowL != NULL;
+			 windowL = windowL->next)
 		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
+			WnckWindow* wnckWindow = WNCK_WINDOW(windowL->data);
 			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
 
 			if (Wnck::getActiveWindowXID() == wnck_window_get_xid(wnckWindow))
@@ -161,6 +161,7 @@ namespace Dock
 			GtkWidget* widget = (GtkWidget*)child->data;
 
 			if (gtk_widget_get_visible(widget))
+			{
 				if (i == nb)
 				{
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
@@ -176,6 +177,7 @@ namespace Dock
 				}
 				else
 					++i;
+			}
 		}
 	}
 

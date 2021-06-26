@@ -41,11 +41,11 @@ namespace Settings
 		// Look for a default config file in XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
 		else
 		{
-			gchar* default_config = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
+			gchar* defaultConfig = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
 
-			if (g_file_test(default_config, G_FILE_TEST_IS_REGULAR))
-				g_key_file_load_from_file(mFile, default_config, G_KEY_FILE_NONE, NULL);
-			g_free(default_config);
+			if (g_file_test(defaultConfig, G_FILE_TEST_IS_REGULAR))
+				g_key_file_load_from_file(mFile, defaultConfig, G_KEY_FILE_NONE, NULL);
+			g_free(defaultConfig);
 		}
 
 		showPreviews.setup(g_key_file_get_boolean(mFile, "user", "showPreviews", NULL),

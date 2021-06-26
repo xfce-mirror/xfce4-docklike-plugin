@@ -17,7 +17,7 @@ void Theme::init()
 
 void Theme::load()
 {
-	std::string css = get_theme_colors();
+	std::string css = getThemeColors();
 	const gchar* filename;
 
 	// Prefer to load user CSS
@@ -34,9 +34,9 @@ void Theme::load()
 
 		if (f != NULL)
 		{
-			int read_char;
-			while ((read_char = getc(f)) != EOF)
-				css += read_char;
+			int readChar;
+			while ((readChar = getc(f)) != EOF)
+				css += readChar;
 			fclose(f);
 		}
 	}
@@ -70,15 +70,15 @@ void Theme::load()
 			   ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n";
 	}
 
-	GtkCssProvider* css_provider = gtk_css_provider_new();
-	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
+	GtkCssProvider* cssProvider = gtk_css_provider_new();
+	if (gtk_css_provider_load_from_data(cssProvider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-			GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+			GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 	css.clear();
 }
 
-std::string Theme::get_theme_colors()
+std::string Theme::getThemeColors()
 {
 	GtkWidget* menu = gtk_menu_new();
 	GtkStyleContext* sc = gtk_widget_get_style_context(menu);

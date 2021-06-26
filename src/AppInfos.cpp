@@ -30,7 +30,7 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-	pthread_mutex_t AppInfosLock;
+	pthread_mutex_t appInfosLock;
 	bool modified;
 
 	void findXDGDirectories()
@@ -65,23 +65,23 @@ namespace AppInfos
 		if (gAppInfo == NULL)
 			return;
 
-		pthread_mutex_lock(&AppInfosLock);
+		pthread_mutex_lock(&appInfosLock);
 
 		std::string icon;
-		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
+		char* testIcon = g_desktop_app_info_get_string(gAppInfo, "Icon");
 
-		if (icon_ == NULL)
+		if (testIcon == NULL)
 		{
-			pthread_mutex_unlock(&AppInfosLock);
+			pthread_mutex_unlock(&appInfosLock);
 			return;
 		}
 
-		icon = Help::String::trim(icon_);
+		icon = Help::String::trim(testIcon);
 		std::string name;
-		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+		char* testName = g_desktop_app_info_get_string(gAppInfo, "Name");
 
-		if (name_ != NULL)
-			name = name_;
+		if (testName != NULL)
+			name = testName;
 
 		const gchar* const* actions = g_desktop_app_info_list_actions(gAppInfo);
 		AppInfo* info = new AppInfo({path, icon, name, actions});
@@ -100,10 +100,10 @@ namespace AppInfos
 		}
 
 		std::string exec;
-		char* exec_ = g_desktop_app_info_get_string(gAppInfo, "Exec");
-		if (exec_ != NULL && exec_[0] != '\0')
+		char* testExec = g_desktop_app_info_get_string(gAppInfo, "Exec");
+		if (testExec != NULL && testExec[0] != '\0')
 		{
-			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
+			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(testExec)));
 
 			exec = Help::String::getWord(execLine, 0);
 
@@ -113,16 +113,16 @@ namespace AppInfos
 		}
 
 		std::string wmclass;
-		char* wmclass_ = g_desktop_app_info_get_string(gAppInfo, "StartupWMClass");
-		if (wmclass_ != NULL && wmclass_[0] != '\0')
+		char* testClass = g_desktop_app_info_get_string(gAppInfo, "StartupWMClass");
+		if (testClass != NULL && testClass[0] != '\0')
 		{
-			wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
+			wmclass = Help::String::toLowercase(Help::String::trim(testClass));
 
 			if (wmclass != id && wmclass != name && wmclass != exec)
 				mAppInfoWMClasses.set(wmclass, info);
 		}
 
-		pthread_mutex_unlock(&AppInfosLock);
+		pthread_mutex_unlock(&appInfosLock);
 	}
 
 	void* threadedXDGDirectoryWatcher(void* dirPath)
@@ -153,10 +153,10 @@ namespace AppInfos
 
 	void watchXDGDirectory(std::string xdgDir)
 	{
-		pthread_t thread_store;
+		pthread_t threadStore;
 		std::string* arg = new std::string(xdgDir);
 
-		pthread_create(&thread_store, NULL, threadedXDGDirectoryWatcher, arg);
+		pthread_create(&threadStore, NULL, threadedXDGDirectoryWatcher, arg);
 	}
 
 	void loadXDGDirectories()
@@ -182,7 +182,7 @@ namespace AppInfos
 	void init()
 	{
 		modified = false;
-		pthread_mutex_init(&AppInfosLock, NULL);
+		pthread_mutex_init(&appInfosLock, NULL);
 		findXDGDirectories();
 		loadXDGDirectories();
 	}
@@ -214,30 +214,9 @@ namespace AppInfos
 		if (ai != NULL)
 			return ai;
 
-		uint pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			ai = mAppInfoIds.get(id);
-
-			if (ai != NULL)
-				return ai;
-		}
-
 		ai = mAppInfoNames.get(id);
-
 		if (ai != NULL)
 			return ai;
-
-		pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			ai = mAppInfoNames.get(id);
-
-			if (ai != NULL)
-				return ai;
-		}
 
 		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
 

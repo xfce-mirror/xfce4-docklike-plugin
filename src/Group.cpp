@@ -5,6 +5,7 @@
  */
 
 #include "Group.hpp"
+#include "Helpers.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
@@ -143,6 +144,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			gtk_widget_set_name(widget, "");
+
 			me->mMenuShowTimeout.stop();
 
 			if (me->mPinned && me->mWindowsCount == 0)
@@ -401,11 +403,11 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 	if (mask & GDK_CONTROL_MASK)
 		gtk_drag_cancel(context);
 
-	GList* tmp_list = gdk_drag_context_list_targets(context);
+	GList* tmpList = gdk_drag_context_list_targets(context);
 
-	if (tmp_list != NULL)
+	if (tmpList != NULL)
 	{
-		std::string target = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
+		std::string target = gdk_atom_name(GDK_POINTER_TO_ATOM(tmpList->data));
 
 		if (target != "application/docklike_group")
 		{
