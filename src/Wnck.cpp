@@ -214,12 +214,7 @@ namespace Wnck
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-				/* TODO: Editing desktop items. Disabled for now.
-				 * The changes won't appear until the panel is reloaded,
-				 * and exo-desktop-item-edit will create a new desktop file in ~/.local/share/applications
-				 * if you're editing something that was in /usr/share/applications (etc.).
-				 * This means pinned apps won't get updated and the user needs to relaunch/pin them. */
-				// gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), launchAnother);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 

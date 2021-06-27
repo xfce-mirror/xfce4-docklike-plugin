@@ -5,26 +5,43 @@
  */
 
 #include "AppInfos.hpp"
+#include "Settings.hpp"
 
 void AppInfo::launch()
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
 	g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
 }
 
 void AppInfo::launch_action(const gchar* action)
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
 	g_desktop_app_info_launch_action(info, action, NULL);
 }
 
 void AppInfo::edit()
 {
-	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
+	gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
+		g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
 
-	g_spawn_command_line_async(command, NULL);
+	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
+	g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL);
+
+	if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
+	{
+		std::list<std::string> pinnedApps = Settings::pinnedAppList;
+		for (auto it = pinnedApps.begin(); it != pinnedApps.end();)
+		{
+			if (*it == this->path)
+			{
+				it = pinnedApps.erase(it);
+				pinnedApps.insert(it, newPath);
+				break;
+			}
+			++it;
+		}
+		Settings::pinnedAppList.set(pinnedApps);
+	}
 }
 
 namespace AppInfos
