@@ -27,6 +27,8 @@ void AppInfo::edit()
 	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
 	g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL);
 
+	// If a new desktop file was created it will be in ~/.local/share/applications/
+	// If the previous file was pinned it needs to be replaced with the new one.
 	if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
 	{
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -50,15 +52,8 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-
 	pthread_mutex_t AppInfosLock;
-
 	bool modified;
-
-	std::string parseId(const std::string id)
-	{
-		return id.substr(0, id.size() - 8);
-	}
 
 	void findXDGDirectories()
 	{
@@ -70,13 +65,28 @@ namespace AppInfos
 		mXdgDataDirs.push_back("/usr/local/share");
 		mXdgDataDirs.push_back("/usr/share");
 
-		for (std::string& dirs : mXdgDataDirs)
-			dirs += "/applications/";
+		for (std::string& dir : mXdgDataDirs)
+			dir += "/applications/";
+
+		mXdgDataDirs.push_back(std::string(getenv("HOME")) + "/.local/share/applications/");
+
+		// Recursively add subdirectories of ~/.local/share/applications (etc.) to mXdgDataDirs.
+		// Wine (and maybe some others) create their own directory tree.
+		// See man ftw(3) for more information.
+		std::list<std::string> tempDirs = mXdgDataDirs;
+		for (std::string& dir : tempDirs)
+		{
+			ftw(
+				dir.c_str(),
+				[](const char* fpath, const struct stat* sb, int typeflag) -> int {
+					if (typeflag == FTW_D)
+						mXdgDataDirs.push_back(fpath);
+					return 0; },
+				1);
+		}
 
 		mXdgDataDirs.sort();
 		mXdgDataDirs.unique();
-
-		mXdgDataDirs.push_back(std::string(getenv("HOME")) + "/.local/share/applications/");
 	}
 
 	void loadDesktopEntry(const std::string& xdgDir, std::string filename)
@@ -224,7 +234,6 @@ namespace AppInfos
 
 	void groupNameTransform(std::string& groupName)
 	{
-		// Rename from table
 		std::map<std::string, std::string>::iterator itRenamed;
 		if ((itRenamed = mGroupNameRename.find(groupName)) != mGroupNameRename.end())
 			groupName = itRenamed->second;

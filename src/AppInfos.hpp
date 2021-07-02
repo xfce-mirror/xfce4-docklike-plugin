@@ -9,6 +9,7 @@
 
 #include <pthread.h>
 #include <sys/inotify.h>
+#include <ftw.h>
 
 #include <gio/gdesktopappinfo.h>
 
