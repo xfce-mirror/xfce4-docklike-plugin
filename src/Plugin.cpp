@@ -11,18 +11,15 @@ namespace Plugin
 {
 	XfcePanelPlugin* mXfPlugin;
 	GdkDevice* mPointer;
-	GdkDisplay* display;
-	GdkSeat* seat;
+	GdkDisplay* mDisplay;
 
 	void init(XfcePanelPlugin* xfPlugin)
 	{
 		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, NULL);
 
 		mXfPlugin = xfPlugin;
-
-		display = gdk_display_get_default();
-		seat = gdk_display_get_default_seat(display);
-		mPointer = gdk_seat_get_pointer(seat);
+		mDisplay = gdk_display_get_default();
+		mPointer = gdk_seat_get_pointer(gdk_display_get_default_seat(mDisplay));
 
 		Settings::init();
 		AppInfos::init();
@@ -31,10 +28,7 @@ namespace Plugin
 		Theme::init();
 		Hotkeys::init();
 
-		//--------------------------------------------------
-
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), GTK_WIDGET(Dock::mBox));
-
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
 		xfce_panel_plugin_menu_show_about(mXfPlugin);
 

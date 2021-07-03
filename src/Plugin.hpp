@@ -35,8 +35,7 @@ namespace Plugin
 {
 	extern XfcePanelPlugin* mXfPlugin;
 	extern GdkDevice* mPointer;
-	extern GdkDisplay* display;
-	extern GdkSeat* seat;
+	extern GdkDisplay* mDisplay;
 
 	void aboutDialog();
 	void remoteEvent(gchar* name, GValue* value);

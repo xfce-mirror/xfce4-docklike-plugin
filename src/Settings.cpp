@@ -39,15 +39,14 @@ namespace Settings
 		if (g_file_test(mPath.c_str(), G_FILE_TEST_IS_REGULAR))
 			g_key_file_load_from_file(mFile, mPath.c_str(), G_KEY_FILE_NONE, NULL);
 
-		// Look for a default config file in XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
-		else
+		else // Look for a default config file in XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
 		{
-			gchar* default_config = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
+			gchar* distConfig = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
 
-			if (g_file_test(default_config, G_FILE_TEST_IS_REGULAR))
-				g_key_file_load_from_file(mFile, default_config, G_KEY_FILE_NONE, NULL);
+			if (distConfig != NULL && g_file_test(distConfig, G_FILE_TEST_IS_REGULAR))
+				g_key_file_load_from_file(mFile, distConfig, G_KEY_FILE_NONE, NULL);
 
-			g_free(default_config);
+			g_free(distConfig);
 		}
 
 		showPreviews.setup(g_key_file_get_boolean(mFile, "user", "showPreviews", NULL),

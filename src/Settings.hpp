@@ -26,6 +26,9 @@ namespace Settings
 
 	void saveFile();
 
+	extern std::string mPath;
+	extern GKeyFile* mFile;
+
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
 
