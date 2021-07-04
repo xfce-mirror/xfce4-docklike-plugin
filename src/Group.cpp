@@ -413,7 +413,7 @@ void Group::onDraw(cairo_t* cr)
 	{
 		if (mSOpened)
 		{
-			const double dotRadius = std::max(h * (0.093), 2.);
+			const double dotRadius = h * 0.075;
 
 			if (mSMany)
 			{
@@ -446,7 +446,7 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_pattern_t* pat = cairo_pattern_create_radial(x0, y0, 0, x0, y0, dotRadius);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x0, y0, dotRadius, 0.0, 2.0 * M_PI);
@@ -456,7 +456,7 @@ void Group::onDraw(cairo_t* cr)
 
 				pat = cairo_pattern_create_radial(x1, y1, 0, x1, y1, dotRadius);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x1, y1, dotRadius, 0.0, 2.0 * M_PI);
@@ -491,7 +491,7 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_pattern_t* pat = cairo_pattern_create_radial(x, y, 0, x, y, dotRadius);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
-				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], 0.10);
+				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
 				cairo_arc(cr, x, y, dotRadius, 0.0, 2.0 * M_PI);
