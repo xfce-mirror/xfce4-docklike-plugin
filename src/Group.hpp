@@ -46,6 +46,7 @@ class Group
 	void setStyle(Style style, bool val);
 	void updateStyle();
 	void electNewTopWindow();
+	void setTopWindow(GroupWindow* groupWindow);
 
 	void onDraw(cairo_t* cr);
 
@@ -66,10 +67,8 @@ class Group
 
 	bool mHover;
 	bool mPinned;
-	GtkWidget* mButton;
-	GdkPixbuf* mIconPixbuf;
+	bool mActive;
 
-	GroupMenu mGroupMenu;
 	bool mSFocus;
 	bool mSOpened;
 	bool mSMany;
@@ -77,15 +76,17 @@ class Group
 	bool mSSuper;
 	uint mTolerablePointerDistance;
 
-	LogicalState<uint> mWindowsCount;
-
 	AppInfo* mAppInfo;
+	GroupMenu mGroupMenu;
 	Store::List<GroupWindow*> mWindows;
 	uint mTopWindowIndex;
+	LogicalState<uint> mWindowsCount;
+	uint mWindowCount;
 
-	void setTopWindow(GroupWindow* groupWindow);
-
-	bool mActive;
+	GtkWidget* mButton;
+	GtkWidget* mLabel;
+	GtkWidget* mImage;
+	GdkPixbuf* mIconPixbuf;
 
 	Help::Gtk::Timeout mLeaveTimeout;
 	Help::Gtk::Timeout mMenuShowTimeout;

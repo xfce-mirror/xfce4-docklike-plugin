@@ -44,9 +44,12 @@ namespace Settings
 
 	extern State<bool> keyComboActive;
 	extern State<bool> keyAloneActive;
-	extern State<int> dockSize;
 
 	extern State<std::list<std::string>> pinnedAppList;
+
+	// HIDDEN SETTINGS:
+	extern State<bool> showWindowCount;
+	extern State<int> dockSize;
 }; // namespace Settings
 
 #endif

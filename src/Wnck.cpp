@@ -55,20 +55,23 @@ namespace Wnck
 
 	void init()
 	{
-		// TODO: Find the screen the panel plugin is on, not the default
 		mWnckScreen = wnck_screen_get_default();
-		wnck_screen_force_update(mWnckScreen);
 
 		// signal connection
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), new GroupWindow(wnckWindow));
+				GroupWindow* newWindow = new GroupWindow(wnckWindow);
+				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
+				newWindow->mGroup->mWindowCount++;
+				newWindow->mGroup->updateStyle();
 			}),
 			NULL);
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				GroupWindow* groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
+				groupWindow->mGroup->mWindowCount--;
+				groupWindow->mGroup->updateStyle();
 				delete groupWindow;
 			}),
 			NULL);

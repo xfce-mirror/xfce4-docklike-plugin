@@ -1,13 +1,11 @@
 # TODO
 
-+ Window count overlay
++ Use g_app_info_get_all() rather than finding apps ourselves
 + Move aliases to a text file so users can add stuff
 + Set initial indicator orientation based on panel orientation
-+ Improve the Dots indicator style
 + Redesign the settings dialog to accomidate more options
 + Configurable thumbnail size, update sleep
 + Rebindable keyboard shortcuts
-+ Option to launch another rather than close all with middle click
 + Docs: write the help page and update screenshots
 + Memory: something is not getting freed/unrefd when a group is closed
 + Test how well the updating thumbnails perform on a really slow system
@@ -16,6 +14,8 @@
 
 ## DONE
 
+> + Window count overlay
+> + Improve the Dots indicator style
 > + Option to set minimum width/height
 > + New CSS indicator style, No indicator style
 > + Make sure we are finding all the .desktop files

@@ -11,12 +11,11 @@ static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
 Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 {
-	mButton = gtk_button_new();
-	Help::Gtk::cssClassAdd(mButton, "flat");
 	mIconPixbuf = NULL;
 	mAppInfo = appInfo;
 	mPinned = pinned;
 	mTopWindowIndex = 0;
+	mWindowCount = 0;
 	mActive = mSFocus = mSOpened = mSMany = mSHover = mSSuper = false;
 
 	//--------------------------------------------------
@@ -57,6 +56,28 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		onMouseEnter();
 		return false;
 	});
+
+	//--------------------------------------------------
+
+	mButton = gtk_button_new();
+	mImage = gtk_image_new();
+	mLabel = gtk_label_new("");
+	GtkWidget* overlay = gtk_overlay_new();
+
+	gtk_label_set_use_markup(GTK_LABEL(mLabel), true);
+	gtk_container_add(GTK_CONTAINER(overlay), mImage);
+	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLabel);
+	gtk_widget_set_halign(GTK_WIDGET(mLabel), GTK_ALIGN_START);
+	gtk_widget_set_valign(GTK_WIDGET(mLabel), GTK_ALIGN_START);
+	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLabel, true);
+	gtk_container_add(GTK_CONTAINER(mButton), overlay);
+
+	Help::Gtk::cssClassAdd(mButton, "flat");
+	Help::Gtk::cssClassAdd(mButton, "group");
+	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
+	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
+	g_object_set_data(G_OBJECT(mButton), "group", this);
+	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
 
 	//--------------------------------------------------
 
@@ -171,27 +192,21 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	//--------------------------------------------------
 
-	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
-	g_object_set_data(G_OBJECT(mButton), "group", this);
-	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
-	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
-	gtk_button_set_always_show_image(GTK_BUTTON(mButton), true);
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "group");
-
 	if (mPinned)
-		gtk_widget_show(mButton);
+		gtk_widget_show_all(mButton);
 
 	if (mAppInfo != NULL && !mAppInfo->icon.empty())
 	{
 		if (mAppInfo->icon[0] == '/')
+		{
 			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), NULL);
+			gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), mIconPixbuf);
+		}
 		else
-			gtk_button_set_image(GTK_BUTTON(mButton),
-				gtk_image_new_from_icon_name(mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON));
+			gtk_image_set_from_icon_name(GTK_IMAGE(mImage), mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON);
 	}
 	else
-		gtk_button_set_image(GTK_BUTTON(mButton),
-			gtk_image_new_from_icon_name("application-x-executable", GTK_ICON_SIZE_BUTTON));
+		gtk_image_set_from_icon_name(GTK_IMAGE(mImage), "application-x-executable", GTK_ICON_SIZE_BUTTON);
 
 	resize();
 	updateStyle();
@@ -264,23 +279,18 @@ void Group::closeAll()
 
 void Group::resize()
 {
-	GtkWidget* img;
 	gtk_widget_set_size_request(mButton, (round((Dock::mPanelSize * 1.2) / 2) * 2), Dock::mPanelSize);
 
 	if (mIconPixbuf != NULL)
 	{
 		GdkPixbuf* pixbuf = gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER);
 		GtkWidget* icon = gtk_image_new_from_pixbuf(pixbuf);
-		gtk_button_set_image(GTK_BUTTON(mButton), icon);
-		img = gtk_button_get_image(GTK_BUTTON(mButton));
+		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), pixbuf);
 	}
 	else
-	{
-		img = gtk_button_get_image(GTK_BUTTON(mButton));
-		gtk_image_set_pixel_size(GTK_IMAGE(img), Dock::mIconSize);
-	}
+		gtk_image_set_pixel_size(GTK_IMAGE(mImage), Dock::mIconSize);
 
-	gtk_widget_set_valign(img, GTK_ALIGN_CENTER);
+	gtk_widget_set_valign(mImage, GTK_ALIGN_CENTER);
 	gtk_widget_queue_draw(mButton);
 }
 
@@ -600,7 +610,7 @@ void Group::updateStyle()
 	int wCount = mWindowsCount;
 
 	if (mPinned || wCount)
-		gtk_widget_show(mButton);
+		gtk_widget_show_all(mButton);
 	else
 		gtk_widget_hide(mButton);
 
@@ -624,6 +634,11 @@ void Group::updateStyle()
 		setStyle(Style::Many, true);
 	else
 		setStyle(Style::Many, false);
+
+	if (mWindowCount > 2 && Settings::showWindowCount)
+		gtk_label_set_markup(GTK_LABEL(mLabel), g_strdup_printf("<b>%d</b>", mWindowCount));
+	else
+		gtk_label_set_markup(GTK_LABEL(mLabel), "");
 }
 
 void Group::electNewTopWindow()

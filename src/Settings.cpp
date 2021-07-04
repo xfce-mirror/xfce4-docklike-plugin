@@ -29,6 +29,7 @@ namespace Settings
 
 	State<std::list<std::string>> pinnedAppList;
 
+	State<bool> showWindowCount;
 	State<int> dockSize;
 
 	void init()
@@ -161,6 +162,12 @@ namespace Settings
 		g_strfreev(pinnedListBuffer);
 
 		// HIDDEN SETTINGS:
+		showWindowCount.setup(g_key_file_get_boolean(mFile, "user", "showWindowCount", NULL),
+			[](bool showWindowCount) -> void {
+				g_key_file_set_boolean(mFile, "user", "showWindowCount", showWindowCount);
+				saveFile();
+			});
+
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),
 			[](int dockSize) -> void {
 				g_key_file_set_integer(mFile, "user", "dockSize", dockSize);
