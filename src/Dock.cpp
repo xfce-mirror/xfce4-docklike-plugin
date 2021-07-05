@@ -147,7 +147,7 @@ namespace Dock
 				continue;
 
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
-			group->setStyle(Group::Style::Super, on);
+			group->mSSuper = on;
 			--grabbedKeys;
 		}
 	}

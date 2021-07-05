@@ -24,41 +24,27 @@ class GroupWindow;
 class Group
 {
   public:
-	enum Style
-	{
-		Focus,
-		Opened,
-		Many,
-		Hover,
-		Super
-	};
-
 	Group(AppInfo* appInfo, bool pinned);
-
 	void add(GroupWindow* window);
 	void remove(GroupWindow* window);
+	void electNewTopWindow();
+	void setTopWindow(GroupWindow* groupWindow);
 
 	void activate(guint32 timestamp);
 	void scrollWindows(guint32 timestamp, GdkScrollDirection direction);
 	void closeAll();
 
 	void resize();
-	void setStyle(Style style, bool val);
 	void updateStyle();
-	void electNewTopWindow();
-	void setTopWindow(GroupWindow* groupWindow);
 
 	void onDraw(cairo_t* cr);
-
 	void onWindowActivate(GroupWindow* groupWindow);
 	void onWindowUnactivate();
-
 	void onButtonPress(GdkEventButton* event);
 	void onButtonRelease(GdkEventButton* event);
 	void onMouseEnter();
 	void onMouseLeave();
 	void setMouseLeaveTimeout();
-
 	bool onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int y, guint time);
 	void onDragLeave(const GdkDragContext* context, guint time);
 	void onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time);

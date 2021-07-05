@@ -29,9 +29,9 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 	g_signal_connect(G_OBJECT(mWindow), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
-			me->mGroup->setStyle(Group::Style::Hover, true);
 			me->mGroup->mLeaveTimeout.stop();
 			me->mMouseHover = true;
+			me->mGroup->mSHover = true;
 
 			me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
