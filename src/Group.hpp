@@ -81,7 +81,6 @@ class Group
 	Store::List<GroupWindow*> mWindows;
 	uint mTopWindowIndex;
 	LogicalState<uint> mWindowsCount;
-	uint mWindowCount;
 
 	GtkWidget* mButton;
 	GtkWidget* mLabel;

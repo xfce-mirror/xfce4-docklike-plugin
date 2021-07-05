@@ -13,13 +13,13 @@ namespace Wnck
 
 	namespace // private:
 	{
-
 		std::string getGroupNameSys(WnckWindow* wnckWindow)
 		{
 			// Wnck method const char *
 			const char* buf = wnck_window_get_class_group_name(wnckWindow);
 			if (buf != NULL && buf[0] != '\0')
 				return buf;
+
 			buf = wnck_window_get_class_instance_name(wnckWindow);
 			if (buf != NULL && buf[0] != '\0')
 				return buf;
@@ -28,13 +28,13 @@ namespace Wnck
 			char buffer[512];
 			std::string path = "/proc/" + std::to_string(wnck_window_get_pid(wnckWindow)) + "/cmdline";
 			int fd = open(path.c_str(), O_RDONLY);
+
 			if (fd >= 0)
 			{
 				int nbr = read(fd, buffer, 512);
 				::close(fd);
 
 				char* exe = basename(buffer);
-
 				if (strcmp(exe, "python") != 0) // ADDIT graphical interpreters here
 					return exe;
 
@@ -57,12 +57,10 @@ namespace Wnck
 	{
 		mWnckScreen = wnck_screen_get_default();
 
-		// signal connection
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				GroupWindow* newWindow = new GroupWindow(wnckWindow);
 				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
-				newWindow->mGroup->mWindowCount++;
 				newWindow->mGroup->updateStyle();
 			}),
 			NULL);
@@ -70,7 +68,6 @@ namespace Wnck
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				GroupWindow* groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
-				groupWindow->mGroup->mWindowCount--;
 				groupWindow->mGroup->updateStyle();
 				delete groupWindow;
 			}),
@@ -135,22 +132,34 @@ namespace Wnck
 		return wnck_window_get_mini_icon(groupWindow->mWnckWindow);
 	}
 
+	void minimize(GroupWindow* groupWindow)
+	{
+		wnck_window_minimize(groupWindow->mWnckWindow);
+	}
+
+	std::string getGroupName(GroupWindow* groupWindow)
+	{
+		return Help::String::toLowercase(getGroupNameSys(groupWindow->mWnckWindow));
+	}
+
 	void activate(GroupWindow* groupWindow, guint32 timestamp)
 	{
+		if (!timestamp)
+			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+
 		WnckWorkspace* workspace = wnck_window_get_workspace(groupWindow->mWnckWindow);
 		if (workspace != NULL)
 			wnck_workspace_activate(workspace, timestamp);
+
 		wnck_window_activate(groupWindow->mWnckWindow, timestamp);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		wnck_window_close(groupWindow->mWnckWindow, 0);
-	}
+		if (!timestamp)
+			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
 
-	void minimize(GroupWindow* groupWindow)
-	{
-		wnck_window_minimize(groupWindow->mWnckWindow);
+		wnck_window_close(groupWindow->mWnckWindow, timestamp);
 	}
 
 	void setActiveWindow()
@@ -173,13 +182,6 @@ namespace Wnck
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
 		}
-	}
-
-	std::string getGroupName(GroupWindow* groupWindow)
-	{
-		std::string groupName = Help::String::toLowercase(getGroupNameSys(groupWindow->mWnckWindow));
-
-		return groupName;
 	}
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)

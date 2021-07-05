@@ -15,7 +15,6 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	mAppInfo = appInfo;
 	mPinned = pinned;
 	mTopWindowIndex = 0;
-	mWindowCount = 0;
 	mActive = mSFocus = mSOpened = mSMany = mSHover = mSSuper = false;
 
 	//--------------------------------------------------
@@ -28,8 +27,6 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 				if (!e->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
 				{
 					++count;
-					if (count == 2)
-						return true;
 				}
 			return false;
 		});
@@ -622,6 +619,16 @@ void Group::updateStyle()
 			gtk_widget_set_tooltip_text(mButton, NULL);
 
 		setStyle(Style::Opened, true);
+
+		if (wCount > 1)
+			setStyle(Style::Many, true);
+		else
+			setStyle(Style::Many, false);
+
+		if (wCount > 2 && Settings::showWindowCount)
+			gtk_label_set_markup(GTK_LABEL(mLabel), g_strdup_printf("<b>%d</b>", wCount));
+		else
+			gtk_label_set_markup(GTK_LABEL(mLabel), "");
 	}
 	else
 	{
@@ -629,16 +636,6 @@ void Group::updateStyle()
 		setStyle(Style::Opened, false);
 		setStyle(Style::Focus, false);
 	}
-
-	if (wCount > 1)
-		setStyle(Style::Many, true);
-	else
-		setStyle(Style::Many, false);
-
-	if (mWindowCount > 2 && Settings::showWindowCount)
-		gtk_label_set_markup(GTK_LABEL(mLabel), g_strdup_printf("<b>%d</b>", mWindowCount));
-	else
-		gtk_label_set_markup(GTK_LABEL(mLabel), "");
 }
 
 void Group::electNewTopWindow()
