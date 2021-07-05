@@ -18,6 +18,7 @@
 namespace SettingsDialog
 {
 	void popup();
+	void updateKeyComboActiveWarning(GtkWidget* widget);
 } // namespace SettingsDialog
 
 #endif // SETTINGS_HPP
