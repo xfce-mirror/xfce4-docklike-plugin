@@ -68,9 +68,20 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	mGroupMenuItem->updateLabel();
 }
 
-bool GroupWindow::getState(WnckWindowState flagMask) const { return (mState & flagMask) != 0; }
-void GroupWindow::activate(guint32 timestamp) { Wnck::activate(this, timestamp); }
-void GroupWindow::minimize() { Wnck::minimize(this); }
+bool GroupWindow::getState(WnckWindowState flagMask) const
+{
+	return (mState & flagMask) != 0;
+}
+
+void GroupWindow::activate(guint32 timestamp)
+{
+	Wnck::activate(this, timestamp);
+}
+
+void GroupWindow::minimize()
+{
+	wnck_window_minimize(this->mWnckWindow);
+}
 
 GroupWindow::~GroupWindow()
 {
@@ -119,7 +130,7 @@ void GroupWindow::updateState()
 	bool monitorChanged = false;
 	bool onWorkspace = true;
 	bool onTasklist = !(mState & WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST);
-	mState = Wnck::getState(this);
+	mState = wnck_window_get_state(this->mWnckWindow);
 
 	if (Settings::onlyDisplayVisible)
 	{

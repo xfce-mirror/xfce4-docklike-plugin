@@ -117,26 +117,6 @@ namespace Wnck
 		return wnck_window_get_xid(activeWindow);
 	}
 
-	std::string getName(GroupWindow* groupWindow)
-	{
-		return wnck_window_get_name(groupWindow->mWnckWindow);
-	}
-
-	gushort getState(GroupWindow* groupWindow)
-	{
-		return wnck_window_get_state(groupWindow->mWnckWindow);
-	}
-
-	GdkPixbuf* getMiniIcon(GroupWindow* groupWindow)
-	{
-		return wnck_window_get_mini_icon(groupWindow->mWnckWindow);
-	}
-
-	void minimize(GroupWindow* groupWindow)
-	{
-		wnck_window_minimize(groupWindow->mWnckWindow);
-	}
-
 	std::string getGroupName(GroupWindow* groupWindow)
 	{
 		return Help::String::toLowercase(getGroupNameSys(groupWindow->mWnckWindow));
@@ -216,13 +196,11 @@ namespace Wnck
 			if (group != NULL)
 			{
 				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
-				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit"));
-				GtkWidget* launchAnother = gtk_menu_item_new_with_label((groupWindow != NULL) ? _("Launch Another") : _("Launch"));
+				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
-				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), launchAnother);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
 				g_signal_connect(G_OBJECT(pinToggle), "toggled",
@@ -237,12 +215,6 @@ namespace Wnck
 				g_signal_connect(G_OBJECT(editLauncher), "activate",
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
 						appInfo->edit();
-					}),
-					appInfo);
-
-				g_signal_connect(G_OBJECT(launchAnother), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-						appInfo->launch();
 					}),
 					appInfo);
 

@@ -126,21 +126,17 @@ GroupMenuItem::~GroupMenuItem()
 
 void GroupMenuItem::updateLabel()
 {
-	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
-	{
-		gchar* markup = g_strdup_printf("<b>%s</b>",
-			g_markup_escape_text(Wnck::getName(mGroupWindow).c_str(),
-				Wnck::getName(mGroupWindow).length()));
+	const char* winName = wnck_window_get_name(mGroupWindow->mWnckWindow);
 
-		gtk_label_set_markup(mLabel, markup);
-	}
+	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+		gtk_label_set_markup(mLabel, g_strdup_printf("<b>%s</b>", g_markup_escape_text(winName, -1)));
 	else
-		gtk_label_set_text(mLabel, Wnck::getName(mGroupWindow).c_str());
+		gtk_label_set_text(mLabel, winName);
 }
 
 void GroupMenuItem::updateIcon()
 {
-	GdkPixbuf* iconPixbuf = Wnck::getMiniIcon(mGroupWindow);
+	GdkPixbuf* iconPixbuf = wnck_window_get_mini_icon(mGroupWindow->mWnckWindow);;
 
 	if (iconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
