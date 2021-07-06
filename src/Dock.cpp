@@ -20,17 +20,17 @@ namespace Dock
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
 		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
-		if (Settings::dockSize != 0)
+
+		if (Settings::dockSize)
 			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
+
 		gtk_widget_show(mBox);
 
 		// Redraw the panel items when the AppInfos have changed
 		mDrawTimeout.setup(500, []() {
 			if (AppInfos::modified)
-			{
 				drawGroups();
-				AppInfos::modified = false;
-			}
+			AppInfos::modified = false;
 			return true;
 		});
 		mDrawTimeout.start();
@@ -70,10 +70,9 @@ namespace Dock
 	{
 		std::list<std::string> pinnedList;
 
-		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
-		GList* child;
-
-		for (child = children; child; child = child->next)
+		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
+			 child != NULL;
+			 child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
@@ -87,20 +86,18 @@ namespace Dock
 
 	void drawGroups()
 	{
+		// Remove old groups
 		if (mGroups.size())
 		{
-			// Remove old groups
 			for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
 				 child != NULL;
 				 child = child->next)
-			{
 				gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
-			}
 
 			mGroups.clear();
 		}
 
-		// pinned groups
+		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
 		std::list<std::string>::iterator it = pinnedApps.begin();
 
@@ -114,7 +111,7 @@ namespace Dock
 			++it;
 		}
 
-		// already opened windows
+		// Add opened windows
 		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
 			 window_l != NULL;
 			 window_l = window_l->next)
@@ -137,9 +134,10 @@ namespace Dock
 	void hoverSupered(bool on)
 	{
 		int grabbedKeys = Hotkeys::mGrabbedKeys;
-		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = children; child && grabbedKeys; child = child->next)
+		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
+			 child != NULL && grabbedKeys;
+			 child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
@@ -155,9 +153,10 @@ namespace Dock
 	void activateGroup(int nb, guint32 timestamp)
 	{
 		int i = 0;
-		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = children; child; child = child->next)
+		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
+			 child != NULL;
+			 child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
@@ -210,7 +209,7 @@ namespace Dock
 	{
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), orientation);
 
-		if (Settings::dockSize != 0)
+		if (Settings::dockSize)
 		{
 			if (orientation == GTK_ORIENTATION_HORIZONTAL)
 				gtk_widget_set_size_request(mBox, Settings::dockSize, -1);

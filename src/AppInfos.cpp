@@ -27,7 +27,7 @@ void AppInfo::edit()
 	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
 	g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL);
 
-	// If a new desktop file was created it will be in ~/.local/share/applications/
+	// If a new desktop file was created, it will be in ~/.local/share/applications
 	// If the previous file was pinned it needs to be replaced with the new one.
 	if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
 	{
@@ -42,6 +42,7 @@ void AppInfo::edit()
 			}
 			++it;
 		}
+
 		Settings::pinnedAppList.set(pinnedApps);
 	}
 }
@@ -141,7 +142,6 @@ namespace AppInfos
 		if (exec_ != NULL && exec_[0] != '\0')
 		{
 			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
-
 			exec = Help::String::getWord(execLine, 0);
 
 			if (exec != "env" && exec != "exo-open")
@@ -178,13 +178,13 @@ namespace AppInfos
 
 			while (i < len)
 			{
-				modified = true;
-
 				event = (struct inotify_event*)&buf[i];
 				loadDesktopEntry(*(std::string*)dirPath, event->name);
 
 				i += sizeof(struct inotify_event) + event->len;
 			}
+
+			modified = true;
 		}
 	}
 
@@ -205,13 +205,8 @@ namespace AppInfos
 				continue;
 
 			struct dirent* entry;
-			std::list<std::string> matches;
 			while ((entry = readdir(directory)) != NULL)
-			{
-				std::string filename = entry->d_name;
-				loadDesktopEntry(xdgDir, filename);
-			}
-
+				loadDesktopEntry(xdgDir, entry->d_name);
 			watchXDGDirectory(xdgDir);
 		}
 	}
