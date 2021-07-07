@@ -291,14 +291,14 @@ void Group::resize()
 
 void Group::onDraw(cairo_t* cr)
 {
-	if (Settings::indicatorStyle == 3) // None
+	if (Settings::indicatorStyle == STYLE_NONE)
 		return;
 
 	int orientation = Settings::indicatorOrientation;
 	// Orientation based on panel mode and position
 	// Mimics Windows 10 style, indicator stays on outside
 	// TODO: make this a hidden setting now
-	if (orientation == 4)
+	if (orientation == ORIENTATION_AUTOMATIC)
 	{
 		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
 		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(Plugin::mXfPlugin);
@@ -306,23 +306,22 @@ void Group::onDraw(cairo_t* cr)
 		if (panelMode == XFCE_PANEL_PLUGIN_MODE_VERTICAL || panelMode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 		{
 			if (xfce_screen_position_is_left(screenPosition))
-				orientation = 3;
+				orientation = ORIENTATION_LEFT;
 			else if (xfce_screen_position_is_right(screenPosition))
-				orientation = 1;
+				orientation = ORIENTATION_RIGHT;
 		}
 		else
 		{
 			if (xfce_screen_position_is_top(screenPosition))
-				orientation = 2;
+				orientation = ORIENTATION_TOP;
 			else if (xfce_screen_position_is_bottom(screenPosition))
-				orientation = 0;
+				orientation = ORIENTATION_BOTTOM;
 		}
 	}
 
 	const float BAR_WEIGHT = 0.9231;
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
-	double aBack = 0;
 	double rgba[4];
 
 	if (mSFocus)
@@ -342,19 +341,19 @@ void Group::onDraw(cairo_t* cr)
 
 	switch (Settings::indicatorStyle)
 	{
-	case 0: //Bars -------------------------------------------------------------
+	case STYLE_BARS:
 	{
 		if (mSOpened)
 		{
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-			if (orientation == 0) // Bottom
+			if (orientation == ORIENTATION_BOTTOM)
 				cairo_rectangle(cr, 0, round(h * BAR_WEIGHT), w, h - round(h * BAR_WEIGHT));
-			else if (orientation == 1) // Right
+			else if (orientation == ORIENTATION_RIGHT)
 				cairo_rectangle(cr, round(w * BAR_WEIGHT), 0, w - round(w * BAR_WEIGHT), h);
-			else if (orientation == 2) // Top
+			else if (orientation == ORIENTATION_TOP)
 				cairo_rectangle(cr, 0, 0, w, round(h * (1 - BAR_WEIGHT)));
-			else // Left
+			else if (orientation == ORIENTATION_LEFT)
 				cairo_rectangle(cr, 0, 0, round(w * (1 - BAR_WEIGHT)), h);
 
 			cairo_fill(cr);
@@ -365,7 +364,7 @@ void Group::onDraw(cairo_t* cr)
 			int pat0;
 			cairo_pattern_t* pat;
 
-			if (orientation == 0 || orientation == 2)
+			if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP)
 			{
 				pat0 = (int)w * 0.88;
 				pat = cairo_pattern_create_linear(pat0, 0, w, 0);
@@ -380,24 +379,14 @@ void Group::onDraw(cairo_t* cr)
 			cairo_pattern_add_color_stop_rgba(pat, 0.1, 0, 0, 0, 0.35);
 			cairo_pattern_add_color_stop_rgba(pat, 0.3, 0, 0, 0, 0.15);
 
-			if (aBack > 0) // Hovered
-			{
-				if (orientation == 0 || orientation == 2) // Bottom & Top
-					cairo_rectangle(cr, pat0, 0, w - pat0, h);
-				else // Right & Left
-					cairo_rectangle(cr, 0, pat0, w, h - pat0);
-			}
-			else
-			{
-				if (orientation == 0) // Bottom
-					cairo_rectangle(cr, pat0, round(h * BAR_WEIGHT), w - pat0, round(h * (1 - BAR_WEIGHT)));
-				else if (orientation == 1) // Right
-					cairo_rectangle(cr, round(w * BAR_WEIGHT), pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
-				else if (orientation == 2) // Top
-					cairo_rectangle(cr, pat0, 0, w - pat0, round(h * (1 - BAR_WEIGHT)));
-				else // Left
-					cairo_rectangle(cr, 0, pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
-			}
+			if (orientation == ORIENTATION_BOTTOM)
+				cairo_rectangle(cr, pat0, round(h * BAR_WEIGHT), w - pat0, round(h * (1 - BAR_WEIGHT)));
+			else if (orientation == ORIENTATION_RIGHT)
+				cairo_rectangle(cr, round(w * BAR_WEIGHT), pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
+			else if (orientation == ORIENTATION_TOP)
+				cairo_rectangle(cr, pat0, 0, w - pat0, round(h * (1 - BAR_WEIGHT)));
+			else if (orientation == ORIENTATION_LEFT)
+				cairo_rectangle(cr, 0, pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
 
 			cairo_set_source(cr, pat);
 			cairo_fill(cr);
@@ -406,57 +395,57 @@ void Group::onDraw(cairo_t* cr)
 
 		break;
 	}
-	case 1: //Dots -------------------------------------------------------------
+	case STYLE_DOTS:
 	{
 		if (mSOpened)
 		{
-			const double dotRadius = h * 0.075;
+			const double DOT_RADIUS = h * 0.075;
 
 			if (mSMany)
 			{
 				double x0, y0, x1, y1;
 
-				if (orientation == 0) // Bottom
+				if (orientation == ORIENTATION_BOTTOM)
 				{
-					x0 = (w / 2.) - dotRadius * 1.3;
-					x1 = (w / 2.) + dotRadius * 1.3;
+					x0 = (w / 2.) - DOT_RADIUS * 1.3;
+					x1 = (w / 2.) + DOT_RADIUS * 1.3;
 					y0 = y1 = h * 0.99;
 				}
-				else if (orientation == 1) // Right
+				else if (orientation == ORIENTATION_RIGHT)
 				{
-					y0 = (h / 2.) - dotRadius * 1.3;
-					y1 = (h / 2.) + dotRadius * 1.3;
+					y0 = (h / 2.) - DOT_RADIUS * 1.3;
+					y1 = (h / 2.) + DOT_RADIUS * 1.3;
 					x0 = x1 = w * 0.99;
 				}
-				else if (orientation == 2) // Top
+				else if (orientation == ORIENTATION_TOP)
 				{
-					x0 = (w / 2.) - dotRadius * 1.3;
-					x1 = (w / 2.) + dotRadius * 1.3;
+					x0 = (w / 2.) - DOT_RADIUS * 1.3;
+					x1 = (w / 2.) + DOT_RADIUS * 1.3;
 					y0 = y1 = h * 0.01;
 				}
-				else // Left
+				else if (orientation == ORIENTATION_LEFT)
 				{
-					y0 = (h / 2.) - dotRadius * 1.3;
-					y1 = (h / 2.) + dotRadius * 1.3;
+					y0 = (h / 2.) - DOT_RADIUS * 1.3;
+					y1 = (h / 2.) + DOT_RADIUS * 1.3;
 					x0 = x1 = w * 0.01;
 				}
 
-				cairo_pattern_t* pat = cairo_pattern_create_radial(x0, y0, 0, x0, y0, dotRadius);
+				cairo_pattern_t* pat = cairo_pattern_create_radial(x0, y0, 0, x0, y0, DOT_RADIUS);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
-				cairo_arc(cr, x0, y0, dotRadius, 0.0, 2.0 * M_PI);
+				cairo_arc(cr, x0, y0, DOT_RADIUS, 0.0, 2.0 * M_PI);
 				cairo_fill(cr);
 
 				cairo_pattern_destroy(pat);
 
-				pat = cairo_pattern_create_radial(x1, y1, 0, x1, y1, dotRadius);
+				pat = cairo_pattern_create_radial(x1, y1, 0, x1, y1, DOT_RADIUS);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
-				cairo_arc(cr, x1, y1, dotRadius, 0.0, 2.0 * M_PI);
+				cairo_arc(cr, x1, y1, DOT_RADIUS, 0.0, 2.0 * M_PI);
 				cairo_fill(cr);
 
 				cairo_pattern_destroy(pat);
@@ -465,33 +454,33 @@ void Group::onDraw(cairo_t* cr)
 			{
 				double x, y;
 
-				if (orientation == 0) // Bottom
+				if (orientation == ORIENTATION_BOTTOM)
 				{
 					x = (w / 2.);
 					y = h * 0.99;
 				}
-				else if (orientation == 1) // Right
+				else if (orientation == ORIENTATION_RIGHT)
 				{
 					x = w * 0.99;
 					y = (h / 2.);
 				}
-				else if (orientation == 2) // Top
+				else if (orientation == ORIENTATION_TOP)
 				{
 					x = (w / 2.);
 					y = h * 0.01;
 				}
-				else // Left
+				else if (orientation == ORIENTATION_LEFT)
 				{
 					x = w * 0.01;
 					y = (h / 2.);
 				}
 
-				cairo_pattern_t* pat = cairo_pattern_create_radial(x, y, 0, x, y, dotRadius);
+				cairo_pattern_t* pat = cairo_pattern_create_radial(x, y, 0, x, y, DOT_RADIUS);
 				cairo_pattern_add_color_stop_rgba(pat, 0.4, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_pattern_add_color_stop_rgba(pat, 1, rgba[0], rgba[1], rgba[2], rgba[3]);
 				cairo_set_source(cr, pat);
 
-				cairo_arc(cr, x, y, dotRadius, 0.0, 2.0 * M_PI);
+				cairo_arc(cr, x, y, DOT_RADIUS, 0.0, 2.0 * M_PI);
 				cairo_fill(cr);
 
 				cairo_pattern_destroy(pat);
@@ -500,14 +489,15 @@ void Group::onDraw(cairo_t* cr)
 
 		break;
 	}
-	case 2: // Rectangles
+	case STYLE_BOXES:
 	{
 		if (mSOpened)
 		{
 			int vw;
-			if (orientation == 0 || orientation == 2) // Bottom & Top
+
+			if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP)
 				vw = w;
-			else // Right & Left
+			else
 				vw = h;
 
 			if (mSMany)
@@ -518,22 +508,22 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-				if (orientation == 0) // Bottom
+				if (orientation == ORIENTATION_BOTTOM)
 				{
 					cairo_rectangle(cr, w / 2. - sep / 2. - space, round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
 					cairo_rectangle(cr, w / 2. + sep / 2., round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
 				}
-				else if (orientation == 1) // Right
+				else if (orientation == ORIENTATION_RIGHT)
 				{
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), h / 2. - sep / 2. - space, round(w * (1 - BAR_WEIGHT)), space);
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), h / 2. + sep / 2., round(w * (1 - BAR_WEIGHT)), space);
 				}
-				else if (orientation == 2) // Top
+				else if (orientation == ORIENTATION_TOP)
 				{
 					cairo_rectangle(cr, w / 2. - sep / 2. - space, 0, space, round(h * (1 - BAR_WEIGHT)));
 					cairo_rectangle(cr, w / 2. + sep / 2., 0, space, round(h * (1 - BAR_WEIGHT)));
 				}
-				else // Left
+				else if (orientation == ORIENTATION_LEFT)
 				{
 					cairo_rectangle(cr, 0, h / 2. - sep / 2. - space, round(w * (1 - BAR_WEIGHT)), space);
 					cairo_rectangle(cr, 0, h / 2. + sep / 2., round(w * (1 - BAR_WEIGHT)), space);
@@ -549,13 +539,13 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-				if (orientation == 0) // Bottom
+				if (orientation == ORIENTATION_BOTTOM)
 					cairo_rectangle(cr, start, round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
-				else if (orientation == 1) // Right
+				else if (orientation == ORIENTATION_RIGHT)
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), start, round(w * (1 - BAR_WEIGHT)), space);
-				else if (orientation == 2) // Top
+				else if (orientation == ORIENTATION_TOP)
 					cairo_rectangle(cr, start, 0, space, round(h * (1 - BAR_WEIGHT)));
-				else // Left
+				else if (orientation == ORIENTATION_LEFT)
 					cairo_rectangle(cr, 0, start, round(w * (1 - BAR_WEIGHT)), space);
 
 				cairo_fill(cr);

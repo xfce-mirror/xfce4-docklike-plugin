@@ -19,12 +19,30 @@
 #include "Helpers.hpp"
 #include "State.tpp"
 
+enum IndicatorOrientation
+{
+	ORIENTATION_BOTTOM,
+	ORIENTATION_RIGHT,
+	ORIENTATION_TOP,
+	ORIENTATION_LEFT,
+	ORIENTATION_AUTOMATIC
+};
+
+enum IndicatorStyle
+{
+	STYLE_BARS,
+	STYLE_DOTS,
+	STYLE_BOXES,
+	STYLE_NONE
+};
+
 class GroupWindow;
 
 class Group
 {
   public:
 	Group(AppInfo* appInfo, bool pinned);
+
 	void add(GroupWindow* window);
 	void remove(GroupWindow* window);
 	void electNewTopWindow();
@@ -51,22 +69,21 @@ class Group
 	void onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time);
 	void onDragBegin(GdkDragContext* context);
 
-	bool mHover;
 	bool mPinned;
 	bool mActive;
-
 	bool mSFocus;
 	bool mSOpened;
 	bool mSMany;
 	bool mSHover;
 	bool mSSuper;
+
 	uint mTolerablePointerDistance;
+	uint mTopWindowIndex;
+	Store::List<GroupWindow*> mWindows;
+	LogicalState<uint> mWindowsCount;
 
 	AppInfo* mAppInfo;
 	GroupMenu mGroupMenu;
-	Store::List<GroupWindow*> mWindows;
-	uint mTopWindowIndex;
-	LogicalState<uint> mWindowsCount;
 
 	GtkWidget* mButton;
 	GtkWidget* mLabel;
