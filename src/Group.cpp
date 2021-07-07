@@ -78,7 +78,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(
 		G_OBJECT(mButton), "button-press-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
-			if (event->button != 3 && event->state & GDK_CONTROL_MASK)
+			if (event->button != GDK_BUTTON_SECONDARY && event->state & GDK_CONTROL_MASK)
 				gtk_drag_begin_with_coordinates(widget, targetList, GDK_ACTION_MOVE, event->button, (GdkEvent*)event, -1, -1);
 
 			if (event->state & GDK_CONTROL_MASK)
@@ -95,7 +95,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(
 		G_OBJECT(mButton), "button-release-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
-			if (event->button != 1 && event->button != 2)
+			if (event->button != GDK_BUTTON_PRIMARY && event->button != GDK_BUTTON_MIDDLE)
 				return false;
 			me->onButtonRelease(event);
 			return true;
@@ -662,7 +662,7 @@ void Group::setTopWindow(GroupWindow* groupWindow)
 
 void Group::onButtonPress(GdkEventButton* event)
 {
-	if (event->button == 3)
+	if (event->button == GDK_BUTTON_SECONDARY)
 	{
 		GroupWindow* win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
 			return (e.second->mGroupAssociated && e.second->mGroup == this);
@@ -683,9 +683,9 @@ void Group::onButtonPress(GdkEventButton* event)
 
 void Group::onButtonRelease(GdkEventButton* event)
 {
-	if (event->button == 2)
+	if (event->button == GDK_BUTTON_MIDDLE) 
 		closeAll();
-	else if (event->state & GDK_SHIFT_MASK || (mPinned && mWindowsCount == 0))
+	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
 		mAppInfo->launch();
 	else if (mActive)
 		mWindows.get(mTopWindowIndex)->minimize();
@@ -710,7 +710,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 		if (target != "application/docklike_group")
 		{
-			if (mWindowsCount > 0)
+			if (mWindowsCount)
 			{
 				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
 				groupWindow->activate(time);

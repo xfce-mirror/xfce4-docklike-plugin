@@ -67,7 +67,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mItem), "button-press-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) {
-			if (event->button == 1)
+			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
 			return true;
 		}),
@@ -77,7 +77,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
 			if (event->state & GDK_BUTTON1_MASK)
 				me->mGroupWindow->activate(event->time);
-			Help::Gtk::cssClassAdd(GTK_WIDGET(me->mItem), "hover_menu_item");
+			Help::Gtk::cssClassAdd(widget, "hover_menu_item");
 			gtk_widget_queue_draw(widget);
 			return true;
 		}),
@@ -85,9 +85,9 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
-			gtk_widget_queue_draw(widget);
-			Help::Gtk::cssClassRemove(GTK_WIDGET(me->mItem), "hover_menu_item");
 			me->mGroupWindow->mGroup->mSHover = false;
+			Help::Gtk::cssClassRemove(widget, "hover_menu_item");
+			gtk_widget_queue_draw(widget);
 			gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);
 			return true;
 		}),
@@ -136,7 +136,7 @@ void GroupMenuItem::updateLabel()
 
 void GroupMenuItem::updateIcon()
 {
-	GdkPixbuf* iconPixbuf = wnck_window_get_mini_icon(mGroupWindow->mWnckWindow);;
+	GdkPixbuf* iconPixbuf = wnck_window_get_mini_icon(mGroupWindow->mWnckWindow);
 
 	if (iconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
