@@ -142,8 +142,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			me->mSHover = true;
 			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
+			me->mSHover = true;
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
@@ -159,8 +159,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(
 		G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			me->mSHover = false;
 			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
+			me->mSHover = false;
 			me->mMenuShowTimeout.stop();
 
 			if (me->mPinned && !me->mWindowsCount)
@@ -191,7 +191,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	if (mAppInfo != NULL && !mAppInfo->icon.empty())
 	{
-		if (mAppInfo->icon[0] == '/')
+		if (mAppInfo->icon[0] == '/' && g_file_test(mAppInfo->icon.c_str(), G_FILE_TEST_IS_REGULAR))
 		{
 			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), NULL);
 			gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), mIconPixbuf);
