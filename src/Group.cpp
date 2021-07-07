@@ -294,6 +294,31 @@ void Group::onDraw(cairo_t* cr)
 	if (Settings::indicatorStyle == 3) // None
 		return;
 
+	int orientation = Settings::indicatorOrientation;
+	// Orientation based on panel mode and position
+	// Mimics Windows 10 style, indicator stays on outside
+	// TODO: make this a hidden setting now
+	if (orientation == 4)
+	{
+		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(Plugin::mXfPlugin);
+
+		if (panelMode == XFCE_PANEL_PLUGIN_MODE_VERTICAL || panelMode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
+		{
+			if (xfce_screen_position_is_left(screenPosition))
+				orientation = 3;
+			else if (xfce_screen_position_is_right(screenPosition))
+				orientation = 1;
+		}
+		else
+		{
+			if (xfce_screen_position_is_top(screenPosition))
+				orientation = 2;
+			else if (xfce_screen_position_is_bottom(screenPosition))
+				orientation = 0;
+		}
+	}
+
 	const float BAR_WEIGHT = 0.9231;
 	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
 	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
@@ -323,11 +348,11 @@ void Group::onDraw(cairo_t* cr)
 		{
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-			if (Settings::indicatorOrientation == 0) // Bottom
+			if (orientation == 0) // Bottom
 				cairo_rectangle(cr, 0, round(h * BAR_WEIGHT), w, h - round(h * BAR_WEIGHT));
-			else if (Settings::indicatorOrientation == 1) // Right
+			else if (orientation == 1) // Right
 				cairo_rectangle(cr, round(w * BAR_WEIGHT), 0, w - round(w * BAR_WEIGHT), h);
-			else if (Settings::indicatorOrientation == 2) // Top
+			else if (orientation == 2) // Top
 				cairo_rectangle(cr, 0, 0, w, round(h * (1 - BAR_WEIGHT)));
 			else // Left
 				cairo_rectangle(cr, 0, 0, round(w * (1 - BAR_WEIGHT)), h);
@@ -340,7 +365,7 @@ void Group::onDraw(cairo_t* cr)
 			int pat0;
 			cairo_pattern_t* pat;
 
-			if (Settings::indicatorOrientation == 0 || Settings::indicatorOrientation == 2)
+			if (orientation == 0 || orientation == 2)
 			{
 				pat0 = (int)w * 0.88;
 				pat = cairo_pattern_create_linear(pat0, 0, w, 0);
@@ -357,18 +382,18 @@ void Group::onDraw(cairo_t* cr)
 
 			if (aBack > 0) // Hovered
 			{
-				if (Settings::indicatorOrientation == 0 || Settings::indicatorOrientation == 2) // Bottom & Top
+				if (orientation == 0 || orientation == 2) // Bottom & Top
 					cairo_rectangle(cr, pat0, 0, w - pat0, h);
 				else // Right & Left
 					cairo_rectangle(cr, 0, pat0, w, h - pat0);
 			}
 			else
 			{
-				if (Settings::indicatorOrientation == 0) // Bottom
+				if (orientation == 0) // Bottom
 					cairo_rectangle(cr, pat0, round(h * BAR_WEIGHT), w - pat0, round(h * (1 - BAR_WEIGHT)));
-				else if (Settings::indicatorOrientation == 1) // Right
+				else if (orientation == 1) // Right
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
-				else if (Settings::indicatorOrientation == 2) // Top
+				else if (orientation == 2) // Top
 					cairo_rectangle(cr, pat0, 0, w - pat0, round(h * (1 - BAR_WEIGHT)));
 				else // Left
 					cairo_rectangle(cr, 0, pat0, round(w * (1 - BAR_WEIGHT)), h - pat0);
@@ -391,19 +416,19 @@ void Group::onDraw(cairo_t* cr)
 			{
 				double x0, y0, x1, y1;
 
-				if (Settings::indicatorOrientation == 0) // Bottom
+				if (orientation == 0) // Bottom
 				{
 					x0 = (w / 2.) - dotRadius * 1.3;
 					x1 = (w / 2.) + dotRadius * 1.3;
 					y0 = y1 = h * 0.99;
 				}
-				else if (Settings::indicatorOrientation == 1) // Right
+				else if (orientation == 1) // Right
 				{
 					y0 = (h / 2.) - dotRadius * 1.3;
 					y1 = (h / 2.) + dotRadius * 1.3;
 					x0 = x1 = w * 0.99;
 				}
-				else if (Settings::indicatorOrientation == 2) // Top
+				else if (orientation == 2) // Top
 				{
 					x0 = (w / 2.) - dotRadius * 1.3;
 					x1 = (w / 2.) + dotRadius * 1.3;
@@ -440,17 +465,17 @@ void Group::onDraw(cairo_t* cr)
 			{
 				double x, y;
 
-				if (Settings::indicatorOrientation == 0) // Bottom
+				if (orientation == 0) // Bottom
 				{
 					x = (w / 2.);
 					y = h * 0.99;
 				}
-				else if (Settings::indicatorOrientation == 1) // Right
+				else if (orientation == 1) // Right
 				{
 					x = w * 0.99;
 					y = (h / 2.);
 				}
-				else if (Settings::indicatorOrientation == 2) // Top
+				else if (orientation == 2) // Top
 				{
 					x = (w / 2.);
 					y = h * 0.01;
@@ -480,7 +505,7 @@ void Group::onDraw(cairo_t* cr)
 		if (mSOpened)
 		{
 			int vw;
-			if (Settings::indicatorOrientation == 0 || Settings::indicatorOrientation == 2) // Bottom & Top
+			if (orientation == 0 || orientation == 2) // Bottom & Top
 				vw = w;
 			else // Right & Left
 				vw = h;
@@ -493,17 +518,17 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-				if (Settings::indicatorOrientation == 0) // Bottom
+				if (orientation == 0) // Bottom
 				{
 					cairo_rectangle(cr, w / 2. - sep / 2. - space, round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
 					cairo_rectangle(cr, w / 2. + sep / 2., round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
 				}
-				else if (Settings::indicatorOrientation == 1) // Right
+				else if (orientation == 1) // Right
 				{
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), h / 2. - sep / 2. - space, round(w * (1 - BAR_WEIGHT)), space);
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), h / 2. + sep / 2., round(w * (1 - BAR_WEIGHT)), space);
 				}
-				else if (Settings::indicatorOrientation == 2) // Top
+				else if (orientation == 2) // Top
 				{
 					cairo_rectangle(cr, w / 2. - sep / 2. - space, 0, space, round(h * (1 - BAR_WEIGHT)));
 					cairo_rectangle(cr, w / 2. + sep / 2., 0, space, round(h * (1 - BAR_WEIGHT)));
@@ -524,11 +549,11 @@ void Group::onDraw(cairo_t* cr)
 
 				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-				if (Settings::indicatorOrientation == 0) // Bottom
+				if (orientation == 0) // Bottom
 					cairo_rectangle(cr, start, round(h * BAR_WEIGHT), space, round(h * (1 - BAR_WEIGHT)));
-				else if (Settings::indicatorOrientation == 1) // Right
+				else if (orientation == 1) // Right
 					cairo_rectangle(cr, round(w * BAR_WEIGHT), start, round(w * (1 - BAR_WEIGHT)), space);
-				else if (Settings::indicatorOrientation == 2) // Top
+				else if (orientation == 2) // Top
 					cairo_rectangle(cr, start, 0, space, round(h * (1 - BAR_WEIGHT)));
 				else // Left
 					cairo_rectangle(cr, 0, start, round(w * (1 - BAR_WEIGHT)), space);
