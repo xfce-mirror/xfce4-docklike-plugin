@@ -58,6 +58,14 @@ namespace Settings
 				g_key_file_set_boolean(mFile, "user", "showPreviews", showPreviews);
 				saveFile();
 			});
+		
+		showWindowCount.setup(g_key_file_get_boolean(mFile, "user", "showWindowCount", NULL),
+			[](bool showWindowCount) -> void {
+				g_key_file_set_boolean(mFile, "user", "showWindowCount", showWindowCount);
+				saveFile();
+
+				Dock::drawGroups();
+			});
 
 		indicatorOrientation.setup(g_key_file_get_integer(mFile, "user", "indicatorOrientation", NULL),
 			[](int indicatorOrientation) -> void {
@@ -165,12 +173,6 @@ namespace Settings
 		g_strfreev(pinnedListBuffer);
 
 		// HIDDEN SETTINGS:
-		showWindowCount.setup(g_key_file_get_boolean(mFile, "user", "showWindowCount", NULL),
-			[](bool showWindowCount) -> void {
-				g_key_file_set_boolean(mFile, "user", "showWindowCount", showWindowCount);
-				saveFile();
-			});
-
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),
 			[](int dockSize) -> void {
 				g_key_file_set_integer(mFile, "user", "dockSize", dockSize);

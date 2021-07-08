@@ -37,6 +37,7 @@ namespace Settings
 	extern State<bool> onlyDisplayVisible;
 	extern State<bool> onlyDisplayScreen;
 	extern State<bool> showPreviews;
+	extern State<bool> showWindowCount;
 
 	extern State<int> indicatorOrientation;
 	extern State<int> indicatorStyle;
@@ -49,7 +50,6 @@ namespace Settings
 	extern State<std::list<std::string>> pinnedAppList;
 
 	// HIDDEN SETTINGS:
-	extern State<bool> showWindowCount;
 	extern State<int> dockSize;
 	extern State<double> previewScale;
 	extern State<int> previewSleep;

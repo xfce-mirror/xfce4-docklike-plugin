@@ -91,7 +91,7 @@
                     <property name="column_spacing">12</property>
                     <child>
                       <object class="GtkCheckButton" id="c_noListForSingleWindow">
-                        <property name="label" translatable="yes">Don't show list for a single window</property>
+                        <property name="label" translatable="yes">Don't show the window list for a single window</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
@@ -106,7 +106,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="c_onlyDisplayVisible">
-                        <property name="label" translatable="yes">Show only applications from the current workspace</property>
+                        <property name="label" translatable="yes">Only show applications on the current workspace</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
@@ -121,7 +121,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="c_onlyDisplayScreen">
-                        <property name="label" translatable="yes">Show only applications from the current display</property>
+                        <property name="label" translatable="yes">Only show applications on the current display</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
@@ -148,6 +148,22 @@
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="c_showWindowCount">
+                        <property name="label" translatable="yes">Show the number of open windows (if more than 2)</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="halign">start</property>
+                        <property name="valign">start</property>
+                        <property name="use_underline">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">4</property>
                       </packing>
                     </child>
                   </object>
@@ -190,7 +206,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Indicator style :</property>
+                        <property name="label" translatable="yes">Indicator style:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -219,7 +235,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Indicator orientation :</property>
+                        <property name="label" translatable="yes">Indicator orientation:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -248,7 +264,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Active indicator :</property>
+                        <property name="label" translatable="yes">Active indicator:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -269,7 +285,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="c_forceIconSize">
-                        <property name="label" translatable="yes">Force icons size :</property>
+                        <property name="label" translatable="yes">Force icon size:</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -324,7 +340,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Inactive indicator :</property>
+                        <property name="label" translatable="yes">Inactive indicator:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
