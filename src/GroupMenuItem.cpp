@@ -53,7 +53,11 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
-	mPreviewTimeout.setup(250, [this]() {
+	int sleepMS = 250;
+	if (Settings::previewSleep)
+		sleepMS = Settings::previewSleep;
+
+	mPreviewTimeout.setup(sleepMS, [this]() {
 		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
@@ -163,6 +167,10 @@ void GroupMenuItem::updatePreview()
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
+		double scale = 0.125;
+		if (Settings::previewScale)
+			scale = Settings::previewScale;
+
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			wnck_window_get_xid(mGroupWindow->mWnckWindow));
 
@@ -174,7 +182,7 @@ void GroupMenuItem::updatePreview()
 			if (pixbuf != NULL)
 			{
 				thumbnail = gdk_pixbuf_scale_simple(pixbuf,
-					gdk_pixbuf_get_width(pixbuf) / 8, gdk_pixbuf_get_height(pixbuf) / 8, GDK_INTERP_BILINEAR);
+					gdk_pixbuf_get_width(pixbuf) * scale, gdk_pixbuf_get_height(pixbuf) * scale, GDK_INTERP_BILINEAR);
 
 				gtk_image_set_from_pixbuf(mPreview, thumbnail);
 

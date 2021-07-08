@@ -32,6 +32,8 @@ namespace Settings
 
 	State<bool> showWindowCount;
 	State<int> dockSize;
+	State<double> previewScale;
+	State<int> previewSleep;
 
 	void init()
 	{
@@ -172,6 +174,18 @@ namespace Settings
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),
 			[](int dockSize) -> void {
 				g_key_file_set_integer(mFile, "user", "dockSize", dockSize);
+				saveFile();
+			});
+		
+		previewScale.setup(g_key_file_get_double(mFile, "user", "previewScale", NULL),
+			[](int previewScale) -> void {
+				g_key_file_set_double(mFile, "user", "previewScale", previewScale);
+				saveFile();
+			});
+		
+		previewSleep.setup(g_key_file_get_integer(mFile, "user", "previewSleep", NULL),
+			[](int previewSleep) -> void {
+				g_key_file_set_integer(mFile, "user", "previewSleep", previewSleep);
 				saveFile();
 			});
 	}

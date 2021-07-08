@@ -51,6 +51,8 @@ namespace Settings
 	// HIDDEN SETTINGS:
 	extern State<bool> showWindowCount;
 	extern State<int> dockSize;
+	extern State<double> previewScale;
+	extern State<int> previewSleep;
 }; // namespace Settings
 
 #endif

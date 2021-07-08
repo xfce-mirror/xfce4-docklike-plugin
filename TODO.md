@@ -3,8 +3,6 @@
 + Use g_app_info_get_all() rather than finding apps ourselves
 + Move aliases to a text file so users can add stuff
 + Redesign the settings dialog to accommodate more options
-+ Configurable thumbnail size, update sleep
-+ Rebindable keyboard shortcuts
 + Docs: write the help page and update screenshots
 + Memory: something is not getting freed/unrefd when a group is closed
 + Test how well the updating thumbnails perform on a really slow system
@@ -12,6 +10,7 @@
 
 ## DONE
 
+> + Configurable thumbnail size, update sleep
 > + Set indicator orientation based on panel orientation
 > + Investigate GLib-CRITICAL from g_source_remove
 > + Window count overlay
