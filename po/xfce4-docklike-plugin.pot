@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for XFCE."
+msgid "A modern, minimalist taskbar for Xfce."
 msgstr ""
 
 #: ../src/Wnck.cpp:208
@@ -59,7 +59,7 @@ msgstr ""
 
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for XFCE"
+msgid "A modern, minimalist taskbar for Xfce"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:1

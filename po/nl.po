@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for XFCE."
-msgstr "Een moderne, minimalistische taakbalk voor XFCE."
+msgid "A modern, minimalist taskbar for Xfce."
+msgstr "Een moderne, minimalistische taakbalk voor Xfce."
 
 #: ../src/Wnck.cpp:208
 msgid "Pinned"
@@ -58,12 +58,12 @@ msgid ""
 "Check your Xfce settings."
 msgstr ""
 "De combinatie &lt;SUPER&gt;+%u is reeds in gebruik door een ander proces. \n"
-"Controleer de instellingen van XFCE."
+"Controleer de instellingen van Xfce."
 
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for XFCE"
-msgstr "Een moderne, minimalistische taakbalk voor XFCE."
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Een moderne, minimalistische taakbalk voor Xfce."
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Close"

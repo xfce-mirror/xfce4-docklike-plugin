@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for XFCE."
-msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το XFCE."
+msgid "A modern, minimalist taskbar for Xfce."
+msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το Xfce."
 
 #: ../src/Wnck.cpp:208
 msgid "Pinned"
@@ -59,12 +59,12 @@ msgid ""
 msgstr ""
 "Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη "
 "εφαρμογή.\n"
-"Παρακαλώ ελέγξτε τις ρυθμίσεις στο XFCE."
+"Παρακαλώ ελέγξτε τις ρυθμίσεις στο Xfce."
 
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for XFCE"
-msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το XFCE."
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το Xfce."
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Close"

@@ -9,7 +9,7 @@
 Name:           xfce4-docklike-plugin
 Version:        0.1
 Release:        1.git%{git_hash}%{?dist}
-Summary:        A modern taskbar for XFCE
+Summary:        A modern taskbar for Xfce
 
 License:        GPLv3
 URL:            http://goodies.xfce.org/projects/panel-plugins/%{name}
@@ -28,7 +28,7 @@ Requires:       xfce4-settings
 
 
 %description
-A WIP modern taskbar for XFCE C++ - GTK3 - CSS - DOCK-LIKE - MINIMALISM
+A WIP modern taskbar for Xfce C++ - GTK3 - CSS - DOCK-LIKE - MINIMALISM
 
 %prep
 %setup -q -n docklike-plugin-master
