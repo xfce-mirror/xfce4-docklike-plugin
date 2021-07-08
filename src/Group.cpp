@@ -75,8 +75,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	//--------------------------------------------------
 
-	g_signal_connect(
-		G_OBJECT(mButton), "button-press-event",
+	g_signal_connect(G_OBJECT(mButton), "button-press-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
 			if (event->button != GDK_BUTTON_SECONDARY && event->state & GDK_CONTROL_MASK)
 				gtk_drag_begin_with_coordinates(widget, targetList, GDK_ACTION_MOVE, event->button, (GdkEvent*)event, -1, -1);
@@ -92,8 +91,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
-	g_signal_connect(
-		G_OBJECT(mButton), "button-release-event",
+	g_signal_connect(G_OBJECT(mButton), "button-release-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
 			if (event->button != GDK_BUTTON_PRIMARY && event->button != GDK_BUTTON_MIDDLE)
 				return false;
@@ -102,8 +100,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
-	g_signal_connect(
-		G_OBJECT(mButton), "scroll-event",
+	g_signal_connect(G_OBJECT(mButton), "scroll-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, Group* me) {
 			me->scrollWindows(event->time, event->direction);
 			return true;
@@ -156,8 +153,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
-	g_signal_connect(
-		G_OBJECT(mButton), "leave-notify-event",
+	g_signal_connect(G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
 			me->mSHover = false;
@@ -177,8 +173,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
-	g_signal_connect(
-		G_OBJECT(mButton), "draw", G_CALLBACK(+[](GtkWidget* widget, cairo_t* cr, Group* me) {
+	g_signal_connect(G_OBJECT(mButton), "draw",
+		G_CALLBACK(+[](GtkWidget* widget, cairo_t* cr, Group* me) {
 			me->onDraw(cr);
 			return false;
 		}),
@@ -559,8 +555,6 @@ void Group::onDraw(cairo_t* cr)
 
 void Group::onMouseEnter()
 {
-	mLeaveTimeout.stop();
-
 	Dock::mGroups.forEach([this](std::pair<AppInfo*, Group*> g) -> void {
 		if (&(g.second->mGroupMenu) != &(this->mGroupMenu))
 			g.second->mGroupMenu.mGroup->onMouseLeave();
@@ -683,7 +677,7 @@ void Group::onButtonPress(GdkEventButton* event)
 
 void Group::onButtonRelease(GdkEventButton* event)
 {
-	if (event->button == GDK_BUTTON_MIDDLE) 
+	if (event->button == GDK_BUTTON_MIDDLE)
 		closeAll();
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
 		mAppInfo->launch();

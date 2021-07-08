@@ -19,7 +19,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
-
 	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(mWindow), 1, 1);
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
@@ -29,7 +28,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 	g_signal_connect(G_OBJECT(mWindow), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
-			me->mGroup->mLeaveTimeout.stop();
 			me->mMouseHover = true;
 			me->mGroup->mSHover = true;
 
@@ -100,13 +98,12 @@ void GroupMenu::popup()
 		gint wx, wy;
 		mVisible = true;
 
-		// Update the previews before showing
+		// Update the previews before showing the window
 		if (Settings::showPreviews)
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
 			});
 
-		//xfce_panel_plugin_block_autohide(Plugin::mXfPlugin, true);
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
 		gtk_widget_show(mWindow);
