@@ -40,3 +40,4 @@ Makefile.in
 po/Makefile*
 Makecache
 xfce4-docklike-plugin-*.tar.*
+compile_commands.json
