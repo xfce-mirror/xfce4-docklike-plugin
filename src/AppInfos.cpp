@@ -166,7 +166,7 @@ namespace AppInfos
 	void* threadedXDGDirectoryWatcher(void* dirPath)
 	{
 		int fd = inotify_init();
-		int wd = inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
+		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
 
 		int i = 0, len = 0;
 		char buf[1024];
@@ -246,31 +246,6 @@ namespace AppInfos
 		ai = mAppInfoIds.get(id);
 		if (ai != NULL)
 			return ai;
-
-		uint pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			ai = mAppInfoIds.get(id);
-
-			if (ai != NULL)
-				return ai;
-		}
-
-		ai = mAppInfoNames.get(id);
-
-		if (ai != NULL)
-			return ai;
-
-		pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			ai = mAppInfoNames.get(id);
-
-			if (ai != NULL)
-				return ai;
-		}
 
 		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
 
