@@ -57,6 +57,11 @@ sudo apt install xfce4-docklike-plugin
 + libwnck-3.0
 + x11-1.6
 
+To get all the dependencies you need on Ubuntu/Debian-like distros:
+```bash
+sudo apt install build-essential git xfce4-dev-tools libxfce4ui-2-dev libxfce4panel-2.0-dev libgtk-3-dev libcairo2-dev libwnck-3-dev libx11-dev
+```
+
 ## Features & Screenshots
 
 Pinnable applications, grouped windows, and desktop actions:
