@@ -1,0 +1,153 @@
+# Docklike-plugin i18n file
+# Copyright (C) 2020 Nicolas Szabo
+# This file is distributed under the same license as the Docklike package.
+# Nicolas Szabo <nszabo@vivaldi.net>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"PO-Revision-Date: 2021-07-09 21:28-0700\n"
+"Last-Translator: SwampRabbit MX Linux>\n"
+"Language-Team: DA\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/Plugin.cpp:101
+msgid "A modern, minimalist taskbar for Xfce."
+msgstr "En moderne, minimalistisk proceslinje til Xfce."
+
+#: ../src/Wnck.cpp:208
+msgid "Pinned"
+msgstr "Fastgjort"
+
+#: ../src/Wnck.cpp:208
+msgid "Pin"
+msgstr "Pin"
+
+#: ../src/Wnck.cpp:209
+msgid "Edit"
+msgstr "Redigere"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch Another"
+msgstr "Start en anden"
+
+#: ../src/Wnck.cpp:210
+msgid "Launch"
+msgstr "Start"
+
+#: ../src/Wnck.cpp:247
+msgid "Close All"
+msgstr "Luk alle"
+
+#: ../src/SettingsDialog.cpp:21
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>Kun de første %u genvejstaster er aktiveret.</b>\n"
+
+#: ../src/SettingsDialog.cpp:25
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+
+#. namespace SettingsDialog
+#: ../src/docklike.desktop.in.h:1
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "En moderne, minimalistisk proceslinje til Xfce."
+
+#: ../src/_dialogs.xml.h:1
+msgid "_Close"
+msgstr "_Tæt"
+
+#: ../src/_dialogs.xml.h:2
+msgid "Don't show list for a single window"
+msgstr "Vis ikke listen for et enkelt vindue"
+
+#: ../src/_dialogs.xml.h:3
+msgid "Show only applications from the current workspace"
+msgstr "Vis kun applikationer fra det aktuelle arbejdsområde"
+
+#: ../src/_dialogs.xml.h:4
+msgid "Show only applications from the current display"
+msgstr "Vis kun applikationer fra den aktuelle skærm"
+
+#: ../src/_dialogs.xml.h:5
+msgid "Show preview thumbnails for open windows"
+msgstr "Vis miniaturebilleder til forhåndsvisning til åbne vinduer"
+
+#: ../src/_dialogs.xml.h:6
+msgid "Behavior"
+msgstr "Opførsel"
+
+#: ../src/_dialogs.xml.h:7
+msgid "Indicator style :"
+msgstr "Indikatorstil :"
+
+#: ../src/_dialogs.xml.h:8
+msgid "Bars"
+msgstr "Barer"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Dots"
+msgstr "Prikker"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Rectangles"
+msgstr "Rektangler"
+
+#: ../src/_dialogs.xml.h:11
+msgid "Indicator orientation :"
+msgstr "Indikatorretning :"
+
+#: ../src/_dialogs.xml.h:12
+msgid "Bottom"
+msgstr "Bund"
+
+#: ../src/_dialogs.xml.h:13
+msgid "Right"
+msgstr "Ret"
+
+#: ../src/_dialogs.xml.h:14
+msgid "Top"
+msgstr "bjergtop"
+
+#: ../src/_dialogs.xml.h:15
+msgid "Left"
+msgstr "Venstre"
+
+#: ../src/_dialogs.xml.h:16
+msgid "Indicator color :"
+msgstr "Blinkfarve :"
+
+#: ../src/_dialogs.xml.h:17
+msgid "Force icons size :"
+msgstr "Tving ikonstørrelse :"
+
+#: ../src/_dialogs.xml.h:18
+msgid "Appearance"
+msgstr "Udseende"
+
+#: ../src/_dialogs.xml.h:19
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:20
+msgid "Switch to the last window with <SUPER>"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:21
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
+msgid "Keyboard hotkeys"
+msgstr "Tastaturgenveje"
