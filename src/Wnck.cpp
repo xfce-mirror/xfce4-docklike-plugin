@@ -201,7 +201,10 @@ namespace Wnck
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+
+				if (g_find_program_in_path("exo-desktop-item-edit"))
+					gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
 				g_signal_connect(G_OBJECT(pinToggle), "toggled",
