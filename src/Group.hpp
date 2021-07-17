@@ -33,7 +33,7 @@ enum IndicatorStyle
 {
 	STYLE_BARS,
 	STYLE_DOTS,
-	STYLE_BOXES,
+	STYLE_RECTS,
 	STYLE_NONE
 };
 

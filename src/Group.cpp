@@ -288,9 +288,28 @@ void Group::resize()
 
 void Group::onDraw(cairo_t* cr)
 {
-	if (Settings::indicatorStyle == STYLE_NONE)
-		return;
+	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
+	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
+	
+	double rgba[4];
+	if (mSFocus)
+	{
+		rgba[0] = (*Settings::indicatorColor).red;
+		rgba[1] = (*Settings::indicatorColor).green;
+		rgba[2] = (*Settings::indicatorColor).blue;
+		rgba[3] = (*Settings::indicatorColor).alpha;
+	}
+	else
+	{
+		rgba[0] = (*Settings::inactiveColor).red;
+		rgba[1] = (*Settings::inactiveColor).green;
+		rgba[2] = (*Settings::inactiveColor).blue;
+		rgba[3] = (*Settings::inactiveColor).alpha;
+	}
 
+	const float BAR_WEIGHT = 0.935;
+	const double DOT_RADIUS = h * 0.065;
+	
 	int orientation = Settings::indicatorOrientation;
 	// Orientation based on panel mode and position
 	// Mimics Windows 10 style, indicator stays on outside
@@ -316,28 +335,11 @@ void Group::onDraw(cairo_t* cr)
 		}
 	}
 
-	const float BAR_WEIGHT = 0.9231;
-	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
-	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
-	double rgba[4];
-
-	if (mSFocus)
-	{
-		rgba[0] = (*Settings::indicatorColor).red;
-		rgba[1] = (*Settings::indicatorColor).green;
-		rgba[2] = (*Settings::indicatorColor).blue;
-		rgba[3] = (*Settings::indicatorColor).alpha;
-	}
-	else
-	{
-		rgba[0] = (*Settings::inactiveColor).red;
-		rgba[1] = (*Settings::inactiveColor).green;
-		rgba[2] = (*Settings::inactiveColor).blue;
-		rgba[3] = (*Settings::inactiveColor).alpha;
-	}
-
 	switch (Settings::indicatorStyle)
 	{
+	case STYLE_NONE:
+		break;
+
 	case STYLE_BARS:
 	{
 		if (mSOpened)
@@ -389,15 +391,13 @@ void Group::onDraw(cairo_t* cr)
 			cairo_fill(cr);
 			cairo_pattern_destroy(pat);
 		}
-
 		break;
 	}
+
 	case STYLE_DOTS:
 	{
 		if (mSOpened)
 		{
-			const double DOT_RADIUS = h * 0.075;
-
 			if (mSMany)
 			{
 				double x0, y0, x1, y1;
@@ -483,10 +483,10 @@ void Group::onDraw(cairo_t* cr)
 				cairo_pattern_destroy(pat);
 			}
 		}
-
 		break;
 	}
-	case STYLE_BOXES:
+
+	case STYLE_RECTS:
 	{
 		if (mSOpened)
 		{
@@ -548,7 +548,6 @@ void Group::onDraw(cairo_t* cr)
 				cairo_fill(cr);
 			}
 		}
-
 		break;
 	}
 	}
