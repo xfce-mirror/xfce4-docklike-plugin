@@ -1,10 +1,9 @@
 # TODO
 
-+ Make automatic indicator orientation the default mode
-+ ^^^ this will make configs incorrect until reset
 + Adjust the drag indicator position based on panel orientation
 + Make sure the label never overlaps the indicator
 + Dragged groups seem to lose their css class?
++ Drag algorithm: insert after rather than before if drag direction is reversed
 + Use g_app_info_get_all() rather than finding apps ourselves
 + Move aliases to a text file so users can add stuff
 + Redesign the settings dialog to accommodate more options
@@ -15,6 +14,7 @@
 
 ## DONE
 
+> + Make automatic indicator orientation the default mode
 > + Configurable thumbnail size, update sleep
 > + Set indicator orientation based on panel orientation
 > + Investigate GLib-CRITICAL from g_source_remove

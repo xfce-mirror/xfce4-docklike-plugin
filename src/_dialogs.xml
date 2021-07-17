@@ -247,11 +247,11 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <items>
+                          <item translatable="yes">Automatic</item>
                           <item translatable="yes">Bottom</item>
                           <item translatable="yes">Right</item>
                           <item translatable="yes">Top</item>
                           <item translatable="yes">Left</item>
-                          <item translatable="yes">Automatic</item>
                         </items>
                       </object>
                       <packing>
