@@ -10,7 +10,7 @@
 
 #define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
 #define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
-#define PANEL_DEBUG atoi(getenv("PANEL_DEBUG"))
+#define PANEL_DEBUG getenv("PANEL_DEBUG") != NULL
 
 #include <gtk/gtk.h>
 #include <libwnck/libwnck.h>

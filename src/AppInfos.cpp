@@ -66,23 +66,28 @@ namespace AppInfos
 
 		mXdgDataDirs.push_back("/usr/local/share");
 		mXdgDataDirs.push_back("/usr/share");
+		mXdgDataDirs.push_back(std::string(getenv("HOME")) + "/.local/share");
 
 		for (std::string& dir : mXdgDataDirs)
 			dir += "/applications/";
 
-		mXdgDataDirs.push_back(std::string(getenv("HOME")) + "/.local/share/applications/");
-
-		// Recursively add subdirectories of ~/.local/share/applications (etc.) to mXdgDataDirs.
-		// Wine (and maybe some others) create their own directory tree.
-		// See man ftw(3) for more information.
 		std::list<std::string> tempDirs = mXdgDataDirs;
 		for (std::string& dir : tempDirs)
 		{
+			if (!g_file_test(dir.c_str(), G_FILE_TEST_IS_DIR))
+			{
+				mXdgDataDirs.remove(dir);
+				continue;
+			}
+
+			// Recursively add subdirectories of mXdgDataDirs to mXdgDataDirs.
+			// Wine (and maybe some others) create their own directory tree.
+			// See man ftw(3) for more information.
 			ftw(
 				dir.c_str(),
 				[](const char* fpath, const struct stat* sb, int typeflag) -> int {
 					if (typeflag == FTW_D)
-						mXdgDataDirs.push_back(fpath);
+						mXdgDataDirs.push_back(g_strdup_printf("%s/", fpath));
 					return 0; },
 				1);
 		}
@@ -209,6 +214,9 @@ namespace AppInfos
 			while ((entry = readdir(directory)) != NULL)
 				loadDesktopEntry(xdgDir, entry->d_name);
 			watchXDGDirectory(xdgDir);
+
+			if (PANEL_DEBUG)
+				g_print("APPDIR: %s\n", xdgDir.c_str());
 		}
 	}
 
