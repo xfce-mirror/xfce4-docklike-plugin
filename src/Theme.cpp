@@ -21,12 +21,10 @@ void Theme::load()
 	std::string css = get_theme_colors();
 	const gchar* filename;
 
-	if (g_environ_getenv(g_get_environ(), "XDG_CONFIG_HOME") != NULL)
-		filename = g_build_filename(g_environ_getenv(g_get_environ(), "XDG_CONFIG_HOME"),
-			"xfce4-docklike-plugin/gtk.css", NULL);
+	if (getenv("XDG_CONFIG_HOME") != NULL)
+		filename = g_build_filename(getenv("XDG_CONFIG_HOME"), "xfce4-docklike-plugin/gtk.css", NULL);
 	else
-		filename = g_build_filename(g_environ_getenv(g_get_environ(), "HOME"),
-			".config/xfce4-docklike-plugin/gtk.css", NULL);
+		filename = g_build_filename(getenv("HOME"), ".config/xfce4-docklike-plugin/gtk.css", NULL);
 
 	if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
 	{
@@ -41,7 +39,7 @@ void Theme::load()
 		}
 	}
 	else // Defaults from https://github.com/nsz32/docklike-plugin/blob/master/src/Theme.cpp
-		css += ".drop_target { box-shadow: inset 4px 0px 0px 0px darkviolet; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n.active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.35); }\n.hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.2); }\n";
+		css += ".drop_target { box-shadow: inset 4px 0px 0px 0px darkviolet; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n.active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.25); }\n.hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.1); }\n";
 
 	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
