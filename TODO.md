@@ -1,5 +1,6 @@
 # TODO
 
++ Use X-Flatpak value for icon/desktop file names if it exists
 + Adjust the drag indicator position based on panel orientation
 + Make sure the label never overlaps the indicator
 + Dragged groups seem to lose their css class?

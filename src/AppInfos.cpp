@@ -191,6 +191,9 @@ namespace AppInfos
 			}
 
 			modified = true;
+
+			if (PANEL_DEBUG)
+				g_print("UPDATE: %s%s\n", ((std::string*)dirPath)->c_str(), event->name);
 		}
 	}
 
@@ -271,6 +274,9 @@ namespace AppInfos
 			if (ai != NULL)
 				return ai;
 		}
+
+		if (PANEL_DEBUG)
+			g_print("NO MATCH: %s\n", id.c_str());
 
 		return new AppInfo({"", "", id});
 	}
