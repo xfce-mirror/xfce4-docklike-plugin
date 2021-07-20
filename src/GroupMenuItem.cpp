@@ -135,6 +135,8 @@ void GroupMenuItem::updateLabel()
 
 	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
 		gtk_label_set_markup(mLabel, g_strdup_printf("<b>%s</b>", g_markup_escape_text(winName, -1)));
+	else if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
+		gtk_label_set_markup(mLabel, g_strdup_printf("<i>%s</i>", g_markup_escape_text(winName, -1)));
 	else
 		gtk_label_set_text(mLabel, winName);
 }
@@ -154,7 +156,7 @@ void GroupMenuItem::updatePreview()
 	if (!Settings::showPreviews)
 		return;
 
-	if ((mGroupWindow->mState & WNCK_WINDOW_STATE_MINIMIZED) == WNCK_WINDOW_STATE_MINIMIZED)
+	if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
 		return; // minimized windows never need a new thumbnail
 
 	// This needs work to survive porting to GTK4 and/or Wayland.

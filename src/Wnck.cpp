@@ -249,14 +249,14 @@ namespace Wnck
 	{
 		auto it = mGroupWindows.mList.begin();
 
-		while (it != mGroupWindows.mList.end() && it->second->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
+		while (it != mGroupWindows.mList.end() && it->second->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
 			++it; //skip dialogs
 		if (it != mGroupWindows.mList.end())
 			++it; //skip current window
 
 		while (it != mGroupWindows.mList.end())
 		{
-			if (!it->second->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
+			if (!it->second->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
 			{
 				it->second->activate(timestamp);
 				return;

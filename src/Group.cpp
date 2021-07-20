@@ -26,7 +26,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 			uint count = 0;
 			
 			mWindows.findIf([&count](GroupWindow* e) -> bool {
-				if (!e->getState(WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST))
+				if (!e->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
 					++count;
 			return false;
 		
