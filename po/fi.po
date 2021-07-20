@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2021-07-09 21:28-0700\n"
 "Last-Translator: SwampRabbit MX Linux>\n"
 "Language-Team: FI\n"
@@ -17,40 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for Xfce."
-msgstr "Moderni, minimalistinen tehtäväpalkki Xfce."
-
-#: ../src/Wnck.cpp:208
-msgid "Pinned"
+#: ../src/Wnck.cpp:199
+#, fuzzy
+msgid "Pinned to Dock"
 msgstr "Pinnattu"
 
-#: ../src/Wnck.cpp:208
-msgid "Pin"
-msgstr "Pin"
+#: ../src/Wnck.cpp:199
+msgid "Pin to Dock"
+msgstr ""
 
-#: ../src/Wnck.cpp:209
-msgid "Edit"
-msgstr "Muokkaa"
-
-#: ../src/Wnck.cpp:210
-msgid "Launch Another"
-msgstr "Käynnistä toinen"
-
-#: ../src/Wnck.cpp:210
-msgid "Launch"
+#: ../src/Wnck.cpp:200
+#, fuzzy
+msgid "Edit Launcher"
 msgstr "Laukaisu"
 
-#: ../src/Wnck.cpp:247
+#: ../src/Wnck.cpp:227
 msgid "Close All"
 msgstr "Sulje kaikki"
 
-#: ../src/SettingsDialog.cpp:21
+#: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Vain ensimmäiset %u pikanäppäimet ovat käytössä.</b>\n"
 
-#: ../src/SettingsDialog.cpp:25
+#: ../src/SettingsDialog.cpp:199
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -63,91 +53,132 @@ msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Moderni, minimalistinen tehtäväpalkki Xfce."
 
 #: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Sulje"
 
-#: ../src/_dialogs.xml.h:2
-msgid "Don't show list for a single window"
+#: ../src/_dialogs.xml.h:3
+#, fuzzy
+msgid "Don't show the window list for a single window"
 msgstr "Älä näytä yksittäisen ikkunan luetteloa"
 
-#: ../src/_dialogs.xml.h:3
-msgid "Show only applications from the current workspace"
+#: ../src/_dialogs.xml.h:4
+#, fuzzy
+msgid "Only show applications on the current workspace"
 msgstr "Näytä vain nykyisen työtilan sovellukset"
 
-#: ../src/_dialogs.xml.h:4
-msgid "Show only applications from the current display"
+#: ../src/_dialogs.xml.h:5
+#, fuzzy
+msgid "Only show applications on the current display"
 msgstr "Näytä vain nykyisen näytön sovellukset"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
 msgstr "Näytä avoimien ikkunoiden esikatselukuvat"
 
-#: ../src/_dialogs.xml.h:6
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:8
 msgid "Behavior"
 msgstr "Käyttäytyminen"
 
-#: ../src/_dialogs.xml.h:7
-msgid "Indicator style :"
+#: ../src/_dialogs.xml.h:9
+#, fuzzy
+msgid "Indicator style:"
 msgstr "Indikaattorin tyyli :"
 
-#: ../src/_dialogs.xml.h:8
+#: ../src/_dialogs.xml.h:10
 msgid "Bars"
 msgstr "Baarit"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:11
 msgid "Dots"
 msgstr "Pisteet"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:12
 msgid "Rectangles"
 msgstr "Suorakulmiot"
 
-#: ../src/_dialogs.xml.h:11
-msgid "Indicator orientation :"
+#: ../src/_dialogs.xml.h:13
+msgid "None"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:14
+#, fuzzy
+msgid "Indicator orientation:"
 msgstr "Indikaattorin suuntaus :"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
+msgid "Automatic"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:16
 msgid "Bottom"
 msgstr "Pohja"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:17
 msgid "Right"
 msgstr "Oikea"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:18
 msgid "Top"
 msgstr "Top"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:19
 msgid "Left"
 msgstr "Vasen"
 
-#: ../src/_dialogs.xml.h:16
-msgid "Indicator color :"
-msgstr "Ilmaisimen väri :"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Force icons size :"
-msgstr "Pakota kuvakkeiden koko :"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Appearance"
-msgstr "Ulkonäkö"
-
-#: ../src/_dialogs.xml.h:19
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr ""
-
 #: ../src/_dialogs.xml.h:20
-msgid "Switch to the last window with <SUPER>"
+msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
+#, fuzzy
+msgid "Force icon size:"
+msgstr "Pakota kuvakkeiden koko :"
+
+#: ../src/_dialogs.xml.h:22
+msgid "Inactive indicator:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
+msgid "Appearance"
+msgstr "Ulkonäkö"
+
+#: ../src/_dialogs.xml.h:24
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:25
+msgid "Switch to the last window with <SUPER>"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr "Näppäimistön pikanäppäimet"
+
+#~ msgid "A modern, minimalist taskbar for Xfce."
+#~ msgstr "Moderni, minimalistinen tehtäväpalkki Xfce."
+
+#~ msgid "Pin"
+#~ msgstr "Pin"
+
+#~ msgid "Edit"
+#~ msgstr "Muokkaa"
+
+#~ msgid "Launch Another"
+#~ msgstr "Käynnistä toinen"
+
+#~ msgid "Indicator color :"
+#~ msgstr "Ilmaisimen väri :"

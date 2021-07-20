@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,40 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for Xfce."
+#: ../src/Wnck.cpp:199
+msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:208
-msgid "Pinned"
+#: ../src/Wnck.cpp:199
+msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:208
-msgid "Pin"
+#: ../src/Wnck.cpp:200
+msgid "Edit Launcher"
 msgstr ""
 
-#: ../src/Wnck.cpp:209
-msgid "Edit"
-msgstr ""
-
-#: ../src/Wnck.cpp:210
-msgid "Launch Another"
-msgstr ""
-
-#: ../src/Wnck.cpp:210
-msgid "Launch"
-msgstr ""
-
-#: ../src/Wnck.cpp:247
+#: ../src/Wnck.cpp:227
 msgid "Close All"
 msgstr ""
 
-#: ../src/SettingsDialog.cpp:21
+#: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr ""
 
-#: ../src/SettingsDialog.cpp:25
+#: ../src/SettingsDialog.cpp:199
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -63,91 +51,111 @@ msgid "A modern, minimalist taskbar for Xfce"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:1
-msgid "_Close"
+msgid "_Help"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:2
-msgid "Don't show list for a single window"
+msgid "_Close"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:3
-msgid "Show only applications from the current workspace"
+msgid "Don't show the window list for a single window"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:4
-msgid "Show only applications from the current display"
+msgid "Only show applications on the current workspace"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:5
-msgid "Show preview thumbnails for open windows"
+msgid "Only show applications on the current display"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:6
-msgid "Behavior"
+msgid "Show preview thumbnails for open windows"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:7
-msgid "Indicator style :"
+msgid "Show the number of open windows (if more than 2)"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:8
-msgid "Bars"
+msgid "Behavior"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:9
-msgid "Dots"
+msgid "Indicator style:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:10
-msgid "Rectangles"
+msgid "Bars"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:11
-msgid "Indicator orientation :"
+msgid "Dots"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:12
-msgid "Bottom"
+msgid "Rectangles"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:13
-msgid "Right"
+msgid "None"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
-msgid "Top"
+msgid "Indicator orientation:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:15
-msgid "Left"
+msgid "Automatic"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:16
-msgid "Indicator color :"
+msgid "Bottom"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:17
-msgid "Force icons size :"
+msgid "Right"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:18
-msgid "Appearance"
+msgid "Top"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:19
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgid "Left"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:20
-msgid "Switch to the last window with <SUPER>"
+msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
+msgid "Force icon size:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:22
+msgid "Inactive indicator:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
+msgid "Appearance"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:24
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:25
+msgid "Switch to the last window with <SUPER>"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr ""

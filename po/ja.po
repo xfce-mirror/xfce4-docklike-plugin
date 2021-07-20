@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yamada Hayao <hayao@fascode.net>\n"
 "Language-Team: JA\n"
@@ -17,41 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for Xfce."
-msgstr "Xfce用のモダンで小さなタスクバー"
-
-#: ../src/Wnck.cpp:208
-msgid "Pinned"
+#: ../src/Wnck.cpp:199
+msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:208
-msgid "Pin"
-msgstr "タスクバーにピン留め"
-
-#: ../src/Wnck.cpp:209
-msgid "Edit"
+#: ../src/Wnck.cpp:199
+msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:210
+#: ../src/Wnck.cpp:200
 #, fuzzy
-msgid "Launch Another"
-msgstr "新しいウィンドウで起動"
-
-#: ../src/Wnck.cpp:210
-msgid "Launch"
+msgid "Edit Launcher"
 msgstr "アプリケーションを起動する"
 
-#: ../src/Wnck.cpp:247
+#: ../src/Wnck.cpp:227
 msgid "Close All"
 msgstr "全てのウィンドウを閉じる"
 
-#: ../src/SettingsDialog.cpp:21
+#: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>最初の %u ホットキーのみが有効です。</b>\n"
 
-#: ../src/SettingsDialog.cpp:25
+#: ../src/SettingsDialog.cpp:199
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -66,87 +54,113 @@ msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Xfce用のモダンで小さなタスクバー"
 
 #: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "閉じる"
 
-#: ../src/_dialogs.xml.h:2
-msgid "Don't show list for a single window"
+#: ../src/_dialogs.xml.h:3
+#, fuzzy
+msgid "Don't show the window list for a single window"
 msgstr "1つのウィンドウのリストを表示しない"
 
-#: ../src/_dialogs.xml.h:3
-msgid "Show only applications from the current workspace"
+#: ../src/_dialogs.xml.h:4
+#, fuzzy
+msgid "Only show applications on the current workspace"
 msgstr "現在のワークスペースのアプリケーションのみ表示する"
 
-#: ../src/_dialogs.xml.h:4
-msgid "Show only applications from the current display"
+#: ../src/_dialogs.xml.h:5
+#, fuzzy
+msgid "Only show applications on the current display"
 msgstr "現在のディスプレイのアプリケーションのみ表示する"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:6
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:8
 msgid "Behavior"
 msgstr "動作"
 
-#: ../src/_dialogs.xml.h:7
-msgid "Indicator style :"
+#: ../src/_dialogs.xml.h:9
+#, fuzzy
+msgid "Indicator style:"
 msgstr "インジケーターのスタイル :"
 
-#: ../src/_dialogs.xml.h:8
+#: ../src/_dialogs.xml.h:10
 msgid "Bars"
 msgstr "バー"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:11
 msgid "Dots"
 msgstr "ドット"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:12
 msgid "Rectangles"
 msgstr "長方形"
 
-#: ../src/_dialogs.xml.h:11
-msgid "Indicator orientation :"
+#: ../src/_dialogs.xml.h:13
+msgid "None"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:14
+#, fuzzy
+msgid "Indicator orientation:"
 msgstr "インジケータの向き :"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
+msgid "Automatic"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:16
 msgid "Bottom"
 msgstr "下"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:17
 msgid "Right"
 msgstr "右"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:18
 msgid "Top"
 msgstr "上"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:19
 msgid "Left"
 msgstr "左"
 
-#: ../src/_dialogs.xml.h:16
-msgid "Indicator color :"
-msgstr "インジケーターの色 :"
+#: ../src/_dialogs.xml.h:20
+msgid "Active indicator:"
+msgstr ""
 
-#: ../src/_dialogs.xml.h:17
-msgid "Force icons size :"
+#: ../src/_dialogs.xml.h:21
+#, fuzzy
+msgid "Force icon size:"
 msgstr "アイコンサイズを強制的に変更する :"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:22
+msgid "Inactive indicator:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
 #, fuzzy
 msgid "Appearance"
 msgstr "外観"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "アプリケーションを <SUPER>+[1, 2, ...] で切り替える"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
 msgstr "<SUPER> で最後のウィンドウに切り替える"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -154,9 +168,22 @@ msgstr ""
 "<b>この機能は無効化されています。</b>\n"
 "この機能はシステムから提供されていない X11 XInput2.0 extension が必要です。"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr "キーボードショートカット"
+
+#~ msgid "A modern, minimalist taskbar for Xfce."
+#~ msgstr "Xfce用のモダンで小さなタスクバー"
+
+#~ msgid "Pin"
+#~ msgstr "タスクバーにピン留め"
+
+#, fuzzy
+#~ msgid "Launch Another"
+#~ msgstr "新しいウィンドウで起動"
+
+#~ msgid "Indicator color :"
+#~ msgstr "インジケーターの色 :"
 
 #~ msgid "Contributors:"
 #~ msgstr "貢献者:"

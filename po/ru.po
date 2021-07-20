@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2020-09-13 16:13+0400\n"
 "Last-Translator: Dmitry K <dkabishchev@ya.ru>\n"
 "Language-Team: RU\n"
@@ -16,41 +16,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for Xfce."
-msgstr "Простая и современная панель задач для Xfce"
-
-#: ../src/Wnck.cpp:208
-msgid "Pinned"
+#: ../src/Wnck.cpp:199
+msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:208
-msgid "Pin"
-msgstr "Закрепить"
-
-#: ../src/Wnck.cpp:209
-msgid "Edit"
+#: ../src/Wnck.cpp:199
+msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:210
+#: ../src/Wnck.cpp:200
 #, fuzzy
-msgid "Launch Another"
-msgstr "Новое окно"
-
-#: ../src/Wnck.cpp:210
-msgid "Launch"
+msgid "Edit Launcher"
 msgstr "Запустить"
 
-#: ../src/Wnck.cpp:247
+#: ../src/Wnck.cpp:227
 msgid "Close All"
 msgstr "Закрыть все окна"
 
-#: ../src/SettingsDialog.cpp:21
+#: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
 
-#: ../src/SettingsDialog.cpp:25
+#: ../src/SettingsDialog.cpp:199
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -65,86 +53,112 @@ msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Простая и современная панель задач для Xfce"
 
 #: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "Закрыть"
 
-#: ../src/_dialogs.xml.h:2
-msgid "Don't show list for a single window"
+#: ../src/_dialogs.xml.h:3
+#, fuzzy
+msgid "Don't show the window list for a single window"
 msgstr "Скрыть выпадающий список для одинарных окон"
 
-#: ../src/_dialogs.xml.h:3
-msgid "Show only applications from the current workspace"
+#: ../src/_dialogs.xml.h:4
+#, fuzzy
+msgid "Only show applications on the current workspace"
 msgstr "Показывать окна только с текущего рабочего места"
 
-#: ../src/_dialogs.xml.h:4
-msgid "Show only applications from the current display"
+#: ../src/_dialogs.xml.h:5
+#, fuzzy
+msgid "Only show applications on the current display"
 msgstr "Показывать окна только с текущего монитора"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:6
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:8
 msgid "Behavior"
 msgstr "Поведение"
 
-#: ../src/_dialogs.xml.h:7
-msgid "Indicator style :"
+#: ../src/_dialogs.xml.h:9
+#, fuzzy
+msgid "Indicator style:"
 msgstr "Стиль индикатора:"
 
-#: ../src/_dialogs.xml.h:8
+#: ../src/_dialogs.xml.h:10
 msgid "Bars"
 msgstr "Полоса"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:11
 msgid "Dots"
 msgstr "Точки"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:12
 msgid "Rectangles"
 msgstr "Линии"
 
-#: ../src/_dialogs.xml.h:11
-msgid "Indicator orientation :"
+#: ../src/_dialogs.xml.h:13
+msgid "None"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:14
+#, fuzzy
+msgid "Indicator orientation:"
 msgstr "Расположение индикатора:"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
+msgid "Automatic"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:16
 msgid "Bottom"
 msgstr "Снизу"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:17
 msgid "Right"
 msgstr "Справа"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:18
 msgid "Top"
 msgstr "Сверху"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:19
 msgid "Left"
 msgstr "Слева"
 
-#: ../src/_dialogs.xml.h:16
-msgid "Indicator color :"
-msgstr "Цвет индикатора:"
+#: ../src/_dialogs.xml.h:20
+msgid "Active indicator:"
+msgstr ""
 
-#: ../src/_dialogs.xml.h:17
-msgid "Force icons size :"
+#: ../src/_dialogs.xml.h:21
+#, fuzzy
+msgid "Force icon size:"
 msgstr "Размер значков:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:22
+msgid "Inactive indicator:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Переключать окна с помощью <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
 msgstr "Переключать ранее выбранные окна с помощью <SUPER>"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -153,9 +167,22 @@ msgstr ""
 "Для её работы необходим X11 XInput2.0, который, вероятно, отсутствует в "
 "вашей системе."
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr "Комбинации клавиш"
+
+#~ msgid "A modern, minimalist taskbar for Xfce."
+#~ msgstr "Простая и современная панель задач для Xfce"
+
+#~ msgid "Pin"
+#~ msgstr "Закрепить"
+
+#, fuzzy
+#~ msgid "Launch Another"
+#~ msgstr "Новое окно"
+
+#~ msgid "Indicator color :"
+#~ msgstr "Цвет индикатора:"
 
 #~ msgid "Contributors:"
 #~ msgstr "При участии:"

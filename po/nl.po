@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-02 21:28-0700\n"
+"POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2020-12-23 15:59+0000\n"
 "Last-Translator: Jan Kazemier <j.kazemier@gmail.com>\n"
 "Language-Team: NL\n"
@@ -17,41 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/Plugin.cpp:101
-msgid "A modern, minimalist taskbar for Xfce."
-msgstr "Een moderne, minimalistische taakbalk voor Xfce."
-
-#: ../src/Wnck.cpp:208
-msgid "Pinned"
+#: ../src/Wnck.cpp:199
+msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:208
-msgid "Pin"
-msgstr "Vastpinnen"
-
-#: ../src/Wnck.cpp:209
-msgid "Edit"
+#: ../src/Wnck.cpp:199
+msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:210
+#: ../src/Wnck.cpp:200
 #, fuzzy
-msgid "Launch Another"
-msgstr "Start nog een"
-
-#: ../src/Wnck.cpp:210
-msgid "Launch"
+msgid "Edit Launcher"
 msgstr "Start"
 
-#: ../src/Wnck.cpp:247
+#: ../src/Wnck.cpp:227
 msgid "Close All"
 msgstr "Sluit alle"
 
-#: ../src/SettingsDialog.cpp:21
+#: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Alleen de eerste %u sneltoetsen zijn ingeschakeld.</b>\n"
 
-#: ../src/SettingsDialog.cpp:25
+#: ../src/SettingsDialog.cpp:199
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -66,86 +54,112 @@ msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Een moderne, minimalistische taakbalk voor Xfce."
 
 #: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "Sluiten"
 
-#: ../src/_dialogs.xml.h:2
-msgid "Don't show list for a single window"
+#: ../src/_dialogs.xml.h:3
+#, fuzzy
+msgid "Don't show the window list for a single window"
 msgstr "Toon geen lijst voor een enkel venster"
 
-#: ../src/_dialogs.xml.h:3
-msgid "Show only applications from the current workspace"
+#: ../src/_dialogs.xml.h:4
+#, fuzzy
+msgid "Only show applications on the current workspace"
 msgstr "Alleen applicaties uit de huidige werkruimte tonen"
 
-#: ../src/_dialogs.xml.h:4
-msgid "Show only applications from the current display"
+#: ../src/_dialogs.xml.h:5
+#, fuzzy
+msgid "Only show applications on the current display"
 msgstr "Alleen applicaties op het huidige beeldscherm tonen"
 
-#: ../src/_dialogs.xml.h:5
+#: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:6
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:8
 msgid "Behavior"
 msgstr "Gedrag"
 
-#: ../src/_dialogs.xml.h:7
-msgid "Indicator style :"
+#: ../src/_dialogs.xml.h:9
+#, fuzzy
+msgid "Indicator style:"
 msgstr "Indicatorstijl:"
 
-#: ../src/_dialogs.xml.h:8
+#: ../src/_dialogs.xml.h:10
 msgid "Bars"
 msgstr "Balken"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:11
 msgid "Dots"
 msgstr "Stippen"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:12
 msgid "Rectangles"
 msgstr "Vierkanten"
 
-#: ../src/_dialogs.xml.h:11
-msgid "Indicator orientation :"
+#: ../src/_dialogs.xml.h:13
+msgid "None"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:14
+#, fuzzy
+msgid "Indicator orientation:"
 msgstr "Orientatie indicator:"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
+msgid "Automatic"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:16
 msgid "Bottom"
 msgstr "Onder"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:17
 msgid "Right"
 msgstr "Rechts"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:18
 msgid "Top"
 msgstr "Boven"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:19
 msgid "Left"
 msgstr "Links"
 
-#: ../src/_dialogs.xml.h:16
-msgid "Indicator color :"
-msgstr "Indicatorkleur:"
+#: ../src/_dialogs.xml.h:20
+msgid "Active indicator:"
+msgstr ""
 
-#: ../src/_dialogs.xml.h:17
-msgid "Force icons size :"
+#: ../src/_dialogs.xml.h:21
+#, fuzzy
+msgid "Force icon size:"
 msgstr "Forceer icoongrootte:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:22
+msgid "Inactive indicator:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:23
 msgid "Appearance"
 msgstr "Uiterlijk"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Wissel tussen applicaties met <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
 msgstr "Wissel naar het laatste venster met"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -154,9 +168,22 @@ msgstr ""
 "Deze functie heeft de X11 XInput2.0-extentie nodig, welke niet op uw systeem "
 "beschikbaar is."
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr "Sneltoetsen"
+
+#~ msgid "A modern, minimalist taskbar for Xfce."
+#~ msgstr "Een moderne, minimalistische taakbalk voor Xfce."
+
+#~ msgid "Pin"
+#~ msgstr "Vastpinnen"
+
+#, fuzzy
+#~ msgid "Launch Another"
+#~ msgstr "Start nog een"
+
+#~ msgid "Indicator color :"
+#~ msgstr "Indicatorkleur:"
 
 #~ msgid "Contributors:"
 #~ msgstr "Bijdragers:"
