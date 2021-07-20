@@ -1,5 +1,6 @@
 # TODO
 
++ Layering of XDG_DATA_DIRS is not working: files in /usr/share/applications, should not be used over those in home
 + Use X-Flatpak value for icon/desktop file names if it exists
 + Adjust the drag indicator position based on panel orientation
 + Make sure the label never overlaps the indicator
