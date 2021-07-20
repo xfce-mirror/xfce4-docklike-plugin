@@ -69,7 +69,10 @@ namespace AppInfos
 		mXdgDataDirs.push_back(std::string(getenv("HOME")) + "/.local/share");
 
 		for (std::string& dir : mXdgDataDirs)
-			dir += "/applications/";
+			if (dir.back() == '/')
+				dir += "applications/";
+			else
+				dir += "/applications/";
 
 		std::list<std::string> tempDirs = mXdgDataDirs;
 		for (std::string& dir : tempDirs)
