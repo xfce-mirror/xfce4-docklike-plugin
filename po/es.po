@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Anclado al muelle "
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Anclar al muelle "
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Editar lanzador "
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -54,34 +54,31 @@ msgstr "Una moderna y minimalista barra de tareas para Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Ayudar"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Cerrar"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
 msgstr "No mostrar la lista para una única ventana"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Mostrar solo aplicaciones del escritorio actual"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
 msgstr "Mostrar solo aplicaciones de la pantalla actual"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Mostrar miniaturas de vista previa para ventanas abiertas"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Muestra el número de ventanas abiertas (si hay más de 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -105,7 +102,7 @@ msgstr "Rectángulos"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -113,7 +110,7 @@ msgstr "Posición del indicador:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -133,7 +130,7 @@ msgstr "Izquierda"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Indicador activo:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -141,10 +138,9 @@ msgstr "Forzar el tamaño de los iconos:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Indicador inactivo:"
 
 #: ../src/_dialogs.xml.h:23
-#, fuzzy
 msgid "Appearance"
 msgstr "Apariencia"
 
