@@ -6,9 +6,9 @@ A modern, minimalist taskbar for Xfce
 
 ## Internationalization
 
-Contribute in localizing the plugin to your native tongue.
-
-Simply go to the ```/po``` directory, and make your own ```[langcode].po``` file by editing ```xfce4-docklike-plugin.pot```. Or update an existing ```[langcode].po``` file and translate new strings. Then open a pull request.
+- New translations: go to the `/po` directory, and create a new `[langcode].po` file by editing `xfce4-docklike-plugin.pot`.
+- Updating translations: edit the `[langcode].po` file and translate new strings. Any lines containing `#, fuzzy` can be deleted if the translation they precede is correct.
+- Open a pull request
 
 ## Build & Install
 
