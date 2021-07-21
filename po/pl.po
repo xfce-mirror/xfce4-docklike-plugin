@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
-"PO-Revision-Date: 2021-02-10 15:35+0100\n"
-"Last-Translator: Matthaiks\n"
+"PO-Revision-Date: 2021-07-20 18:37-0700\n"
+"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
 
@@ -28,9 +28,8 @@ msgid "Pin to Dock"
 msgstr ""
 
 #: ../src/Wnck.cpp:200
-#, fuzzy
 msgid "Edit Launcher"
-msgstr "Uruchom"
+msgstr ""
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -92,7 +91,6 @@ msgid "Behavior"
 msgstr "Zachowanie"
 
 #: ../src/_dialogs.xml.h:9
-#, fuzzy
 msgid "Indicator style:"
 msgstr "Styl wskaźnika:"
 
@@ -113,7 +111,6 @@ msgid "None"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
-#, fuzzy
 msgid "Indicator orientation:"
 msgstr "Orientacja wskaźnika:"
 
@@ -142,7 +139,6 @@ msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
-#, fuzzy
 msgid "Force icon size:"
 msgstr "Wymuś rozmiar ikon:"
 

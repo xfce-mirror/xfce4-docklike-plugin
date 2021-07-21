@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the Docklike package.
 # Nicolas Szabo <nszabo@vivaldi.net>, 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
-"PO-Revision-Date: 2021-07-09 21:28-0700\n"
-"Last-Translator: SwampRabbit MX Linux>\n"
+"PO-Revision-Date: 2021-07-20 18:36-0700\n"
+"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
 "Language-Team: HR\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:199
 #, fuzzy
@@ -27,9 +27,8 @@ msgid "Pin to Dock"
 msgstr ""
 
 #: ../src/Wnck.cpp:200
-#, fuzzy
 msgid "Edit Launcher"
-msgstr "lansiranje"
+msgstr ""
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -50,7 +49,7 @@ msgstr ""
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Moderna, minimalistička programska traka za Xfce."
+msgstr "Moderna, minimalistička programska traka za Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
@@ -88,9 +87,8 @@ msgid "Behavior"
 msgstr "Ponašanje"
 
 #: ../src/_dialogs.xml.h:9
-#, fuzzy
 msgid "Indicator style:"
-msgstr "Stil indikatora :"
+msgstr "Stil indikatora:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -109,9 +107,8 @@ msgid "None"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
-#, fuzzy
 msgid "Indicator orientation:"
-msgstr "Orijentacija indikatora :"
+msgstr "Orijentacija indikatora:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
@@ -138,9 +135,8 @@ msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
-#, fuzzy
 msgid "Force icon size:"
-msgstr "Prisiliti veličinu ikona :"
+msgstr "Prisiliti veličinu ikona:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"

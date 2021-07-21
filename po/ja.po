@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the Docklike package.
 # Yamada Hayao <hayao@fascode.net>, 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Yamada Hayao <hayao@fascode.net>\n"
+"PO-Revision-Date: 2021-07-20 18:36-0700\n"
+"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
 "Language-Team: JA\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
@@ -89,9 +89,8 @@ msgid "Behavior"
 msgstr "動作"
 
 #: ../src/_dialogs.xml.h:9
-#, fuzzy
 msgid "Indicator style:"
-msgstr "インジケーターのスタイル :"
+msgstr "インジケーターのスタイル:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -110,9 +109,8 @@ msgid "None"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
-#, fuzzy
 msgid "Indicator orientation:"
-msgstr "インジケータの向き :"
+msgstr "インジケータの向き:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
@@ -139,9 +137,8 @@ msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
-#, fuzzy
 msgid "Force icon size:"
-msgstr "アイコンサイズを強制的に変更する :"
+msgstr "アイコンサイズを強制的に変更する:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"

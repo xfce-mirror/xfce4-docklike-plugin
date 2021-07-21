@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the Docklike package.
 # Fábio Meneghetti <fabiom@riseup.net>, 2020.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Fábio Meneghetti <fabiom@riseup.net>\n"
+"PO-Revision-Date: 2021-07-20 18:38-0700\n"
+"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
 "Language-Team: PT_BR\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
@@ -26,9 +26,8 @@ msgid "Pin to Dock"
 msgstr ""
 
 #: ../src/Wnck.cpp:200
-#, fuzzy
 msgid "Edit Launcher"
-msgstr "Iniciar"
+msgstr ""
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -51,7 +50,7 @@ msgstr ""
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Uma barra de tarefas moderna e minimalista para o Xfce."
+msgstr "Uma barra de tarefas moderna e minimalista para o Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
@@ -89,7 +88,6 @@ msgid "Behavior"
 msgstr "Comportamento"
 
 #: ../src/_dialogs.xml.h:9
-#, fuzzy
 msgid "Indicator style:"
 msgstr "Estilo do indicador:"
 
@@ -110,7 +108,6 @@ msgid "None"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
-#, fuzzy
 msgid "Indicator orientation:"
 msgstr "Posição do indicador:"
 
@@ -139,7 +136,6 @@ msgid "Active indicator:"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:21
-#, fuzzy
 msgid "Force icon size:"
 msgstr "Forçar tamanho dos ícones:"
 
