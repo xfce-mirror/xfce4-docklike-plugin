@@ -69,13 +69,14 @@ namespace Plugin
 
 	void aboutDialog()
 	{
-		const gchar* authors[] = {
+		const gchar* AUTHORS[] = {
 			"Nicolas Szabo <nszabo@vivaldi.net> © 2019-2020",
 			"David Keogh <davidtkeogh@gmail.com> © 2020-2021"
 			"\n",
 			NULL};
 
-		const gchar* translators =
+		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
+		const gchar* TRANSLATORS =
 			"Yamada Hayao <hayao@fascode.net> : ja\n"
 			"Dmitry K <dkabishchev@ya.ru> : ru\n"
 			"Fábio Meneghetti <fabiom@riseup.net> : pt\n"
@@ -85,7 +86,8 @@ namespace Plugin
 			"fredii: de\n"
 			"Lucas Hadjilucas <puzzle@outlook.com> : el\n"
 			"Jan Kazemier : nl\n"
-			"Matthaiks : pl\n";
+			"Matthaiks : pl\n"
+			"Faisal Rachmadin <frachmadin@gmail.com> : id\n";
 
 		gtk_show_about_dialog(NULL,
 			"program-name", "Docklike Taskbar",
@@ -95,8 +97,8 @@ namespace Plugin
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"website", PLUGIN_WEBSITE,
 			"website-label", PLUGIN_WEBSITE,
-			"authors", authors,
-			"translator-credits", translators,
+			"authors", AUTHORS,
+			"translator-credits", TRANSLATORS,
 			NULL);
 	}
 
