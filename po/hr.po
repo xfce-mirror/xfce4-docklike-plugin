@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2021-07-20 18:36-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: HR\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,16 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:199
-#, fuzzy
 msgid "Pinned to Dock"
-msgstr "Prikvačeno"
+msgstr "Prikvačeno na Pristanište"
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Prikvači na Pristanište"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Uredi Lancer"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -53,24 +52,21 @@ msgstr "Moderna, minimalistička programska traka za Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Pomozite"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Zatvoriti"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Ne prikazuj popis ni za jedan prozor"
+msgstr "Ne prikazujte popis prozora za jedan prozor"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Prikaži samo aplikacije iz trenutnog radnog prostora"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
 msgstr "Prikaži samo programe s trenutnog zaslona"
 
@@ -80,7 +76,7 @@ msgstr "Prikaži minijature pregleda za otvorene prozore"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Prikaži broj otvorenih prozora (ako je veći od 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -104,7 +100,7 @@ msgstr "Pravokutnici"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Nijedna"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -112,7 +108,7 @@ msgstr "Orijentacija indikatora:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Automatski"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -132,7 +128,7 @@ msgstr "Lijevo"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Aktivni pokazatelj "
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -140,7 +136,7 @@ msgstr "Prisiliti veličinu ikona:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Neaktivni pokazatelj:"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Appearance"
@@ -148,11 +144,11 @@ msgstr "Izgled"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr ""
+msgstr "Prebacivanje između aplikacija pomoću <SUPER> + [1, 2, ...]"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
-msgstr ""
+msgstr "Prebacite se na zadnji prozor pomoću <SUPER>"
 
 #: ../src/_dialogs.xml.h:26
 msgid ""

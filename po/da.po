@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2021-07-20 18:34-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: DA\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,16 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:199
-#, fuzzy
 msgid "Pinned to Dock"
-msgstr "Fastgjort"
+msgstr "Fastgjort til Dock"
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Fastgør til Dock"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Rediger Launcher"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -53,26 +52,23 @@ msgstr "En moderne, minimalistisk proceslinje til Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Hjælp"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Tæt"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Vis ikke listen for et enkelt vindue"
+msgstr "Vis ikke vindueslisten for et enkelt vindue"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
-msgstr "Vis kun applikationer fra det aktuelle arbejdsområde"
+msgstr "Vis kun applikationer på det aktuelle arbejdsområde"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
-msgstr "Vis kun applikationer fra den aktuelle skærm"
+msgstr "Vis kun applikationer på det aktuelle skærm"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
@@ -80,7 +76,7 @@ msgstr "Vis miniaturebilleder til forhåndsvisning til åbne vinduer"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Vis antallet af åbne vinduer (hvis mere end 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -104,7 +100,7 @@ msgstr "Rektangler"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -112,7 +108,7 @@ msgstr "Indikatorretning:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisk"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -132,7 +128,7 @@ msgstr "Venstre"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Aktiv indikator:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -140,7 +136,7 @@ msgstr "Tving ikonstørrelse:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Inaktiv indikator:"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Appearance"
@@ -148,11 +144,11 @@ msgstr "Udseende"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr ""
+msgstr "Skift mellem applikationer med <SUPER>+[1, 2, ...]"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
-msgstr ""
+msgstr "Skift til det sidste vindue med <SUPER> "
 
 #: ../src/_dialogs.xml.h:26
 msgid ""
