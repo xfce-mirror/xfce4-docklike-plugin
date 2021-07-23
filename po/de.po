@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2021-07-20 18:34-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: fehlix <fehlix@mxlinux.org>\n"
 "Language-Team: DE\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Ans Dock angeheftet"
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Ans Dock anheften"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Starter bearbeiten"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -55,34 +55,31 @@ msgstr "Eine moderne und minimalistische Taskleiste für Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Hilfe"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Schließen"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Liste für ein einzelnes Fenster nicht anzeigen"
+msgstr "Die Fensterliste für ein einzelnes Fenster nicht anzeigen"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Nur Anwendungen aus dem aktuellen Arbeitsbereich anzeigen"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
 msgstr "Nur Anwendungen vom aktuellen Bildschirm anzeigen"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Vorschau-Miniaturansicht für geöffnete Fenster anzeigen"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Anzeigen der Anzahl der geöffneten Fenster (wenn mehr als 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -90,7 +87,7 @@ msgstr "Verhalten"
 
 #: ../src/_dialogs.xml.h:9
 msgid "Indicator style:"
-msgstr "Stil des Indikator:"
+msgstr "Indikator Stil:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -106,15 +103,15 @@ msgstr "Rechtecke"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
-msgstr "Orientierung des Indikator:"
+msgstr "Orientierung des Indikators:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisch"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -134,19 +131,17 @@ msgstr "Links"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Aktiver Indikator:"
 
 #: ../src/_dialogs.xml.h:21
-#, fuzzy
 msgid "Force icon size:"
 msgstr "Größe der Symbole erzwingen:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Inaktiver Indikator:"
 
 #: ../src/_dialogs.xml.h:23
-#, fuzzy
 msgid "Appearance"
 msgstr "Aussehen"
 
@@ -177,7 +172,6 @@ msgstr "Tastenkürzel"
 #~ msgid "Pin"
 #~ msgstr "Anheften"
 
-#, fuzzy
 #~ msgid "Launch Another"
 #~ msgstr "Starte einen Weiteren"
 
