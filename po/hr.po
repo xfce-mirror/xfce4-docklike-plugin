@@ -36,7 +36,7 @@ msgstr "Zatvori sve"
 #: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Csak az első %u billentyűparancs engedélyezett.</b>\n"
 
 #: ../src/SettingsDialog.cpp:199
 #, c-format
