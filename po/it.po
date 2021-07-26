@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
 "PO-Revision-Date: 2021-07-20 18:36-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: IT\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Appuntato al dock"
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Pin per Attraccare"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Modifica lanciatore"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -54,34 +54,31 @@ msgstr "Una Taskbar moderna e minimale per Xfce"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Aiuto"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "Chiudi"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Visualizza l'elenco anche per una singola finestra"
+msgstr "Non mostrare l'elenco delle finestre per una singola finestra"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Mostra solo le applicazioni dall'area di lavoro corrente"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
-msgstr "Mostra solo le applicazioni dalla visualizzazione corrente"
+msgstr "Mostra solo le applicazioni nella schermata corrente"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Mostra le miniature di anteprima per le finestre aperte"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Mostra il numero di finestre aperte (se più di 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -105,7 +102,7 @@ msgstr "Rettangoli"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -113,7 +110,7 @@ msgstr "Orientamento indicatori:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Automatico"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -133,7 +130,7 @@ msgstr "Sinistra"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Indicatore attivo:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -141,10 +138,9 @@ msgstr "Forza dimensione icone:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Indicatore inattivo:"
 
 #: ../src/_dialogs.xml.h:23
-#, fuzzy
 msgid "Appearance"
 msgstr "Aspetto"
 
