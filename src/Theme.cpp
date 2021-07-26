@@ -19,16 +19,12 @@ void Theme::load()
 {
 	GtkCssProvider* css_provider = gtk_css_provider_new();
 	std::string css = get_theme_colors();
-	const gchar* filename;
+	gchar* filename = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4-docklike-plugin/gtk.css");
 
-	if (getenv("XDG_CONFIG_HOME") != NULL)
-		filename = g_build_filename(getenv("XDG_CONFIG_HOME"), "xfce4-docklike-plugin/gtk.css", NULL);
-	else
-		filename = g_build_filename(getenv("HOME"), ".config/xfce4-docklike-plugin/gtk.css", NULL);
-
-	if (g_file_test(filename, G_FILE_TEST_IS_REGULAR))
+	if (filename != NULL && g_file_test(filename, G_FILE_TEST_IS_REGULAR))
 	{
 		FILE* f = fopen(filename, "r");
+		g_free(filename);
 
 		if (f != NULL)
 		{
@@ -67,7 +63,10 @@ std::string Theme::get_theme_colors()
 	gtk_style_context_get_property(sc, "background-color", GTK_STATE_FLAG_PRELIGHT, &gv);
 	std::string itemBgHover = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
 
+	std::string indicatorColor = gdk_rgba_to_string(Settings::indicatorColor);
+	std::string inactiveColor = gdk_rgba_to_string(Settings::inactiveColor);
+
 	gtk_widget_destroy(menu);
 
-	return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n";
+	return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n@define-color active_indicator_color " + indicatorColor + ";\n@define-color inactive_indicator_color " + inactiveColor + ";\n";
 }

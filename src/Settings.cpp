@@ -110,6 +110,7 @@ namespace Settings
 				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
 				saveFile();
 
+				Theme::load();
 				Dock::drawGroups();
 			});
 
@@ -124,7 +125,8 @@ namespace Settings
 				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(inactiveColor));
 				saveFile();
 
-				gtk_widget_queue_draw(Dock::mBox);
+				Theme::load();
+				Dock::drawGroups();
 			});
 
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),
