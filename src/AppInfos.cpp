@@ -178,7 +178,7 @@ namespace AppInfos
 		struct inotify_event* event;
 		int fd = inotify_init();
 
-		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
+		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE | IN_DELETE | IN_MOVED_FROM | IN_MODIFY);
 
 		while (true)
 		{
@@ -197,7 +197,12 @@ namespace AppInfos
 				loadDesktopEntry(*(std::string*)dirPath, newFile);
 
 				if (PANEL_DEBUG)
-					g_print("UPDATE: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
+				{
+					if (event->mask & IN_DELETE || event->mask & IN_MOVED_FROM)
+						g_print("REMOVED: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
+					else
+						g_print("UPDATED: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
+				}
 			}
 
 			modified = true;
