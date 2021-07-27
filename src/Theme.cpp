@@ -9,10 +9,10 @@
 
 void Theme::init()
 {
-	load();
-
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
-		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }), NULL);
+		G_CALLBACK(+[](GtkStyleContext* stylecontext)
+				   { load(); }),
+		NULL);
 }
 
 void Theme::load()
@@ -33,13 +33,18 @@ void Theme::load()
 				css += read_char;
 			fclose(f);
 		}
+		else // Empty file
+			css += DEFAULT_THEME;
 	}
-	else // Defaults from https://github.com/nsz32/docklike-plugin/blob/master/src/Theme.cpp
-		css += ".drop_target { box-shadow: inset 4px 0px 0px 0px darkviolet; }\n.menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n.hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n.active_group { background-color: alpha(@menu_item_bgcolor_hover, 0.25); }\n.hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.1); }\n";
+	else // No file
+		css += DEFAULT_THEME;
 
 	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 			GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+	if (PANEL_DEBUG)
+		g_print("CSS THEME:\n%s", css.c_str());
 }
 
 std::string Theme::get_theme_colors()
@@ -68,5 +73,11 @@ std::string Theme::get_theme_colors()
 
 	gtk_widget_destroy(menu);
 
-	return "@define-color menu_bgcolor " + menuBg + ";\n@define-color menu_item_color " + itemLabel + ";\n@define-color menu_item_color_hover " + itemLabelHover + ";\n@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n@define-color active_indicator_color " + indicatorColor + ";\n@define-color inactive_indicator_color " + inactiveColor + ";\n";
+	std::string css = "@define-color menu_bgcolor " + menuBg + ";\n";
+	css += "@define-color menu_item_color " + itemLabel + ";\n";
+	css += "@define-color menu_item_color_hover " + itemLabelHover + ";\n";
+	css += "@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n";
+	css += "@define-color active_indicator_color " + indicatorColor + ";\n";
+	css += "@define-color inactive_indicator_color " + inactiveColor + ";\n";
+	return css;
 }
