@@ -116,14 +116,13 @@ namespace AppInfos
 
 		std::string icon;
 		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
-
 		if (icon_ == NULL)
 		{
 			pthread_mutex_unlock(&AppInfosLock);
 			return;
 		}
-
 		icon = Help::String::trim(icon_);
+		
 		std::string name;
 		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
 
@@ -173,12 +172,13 @@ namespace AppInfos
 
 	void* threadedXDGDirectoryWatcher(void* dirPath)
 	{
-		int fd = inotify_init();
-		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
-
-		int i = 0, len = 0;
+		int i = 0;
+		int len = 0;
 		char buf[1024];
 		struct inotify_event* event;
+		int fd = inotify_init();
+
+		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE);
 
 		while (true)
 		{
@@ -188,15 +188,19 @@ namespace AppInfos
 			while (i < len)
 			{
 				event = (struct inotify_event*)&buf[i];
-				loadDesktopEntry(*(std::string*)dirPath, event->name);
-
 				i += sizeof(struct inotify_event) + event->len;
 			}
 
-			modified = true;
+			std::string newFile = event->name;
+			if (newFile.substr(newFile.size() - 8, std::string::npos) == ".desktop")
+			{
+				loadDesktopEntry(*(std::string*)dirPath, newFile);
 
-			if (PANEL_DEBUG)
-				g_print("UPDATE: %s%s\n", ((std::string*)dirPath)->c_str(), event->name);
+				if (PANEL_DEBUG)
+					g_print("UPDATE: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
+			}
+
+			modified = true;
 		}
 	}
 
