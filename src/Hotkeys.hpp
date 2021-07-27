@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
+#ifndef HOTKEYS_HPP
+#define HOTKEYS_HPP
 
 #include <iostream>
 #include <string>
@@ -30,4 +30,4 @@ namespace Hotkeys
 	const int NbHotkeys = 10;
 } // namespace Hotkeys
 
-#endif
+#endif // HOTKEYS_HPP

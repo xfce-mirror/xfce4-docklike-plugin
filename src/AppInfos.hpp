@@ -8,9 +8,9 @@
 #ifndef APPINFOS_HPP
 #define APPINFOS_HPP
 
+#include <ftw.h>
 #include <pthread.h>
 #include <sys/inotify.h>
-#include <ftw.h>
 
 #include <gio/gdesktopappinfo.h>
 
@@ -34,9 +34,9 @@ struct AppInfo
 namespace AppInfos
 {
 	void init();
-	extern bool modified;
-
 	AppInfo* search(std::string id);
+
+	extern bool modified;
 } // namespace AppInfos
 
-#endif
+#endif // APPINFOS_HPP

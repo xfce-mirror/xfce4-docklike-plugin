@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef DOCK_BUTTON_MENU_HPP
-#define DOCK_BUTTON_MENU_HPP
+#ifndef GROUP_MENU_HPP
+#define GROUP_MENU_HPP
 
 #include <gtk/gtk.h>
 
@@ -37,4 +37,4 @@ class GroupMenu
 	bool mMouseHover;
 };
 
-#endif
+#endif // GROUP_MENU_HPP

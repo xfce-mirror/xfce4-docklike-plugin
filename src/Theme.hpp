@@ -28,4 +28,4 @@ namespace Theme
 	std::string get_theme_colors();
 } // namespace Theme
 
-#endif
+#endif // THEME_HPP

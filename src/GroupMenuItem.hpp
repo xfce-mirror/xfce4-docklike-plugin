@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef DOCK_BUTTON_MENU_ITEM_HPP
-#define DOCK_BUTTON_MENU_ITEM_HPP
+#ifndef GROUP_MENU_ITEM_HPP
+#define GROUP_MENU_ITEM_HPP
 
 #include <gtk/gtk.h>
 
@@ -41,4 +41,4 @@ class GroupMenuItem
 	Help::Gtk::Timeout mPreviewTimeout;
 };
 
-#endif
+#endif // GROUP_MENU_ITEM_HPP

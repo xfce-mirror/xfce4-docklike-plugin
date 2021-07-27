@@ -59,4 +59,4 @@ namespace Help
 	} // namespace Gtk
 } // namespace Help
 
-#endif
+#endif // HELPERS_HPP

@@ -67,4 +67,4 @@ class LogicalState
 	std::function<void(V)> f;
 };
 
-#endif
+#endif // STATE_HPP

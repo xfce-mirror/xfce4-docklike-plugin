@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef TASKBAR_HPP
-#define TASKBAR_HPP
+#ifndef DOCK_HPP
+#define DOCK_HPP
 
 #include <gtk/gtk.h>
 #include <libwnck/libwnck.h>
@@ -47,4 +47,4 @@ namespace Dock
 	extern int mIconSize;
 } // namespace Dock
 
-#endif
+#endif // DOCK_HPP

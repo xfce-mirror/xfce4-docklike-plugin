@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef SETTINGS_HPP
-#define SETTINGS_HPP
+#ifndef SETTINGS_DIALOG_HPP
+#define SETTINGS_DIALOG_HPP
 
 #include <gtk/gtk.h>
 
@@ -22,4 +22,4 @@ namespace SettingsDialog
 	void updateKeyComboActiveWarning(GtkWidget* widget);
 } // namespace SettingsDialog
 
-#endif // SETTINGS_HPP
+#endif // SETTINGS_DIALOG_HPP

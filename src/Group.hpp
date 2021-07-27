@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef DOCK_BUTTON_HPP
-#define DOCK_BUTTON_HPP
+#ifndef GROUP_HPP
+#define GROUP_HPP
 
 #include <gtk/gtk.h>
 
@@ -95,4 +95,4 @@ class Group
 	Help::Gtk::Timeout mMenuShowTimeout;
 };
 
-#endif
+#endif // GROUP_HPP

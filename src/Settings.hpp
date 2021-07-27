@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
+#ifndef SETTINGS_HPP
+#define SETTINGS_HPP
 
 #include <glib.h>
 
@@ -55,4 +55,4 @@ namespace Settings
 	extern State<int> previewSleep;
 }; // namespace Settings
 
-#endif
+#endif // SETTINGS_HPP

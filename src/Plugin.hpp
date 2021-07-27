@@ -8,10 +8,6 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
-#define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
-#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
-#define PANEL_DEBUG getenv("PANEL_DEBUG") != NULL
-
 #include <gtk/gtk.h>
 #include <libwnck/libwnck.h>
 
@@ -33,6 +29,10 @@ extern "C"
 #include <libxfce4util/libxfce4util.h>
 }
 
+#define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
+#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
+#define PANEL_DEBUG getenv("PANEL_DEBUG") != NULL
+
 namespace Plugin
 {
 	extern XfcePanelPlugin* mXfPlugin;
@@ -43,4 +43,4 @@ namespace Plugin
 	void remoteEvent(gchar* name, GValue* value);
 } // namespace Plugin
 
-#endif
+#endif // PLUGIN_HPP

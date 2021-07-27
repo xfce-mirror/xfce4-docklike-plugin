@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef GROUPWINDOW_HPP
-#define GROUPWINDOW_HPP
+#ifndef GROUP_WINDOW_HPP
+#define GROUP_WINDOW_HPP
 
 #include <gtk/gtk.h>
 #include <libwnck/libwnck.h>
@@ -49,4 +49,4 @@ class GroupWindow
 	bool mGroupAssociated;
 };
 
-#endif
+#endif // GROUP_WINDOW_HPP
