@@ -42,9 +42,6 @@ void Theme::load()
 	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 			GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-	if (PANEL_DEBUG)
-		g_print("CSS THEME:\n%s", css.c_str());
 }
 
 std::string Theme::get_theme_colors()

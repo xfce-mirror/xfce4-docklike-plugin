@@ -101,9 +101,6 @@ namespace AppInfos
 
 	void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-		if (filename.size() < 9 || filename.substr(filename.size() - 8, std::string::npos) != ".desktop")
-			return;
-
 		std::string id = filename.substr(0, filename.size() - 8);
 		std::string path = xdgDir + id + ".desktop";
 
@@ -170,6 +167,19 @@ namespace AppInfos
 		pthread_mutex_unlock(&AppInfosLock);
 	}
 
+	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
+	{
+		std::string id = filename.substr(0, filename.size() - 8);
+
+		pthread_mutex_lock(&AppInfosLock);
+
+		mAppInfoIds.remove(id);
+		mAppInfoNames.remove(id);
+		mAppInfoWMClasses.remove(id);
+
+		pthread_mutex_unlock(&AppInfosLock);
+	}
+
 	void* threadedXDGDirectoryWatcher(void* dirPath)
 	{
 		int i = 0;
@@ -191,20 +201,24 @@ namespace AppInfos
 				i += sizeof(struct inotify_event) + event->len;
 			}
 
-			std::string newFile = event->name;
-			if (newFile.substr(newFile.size() - 8, std::string::npos) == ".desktop")
+			std::string filename = event->name;
+			if (filename.substr(filename.size() - 8, std::string::npos) == ".desktop")
 			{
-				loadDesktopEntry(*(std::string*)dirPath, newFile);
-
-				if (PANEL_DEBUG)
+				if (event->mask & IN_DELETE || event->mask & IN_MOVED_FROM)
 				{
-					if (event->mask & IN_DELETE || event->mask & IN_MOVED_FROM)
-						g_print("REMOVED: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
-					else
-						g_print("UPDATED: %s%s\n", ((std::string*)dirPath)->c_str(), newFile.c_str());
+					removeDesktopEntry(*(std::string*)dirPath, filename);
+
+					if (PANEL_DEBUG)
+						g_print("REMOVED: %s%s\n", ((std::string*)dirPath)->c_str(), filename.c_str());
+				}
+				else
+				{
+					loadDesktopEntry(*(std::string*)dirPath, filename);
+
+					if (PANEL_DEBUG)
+						g_print("UPDATED: %s%s\n", ((std::string*)dirPath)->c_str(), filename.c_str());
 				}
 			}
-
 			modified = true;
 		}
 	}
