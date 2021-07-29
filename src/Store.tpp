@@ -96,6 +96,13 @@ namespace Store
 			return NULL;
 		}
 
+		void remove(K k)
+		{
+			typename std::map<const K, V>::iterator it = mMap.find(k);
+			if (it != mMap.end())
+				mMap.erase(it);
+		}
+
 	  private:
 		std::map<const K, V> mMap;
 	};
