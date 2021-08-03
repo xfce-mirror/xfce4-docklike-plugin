@@ -8,28 +8,28 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-20 16:46-0700\n"
-"PO-Revision-Date: 2021-07-20 18:37-0700\n"
-"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
+"PO-Revision-Date: 2021-08-03 14:13+0200\n"
+"Last-Translator: Matthaiks\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
 
 #: ../src/Wnck.cpp:199
 msgid "Pinned to Dock"
-msgstr "Przypięte do Docka"
+msgstr "Przypięty do paska"
 
 #: ../src/Wnck.cpp:199
 msgid "Pin to Dock"
-msgstr "Przypnij do Docka"
+msgstr "Przypnij do paska"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr "Edytuj Launcher"
+msgstr "Edytuj aktywator"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
@@ -69,19 +69,19 @@ msgstr "Nie pokazuj listy okien dla pojedynczego okna"
 
 #: ../src/_dialogs.xml.h:4
 msgid "Only show applications on the current workspace"
-msgstr "Pokazuj tylko aplikacje z bieżącego obszaru roboczego"
+msgstr "Pokazuj tylko aplikacje w bieżącym obszarze roboczym"
 
 #: ../src/_dialogs.xml.h:5
 msgid "Only show applications on the current display"
-msgstr "Pokazuj tylko aplikacje z bieżącego ekranu"
+msgstr "Pokazuj tylko aplikacje na bieżącym ekranie"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr "Pokaż miniatury podglądu dla otwartych okien"
+msgstr "Pokazuj miniatury podglądu dla otwartych okien"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr "Pokaż liczbę otwartych okien (jeśli więcej niż 2)"
+msgstr "Pokazuj liczbę otwartych okien (jeśli więcej niż 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -113,7 +113,7 @@ msgstr "Orientacja wskaźnika:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr "Automatyczny"
+msgstr "Automatyczna"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -133,7 +133,7 @@ msgstr "Lewa"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr "Aktywny wskaźnik:"
+msgstr "Wskaźnik aktywnych:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -141,7 +141,7 @@ msgstr "Wymuś rozmiar ikon:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr "Nieaktywny wskaźnik:"
+msgstr "Wskaźnik nieaktywnych:"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Appearance"
@@ -167,22 +167,3 @@ msgstr ""
 #: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
 msgstr "Skróty klawiszowe"
-
-#~ msgid "A modern, minimalist taskbar for Xfce."
-#~ msgstr "Nowoczesny, minimalistyczny pasek zadań dla Xfce."
-
-#~ msgid "Pin"
-#~ msgstr "Przypnij"
-
-#, fuzzy
-#~ msgid "Launch Another"
-#~ msgstr "Uruchom kolejne"
-
-#~ msgid "Indicator color :"
-#~ msgstr "Kolor wskaźnika:"
-
-#~ msgid "Contributors:"
-#~ msgstr "Współtwórcy:"
-
-#~ msgid "Unpin"
-#~ msgstr "Odepnij"
