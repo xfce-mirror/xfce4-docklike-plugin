@@ -25,6 +25,7 @@ namespace Dock
 			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
 
 		gtk_widget_show(mBox);
+		drawGroups();
 
 		// Redraw the panel items when the AppInfos have changed
 		mDrawTimeout.setup(500, []() {
@@ -87,15 +88,10 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		if (mGroups.size())
-		{
-			for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-				 child != NULL;
-				 child = child->next)
-				gtk_widget_destroy(GTK_WIDGET(child->data));
-
-			mGroups.clear();
-		}
+		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void { 
+			gtk_widget_destroy(g.second->mButton);
+		});
+		mGroups.clear();
 
 		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -117,12 +113,13 @@ namespace Dock
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
+			gulong activeXID = wnck_window_get_xid(WNCK_WINDOW(window_l->data));
 			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
 
-			if (Wnck::getActiveWindowXID() == wnck_window_get_xid(wnckWindow))
+			if (Wnck::getActiveWindowXID() == activeXID)
 				Help::Gtk::cssClassAdd(GTK_WIDGET(groupWindow->mGroupMenuItem->mItem), "active_menu_item");
 
-			Wnck::mGroupWindows.push(wnck_window_get_xid(wnckWindow), groupWindow);
+			Wnck::mGroupWindows.push(activeXID, groupWindow);
 
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
