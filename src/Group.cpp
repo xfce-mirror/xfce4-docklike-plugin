@@ -242,6 +242,7 @@ void Group::activate(guint32 timestamp)
 	});
 
 	groupWindow->activate(timestamp);
+	onWindowActivate(groupWindow);
 }
 
 void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
@@ -684,6 +685,8 @@ void Group::onButtonRelease(GdkEventButton* event)
 	else if (mActive)
 		mWindows.get(mTopWindowIndex)->minimize();
 	else if (!mActive)
+		activate(event->time);
+	else // mActive is out of sync somehow?
 		activate(event->time);
 }
 
