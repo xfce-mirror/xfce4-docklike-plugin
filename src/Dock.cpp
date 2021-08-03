@@ -19,7 +19,7 @@ namespace Dock
 	void init()
 	{
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
+		gtk_widget_set_name(mBox, "docklike-plugin");
 
 		if (Settings::dockSize)
 			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
@@ -45,7 +45,7 @@ namespace Dock
 			group = new Group(appInfo, false);
 			mGroups.push(appInfo, group);
 
-			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
+			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
 
 		return group;
@@ -53,15 +53,15 @@ namespace Dock
 
 	void moveButton(Group* moving, Group* dest)
 	{
-		int startpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), GTK_WIDGET(moving->mButton));
-		int destpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), GTK_WIDGET(dest->mButton));
+		int startpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), moving->mButton);
+		int destpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), dest->mButton);
 
 		if (startpos == destpos)
 			return;
 		if (startpos < destpos)
 			--destpos;
 
-		gtk_box_reorder_child(GTK_BOX(mBox), GTK_WIDGET(moving->mButton), destpos);
+		gtk_box_reorder_child(GTK_BOX(mBox), moving->mButton, destpos);
 
 		savePinned();
 	}
@@ -92,7 +92,7 @@ namespace Dock
 			for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
 				 child != NULL;
 				 child = child->next)
-				gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
+				gtk_widget_destroy(GTK_WIDGET(child->data));
 
 			mGroups.clear();
 		}
@@ -107,7 +107,7 @@ namespace Dock
 			Group* group = new Group(appInfo, true);
 
 			mGroups.push(appInfo, group);
-			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
+			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 			++it;
 		}
 
