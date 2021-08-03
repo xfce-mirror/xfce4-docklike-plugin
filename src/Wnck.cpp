@@ -105,7 +105,6 @@ namespace Wnck
 			}),
 			NULL);
 
-		Dock::drawGroups();
 		setActiveWindow();
 	}
 
