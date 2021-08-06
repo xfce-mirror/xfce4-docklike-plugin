@@ -284,6 +284,18 @@ namespace AppInfos
 		if (ai != NULL)
 			return ai;
 
+		// Try to use just the first word of the window class; so that
+		//virtualbox manager, virtualbox machine get grouped together etc.
+		uint pos = id.find(' ');
+		if (pos != std::string::npos)
+		{
+			id = id.substr(0, pos);
+			ai = mAppInfoIds.get(id);
+
+			if (ai != NULL)
+				return ai;
+		}
+
 		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
 
 		if (gioPath != NULL && gioPath[0] != NULL && gioPath[0][0] != NULL && gioPath[0][0][0] != '\0')
