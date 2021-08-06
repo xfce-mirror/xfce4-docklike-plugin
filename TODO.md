@@ -1,5 +1,6 @@
 # TODO
 
++ Create a light.css and dark.css and use them as default theme
 + Greyscale/pixelate minimized thumbnail images
 + Layering of XDG_DATA_DIRS is not working: files in /usr/share/applications, should not be used over those in home
 + Use X-Flatpak value for icon/desktop file names if it exists
