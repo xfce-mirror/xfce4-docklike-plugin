@@ -14,6 +14,10 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	mGroupAssociated = false;
 
 	std::string groupName = Wnck::getGroupName(this);
+
+	if (PANEL_DEBUG)
+		g_print("GROUP: %s\n", groupName.c_str());
+
 	AppInfo* appInfo = AppInfos::search(groupName);
 	mGroup = Dock::prepareGroup(appInfo);
 
