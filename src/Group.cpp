@@ -275,8 +275,9 @@ void Group::closeAll()
 
 void Group::resize()
 {
-	gtk_widget_set_size_request(mButton, (round((Dock::mPanelSize * 1.2) / 2) * 2), Dock::mPanelSize);
-
+	// TODO: set `min-width` / `min-height` CSS property on button?
+	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
+	
 	if (mIconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage),
 			gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER));
