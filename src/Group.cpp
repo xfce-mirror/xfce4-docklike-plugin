@@ -685,9 +685,7 @@ void Group::onButtonRelease(GdkEventButton* event)
 		mAppInfo->launch();
 	else if (mActive)
 		mWindows.get(mTopWindowIndex)->minimize();
-	else if (!mActive)
-		activate(event->time);
-	else // mActive is out of sync somehow?
+	else
 		activate(event->time);
 }
 
