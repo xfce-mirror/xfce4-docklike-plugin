@@ -1,5 +1,6 @@
 # TODO
 
++ Remove pinned application when desktop file is removed
 + Make separate light and dark themes
 + Greyscale/pixelate minimized thumbnail images
 + Layering of XDG_DATA_DIRS is not working: files in /usr/share/applications, should not be used over those in home
