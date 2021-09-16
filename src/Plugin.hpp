@@ -29,8 +29,7 @@ extern "C"
 #include <libxfce4util/libxfce4util.h>
 }
 
-#define PLUGIN_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin"
-#define HELP_WEBSITE "https://github.com/davekeogh/xfce4-docklike-plugin/wiki/Help"
+#define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
 #define PANEL_DEBUG getenv("PANEL_DEBUG") != NULL
 
 namespace Plugin

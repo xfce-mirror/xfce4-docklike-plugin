@@ -95,8 +95,6 @@ namespace Plugin
 			"version", PACKAGE_VERSION,
 			"copyright", "Copyright © 2019-2021",
 			"license-type", GTK_LICENSE_GPL_3_0,
-			"website", PLUGIN_WEBSITE,
-			"website-label", PLUGIN_WEBSITE,
 			"authors", AUTHORS,
 			"translator-credits", TRANSLATORS,
 			NULL);
