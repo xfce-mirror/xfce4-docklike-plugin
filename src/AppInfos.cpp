@@ -263,6 +263,7 @@ namespace AppInfos
 		{"libreoffice", "libreoffice-startcenter"},
 		{"radium_linux.bin", "radium"},
 		{"viberpc", "viber"},
+		{"multimc5", "multimc"},
 	};
 
 	void groupNameTransform(std::string& groupName)
