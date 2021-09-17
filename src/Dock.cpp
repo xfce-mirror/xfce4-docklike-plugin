@@ -78,7 +78,7 @@ namespace Dock
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
-			if (group->mPinned)
+			if (group->mPinned && g_file_test(group->mAppInfo->path.c_str(), G_FILE_TEST_IS_REGULAR))
 				pinnedList.push_back(group->mAppInfo->path);
 		}
 
