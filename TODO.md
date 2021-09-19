@@ -1,6 +1,5 @@
 # TODO
 
-+ Remove pinned application when desktop file is removed
 + Make separate light and dark themes
 + Greyscale/pixelate minimized thumbnail images
 + Layering of XDG_DATA_DIRS is not working: files in /usr/share/applications, should not be used over those in home
@@ -9,6 +8,7 @@
 + Make sure the label never overlaps the indicator
 + Dragged groups seem to lose their css class?
 + Use g_app_info_get_all() rather than finding apps ourselves
++ Use GAppInfoMonitor rather than inotify for better portability
 + Move aliases to a text file so users can add stuff
 + Redesign the settings dialog to accommodate more options
 + Docs: write the help page and update screenshots
@@ -18,6 +18,7 @@
 
 ## DONE
 
+> + Remove pinned application when desktop file is removed
 > + Make automatic indicator orientation the default mode
 > + Configurable thumbnail size, update sleep
 > + Set indicator orientation based on panel orientation

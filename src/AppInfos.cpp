@@ -11,40 +11,46 @@
 void AppInfo::launch()
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-	g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
+	
+	if (info != NULL)
+		g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
 }
 
 void AppInfo::launch_action(const gchar* action)
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-	g_desktop_app_info_launch_action(info, action, NULL);
+	
+	if (info != NULL)
+		g_desktop_app_info_launch_action(info, action, NULL);
 }
 
 void AppInfo::edit()
 {
-	gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
-		g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
-
 	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
-	g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL);
 
-	// If a new desktop file was created, it will be in ~/.local/share/applications
-	// If the previous file was pinned it needs to be replaced with the new one.
-	if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
+	if (g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL))
 	{
-		std::list<std::string> pinnedApps = Settings::pinnedAppList;
-		for (auto it = pinnedApps.begin(); it != pinnedApps.end();)
+		// If a new desktop file was created, it will be in ~/.local/share/applications
+		// If the previous file was pinned it needs to be replaced with the new one.
+		gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
+			g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
+		
+		if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
 		{
-			if (*it == this->path)
+			std::list<std::string> pinnedApps = Settings::pinnedAppList;
+			for (auto it = pinnedApps.begin(); it != pinnedApps.end();)
 			{
-				it = pinnedApps.erase(it);
-				pinnedApps.insert(it, newPath);
-				break;
+				if (*it == this->path)
+				{
+					it = pinnedApps.erase(it);
+					pinnedApps.insert(it, newPath);
+					break;
+				}
+				++it;
 			}
-			++it;
-		}
 
-		Settings::pinnedAppList.set(pinnedApps);
+			Settings::pinnedAppList.set(pinnedApps);
+		}
 	}
 }
 
@@ -210,6 +216,10 @@ namespace AppInfos
 
 					if (PANEL_DEBUG)
 						g_print("REMOVED: %s%s\n", ((std::string*)dirPath)->c_str(), filename.c_str());
+
+					std::list<std::string> pinnedApps = Settings::pinnedAppList;
+					pinnedApps.remove(*(std::string*)dirPath);
+					Settings::pinnedAppList.set(pinnedApps);
 				}
 				else
 				{
