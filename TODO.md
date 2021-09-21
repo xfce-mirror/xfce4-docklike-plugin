@@ -11,13 +11,13 @@
 + Use GAppInfoMonitor rather than inotify for better portability
 + Move aliases to a text file so users can add stuff
 + Redesign the settings dialog to accommodate more options
-+ Docs: write the help page and update screenshots
 + Memory: something is not getting freed/unrefd when a group is closed
 + Test how well the updating thumbnails perform on a really slow system
 + Can we still crash the plugin?
 
 ## DONE
 
+> + Docs: write the help page and update screenshots
 > + Remove pinned application when desktop file is removed
 > + Make automatic indicator orientation the default mode
 > + Configurable thumbnail size, update sleep
