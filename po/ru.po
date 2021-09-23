@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-07-20 18:38-0700\n"
 "Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: RU\n"
@@ -17,27 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
 msgstr "Прикреплен к док-станции"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pin to Dock"
 msgstr "прикрепить к док-станции"
 
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:199
 msgid "Edit Launcher"
 msgstr "Редактировать пусковую установку"
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Закрыть все окна"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr ""
-"<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
+msgstr "<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
 
 #: ../src/SettingsDialog.cpp:199
 #, c-format

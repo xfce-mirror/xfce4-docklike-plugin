@@ -7,32 +7,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-08-04 13:06+0200\n"
+"Last-Translator: Andriy Byelikov\n"
 "Language-Team: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: Andriy Byelikov\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: ca\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
 msgstr "Ancorat al Dock"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pin to Dock"
 msgstr "Ancora al Dock"
 
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:199
 msgid "Edit Launcher"
 msgstr "Edita el llançador"
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Tanca-ho tot"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
@@ -159,7 +163,8 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Aquesta característica està deshabilitada.</b>\n"
-"Requereix de l'extensió X11 XInput2.0 la qual no està proporcionada per el teu sistema."
+"Requereix de l'extensió X11 XInput2.0 la qual no està proporcionada per el "
+"teu sistema."
 
 #: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"

@@ -1,37 +1,37 @@
-# Docklike-plugin i18n file
-# Copyright (C) 2020 Nicolas Szabo
-# This file is distributed under the same license as the Docklike package.
-# Nicolas Szabo <nszabo@vivaldi.net>, 2020.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Docklike 0.9\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 21:34-0700\n"
-"PO-Revision-Date: 2021-07-20 18:38-0700\n"
-"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
-"Language-Team: TR\n"
-"Language: tr\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
 
 #: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
-msgstr "Dock'a Sabitlendi"
+msgstr ""
 
 #: ../src/Wnck.cpp:198
 msgid "Pin to Dock"
-msgstr "Dock'a Sabitle"
+msgstr ""
 
 #: ../src/Wnck.cpp:199
 msgid "Edit Launcher"
-msgstr "Başlatıcıyı Düzenle"
+msgstr ""
 
 #: ../src/Wnck.cpp:226
 msgid "Close All"
-msgstr "Tümünü Kapat"
+msgstr ""
 
 #: ../src/Wnck.cpp:245
 msgid "Remove"
@@ -40,7 +40,7 @@ msgstr ""
 #: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>Sadece ilk %u kısayol tuşları aktif hale getirildi.</b>\n"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:199
 #, c-format
@@ -48,142 +48,118 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"&lt;SUPER&gt;+%u kombinasyonu halihazırda başka bir program tarafından "
-"kullanılıyor.\n"
-"Xfce ayarlarınızı kontrol edin."
 
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Xfce için modern, minimalist bir görev çubuğu"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr "_Yardım"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
-msgstr "_Kapat"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:3
 msgid "Don't show the window list for a single window"
-msgstr "Yalnızca birden çok pencere için pencere listesini göster"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:4
 msgid "Only show applications on the current workspace"
-msgstr "Sadece mevcut çalışma alanındaki uygulamaları göster"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:5
 msgid "Only show applications on the current display"
-msgstr "Sadece mevcut ekrandaki uygulamaları göster"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr "Açık pencereler için önizleme küçük resimlerini göster"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr "Açık pencerelerin sayısını göster (2'den fazlaysa)"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
-msgstr "Davranış"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:9
 msgid "Indicator style:"
-msgstr "Gösterge stili:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
-msgstr "Barlar"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:11
 msgid "Dots"
-msgstr "Noktalar"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:12
 msgid "Rectangles"
-msgstr "Dikdörtgenler"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr "Hiçbiri"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
-msgstr "Gösterge yönü:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr "Otomatik"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
-msgstr "Aşağı"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:17
 msgid "Right"
-msgstr "Sağ"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:18
 msgid "Top"
-msgstr "Yukarı"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:19
 msgid "Left"
-msgstr "Sol"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr "Aktif gösterge:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
-msgstr "Simgelerin boyutlarını zorla:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr "Aktif olmayan gösterge:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:23
 msgid "Appearance"
-msgstr "Görünüm"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:24
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "<SUPER>+[1, 2, ...] ile uygulamalar araşında geçiş yap"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:25
 msgid "Switch to the last window with <SUPER>"
-msgstr "<SUPER> ile son pencereye geçiş yap"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:26
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
-"<b>Bu özellik kapalı.</b>\n"
-"Sisteminiz tarafından sağlanmayan X11 XInput2.0 eklentisini gerektiriyor."
 
 #: ../src/_dialogs.xml.h:28
 msgid "Keyboard hotkeys"
-msgstr "Klavye kısayol tuşları"
-
-#~ msgid "A modern, minimalist taskbar for Xfce."
-#~ msgstr "Xfce için modern, minimalist bir görev çubuğu."
-
-#~ msgid "Pin"
-#~ msgstr "Sabitle"
-
-#, fuzzy
-#~ msgid "Launch Another"
-#~ msgstr "Yeni bir tane başlat"
-
-#~ msgid "Indicator color :"
-#~ msgstr "Gösterge rengi :"
-
-#~ msgid "Contributors:"
-#~ msgstr "Katkıda bulunanlar :"
-
-#~ msgid "Unpin"
-#~ msgstr "Sabitlemeyi kaldır"
+msgstr ""
