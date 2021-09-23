@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-07-20 18:34-0700\n"
 "Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
 "Language-Team: ES\n"
@@ -17,21 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
 msgstr "Anclado al muelle "
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pin to Dock"
 msgstr "Anclar al muelle "
 
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:199
 msgid "Edit Launcher"
 msgstr "Editar lanzador "
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Cerrar Todas"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format

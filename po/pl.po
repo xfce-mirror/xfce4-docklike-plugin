@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-08-03 14:13+0200\n"
 "Last-Translator: Matthaiks\n"
 "Language-Team: \n"
@@ -19,21 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
 msgstr "Przypięty do paska"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pin to Dock"
 msgstr "Przypnij do paska"
 
-#: ../src/Wnck.cpp:200
+#: ../src/Wnck.cpp:199
 msgid "Edit Launcher"
 msgstr "Edytuj aktywator"
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Zamknij wszystkie"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
