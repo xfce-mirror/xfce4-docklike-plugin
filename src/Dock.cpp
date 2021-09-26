@@ -45,7 +45,6 @@ namespace Dock
 		{
 			group = new Group(appInfo, false);
 			mGroups.push(appInfo, group);
-
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
 
@@ -92,6 +91,7 @@ namespace Dock
 			gtk_widget_destroy(g.second->mButton);
 		});
 		mGroups.clear();
+		Wnck::mGroupWindows.clear();
 
 		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -107,21 +107,21 @@ namespace Dock
 			++it;
 		}
 
-		// Add opened windows
+		// Add open windows
 		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
 			 window_l != NULL;
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			gulong activeXID = wnck_window_get_xid(WNCK_WINDOW(window_l->data));
-			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
+			gulong windowXID = wnck_window_get_xid(wnckWindow);
+			GroupWindow* groupWindow = Wnck::mGroupWindows.get(windowXID);
 
-			if (Wnck::getActiveWindowXID() == activeXID)
-				Help::Gtk::cssClassAdd(GTK_WIDGET(groupWindow->mGroupMenuItem->mItem), "active_menu_item");
+			if (groupWindow == NULL)
+				groupWindow = new GroupWindow(wnckWindow);
+			else
+				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Wnck::mGroupWindows.push(activeXID, groupWindow);
-
-			groupWindow->leaveGroup();
+			Wnck::mGroupWindows.push(windowXID, groupWindow);
 			groupWindow->updateState();
 		}
 
