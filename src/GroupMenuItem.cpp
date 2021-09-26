@@ -53,6 +53,9 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
+	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
+
 	int sleepMS = 250;
 	if (Settings::previewSleep)
 		sleepMS = Settings::previewSleep;

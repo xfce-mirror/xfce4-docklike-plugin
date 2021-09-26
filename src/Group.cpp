@@ -170,7 +170,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 					w->mGroupMenuItem->mPreviewTimeout.stop();
 				});
 
-			return true;
+			return false;
 		}),
 		this);
 
@@ -720,7 +720,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "drop_target");
 	gtk_drag_highlight(mButton);
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
@@ -728,7 +727,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "drop_target");
 	gtk_drag_unhighlight(mButton);
 }
 

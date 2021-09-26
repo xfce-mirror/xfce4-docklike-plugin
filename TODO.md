@@ -6,17 +6,17 @@
 + Use X-Flatpak value for icon/desktop file names if it exists
 + Handle running out of dock space, overflow menu?
 + Make sure the label never overlaps the indicator
-+ Dragged groups seem to lose their css class?
 + Use g_app_info_get_all() rather than finding apps ourselves
 + Use GAppInfoMonitor rather than inotify for better portability
++ Investigate GLib-CRITICAL from DnD, Timeouts
 + Move aliases to a text file so users can add stuff
-+ Redesign the settings dialog to accommodate more options
 + Memory: something is not getting freed/unrefd when a group is closed
 + Test how well the updating thumbnails perform on a really slow system
 + Can we still crash the plugin?
 
 ## DONE
 
+> + Dragged groups hover state gets stuck on
 > + Docs: write the help page and update screenshots
 > + Remove pinned application when desktop file is removed
 > + Make automatic indicator orientation the default mode
