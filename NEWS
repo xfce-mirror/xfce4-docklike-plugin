@@ -1,0 +1,38 @@
+0.4.0 (2021-09-26)
+=====
+
+- Fix pinned uninstalled applications get stuck on dock
+- Fix button visual issue after drag & drop
+- Use default button size request
+- Changed some strings to be more clear
+- New Catalan translation (andriybyelikov)
+- New Indonesian translation (frachmadin)
+- Updated translations: 
+  Danish, Dutch, Finnish, French, German, Greek, Hungarian, Italian,
+  Japanese, Polish, Portuguese, Portuguese (Brazil), Russian, Turkish
+
+0.3.0 (2021-07-08)
+=====
+
+- Window previews
+- Editing launchers
+- Automatic indicator positioning mode
+- Window count overlay
+- CSS support
+- Fix close buttons sometimes showing a broken icon
+- Fix panel items getting duplicated when a desktop file is modified
+  by a package update
+
+0.2.0 (2021-03-13)
+=====
+
+- New Polish translation (matthaiks)
+- Distros can set a default dock configuration and pinned icons in: 
+  XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
+- Compiles on systems using GCC 11
+
+0.1.0 (2021-02-02)
+=====
+
+- Initial release
+- Fix build warnings and make distcheck errors
