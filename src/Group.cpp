@@ -69,6 +69,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	Help::Gtk::cssClassAdd(mButton, "flat");
 	Help::Gtk::cssClassAdd(mButton, "group");
+	Help::Gtk::cssClassAdd(mLabel, "window_count");
+
 	g_object_set_data(G_OBJECT(mButton), "group", this);
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
 	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
