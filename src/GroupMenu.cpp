@@ -19,11 +19,11 @@ GroupMenu::GroupMenu(Group* dockButton)
 	mWindow = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mBox), "menu");
+	Help::Gtk::cssClassAdd(mBox, "menu");
 	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(mWindow), 1, 1);
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
-	gtk_widget_show(GTK_WIDGET(mBox));
+	gtk_widget_show(mBox);
 
 	//--------------------------------------------------
 

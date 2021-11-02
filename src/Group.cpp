@@ -62,8 +62,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	gtk_label_set_use_markup(GTK_LABEL(mLabel), true);
 	gtk_container_add(GTK_CONTAINER(overlay), mImage);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLabel);
-	gtk_widget_set_halign(GTK_WIDGET(mLabel), GTK_ALIGN_START);
-	gtk_widget_set_valign(GTK_WIDGET(mLabel), GTK_ALIGN_START);
+	gtk_widget_set_halign(mLabel, GTK_ALIGN_START);
+	gtk_widget_set_valign(mLabel, GTK_ALIGN_START);
 	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLabel, true);
 	gtk_container_add(GTK_CONTAINER(mButton), overlay);
 
@@ -210,10 +210,10 @@ void Group::add(GroupWindow* window)
 	mWindows.push(window);
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "open_group");
+	Help::Gtk::cssClassAdd(mButton, "open_group");
 
 	if (mWindowsCount == 1 && !mPinned)
-		gtk_box_reorder_child(GTK_BOX(Dock::mBox), GTK_WIDGET(mButton), -1);
+		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
 
 	gtk_widget_queue_draw(mButton);
 }
@@ -226,7 +226,7 @@ void Group::remove(GroupWindow* window)
 	mSFocus = false;
 
 	if (!mWindowsCount)
-		Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "open_group");
+		Help::Gtk::cssClassRemove(mButton, "open_group");
 
 	gtk_widget_queue_draw(mButton);
 }
@@ -292,8 +292,8 @@ void Group::resize()
 
 void Group::onDraw(cairo_t* cr)
 {
-	int w = gtk_widget_get_allocated_width(GTK_WIDGET(mButton));
-	int h = gtk_widget_get_allocated_height(GTK_WIDGET(mButton));
+	int w = gtk_widget_get_allocated_width(mButton);
+	int h = gtk_widget_get_allocated_height(mButton);
 	
 	double rgba[4];
 	if (mSFocus)
@@ -642,7 +642,7 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		mSFocus = true;
 		setTopWindow(groupWindow);
-		Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "active_group");
+		Help::Gtk::cssClassAdd(mButton, "active_group");
 	}
 }
 
@@ -650,7 +650,7 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	mSFocus = false;
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "active_group");
+	Help::Gtk::cssClassRemove(mButton, "active_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)
@@ -672,8 +672,8 @@ void Group::onButtonPress(GdkEventButton* event)
 		GtkWidget* menu = Wnck::buildActionMenu(win, this);
 
 		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
-		gtk_menu_attach_to_widget(GTK_MENU(menu), GTK_WIDGET(mButton), NULL);
-		gtk_menu_popup_at_widget(GTK_MENU(menu), GTK_WIDGET(mButton), GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+		gtk_menu_attach_to_widget(GTK_MENU(menu), mButton, NULL);
+		gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 
 		mGroupMenu.hide();
 	}
