@@ -29,7 +29,7 @@ namespace Plugin
 		Theme::init();
 		Hotkeys::init();
 
-		gtk_container_add(GTK_CONTAINER(mXfPlugin), GTK_WIDGET(Dock::mBox));
+		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
 		xfce_panel_plugin_menu_show_about(mXfPlugin);
 
