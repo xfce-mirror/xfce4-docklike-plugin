@@ -152,7 +152,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 					w->mGroupMenuItem->mPreviewTimeout.start();
 				});
 
-			return true;
+			return false;
 		}),
 		this);
 
