@@ -69,6 +69,7 @@ std::string Theme::get_theme_colors()
 	std::string inactiveColor = gdk_rgba_to_string(Settings::inactiveColor);
 
 	gtk_widget_destroy(menu);
+	g_value_unset(&gv);
 
 	std::string css = "@define-color menu_bgcolor " + menuBg + ";\n";
 	css += "@define-color menu_item_color " + itemLabel + ";\n";

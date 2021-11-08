@@ -9,8 +9,7 @@
 #define THEME_HPP
 
 #define DEFAULT_THEME ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n" \
-					  ".hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n"   \
-					  ".hover_group { background-color: alpha(@menu_item_bgcolor_hover, 0.1); }\n";
+					  ".hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
 
 #include <gtk/gtk.h>
 
