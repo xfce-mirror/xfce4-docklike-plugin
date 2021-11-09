@@ -210,7 +210,7 @@ namespace AppInfos
 
 		if (PANEL_DEBUG)
 			for (std::string xdgDir : mXdgDataDirs)
-				g_print("APPDIR: %s\n", xdgDir.c_str());
+				g_log("docklike", G_LOG_LEVEL_MESSAGE, "APPDIR: %s", xdgDir.c_str());
 	}
 
 	// TODO: Load these from a file so that the user can add their own aliases
@@ -271,7 +271,7 @@ namespace AppInfos
 		}
 
 		if (PANEL_DEBUG)
-			g_print("NO MATCH: %s\n", id.c_str());
+			g_log("docklike", G_LOG_LEVEL_MESSAGE, "NO MATCH: %s", id.c_str());
 
 		return new AppInfo({"", "", id});
 	}
