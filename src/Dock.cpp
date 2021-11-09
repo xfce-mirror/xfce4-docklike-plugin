@@ -26,15 +26,6 @@ namespace Dock
 
 		gtk_widget_show(mBox);
 		drawGroups();
-
-		// Redraw the panel items when the AppInfos have changed
-		mDrawTimeout.setup(500, []() {
-			if (AppInfos::modified)
-				drawGroups();
-			AppInfos::modified = false;
-			return true;
-		});
-		mDrawTimeout.start();
 	}
 
 	Group* prepareGroup(AppInfo* appInfo)
@@ -87,9 +78,9 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void { 
-			gtk_widget_destroy(g.second->mButton);
-		});
+		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
+			{ gtk_widget_destroy(g.second->mButton); });
+
 		mGroups.clear();
 		Wnck::mGroupWindows.clear();
 
@@ -199,7 +190,8 @@ namespace Dock
 				mIconSize = mPanelSize * 0.8;
 		}
 
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void { g.second->resize(); });
+		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
+			{ g.second->resize(); });
 	}
 
 	void onPanelOrientationChange(GtkOrientation orientation)
