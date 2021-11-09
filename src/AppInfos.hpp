@@ -9,8 +9,6 @@
 #define APPINFOS_HPP
 
 #include <ftw.h>
-#include <pthread.h>
-#include <sys/inotify.h>
 
 #include <gio/gdesktopappinfo.h>
 

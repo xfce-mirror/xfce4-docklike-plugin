@@ -11,7 +11,7 @@
 void AppInfo::launch()
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-	
+
 	if (info != NULL)
 		g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
 }
@@ -19,7 +19,7 @@ void AppInfo::launch()
 void AppInfo::launch_action(const gchar* action)
 {
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-	
+
 	if (info != NULL)
 		g_desktop_app_info_launch_action(info, action, NULL);
 }
@@ -34,7 +34,7 @@ void AppInfo::edit()
 		// If the previous file was pinned it needs to be replaced with the new one.
 		gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
 			g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
-		
+
 		if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
 		{
 			std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -60,8 +60,8 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-	pthread_mutex_t AppInfosLock;
 	bool modified;
+	GAppInfoMonitor* mMonitor;
 
 	void findXDGDirectories()
 	{
@@ -94,10 +94,12 @@ namespace AppInfos
 			// See man ftw(3) for more information.
 			ftw(
 				dir.c_str(),
-				[](const char* fpath, const struct stat* sb, int typeflag) -> int {
+				[](const char* fpath, const struct stat* sb, int typeflag) -> int
+				{
 					if (typeflag == FTW_D)
 						mXdgDataDirs.push_back(g_strdup_printf("%s/", fpath));
-					return 0; },
+					return 0;
+				},
 				1);
 		}
 
@@ -115,17 +117,13 @@ namespace AppInfos
 		if (gAppInfo == NULL)
 			return;
 
-		pthread_mutex_lock(&AppInfosLock);
-
 		std::string icon;
 		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
 		if (icon_ == NULL)
-		{
-			pthread_mutex_unlock(&AppInfosLock);
 			return;
-		}
+
 		icon = Help::String::trim(icon_);
-		
+
 		std::string name;
 		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
 
@@ -169,76 +167,15 @@ namespace AppInfos
 			if (wmclass != id && wmclass != name && wmclass != exec)
 				mAppInfoWMClasses.set(wmclass, info);
 		}
-
-		pthread_mutex_unlock(&AppInfosLock);
 	}
 
 	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
 		std::string id = filename.substr(0, filename.size() - 8);
 
-		pthread_mutex_lock(&AppInfosLock);
-
 		mAppInfoIds.remove(id);
 		mAppInfoNames.remove(id);
 		mAppInfoWMClasses.remove(id);
-
-		pthread_mutex_unlock(&AppInfosLock);
-	}
-
-	void* threadedXDGDirectoryWatcher(void* dirPath)
-	{
-		int i = 0;
-		int len = 0;
-		char buf[1024];
-		struct inotify_event* event;
-		int fd = inotify_init();
-
-		inotify_add_watch(fd, ((std::string*)dirPath)->c_str(), IN_CLOSE_WRITE | IN_MOVED_TO | IN_CREATE | IN_DELETE | IN_MOVED_FROM | IN_MODIFY);
-
-		while (true)
-		{
-			i = 0;
-			len = read(fd, buf, 1024);
-
-			while (i < len)
-			{
-				event = (struct inotify_event*)&buf[i];
-				i += sizeof(struct inotify_event) + event->len;
-			}
-
-			std::string filename = event->name;
-			if (filename.substr(filename.size() - 8, std::string::npos) == ".desktop")
-			{
-				if (event->mask & IN_DELETE || event->mask & IN_MOVED_FROM)
-				{
-					removeDesktopEntry(*(std::string*)dirPath, filename);
-
-					if (PANEL_DEBUG)
-						g_print("REMOVED: %s%s\n", ((std::string*)dirPath)->c_str(), filename.c_str());
-
-					std::list<std::string> pinnedApps = Settings::pinnedAppList;
-					pinnedApps.remove(*(std::string*)dirPath);
-					Settings::pinnedAppList.set(pinnedApps);
-				}
-				else
-				{
-					loadDesktopEntry(*(std::string*)dirPath, filename);
-
-					if (PANEL_DEBUG)
-						g_print("UPDATED: %s%s\n", ((std::string*)dirPath)->c_str(), filename.c_str());
-				}
-			}
-			modified = true;
-		}
-	}
-
-	void watchXDGDirectory(std::string xdgDir)
-	{
-		pthread_t thread_store;
-		std::string* arg = new std::string(xdgDir);
-
-		pthread_create(&thread_store, NULL, threadedXDGDirectoryWatcher, arg);
 	}
 
 	void loadXDGDirectories()
@@ -252,19 +189,28 @@ namespace AppInfos
 			struct dirent* entry;
 			while ((entry = readdir(directory)) != NULL)
 				loadDesktopEntry(xdgDir, entry->d_name);
-			watchXDGDirectory(xdgDir);
-
-			if (PANEL_DEBUG)
-				g_print("APPDIR: %s\n", xdgDir.c_str());
 		}
 	}
 
 	void init()
 	{
-		modified = false;
-		pthread_mutex_init(&AppInfosLock, NULL);
+		mMonitor = g_app_info_monitor_get();
+
+		g_signal_connect(G_OBJECT(mMonitor), "changed",
+			G_CALLBACK(+[](GAppInfoMonitor* monitor)
+					   {
+						   mXdgDataDirs.clear();
+						   loadXDGDirectories();
+						   Dock::drawGroups();
+					   }),
+			NULL);
+
 		findXDGDirectories();
 		loadXDGDirectories();
+
+		if (PANEL_DEBUG)
+			for (std::string xdgDir : mXdgDataDirs)
+				g_print("APPDIR: %s\n", xdgDir.c_str());
 	}
 
 	// TODO: Load these from a file so that the user can add their own aliases
@@ -296,7 +242,7 @@ namespace AppInfos
 			return ai;
 
 		// Try to use just the first word of the window class; so that
-		//virtualbox manager, virtualbox machine get grouped together etc.
+		// virtualbox manager, virtualbox machine get grouped together etc.
 		uint pos = id.find(' ');
 		if (pos != std::string::npos)
 		{
