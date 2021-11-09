@@ -16,7 +16,7 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	std::string groupName = Wnck::getGroupName(this);
 
 	if (PANEL_DEBUG)
-		g_print("GROUP: %s\n", groupName.c_str());
+		g_log("docklike", G_LOG_LEVEL_MESSAGE, "NEW: %s", groupName.c_str());
 
 	AppInfo* appInfo = AppInfos::search(groupName);
 	mGroup = Dock::prepareGroup(appInfo);
