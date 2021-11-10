@@ -37,7 +37,6 @@ class GroupMenuItem
 	GtkButton* mCloseButton;
 	GtkImage* mPreview;
 
-	Help::Gtk::Timeout mDragSwitchTimeout;
 	Help::Gtk::Timeout mPreviewTimeout;
 };
 

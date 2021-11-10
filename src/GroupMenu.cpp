@@ -36,10 +36,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
 
 				if (Settings::showPreviews)
-				{
 					w->mGroupMenuItem->updatePreview();
-					w->mGroupMenuItem->mPreviewTimeout.start();
-				}
 			});
 
 			return true;
@@ -59,12 +56,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 			me->mGroup->setMouseLeaveTimeout();
 			me->mMouseHover = false;
 
-			if (Settings::showPreviews)
-			{
-				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-					w->mGroupMenuItem->mPreviewTimeout.stop();
-				});
-			}
+
 
 			return true;
 		}),

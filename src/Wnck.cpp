@@ -63,13 +63,15 @@ namespace Wnck
 				GroupWindow* newWindow = new GroupWindow(wnckWindow);
 				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
 				newWindow->mGroup->updateStyle();
+
+				if (Settings::showPreviews && newWindow->mGroup->mGroupMenu.mVisible)
+					newWindow->mGroupMenuItem->mPreviewTimeout.start();
 			}),
 			NULL);
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				GroupWindow* groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
-				groupWindow->mGroup->updateStyle();
 				delete groupWindow;
 			}),
 			NULL);
