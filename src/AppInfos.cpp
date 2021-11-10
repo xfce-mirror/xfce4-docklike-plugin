@@ -60,7 +60,6 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-	bool modified;
 	GAppInfoMonitor* mMonitor;
 
 	void findXDGDirectories()
@@ -113,28 +112,19 @@ namespace AppInfos
 		std::string path = xdgDir + id + ".desktop";
 
 		GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
-
 		if (gAppInfo == NULL)
 			return;
 
-		std::string icon;
-		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
-		if (icon_ == NULL)
-			return;
-
-		icon = Help::String::trim(icon_);
-
-		std::string name;
 		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+		std::string name = (name_ != NULL) ? name_ : id;
 
-		if (name_ != NULL)
-			name = name_;
+		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
+		std::string icon = (icon_ != NULL) ? icon_ : "";
 
-		const gchar* const* actions = g_desktop_app_info_list_actions(gAppInfo);
-		AppInfo* info = new AppInfo({path, icon, name, actions});
+		// g_desktop_app_info_list_actions always returns non-NULL
+		AppInfo* info = new AppInfo({path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
 
-		id = Help::String::toLowercase(id);
-		mAppInfoIds.set(id, info);
+		mAppInfoIds.set(Help::String::toLowercase(id), info);
 		mAppInfoIds.set(path, info); // for saved pinned groups
 
 		if (!name.empty())
@@ -189,6 +179,8 @@ namespace AppInfos
 			struct dirent* entry;
 			while ((entry = readdir(directory)) != NULL)
 				loadDesktopEntry(xdgDir, entry->d_name);
+
+			PANEL_DEBUG("APPDIR: %s", xdgDir.c_str());
 		}
 	}
 
@@ -207,10 +199,6 @@ namespace AppInfos
 
 		findXDGDirectories();
 		loadXDGDirectories();
-
-		if (PANEL_DEBUG)
-			for (std::string xdgDir : mXdgDataDirs)
-				g_log("docklike", G_LOG_LEVEL_MESSAGE, "APPDIR: %s", xdgDir.c_str());
 	}
 
 	// TODO: Load these from a file so that the user can add their own aliases
@@ -270,10 +258,8 @@ namespace AppInfos
 				return ai;
 		}
 
-		if (PANEL_DEBUG)
-			g_log("docklike", G_LOG_LEVEL_MESSAGE, "NO MATCH: %s", id.c_str());
+		PANEL_DEBUG("NO MATCH: %s", id.c_str());
 
 		return new AppInfo({"", "", id});
 	}
-
 } // namespace AppInfos

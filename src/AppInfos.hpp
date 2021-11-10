@@ -33,8 +33,6 @@ namespace AppInfos
 {
 	void init();
 	AppInfo* search(std::string id);
-
-	extern bool modified;
 } // namespace AppInfos
 
 #endif // APPINFOS_HPP
