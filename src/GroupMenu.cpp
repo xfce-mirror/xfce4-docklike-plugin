@@ -56,8 +56,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 			me->mGroup->setMouseLeaveTimeout();
 			me->mMouseHover = false;
 
-
-
 			return true;
 		}),
 		this);
