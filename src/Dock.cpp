@@ -11,7 +11,6 @@ namespace Dock
 {
 	GtkWidget* mBox;
 	Store::KeyStore<AppInfo*, Group*> mGroups;
-	Help::Gtk::Timeout mDrawTimeout;
 
 	int mPanelSize;
 	int mIconSize;

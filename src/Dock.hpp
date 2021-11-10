@@ -41,7 +41,6 @@ namespace Dock
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<AppInfo*, Group*> mGroups;
-	extern Help::Gtk::Timeout mDrawTimeout;
 
 	extern int mPanelSize;
 	extern int mIconSize;
