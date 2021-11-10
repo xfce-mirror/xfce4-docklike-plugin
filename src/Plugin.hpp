@@ -30,7 +30,7 @@ extern "C"
 }
 
 #define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
-#define PANEL_DEBUG getenv("PANEL_DEBUG") != NULL
+#define PANEL_DEBUG(F, A) if (getenv("PANEL_DEBUG") != NULL) g_log("docklike", G_LOG_LEVEL_MESSAGE, F, A)
 
 namespace Plugin
 {
