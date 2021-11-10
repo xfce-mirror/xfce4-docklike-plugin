@@ -61,14 +61,8 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		sleepMS = Settings::previewSleep;
 
 	mPreviewTimeout.setup(sleepMS, [this]() {
-		gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 		updatePreview();
 		return true;
-	});
-
-	mDragSwitchTimeout.setup(250, [this]() {
-		mGroupWindow->activate(0);
-		return false;
 	});
 
 	//--------------------------------------------------
@@ -101,24 +95,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mItem), "drag-leave",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* c, guint time, GroupMenuItem* me) {
-			me->mGroupWindow->mGroup->setMouseLeaveTimeout();
-			me->mDragSwitchTimeout.stop();
-		}),
-		this);
-
-	g_signal_connect(G_OBJECT(mItem), "drag-motion",
-		G_CALLBACK(+[](GtkWidget* w, GdkDragContext* c, gint x, gint y, guint time, GroupMenuItem* me) {
-			if (!me->mDragSwitchTimeout.mTimeoutId)
-				me->mDragSwitchTimeout.start();
-
-			me->mGroupWindow->mGroup->mLeaveTimeout.stop();
-			gdk_drag_status(c, GDK_ACTION_DEFAULT, time);
-			return true;
-		}),
-		this);
-
 	g_signal_connect(G_OBJECT(mCloseButton), "clicked",
 		G_CALLBACK(+[](GtkButton* button, GroupMenuItem* me) {
 			Wnck::close(me->mGroupWindow, 0);
@@ -128,7 +104,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 GroupMenuItem::~GroupMenuItem()
 {
-	mPreviewTimeout.stop();
 	gtk_widget_destroy(GTK_WIDGET(mItem));
 }
 
