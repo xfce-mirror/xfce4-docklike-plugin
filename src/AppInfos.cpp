@@ -191,7 +191,6 @@ namespace AppInfos
 		g_signal_connect(G_OBJECT(mMonitor), "changed",
 			G_CALLBACK(+[](GAppInfoMonitor* monitor)
 					   {
-						   mXdgDataDirs.clear();
 						   loadXDGDirectories();
 						   Dock::drawGroups();
 					   }),
