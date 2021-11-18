@@ -99,7 +99,7 @@ namespace AppInfos
 						mXdgDataDirs.push_back(g_strdup_printf("%s/", fpath));
 					return 0;
 				},
-				1);
+				16);
 		}
 
 		mXdgDataDirs.sort();
