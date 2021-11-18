@@ -108,8 +108,14 @@ namespace AppInfos
 
 	void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-		std::string id = filename.substr(0, filename.size() - 8);
-		std::string path = xdgDir + id + ".desktop";
+		#define DOT_DESKTOP ".desktop"
+		constexpr size_t DOT_DESKTOP_SIZE = 8;
+
+		if (!g_str_has_suffix(filename.c_str(), DOT_DESKTOP)) {
+			return;
+		}
+		std::string id = filename.substr(0, filename.size() - DOT_DESKTOP_SIZE);
+		std::string path = xdgDir + filename;
 
 		GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
 		if (gAppInfo == NULL)
