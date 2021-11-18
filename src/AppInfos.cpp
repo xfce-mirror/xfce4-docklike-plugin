@@ -153,9 +153,7 @@ namespace AppInfos
 		if (wmclass_ != NULL && wmclass_[0] != '\0')
 		{
 			wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
-
-			if (wmclass != id && wmclass != name && wmclass != exec)
-				mAppInfoWMClasses.set(wmclass, info);
+			mAppInfoWMClasses.set(wmclass, info);
 		}
 	}
 
