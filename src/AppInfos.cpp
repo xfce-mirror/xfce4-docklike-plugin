@@ -228,7 +228,7 @@ namespace AppInfos
 
 		// Try to use just the first word of the window class; so that
 		// virtualbox manager, virtualbox machine get grouped together etc.
-		uint pos = id.find(' ');
+		auto pos = id.find(' ');
 		if (pos != std::string::npos)
 		{
 			id = id.substr(0, pos);
