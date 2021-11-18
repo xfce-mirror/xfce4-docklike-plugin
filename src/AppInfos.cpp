@@ -163,15 +163,6 @@ namespace AppInfos
 		}
 	}
 
-	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
-	{
-		std::string id = filename.substr(0, filename.size() - 8);
-
-		mAppInfoIds.remove(id);
-		mAppInfoNames.remove(id);
-		mAppInfoWMClasses.remove(id);
-	}
-
 	void loadXDGDirectories()
 	{
 		for (const std::string& xdgDir : mXdgDataDirs)
@@ -202,6 +193,15 @@ namespace AppInfos
 
 		findXDGDirectories();
 		loadXDGDirectories();
+	}
+
+	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
+	{
+		std::string id = filename.substr(0, filename.size() - 8);
+
+		mAppInfoIds.remove(id);
+		mAppInfoNames.remove(id);
+		mAppInfoWMClasses.remove(id);
 	}
 
 	// TODO: Load these from a file so that the user can add their own aliases
