@@ -153,9 +153,7 @@ namespace AppInfos
 		if (wmclass_ != NULL && wmclass_[0] != '\0')
 		{
 			wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
-
-			if (wmclass != id && wmclass != name && wmclass != exec)
-				mAppInfoWMClasses.set(wmclass, info);
+			mAppInfoWMClasses.set(wmclass, info);
 		}
 	}
 
@@ -230,7 +228,7 @@ namespace AppInfos
 
 		// Try to use just the first word of the window class; so that
 		// virtualbox manager, virtualbox machine get grouped together etc.
-		uint pos = id.find(' ');
+		auto pos = id.find(' ');
 		if (pos != std::string::npos)
 		{
 			id = id.substr(0, pos);
