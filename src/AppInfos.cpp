@@ -168,7 +168,7 @@ namespace AppInfos
 
 	void loadXDGDirectories()
 	{
-		for (std::string xdgDir : mXdgDataDirs)
+		for (const std::string& xdgDir : mXdgDataDirs)
 		{
 			DIR* directory = opendir(xdgDir.c_str());
 			if (directory == NULL)
