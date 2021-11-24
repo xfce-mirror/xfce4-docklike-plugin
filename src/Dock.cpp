@@ -48,8 +48,6 @@ namespace Dock
 
 		if (startpos == destpos)
 			return;
-		if (startpos < destpos)
-			--destpos;
 
 		gtk_box_reorder_child(GTK_BOX(mBox), moving->mButton, destpos);
 
