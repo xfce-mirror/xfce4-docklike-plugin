@@ -111,6 +111,9 @@ namespace SettingsDialog
 			}),
 			dialog);
 
+		GObject* customIndicatorColors = gtk_builder_get_object(builder, "g_customIndicatorColors");
+		gtk_widget_set_sensitive(GTK_WIDGET(customIndicatorColors), !Settings::indicatorColorFromTheme);
+
 		GObject* indicatorColor = gtk_builder_get_object(builder, "cp_indicatorColor");
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor);
 		g_signal_connect(indicatorColor, "color-set",
@@ -132,6 +135,15 @@ namespace SettingsDialog
 				Settings::inactiveColor.set(gdk_rgba_copy(color));
 			}),
 			dialog);
+
+		GObject* indicatorColorFromTheme = gtk_builder_get_object(builder, "c_indicatorColorFromTheme");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(indicatorColorFromTheme), Settings::indicatorColorFromTheme);
+		g_signal_connect(indicatorColorFromTheme, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* indicatorColorFromTheme, GtkWidget* customIndicatorColors) {
+				Settings::indicatorColorFromTheme.set(gtk_toggle_button_get_active(indicatorColorFromTheme));
+				gtk_widget_set_sensitive(GTK_WIDGET(customIndicatorColors), !Settings::indicatorColorFromTheme);
+			}),
+			customIndicatorColors);
 
 		// =====================================================================
 
