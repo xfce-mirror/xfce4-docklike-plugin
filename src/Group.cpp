@@ -294,21 +294,39 @@ void Group::onDraw(cairo_t* cr)
 {
 	int w = gtk_widget_get_allocated_width(mButton);
 	int h = gtk_widget_get_allocated_height(mButton);
-	
+
 	double rgba[4];
-	if (mSFocus)
+
+	if (Settings::indicatorColorFromTheme)
 	{
-		rgba[0] = (*Settings::indicatorColor).red;
-		rgba[1] = (*Settings::indicatorColor).green;
-		rgba[2] = (*Settings::indicatorColor).blue;
-		rgba[3] = (*Settings::indicatorColor).alpha;
-	}
-	else
-	{
-		rgba[0] = (*Settings::inactiveColor).red;
-		rgba[1] = (*Settings::inactiveColor).green;
-		rgba[2] = (*Settings::inactiveColor).blue;
-		rgba[3] = (*Settings::inactiveColor).alpha;
+		GtkWidget* menu = gtk_menu_new();
+		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
+
+		GValue gv = G_VALUE_INIT;
+		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
+		GdkRGBA* indicatorColor = (GdkRGBA*)g_value_get_boxed(&gv);
+
+		gtk_widget_destroy(menu);
+
+		rgba[0] = (*indicatorColor).red;
+		rgba[1] = (*indicatorColor).green;
+		rgba[2] = (*indicatorColor).blue;
+		rgba[3] = (*indicatorColor).alpha;
+	} else {
+		if (mSFocus)
+		{
+			rgba[0] = (*Settings::indicatorColor).red;
+			rgba[1] = (*Settings::indicatorColor).green;
+			rgba[2] = (*Settings::indicatorColor).blue;
+			rgba[3] = (*Settings::indicatorColor).alpha;
+		}
+		else
+		{
+			rgba[0] = (*Settings::inactiveColor).red;
+			rgba[1] = (*Settings::inactiveColor).green;
+			rgba[2] = (*Settings::inactiveColor).blue;
+			rgba[3] = (*Settings::inactiveColor).alpha;
+		}
 	}
 
 	const float BAR_WEIGHT = 0.935;
