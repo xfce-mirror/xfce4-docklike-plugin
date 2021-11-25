@@ -313,7 +313,8 @@ void Group::onDraw(cairo_t* cr)
 
 	const float BAR_WEIGHT = 0.935;
 	const double DOT_RADIUS = h * 0.065;
-	
+	const double CIRCLE_WEIGHT = 0.0375;
+
 	int orientation = Settings::indicatorOrientation;
 	// Orientation based on panel mode and position
 	// Mimics Windows 10 style, indicator stays on outside
@@ -394,6 +395,146 @@ void Group::onDraw(cairo_t* cr)
 			cairo_set_source(cr, pat);
 			cairo_fill(cr);
 			cairo_pattern_destroy(pat);
+		}
+		break;
+	}
+
+	case STYLE_CILIORA:
+	{
+		if (mSOpened)
+		{
+		    int offset;
+			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
+			
+			offset = 0;
+			
+			if (mSMany) {
+			    if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP) {
+			        offset = 2 * (round(h * (1 - BAR_WEIGHT)));
+			    } else {
+			        offset = (2 * (round(w * (1 - BAR_WEIGHT))));
+			    }
+			}
+
+			if (orientation == ORIENTATION_BOTTOM)
+				cairo_rectangle(cr, 0, round(h * BAR_WEIGHT), w - offset, round(h * (1 - BAR_WEIGHT)));
+			else if (orientation == ORIENTATION_RIGHT)
+				cairo_rectangle(cr, round(w * BAR_WEIGHT), 0, round(w * (1 - BAR_WEIGHT)), h - offset);
+			else if (orientation == ORIENTATION_TOP)
+				cairo_rectangle(cr, 0, 0, w - offset, round(h * (1 - BAR_WEIGHT)));
+			else if (orientation == ORIENTATION_LEFT)
+				cairo_rectangle(cr, 0, 0, round(w * (1 - BAR_WEIGHT)), h - offset);
+
+			cairo_fill(cr);
+		}
+
+		if (mSMany && (mSOpened || mSHover))
+		{
+		    int size;
+			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
+			
+			if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP) {
+			    size = round(h * (1 - BAR_WEIGHT));
+			} else {
+			    size = round(w * (1 - BAR_WEIGHT));
+			}
+			
+			
+			if (orientation == ORIENTATION_BOTTOM)
+				cairo_rectangle(cr, w - size, round(h * BAR_WEIGHT), size, size);
+			else if (orientation == ORIENTATION_RIGHT)
+				cairo_rectangle(cr, round(w * BAR_WEIGHT), h - size, size, size);
+			else if (orientation == ORIENTATION_TOP)
+				cairo_rectangle(cr, w - size, 0, size, size);
+			else if (orientation == ORIENTATION_LEFT)
+				cairo_rectangle(cr, 0, h - size, size, size);
+
+			cairo_fill(cr);
+		}
+		break;
+	}
+
+	case STYLE_CIRCLES:
+	{
+		if (mSOpened)
+		{
+			if (mSMany)
+			{
+				double x0, y0, x1, y1, radius;
+
+				if (orientation == ORIENTATION_BOTTOM)
+				{
+				    radius = h * CIRCLE_WEIGHT;
+					x0 = (w / 2.) - radius * 1.5;
+					x1 = (w / 2.) + radius * 1.5;
+					y0 = y1 = h - radius;
+				}
+				else if (orientation == ORIENTATION_RIGHT)
+				{
+				    radius = w * CIRCLE_WEIGHT;
+					y0 = (h / 2.) - radius * 1.5;
+					y1 = (h / 2.) + radius * 1.5;
+					x0 = x1 = w - radius;
+				}
+				else if (orientation == ORIENTATION_TOP)
+				{
+					radius = h * CIRCLE_WEIGHT;
+					x0 = (w / 2.) - radius * 1.5;
+					x1 = (w / 2.) + radius * 1.5;
+					y0 = y1 = radius;
+				}
+				else if (orientation == ORIENTATION_LEFT)
+				{
+					radius = w * CIRCLE_WEIGHT;
+					y0 = (h / 2.) - radius * 1.5;
+					y1 = (h / 2.) + radius * 1.5;
+					x0 = x1 = radius;
+				}
+
+				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
+
+				cairo_arc(cr, x0, y0, radius, 0.0, 2.0 * M_PI);
+				cairo_fill(cr);
+
+				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
+
+				cairo_arc(cr, x1, y1, radius, 0.0, 2.0 * M_PI);
+				cairo_fill(cr);
+			}
+			else
+			{
+				double x, y, radius;
+
+				if (orientation == ORIENTATION_BOTTOM)
+				{
+					radius = h * CIRCLE_WEIGHT;
+					x = (w / 2.);
+					y = h - radius;
+				}
+				else if (orientation == ORIENTATION_RIGHT)
+				{
+					radius = w * CIRCLE_WEIGHT;
+					x = w - radius;
+					y = (h / 2.);
+				}
+				else if (orientation == ORIENTATION_TOP)
+				{
+					radius = h * CIRCLE_WEIGHT;
+					x = (w / 2.);
+					y = radius;
+				}
+				else if (orientation == ORIENTATION_LEFT)
+				{
+					radius = w * CIRCLE_WEIGHT;
+					x = radius;
+					y = (h / 2.);
+				}
+
+				cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
+
+				cairo_arc(cr, x, y, radius, 0.0, 2.0 * M_PI);
+				cairo_fill(cr);
+			}
 		}
 		break;
 	}
