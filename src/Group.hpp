@@ -32,10 +32,10 @@ enum IndicatorOrientation
 enum IndicatorStyle
 {
 	STYLE_BARS,
-	STYLE_CILIORA,
-	STYLE_CIRCLES,
 	STYLE_DOTS,
 	STYLE_RECTS,
+    STYLE_CILIORA,
+	STYLE_CIRCLES,
 	STYLE_NONE
 };
 
