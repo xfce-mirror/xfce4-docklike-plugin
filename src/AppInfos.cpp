@@ -13,7 +13,14 @@ void AppInfo::launch()
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
 
 	if (info != NULL)
-		g_app_info_launch((GAppInfo*)info, NULL, NULL, NULL);
+	{
+		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
+
+		g_app_info_launch(G_APP_INFO(info), NULL, G_APP_LAUNCH_CONTEXT(context), NULL);
+
+		g_object_unref(context);
+		g_object_unref(info);
+	}
 }
 
 void AppInfo::launch_action(const gchar* action)
@@ -21,7 +28,14 @@ void AppInfo::launch_action(const gchar* action)
 	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
 
 	if (info != NULL)
-		g_desktop_app_info_launch_action(info, action, NULL);
+	{
+		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
+
+		g_desktop_app_info_launch_action(info, action, G_APP_LAUNCH_CONTEXT(context));
+
+		g_object_unref(context);
+		g_object_unref(info);
+	}
 }
 
 void AppInfo::edit()
@@ -31,7 +45,7 @@ void AppInfo::edit()
 	if (g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL))
 	{
 		// If a new desktop file was created, it will be in ~/.local/share/applications
-		// If the previous file was pinned it needs to be replaced with the new one.
+		// If the previous file was pinned, it needs to be replaced with the new one.
 		gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
 			g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
 
@@ -50,8 +64,12 @@ void AppInfo::edit()
 			}
 
 			Settings::pinnedAppList.set(pinnedApps);
+
+			g_free(newPath);
 		}
 	}
+
+	g_free(command);
 }
 
 namespace AppInfos
