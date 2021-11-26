@@ -177,11 +177,11 @@ namespace Dock
 		{
 			if (mPanelSize <= 20)
 				mIconSize = mPanelSize - 6;
-			else if (mPanelSize <= 28)
+			else if (mPanelSize <= 30)
 				mIconSize = 16;
-			else if (mPanelSize <= 38)
+			else if (mPanelSize <= 43)
 				mIconSize = 24;
-			else if (mPanelSize <= 41)
+			else if (mPanelSize <= 59)
 				mIconSize = 32;
 			else
 				mIconSize = mPanelSize * 0.8;
