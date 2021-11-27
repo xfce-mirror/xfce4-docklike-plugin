@@ -96,9 +96,41 @@ void GroupMenu::popup()
 			});
 
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
-		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
+		updatePosition(wx, wy);
 		gtk_widget_show(mWindow);
 	}
+}
+
+void GroupMenu::updatePosition(gint wx, gint wy)
+{
+	GdkRectangle geometry;
+	GdkMonitor *monitor;
+
+	monitor = gdk_display_get_monitor_at_window(Plugin::mDisplay, gtk_widget_get_window(mGroup->mButton));
+	gdk_monitor_get_geometry(monitor, &geometry);
+
+	gint window_width, window_height;
+	gtk_window_get_size(GTK_WINDOW(mWindow), &window_width, &window_height);
+
+	gint button_width = gtk_widget_get_allocated_width(mGroup->mButton);
+	gint button_height = gtk_widget_get_allocated_height(mGroup->mButton);
+	
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+
+	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+	{
+		if (wx != geometry.x + geometry.width - window_width) {
+			wx -= (window_width/2) - (button_width/2);
+			wx = wx < geometry.x ? geometry.x : wx;
+		}
+	} else {
+		if (wy != geometry.y + geometry.height - window_height) {
+			wy -= (window_height/2) - (button_height/2);
+			wy = wy < geometry.y ? geometry.y : wy;
+		}
+	}
+
+	gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
 }
 
 void GroupMenu::hide()
