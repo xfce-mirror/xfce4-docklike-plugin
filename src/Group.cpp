@@ -312,7 +312,9 @@ void Group::onDraw(cairo_t* cr)
 		rgba[1] = (*indicatorColor).green;
 		rgba[2] = (*indicatorColor).blue;
 		rgba[3] = (*indicatorColor).alpha;
-	} else {
+	}
+    else
+    {
 		if (mSFocus)
 		{
 			rgba[0] = (*Settings::indicatorColor).red;
