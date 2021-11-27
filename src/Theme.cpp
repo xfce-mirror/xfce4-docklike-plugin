@@ -68,6 +68,14 @@ std::string Theme::get_theme_colors()
 	std::string indicatorColor = gdk_rgba_to_string(Settings::indicatorColor);
 	std::string inactiveColor = gdk_rgba_to_string(Settings::inactiveColor);
 
+	if (Settings::indicatorColorFromTheme)
+	{
+		gv = G_VALUE_INIT;
+		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
+		indicatorColor = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+		inactiveColor = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	}
+
 	gtk_widget_destroy(menu);
 	g_value_unset(&gv);
 
