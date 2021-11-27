@@ -41,6 +41,7 @@ namespace Settings
 
 	extern State<int> indicatorOrientation;
 	extern State<int> indicatorStyle;
+	extern State<bool> indicatorColorFromTheme;
 	extern State<GdkRGBA*> indicatorColor;
 	extern State<GdkRGBA*> inactiveColor;
 
