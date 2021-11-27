@@ -119,12 +119,16 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
-		if (wx != geometry.x + geometry.width - window_width) {
+		if (wx != geometry.x + geometry.width - window_width)
+        {
 			wx -= (window_width/2) - (button_width/2);
 			wx = wx < geometry.x ? geometry.x : wx;
 		}
-	} else {
-		if (wy != geometry.y + geometry.height - window_height) {
+	}
+    else
+    {
+		if (wy != geometry.y + geometry.height - window_height)
+        {
 			wy -= (window_height/2) - (button_height/2);
 			wy = wy < geometry.y ? geometry.y : wy;
 		}
