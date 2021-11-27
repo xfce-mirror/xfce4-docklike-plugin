@@ -89,6 +89,8 @@ void GroupMenu::popup()
 		gint wx, wy;
 		mVisible = true;
 
+		updateOrientation();
+
 		// Update the previews before showing the window
 		if (Settings::showPreviews)
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
@@ -99,6 +101,16 @@ void GroupMenu::popup()
 		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
 		gtk_widget_show(mWindow);
 	}
+}
+
+void GroupMenu::updateOrientation()
+{
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+
+	if (Settings::showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL
+        gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
+	else
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_VERTICAL);
 }
 
 void GroupMenu::hide()
