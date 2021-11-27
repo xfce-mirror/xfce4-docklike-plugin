@@ -103,14 +103,10 @@ void GroupMenu::popup()
 
 void GroupMenu::updatePosition(gint wx, gint wy)
 {
-	GdkScreen *screen;
 	GdkRectangle geometry;
-	GdkDisplay *display;
 	GdkMonitor *monitor;
 
-	screen = gtk_widget_get_screen(mGroup->mButton);
-	display = gdk_screen_get_display(screen);
-	monitor = gdk_display_get_monitor_at_window(display, gtk_widget_get_window(mGroup->mButton));
+	monitor = gdk_display_get_monitor_at_window(Plugin::mDisplay, gtk_widget_get_window(mGroup->mButton));
 	gdk_monitor_get_geometry(monitor, &geometry);
 
 	gint window_width, window_height;
