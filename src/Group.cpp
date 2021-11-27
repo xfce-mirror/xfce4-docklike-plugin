@@ -342,9 +342,7 @@ void Group::onDraw(cairo_t* cr)
 	
 	int indicator_style = Settings::inactiveIndicatorStyle;
 	if (mSFocus)
-	{
 		indicator_style = Settings::indicatorStyle;
-	}
 
 	switch (indicator_style)
 	{
