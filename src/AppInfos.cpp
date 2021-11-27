@@ -99,7 +99,7 @@ namespace AppInfos
 						mXdgDataDirs.push_back(g_strdup_printf("%s/", fpath));
 					return 0;
 				},
-				1);
+				16);
 		}
 
 		mXdgDataDirs.sort();
@@ -108,8 +108,14 @@ namespace AppInfos
 
 	void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-		std::string id = filename.substr(0, filename.size() - 8);
-		std::string path = xdgDir + id + ".desktop";
+		#define DOT_DESKTOP ".desktop"
+		constexpr size_t DOT_DESKTOP_SIZE = 8;
+
+		if (!g_str_has_suffix(filename.c_str(), DOT_DESKTOP)) {
+			return;
+		}
+		std::string id = filename.substr(0, filename.size() - DOT_DESKTOP_SIZE);
+		std::string path = xdgDir + filename;
 
 		GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
 		if (gAppInfo == NULL)
@@ -157,18 +163,9 @@ namespace AppInfos
 		}
 	}
 
-	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
-	{
-		std::string id = filename.substr(0, filename.size() - 8);
-
-		mAppInfoIds.remove(id);
-		mAppInfoNames.remove(id);
-		mAppInfoWMClasses.remove(id);
-	}
-
 	void loadXDGDirectories()
 	{
-		for (std::string xdgDir : mXdgDataDirs)
+		for (const std::string& xdgDir : mXdgDataDirs)
 		{
 			DIR* directory = opendir(xdgDir.c_str());
 			if (directory == NULL)
@@ -196,6 +193,15 @@ namespace AppInfos
 
 		findXDGDirectories();
 		loadXDGDirectories();
+	}
+
+	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
+	{
+		std::string id = filename.substr(0, filename.size() - 8);
+
+		mAppInfoIds.remove(id);
+		mAppInfoNames.remove(id);
+		mAppInfoWMClasses.remove(id);
 	}
 
 	// TODO: Load these from a file so that the user can add their own aliases
