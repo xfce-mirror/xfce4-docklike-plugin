@@ -23,6 +23,7 @@ namespace Settings
 	State<int> indicatorOrientation;
 	State<int> indicatorStyle;
 	State<int> inactiveIndicatorStyle;
+	State<bool> indicatorColorFromTheme;
 	State<GdkRGBA*> indicatorColor;
 	State<GdkRGBA*> inactiveColor;
 
@@ -105,6 +106,15 @@ namespace Settings
 				g_key_file_set_integer(mFile, "user", "inactiveIndicatorStyle", inactiveIndicatorStyle);
 				saveFile();
 
+				Dock::drawGroups();
+			});
+
+		indicatorColorFromTheme.setup(g_key_file_get_boolean(mFile, "user", "indicatorColorFromTheme", NULL),
+			[](bool indicatorColorFromTheme) -> void {
+				g_key_file_set_boolean(mFile, "user", "indicatorColorFromTheme", indicatorColorFromTheme);
+				saveFile();
+
+				Theme::load();
 				Dock::drawGroups();
 			});
 
