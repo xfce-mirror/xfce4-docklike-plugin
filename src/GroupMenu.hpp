@@ -24,6 +24,7 @@ class GroupMenu
 	void remove(GroupMenuItem* menuItem);
 
 	void popup();
+	void updateOrientation();
 	void updatePosition(gint wx, gint wy);
 	void hide();
 

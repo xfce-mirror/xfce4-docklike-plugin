@@ -89,6 +89,8 @@ void GroupMenu::popup()
 		gint wx, wy;
 		mVisible = true;
 
+		updateOrientation();
+
 		// Update the previews before showing the window
 		if (Settings::showPreviews)
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
@@ -99,6 +101,16 @@ void GroupMenu::popup()
 		updatePosition(wx, wy);
 		gtk_widget_show(mWindow);
 	}
+}
+
+void GroupMenu::updateOrientation()
+{
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+
+	if (Settings::showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
+	else
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_VERTICAL);
 }
 
 void GroupMenu::updatePosition(gint wx, gint wy)
@@ -120,15 +132,15 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
 		if (wx != geometry.x + geometry.width - window_width)
-        {
+		{
 			wx -= (window_width/2) - (button_width/2);
 			wx = wx < geometry.x ? geometry.x : wx;
 		}
 	}
-    else
-    {
+	else
+	{
 		if (wy != geometry.y + geometry.height - window_height)
-        {
+		{
 			wy -= (window_height/2) - (button_height/2);
 			wy = wy < geometry.y ? geometry.y : wy;
 		}
