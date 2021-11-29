@@ -313,8 +313,8 @@ void Group::onDraw(cairo_t* cr)
 		rgba[2] = (*indicatorColor).blue;
 		rgba[3] = (*indicatorColor).alpha;
 	}
-    else
-    {
+	else
+	{
 		if (mSFocus)
 		{
 			rgba[0] = (*Settings::indicatorColor).red;
@@ -359,8 +359,12 @@ void Group::onDraw(cairo_t* cr)
 				orientation = ORIENTATION_BOTTOM;
 		}
 	}
+	
+	int indicator_style = Settings::inactiveIndicatorStyle;
+	if (mSFocus)
+		indicator_style = Settings::indicatorStyle;
 
-	switch (Settings::indicatorStyle)
+	switch (indicator_style)
 	{
 	case STYLE_NONE:
 		break;

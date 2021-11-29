@@ -208,7 +208,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Indicator style:</property>
+                        <property name="label" translatable="yes">Active indicator style:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -239,11 +239,42 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Indicator orientation:</property>
+                        <property name="label" translatable="yes">Inactive indicator style:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBoxText" id="co_inactiveIndicatorStyle">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <items>
+                          <item translatable="yes">Bars</item>
+                          <item translatable="yes">Dots</item>
+                          <item translatable="yes">Rectangles</item>
+                          <item translatable="yes">Ciliora</item>
+                          <item translatable="yes">Circles</item>
+                          <item translatable="yes">None</item>
+                        </items>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Indicator orientation:</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
                       </packing>
                     </child>
                     <child>
@@ -260,7 +291,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
+                        <property name="top_attach">2</property>
                       </packing>
                     </child>
                     <child>
@@ -275,7 +306,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
+                        <property name="top_attach">3</property>
                       </packing>
                     </child>
                     <child>
@@ -337,7 +368,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
+                        <property name="top_attach">4</property>
                       </packing>
                     </child>
                     <child>
@@ -352,7 +383,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">4</property>
+                        <property name="top_attach">5</property>
                       </packing>
                     </child>
                     <child>
@@ -377,7 +408,7 @@
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
-                        <property name="top_attach">4</property>
+                        <property name="top_attach">5</property>
                       </packing>
                     </child>
                   </object>
