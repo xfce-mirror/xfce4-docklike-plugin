@@ -847,7 +847,19 @@ void Group::onButtonPress(GdkEventButton* event)
 void Group::onButtonRelease(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_MIDDLE)
-		closeAll();
+	{
+		switch(Settings::middleButtonBehavior)
+		{
+			case BEHAVIOR_CLOSE_ALL:
+			{
+				closeAll();
+			}
+			case BEHAVIOR_LAUNCH_NEW:
+			{
+				mAppInfo->launch();
+			}
+		}
+	}
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
 		mAppInfo->launch();
 	else if (mActive)
