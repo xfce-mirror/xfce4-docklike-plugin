@@ -93,6 +93,14 @@ namespace SettingsDialog
 			}),
 			NULL);
 
+		GObject* launchOnMiddleClick = gtk_builder_get_object(builder, "c_launchOnMiddleClick");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(launchOnMiddleClick), Settings::launchOnMiddleClick);
+		g_signal_connect(launchOnMiddleClick, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* launchOnMiddleClick) {
+				Settings::launchOnMiddleClick.set(gtk_toggle_button_get_active(launchOnMiddleClick));
+			}),
+			NULL);
+
 		// =====================================================================
 
 		GObject* indicatorOrientation = gtk_builder_get_object(builder, "co_indicatorOrientation");

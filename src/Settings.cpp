@@ -33,6 +33,7 @@ namespace Settings
 	State<std::list<std::string>> pinnedAppList;
 
 	State<bool> showWindowCount;
+	State<bool> launchOnMiddleClick;
 	State<int> dockSize;
 	State<double> previewScale;
 	State<int> previewSleep;
@@ -64,6 +65,14 @@ namespace Settings
 		showWindowCount.setup(g_key_file_get_boolean(mFile, "user", "showWindowCount", NULL),
 			[](bool showWindowCount) -> void {
 				g_key_file_set_boolean(mFile, "user", "showWindowCount", showWindowCount);
+				saveFile();
+
+				Dock::drawGroups();
+			});
+
+		launchOnMiddleClick.setup(g_key_file_get_boolean(mFile, "user", "launchOnMiddleClick", NULL),
+			[](bool launchOnMiddleClick) -> void {
+				g_key_file_set_boolean(mFile, "user", "launchOnMiddleClick", launchOnMiddleClick);
 				saveFile();
 
 				Dock::drawGroups();
