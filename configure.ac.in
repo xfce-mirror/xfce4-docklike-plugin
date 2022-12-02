@@ -59,8 +59,8 @@ dnl *** Check for required packages ***
 dnl ***********************************
 m4_define([xfce_build_version], [4.14.0])
 XDT_CHECK_LIBX11_REQUIRE()
-XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.42.0])
-XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.42.0])
+XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.58.0])
+XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.58.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.24.0])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.16.0])
 XDT_CHECK_PACKAGE([WNCK], [libwnck-3.0], [3.30.0])
