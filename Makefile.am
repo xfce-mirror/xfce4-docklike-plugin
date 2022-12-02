@@ -19,4 +19,5 @@ DISTCLEANFILES =				\
 	mkinstalldirs				\
 	intltool-extract			\
 	intltool-merge				\
-	intltool-update
+	intltool-update				\
+	po/.intltool-merge-cache.lock
