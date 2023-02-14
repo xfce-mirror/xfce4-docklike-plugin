@@ -44,15 +44,9 @@ dnl ********************************
 dnl *** Check for basic programs ***
 dnl ********************************
 AC_PROG_CXX()
-AC_PROG_LD()
 AC_PROG_INSTALL()
 AC_PROG_LN_S()
 IT_PROG_INTLTOOL([0.35.0])
-
-dnl **********************************
-dnl *** Check for standard headers ***
-dnl **********************************
-AC_HEADER_STDC()
 
 dnl ***********************************
 dnl *** Check for required packages ***
@@ -77,8 +71,9 @@ XDT_I18N([@LINGUAS@])
 dnl ************************
 dnl *** Makefile outputs ***
 dnl ************************
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 src/Makefile
 po/Makefile.in
 ])
+AC_OUTPUT

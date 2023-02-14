@@ -3,7 +3,6 @@
 obj/**
 libdocklike.so
 Makefile
-COPYING
 INSTALL
 aclocal.m4
 ar-lib
