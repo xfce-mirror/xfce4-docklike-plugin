@@ -25,7 +25,6 @@ AC_PREREQ([2.50])
 AC_CANONICAL_TARGET()
 AC_REVISION([project_version_build])
 AC_CONFIG_MACRO_DIRS([m4])
-AC_PREFIX_DEFAULT([/usr])
 
 dnl ***************************
 dnl *** Initialize automake ***
