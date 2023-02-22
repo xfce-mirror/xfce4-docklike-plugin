@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-docklike-plugin\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>, 2023\n"
 "Language-Team: Finnish (https://www.transifex.com/xfce/teams/16840/fi/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: ../src/Wnck.cpp:202
 msgid "Pinned to Dock"
-msgstr "Kiinnitetty telakointiin"
+msgstr "Kiinnitetty telakkaan"
 
 #: ../src/Wnck.cpp:202
 msgid "Pin to Dock"
@@ -32,7 +32,7 @@ msgstr "Kiinnitä telakkaan"
 
 #: ../src/Wnck.cpp:203
 msgid "Edit Launcher"
-msgstr "Muokkaa kantorakettia"
+msgstr "Muokkaa käynnistintä"
 
 #: ../src/Wnck.cpp:230
 msgid "Close All"
@@ -57,15 +57,15 @@ msgstr ""
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Moderni, minimalistinen tehtäväpalkki Xfce"
+msgstr "Moderni, minimalistinen tehtäväpalkki Xfce:lle"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr "_Auta"
+msgstr "_Ohje"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
-msgstr "_Sulkea"
+msgstr "_Sulje"
 
 #: ../src/_dialogs.xml.h:3
 msgid "Don't show the window list for a single window"
@@ -85,19 +85,19 @@ msgstr "Näytä esikatselukuvat avoimille ikkunoille"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr "Näytä auki olevien ikkunoiden määrä (jos yli 2)"
+msgstr "Näytä avoinna olevien ikkunoiden määrä (jos yli 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
-msgstr "Käyttäytyminen"
+msgstr "Toiminta"
 
 #: ../src/_dialogs.xml.h:9
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Aktiivisen ilmaisimen tyyli:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
-msgstr "Baarit"
+msgstr "Palkit"
 
 #: ../src/_dialogs.xml.h:11
 msgid "Dots"
@@ -117,15 +117,15 @@ msgstr ""
 
 #: ../src/_dialogs.xml.h:15
 msgid "None"
-msgstr "ei yhtään"
+msgstr "Ei mitään"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Passiivisen ilmaisimen tyyli:"
 
 #: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
-msgstr "Indikaattorin suuntaus:"
+msgstr "Ilmaisimen suunta:"
 
 #: ../src/_dialogs.xml.h:18
 msgid "Automatic"
@@ -133,7 +133,7 @@ msgstr "Automaattinen"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Bottom"
-msgstr "Pohja"
+msgstr "Alas"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Right"
@@ -141,15 +141,15 @@ msgstr "Oikealle"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Top"
-msgstr "Huippu"
+msgstr "Ylös"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Left"
-msgstr "Vasen"
+msgstr "Vasemmalle"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Get indicator color from theme"
-msgstr ""
+msgstr "Määritä ilmaisimen väri teemasta"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
@@ -157,7 +157,7 @@ msgstr "Aktiivinen ilmaisin:"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Inactive indicator:"
-msgstr "Ei-aktiivinen ilmaisin:"
+msgstr "Passiivinen ilmaisin:"
 
 #: ../src/_dialogs.xml.h:26
 msgid "Force icon size:"
@@ -165,7 +165,7 @@ msgstr "Pakota kuvakkeiden koko:"
 
 #: ../src/_dialogs.xml.h:27
 msgid "Appearance"
-msgstr "Ulkonäkö"
+msgstr "Ulkoasu"
 
 #: ../src/_dialogs.xml.h:28
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
@@ -173,7 +173,7 @@ msgstr "Vaihda sovellusten välillä painikkeilla <SUPER> + [1, 2, ...]"
 
 #: ../src/_dialogs.xml.h:29
 msgid "Switch to the last window with <SUPER>"
-msgstr "Vaihda viimeiseen ikkunaan <SUPER> -näppäimellä"
+msgstr "Vaihda viimeiseen ikkunaan näppäimellä <SUPER>"
 
 #: ../src/_dialogs.xml.h:30
 msgid ""
@@ -183,4 +183,4 @@ msgstr ""
 
 #: ../src/_dialogs.xml.h:32
 msgid "Keyboard hotkeys"
-msgstr "Näppäimistön pikanäppäimet"
+msgstr "Pikanäppäimet"
