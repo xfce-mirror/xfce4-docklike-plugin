@@ -1,56 +1,61 @@
-# Docklike-plugin i18n file
-# Copyright (C) 2020 Lucas Hadjilucas
-# This file is distributed under the same license as the Docklike package.
-# Lucas Hadjilucas <puzzle@outlook.com>, 2020.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Xfce Bot <transifex@xfce.org>, 2023
+# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2023
+# Ioannis LM, 2023
+# Nick Schermer <nick@xfce.org>, 2023
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Docklike 0.9\n"
+"Project-Id-Version: xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 21:34-0700\n"
-"PO-Revision-Date: 2021-07-20 18:25-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
-"Language-Team: EL\n"
-"Language: el\n"
+"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Nick Schermer <nick@xfce.org>, 2023\n"
+"Language-Team: Greek (https://www.transifex.com/xfce/teams/16840/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/Wnck.cpp:198
+#: ../src/Wnck.cpp:202
 msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:198
+#: ../src/Wnck.cpp:202
 msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:199
-#, fuzzy
+#: ../src/Wnck.cpp:203
 msgid "Edit Launcher"
-msgstr "Έναρξη εφαρμογής"
+msgstr ""
 
-#: ../src/Wnck.cpp:226
+#: ../src/Wnck.cpp:230
 msgid "Close All"
 msgstr "Κλείσιμο όλων των εφαρμογών"
 
-#: ../src/Wnck.cpp:245
+#: ../src/Wnck.cpp:249
 msgid "Remove"
-msgstr ""
+msgstr "Αφαίρεση"
 
-#: ../src/SettingsDialog.cpp:197
+#: ../src/SettingsDialog.cpp:217
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Μόνο τα πρώτα %u πλήκτρα πρόσβασης είναι ενεργοποιημένα.</b>\n"
 
-#: ../src/SettingsDialog.cpp:199
+#: ../src/SettingsDialog.cpp:219
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη "
-"εφαρμογή.\n"
+"Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη εφαρμογή.\n"
 "Παρακαλώ ελέγξτε τις ρυθμίσεις στο Xfce."
 
 #. namespace SettingsDialog
@@ -60,26 +65,23 @@ msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργ�
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Βοήθεια"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Κλείσιμο"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Μή εμφάνισή λίστας για ένα μόνο παράθυρο"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
-msgstr "Εμφάνιση εφαρμογών μόνο απο την παρούσα επιφάνειας εργασίας"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
-msgstr "Εμφάνιση εφαρμογών μόνο απο την παρούσα οθόνη"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
@@ -94,8 +96,8 @@ msgid "Behavior"
 msgstr "Συμπεριφορά"
 
 #: ../src/_dialogs.xml.h:9
-msgid "Indicator style:"
-msgstr "Τρόπος παρουσίασης δείκτη:"
+msgid "Active indicator style:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -110,85 +112,81 @@ msgid "Rectangles"
 msgstr "Ορθογώνια"
 
 #: ../src/_dialogs.xml.h:13
-msgid "None"
+msgid "Ciliora"
 msgstr ""
 
 #: ../src/_dialogs.xml.h:14
+msgid "Circles"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:15
+msgid "None"
+msgstr "Κανένα"
+
+#: ../src/_dialogs.xml.h:16
+msgid "Inactive indicator style:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
 msgstr "Προσανατολισμός δείκτη:"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "Automatic"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Bottom"
 msgstr "Κάτω μέρος"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Right"
 msgstr "Δεξιά"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Top"
 msgstr "Πάνω"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Left"
 msgstr "Αριστερά"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
+msgid "Get indicator color from theme"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:21
-msgid "Force icon size:"
-msgstr "Περιορισμός μεγέθους εικονιδίων:"
-
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Inactive indicator:"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
+msgid "Force icon size:"
+msgstr "Περιορισμός μεγέθους εικονιδίων:"
+
+#: ../src/_dialogs.xml.h:27
 msgid "Appearance"
 msgstr "Παρουσίαση"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:28
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Εναλλαγή μεταξύ εφαρμογών με τον συνδυασμό <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:29
 msgid "Switch to the last window with <SUPER>"
 msgstr "Εναλλαγή στο τελευταίο παράθυρο με το πλήκτρο <SUPER>"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:30
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Αυτή η λειτουργία είναι απενεργοποιημένη.</b>\n"
-"Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά "
-"σας."
+"Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά σας."
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:32
 msgid "Keyboard hotkeys"
 msgstr "Συνδυασμοί πληκτρολογίου"
-
-#~ msgid "A modern, minimalist taskbar for Xfce."
-#~ msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το Xfce."
-
-#~ msgid "Pin"
-#~ msgstr "Καρφίτσωμα"
-
-#, fuzzy
-#~ msgid "Launch Another"
-#~ msgstr "Έναρξη νέας εφαρμογής"
-
-#~ msgid "Indicator color :"
-#~ msgstr "Χρώμα δείκτη :"
-
-#~ msgid "Contributors:"
-#~ msgstr "Συνεργάτες:"
-
-#~ msgid "Unpin"
-#~ msgstr "Ξεκαρφίτσωμα"
