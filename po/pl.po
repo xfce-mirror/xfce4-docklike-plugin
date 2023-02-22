@@ -2,56 +2,58 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Xfce Bot <transifex@xfce.org>, 2023
+# Marek Adamski, 2023
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 21:34-0700\n"
-"PO-Revision-Date: 2021-08-03 14:13+0200\n"
-"Last-Translator: Matthaiks\n"
-"Language-Team: \n"
-"Language: pl\n"
+"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Marek Adamski, 2023\n"
+"Language-Team: Polish (https://www.transifex.com/xfce/teams/16840/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
-"|| n%100>14) ? 1 : 2);\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: ../src/Wnck.cpp:198
+#: ../src/Wnck.cpp:202
 msgid "Pinned to Dock"
 msgstr "Przypięty do paska"
 
-#: ../src/Wnck.cpp:198
+#: ../src/Wnck.cpp:202
 msgid "Pin to Dock"
 msgstr "Przypnij do paska"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:203
 msgid "Edit Launcher"
 msgstr "Edytuj aktywator"
 
-#: ../src/Wnck.cpp:226
+#: ../src/Wnck.cpp:230
 msgid "Close All"
 msgstr "Zamknij wszystkie"
 
-#: ../src/Wnck.cpp:245
+#: ../src/Wnck.cpp:249
 msgid "Remove"
-msgstr ""
+msgstr "Usuń"
 
-#: ../src/SettingsDialog.cpp:197
+#: ../src/SettingsDialog.cpp:217
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Włączono tylko pierwsze skróty klawiszowe %u</b>\n"
 
-#: ../src/SettingsDialog.cpp:199
+#: ../src/SettingsDialog.cpp:219
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Wydaje się, że kombinacja &lt;SUPER&gt;+%u jest już używana przez inny "
-"proces.\n"
+"Wydaje się, że kombinacja &lt;SUPER&gt;+%u jest już używana przez inny proces.\n"
 "Sprawdź ustawienia Xfce."
 
 #. namespace SettingsDialog
@@ -92,8 +94,8 @@ msgid "Behavior"
 msgstr "Zachowanie"
 
 #: ../src/_dialogs.xml.h:9
-msgid "Indicator style:"
-msgstr "Styl wskaźnika:"
+msgid "Active indicator style:"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -108,66 +110,81 @@ msgid "Rectangles"
 msgstr "Prostokąty"
 
 #: ../src/_dialogs.xml.h:13
+msgid "Ciliora"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:14
+msgid "Circles"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:15
 msgid "None"
 msgstr "Żaden"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:16
+msgid "Inactive indicator style:"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
 msgstr "Orientacja wskaźnika:"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "Automatic"
 msgstr "Automatyczna"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Bottom"
 msgstr "Dolna"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Right"
 msgstr "Prawa"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Top"
 msgstr "Górna"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Left"
 msgstr "Lewa"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
+msgid "Get indicator color from theme"
+msgstr ""
+
+#: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
 msgstr "Wskaźnik aktywnych:"
 
-#: ../src/_dialogs.xml.h:21
-msgid "Force icon size:"
-msgstr "Wymuś rozmiar ikon:"
-
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Inactive indicator:"
 msgstr "Wskaźnik nieaktywnych:"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
+msgid "Force icon size:"
+msgstr "Wymuś rozmiar ikon:"
+
+#: ../src/_dialogs.xml.h:27
 msgid "Appearance"
 msgstr "Wygląd"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:28
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Przełączaj się między aplikacjami za pomocą <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:29
 msgid "Switch to the last window with <SUPER>"
 msgstr "Przechodź do ostatniego okna za pomocą <SUPER>"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:30
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Ta funkcja jest wyłączona.</b>\n"
-"Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten "
-"system."
+"Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten system."
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:32
 msgid "Keyboard hotkeys"
 msgstr "Skróty klawiszowe"
