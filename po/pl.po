@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-docklike-plugin\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Marek Adamski, 2023\n"
 "Language-Team: Polish (https://www.transifex.com/xfce/teams/16840/pl/)\n"
@@ -95,7 +95,7 @@ msgstr "Zachowanie"
 
 #: ../src/_dialogs.xml.h:9
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Styl wskaźnika aktywnych:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -111,11 +111,11 @@ msgstr "Prostokąty"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Ciliora"
-msgstr ""
+msgstr "Ciliora"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Circles"
-msgstr ""
+msgstr "Kręgi"
 
 #: ../src/_dialogs.xml.h:15
 msgid "None"
@@ -123,7 +123,7 @@ msgstr "Żaden"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Styl wskaźnika nieaktywnych:"
 
 #: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
@@ -151,7 +151,7 @@ msgstr "Lewa"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Get indicator color from theme"
-msgstr ""
+msgstr "Pobierz kolor wskaźnika z motywu"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
