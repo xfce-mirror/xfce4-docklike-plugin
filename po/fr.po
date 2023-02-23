@@ -7,6 +7,7 @@
 # Xfce Bot <transifex@xfce.org>, 2023
 # Charles Monzat <c.monzat@laposte.net>, 2023
 # Joel Carnat, 2023
+# David D, 2023
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-22 12:49+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Joel Carnat, 2023\n"
+"Last-Translator: David D, 2023\n"
 "Language-Team: French (https://www.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +97,7 @@ msgstr "Comportement"
 
 #: ../src/_dialogs.xml.h:9
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Style de l'indicateur actif :"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -112,11 +113,11 @@ msgstr "Rectangles"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Ciliora"
-msgstr ""
+msgstr "Ciliora"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Circles"
-msgstr ""
+msgstr "Cercles"
 
 #: ../src/_dialogs.xml.h:15
 msgid "None"
@@ -124,7 +125,7 @@ msgstr "Rien"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Style de l'indicateur inactif :"
 
 #: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
@@ -152,19 +153,19 @@ msgstr "Gauche"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Get indicator color from theme"
-msgstr ""
+msgstr "Obtenir la couleur de l'indicateur à partir du thème"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
-msgstr "Indicateur actif:"
+msgstr "Indicateur actif :"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Inactive indicator:"
-msgstr "Indicateur inactif:"
+msgstr "Indicateur inactif :"
 
 #: ../src/_dialogs.xml.h:26
 msgid "Force icon size:"
-msgstr "Forcer la taille des icônes:"
+msgstr "Forcer la taille des icônes :"
 
 #: ../src/_dialogs.xml.h:27
 msgid "Appearance"
@@ -184,7 +185,7 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Cette fonction est désactivée.</b>\n"
-"Elle nécéssite l'extension X11 XInput2.0 qui n'est pas fournie par votre système."
+"Elle nécessite l'extension X11 XInput2.0 qui n'est pas fournie par votre système."
 
 #: ../src/_dialogs.xml.h:32
 msgid "Keyboard hotkeys"
