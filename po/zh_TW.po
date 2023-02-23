@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# pan93412 <pan93412@gmail.com>, 2023
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2023
+# Hsiu-Ming Chang <cges30901@gmail.com>, 2023
+# Nick Schermer <nick@xfce.org>, 2023
+# 黃柏諺 <s8321414@gmail.com>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2023\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/xfce/teams/16840/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../src/Wnck.cpp:202
+msgid "Pinned to Dock"
+msgstr "已釘選至 Dock"
+
+#: ../src/Wnck.cpp:202
+msgid "Pin to Dock"
+msgstr "釘選至 Dock"
+
+#: ../src/Wnck.cpp:203
+msgid "Edit Launcher"
+msgstr "編輯啟動器"
+
+#: ../src/Wnck.cpp:230
+msgid "Close All"
+msgstr "關閉全部"
+
+#: ../src/Wnck.cpp:249
+msgid "Remove"
+msgstr "移除"
+
+#: ../src/SettingsDialog.cpp:217
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>僅啟用第一個 %u 快捷鍵。</b>\n"
+
+#: ../src/SettingsDialog.cpp:219
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"&lt;SUPER&gt;+%u 組合鍵似乎已被其他處理程序使用。\n"
+"請檢查您的 Xfce 設定。"
+
+#. namespace SettingsDialog
+#: ../src/docklike.desktop.in.h:1
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Xfce 的現代簡約工作列"
+
+#: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr "說明(_H)"
+
+#: ../src/_dialogs.xml.h:2
+msgid "_Close"
+msgstr "關閉(_C)"
+
+#: ../src/_dialogs.xml.h:3
+msgid "Don't show the window list for a single window"
+msgstr "不要在僅有一個視窗時顯示視窗清單"
+
+#: ../src/_dialogs.xml.h:4
+msgid "Only show applications on the current workspace"
+msgstr "僅顯示目前工作空間中的應用程式"
+
+#: ../src/_dialogs.xml.h:5
+msgid "Only show applications on the current display"
+msgstr "僅顯示目前螢幕中的應用程式"
+
+#: ../src/_dialogs.xml.h:6
+msgid "Show preview thumbnails for open windows"
+msgstr "顯示開啟視窗的預覽縮圖"
+
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr "顯示開啟視窗的數量（若多於 2）"
+
+#: ../src/_dialogs.xml.h:8
+msgid "Behavior"
+msgstr "行為"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Active indicator style:"
+msgstr "作用中的指示器樣式："
+
+#: ../src/_dialogs.xml.h:10
+msgid "Bars"
+msgstr "條"
+
+#: ../src/_dialogs.xml.h:11
+msgid "Dots"
+msgstr "點"
+
+#: ../src/_dialogs.xml.h:12
+msgid "Rectangles"
+msgstr "矩形"
+
+#: ../src/_dialogs.xml.h:13
+msgid "Ciliora"
+msgstr "睫毛"
+
+#: ../src/_dialogs.xml.h:14
+msgid "Circles"
+msgstr "圈圈"
+
+#: ../src/_dialogs.xml.h:15
+msgid "None"
+msgstr "無"
+
+#: ../src/_dialogs.xml.h:16
+msgid "Inactive indicator style:"
+msgstr "非作用中的指示器樣式："
+
+#: ../src/_dialogs.xml.h:17
+msgid "Indicator orientation:"
+msgstr "指示器方向："
+
+#: ../src/_dialogs.xml.h:18
+msgid "Automatic"
+msgstr "自動"
+
+#: ../src/_dialogs.xml.h:19
+msgid "Bottom"
+msgstr "底端"
+
+#: ../src/_dialogs.xml.h:20
+msgid "Right"
+msgstr "右側"
+
+#: ../src/_dialogs.xml.h:21
+msgid "Top"
+msgstr "頂端"
+
+#: ../src/_dialogs.xml.h:22
+msgid "Left"
+msgstr "左側"
+
+#: ../src/_dialogs.xml.h:23
+msgid "Get indicator color from theme"
+msgstr "從佈景主題取得指示器色彩"
+
+#: ../src/_dialogs.xml.h:24
+msgid "Active indicator:"
+msgstr "作用中的指示器："
+
+#: ../src/_dialogs.xml.h:25
+msgid "Inactive indicator:"
+msgstr "非作用中的指示器："
+
+#: ../src/_dialogs.xml.h:26
+msgid "Force icon size:"
+msgstr "強制圖示大小："
+
+#: ../src/_dialogs.xml.h:27
+msgid "Appearance"
+msgstr "外觀"
+
+#: ../src/_dialogs.xml.h:28
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "使用 <SUPER>+[1, 2, ...] 在應用程式間切換"
+
+#: ../src/_dialogs.xml.h:29
+msgid "Switch to the last window with <SUPER>"
+msgstr "使用 <SUPER> 切換至前一個視窗"
+
+#: ../src/_dialogs.xml.h:30
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>此功能已停用。</b>\n"
+"其需要 X11 XInput2.0 擴充功能，但您的系統並未提供。"
+
+#: ../src/_dialogs.xml.h:32
+msgid "Keyboard hotkeys"
+msgstr "鍵盤快捷鍵"
