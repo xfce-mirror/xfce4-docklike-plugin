@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Любомир Василев, 2023
+# Kiril Kirilov <cybercop_montana@abv.bg>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2023\n"
+"Language-Team: Bulgarian (https://www.transifex.com/xfce/teams/16840/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/Wnck.cpp:202
+msgid "Pinned to Dock"
+msgstr "Прикачено към дока"
+
+#: ../src/Wnck.cpp:202
+msgid "Pin to Dock"
+msgstr "Прикачване към дока"
+
+#: ../src/Wnck.cpp:203
+msgid "Edit Launcher"
+msgstr "Редактиране на стартер"
+
+#: ../src/Wnck.cpp:230
+msgid "Close All"
+msgstr "Затваряне на всички"
+
+#: ../src/Wnck.cpp:249
+msgid "Remove"
+msgstr "Премахване"
+
+#: ../src/SettingsDialog.cpp:217
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>Само първите %u бързи клавиш(и) са активирани.</b>\n"
+
+#: ../src/SettingsDialog.cpp:219
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"Комбинацията &lt;SUPER&gt;+%u изглежда вече се използва от друг процес.\n"
+"Проверете вашите настройки на Xfce."
+
+#. namespace SettingsDialog
+#: ../src/docklike.desktop.in.h:1
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Модерна, минималистична лента на задачи за Xfce"
+
+#: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr "_Помощ"
+
+#: ../src/_dialogs.xml.h:2
+msgid "_Close"
+msgstr "_Затваряне"
+
+#: ../src/_dialogs.xml.h:3
+msgid "Don't show the window list for a single window"
+msgstr "Да не се показва списъка с прозорци за един прозорец"
+
+#: ../src/_dialogs.xml.h:4
+msgid "Only show applications on the current workspace"
+msgstr "Показване на приложения само в текущото работно пространство"
+
+#: ../src/_dialogs.xml.h:5
+msgid "Only show applications on the current display"
+msgstr "Показване на приложения само на текущия дисплей"
+
+#: ../src/_dialogs.xml.h:6
+msgid "Show preview thumbnails for open windows"
+msgstr "Показване на миниатюри за визуализация за отворени прозорци"
+
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Показване на броя отворени прозорци (ако са повече от 2)"
+
+#: ../src/_dialogs.xml.h:8
+msgid "Behavior"
+msgstr "Поведение"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Active indicator style:"
+msgstr "Стил на активният индикатор:"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Bars"
+msgstr "Ленти"
+
+#: ../src/_dialogs.xml.h:11
+msgid "Dots"
+msgstr "Точки"
+
+#: ../src/_dialogs.xml.h:12
+msgid "Rectangles"
+msgstr "Правоъгълници"
+
+#: ../src/_dialogs.xml.h:13
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: ../src/_dialogs.xml.h:14
+msgid "Circles"
+msgstr "Кръгове"
+
+#: ../src/_dialogs.xml.h:15
+msgid "None"
+msgstr "Без"
+
+#: ../src/_dialogs.xml.h:16
+msgid "Inactive indicator style:"
+msgstr "Стил на неактивният индикатор:"
+
+#: ../src/_dialogs.xml.h:17
+msgid "Indicator orientation:"
+msgstr "Ориентация на индикатора:"
+
+#: ../src/_dialogs.xml.h:18
+msgid "Automatic"
+msgstr "Автоматично"
+
+#: ../src/_dialogs.xml.h:19
+msgid "Bottom"
+msgstr "Отдолу"
+
+#: ../src/_dialogs.xml.h:20
+msgid "Right"
+msgstr "Отдясно"
+
+#: ../src/_dialogs.xml.h:21
+msgid "Top"
+msgstr "Отгоре"
+
+#: ../src/_dialogs.xml.h:22
+msgid "Left"
+msgstr "Отляво"
+
+#: ../src/_dialogs.xml.h:23
+msgid "Get indicator color from theme"
+msgstr "Вземи цвят за индикатора от темата"
+
+#: ../src/_dialogs.xml.h:24
+msgid "Active indicator:"
+msgstr "Активен индикатор:"
+
+#: ../src/_dialogs.xml.h:25
+msgid "Inactive indicator:"
+msgstr "Неактивен индикатор:"
+
+#: ../src/_dialogs.xml.h:26
+msgid "Force icon size:"
+msgstr "Форсиран размер на икона:"
+
+#: ../src/_dialogs.xml.h:27
+msgid "Appearance"
+msgstr "Външен вид"
+
+#: ../src/_dialogs.xml.h:28
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Превключване между приложенията с<SUPER>+[1, 2, ...]"
+
+#: ../src/_dialogs.xml.h:29
+msgid "Switch to the last window with <SUPER>"
+msgstr "Преминаване към последния прозорец с <SUPER>"
+
+#: ../src/_dialogs.xml.h:30
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>Тази опция ще бъде деактивирана.</b>\n"
+"Изисква разширение X11 XInput2.0, което не се предоставя от вашата система."
+
+#: ../src/_dialogs.xml.h:32
+msgid "Keyboard hotkeys"
+msgstr "Бързи клавиши на клавиатурата"
