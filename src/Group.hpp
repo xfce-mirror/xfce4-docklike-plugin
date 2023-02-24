@@ -20,6 +20,12 @@
 #include "Helpers.hpp"
 #include "State.tpp"
 
+enum MiddleButtonBehavior
+{
+	BEHAVIOR_CLOSE_ALL,
+	BEHAVIOR_LAUNCH_NEW
+};
+
 enum IndicatorOrientation
 {
 	ORIENTATION_AUTOMATIC,
