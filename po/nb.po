@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Erlend Østlie <erlendandreas12368@gmail.com>, 2023
+# Allan Nordhøy <epost@anotheragency.no>, 2023
+# Harald H. <haarektrans@gmail.com>, 2023
+# heskjestad <cato@heskjestad.xyz>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2023\n"
+"Language-Team: Norwegian Bokmål (https://www.transifex.com/xfce/teams/16840/nb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/Wnck.cpp:202
+msgid "Pinned to Dock"
+msgstr "Festet til dokkpanelet"
+
+#: ../src/Wnck.cpp:202
+msgid "Pin to Dock"
+msgstr "Fest til dokkpanelet"
+
+#: ../src/Wnck.cpp:203
+msgid "Edit Launcher"
+msgstr "Rediger programstarter"
+
+#: ../src/Wnck.cpp:230
+msgid "Close All"
+msgstr "Lukk alle"
+
+#: ../src/Wnck.cpp:249
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../src/SettingsDialog.cpp:217
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>Kun de(n) første %u hurtigtasten(e) er slått på.</b>\n"
+
+#: ../src/SettingsDialog.cpp:219
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"Tastekombinasjonen &lt;SUPER&gt; + %u brukes allerede av en annen prosess.\n"
+"Sjekk dette i Xfce-innstillingene."
+
+#. namespace SettingsDialog
+#: ../src/docklike.desktop.in.h:1
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "En moderne og minimalistisk verktøylinje for Xfce"
+
+#: ../src/_dialogs.xml.h:1
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../src/_dialogs.xml.h:2
+msgid "_Close"
+msgstr "_Lukk"
+
+#: ../src/_dialogs.xml.h:3
+msgid "Don't show the window list for a single window"
+msgstr "Ikke vis vindusliste for et enkeltvindu"
+
+#: ../src/_dialogs.xml.h:4
+msgid "Only show applications on the current workspace"
+msgstr "Vis kun programmer i gjeldende arbeidsområde"
+
+#: ../src/_dialogs.xml.h:5
+msgid "Only show applications on the current display"
+msgstr "Vis kun programmer på gjeldende skjerm"
+
+#: ../src/_dialogs.xml.h:6
+msgid "Show preview thumbnails for open windows"
+msgstr "Vis miniatyrbilder av åpne vinduer"
+
+#: ../src/_dialogs.xml.h:7
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Vis antall åpne vinduer (hvis flere enn 2)"
+
+#: ../src/_dialogs.xml.h:8
+msgid "Behavior"
+msgstr "Oppførsel"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Active indicator style:"
+msgstr "Aktiv indikatorstil:"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Bars"
+msgstr "Stolper"
+
+#: ../src/_dialogs.xml.h:11
+msgid "Dots"
+msgstr "Prikker"
+
+#: ../src/_dialogs.xml.h:12
+msgid "Rectangles"
+msgstr "Rektangler"
+
+#: ../src/_dialogs.xml.h:13
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: ../src/_dialogs.xml.h:14
+msgid "Circles"
+msgstr "Sirkler"
+
+#: ../src/_dialogs.xml.h:15
+msgid "None"
+msgstr "Ingen"
+
+#: ../src/_dialogs.xml.h:16
+msgid "Inactive indicator style:"
+msgstr "Inaktiv indikatorstil:"
+
+#: ../src/_dialogs.xml.h:17
+msgid "Indicator orientation:"
+msgstr "Indikatorretning:"
+
+#: ../src/_dialogs.xml.h:18
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: ../src/_dialogs.xml.h:19
+msgid "Bottom"
+msgstr "Bunn"
+
+#: ../src/_dialogs.xml.h:20
+msgid "Right"
+msgstr "Høyre"
+
+#: ../src/_dialogs.xml.h:21
+msgid "Top"
+msgstr "Topp"
+
+#: ../src/_dialogs.xml.h:22
+msgid "Left"
+msgstr "Venstre"
+
+#: ../src/_dialogs.xml.h:23
+msgid "Get indicator color from theme"
+msgstr "Hent indikatorfarge fra tema"
+
+#: ../src/_dialogs.xml.h:24
+msgid "Active indicator:"
+msgstr "Aktiv indikator:"
+
+#: ../src/_dialogs.xml.h:25
+msgid "Inactive indicator:"
+msgstr "Inaktiv indikator:"
+
+#: ../src/_dialogs.xml.h:26
+msgid "Force icon size:"
+msgstr "Tving ikonstørrelse:"
+
+#: ../src/_dialogs.xml.h:27
+msgid "Appearance"
+msgstr "Utseende"
+
+#: ../src/_dialogs.xml.h:28
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Bytt mellom programmer med <SUPER> +[1, 2, …]"
+
+#: ../src/_dialogs.xml.h:29
+msgid "Switch to the last window with <SUPER>"
+msgstr "Bytt til siste vindu med <SUPER>"
+
+#: ../src/_dialogs.xml.h:30
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>Denne funksjonaliteten er slått av.</b>\n"
+"Den krever utvidelsen X11 XInput2.0, som ikke tilbys av dette systemet."
+
+#: ../src/_dialogs.xml.h:32
+msgid "Keyboard hotkeys"
+msgstr "Hurtigtaster"
