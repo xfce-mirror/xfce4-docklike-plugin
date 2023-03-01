@@ -6,15 +6,16 @@
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2023
 # Triyan W. Nugroho <triyan.wn@gmail.com>, 2023
+# Faisal Rachmadin <frachmadin@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-docklike-plugin\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"POT-Creation-Date: 2023-02-22 12:49+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Triyan W. Nugroho <triyan.wn@gmail.com>, 2023\n"
+"Last-Translator: Faisal Rachmadin <frachmadin@gmail.com>, 2023\n"
 "Language-Team: Indonesian (https://www.transifex.com/xfce/teams/16840/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgstr "Perilaku"
 
 #: ../src/_dialogs.xml.h:9
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Gaya indikator aktif:"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Bars"
@@ -111,11 +112,11 @@ msgstr "Persegi panjang"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Ciliora"
-msgstr ""
+msgstr "Ciliora"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Circles"
-msgstr ""
+msgstr "Lingkaran"
 
 #: ../src/_dialogs.xml.h:15
 msgid "None"
@@ -123,11 +124,11 @@ msgstr "Tidak ada"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Gaya indikator tidak aktif:"
 
 #: ../src/_dialogs.xml.h:17
 msgid "Indicator orientation:"
-msgstr "Orientasi penunjuk:"
+msgstr "Orientasi indikator:"
 
 #: ../src/_dialogs.xml.h:18
 msgid "Automatic"
@@ -151,19 +152,19 @@ msgstr "Kiri"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Get indicator color from theme"
-msgstr ""
+msgstr "Dapatkan warna indikator dari tema"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Active indicator:"
-msgstr "Penunjuk aktif:"
+msgstr "Indikator aktif:"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Inactive indicator:"
-msgstr "Penunjuk tidak aktif:"
+msgstr "Indikator tidak aktif:"
 
 #: ../src/_dialogs.xml.h:26
 msgid "Force icon size:"
-msgstr "Paksa ukuran ikon :"
+msgstr "Paksa ukuran ikon:"
 
 #: ../src/_dialogs.xml.h:27
 msgid "Appearance"
@@ -183,7 +184,7 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Fitur ini dinonaktifkan.</b>\n"
-"Ini membutuhkan ekstensi X11 XInput2.0 yang tidak disediakan oleh sistem Anda."
+"Fitur ini membutuhkan ekstensi X11 XInput2.0 yang tidak disediakan oleh sistem Anda."
 
 #: ../src/_dialogs.xml.h:32
 msgid "Keyboard hotkeys"
