@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"POT-Creation-Date: 2023-03-02 12:55+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Moo, 2023\n"
 "Language-Team: Lithuanian (https://www.transifex.com/xfce/teams/16840/lt/)\n"
@@ -42,12 +42,12 @@ msgstr "Užverti visus"
 msgid "Remove"
 msgstr "Šalinti"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:225
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Yra įjungtas tik pirmasis %u susiejimas(-ai).</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:227
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -90,94 +90,106 @@ msgid "Show the number of open windows (if more than 2)"
 msgstr "Rodyti atvertų langų skaičių (jeigu jų yra daugiau nei 2)"
 
 #: ../src/_dialogs.xml.h:8
+msgid "Middle mouse button:"
+msgstr "Vidurinis pelės mygtukas:"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Close all"
+msgstr "Užverti visus"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Launch new instance"
+msgstr "Paleisti naują egzempliorių"
+
+#: ../src/_dialogs.xml.h:11
 msgid "Behavior"
 msgstr "Elgsena"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
 msgstr "Aktyvaus indikatoriaus stilius:"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:13
 msgid "Bars"
 msgstr "Juostos"
 
-#: ../src/_dialogs.xml.h:11
+#: ../src/_dialogs.xml.h:14
 msgid "Dots"
 msgstr "Taškai"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
 msgid "Rectangles"
 msgstr "Stačiakampiai"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:16
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:17
 msgid "Circles"
 msgstr "Apskritimai"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "None"
 msgstr "Nėra"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
 msgstr "Neaktyvaus indikatoriaus stilius:"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
 msgstr "Indikatoriaus orientacija:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Automatic"
 msgstr "Automatiškai"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Bottom"
 msgstr "Apačia"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
 msgid "Right"
 msgstr "Dešinė"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:24
 msgid "Top"
 msgstr "Viršus"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Left"
 msgstr "Kairė"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
 msgid "Get indicator color from theme"
 msgstr "Gauti indikatoriaus spalvą iš temos"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:27
 msgid "Active indicator:"
 msgstr "Aktyvus indikatorius:"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:28
 msgid "Inactive indicator:"
 msgstr "Neaktyvus indikatorius:"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:29
 msgid "Force icon size:"
 msgstr "Priverstinis piktogramų dydis:"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:30
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:31
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Perjunginėkite programas naudodami <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:32
 msgid "Switch to the last window with <SUPER>"
 msgstr "Perjunkite į paskutinį langą naudodami <SUPER>"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:33
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -185,6 +197,6 @@ msgstr ""
 "<b>Ši ypatybė yra išjungta.</b>\n"
 "Ji reikalauja X11 XInput2.0 plėtinio, kurio jūsų sistema neteikia."
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
 msgstr "Spartieji klavišai"
