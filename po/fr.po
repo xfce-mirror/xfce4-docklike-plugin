@@ -8,15 +8,16 @@
 # Charles Monzat <c.monzat@laposte.net>, 2023
 # David D, 2023
 # Joel Carnat, 2023
+# Wallon Wallon, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"POT-Creation-Date: 2023-03-02 12:55+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Joel Carnat, 2023\n"
+"Last-Translator: Wallon Wallon, 2023\n"
 "Language-Team: French (https://www.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,12 +45,12 @@ msgstr "Tout fermer"
 msgid "Remove"
 msgstr "Enlever"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:225
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Seules les %u premières touches de raccourci sont activées.</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:227
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -92,94 +93,106 @@ msgid "Show the number of open windows (if more than 2)"
 msgstr "Afficher le nombre de fenêtres ouvertes (si plus de 2)"
 
 #: ../src/_dialogs.xml.h:8
+msgid "Middle mouse button:"
+msgstr "Bouton du milieu de la souris :"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Close all"
+msgstr "Tout fermer"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Launch new instance"
+msgstr "Lancer une nouvelle instance"
+
+#: ../src/_dialogs.xml.h:11
 msgid "Behavior"
 msgstr "Comportement"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
 msgstr "Style de l'indicateur actif :"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:13
 msgid "Bars"
 msgstr "Barres"
 
-#: ../src/_dialogs.xml.h:11
+#: ../src/_dialogs.xml.h:14
 msgid "Dots"
 msgstr "Points"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
 msgid "Rectangles"
 msgstr "Rectangles"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:16
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:17
 msgid "Circles"
 msgstr "Cercles"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "None"
 msgstr "Rien"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
 msgstr "Style de l'indicateur inactif :"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
 msgstr "Orientation de l'indicateur:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Automatic"
 msgstr "Automatique"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Bottom"
 msgstr "Bas"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
 msgid "Right"
 msgstr "Droite"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:24
 msgid "Top"
 msgstr "Haut"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Left"
 msgstr "Gauche"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
 msgid "Get indicator color from theme"
 msgstr "Obtenir la couleur de l'indicateur à partir du thème"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:27
 msgid "Active indicator:"
 msgstr "Indicateur actif :"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:28
 msgid "Inactive indicator:"
 msgstr "Indicateur inactif :"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:29
 msgid "Force icon size:"
 msgstr "Forcer la taille des icônes :"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:30
 msgid "Appearance"
 msgstr "Apparence"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:31
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Changer d'application avec <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:32
 msgid "Switch to the last window with <SUPER>"
 msgstr "Appeler l'application précédente avec <SUPER>"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:33
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -187,6 +200,6 @@ msgstr ""
 "<b>Cette fonction est désactivée.</b>\n"
 "Elle nécessite l'extension X11 XInput2.0 qui n'est pas fournie par votre système."
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
 msgstr "Raccourcis clavier"
