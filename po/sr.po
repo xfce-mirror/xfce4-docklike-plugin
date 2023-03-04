@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"POT-Creation-Date: 2023-03-02 12:55+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>, 2023\n"
 "Language-Team: Serbian (https://www.transifex.com/xfce/teams/16840/sr/)\n"
@@ -42,12 +42,12 @@ msgstr "Затвори све"
 msgid "Remove"
 msgstr "Уклони"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:225
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Само прва пречица %u је омогућена.</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:227
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -90,94 +90,106 @@ msgid "Show the number of open windows (if more than 2)"
 msgstr "Приказуј број отворених прозора (ако их је више од 2)"
 
 #: ../src/_dialogs.xml.h:8
+msgid "Middle mouse button:"
+msgstr "Средње дугме миша"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Close all"
+msgstr "Затвори све"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Launch new instance"
+msgstr "Покрени нови примерак"
+
+#: ../src/_dialogs.xml.h:11
 msgid "Behavior"
 msgstr "Понашање"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
 msgstr "Начин приказа показивача у погону:"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:13
 msgid "Bars"
 msgstr "Траке"
 
-#: ../src/_dialogs.xml.h:11
+#: ../src/_dialogs.xml.h:14
 msgid "Dots"
 msgstr "Тачке"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
 msgid "Rectangles"
 msgstr "троуглови"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:16
 msgid "Ciliora"
 msgstr "Трепавице"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:17
 msgid "Circles"
 msgstr "Кругови"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "None"
 msgstr "Ништа"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
 msgstr "Начин приказа указивача ван погона:"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
 msgstr "Усмерење указивача:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Automatic"
 msgstr "Самостално"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Bottom"
 msgstr "Доле"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
 msgid "Right"
 msgstr "Десно"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:24
 msgid "Top"
 msgstr "Горе"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Left"
 msgstr "Лево"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
 msgid "Get indicator color from theme"
 msgstr "Добави боју указивача из теме"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:27
 msgid "Active indicator:"
 msgstr "Указивач у погону:"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:28
 msgid "Inactive indicator:"
 msgstr "Указивач ван погона:"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:29
 msgid "Force icon size:"
 msgstr "Присили величину сличице:"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:30
 msgid "Appearance"
 msgstr "Изглед"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:31
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Мењај програме помоћу <СУПЕР>+[1,2, ..]"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:32
 msgid "Switch to the last window with <SUPER>"
 msgstr "Пређи на последњи прозор помоћу <СУПЕР>"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:33
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -185,6 +197,6 @@ msgstr ""
 "<b>Ова могућност је онемогућена.</b>\n"
 "Захтева проширење Х11 Хинпут2.0 које није обезбеђено у Вашем радном склопу."
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
 msgstr "Пречице дугмади"
