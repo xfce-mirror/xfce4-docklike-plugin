@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"POT-Creation-Date: 2023-03-02 12:55+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2023\n"
 "Language-Team: Bulgarian (https://www.transifex.com/xfce/teams/16840/bg/)\n"
@@ -42,12 +42,12 @@ msgstr "Затваряне на всички"
 msgid "Remove"
 msgstr "Премахване"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:225
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Само първите %u бързи клавиш(и) са активирани.</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:227
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -90,94 +90,106 @@ msgid "Show the number of open windows (if more than 2)"
 msgstr "Показване на броя отворени прозорци (ако са повече от 2)"
 
 #: ../src/_dialogs.xml.h:8
+msgid "Middle mouse button:"
+msgstr "Среден бутон на мишката:"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Close all"
+msgstr "Затваряне на всички"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Launch new instance"
+msgstr "Стартиране на ново копие"
+
+#: ../src/_dialogs.xml.h:11
 msgid "Behavior"
 msgstr "Поведение"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
 msgstr "Стил на активният индикатор:"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:13
 msgid "Bars"
 msgstr "Ленти"
 
-#: ../src/_dialogs.xml.h:11
+#: ../src/_dialogs.xml.h:14
 msgid "Dots"
 msgstr "Точки"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
 msgid "Rectangles"
 msgstr "Правоъгълници"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:16
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:17
 msgid "Circles"
 msgstr "Кръгове"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "None"
 msgstr "Без"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
 msgstr "Стил на неактивният индикатор:"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
 msgstr "Ориентация на индикатора:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Bottom"
 msgstr "Отдолу"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
 msgid "Right"
 msgstr "Отдясно"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:24
 msgid "Top"
 msgstr "Отгоре"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Left"
 msgstr "Отляво"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:26
 msgid "Get indicator color from theme"
 msgstr "Вземи цвят за индикатора от темата"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:27
 msgid "Active indicator:"
 msgstr "Активен индикатор:"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:28
 msgid "Inactive indicator:"
 msgstr "Неактивен индикатор:"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:29
 msgid "Force icon size:"
 msgstr "Форсиран размер на икона:"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:30
 msgid "Appearance"
 msgstr "Външен вид"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:31
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Превключване между приложенията с<SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:32
 msgid "Switch to the last window with <SUPER>"
 msgstr "Преминаване към последния прозорец с <SUPER>"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:33
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -185,6 +197,6 @@ msgstr ""
 "<b>Тази опция ще бъде деактивирана.</b>\n"
 "Изисква разширение X11 XInput2.0, което не се предоставя от вашата система."
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
 msgstr "Бързи клавиши на клавиатурата"
