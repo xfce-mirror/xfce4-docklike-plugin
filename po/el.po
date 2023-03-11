@@ -5,18 +5,18 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2023
-# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2023
 # Ioannis LM, 2023
 # Nick Schermer <nick@xfce.org>, 2023
+# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-docklike-plugin\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:01+0100\n"
+"POT-Creation-Date: 2023-03-02 12:55+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Nick Schermer <nick@xfce.org>, 2023\n"
+"Last-Translator: Πέτρος Σαμαράς <psamaras1@gmail.com>, 2023\n"
 "Language-Team: Greek (https://www.transifex.com/xfce/teams/16840/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,15 +26,15 @@ msgstr ""
 
 #: ../src/Wnck.cpp:202
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Καρφιτσωμένα στη Γραμμή εργασιών"
 
 #: ../src/Wnck.cpp:202
 msgid "Pin to Dock"
-msgstr ""
+msgstr "Καρφίτσωμα στη Γραμμή εργασιών"
 
 #: ../src/Wnck.cpp:203
 msgid "Edit Launcher"
-msgstr ""
+msgstr "Επεξεργασία Εκτελεστή"
 
 #: ../src/Wnck.cpp:230
 msgid "Close All"
@@ -44,12 +44,12 @@ msgstr "Κλείσιμο όλων των εφαρμογών"
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:225
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Μόνο τα πρώτα %u πλήκτρα πρόσβασης είναι ενεργοποιημένα.</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:227
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -73,120 +73,132 @@ msgstr "_Κλείσιμο"
 
 #: ../src/_dialogs.xml.h:3
 msgid "Don't show the window list for a single window"
-msgstr ""
+msgstr "Να μην εμφανίζεται λίστα για ένα μόνο παράθυρο"
 
 #: ../src/_dialogs.xml.h:4
 msgid "Only show applications on the current workspace"
-msgstr ""
+msgstr "Εμφάνιση παραθύρων μόνο από την ίδια επιφάνεια εργασίας"
 
 #: ../src/_dialogs.xml.h:5
 msgid "Only show applications on the current display"
-msgstr ""
+msgstr "Εμφάνιση παραθύρων μόνο από την ίδια οθόνη"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Εμφάνιση μικρογραφιών για ανοιχτά παράθυρα"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Εμφάνιση αριθμού ανοιχτών παραθύρων (για περισσότερα από 2)"
 
 #: ../src/_dialogs.xml.h:8
+msgid "Middle mouse button:"
+msgstr "Μεσαίο κουμπί ποντικιού:"
+
+#: ../src/_dialogs.xml.h:9
+msgid "Close all"
+msgstr "Κλείσιμο όλων"
+
+#: ../src/_dialogs.xml.h:10
+msgid "Launch new instance"
+msgstr "Εκκίνηση νέου παραθύρου εφαρμογής"
+
+#: ../src/_dialogs.xml.h:11
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
-#: ../src/_dialogs.xml.h:9
+#: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Μορφή δείκτη ενεργού:"
 
-#: ../src/_dialogs.xml.h:10
+#: ../src/_dialogs.xml.h:13
 msgid "Bars"
 msgstr "Ράβδοι"
 
-#: ../src/_dialogs.xml.h:11
+#: ../src/_dialogs.xml.h:14
 msgid "Dots"
 msgstr "Τελείες"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:15
 msgid "Rectangles"
 msgstr "Ορθογώνια"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:16
 msgid "Ciliora"
-msgstr ""
+msgstr "Ciliora"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:17
 msgid "Circles"
-msgstr ""
+msgstr "Κύκλοι"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:18
 msgid "None"
 msgstr "Κανένα"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Μορφή δείκτη μη ενεργού:"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
 msgstr "Προσανατολισμός δείκτη:"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:21
 msgid "Automatic"
-msgstr ""
+msgstr "Αυτόματο"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:22
 msgid "Bottom"
 msgstr "Κάτω μέρος"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:23
 msgid "Right"
 msgstr "Δεξιά"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:24
 msgid "Top"
 msgstr "Πάνω"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:25
 msgid "Left"
 msgstr "Αριστερά"
 
-#: ../src/_dialogs.xml.h:23
-msgid "Get indicator color from theme"
-msgstr ""
-
-#: ../src/_dialogs.xml.h:24
-msgid "Active indicator:"
-msgstr ""
-
-#: ../src/_dialogs.xml.h:25
-msgid "Inactive indicator:"
-msgstr ""
-
 #: ../src/_dialogs.xml.h:26
-msgid "Force icon size:"
-msgstr "Περιορισμός μεγέθους εικονιδίων:"
+msgid "Get indicator color from theme"
+msgstr "Ορισμός χρώματος δείκτη από το θέμα"
 
 #: ../src/_dialogs.xml.h:27
-msgid "Appearance"
-msgstr "Παρουσίαση"
+msgid "Active indicator:"
+msgstr "Δείκτης ενεργού:"
 
 #: ../src/_dialogs.xml.h:28
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Εναλλαγή μεταξύ εφαρμογών με τον συνδυασμό <SUPER>+[1, 2, ...]"
+msgid "Inactive indicator:"
+msgstr "Δείκτης μη ενεργού:"
 
 #: ../src/_dialogs.xml.h:29
-msgid "Switch to the last window with <SUPER>"
-msgstr "Εναλλαγή στο τελευταίο παράθυρο με το πλήκτρο <SUPER>"
+msgid "Force icon size:"
+msgstr "Επιβολή μεγέθους εικονιδίων:"
 
 #: ../src/_dialogs.xml.h:30
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: ../src/_dialogs.xml.h:31
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Εναλλαγή μεταξύ εφαρμογών με <SUPER>+[1, 2, ...]"
+
+#: ../src/_dialogs.xml.h:32
+msgid "Switch to the last window with <SUPER>"
+msgstr "Εναλλαγή στο τελευταίο παράθυρο με <SUPER>"
+
+#: ../src/_dialogs.xml.h:33
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Αυτή η λειτουργία είναι απενεργοποιημένη.</b>\n"
-"Απαιτείται η επέκταση X11 XInput2.0 η οποία δεν υποστηρίζεται από το σύστημά σας."
+"Προϋποθέτει την επέκταση X11 XInput2.0 η οποία δεν παρέχεται από το σύστημά σας."
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
 msgstr "Συνδυασμοί πληκτρολογίου"
