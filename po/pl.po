@@ -99,7 +99,7 @@ msgstr "Zamknij wszystkie"
 
 #: ../src/_dialogs.xml.h:10
 msgid "Launch new instance"
-msgstr "Uruchom nową instancję"
+msgstr "Uruchom nowe wystąpienie"
 
 #: ../src/_dialogs.xml.h:11
 msgid "Behavior"
