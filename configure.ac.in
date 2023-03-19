@@ -67,6 +67,11 @@ dnl *** Check for i18n support ***
 dnl ******************************
 XDT_I18N([@LINGUAS@])
 
+dnl ***********************************
+dnl *** Check for debugging support ***
+dnl ***********************************
+XDT_FEATURE_DEBUG()
+
 dnl ************************
 dnl *** Makefile outputs ***
 dnl ************************
