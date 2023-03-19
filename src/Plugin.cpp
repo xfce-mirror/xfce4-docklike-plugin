@@ -71,8 +71,8 @@ namespace Plugin
 	{
 		const gchar* AUTHORS[] = {
 			"Nicolas Szabo <nszabo@vivaldi.net> © 2019-2020",
-			"David Keogh <davidtkeogh@gmail.com> © 2020-2021"
-			"\n",
+			"David Keogh <davidtkeogh@gmail.com> © 2020-2021",
+			"The Xfce development team © 2022-2023",
 			NULL};
 
 		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
