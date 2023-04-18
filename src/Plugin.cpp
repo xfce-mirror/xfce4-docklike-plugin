@@ -70,8 +70,8 @@ namespace Plugin
 	void aboutDialog()
 	{
 		const gchar* AUTHORS[] = {
-			"Nicolas Szabo <nszabo@vivaldi.net>,
-			"David Keogh <davidtkeogh@gmail.com>,
+			"Nicolas Szabo <nszabo@vivaldi.net>",
+			"David Keogh <davidtkeogh@gmail.com>",
 			NULL};
 
 		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
