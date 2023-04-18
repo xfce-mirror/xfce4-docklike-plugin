@@ -70,9 +70,8 @@ namespace Plugin
 	void aboutDialog()
 	{
 		const gchar* AUTHORS[] = {
-			"Nicolas Szabo <nszabo@vivaldi.net> © 2019-2020",
-			"David Keogh <davidtkeogh@gmail.com> © 2020-2021",
-			"The Xfce development team © 2022-2023",
+			"Nicolas Szabo <nszabo@vivaldi.net>,
+			"David Keogh <davidtkeogh@gmail.com>,
 			NULL};
 
 		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
@@ -93,7 +92,7 @@ namespace Plugin
 			"program-name", "Docklike Taskbar",
 			"logo-icon-name", "preferences-system-windows",
 			"version", PACKAGE_VERSION,
-			"copyright", "Copyright © 2019-2021",
+			"copyright", "Copyright \302\251 2003-2023 The Xfce development team",
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"authors", AUTHORS,
 			"translator-credits", TRANSLATORS,
