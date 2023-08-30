@@ -193,6 +193,7 @@ namespace AppInfos
 			while ((entry = readdir(directory)) != NULL)
 				loadDesktopEntry(xdgDir, entry->d_name);
 
+			closedir(directory);
 			PANEL_DEBUG("APPDIR: %s", xdgDir.c_str());
 		}
 	}
