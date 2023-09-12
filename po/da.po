@@ -53,6 +53,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
+"Kombinationen &lt;SUPER&gt;+%u ser allerede ud til at være i brug af en anden process.\n"
+"Tjek dine Xfce-indstillinger."
 
 #. namespace SettingsDialog
 #: ../src/docklike.desktop.in.h:1
@@ -105,7 +107,7 @@ msgstr "Opførsel"
 
 #: ../src/_dialogs.xml.h:12
 msgid "Active indicator style:"
-msgstr ""
+msgstr "Stil for aktiv indikator:"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Bars"
@@ -133,7 +135,7 @@ msgstr "Ingen"
 
 #: ../src/_dialogs.xml.h:19
 msgid "Inactive indicator style:"
-msgstr ""
+msgstr "Stil for inaktiv indikator:"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Indicator orientation:"
@@ -161,7 +163,7 @@ msgstr "Venstre"
 
 #: ../src/_dialogs.xml.h:26
 msgid "Get indicator color from theme"
-msgstr ""
+msgstr "Hent indikatorfarve fra tema"
 
 #: ../src/_dialogs.xml.h:27
 msgid "Active indicator:"
@@ -192,6 +194,8 @@ msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
+"<b>Funktionaliteten er deaktiveret.</b>\n"
+"Den kræver X11 XInput2.0-udvidelsen, som ikke findes på dit system."
 
 #: ../src/_dialogs.xml.h:35
 msgid "Keyboard hotkeys"
