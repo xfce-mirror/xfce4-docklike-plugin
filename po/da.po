@@ -24,15 +24,15 @@ msgstr ""
 
 #: ../src/Wnck.cpp:202
 msgid "Pinned to Dock"
-msgstr "Fastgjort til Dock"
+msgstr "Fastgjort til dok"
 
 #: ../src/Wnck.cpp:202
 msgid "Pin to Dock"
-msgstr "Fastgør til Dock"
+msgstr "Fastgør til dok"
 
 #: ../src/Wnck.cpp:203
 msgid "Edit Launcher"
-msgstr "Rediger Launcher"
+msgstr "Rediger programstarter"
 
 #: ../src/Wnck.cpp:230
 msgid "Close All"
@@ -67,7 +67,7 @@ msgstr "_Hjælp"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
-msgstr "_Tæt"
+msgstr "_Luk"
 
 #: ../src/_dialogs.xml.h:3
 msgid "Don't show the window list for a single window"
@@ -75,15 +75,15 @@ msgstr "Vis ikke vindueslisten for et enkelt vindue"
 
 #: ../src/_dialogs.xml.h:4
 msgid "Only show applications on the current workspace"
-msgstr "Vis kun applikationer på det aktuelle arbejdsområde"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:5
 msgid "Only show applications on the current display"
-msgstr "Vis kun applikationer på det aktuelle skærm"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr "Vis miniaturebilleder til forhåndsvisning til åbne vinduer"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
@@ -111,7 +111,7 @@ msgstr "Stil for aktiv indikator:"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Bars"
-msgstr "Barer"
+msgstr ""
 
 #: ../src/_dialogs.xml.h:14
 msgid "Dots"
@@ -147,15 +147,15 @@ msgstr "Automatisk"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Bottom"
-msgstr "Bund"
+msgstr "Nederst"
 
 #: ../src/_dialogs.xml.h:23
 msgid "Right"
-msgstr "Ret"
+msgstr "Højre"
 
 #: ../src/_dialogs.xml.h:24
 msgid "Top"
-msgstr "Bjergtop"
+msgstr "Øverst"
 
 #: ../src/_dialogs.xml.h:25
 msgid "Left"
@@ -183,11 +183,11 @@ msgstr "Udseende"
 
 #: ../src/_dialogs.xml.h:31
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Skift mellem applikationer med <SUPER>+[1, 2, ...]"
+msgstr "Skift mellem programmer med <SUPER>+[1, 2, ...]"
 
 #: ../src/_dialogs.xml.h:32
 msgid "Switch to the last window with <SUPER>"
-msgstr "Skift til det sidste vindue med <SUPER> "
+msgstr "Skift til den sidste vindue med <SUPER>"
 
 #: ../src/_dialogs.xml.h:33
 msgid ""
