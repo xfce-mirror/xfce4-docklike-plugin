@@ -75,11 +75,11 @@ msgstr "Vis ikke vindueslisten for et enkelt vindue"
 
 #: ../src/_dialogs.xml.h:4
 msgid "Only show applications on the current workspace"
-msgstr ""
+msgstr "Vis kun programmer på det nuværende arbejdsområde"
 
 #: ../src/_dialogs.xml.h:5
 msgid "Only show applications on the current display"
-msgstr ""
+msgstr "Vis kun programmer på den nuværende skærm"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
@@ -111,7 +111,7 @@ msgstr "Stil for aktiv indikator:"
 
 #: ../src/_dialogs.xml.h:13
 msgid "Bars"
-msgstr ""
+msgstr "Bjælker"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Dots"
