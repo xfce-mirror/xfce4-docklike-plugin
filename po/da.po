@@ -83,7 +83,7 @@ msgstr "Vis kun programmer på den nuværende skærm"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Vis forhåndsvisningsminiaturer for åbne vinduer"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
