@@ -23,7 +23,8 @@
 enum MiddleButtonBehavior
 {
 	BEHAVIOR_CLOSE_ALL,
-	BEHAVIOR_LAUNCH_NEW
+	BEHAVIOR_LAUNCH_NEW,
+	BEHAVIOR_DO_NOTHING
 };
 
 enum IndicatorOrientation
