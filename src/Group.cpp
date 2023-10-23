@@ -853,10 +853,16 @@ void Group::onButtonRelease(GdkEventButton* event)
 			case BEHAVIOR_CLOSE_ALL:
 			{
 				closeAll();
+				break;
 			}
 			case BEHAVIOR_LAUNCH_NEW:
 			{
 				mAppInfo->launch();
+				break;
+			}
+			case BEHAVIOR_DO_NOTHING:
+			{
+				break;
 			}
 		}
 	}
