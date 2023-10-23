@@ -194,6 +194,7 @@
                             <items>
                               <item translatable="yes">Close all</item>
                               <item translatable="yes">Launch new instance</item>
+                              <item translatable="yes">Do Nothing</item>
                             </items>
                           </object>
                           <packing>
