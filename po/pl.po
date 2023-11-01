@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 12:55+0100\n"
+"POT-Creation-Date: 2023-10-23 12:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Marek Adamski, 2023\n"
-"Language-Team: Polish (https://www.transifex.com/xfce/teams/16840/pl/)\n"
+"Language-Team: Polish (https://app.transifex.com/xfce/teams/16840/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -102,94 +102,98 @@ msgid "Launch new instance"
 msgstr "Uruchom nowe wystąpienie"
 
 #: ../src/_dialogs.xml.h:11
+msgid "Do Nothing"
+msgstr "Nic nie rób"
+
+#: ../src/_dialogs.xml.h:12
 msgid "Behavior"
 msgstr "Zachowanie"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:13
 msgid "Active indicator style:"
 msgstr "Styl wskaźnika aktywnych:"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:14
 msgid "Bars"
 msgstr "Paski"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:15
 msgid "Dots"
 msgstr "Kropki"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:16
 msgid "Rectangles"
 msgstr "Prostokąty"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:17
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:18
 msgid "Circles"
 msgstr "Kręgi"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:19
 msgid "None"
 msgstr "Żaden"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:20
 msgid "Inactive indicator style:"
 msgstr "Styl wskaźnika nieaktywnych:"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:21
 msgid "Indicator orientation:"
 msgstr "Orientacja wskaźnika:"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:22
 msgid "Automatic"
 msgstr "Automatyczna"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:23
 msgid "Bottom"
 msgstr "Dolna"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:24
 msgid "Right"
 msgstr "Prawa"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:25
 msgid "Top"
 msgstr "Górna"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:26
 msgid "Left"
 msgstr "Lewa"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:27
 msgid "Get indicator color from theme"
 msgstr "Pobierz kolor wskaźnika z motywu"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:28
 msgid "Active indicator:"
 msgstr "Wskaźnik aktywnych:"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:29
 msgid "Inactive indicator:"
 msgstr "Wskaźnik nieaktywnych:"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:30
 msgid "Force icon size:"
 msgstr "Wymuś rozmiar ikon:"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:31
 msgid "Appearance"
 msgstr "Wygląd"
 
-#: ../src/_dialogs.xml.h:31
+#: ../src/_dialogs.xml.h:32
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Przełączaj się między aplikacjami za pomocą <SUPER>+[1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:33
 msgid "Switch to the last window with <SUPER>"
 msgstr "Przechodź do ostatniego okna za pomocą <SUPER>"
 
-#: ../src/_dialogs.xml.h:33
+#: ../src/_dialogs.xml.h:34
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -197,6 +201,6 @@ msgstr ""
 "<b>Ta funkcja jest wyłączona.</b>\n"
 "Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten system."
 
-#: ../src/_dialogs.xml.h:35
+#: ../src/_dialogs.xml.h:36
 msgid "Keyboard hotkeys"
 msgstr "Skróty klawiszowe"
