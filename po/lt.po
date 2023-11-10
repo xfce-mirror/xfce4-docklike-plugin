@@ -167,7 +167,7 @@ msgstr "Kairė"
 
 #: ../src/_dialogs.xml.h:27
 msgid "Get indicator color from theme"
-msgstr "Gauti indikatoriaus spalvą iš temos"
+msgstr "Gauti indikatoriaus spalvą iš apipavidalinimo"
 
 #: ../src/_dialogs.xml.h:28
 msgid "Active indicator:"
