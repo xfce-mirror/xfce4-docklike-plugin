@@ -139,7 +139,7 @@ namespace AppInfos
 		if (gAppInfo == NULL)
 			return;
 
-		char* name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+		char* name_ = g_desktop_app_info_get_locale_string(gAppInfo, "Name");
 		std::string name = (name_ != NULL) ? name_ : id;
 
 		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
