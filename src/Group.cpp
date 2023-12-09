@@ -506,18 +506,18 @@ void Group::onDraw(cairo_t* cr)
 		{
 			if (mSMany)
 			{
-				double x0, y0, x1, y1, radius;
+				double x0 = 0, y0 = 0, x1 = 0, y1 = 0, radius = 0;
 
 				if (orientation == ORIENTATION_BOTTOM)
 				{
-				    radius = h * CIRCLE_WEIGHT;
+					radius = h * CIRCLE_WEIGHT;
 					x0 = (w / 2.) - radius * 1.5;
 					x1 = (w / 2.) + radius * 1.5;
 					y0 = y1 = h - radius;
 				}
 				else if (orientation == ORIENTATION_RIGHT)
 				{
-				    radius = w * CIRCLE_WEIGHT;
+					radius = w * CIRCLE_WEIGHT;
 					y0 = (h / 2.) - radius * 1.5;
 					y1 = (h / 2.) + radius * 1.5;
 					x0 = x1 = w - radius;
@@ -549,7 +549,7 @@ void Group::onDraw(cairo_t* cr)
 			}
 			else
 			{
-				double x, y, radius;
+				double x = 0, y = 0, radius = 0;
 
 				if (orientation == ORIENTATION_BOTTOM)
 				{
@@ -591,7 +591,7 @@ void Group::onDraw(cairo_t* cr)
 		{
 			if (mSMany)
 			{
-				double x0, y0, x1, y1;
+				double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
 
 				if (orientation == ORIENTATION_BOTTOM)
 				{
@@ -640,7 +640,7 @@ void Group::onDraw(cairo_t* cr)
 			}
 			else
 			{
-				double x, y;
+				double x = 0, y = 0;
 
 				if (orientation == ORIENTATION_BOTTOM)
 				{
