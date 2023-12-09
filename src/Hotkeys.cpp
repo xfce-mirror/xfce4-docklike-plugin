@@ -144,10 +144,12 @@ namespace Hotkeys
 						if (toTrigger)
 							gdk_threads_add_idle(threadSafeSwitch, NULL);
 				if (cookie->evtype == XI_RawKeyPress)
+				{
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						toTrigger = true;
 					else
 						toTrigger = false;
+				}
 			}
 		}
 	}
@@ -155,6 +157,7 @@ namespace Hotkeys
 	static void startStopXIKeyListenner(bool start)
 	{
 		if (mXIExtAvailable && start)
+		{
 			if (!mThread)
 				pthread_create(&mThread, NULL, threadedXIKeyListenner, NULL);
 			else if (mThread)
@@ -164,6 +167,7 @@ namespace Hotkeys
 				pthread_join(mThread, &ret);
 				mThread = 0;
 			}
+		}
 	}
 
 	static void checkXIExtension(Display* display)

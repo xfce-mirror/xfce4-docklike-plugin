@@ -149,6 +149,7 @@ namespace Dock
 			GtkWidget* widget = (GtkWidget*)child->data;
 
 			if (gtk_widget_get_visible(widget))
+			{
 				if (i == nb)
 				{
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
@@ -164,6 +165,7 @@ namespace Dock
 				}
 				else
 					++i;
+			}
 		}
 	}
 
