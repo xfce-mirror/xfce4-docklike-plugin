@@ -83,7 +83,8 @@ namespace Wnck
 				{
 					GroupWindow* activeWindow = mGroupWindows.get(activeXID);
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
-					gtk_widget_queue_draw(activeWindow->mGroup->mButton);
+					if (activeWindow->mGroup->mButton != NULL)
+						gtk_widget_queue_draw(activeWindow->mGroup->mButton);
 				}
 				if (previousActiveWindow != NULL)
 				{
@@ -95,7 +96,8 @@ namespace Wnck
 						{
 							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
-							gtk_widget_queue_draw(prevWindow->mGroup->mButton);
+							if (prevWindow->mGroup->mButton != NULL)
+								gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 						}
 					}
 				}

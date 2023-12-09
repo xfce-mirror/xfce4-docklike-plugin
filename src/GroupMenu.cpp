@@ -120,6 +120,9 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 	GdkDisplay *display;
 	GdkMonitor *monitor;
 
+	if (mGroup->mButton == NULL)
+		return;
+
 	screen = gtk_widget_get_screen(mGroup->mButton);
 	display = gdk_screen_get_display(screen);
 	monitor = gdk_display_get_monitor_at_window(display, gtk_widget_get_window(mGroup->mButton));

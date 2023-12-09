@@ -54,6 +54,11 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	//--------------------------------------------------
 
 	mButton = gtk_button_new();
+	// This probably shouldn't be necessary, if this widget wasn't a public member and was
+	// destroyed in its class destructor. But in the absence of a better fix, this reset with
+	// sanity checks avoids crashes all over the plugin.
+	g_signal_connect(mButton, "destroy", G_CALLBACK(gtk_widget_destroyed), &mButton);
+
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	GtkWidget* overlay = gtk_overlay_new();
@@ -142,7 +147,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
+			if (me->mButton != NULL)
+				Help::Gtk::cssClassAdd(me->mButton, "hover_group");
 			me->mSHover = true;
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
@@ -158,7 +164,8 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
+			if (me->mButton != NULL)
+				Help::Gtk::cssClassRemove(me->mButton, "hover_group");
 			me->mSHover = false;
 			me->mMenuShowTimeout.stop();
 
@@ -210,6 +217,10 @@ void Group::add(GroupWindow* window)
 	mWindows.push(window);
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
+
+	if (mButton == NULL)
+		return;
+
 	Help::Gtk::cssClassAdd(mButton, "open_group");
 
 	if (mWindowsCount == 1 && !mPinned)
@@ -224,6 +235,9 @@ void Group::remove(GroupWindow* window)
 	mWindowsCount.updateState();
 	mGroupMenu.remove(window->mGroupMenuItem);
 	mSFocus = false;
+
+	if (mButton == NULL)
+		return;
 
 	if (!mWindowsCount)
 		Help::Gtk::cssClassRemove(mButton, "open_group");
@@ -287,13 +301,18 @@ void Group::resize()
 		gtk_image_set_pixel_size(GTK_IMAGE(mImage), Dock::mIconSize);
 
 	gtk_widget_set_valign(mImage, GTK_ALIGN_CENTER);
-	gtk_widget_queue_draw(mButton);
+	if (mButton != NULL)
+		gtk_widget_queue_draw(mButton);
 }
 
 void Group::onDraw(cairo_t* cr)
 {
-	int w = gtk_widget_get_allocated_width(mButton);
-	int h = gtk_widget_get_allocated_height(mButton);
+	int w = 0, h = 0;
+	if (mButton != NULL)
+	{
+		w = gtk_widget_get_allocated_width(mButton);
+		h = gtk_widget_get_allocated_height(mButton);
+	}
 
 	double rgba[4];
 
@@ -749,6 +768,9 @@ void Group::updateStyle()
 {
 	int wCount = mWindowsCount;
 
+	if (mButton == NULL)
+		return;
+
 	if (mPinned || wCount)
 		gtk_widget_show_all(mButton);
 	else
@@ -807,7 +829,8 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		mSFocus = true;
 		setTopWindow(groupWindow);
-		Help::Gtk::cssClassAdd(mButton, "active_group");
+		if (mButton != NULL)
+			Help::Gtk::cssClassAdd(mButton, "active_group");
 	}
 }
 
@@ -815,7 +838,8 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	mSFocus = false;
-	Help::Gtk::cssClassRemove(mButton, "active_group");
+	if (mButton != NULL)
+		Help::Gtk::cssClassRemove(mButton, "active_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)
@@ -837,8 +861,11 @@ void Group::onButtonPress(GdkEventButton* event)
 		GtkWidget* menu = Wnck::buildActionMenu(win, this);
 
 		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
-		gtk_menu_attach_to_widget(GTK_MENU(menu), mButton, NULL);
-		gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+		if (mButton != NULL)
+		{
+			gtk_menu_attach_to_widget(GTK_MENU(menu), mButton, NULL);
+			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+		}
 
 		mGroupMenu.hide();
 	}
@@ -905,14 +932,16 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	gtk_drag_highlight(mButton);
+	if (mButton != NULL)
+		gtk_drag_highlight(mButton);
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	gtk_drag_unhighlight(mButton);
+	if (mButton != NULL)
+		gtk_drag_unhighlight(mButton);
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
