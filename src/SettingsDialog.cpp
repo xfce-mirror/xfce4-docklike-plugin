@@ -38,13 +38,13 @@ namespace SettingsDialog
 			dialog);
 
 		g_signal_connect(dialog, "close",
-			G_CALLBACK(+[](GtkDialog* dialog) {
+			G_CALLBACK(+[](GtkDialog* _dialog) {
 				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
 			}),
 			NULL);
 
 		g_signal_connect(dialog, "response",
-			G_CALLBACK(+[](GtkDialog* dialog, gint response) {
+			G_CALLBACK(+[](GtkDialog* _dialog, gint response) {
 				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
 			}),
 			NULL);
@@ -62,8 +62,8 @@ namespace SettingsDialog
 		GObject* onlyDisplayVisible = gtk_builder_get_object(builder, "c_onlyDisplayVisible");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayVisible), Settings::onlyDisplayVisible);
 		g_signal_connect(onlyDisplayVisible, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* onlyDisplayVisible) {
-				Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(onlyDisplayVisible));
+			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
+				Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
 				Wnck::setVisibleGroups();
 			}),
 			NULL);
@@ -71,8 +71,8 @@ namespace SettingsDialog
 		GObject* onlyDisplayScreen = gtk_builder_get_object(builder, "c_onlyDisplayScreen");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayScreen), Settings::onlyDisplayScreen);
 		g_signal_connect(onlyDisplayScreen, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* onlyDisplayScreen) {
-				Settings::onlyDisplayScreen.set(gtk_toggle_button_get_active(onlyDisplayScreen));
+			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayScreen) {
+				Settings::onlyDisplayScreen.set(gtk_toggle_button_get_active(_onlyDisplayScreen));
 				Wnck::setVisibleGroups();
 			}),
 			NULL);
@@ -80,24 +80,24 @@ namespace SettingsDialog
 		GObject* showPreviews = gtk_builder_get_object(builder, "c_showPreviews");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showPreviews), Settings::showPreviews);
 		g_signal_connect(showPreviews, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* showPreviews) {
-				Settings::showPreviews.set(gtk_toggle_button_get_active(showPreviews));
+			G_CALLBACK(+[](GtkToggleButton* _showPreviews) {
+				Settings::showPreviews.set(gtk_toggle_button_get_active(_showPreviews));
 			}),
 			NULL);
 		
 		GObject* showWindowCount = gtk_builder_get_object(builder, "c_showWindowCount");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showWindowCount), Settings::showWindowCount);
 		g_signal_connect(showWindowCount, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* showWindowCount) {
-				Settings::showWindowCount.set(gtk_toggle_button_get_active(showWindowCount));
+			G_CALLBACK(+[](GtkToggleButton* _showWindowCount) {
+				Settings::showWindowCount.set(gtk_toggle_button_get_active(_showWindowCount));
 			}),
 			NULL);
 
 		GObject* middleButtonBehavior = gtk_builder_get_object(builder, "co_middleButtonBehavior");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(middleButtonBehavior), Settings::middleButtonBehavior);
 		g_signal_connect(middleButtonBehavior, "changed",
-			G_CALLBACK(+[](GtkComboBox* middleButtonBehavior, GtkWidget* g) {
-				Settings::middleButtonBehavior.set(gtk_combo_box_get_active(GTK_COMBO_BOX(middleButtonBehavior)));
+			G_CALLBACK(+[](GtkComboBox* _middleButtonBehavior, GtkWidget* g) {
+				Settings::middleButtonBehavior.set(gtk_combo_box_get_active(GTK_COMBO_BOX(_middleButtonBehavior)));
 			}),
 			dialog);
 
@@ -106,24 +106,24 @@ namespace SettingsDialog
 		GObject* indicatorOrientation = gtk_builder_get_object(builder, "co_indicatorOrientation");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(indicatorOrientation), Settings::indicatorOrientation);
 		g_signal_connect(indicatorOrientation, "changed",
-			G_CALLBACK(+[](GtkComboBox* indicatorOrientation, GtkWidget* g) {
-				Settings::indicatorOrientation.set(gtk_combo_box_get_active(GTK_COMBO_BOX(indicatorOrientation)));
+			G_CALLBACK(+[](GtkComboBox* _indicatorOrientation, GtkWidget* g) {
+				Settings::indicatorOrientation.set(gtk_combo_box_get_active(GTK_COMBO_BOX(_indicatorOrientation)));
 			}),
 			dialog);
 
 		GObject* indicatorStyle = gtk_builder_get_object(builder, "co_indicatorStyle");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(indicatorStyle), Settings::indicatorStyle);
 		g_signal_connect(indicatorStyle, "changed",
-			G_CALLBACK(+[](GtkComboBox* indicatorStyle, GtkWidget* g) {
-				Settings::indicatorStyle.set(gtk_combo_box_get_active(GTK_COMBO_BOX(indicatorStyle)));
+			G_CALLBACK(+[](GtkComboBox* _indicatorStyle, GtkWidget* g) {
+				Settings::indicatorStyle.set(gtk_combo_box_get_active(GTK_COMBO_BOX(_indicatorStyle)));
 			}),
 			dialog);
 
 		GObject* inactiveIndicatorStyle = gtk_builder_get_object(builder, "co_inactiveIndicatorStyle");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(inactiveIndicatorStyle), Settings::inactiveIndicatorStyle);
 		g_signal_connect(inactiveIndicatorStyle, "changed",
-			G_CALLBACK(+[](GtkComboBox* inactiveIndicatorStyle, GtkWidget* g) {
-				Settings::inactiveIndicatorStyle.set(gtk_combo_box_get_active(GTK_COMBO_BOX(inactiveIndicatorStyle)));
+			G_CALLBACK(+[](GtkComboBox* _inactiveIndicatorStyle, GtkWidget* g) {
+				Settings::inactiveIndicatorStyle.set(gtk_combo_box_get_active(GTK_COMBO_BOX(_inactiveIndicatorStyle)));
 			}),
 			dialog);
 
@@ -133,10 +133,10 @@ namespace SettingsDialog
 		GObject* indicatorColor = gtk_builder_get_object(builder, "cp_indicatorColor");
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor);
 		g_signal_connect(indicatorColor, "color-set",
-			G_CALLBACK(+[](GtkColorButton* indicatorColor, GtkWidget* g) {
+			G_CALLBACK(+[](GtkColorButton* _indicatorColor, GtkWidget* g) {
 				gdk_rgba_free(Settings::indicatorColor);
 				GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
-				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(indicatorColor), color);
+				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_indicatorColor), color);
 				Settings::indicatorColor.set(gdk_rgba_copy(color));
 			}),
 			dialog);
@@ -144,10 +144,10 @@ namespace SettingsDialog
 		GObject* inactiveColor = gtk_builder_get_object(builder, "cp_inactiveColor");
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(inactiveColor), Settings::inactiveColor);
 		g_signal_connect(inactiveColor, "color-set",
-			G_CALLBACK(+[](GtkColorButton* inactiveColor, GtkWidget* g) {
+			G_CALLBACK(+[](GtkColorButton* _inactiveColor, GtkWidget* g) {
 				gdk_rgba_free(Settings::inactiveColor);
 				GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
-				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(inactiveColor), color);
+				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_inactiveColor), color);
 				Settings::inactiveColor.set(gdk_rgba_copy(color));
 			}),
 			dialog);
@@ -155,9 +155,9 @@ namespace SettingsDialog
 		GObject* indicatorColorFromTheme = gtk_builder_get_object(builder, "c_indicatorColorFromTheme");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(indicatorColorFromTheme), Settings::indicatorColorFromTheme);
 		g_signal_connect(indicatorColorFromTheme, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* indicatorColorFromTheme, GtkWidget* customIndicatorColors) {
-				Settings::indicatorColorFromTheme.set(gtk_toggle_button_get_active(indicatorColorFromTheme));
-				gtk_widget_set_sensitive(GTK_WIDGET(customIndicatorColors), !Settings::indicatorColorFromTheme);
+			G_CALLBACK(+[](GtkToggleButton* _indicatorColorFromTheme, GtkWidget* _customIndicatorColors) {
+				Settings::indicatorColorFromTheme.set(gtk_toggle_button_get_active(_indicatorColorFromTheme));
+				gtk_widget_set_sensitive(GTK_WIDGET(_customIndicatorColors), !Settings::indicatorColorFromTheme);
 			}),
 			customIndicatorColors);
 
@@ -167,8 +167,8 @@ namespace SettingsDialog
 		gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(iconSize))), std::to_string(Settings::iconSize).c_str());
 		gtk_widget_set_sensitive(GTK_WIDGET(iconSize), Settings::forceIconSize);
 		g_signal_connect(iconSize, "changed",
-			G_CALLBACK(+[](GtkComboBox* iconSize) {
-				GtkEntry* entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(iconSize)));
+			G_CALLBACK(+[](GtkComboBox* _iconSize) {
+				GtkEntry* entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(_iconSize)));
 				std::string value = Help::String::numericOnly(gtk_entry_get_text(entry));
 				gtk_entry_set_text(entry, value.c_str());
 				Settings::iconSize.set(std::stoi("0" + value));
@@ -178,9 +178,9 @@ namespace SettingsDialog
 		GObject* forceIconSize = gtk_builder_get_object(builder, "c_forceIconSize");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(forceIconSize), Settings::forceIconSize);
 		g_signal_connect(forceIconSize, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* forceIconSize, GtkWidget* iconSize) {
-				Settings::forceIconSize.set(gtk_toggle_button_get_active(forceIconSize));
-				gtk_widget_set_sensitive(GTK_WIDGET(iconSize), Settings::forceIconSize);
+			G_CALLBACK(+[](GtkToggleButton* _forceIconSize, GtkWidget* _iconSize) {
+				Settings::forceIconSize.set(gtk_toggle_button_get_active(_forceIconSize));
+				gtk_widget_set_sensitive(GTK_WIDGET(_iconSize), Settings::forceIconSize);
 			}),
 			iconSize);
 
@@ -190,8 +190,8 @@ namespace SettingsDialog
 		GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
 		g_signal_connect(keyComboActive, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* keyComboActive, GtkWidget* tooltip) {
-				Settings::keyComboActive.set(gtk_toggle_button_get_active(keyComboActive));
+			G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
+				Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
 				updateKeyComboActiveWarning(tooltip);
 			}),
 			keyComboActiveWarning);
@@ -199,8 +199,8 @@ namespace SettingsDialog
 		GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);
 		g_signal_connect(keyAloneActive, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* keyAloneActive) {
-				Settings::keyAloneActive.set(gtk_toggle_button_get_active(keyAloneActive));
+			G_CALLBACK(+[](GtkToggleButton* _keyAloneActive) {
+				Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
 			}),
 			NULL);
 

@@ -193,8 +193,8 @@ namespace Wnck
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
 
 				g_signal_connect(G_OBJECT(actionLauncher), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-						appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
+					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
+						_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
 					}),
 					appInfo);
 			}
@@ -213,17 +213,17 @@ namespace Wnck
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
 				g_signal_connect(G_OBJECT(pinToggle), "toggled",
-					G_CALLBACK(+[](GtkCheckMenuItem* menuitem, Group* group) {
-						group->mPinned = !group->mPinned;
-						if (!group->mPinned)
-							group->updateStyle();
+					G_CALLBACK(+[](GtkCheckMenuItem* menuitem, Group* _group) {
+						_group->mPinned = !_group->mPinned;
+						if (!_group->mPinned)
+							_group->updateStyle();
 						Dock::savePinned();
 					}),
 					group);
 
 				g_signal_connect(G_OBJECT(editLauncher), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* appInfo) {
-						appInfo->edit();
+					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
+						_appInfo->edit();
 					}),
 					appInfo);
 
@@ -235,8 +235,8 @@ namespace Wnck
 					gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
 
 					g_signal_connect(G_OBJECT(closeAll), "activate",
-						G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group) {
-							group->closeAll();
+						G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+							_group->closeAll();
 						}),
 						group);
 				}
@@ -252,12 +252,11 @@ namespace Wnck
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
 
 		g_signal_connect(G_OBJECT(remove), "activate",
-			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* group)
-					   {
-						   group->mPinned = FALSE;
-						   Dock::savePinned();
-						   Dock::drawGroups();
-					   }),
+			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+				_group->mPinned = FALSE;
+				Dock::savePinned();
+				Dock::drawGroups();
+			}),
 			group);
 
 		gtk_widget_show_all(menu);

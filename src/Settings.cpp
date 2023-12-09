@@ -57,68 +57,68 @@ namespace Settings
 		}
 
 		showPreviews.setup(g_key_file_get_boolean(mFile, "user", "showPreviews", NULL),
-			[](bool showPreviews) -> void {
-				g_key_file_set_boolean(mFile, "user", "showPreviews", showPreviews);
+			[](bool _showPreviews) -> void {
+				g_key_file_set_boolean(mFile, "user", "showPreviews", _showPreviews);
 				saveFile();
 			});
 		
 		showWindowCount.setup(g_key_file_get_boolean(mFile, "user", "showWindowCount", NULL),
-			[](bool showWindowCount) -> void {
-				g_key_file_set_boolean(mFile, "user", "showWindowCount", showWindowCount);
+			[](bool _showWindowCount) -> void {
+				g_key_file_set_boolean(mFile, "user", "showWindowCount", _showWindowCount);
 				saveFile();
 
 				Dock::drawGroups();
 			});
 
 		middleButtonBehavior.setup(g_key_file_get_integer(mFile, "user", "middleButtonBehavior", NULL),
-			[](int middleButtonBehavior) -> void {
-				g_key_file_set_integer(mFile, "user", "middleButtonBehavior", middleButtonBehavior);
+			[](int _middleButtonBehavior) -> void {
+				g_key_file_set_integer(mFile, "user", "middleButtonBehavior", _middleButtonBehavior);
 				saveFile();
 			});
 
 		indicatorOrientation.setup(g_key_file_get_integer(mFile, "user", "indicatorOrientation", NULL),
-			[](int indicatorOrientation) -> void {
-				g_key_file_set_integer(mFile, "user", "indicatorOrientation", indicatorOrientation);
+			[](int _indicatorOrientation) -> void {
+				g_key_file_set_integer(mFile, "user", "indicatorOrientation", _indicatorOrientation);
 				saveFile();
 
 				Dock::drawGroups();
 			});
 
 		forceIconSize.setup(g_key_file_get_boolean(mFile, "user", "forceIconSize", NULL),
-			[](bool forceIconSize) -> void {
-				g_key_file_set_boolean(mFile, "user", "forceIconSize", forceIconSize);
+			[](bool _forceIconSize) -> void {
+				g_key_file_set_boolean(mFile, "user", "forceIconSize", _forceIconSize);
 				saveFile();
 
 				Dock::onPanelResize();
 			});
 
 		iconSize.setup(g_key_file_get_integer(mFile, "user", "iconSize", NULL),
-			[](int iconSize) -> void {
-				g_key_file_set_integer(mFile, "user", "iconSize", iconSize);
+			[](int _iconSize) -> void {
+				g_key_file_set_integer(mFile, "user", "iconSize", _iconSize);
 				saveFile();
 
 				Dock::onPanelResize();
 			});
 
 		indicatorStyle.setup(g_key_file_get_integer(mFile, "user", "indicatorStyle", NULL),
-			[](int indicatorStyle) -> void {
-				g_key_file_set_integer(mFile, "user", "indicatorStyle", indicatorStyle);
+			[](int _indicatorStyle) -> void {
+				g_key_file_set_integer(mFile, "user", "indicatorStyle", _indicatorStyle);
 				saveFile();
 
 				Dock::drawGroups();
 			});
 
 		inactiveIndicatorStyle.setup(g_key_file_get_integer(mFile, "user", "inactiveIndicatorStyle", NULL),
-			[](int inactiveIndicatorStyle) -> void {
-				g_key_file_set_integer(mFile, "user", "inactiveIndicatorStyle", inactiveIndicatorStyle);
+			[](int _inactiveIndicatorStyle) -> void {
+				g_key_file_set_integer(mFile, "user", "inactiveIndicatorStyle", _inactiveIndicatorStyle);
 				saveFile();
 
 				Dock::drawGroups();
 			});
 
 		indicatorColorFromTheme.setup(g_key_file_get_boolean(mFile, "user", "indicatorColorFromTheme", NULL),
-			[](bool indicatorColorFromTheme) -> void {
-				g_key_file_set_boolean(mFile, "user", "indicatorColorFromTheme", indicatorColorFromTheme);
+			[](bool _indicatorColorFromTheme) -> void {
+				g_key_file_set_boolean(mFile, "user", "indicatorColorFromTheme", _indicatorColorFromTheme);
 				saveFile();
 
 				Theme::load();
@@ -132,8 +132,8 @@ namespace Settings
 			gdk_rgba_parse(color, "rgb(76,166,230)");
 
 		indicatorColor.setup(color,
-			[](GdkRGBA* indicatorColor) -> void {
-				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(indicatorColor));
+			[](GdkRGBA* _indicatorColor) -> void {
+				g_key_file_set_string(mFile, "user", "indicatorColor", gdk_rgba_to_string(_indicatorColor));
 				saveFile();
 
 				Theme::load();
@@ -147,8 +147,8 @@ namespace Settings
 			gdk_rgba_parse(color, "rgb(76,166,230)");
 
 		inactiveColor.setup(color,
-			[](GdkRGBA* inactiveColor) -> void {
-				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(inactiveColor));
+			[](GdkRGBA* _inactiveColor) -> void {
+				g_key_file_set_string(mFile, "user", "inactiveColor", gdk_rgba_to_string(_inactiveColor));
 				saveFile();
 
 				Theme::load();
@@ -156,34 +156,34 @@ namespace Settings
 			});
 
 		noWindowsListIfSingle.setup(g_key_file_get_boolean(mFile, "user", "noWindowsListIfSingle", NULL),
-			[](bool noWindowsListIfSingle) -> void {
-				g_key_file_set_boolean(mFile, "user", "noWindowsListIfSingle", noWindowsListIfSingle);
+			[](bool _noWindowsListIfSingle) -> void {
+				g_key_file_set_boolean(mFile, "user", "noWindowsListIfSingle", _noWindowsListIfSingle);
 				saveFile();
 			});
 
 		onlyDisplayVisible.setup(g_key_file_get_boolean(mFile, "user", "onlyDisplayVisible", NULL),
-			[](bool onlyDisplayVisible) -> void {
-				g_key_file_set_boolean(mFile, "user", "onlyDisplayVisible", onlyDisplayVisible);
+			[](bool _onlyDisplayVisible) -> void {
+				g_key_file_set_boolean(mFile, "user", "onlyDisplayVisible", _onlyDisplayVisible);
 				saveFile();
 			});
 
 		onlyDisplayScreen.setup(g_key_file_get_boolean(mFile, "user", "onlyDisplayScreen", NULL),
-			[](bool onlyDisplayScreen) -> void {
-				g_key_file_set_boolean(mFile, "user", "onlyDisplayScreen", onlyDisplayScreen);
+			[](bool _onlyDisplayScreen) -> void {
+				g_key_file_set_boolean(mFile, "user", "onlyDisplayScreen", _onlyDisplayScreen);
 				saveFile();
 			});
 
 		keyComboActive.setup(g_key_file_get_boolean(mFile, "user", "keyComboActive", NULL),
-			[](bool keyComboActive) -> void {
-				g_key_file_set_boolean(mFile, "user", "keyComboActive", keyComboActive);
+			[](bool _keyComboActive) -> void {
+				g_key_file_set_boolean(mFile, "user", "keyComboActive", _keyComboActive);
 				saveFile();
 
 				Hotkeys::updateSettings();
 			});
 
 		keyAloneActive.setup(g_key_file_get_boolean(mFile, "user", "keyAloneActive", NULL),
-			[](bool keyAloneActive) -> void {
-				g_key_file_set_boolean(mFile, "user", "keyAloneActive", keyAloneActive);
+			[](bool _keyAloneActive) -> void {
+				g_key_file_set_boolean(mFile, "user", "keyAloneActive", _keyAloneActive);
 				saveFile();
 
 				Hotkeys::updateSettings();
@@ -202,20 +202,20 @@ namespace Settings
 
 		// HIDDEN SETTINGS:
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),
-			[](int dockSize) -> void {
-				g_key_file_set_integer(mFile, "user", "dockSize", dockSize);
+			[](int _dockSize) -> void {
+				g_key_file_set_integer(mFile, "user", "dockSize", _dockSize);
 				saveFile();
 			});
 		
 		previewScale.setup(g_key_file_get_double(mFile, "user", "previewScale", NULL),
-			[](int previewScale) -> void {
-				g_key_file_set_double(mFile, "user", "previewScale", previewScale);
+			[](int _previewScale) -> void {
+				g_key_file_set_double(mFile, "user", "previewScale", _previewScale);
 				saveFile();
 			});
 		
 		previewSleep.setup(g_key_file_get_integer(mFile, "user", "previewSleep", NULL),
-			[](int previewSleep) -> void {
-				g_key_file_set_integer(mFile, "user", "previewSleep", previewSleep);
+			[](int _previewSleep) -> void {
+				g_key_file_set_integer(mFile, "user", "previewSleep", _previewSleep);
 				saveFile();
 			});
 	}
