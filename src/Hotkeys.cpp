@@ -22,7 +22,7 @@ namespace Hotkeys
 
 	// =========================================================================
 
-	GdkFilterReturn hotkeysHandler(GdkXEvent* gdk_xevent, GdkEvent* event, gpointer data)
+	static GdkFilterReturn hotkeysHandler(GdkXEvent* gdk_xevent, GdkEvent* event, gpointer data)
 	{
 		XEvent* xevent = (XEvent*)gdk_xevent;
 
@@ -42,7 +42,7 @@ namespace Hotkeys
 		return GDK_FILTER_CONTINUE;
 	}
 
-	void startStopHotkeysHandler(bool start)
+	static void startStopHotkeysHandler(bool start)
 	{
 		if (start && !mHotkeysHandling)
 		{
@@ -56,7 +56,7 @@ namespace Hotkeys
 		}
 	}
 
-	void grabUngrabHotkeys(bool grab, unsigned int startKey = 0)
+	static void grabUngrabHotkeys(bool grab, unsigned int startKey = 0)
 	{
 		GdkWindow* rootwin = gdk_get_default_root_window();
 		GdkDisplay* display = gdk_window_get_display(rootwin);
@@ -105,13 +105,13 @@ namespace Hotkeys
 	* allowing us to determine the state (consumed or not) of the modifier key when released.
 	*/
 
-	gboolean threadSafeSwitch(gpointer data)
+	static gboolean threadSafeSwitch(gpointer data)
 	{
 		Wnck::switchToLastWindow(g_get_monotonic_time() / 1000);
 		return false;
 	}
 
-	void* threadedXIKeyListenner(void* data)
+	static void* threadedXIKeyListenner(void* data)
 	{
 		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
@@ -152,7 +152,7 @@ namespace Hotkeys
 		}
 	}
 
-	void startStopXIKeyListenner(bool start)
+	static void startStopXIKeyListenner(bool start)
 	{
 		if (mXIExtAvailable && start)
 			if (!mThread)
@@ -166,7 +166,7 @@ namespace Hotkeys
 			}
 	}
 
-	void checkXIExtension(Display* display)
+	static void checkXIExtension(Display* display)
 	{
 		mXIExtAvailable = false;
 

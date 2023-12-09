@@ -80,7 +80,7 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
 	GAppInfoMonitor* mMonitor;
 
-	void findXDGDirectories()
+	static void findXDGDirectories()
 	{
 		char* var = getenv("XDG_DATA_DIRS");
 
@@ -124,7 +124,7 @@ namespace AppInfos
 		mXdgDataDirs.unique();
 	}
 
-	void loadDesktopEntry(const std::string& xdgDir, std::string filename)
+	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
 		#define DOT_DESKTOP ".desktop"
 		constexpr size_t DOT_DESKTOP_SIZE = 8;
@@ -181,7 +181,7 @@ namespace AppInfos
 		}
 	}
 
-	void loadXDGDirectories()
+	static void loadXDGDirectories()
 	{
 		for (const std::string& xdgDir : mXdgDataDirs)
 		{
@@ -214,7 +214,7 @@ namespace AppInfos
 		loadXDGDirectories();
 	}
 
-	void removeDesktopEntry(const std::string& xdgDir, std::string filename)
+	static void removeDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
 		std::string id = filename.substr(0, filename.size() - 8);
 
@@ -232,7 +232,7 @@ namespace AppInfos
 		{"multimc5", "multimc"},
 	};
 
-	void groupNameTransform(std::string& groupName)
+	static void groupNameTransform(std::string& groupName)
 	{
 		std::map<std::string, std::string>::iterator itRenamed;
 		if ((itRenamed = mGroupNameRename.find(groupName)) != mGroupNameRename.end())

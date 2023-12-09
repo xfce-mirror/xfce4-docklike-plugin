@@ -14,7 +14,7 @@ namespace Plugin
 	GdkDevice* mPointer;
 	GdkDisplay* mDisplay;
 
-	void init(XfcePanelPlugin* xfPlugin)
+	static void init(XfcePanelPlugin* xfPlugin)
 	{
 		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, NULL);
 

@@ -27,6 +27,7 @@ extern "C"
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
+void construct(XfcePanelPlugin* xfPlugin);
 }
 
 #define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
