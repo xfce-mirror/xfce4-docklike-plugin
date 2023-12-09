@@ -285,7 +285,10 @@ void Group::closeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
 		if (!w->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
+		{
+			w->mGroupMenuItem->mPreviewTimeout.stop();
 			Wnck::close(w, 0);
+		}
 	});
 }
 
