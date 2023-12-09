@@ -214,15 +214,6 @@ namespace AppInfos
 		loadXDGDirectories();
 	}
 
-	static void removeDesktopEntry(const std::string& xdgDir, std::string filename)
-	{
-		std::string id = filename.substr(0, filename.size() - 8);
-
-		mAppInfoIds.remove(id);
-		mAppInfoNames.remove(id);
-		mAppInfoWMClasses.remove(id);
-	}
-
 	// TODO: Load these from a file so that the user can add their own aliases
 	std::map<std::string, std::string> mGroupNameRename = {
 		{"soffice", "libreoffice-startcenter"},
