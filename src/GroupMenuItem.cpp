@@ -56,7 +56,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
-	int sleepMS = 250;
+	int sleepMS = 1000;
 	if (Settings::previewSleep)
 		sleepMS = Settings::previewSleep;
 
