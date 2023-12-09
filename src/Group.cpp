@@ -271,11 +271,11 @@ void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
 	else
 	{
 		if (direction == GDK_SCROLL_UP)
-			mTopWindowIndex = ++mTopWindowIndex % mWindows.size();
+			mTopWindowIndex = (mTopWindowIndex + 1) % mWindows.size();
 		else if (direction == GDK_SCROLL_DOWN)
 		{
 			int size = mWindows.size();
-			mTopWindowIndex = (--mTopWindowIndex + size) % size;
+			mTopWindowIndex = (mTopWindowIndex - 1 + size) % size;
 		}
 		mWindows.get(mTopWindowIndex)->activate(timestamp);
 	}
