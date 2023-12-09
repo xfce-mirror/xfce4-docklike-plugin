@@ -123,7 +123,7 @@ namespace Hotkeys
 		XIEventMask m;
 		m.deviceid = XIAllMasterDevices;
 		m.mask_len = XIMaskLen(XI_LASTEVENT);
-		m.mask = (unsigned char*)calloc(m.mask_len, sizeof(char));
+		m.mask = g_new0(unsigned char, m.mask_len);
 		XISetMask(m.mask, XI_RawKeyPress);
 		XISetMask(m.mask, XI_RawKeyRelease);
 		XISelectEvents(display, root, &m, 1);

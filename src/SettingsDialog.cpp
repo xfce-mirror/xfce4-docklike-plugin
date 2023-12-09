@@ -135,7 +135,7 @@ namespace SettingsDialog
 		g_signal_connect(indicatorColor, "color-set",
 			G_CALLBACK(+[](GtkColorButton* _indicatorColor, GtkWidget* g) {
 				gdk_rgba_free(Settings::indicatorColor);
-				GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+				GdkRGBA* color = g_new(GdkRGBA, 1);
 				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_indicatorColor), color);
 				Settings::indicatorColor.set(gdk_rgba_copy(color));
 			}),
@@ -146,7 +146,7 @@ namespace SettingsDialog
 		g_signal_connect(inactiveColor, "color-set",
 			G_CALLBACK(+[](GtkColorButton* _inactiveColor, GtkWidget* g) {
 				gdk_rgba_free(Settings::inactiveColor);
-				GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+				GdkRGBA* color = g_new(GdkRGBA, 1);
 				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_inactiveColor), color);
 				Settings::inactiveColor.set(gdk_rgba_copy(color));
 			}),

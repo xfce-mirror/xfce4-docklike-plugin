@@ -126,7 +126,7 @@ namespace Settings
 			});
 
 		gchar* colorString = g_key_file_get_string(mFile, "user", "indicatorColor", NULL);
-		GdkRGBA* color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+		GdkRGBA* color = g_new(GdkRGBA, 1);
 
 		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
 			gdk_rgba_parse(color, "rgb(76,166,230)");
@@ -141,7 +141,7 @@ namespace Settings
 			});
 
 		colorString = g_key_file_get_string(mFile, "user", "inactiveColor", NULL);
-		color = (GdkRGBA*)malloc(sizeof(GdkRGBA));
+		color = g_new(GdkRGBA, 1);
 
 		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
 			gdk_rgba_parse(color, "rgb(76,166,230)");
