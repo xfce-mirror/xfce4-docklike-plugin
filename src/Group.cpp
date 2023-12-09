@@ -959,5 +959,14 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 
 void Group::onDragBegin(GdkDragContext* context)
 {
-	gtk_drag_set_icon_name(context, mAppInfo->icon.c_str(), 0, 0);
+	if (mIconPixbuf != NULL)
+	{
+		gtk_drag_set_icon_pixbuf(context, mIconPixbuf, 0, 0);
+	}
+	else
+	{
+		const gchar *icon_name;
+		gtk_image_get_icon_name(GTK_IMAGE(mImage), &icon_name, NULL);
+		gtk_drag_set_icon_name(context, icon_name, 0, 0);
+	}
 }
