@@ -39,7 +39,7 @@ namespace Help
 
 		std::string getWord(std::string str, int index, char separator)
 		{
-			if (index == std::string::npos)
+			if (index == (int)std::string::npos)
 			{
 				std::string::iterator it = --str.end();
 				while (it != str.begin() && *it == separator)

@@ -18,7 +18,7 @@ namespace Hotkeys
 	int mXIOpcode;
 	pthread_t mThread;
 
-	int mSuperLKeycode, mSuperRKeycode, m1Keycode;
+	uint mSuperLKeycode, mSuperRKeycode, m1Keycode;
 
 	// =========================================================================
 
@@ -66,7 +66,7 @@ namespace Hotkeys
 		else
 			mGrabbedKeys = startKey;
 
-		for (int k = m1Keycode + startKey; k < m1Keycode + NbHotkeys; k++)
+		for (uint k = m1Keycode + startKey; k < m1Keycode + NbHotkeys; k++)
 		{
 			for (int ignoredModifiers : {0, (int)GDK_MOD2_MASK, (int)GDK_LOCK_MASK, (int)(GDK_MOD2_MASK | GDK_LOCK_MASK)})
 				if (grab)
@@ -138,7 +138,7 @@ namespace Hotkeys
 			XNextEvent(display, &event);
 			if (XGetEventData(display, cookie) && cookie->type == GenericEvent && cookie->extension == mXIOpcode)
 			{
-				int keycode = ((XIRawEvent*)cookie->data)->detail;
+				uint keycode = ((XIRawEvent*)cookie->data)->detail;
 				if (cookie->evtype == XI_RawKeyRelease)
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						if (toTrigger)
