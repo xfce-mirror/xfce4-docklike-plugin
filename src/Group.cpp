@@ -861,12 +861,11 @@ void Group::onButtonPress(GdkEventButton* event)
 		if (win == NULL && !mPinned)
 			return;
 
-		GtkWidget* menu = Wnck::buildActionMenu(win, this);
-
-		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 		if (mButton != NULL)
 		{
-			gtk_menu_attach_to_widget(GTK_MENU(menu), mButton, NULL);
+			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win, this)));
+			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), NULL);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 		}
 
