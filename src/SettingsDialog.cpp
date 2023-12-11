@@ -38,16 +38,18 @@ namespace SettingsDialog
 			dialog);
 
 		g_signal_connect(dialog, "close",
-			G_CALLBACK(+[](GtkDialog* _dialog) {
+			G_CALLBACK(+[](GtkDialog* _dialog, GtkBuilder* _builder) {
 				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
+				g_object_unref(_builder);
 			}),
-			NULL);
+			builder);
 
 		g_signal_connect(dialog, "response",
-			G_CALLBACK(+[](GtkDialog* _dialog, gint response) {
+			G_CALLBACK(+[](GtkDialog* _dialog, gint response, GtkBuilder* _builder) {
 				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
+				g_object_unref(_builder);
 			}),
-			NULL);
+			builder);
 
 		// =====================================================================
 
@@ -137,7 +139,7 @@ namespace SettingsDialog
 				gdk_rgba_free(Settings::indicatorColor);
 				GdkRGBA* color = g_new(GdkRGBA, 1);
 				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_indicatorColor), color);
-				Settings::indicatorColor.set(gdk_rgba_copy(color));
+				Settings::indicatorColor.set(color);
 			}),
 			dialog);
 
@@ -148,7 +150,7 @@ namespace SettingsDialog
 				gdk_rgba_free(Settings::inactiveColor);
 				GdkRGBA* color = g_new(GdkRGBA, 1);
 				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_inactiveColor), color);
-				Settings::inactiveColor.set(gdk_rgba_copy(color));
+				Settings::inactiveColor.set(color);
 			}),
 			dialog);
 
@@ -220,11 +222,18 @@ namespace SettingsDialog
 		else
 		{
 			std::string tooltip = "";
+			gchar* markup;
 
 			if (Hotkeys::mGrabbedKeys > 0)
-				tooltip += g_strdup_printf(_("<b>Only the first %u hotkeys(s) are enabled.</b>\n"), Hotkeys::mGrabbedKeys);
+			{
+				markup = g_strdup_printf(_("<b>Only the first %u hotkeys(s) are enabled.</b>\n"), Hotkeys::mGrabbedKeys);
+				tooltip += markup;
+				g_free(markup);
+			}
 
-			tooltip += g_strdup_printf(_("The &lt;SUPER&gt;+%u combination seems already in use by another process.\nCheck your Xfce settings."), Hotkeys::mGrabbedKeys + 1);
+			markup = g_strdup_printf(_("The &lt;SUPER&gt;+%u combination seems already in use by another process.\nCheck your Xfce settings."), Hotkeys::mGrabbedKeys + 1);
+			tooltip += markup;
+			g_free(markup);
 
 			gtk_widget_set_tooltip_markup(widget, tooltip.c_str());
 			gtk_image_set_from_icon_name(GTK_IMAGE(widget), (Hotkeys::mGrabbedKeys == 0) ? "gtk-dialog-error" : "gtk-dialog-warning", GTK_ICON_SIZE_SMALL_TOOLBAR);
