@@ -185,8 +185,6 @@ namespace AppInfos
 			mAppInfoWMClasses.set(wmclass, info);
 		}
 		g_free(wmclass_);
-
-		g_object_unref(gAppInfo);
 	}
 
 	static void loadXDGDirectories()
