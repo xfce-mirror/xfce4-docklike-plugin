@@ -46,10 +46,10 @@ void AppInfo::edit()
 
 	if (g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL))
 	{
-		// If a new desktop file was created, it will be in ~/.local/share/applications
+		// If a new desktop file was created, it will be in $XDG_DATA_HOME
 		// If the previous file was pinned, it needs to be replaced with the new one.
-		gchar* newPath = g_build_filename(getenv("HOME"), "/.local/share/applications/",
-			g_strdup_printf("%s.desktop", this->icon.c_str()), NULL);
+		gchar *basename = g_strdup_printf("%s.desktop", this->icon.c_str());
+		gchar* newPath = g_build_filename(g_get_user_data_dir(), "applications", basename, NULL);
 
 		if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
 		{
@@ -66,9 +66,10 @@ void AppInfo::edit()
 			}
 
 			Settings::pinnedAppList.set(pinnedApps);
-
-			g_free(newPath);
 		}
+
+		g_free(newPath);
+		g_free(basename);
 	}
 
 	g_free(command);
