@@ -36,15 +36,22 @@ namespace Wnck
 				::close(fd);
 
 				char* exe = g_path_get_basename(buffer);
-				if (strcmp(exe, "python") != 0) // ADDIT graphical interpreters here
-					return exe;
+				std::string exe_out = exe;
+				g_free(exe);
+				if (exe_out != "python") // ADDIT graphical interpreters here
+					return exe_out;
 
 				char* it = buffer;
 				while (*it++)
 					;
 
 				if (it < buffer + nbr)
-					return g_path_get_basename(it);
+				{
+					gchar* basename = g_path_get_basename(it);
+					std::string basename_out = basename;
+					g_free(basename);
+					return basename_out;
+				}
 			}
 
 			// fallback : return window's name
@@ -187,7 +194,10 @@ namespace Wnck
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
 				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(_(g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i])));
+				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i]);
+				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
+				g_free(action_name);
+				g_object_unref(GDAppInfo);
 
 				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
@@ -207,8 +217,12 @@ namespace Wnck
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-				if (g_find_program_in_path("exo-desktop-item-edit"))
+				gchar* program = g_find_program_in_path("exo-desktop-item-edit");
+				if (program != NULL)
+				{
 					gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+					g_free(program);
+				}
 
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
