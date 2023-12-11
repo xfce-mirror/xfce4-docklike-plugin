@@ -40,7 +40,9 @@ namespace Settings
 
 	void init()
 	{
-		mPath = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
+		gchar* location = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
+		mPath = location;
+		g_free(location);
 		mFile = g_key_file_new();
 
 		if (g_file_test(mPath.c_str(), G_FILE_TEST_IS_REGULAR))
@@ -130,6 +132,7 @@ namespace Settings
 
 		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
 			gdk_rgba_parse(color, "rgb(76,166,230)");
+		g_free(colorString);
 
 		indicatorColor.setup(color,
 			[](GdkRGBA* _indicatorColor) -> void {
@@ -145,6 +148,7 @@ namespace Settings
 
 		if (colorString == NULL || !gdk_rgba_parse(color, colorString))
 			gdk_rgba_parse(color, "rgb(76,166,230)");
+		g_free(colorString);
 
 		inactiveColor.setup(color,
 			[](GdkRGBA* _inactiveColor) -> void {
