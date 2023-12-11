@@ -81,9 +81,10 @@ namespace Help
 
 		std::string pathBasename(const std::string str)
 		{
-			char buffer[1024];
-			strcpy(buffer, str.c_str());
-			return g_path_get_basename(buffer);
+			gchar* basename = g_path_get_basename(str.c_str());
+			std::string str_out = basename;
+			g_free(basename);
+			return str_out;
 		}
 
 		std::string trim(const std::string str)
@@ -127,12 +128,15 @@ namespace Help
 
 		int getChildPosition(GtkContainer* container, GtkWidget* child)
 		{
+			int ret;
 			GValue gv = G_VALUE_INIT;
 			g_value_init(&gv, G_TYPE_INT);
 
 			gtk_container_child_get_property(container, child, "position", &gv);
+			ret = g_value_get_int(&gv);
+			g_value_unset(&gv);
 
-			return g_value_get_int(&gv);
+			return ret;
 		}
 
 		void cssClassAdd(GtkWidget* widget, const char* className)
@@ -148,7 +152,6 @@ namespace Help
 		Timeout::Timeout()
 		{
 			mDuration = mTimeoutId = 0;
-			// mFunction = NULL;
 		}
 
 		void Timeout::setup(uint ms, std::function<bool()> function)
