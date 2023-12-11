@@ -60,10 +60,9 @@ namespace Dock
 	void savePinned()
 	{
 		std::list<std::string> pinnedList;
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-			 child != NULL;
-			 child = child->next)
+		for (GList* child = children; child != NULL; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
@@ -73,6 +72,7 @@ namespace Dock
 		}
 
 		Settings::pinnedAppList.set(pinnedList);
+		g_list_free(children);
 	}
 
 	void drawGroups()
@@ -122,10 +122,9 @@ namespace Dock
 	void hoverSupered(bool on)
 	{
 		int grabbedKeys = Hotkeys::mGrabbedKeys;
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-			 child != NULL && grabbedKeys;
-			 child = child->next)
+		for (GList* child = children; child != NULL && grabbedKeys; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
@@ -136,15 +135,16 @@ namespace Dock
 			group->mSSuper = on;
 			--grabbedKeys;
 		}
+
+		g_list_free(children);
 	}
 
 	void activateGroup(int nb, guint32 timestamp)
 	{
 		int i = 0;
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-			 child != NULL;
-			 child = child->next)
+		for (GList* child = children; child != NULL; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
@@ -167,6 +167,8 @@ namespace Dock
 					++i;
 			}
 		}
+
+		g_list_free(children);
 	}
 
 	void onPanelResize(int size)
