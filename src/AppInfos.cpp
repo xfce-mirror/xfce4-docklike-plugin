@@ -5,6 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#include <unordered_set>
+
 #include "AppInfos.hpp"
 #include "Settings.hpp"
 
@@ -82,32 +84,27 @@ namespace AppInfos
 
 	static void findXDGDirectories()
 	{
-		char* var = getenv("XDG_DATA_DIRS");
+		std::unordered_set<std::string> dir_set;
+		std::list<std::string> dir_list, topdir_list;
 
-		if (var != NULL && var[0] != '\0')
-			Help::String::split(var, mXdgDataDirs, ':');
+		dir_list.push_back(g_get_user_data_dir());
+		for (const gchar *const *p = g_get_system_data_dirs(); *p != NULL; p++)
+			dir_list.push_back(*p);
 
-		mXdgDataDirs.push_back("/usr/local/share");
-		mXdgDataDirs.push_back("/usr/share");
-		var = getenv("HOME");
-		if (var != NULL && var[0] != '\0')
-			mXdgDataDirs.push_back(std::string(var) + "/.local/share");
-
-		for (std::string& dir : mXdgDataDirs)
+		for (std::string& dir : dir_list)
+		{
 			if (dir.back() == '/')
 				dir += "applications/";
 			else
 				dir += "/applications/";
 
-		std::list<std::string> tempDirs = mXdgDataDirs;
-		for (std::string& dir : tempDirs)
-		{
-			if (!g_file_test(dir.c_str(), G_FILE_TEST_IS_DIR))
-			{
-				mXdgDataDirs.remove(dir);
-				continue;
-			}
+			// ensure uniqueness and existing dirs
+			if (dir_set.insert(dir).second && g_file_test(dir.c_str(), G_FILE_TEST_IS_DIR))
+				topdir_list.push_back(dir);
+		}
 
+		for (std::string& dir : topdir_list)
+		{
 			// Recursively add subdirectories of mXdgDataDirs to mXdgDataDirs.
 			// Wine (and maybe some others) create their own directory tree.
 			// See man ftw(3) for more information.
@@ -116,14 +113,11 @@ namespace AppInfos
 				[](const char* fpath, const struct stat* sb, int typeflag) -> int
 				{
 					if (typeflag == FTW_D)
-						mXdgDataDirs.push_back(g_strdup_printf("%s/", fpath));
+						mXdgDataDirs.push_back(std::string(fpath) + '/');
 					return 0;
 				},
 				16);
 		}
-
-		mXdgDataDirs.sort();
-		mXdgDataDirs.unique();
 	}
 
 	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
@@ -135,8 +129,11 @@ namespace AppInfos
 			return;
 
 		std::string id = filename.substr(0, filename.size() - DOT_DESKTOP_SIZE);
-		std::string path = xdgDir + filename;
+		std::string lower_id = Help::String::toLowercase(id);
+		if (mAppInfoIds.get(lower_id) != NULL)
+			return;
 
+		std::string path = xdgDir + filename;
 		GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
 		if (gAppInfo == NULL)
 			return;
@@ -150,7 +147,7 @@ namespace AppInfos
 		// g_desktop_app_info_list_actions always returns non-NULL
 		AppInfo* info = new AppInfo({path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
 
-		mAppInfoIds.set(Help::String::toLowercase(id), info);
+		mAppInfoIds.set(lower_id, info);
 		mAppInfoIds.set(path, info); // for saved pinned groups
 
 		if (!name.empty())
@@ -206,10 +203,13 @@ namespace AppInfos
 
 		g_signal_connect(G_OBJECT(mMonitor), "changed",
 			G_CALLBACK(+[](GAppInfoMonitor* monitor)
-					   {
-						   loadXDGDirectories();
-						   Dock::drawGroups();
-					   }),
+				{
+					mAppInfoIds.clear();
+					mAppInfoNames.clear();
+					mAppInfoWMClasses.clear();
+					loadXDGDirectories();
+					Dock::drawGroups();
+				}),
 			NULL);
 
 		findXDGDirectories();

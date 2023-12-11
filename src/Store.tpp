@@ -103,6 +103,8 @@ namespace Store
 				mMap.erase(it);
 		}
 
+		void clear() { mMap.clear(); }
+
 	  private:
 		std::map<const K, V> mMap;
 	};
