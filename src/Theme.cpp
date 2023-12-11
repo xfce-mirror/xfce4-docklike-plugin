@@ -24,7 +24,6 @@ void Theme::load()
 	if (filename != NULL && g_file_test(filename, G_FILE_TEST_IS_REGULAR))
 	{
 		FILE* f = fopen(filename, "r");
-		g_free(filename);
 
 		if (f != NULL)
 		{
@@ -42,42 +41,64 @@ void Theme::load()
 	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 			GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+	g_free(filename);
+	g_object_unref(css_provider);
 }
 
 std::string Theme::get_theme_colors()
 {
 	GtkWidget* menu = gtk_menu_new();
 	GtkStyleContext* sc = gtk_widget_get_style_context(menu);
+	gchar* str;
 
 	GValue gv = G_VALUE_INIT;
 	gtk_style_context_get_property(sc, "background-color", GTK_STATE_FLAG_NORMAL, &gv);
-	std::string menuBg = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string menuBg = str;
+	g_free(str);
+	g_value_unset(&gv);
 
 	gv = G_VALUE_INIT;
 	gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
-	std::string itemLabel = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string itemLabel = str;
+	g_free(str);
+	g_value_unset(&gv);
 
 	gv = G_VALUE_INIT;
 	gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_PRELIGHT, &gv);
-	std::string itemLabelHover = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string itemLabelHover = str;
+	g_free(str);
+	g_value_unset(&gv);
 
 	gv = G_VALUE_INIT;
 	gtk_style_context_get_property(sc, "background-color", GTK_STATE_FLAG_PRELIGHT, &gv);
-	std::string itemBgHover = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string itemBgHover = str;
+	g_free(str);
+	g_value_unset(&gv);
 
-	std::string indicatorColor = gdk_rgba_to_string(Settings::indicatorColor);
-	std::string inactiveColor = gdk_rgba_to_string(Settings::inactiveColor);
+	str = gdk_rgba_to_string(Settings::indicatorColor);
+	std::string indicatorColor = str;
+	g_free(str);
+	str = gdk_rgba_to_string(Settings::inactiveColor);
+	std::string inactiveColor = str;
+	g_free(str);
 
 	if (Settings::indicatorColorFromTheme)
 	{
 		gv = G_VALUE_INIT;
 		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
-		indicatorColor = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
-		inactiveColor = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+		str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+		indicatorColor = str;
+		inactiveColor = str;
+		g_free(str);
+		g_value_unset(&gv);
 	}
 
 	gtk_widget_destroy(menu);
-	g_value_unset(&gv);
 
 	std::string css = "@define-color menu_bgcolor " + menuBg + ";\n";
 	css += "@define-color menu_item_color " + itemLabel + ";\n";
