@@ -105,7 +105,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 GroupMenuItem::~GroupMenuItem()
 {
-	gtk_widget_destroy(GTK_WIDGET(mItem));
+	g_object_unref(mItem);
 }
 
 void GroupMenuItem::updateLabel()
@@ -113,9 +113,21 @@ void GroupMenuItem::updateLabel()
 	const char* winName = wnck_window_get_name(mGroupWindow->mWnckWindow);
 
 	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
-		gtk_label_set_markup(mLabel, g_strdup_printf("<b>%s</b>", g_markup_escape_text(winName, -1)));
+	{
+		gchar* escaped = g_markup_escape_text(winName, -1);
+		gchar* markup = g_strdup_printf("<b>%s</b>", escaped);
+		gtk_label_set_markup(mLabel, markup);
+		g_free(markup);
+		g_free(escaped);
+	}
 	else if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
-		gtk_label_set_markup(mLabel, g_strdup_printf("<i>%s</i>", g_markup_escape_text(winName, -1)));
+	{
+		gchar* escaped = g_markup_escape_text(winName, -1);
+		gchar* markup = g_strdup_printf("<i>%s</i>", escaped);
+		gtk_label_set_markup(mLabel, markup);
+		g_free(markup);
+		g_free(escaped);
+	}
 	else
 		gtk_label_set_text(mLabel, winName);
 }
@@ -168,9 +180,9 @@ void GroupMenuItem::updatePreview()
 				gtk_image_set_from_pixbuf(mPreview, thumbnail);
 
 				g_object_unref(thumbnail);
+				g_object_unref(pixbuf);
 			}
-			g_object_unref(pixbuf);
+			g_object_unref(window);
 		}
-		g_object_unref(window);
 	}
 }
