@@ -42,7 +42,8 @@ void AppInfo::launch_action(const gchar* action)
 
 void AppInfo::edit()
 {
-	gchar* command = g_strconcat("exo-desktop-item-edit ", g_shell_quote(this->path.c_str()), NULL);
+	gchar* quoted = g_shell_quote(this->path.c_str());
+	gchar* command = g_strconcat("exo-desktop-item-edit ", quoted, NULL);
 
 	if (g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL))
 	{
@@ -73,6 +74,7 @@ void AppInfo::edit()
 	}
 
 	g_free(command);
+	g_free(quoted);
 }
 
 namespace AppInfos
@@ -141,9 +143,11 @@ namespace AppInfos
 
 		char* name_ = g_desktop_app_info_get_locale_string(gAppInfo, "Name");
 		std::string name = (name_ != NULL) ? name_ : id;
+		g_free(name_);
 
 		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
 		std::string icon = (icon_ != NULL) ? icon_ : "";
+		g_free(icon_);
 
 		// g_desktop_app_info_list_actions always returns non-NULL
 		AppInfo* info = new AppInfo({path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
@@ -171,6 +175,7 @@ namespace AppInfos
 				if (exec != id && exec != name)
 					mAppInfoNames.set(Help::String::toLowercase(exec), info);
 		}
+		g_free(exec_);
 
 		std::string wmclass;
 		char* wmclass_ = g_desktop_app_info_get_string(gAppInfo, "StartupWMClass");
@@ -179,6 +184,9 @@ namespace AppInfos
 			wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
 			mAppInfoWMClasses.set(wmclass, info);
 		}
+		g_free(wmclass_);
+
+		g_object_unref(gAppInfo);
 	}
 
 	static void loadXDGDirectories()
@@ -259,20 +267,19 @@ namespace AppInfos
 
 		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
 
-		if (gioPath != NULL && gioPath[0] != NULL && gioPath[0][0] != NULL && gioPath[0][0][0] != '\0')
+		if (gioPath[0] != NULL && gioPath[0][0] != NULL && gioPath[0][0][0] != '\0')
 		{
 			std::string gioId = gioPath[0][0];
 			gioId = Help::String::toLowercase(gioId.substr(0, gioId.size() - 8));
 			ai = mAppInfoIds.get(gioId);
-
-			for (int i = 0; gioPath[i] != NULL; ++i)
-				g_strfreev(gioPath[i]);
-
-			g_free(gioPath);
-
-			if (ai != NULL)
-				return ai;
 		}
+
+		for (int i = 0; gioPath[i] != NULL; ++i)
+			g_strfreev(gioPath[i]);
+		g_free(gioPath);
+
+		if (ai != NULL)
+			return ai;
 
 		PANEL_DEBUG("NO MATCH: %s", id.c_str());
 
