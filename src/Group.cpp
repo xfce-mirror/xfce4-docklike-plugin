@@ -298,8 +298,11 @@ void Group::resize()
 	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
 	
 	if (mIconPixbuf != NULL)
-		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage),
-			gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER));
+	{
+		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER);
+		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), scaled);
+		g_object_unref(scaled);
+	}
 	else
 		gtk_image_set_pixel_size(GTK_IMAGE(mImage), Dock::mIconSize);
 
@@ -794,7 +797,11 @@ void Group::updateStyle()
 			mSMany = false;
 
 		if (wCount > 2 && Settings::showWindowCount)
-			gtk_label_set_markup(GTK_LABEL(mLabel), g_strdup_printf("<b>%d</b>", wCount));
+		{
+			gchar* markup = g_strdup_printf("<b>%d</b>", wCount);
+			gtk_label_set_markup(GTK_LABEL(mLabel), markup);
+			g_free(markup);
+		}
 		else
 			gtk_label_set_markup(GTK_LABEL(mLabel), "");
 	}
@@ -916,7 +923,9 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 	if (tmp_list != NULL)
 	{
-		std::string target = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
+		gchar* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
+		std::string target = name;
+		g_free(name);
 
 		if (target != "application/docklike_group")
 		{
