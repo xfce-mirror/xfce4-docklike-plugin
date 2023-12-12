@@ -105,6 +105,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 GroupMenuItem::~GroupMenuItem()
 {
+	mPreviewTimeout.stop();
 	g_object_unref(mItem);
 }
 
