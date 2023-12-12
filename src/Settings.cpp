@@ -202,7 +202,21 @@ namespace Settings
 				saveFile();
 			});
 
-		g_strfreev(pinnedListBuffer);
+		if (pinnedListBuffer != NULL)
+		{
+			// try to be backward compatible: retrieve ids from paths
+			for (gchar** p = pinnedListBuffer; *p != NULL; p++)
+				if (**p == '/' && g_str_has_suffix(*p, ".desktop"))
+				{
+					gchar* basename = g_path_get_basename(*p);
+					std::string id = basename;
+					g_free(basename);
+					g_free(*p);
+					*p = g_strdup(id.substr(0, id.size() - 8).c_str());
+				}
+			pinnedAppList.set(Help::Gtk::bufferToStdStringList(pinnedListBuffer));
+			g_strfreev(pinnedListBuffer);
+		}
 
 		// HIDDEN SETTINGS:
 		dockSize.setup(g_key_file_get_integer(mFile, "user", "dockSize", NULL),

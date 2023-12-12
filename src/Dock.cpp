@@ -68,7 +68,7 @@ namespace Dock
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
 			if (group->mPinned && g_file_test(group->mAppInfo->path.c_str(), G_FILE_TEST_IS_REGULAR))
-				pinnedList.push_back(group->mAppInfo->path);
+				pinnedList.push_back(group->mAppInfo->id);
 		}
 
 		Settings::pinnedAppList.set(pinnedList);
@@ -90,7 +90,7 @@ namespace Dock
 
 		while (it != pinnedApps.end())
 		{
-			AppInfo* appInfo = AppInfos::search(*it);
+			AppInfo* appInfo = AppInfos::search(Help::String::toLowercase(*it));
 			Group* group = new Group(appInfo, true);
 
 			mGroups.push(appInfo, group);

@@ -42,35 +42,14 @@ void AppInfo::launch_action(const gchar* action)
 
 void AppInfo::edit()
 {
+	GError* error = NULL;
 	gchar* quoted = g_shell_quote(this->path.c_str());
 	gchar* command = g_strconcat("exo-desktop-item-edit ", quoted, NULL);
 
-	if (g_spawn_command_line_sync(command, NULL, NULL, NULL, NULL))
+	if (!g_spawn_command_line_async(command, &error))
 	{
-		// If a new desktop file was created, it will be in $XDG_DATA_HOME
-		// If the previous file was pinned, it needs to be replaced with the new one.
-		gchar *basename = g_strdup_printf("%s.desktop", this->icon.c_str());
-		gchar* newPath = g_build_filename(g_get_user_data_dir(), "applications", basename, NULL);
-
-		if (this->path.compare(newPath) != 0 && g_file_test(newPath, G_FILE_TEST_IS_REGULAR))
-		{
-			std::list<std::string> pinnedApps = Settings::pinnedAppList;
-			for (auto it = pinnedApps.begin(); it != pinnedApps.end();)
-			{
-				if (*it == this->path)
-				{
-					it = pinnedApps.erase(it);
-					pinnedApps.insert(it, newPath);
-					break;
-				}
-				++it;
-			}
-
-			Settings::pinnedAppList.set(pinnedApps);
-		}
-
-		g_free(newPath);
-		g_free(basename);
+		g_warning("Failed to open edit dialog: %s", error->message);
+		g_error_free(error);
 	}
 
 	g_free(command);
@@ -150,10 +129,9 @@ namespace AppInfos
 		g_free(icon_);
 
 		// g_desktop_app_info_list_actions always returns non-NULL
-		AppInfo* info = new AppInfo({path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
+		AppInfo* info = new AppInfo({id, path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
 
 		mAppInfoIds.set(lower_id, info);
-		mAppInfoIds.set(path, info); // for saved pinned groups
 
 		if (!name.empty())
 		{
@@ -281,6 +259,6 @@ namespace AppInfos
 
 		PANEL_DEBUG("NO MATCH: %s", id.c_str());
 
-		return new AppInfo({"", "", id});
+		return new AppInfo({"", "", "", id});
 	}
 } // namespace AppInfos

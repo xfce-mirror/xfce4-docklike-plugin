@@ -19,6 +19,7 @@
 
 struct AppInfo
 {
+	const std::string id;
 	const std::string path;
 	const std::string icon;
 	const std::string name;
