@@ -89,8 +89,7 @@ namespace Wnck
 				{
 					std::shared_ptr<GroupWindow> activeWindow = mGroupWindows.get(activeXID);
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
-					if (activeWindow->mGroup->mButton != NULL)
-						gtk_widget_queue_draw(activeWindow->mGroup->mButton);
+					gtk_widget_queue_draw(activeWindow->mGroup->mButton);
 				}
 				if (previousActiveWindow != NULL)
 				{
@@ -102,8 +101,7 @@ namespace Wnck
 						{
 							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
-							if (prevWindow->mGroup->mButton != NULL)
-								gtk_widget_queue_draw(prevWindow->mGroup->mButton);
+							gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 						}
 					}
 				}
