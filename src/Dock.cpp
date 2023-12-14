@@ -75,9 +75,6 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void
-			{ gtk_widget_destroy(g.second->mButton); });
-
 		Wnck::mGroupWindows.clear();
 		mGroups.clear();
 

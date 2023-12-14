@@ -52,6 +52,7 @@ class Group
 {
   public:
 	Group(std::shared_ptr<AppInfo> appInfo, bool pinned);
+	~Group();
 
 	void add(GroupWindow* window);
 	void remove(GroupWindow* window);

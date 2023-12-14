@@ -53,7 +53,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 
 	//--------------------------------------------------
 
-	mButton = gtk_button_new();
+	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	GtkWidget* overlay = gtk_overlay_new();
@@ -203,6 +203,17 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 
 	resize();
 	updateStyle();
+}
+
+Group::~Group()
+{
+	// can be unparented before the group is destroyed on exit
+	if (gtk_widget_get_parent(mButton) != NULL)
+		gtk_container_remove(GTK_CONTAINER(gtk_widget_get_parent(mButton)), mButton);
+	g_object_unref(mButton);
+
+	if (mIconPixbuf != NULL)
+		g_object_unref(mIconPixbuf);
 }
 
 void Group::add(GroupWindow* window)
