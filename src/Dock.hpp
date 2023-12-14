@@ -40,7 +40,7 @@ namespace Dock
 	void onPanelOrientationChange(GtkOrientation orientation);
 
 	extern GtkWidget* mBox;
-	extern Store::KeyStore<std::shared_ptr<AppInfo>, Group*> mGroups;
+	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
 
 	extern int mPanelSize;
 	extern int mIconSize;
