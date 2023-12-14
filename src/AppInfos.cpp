@@ -62,7 +62,7 @@ namespace AppInfos
 	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
 	Store::Map<const std::string, AppInfo*> mAppInfoIds;
 	Store::Map<const std::string, AppInfo*> mAppInfoNames;
-	GAppInfoMonitor* mMonitor;
+	Store::AutoPtr<GAppInfoMonitor> mMonitor;
 
 	static void findXDGDirectories()
 	{
@@ -128,9 +128,7 @@ namespace AppInfos
 		std::string icon = (icon_ != NULL) ? icon_ : "";
 		g_free(icon_);
 
-		// g_desktop_app_info_list_actions always returns non-NULL
-		AppInfo* info = new AppInfo({id, path, icon, name, g_desktop_app_info_list_actions(gAppInfo)});
-
+		AppInfo* info = new AppInfo(id, path, icon, name, gAppInfo);
 		mAppInfoIds.set(lower_id, info);
 
 		if (!name.empty())
@@ -184,9 +182,9 @@ namespace AppInfos
 
 	void init()
 	{
-		mMonitor = g_app_info_monitor_get();
+		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
 
-		g_signal_connect(G_OBJECT(mMonitor), "changed",
+		g_signal_connect(G_OBJECT(mMonitor.get()), "changed",
 			G_CALLBACK(+[](GAppInfoMonitor* monitor)
 				{
 					mAppInfoIds.clear();
@@ -259,6 +257,6 @@ namespace AppInfos
 
 		PANEL_DEBUG("NO MATCH: %s", id.c_str());
 
-		return new AppInfo({"", "", "", id});
+		return new AppInfo("", "", "", id);
 	}
 } // namespace AppInfos

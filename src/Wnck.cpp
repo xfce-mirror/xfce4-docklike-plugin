@@ -186,7 +186,8 @@ namespace Wnck
 
 		if (!appInfo->path.empty())
 		{
-			for (int i = 0; appInfo->actions[i]; i++)
+			const gchar* const* actions = appInfo->get_actions();
+			for (int i = 0; actions[i]; i++)
 			{
 				// Desktop actions get inserted into the menu above all the window manager controls.
 				// We need an extra separator only if the application is running.
@@ -194,12 +195,12 @@ namespace Wnck
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
 				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i]);
+				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, actions[i]);
 				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
 				g_free(action_name);
 				g_object_unref(GDAppInfo);
 
-				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
+				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)actions[i]);
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
 
 				g_signal_connect(G_OBJECT(actionLauncher), "activate",
