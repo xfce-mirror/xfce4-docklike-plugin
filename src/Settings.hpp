@@ -27,9 +27,6 @@ namespace Settings
 
 	void saveFile();
 
-	extern std::string mPath;
-	extern GKeyFile* mFile;
-
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
 
@@ -44,8 +41,8 @@ namespace Settings
 	extern State<int> indicatorStyle;
 	extern State<int> inactiveIndicatorStyle;
 	extern State<bool> indicatorColorFromTheme;
-	extern State<GdkRGBA*> indicatorColor;
-	extern State<GdkRGBA*> inactiveColor;
+	extern State<std::shared_ptr<GdkRGBA>> indicatorColor;
+	extern State<std::shared_ptr<GdkRGBA>> inactiveColor;
 
 	extern State<bool> keyComboActive;
 	extern State<bool> keyAloneActive;

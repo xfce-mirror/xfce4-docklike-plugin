@@ -80,10 +80,10 @@ std::string Theme::get_theme_colors()
 	g_free(str);
 	g_value_unset(&gv);
 
-	str = gdk_rgba_to_string(Settings::indicatorColor);
+	str = gdk_rgba_to_string(Settings::indicatorColor.get().get());
 	std::string indicatorColor = str;
 	g_free(str);
-	str = gdk_rgba_to_string(Settings::inactiveColor);
+	str = gdk_rgba_to_string(Settings::inactiveColor.get().get());
 	std::string inactiveColor = str;
 	g_free(str);
 

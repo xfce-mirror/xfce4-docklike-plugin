@@ -68,6 +68,11 @@ GroupMenu::GroupMenu(Group* dockButton)
 		this);
 }
 
+GroupMenu::~GroupMenu()
+{
+	gtk_widget_destroy(mWindow);
+}
+
 void GroupMenu::add(GroupMenuItem* menuItem)
 {
 	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);

@@ -19,6 +19,7 @@ class GroupMenu
 {
   public:
 	GroupMenu(Group* dockButton);
+	~GroupMenu();
 
 	void add(GroupMenuItem* menuItem);
 	void remove(GroupMenuItem* menuItem);

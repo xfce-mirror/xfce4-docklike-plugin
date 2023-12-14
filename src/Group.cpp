@@ -326,23 +326,20 @@ void Group::onDraw(cairo_t* cr)
 		rgba[1] = (*indicatorColor).green;
 		rgba[2] = (*indicatorColor).blue;
 		rgba[3] = (*indicatorColor).alpha;
+		g_value_unset(&gv);
 	}
 	else
 	{
+		std::shared_ptr<GdkRGBA> color;
 		if (mSFocus)
-		{
-			rgba[0] = (*Settings::indicatorColor).red;
-			rgba[1] = (*Settings::indicatorColor).green;
-			rgba[2] = (*Settings::indicatorColor).blue;
-			rgba[3] = (*Settings::indicatorColor).alpha;
-		}
+			color = Settings::indicatorColor;
 		else
-		{
-			rgba[0] = (*Settings::inactiveColor).red;
-			rgba[1] = (*Settings::inactiveColor).green;
-			rgba[2] = (*Settings::inactiveColor).blue;
-			rgba[3] = (*Settings::inactiveColor).alpha;
-		}
+			color = Settings::inactiveColor;
+
+		rgba[0] = color->red;
+		rgba[1] = color->green;
+		rgba[2] = color->blue;
+		rgba[3] = color->alpha;
 	}
 
 	const float BAR_WEIGHT = 0.935;
