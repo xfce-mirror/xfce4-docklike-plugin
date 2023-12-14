@@ -90,6 +90,7 @@ void GroupWindow::minimize()
 GroupWindow::~GroupWindow()
 {
 	leaveGroup();
+	g_signal_handlers_disconnect_by_data(this->mWnckWindow, this);
 	delete mGroupMenuItem;
 }
 

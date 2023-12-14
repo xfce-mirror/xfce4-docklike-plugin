@@ -819,11 +819,11 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
+			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
-			});
+			}).get();
 
 		setTopWindow(newTopWindow);
 	}
@@ -858,16 +858,16 @@ void Group::onButtonPress(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_SECONDARY)
 	{
-		GroupWindow* win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
+		std::shared_ptr<GroupWindow> win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
 			return (e.second->mGroupAssociated && e.second->mGroup == this);
 		});
 
-		if (win == NULL && !mPinned)
+		if (!win && !mPinned)
 			return;
 
 		if (mButton != NULL)
 		{
-			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win, this)));
+			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win.get(), this)));
 			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), NULL);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);

@@ -81,8 +81,8 @@ namespace Dock
 		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void
 			{ gtk_widget_destroy(g.second->mButton); });
 
-		mGroups.clear();
 		Wnck::mGroupWindows.clear();
+		mGroups.clear();
 
 		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -105,10 +105,10 @@ namespace Dock
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
 			gulong windowXID = wnck_window_get_xid(wnckWindow);
-			GroupWindow* groupWindow = Wnck::mGroupWindows.get(windowXID);
+			std::shared_ptr<GroupWindow> groupWindow = Wnck::mGroupWindows.get(windowXID);
 
-			if (groupWindow == NULL)
-				groupWindow = new GroupWindow(wnckWindow);
+			if (!groupWindow)
+				groupWindow = std::make_shared<GroupWindow>(wnckWindow);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 

@@ -38,7 +38,7 @@ namespace Wnck
 	void setVisibleGroups();
 
 	extern WnckScreen* mWnckScreen;
-	extern Store::KeyStore<gulong, GroupWindow*> mGroupWindows;
+	extern Store::KeyStore<gulong, std::shared_ptr<GroupWindow>> mGroupWindows;
 } // namespace Wnck
 
 #endif //WNCK_HPP

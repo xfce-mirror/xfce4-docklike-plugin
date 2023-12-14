@@ -10,7 +10,7 @@
 namespace Wnck
 {
 	WnckScreen* mWnckScreen;
-	Store::KeyStore<gulong, GroupWindow*> mGroupWindows;
+	Store::KeyStore<gulong, std::shared_ptr<GroupWindow>> mGroupWindows;
 
 	namespace // private:
 	{
@@ -67,7 +67,7 @@ namespace Wnck
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				GroupWindow* newWindow = new GroupWindow(wnckWindow);
+				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(wnckWindow);
 				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
 				newWindow->mGroup->updateStyle();
 
@@ -78,8 +78,7 @@ namespace Wnck
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				GroupWindow* groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
-				delete groupWindow;
+				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
 			}),
 			NULL);
 
@@ -88,7 +87,7 @@ namespace Wnck
 				gulong activeXID = getActiveWindowXID();
 				if (activeXID)
 				{
-					GroupWindow* activeWindow = mGroupWindows.get(activeXID);
+					std::shared_ptr<GroupWindow> activeWindow = mGroupWindows.get(activeXID);
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
 					if (activeWindow->mGroup->mButton != NULL)
 						gtk_widget_queue_draw(activeWindow->mGroup->mButton);
@@ -98,7 +97,7 @@ namespace Wnck
 					gulong prevXID = wnck_window_get_xid(previousActiveWindow);
 					if (prevXID)
 					{
-						GroupWindow* prevWindow = mGroupWindows.get(prevXID);
+						std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(prevXID);
 						if (prevWindow != NULL)
 						{
 							prevWindow->mGroup->mSHover = false;
@@ -172,7 +171,7 @@ namespace Wnck
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			GroupWindow* groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
+			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
 
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
