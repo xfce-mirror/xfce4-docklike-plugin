@@ -10,7 +10,7 @@
 namespace Dock
 {
 	GtkWidget* mBox;
-	Store::KeyStore<AppInfo*, Group*> mGroups;
+	Store::KeyStore<std::shared_ptr<AppInfo>, Group*> mGroups;
 
 	int mPanelSize;
 	int mIconSize;
@@ -27,7 +27,7 @@ namespace Dock
 		drawGroups();
 	}
 
-	Group* prepareGroup(AppInfo* appInfo)
+	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo)
 	{
 		Group* group = mGroups.get(appInfo);
 
@@ -78,7 +78,7 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
+		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, Group*> g) -> void
 			{ gtk_widget_destroy(g.second->mButton); });
 
 		mGroups.clear();
@@ -90,7 +90,7 @@ namespace Dock
 
 		while (it != pinnedApps.end())
 		{
-			AppInfo* appInfo = AppInfos::search(Help::String::toLowercase(*it));
+			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(*it));
 			Group* group = new Group(appInfo, true);
 
 			mGroups.push(appInfo, group);
@@ -194,7 +194,7 @@ namespace Dock
 				mIconSize = mPanelSize * 0.8;
 		}
 
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
+		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, Group*> g) -> void
 			{ g.second->resize(); });
 	}
 

@@ -17,7 +17,7 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	PANEL_DEBUG("NEW: %s", groupName.c_str());
 
-	AppInfo* appInfo = AppInfos::search(groupName);
+	std::shared_ptr<AppInfo> appInfo = AppInfos::search(groupName);
 	mGroup = Dock::prepareGroup(appInfo);
 
 	//--------------------------------------------------

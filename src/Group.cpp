@@ -10,7 +10,7 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 {
 	mIconPixbuf = NULL;
 	mAppInfo = appInfo;
@@ -746,7 +746,7 @@ void Group::onDraw(cairo_t* cr)
 
 void Group::onMouseEnter()
 {
-	Dock::mGroups.forEach([this](std::pair<AppInfo*, Group*> g) -> void {
+	Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, Group*> g) -> void {
 		if (&(g.second->mGroupMenu) != &(this->mGroupMenu))
 			g.second->mGroupMenu.mGroup->onMouseLeave();
 	});

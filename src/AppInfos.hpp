@@ -37,7 +37,7 @@ struct AppInfo
 namespace AppInfos
 {
 	void init();
-	AppInfo* search(std::string id);
+	std::shared_ptr<AppInfo> search(std::string id);
 } // namespace AppInfos
 
 #endif // APPINFOS_HPP

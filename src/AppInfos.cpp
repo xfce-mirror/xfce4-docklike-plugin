@@ -59,9 +59,9 @@ void AppInfo::edit()
 namespace AppInfos
 {
 	std::list<std::string> mXdgDataDirs;
-	Store::Map<const std::string, AppInfo*> mAppInfoWMClasses;
-	Store::Map<const std::string, AppInfo*> mAppInfoIds;
-	Store::Map<const std::string, AppInfo*> mAppInfoNames;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoNames;
 	Store::AutoPtr<GAppInfoMonitor> mMonitor;
 
 	static void findXDGDirectories()
@@ -128,7 +128,7 @@ namespace AppInfos
 		std::string icon = (icon_ != NULL) ? icon_ : "";
 		g_free(icon_);
 
-		AppInfo* info = new AppInfo(id, path, icon, name, gAppInfo);
+		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
 		mAppInfoIds.set(lower_id, info);
 
 		if (!name.empty())
@@ -215,11 +215,11 @@ namespace AppInfos
 			groupName = itRenamed->second;
 	}
 
-	AppInfo* search(std::string id)
+	std::shared_ptr<AppInfo> search(std::string id)
 	{
 		groupNameTransform(id);
 
-		AppInfo* ai = mAppInfoWMClasses.get(id);
+		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != NULL)
 			return ai;
 
@@ -257,6 +257,6 @@ namespace AppInfos
 
 		PANEL_DEBUG("NO MATCH: %s", id.c_str());
 
-		return new AppInfo("", "", "", id);
+		return std::make_shared<AppInfo>("", "", "", id);
 	}
 } // namespace AppInfos
