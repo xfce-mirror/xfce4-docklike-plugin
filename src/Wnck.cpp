@@ -114,8 +114,6 @@ namespace Wnck
 				setVisibleGroups();
 			}),
 			NULL);
-
-		setActiveWindow();
 	}
 
 	gulong getActiveWindowXID()
