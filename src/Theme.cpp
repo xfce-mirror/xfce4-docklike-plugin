@@ -12,7 +12,7 @@ void Theme::init()
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
 		G_CALLBACK(+[](GtkStyleContext* stylecontext)
 				   { load(); }),
-		NULL);
+		nullptr);
 }
 
 void Theme::load()
@@ -21,11 +21,11 @@ void Theme::load()
 	std::string css = get_theme_colors();
 	gchar* filename = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4-docklike-plugin/gtk.css");
 
-	if (filename != NULL && g_file_test(filename, G_FILE_TEST_IS_REGULAR))
+	if (filename != nullptr && g_file_test(filename, G_FILE_TEST_IS_REGULAR))
 	{
 		FILE* f = fopen(filename, "r");
 
-		if (f != NULL)
+		if (f != nullptr)
 		{
 			int read_char;
 			while ((read_char = getc(f)) != EOF)
@@ -38,7 +38,7 @@ void Theme::load()
 	else // No file
 		css += DEFAULT_THEME;
 
-	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, NULL))
+	if (gtk_css_provider_load_from_data(css_provider, css.c_str(), -1, nullptr))
 		gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 			GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 

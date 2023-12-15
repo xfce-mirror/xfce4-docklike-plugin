@@ -46,25 +46,25 @@ namespace Settings
 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);
 
 		if (g_file_test(path, G_FILE_TEST_IS_REGULAR))
-			g_key_file_load_from_file(file, path, G_KEY_FILE_NONE, NULL);
+			g_key_file_load_from_file(file, path, G_KEY_FILE_NONE, nullptr);
 
 		else // Look for a default config file in XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
 		{
 			gchar* distConfig = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
 
-			if (distConfig != NULL && g_file_test(distConfig, G_FILE_TEST_IS_REGULAR))
-				g_key_file_load_from_file(file, distConfig, G_KEY_FILE_NONE, NULL);
+			if (distConfig != nullptr && g_file_test(distConfig, G_FILE_TEST_IS_REGULAR))
+				g_key_file_load_from_file(file, distConfig, G_KEY_FILE_NONE, nullptr);
 
 			g_free(distConfig);
 		}
 
-		showPreviews.setup(g_key_file_get_boolean(file, "user", "showPreviews", NULL),
+		showPreviews.setup(g_key_file_get_boolean(file, "user", "showPreviews", nullptr),
 			[](bool _showPreviews) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
 				saveFile();
 			});
 		
-		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", NULL),
+		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", nullptr),
 			[](bool _showWindowCount) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showWindowCount", _showWindowCount);
 				saveFile();
@@ -72,13 +72,13 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		middleButtonBehavior.setup(g_key_file_get_integer(file, "user", "middleButtonBehavior", NULL),
+		middleButtonBehavior.setup(g_key_file_get_integer(file, "user", "middleButtonBehavior", nullptr),
 			[](int _middleButtonBehavior) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "middleButtonBehavior", _middleButtonBehavior);
 				saveFile();
 			});
 
-		indicatorOrientation.setup(g_key_file_get_integer(file, "user", "indicatorOrientation", NULL),
+		indicatorOrientation.setup(g_key_file_get_integer(file, "user", "indicatorOrientation", nullptr),
 			[](int _indicatorOrientation) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "indicatorOrientation", _indicatorOrientation);
 				saveFile();
@@ -86,7 +86,7 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		forceIconSize.setup(g_key_file_get_boolean(file, "user", "forceIconSize", NULL),
+		forceIconSize.setup(g_key_file_get_boolean(file, "user", "forceIconSize", nullptr),
 			[](bool _forceIconSize) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "forceIconSize", _forceIconSize);
 				saveFile();
@@ -94,7 +94,7 @@ namespace Settings
 				Dock::onPanelResize();
 			});
 
-		iconSize.setup(g_key_file_get_integer(file, "user", "iconSize", NULL),
+		iconSize.setup(g_key_file_get_integer(file, "user", "iconSize", nullptr),
 			[](int _iconSize) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "iconSize", _iconSize);
 				saveFile();
@@ -102,7 +102,7 @@ namespace Settings
 				Dock::onPanelResize();
 			});
 
-		indicatorStyle.setup(g_key_file_get_integer(file, "user", "indicatorStyle", NULL),
+		indicatorStyle.setup(g_key_file_get_integer(file, "user", "indicatorStyle", nullptr),
 			[](int _indicatorStyle) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "indicatorStyle", _indicatorStyle);
 				saveFile();
@@ -110,7 +110,7 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		inactiveIndicatorStyle.setup(g_key_file_get_integer(file, "user", "inactiveIndicatorStyle", NULL),
+		inactiveIndicatorStyle.setup(g_key_file_get_integer(file, "user", "inactiveIndicatorStyle", nullptr),
 			[](int _inactiveIndicatorStyle) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "inactiveIndicatorStyle", _inactiveIndicatorStyle);
 				saveFile();
@@ -118,7 +118,7 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		indicatorColorFromTheme.setup(g_key_file_get_boolean(file, "user", "indicatorColorFromTheme", NULL),
+		indicatorColorFromTheme.setup(g_key_file_get_boolean(file, "user", "indicatorColorFromTheme", nullptr),
 			[](bool _indicatorColorFromTheme) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "indicatorColorFromTheme", _indicatorColorFromTheme);
 				saveFile();
@@ -127,10 +127,10 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		gchar* colorString = g_key_file_get_string(file, "user", "indicatorColor", NULL);
+		gchar* colorString = g_key_file_get_string(file, "user", "indicatorColor", nullptr);
 		std::shared_ptr<GdkRGBA> color(g_new(GdkRGBA, 1), g_free);
 
-		if (colorString == NULL || !gdk_rgba_parse(color.get(), colorString))
+		if (colorString == nullptr || !gdk_rgba_parse(color.get(), colorString))
 			gdk_rgba_parse(color.get(), "rgb(76,166,230)");
 		g_free(colorString);
 
@@ -145,10 +145,10 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		colorString = g_key_file_get_string(file, "user", "inactiveColor", NULL);
+		colorString = g_key_file_get_string(file, "user", "inactiveColor", nullptr);
 		color = std::shared_ptr<GdkRGBA>(g_new(GdkRGBA, 1), g_free);
 
-		if (colorString == NULL || !gdk_rgba_parse(color.get(), colorString))
+		if (colorString == nullptr || !gdk_rgba_parse(color.get(), colorString))
 			gdk_rgba_parse(color.get(), "rgb(76,166,230)");
 		g_free(colorString);
 
@@ -163,25 +163,25 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		noWindowsListIfSingle.setup(g_key_file_get_boolean(file, "user", "noWindowsListIfSingle", NULL),
+		noWindowsListIfSingle.setup(g_key_file_get_boolean(file, "user", "noWindowsListIfSingle", nullptr),
 			[](bool _noWindowsListIfSingle) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "noWindowsListIfSingle", _noWindowsListIfSingle);
 				saveFile();
 			});
 
-		onlyDisplayVisible.setup(g_key_file_get_boolean(file, "user", "onlyDisplayVisible", NULL),
+		onlyDisplayVisible.setup(g_key_file_get_boolean(file, "user", "onlyDisplayVisible", nullptr),
 			[](bool _onlyDisplayVisible) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "onlyDisplayVisible", _onlyDisplayVisible);
 				saveFile();
 			});
 
-		onlyDisplayScreen.setup(g_key_file_get_boolean(file, "user", "onlyDisplayScreen", NULL),
+		onlyDisplayScreen.setup(g_key_file_get_boolean(file, "user", "onlyDisplayScreen", nullptr),
 			[](bool _onlyDisplayScreen) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "onlyDisplayScreen", _onlyDisplayScreen);
 				saveFile();
 			});
 
-		keyComboActive.setup(g_key_file_get_boolean(file, "user", "keyComboActive", NULL),
+		keyComboActive.setup(g_key_file_get_boolean(file, "user", "keyComboActive", nullptr),
 			[](bool _keyComboActive) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "keyComboActive", _keyComboActive);
 				saveFile();
@@ -189,7 +189,7 @@ namespace Settings
 				Hotkeys::updateSettings();
 			});
 
-		keyAloneActive.setup(g_key_file_get_boolean(file, "user", "keyAloneActive", NULL),
+		keyAloneActive.setup(g_key_file_get_boolean(file, "user", "keyAloneActive", nullptr),
 			[](bool _keyAloneActive) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "keyAloneActive", _keyAloneActive);
 				saveFile();
@@ -197,7 +197,7 @@ namespace Settings
 				Hotkeys::updateSettings();
 			});
 
-		gchar** pinnedListBuffer = g_key_file_get_string_list(file, "user", "pinned", NULL, NULL);
+		gchar** pinnedListBuffer = g_key_file_get_string_list(file, "user", "pinned", nullptr, nullptr);
 
 		pinnedAppList.setup(Help::Gtk::bufferToStdStringList(pinnedListBuffer),
 			[](std::list<std::string> list) -> void {
@@ -206,10 +206,10 @@ namespace Settings
 				saveFile();
 			});
 
-		if (pinnedListBuffer != NULL)
+		if (pinnedListBuffer != nullptr)
 		{
 			// try to be backward compatible: retrieve ids from paths
-			for (gchar** p = pinnedListBuffer; *p != NULL; p++)
+			for (gchar** p = pinnedListBuffer; *p != nullptr; p++)
 				if (**p == '/' && g_str_has_suffix(*p, ".desktop"))
 				{
 					gchar* basename = g_path_get_basename(*p);
@@ -223,19 +223,19 @@ namespace Settings
 		}
 
 		// HIDDEN SETTINGS:
-		dockSize.setup(g_key_file_get_integer(file, "user", "dockSize", NULL),
+		dockSize.setup(g_key_file_get_integer(file, "user", "dockSize", nullptr),
 			[](int _dockSize) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "dockSize", _dockSize);
 				saveFile();
 			});
 		
-		previewScale.setup(g_key_file_get_double(file, "user", "previewScale", NULL),
+		previewScale.setup(g_key_file_get_double(file, "user", "previewScale", nullptr),
 			[](int _previewScale) -> void {
 				g_key_file_set_double(mFile.get(), "user", "previewScale", _previewScale);
 				saveFile();
 			});
 		
-		previewSleep.setup(g_key_file_get_integer(file, "user", "previewSleep", NULL),
+		previewSleep.setup(g_key_file_get_integer(file, "user", "previewSleep", nullptr),
 			[](int _previewSleep) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "previewSleep", _previewSleep);
 				saveFile();
@@ -253,6 +253,6 @@ namespace Settings
 
 	void saveFile()
 	{
-		g_key_file_save_to_file(mFile.get(), mPath.get(), NULL);
+		g_key_file_save_to_file(mFile.get(), mPath.get(), nullptr);
 	}
 } // namespace Settings

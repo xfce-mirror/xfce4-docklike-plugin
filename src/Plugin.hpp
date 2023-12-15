@@ -31,7 +31,7 @@ void construct(XfcePanelPlugin* xfPlugin);
 }
 
 #define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
-#define PANEL_DEBUG(F, A) if (getenv("PANEL_DEBUG") != NULL) g_log("docklike", G_LOG_LEVEL_MESSAGE, F, A)
+#define PANEL_DEBUG(F, A) if (getenv("PANEL_DEBUG") != nullptr) g_log("docklike", G_LOG_LEVEL_MESSAGE, F, A)
 
 namespace Plugin
 {

@@ -16,7 +16,7 @@ namespace Plugin
 
 	static void init(XfcePanelPlugin* xfPlugin)
 	{
-		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, NULL);
+		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
 		mXfPlugin = xfPlugin;
 		mDisplay = gdk_display_get_default();
@@ -40,41 +40,41 @@ namespace Plugin
 				Dock::onPanelResize(size);
 				return true;
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "orientation-changed",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin, GtkOrientation orientation) {
 				Dock::onPanelOrientationChange(orientation);
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "configure-plugin",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
 				SettingsDialog::popup();
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "about",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
 				Plugin::aboutDialog();
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) {
 				remoteEvent(name, value);
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
 				Wnck::mGroupWindows.clear();
 				Dock::mGroups.clear();
-				g_signal_handlers_disconnect_by_data(Wnck::mWnckScreen, NULL);
+				g_signal_handlers_disconnect_by_data(Wnck::mWnckScreen, nullptr);
 				AppInfos::finalize();
 				Settings::finalize();
 			}),
-			NULL);
+			nullptr);
 	}
 
 	void aboutDialog()
@@ -82,7 +82,7 @@ namespace Plugin
 		const gchar* AUTHORS[] = {
 			"Nicolas Szabo <nszabo@vivaldi.net>",
 			"David Keogh <davidtkeogh@gmail.com>",
-			NULL};
+			nullptr};
 
 		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
 		const gchar* TRANSLATORS =
@@ -98,7 +98,7 @@ namespace Plugin
 			"Matthaiks : pl\n"
 			"Faisal Rachmadin <frachmadin@gmail.com> : id\n";
 
-		gtk_show_about_dialog(NULL,
+		gtk_show_about_dialog(nullptr,
 			"program-name", "Docklike Taskbar",
 			"logo-icon-name", "preferences-system-windows",
 			"version", PACKAGE_VERSION,
@@ -106,7 +106,7 @@ namespace Plugin
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"authors", AUTHORS,
 			"translator-credits", TRANSLATORS,
-			NULL);
+			nullptr);
 	}
 
 	void remoteEvent(gchar* name, GValue* value)

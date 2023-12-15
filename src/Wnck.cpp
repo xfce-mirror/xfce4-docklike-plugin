@@ -18,11 +18,11 @@ namespace Wnck
 		{
 			// Wnck method const char *
 			const char* buf = wnck_window_get_class_group_name(wnckWindow);
-			if (buf != NULL && buf[0] != '\0')
+			if (buf != nullptr && buf[0] != '\0')
 				return buf;
 
 			buf = wnck_window_get_class_instance_name(wnckWindow);
-			if (buf != NULL && buf[0] != '\0')
+			if (buf != nullptr && buf[0] != '\0')
 				return buf;
 
 			// proc/{pid}/cmdline method
@@ -74,13 +74,13 @@ namespace Wnck
 				if (Settings::showPreviews && newWindow->mGroup->mGroupMenu.mVisible)
 					newWindow->mGroupMenuItem->mPreviewTimeout.start();
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "active-window-changed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* previousActiveWindow) {
@@ -91,13 +91,13 @@ namespace Wnck
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
 					gtk_widget_queue_draw(activeWindow->mGroup->mButton);
 				}
-				if (previousActiveWindow != NULL)
+				if (previousActiveWindow != nullptr)
 				{
 					gulong prevXID = wnck_window_get_xid(previousActiveWindow);
 					if (prevXID)
 					{
 						std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(prevXID);
-						if (prevWindow != NULL)
+						if (prevWindow != nullptr)
 						{
 							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
@@ -107,13 +107,13 @@ namespace Wnck
 				}
 				setActiveWindow();
 			}),
-			NULL);
+			nullptr);
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "active-workspace-changed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				setVisibleGroups();
 			}),
-			NULL);
+			nullptr);
 	}
 
 	gulong getActiveWindowXID()
@@ -136,7 +136,7 @@ namespace Wnck
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
 
 		WnckWorkspace* workspace = wnck_window_get_workspace(groupWindow->mWnckWindow);
-		if (workspace != NULL)
+		if (workspace != nullptr)
 			wnck_workspace_activate(workspace, timestamp);
 
 		wnck_window_activate(groupWindow->mWnckWindow, timestamp);
@@ -163,7 +163,7 @@ namespace Wnck
 	void setVisibleGroups()
 	{
 		for (GList* window_l = wnck_screen_get_windows(mWnckScreen);
-			 window_l != NULL;
+			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
@@ -176,8 +176,8 @@ namespace Wnck
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
-		GtkWidget* menu = (groupWindow != NULL && !groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST)) ? wnck_action_menu_new(groupWindow->mWnckWindow) : gtk_menu_new();
-		std::shared_ptr<AppInfo> appInfo = (groupWindow != NULL) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
+		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST)) ? wnck_action_menu_new(groupWindow->mWnckWindow) : gtk_menu_new();
+		std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
 		{
@@ -205,7 +205,7 @@ namespace Wnck
 					appInfo.get());
 			}
 
-			if (group != NULL)
+			if (group != nullptr)
 			{
 				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
 				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
@@ -214,7 +214,7 @@ namespace Wnck
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
 				gchar* program = g_find_program_in_path("exo-desktop-item-edit");
-				if (program != NULL)
+				if (program != nullptr)
 				{
 					gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
 					g_free(program);

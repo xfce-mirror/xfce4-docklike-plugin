@@ -46,12 +46,12 @@ namespace Hotkeys
 	{
 		if (start && !mHotkeysHandling)
 		{
-			gdk_window_add_filter(NULL, hotkeysHandler, NULL);
+			gdk_window_add_filter(nullptr, hotkeysHandler, nullptr);
 			mHotkeysHandling = true;
 		}
 		else if (!start && mHotkeysHandling)
 		{
-			gdk_window_remove_filter(NULL, hotkeysHandler, NULL);
+			gdk_window_remove_filter(nullptr, hotkeysHandler, nullptr);
 			mHotkeysHandling = false;
 		}
 	}
@@ -113,10 +113,10 @@ namespace Hotkeys
 
 	static void* threadedXIKeyListenner(void* data)
 	{
-		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
-		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, nullptr);
+		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);
 
-		Display* display = XOpenDisplay(NULL);
+		Display* display = XOpenDisplay(nullptr);
 
 		// Register events
 		Window root = DefaultRootWindow(display);
@@ -142,7 +142,7 @@ namespace Hotkeys
 				if (cookie->evtype == XI_RawKeyRelease)
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
 						if (toTrigger)
-							gdk_threads_add_idle(threadSafeSwitch, NULL);
+							gdk_threads_add_idle(threadSafeSwitch, nullptr);
 				if (cookie->evtype == XI_RawKeyPress)
 				{
 					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
@@ -159,11 +159,11 @@ namespace Hotkeys
 		if (mXIExtAvailable && start)
 		{
 			if (!mThread)
-				pthread_create(&mThread, NULL, threadedXIKeyListenner, NULL);
+				pthread_create(&mThread, nullptr, threadedXIKeyListenner, nullptr);
 			else if (mThread)
 			{
 				pthread_cancel(mThread); //also close the XDisplay in the thread
-				void* ret = NULL;
+				void* ret = nullptr;
 				pthread_join(mThread, &ret);
 				mThread = 0;
 			}
@@ -203,7 +203,7 @@ namespace Hotkeys
 
 	void init()
 	{
-		Display* display = XOpenDisplay(NULL);
+		Display* display = XOpenDisplay(nullptr);
 
 		checkXIExtension(display);
 

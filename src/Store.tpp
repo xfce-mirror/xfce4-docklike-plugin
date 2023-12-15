@@ -37,7 +37,7 @@ namespace Store
 				return v;
 			}
 
-			return NULL;
+			return nullptr;
 		}
 
 		V get(K k)
@@ -48,7 +48,7 @@ namespace Store
 			if (it != mList.end())
 				return it->second;
 
-			return NULL;
+			return nullptr;
 		}
 
 		V moveToStart(K k)
@@ -65,7 +65,7 @@ namespace Store
 			if (it != mList.end())
 				return it->second;
 
-			return NULL;
+			return nullptr;
 		}
 
 		void forEach(std::function<void(std::pair<const K, V>)> funct)
@@ -94,7 +94,7 @@ namespace Store
 			if (it != mMap.end())
 				return it->second;
 
-			return NULL;
+			return nullptr;
 		}
 
 		void remove(K k)
@@ -132,7 +132,7 @@ namespace Store
 			if (it != mList.end())
 				return *it;
 
-			return NULL;
+			return nullptr;
 		}
 
 		void forEach(std::function<void(V)> funct) { std::for_each(mList.begin(), mList.end(), funct); }

@@ -12,7 +12,7 @@ static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
 Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 {
-	mIconPixbuf = NULL;
+	mIconPixbuf = nullptr;
 	mAppInfo = appInfo;
 	mPinned = pinned;
 	mTopWindowIndex = 0;
@@ -188,11 +188,11 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	if (mPinned)
 		gtk_widget_show_all(mButton);
 
-	if (mAppInfo != NULL && !mAppInfo->icon.empty())
+	if (mAppInfo != nullptr && !mAppInfo->icon.empty())
 	{
 		if (mAppInfo->icon[0] == '/' && g_file_test(mAppInfo->icon.c_str(), G_FILE_TEST_IS_REGULAR))
 		{
-			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), NULL);
+			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), nullptr);
 			gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), mIconPixbuf);
 		}
 		else
@@ -208,11 +208,11 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 Group::~Group()
 {
 	// can be unparented before the group is destroyed on exit
-	if (gtk_widget_get_parent(mButton) != NULL)
+	if (gtk_widget_get_parent(mButton) != nullptr)
 		gtk_container_remove(GTK_CONTAINER(gtk_widget_get_parent(mButton)), mButton);
 	g_object_unref(mButton);
 
-	if (mIconPixbuf != NULL)
+	if (mIconPixbuf != nullptr)
 		g_object_unref(mIconPixbuf);
 }
 
@@ -291,7 +291,7 @@ void Group::resize()
 	// TODO: set `min-width` / `min-height` CSS property on button?
 	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
 	
-	if (mIconPixbuf != NULL)
+	if (mIconPixbuf != nullptr)
 	{
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER);
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), scaled);
@@ -770,7 +770,7 @@ void Group::updateStyle()
 		if (wCount == 1 && Settings::noWindowsListIfSingle)
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
 		else
-			gtk_widget_set_tooltip_text(mButton, NULL);
+			gtk_widget_set_tooltip_text(mButton, nullptr);
 
 		mSOpened = true;
 
@@ -849,11 +849,11 @@ void Group::onButtonPress(GdkEventButton* event)
 		if (!win && !mPinned)
 			return;
 
-		if (mButton != NULL)
+		if (mButton != nullptr)
 		{
 			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win.get(), this)));
 			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
-			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), NULL);
+			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), nullptr);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 		}
 
@@ -895,14 +895,14 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 {
 	GdkModifierType mask;
 	GdkDevice* device = gdk_drag_context_get_device(context);
-	gdk_window_get_device_position(gtk_widget_get_window(widget), device, NULL, NULL, &mask);
+	gdk_window_get_device_position(gtk_widget_get_window(widget), device, nullptr, nullptr, &mask);
 
 	if (mask & GDK_CONTROL_MASK)
 		gtk_drag_cancel(context);
 
 	GList* tmp_list = gdk_drag_context_list_targets(context);
 
-	if (tmp_list != NULL)
+	if (tmp_list != nullptr)
 	{
 		gchar* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
 		std::string target = name;
@@ -946,14 +946,14 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 
 void Group::onDragBegin(GdkDragContext* context)
 {
-	if (mIconPixbuf != NULL)
+	if (mIconPixbuf != nullptr)
 	{
 		gtk_drag_set_icon_pixbuf(context, mIconPixbuf, 0, 0);
 	}
 	else
 	{
 		const gchar *icon_name;
-		gtk_image_get_icon_name(GTK_IMAGE(mImage), &icon_name, NULL);
+		gtk_image_get_icon_name(GTK_IMAGE(mImage), &icon_name, nullptr);
 		gtk_drag_set_icon_name(context, icon_name, 0, 0);
 	}
 }

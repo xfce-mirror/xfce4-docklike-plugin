@@ -33,7 +33,7 @@ namespace SettingsDialog
 		g_signal_connect(
 			gtk_builder_get_object(builder, "b_help"), "clicked",
 			G_CALLBACK(+[](GtkButton* button, GtkWindow* dialogWindow) {
-				gtk_show_uri_on_window(dialogWindow, HELP_WEBSITE, GDK_CURRENT_TIME, NULL);
+				gtk_show_uri_on_window(dialogWindow, HELP_WEBSITE, GDK_CURRENT_TIME, nullptr);
 			}),
 			dialog);
 
@@ -59,7 +59,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkToggleButton* noWindowsListIfSingle) {
 				Settings::noWindowsListIfSingle.set(gtk_toggle_button_get_active(noWindowsListIfSingle));
 			}),
-			NULL);
+			nullptr);
 
 		GObject* onlyDisplayVisible = gtk_builder_get_object(builder, "c_onlyDisplayVisible");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayVisible), Settings::onlyDisplayVisible);
@@ -68,7 +68,7 @@ namespace SettingsDialog
 				Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
 				Wnck::setVisibleGroups();
 			}),
-			NULL);
+			nullptr);
 
 		GObject* onlyDisplayScreen = gtk_builder_get_object(builder, "c_onlyDisplayScreen");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayScreen), Settings::onlyDisplayScreen);
@@ -77,7 +77,7 @@ namespace SettingsDialog
 				Settings::onlyDisplayScreen.set(gtk_toggle_button_get_active(_onlyDisplayScreen));
 				Wnck::setVisibleGroups();
 			}),
-			NULL);
+			nullptr);
 
 		GObject* showPreviews = gtk_builder_get_object(builder, "c_showPreviews");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showPreviews), Settings::showPreviews);
@@ -85,7 +85,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkToggleButton* _showPreviews) {
 				Settings::showPreviews.set(gtk_toggle_button_get_active(_showPreviews));
 			}),
-			NULL);
+			nullptr);
 		
 		GObject* showWindowCount = gtk_builder_get_object(builder, "c_showWindowCount");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showWindowCount), Settings::showWindowCount);
@@ -93,7 +93,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkToggleButton* _showWindowCount) {
 				Settings::showWindowCount.set(gtk_toggle_button_get_active(_showWindowCount));
 			}),
-			NULL);
+			nullptr);
 
 		GObject* middleButtonBehavior = gtk_builder_get_object(builder, "co_middleButtonBehavior");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(middleButtonBehavior), Settings::middleButtonBehavior);
@@ -173,7 +173,7 @@ namespace SettingsDialog
 				gtk_entry_set_text(entry, value.c_str());
 				Settings::iconSize.set(std::stoi("0" + value));
 			}),
-			NULL);
+			nullptr);
 
 		GObject* forceIconSize = gtk_builder_get_object(builder, "c_forceIconSize");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(forceIconSize), Settings::forceIconSize);
@@ -202,7 +202,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkToggleButton* _keyAloneActive) {
 				Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
 			}),
-			NULL);
+			nullptr);
 
 		if (!Hotkeys::mXIExtAvailable)
 		{

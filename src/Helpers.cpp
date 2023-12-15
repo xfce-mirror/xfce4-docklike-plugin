@@ -109,8 +109,8 @@ namespace Help
 		{
 			std::list<std::string> ret;
 
-			if (stringList != NULL)
-				for (int i = 0; stringList[i] != NULL; ++i)
+			if (stringList != nullptr)
+				for (int i = 0; stringList[i] != nullptr; ++i)
 					ret.push_back(stringList[i]);
 
 			return ret;

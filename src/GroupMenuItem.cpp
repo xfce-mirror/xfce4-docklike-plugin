@@ -136,7 +136,7 @@ void GroupMenuItem::updateIcon()
 {
 	GdkPixbuf* iconPixbuf = wnck_window_get_mini_icon(mGroupWindow->mWnckWindow);
 
-	if (iconPixbuf != NULL)
+	if (iconPixbuf != nullptr)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mIcon), iconPixbuf);
 }
 
@@ -167,12 +167,12 @@ void GroupMenuItem::updatePreview()
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			wnck_window_get_xid(mGroupWindow->mWnckWindow));
 
-		if (window != NULL)
+		if (window != nullptr)
 		{
 			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window),
 				gdk_window_get_height(window));
 
-			if (pixbuf != NULL)
+			if (pixbuf != nullptr)
 			{
 				thumbnail = gdk_pixbuf_scale_simple(pixbuf,
 					gdk_pixbuf_get_width(pixbuf) * scale, gdk_pixbuf_get_height(pixbuf) * scale, GDK_INTERP_BILINEAR);

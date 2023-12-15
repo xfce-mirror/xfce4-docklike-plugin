@@ -59,7 +59,7 @@ namespace Dock
 		std::list<std::string> pinnedList;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = children; child != NULL; child = child->next)
+		for (GList* child = children; child != nullptr; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
@@ -94,7 +94,7 @@ namespace Dock
 
 		// Add open windows
 		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
-			 window_l != NULL;
+			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
@@ -118,7 +118,7 @@ namespace Dock
 		int grabbedKeys = Hotkeys::mGrabbedKeys;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = children; child != NULL && grabbedKeys; child = child->next)
+		for (GList* child = children; child != nullptr && grabbedKeys; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
@@ -138,7 +138,7 @@ namespace Dock
 		int i = 0;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-		for (GList* child = children; child != NULL; child = child->next)
+		for (GList* child = children; child != nullptr; child = child->next)
 		{
 			GtkWidget* widget = (GtkWidget*)child->data;
 
