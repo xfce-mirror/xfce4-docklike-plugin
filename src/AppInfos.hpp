@@ -37,6 +37,7 @@ struct AppInfo
 namespace AppInfos
 {
 	void init();
+	void finalize();
 	std::shared_ptr<AppInfo> search(std::string id);
 } // namespace AppInfos
 

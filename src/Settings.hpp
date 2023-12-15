@@ -24,6 +24,7 @@
 namespace Settings
 {
 	void init();
+	void finalize();
 
 	void saveFile();
 

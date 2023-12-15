@@ -199,6 +199,15 @@ namespace AppInfos
 		loadXDGDirectories();
 	}
 
+	void finalize()
+	{
+		mXdgDataDirs.clear();
+		mAppInfoWMClasses.clear();
+		mAppInfoIds.clear();
+		mAppInfoNames.clear();
+		mMonitor.reset();
+	}
+
 	// TODO: Load these from a file so that the user can add their own aliases
 	std::map<std::string, std::string> mGroupNameRename = {
 		{"soffice", "libreoffice-startcenter"},

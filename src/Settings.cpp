@@ -242,6 +242,15 @@ namespace Settings
 			});
 	}
 
+	void finalize()
+	{
+		mPath.reset();
+		mFile.reset();
+		indicatorColor.get().reset();
+		inactiveColor.get().reset();
+		pinnedAppList.get().clear();
+	}
+
 	void saveFile()
 	{
 		g_key_file_save_to_file(mFile.get(), mPath.get(), NULL);
