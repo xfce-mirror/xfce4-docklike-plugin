@@ -263,7 +263,7 @@ namespace Wnck
 
 		g_signal_connect(G_OBJECT(remove), "activate",
 			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
-				_group->mPinned = FALSE;
+				_group->mPinned = false;
 				Dock::savePinned();
 				Dock::drawGroups();
 			}),
