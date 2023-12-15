@@ -10,7 +10,7 @@
 namespace Wnck
 {
 	WnckScreen* mWnckScreen;
-	Store::KeyStore<gulong, GroupWindow*> mGroupWindows;
+	Store::KeyStore<gulong, std::shared_ptr<GroupWindow>> mGroupWindows;
 
 	namespace // private:
 	{
@@ -67,7 +67,7 @@ namespace Wnck
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				GroupWindow* newWindow = new GroupWindow(wnckWindow);
+				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(wnckWindow);
 				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
 				newWindow->mGroup->updateStyle();
 
@@ -78,8 +78,7 @@ namespace Wnck
 
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				GroupWindow* groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
-				delete groupWindow;
+				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
 			}),
 			NULL);
 
@@ -88,23 +87,21 @@ namespace Wnck
 				gulong activeXID = getActiveWindowXID();
 				if (activeXID)
 				{
-					GroupWindow* activeWindow = mGroupWindows.get(activeXID);
+					std::shared_ptr<GroupWindow> activeWindow = mGroupWindows.get(activeXID);
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
-					if (activeWindow->mGroup->mButton != NULL)
-						gtk_widget_queue_draw(activeWindow->mGroup->mButton);
+					gtk_widget_queue_draw(activeWindow->mGroup->mButton);
 				}
 				if (previousActiveWindow != NULL)
 				{
 					gulong prevXID = wnck_window_get_xid(previousActiveWindow);
 					if (prevXID)
 					{
-						GroupWindow* prevWindow = mGroupWindows.get(prevXID);
+						std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(prevXID);
 						if (prevWindow != NULL)
 						{
 							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
-							if (prevWindow->mGroup->mButton != NULL)
-								gtk_widget_queue_draw(prevWindow->mGroup->mButton);
+							gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 						}
 					}
 				}
@@ -117,8 +114,6 @@ namespace Wnck
 				setVisibleGroups();
 			}),
 			NULL);
-
-		setActiveWindow();
 	}
 
 	gulong getActiveWindowXID()
@@ -172,7 +167,7 @@ namespace Wnck
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			GroupWindow* groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
+			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
 
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
@@ -182,11 +177,12 @@ namespace Wnck
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
 		GtkWidget* menu = (groupWindow != NULL && !groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST)) ? wnck_action_menu_new(groupWindow->mWnckWindow) : gtk_menu_new();
-		AppInfo* appInfo = (groupWindow != NULL) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
+		std::shared_ptr<AppInfo> appInfo = (groupWindow != NULL) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
 		{
-			for (int i = 0; appInfo->actions[i]; i++)
+			const gchar* const* actions = appInfo->get_actions();
+			for (int i = 0; actions[i]; i++)
 			{
 				// Desktop actions get inserted into the menu above all the window manager controls.
 				// We need an extra separator only if the application is running.
@@ -194,19 +190,19 @@ namespace Wnck
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
 				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
-				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, appInfo->actions[i]);
+				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, actions[i]);
 				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
 				g_free(action_name);
 				g_object_unref(GDAppInfo);
 
-				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)appInfo->actions[i]);
+				g_object_set_data((GObject*)actionLauncher, "action", (gpointer)actions[i]);
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
 
 				g_signal_connect(G_OBJECT(actionLauncher), "activate",
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
 						_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
 					}),
-					appInfo);
+					appInfo.get());
 			}
 
 			if (group != NULL)
@@ -239,7 +235,7 @@ namespace Wnck
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
 						_appInfo->edit();
 					}),
-					appInfo);
+					appInfo.get());
 
 				if (group->mWindowsCount > 1)
 				{

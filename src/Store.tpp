@@ -13,6 +13,7 @@
 #include <list>
 #include <map>
 #include <utility>
+#include <memory>
 
 namespace Store
 {
@@ -141,6 +142,9 @@ namespace Store
 	  private:
 		std::list<V> mList;
 	};
+
+	template<typename T>
+	using AutoPtr = std::unique_ptr<T,std::function<void(void*)>>;
 } // namespace Store
 
 #endif // STORE_HPP

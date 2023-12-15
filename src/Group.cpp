@@ -10,7 +10,7 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 {
 	mIconPixbuf = NULL;
 	mAppInfo = appInfo;
@@ -53,12 +53,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	//--------------------------------------------------
 
-	mButton = gtk_button_new();
-	// This probably shouldn't be necessary, if this widget wasn't a public member and was
-	// destroyed in its class destructor. But in the absence of a better fix, this reset with
-	// sanity checks avoids crashes all over the plugin.
-	g_signal_connect(mButton, "destroy", G_CALLBACK(gtk_widget_destroyed), &mButton);
-
+	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	GtkWidget* overlay = gtk_overlay_new();
@@ -147,8 +142,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			if (me->mButton != NULL)
-				Help::Gtk::cssClassAdd(me->mButton, "hover_group");
+			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
 			me->mSHover = true;
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
@@ -164,8 +158,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 
 	g_signal_connect(G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
-			if (me->mButton != NULL)
-				Help::Gtk::cssClassRemove(me->mButton, "hover_group");
+			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
 			me->mSHover = false;
 			me->mMenuShowTimeout.stop();
 
@@ -212,15 +205,22 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 	updateStyle();
 }
 
+Group::~Group()
+{
+	// can be unparented before the group is destroyed on exit
+	if (gtk_widget_get_parent(mButton) != NULL)
+		gtk_container_remove(GTK_CONTAINER(gtk_widget_get_parent(mButton)), mButton);
+	g_object_unref(mButton);
+
+	if (mIconPixbuf != NULL)
+		g_object_unref(mIconPixbuf);
+}
+
 void Group::add(GroupWindow* window)
 {
 	mWindows.push(window);
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
-
-	if (mButton == NULL)
-		return;
-
 	Help::Gtk::cssClassAdd(mButton, "open_group");
 
 	if (mWindowsCount == 1 && !mPinned)
@@ -235,9 +235,6 @@ void Group::remove(GroupWindow* window)
 	mWindowsCount.updateState();
 	mGroupMenu.remove(window->mGroupMenuItem);
 	mSFocus = false;
-
-	if (mButton == NULL)
-		return;
 
 	if (!mWindowsCount)
 		Help::Gtk::cssClassRemove(mButton, "open_group");
@@ -304,18 +301,13 @@ void Group::resize()
 		gtk_image_set_pixel_size(GTK_IMAGE(mImage), Dock::mIconSize);
 
 	gtk_widget_set_valign(mImage, GTK_ALIGN_CENTER);
-	if (mButton != NULL)
-		gtk_widget_queue_draw(mButton);
+	gtk_widget_queue_draw(mButton);
 }
 
 void Group::onDraw(cairo_t* cr)
 {
-	int w = 0, h = 0;
-	if (mButton != NULL)
-	{
-		w = gtk_widget_get_allocated_width(mButton);
-		h = gtk_widget_get_allocated_height(mButton);
-	}
+	int w = gtk_widget_get_allocated_width(mButton);
+	int h = gtk_widget_get_allocated_height(mButton);
 
 	double rgba[4];
 
@@ -334,23 +326,20 @@ void Group::onDraw(cairo_t* cr)
 		rgba[1] = (*indicatorColor).green;
 		rgba[2] = (*indicatorColor).blue;
 		rgba[3] = (*indicatorColor).alpha;
+		g_value_unset(&gv);
 	}
 	else
 	{
+		std::shared_ptr<GdkRGBA> color;
 		if (mSFocus)
-		{
-			rgba[0] = (*Settings::indicatorColor).red;
-			rgba[1] = (*Settings::indicatorColor).green;
-			rgba[2] = (*Settings::indicatorColor).blue;
-			rgba[3] = (*Settings::indicatorColor).alpha;
-		}
+			color = Settings::indicatorColor;
 		else
-		{
-			rgba[0] = (*Settings::inactiveColor).red;
-			rgba[1] = (*Settings::inactiveColor).green;
-			rgba[2] = (*Settings::inactiveColor).blue;
-			rgba[3] = (*Settings::inactiveColor).alpha;
-		}
+			color = Settings::inactiveColor;
+
+		rgba[0] = color->red;
+		rgba[1] = color->green;
+		rgba[2] = color->blue;
+		rgba[3] = color->alpha;
 	}
 
 	const float BAR_WEIGHT = 0.935;
@@ -746,7 +735,7 @@ void Group::onDraw(cairo_t* cr)
 
 void Group::onMouseEnter()
 {
-	Dock::mGroups.forEach([this](std::pair<AppInfo*, Group*> g) -> void {
+	Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 		if (&(g.second->mGroupMenu) != &(this->mGroupMenu))
 			g.second->mGroupMenu.mGroup->onMouseLeave();
 	});
@@ -770,9 +759,6 @@ void Group::setMouseLeaveTimeout()
 void Group::updateStyle()
 {
 	int wCount = mWindowsCount;
-
-	if (mButton == NULL)
-		return;
 
 	if (mPinned || wCount)
 		gtk_widget_show_all(mButton);
@@ -819,11 +805,11 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
+			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
-			});
+			}).get();
 
 		setTopWindow(newTopWindow);
 	}
@@ -836,8 +822,7 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 		mActive = true;
 		mSFocus = true;
 		setTopWindow(groupWindow);
-		if (mButton != NULL)
-			Help::Gtk::cssClassAdd(mButton, "active_group");
+		Help::Gtk::cssClassAdd(mButton, "active_group");
 	}
 }
 
@@ -845,8 +830,7 @@ void Group::onWindowUnactivate()
 {
 	mActive = false;
 	mSFocus = false;
-	if (mButton != NULL)
-		Help::Gtk::cssClassRemove(mButton, "active_group");
+	Help::Gtk::cssClassRemove(mButton, "active_group");
 }
 
 void Group::setTopWindow(GroupWindow* groupWindow)
@@ -858,16 +842,16 @@ void Group::onButtonPress(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_SECONDARY)
 	{
-		GroupWindow* win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, GroupWindow*> e) -> bool {
+		std::shared_ptr<GroupWindow> win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
 			return (e.second->mGroupAssociated && e.second->mGroup == this);
 		});
 
-		if (win == NULL && !mPinned)
+		if (!win && !mPinned)
 			return;
 
 		if (mButton != NULL)
 		{
-			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win, this)));
+			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win.get(), this)));
 			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), NULL);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
@@ -940,16 +924,14 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	if (mButton != NULL)
-		gtk_drag_highlight(mButton);
+	gtk_drag_highlight(mButton);
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	if (mButton != NULL)
-		gtk_drag_unhighlight(mButton);
+	gtk_drag_unhighlight(mButton);
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)

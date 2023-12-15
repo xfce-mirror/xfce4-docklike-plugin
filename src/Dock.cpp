@@ -10,7 +10,7 @@
 namespace Dock
 {
 	GtkWidget* mBox;
-	Store::KeyStore<AppInfo*, Group*> mGroups;
+	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
 
 	int mPanelSize;
 	int mIconSize;
@@ -27,25 +27,22 @@ namespace Dock
 		drawGroups();
 	}
 
-	Group* prepareGroup(AppInfo* appInfo)
+	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo)
 	{
-		Group* group = mGroups.get(appInfo);
+		std::shared_ptr<Group> group = mGroups.get(appInfo);
 
-		if (group == NULL)
+		if (!group)
 		{
-			group = new Group(appInfo, false);
+			group = std::make_shared<Group>(appInfo, false);
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
 
-		return group;
+		return group.get();
 	}
 
 	void moveButton(Group* moving, Group* dest)
 	{
-		if (moving->mButton == NULL || dest->mButton == NULL)
-			return;
-
 		int startpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), moving->mButton);
 		int destpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), dest->mButton);
 
@@ -78,11 +75,8 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
-			{ gtk_widget_destroy(g.second->mButton); });
-
-		mGroups.clear();
 		Wnck::mGroupWindows.clear();
+		mGroups.clear();
 
 		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -90,8 +84,8 @@ namespace Dock
 
 		while (it != pinnedApps.end())
 		{
-			AppInfo* appInfo = AppInfos::search(Help::String::toLowercase(*it));
-			Group* group = new Group(appInfo, true);
+			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(*it));
+			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true);
 
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
@@ -105,10 +99,10 @@ namespace Dock
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
 			gulong windowXID = wnck_window_get_xid(wnckWindow);
-			GroupWindow* groupWindow = Wnck::mGroupWindows.get(windowXID);
+			std::shared_ptr<GroupWindow> groupWindow = Wnck::mGroupWindows.get(windowXID);
 
-			if (groupWindow == NULL)
-				groupWindow = new GroupWindow(wnckWindow);
+			if (!groupWindow)
+				groupWindow = std::make_shared<GroupWindow>(wnckWindow);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
@@ -194,7 +188,7 @@ namespace Dock
 				mIconSize = mPanelSize * 0.8;
 		}
 
-		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void
+		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void
 			{ g.second->resize(); });
 	}
 

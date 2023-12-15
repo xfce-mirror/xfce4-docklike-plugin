@@ -133,23 +133,21 @@ namespace SettingsDialog
 		gtk_widget_set_sensitive(GTK_WIDGET(customIndicatorColors), !Settings::indicatorColorFromTheme);
 
 		GObject* indicatorColor = gtk_builder_get_object(builder, "cp_indicatorColor");
-		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor);
+		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(indicatorColor), Settings::indicatorColor.get().get());
 		g_signal_connect(indicatorColor, "color-set",
 			G_CALLBACK(+[](GtkColorButton* _indicatorColor, GtkWidget* g) {
-				gdk_rgba_free(Settings::indicatorColor);
-				GdkRGBA* color = g_new(GdkRGBA, 1);
-				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_indicatorColor), color);
+				std::shared_ptr<GdkRGBA> color(g_new(GdkRGBA, 1), g_free);
+				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_indicatorColor), color.get());
 				Settings::indicatorColor.set(color);
 			}),
 			dialog);
 
 		GObject* inactiveColor = gtk_builder_get_object(builder, "cp_inactiveColor");
-		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(inactiveColor), Settings::inactiveColor);
+		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(inactiveColor), Settings::inactiveColor.get().get());
 		g_signal_connect(inactiveColor, "color-set",
 			G_CALLBACK(+[](GtkColorButton* _inactiveColor, GtkWidget* g) {
-				gdk_rgba_free(Settings::inactiveColor);
-				GdkRGBA* color = g_new(GdkRGBA, 1);
-				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_inactiveColor), color);
+				std::shared_ptr<GdkRGBA> color(g_new(GdkRGBA, 1), g_free);
+				gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(_inactiveColor), color.get());
 				Settings::inactiveColor.set(color);
 			}),
 			dialog);

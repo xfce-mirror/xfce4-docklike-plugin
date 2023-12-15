@@ -29,6 +29,8 @@ class State
 			f(v);
 	}
 
+	V get() { return v; }
+
 	operator V() const { return v; }
 
   private:

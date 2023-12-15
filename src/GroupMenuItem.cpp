@@ -90,8 +90,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 			me->mGroupWindow->mGroup->mSHover = false;
 			Help::Gtk::cssClassRemove(widget, "hover_menu_item");
 			gtk_widget_queue_draw(widget);
-			if (me->mGroupWindow->mGroup->mButton != NULL)
-				gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);
+			gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);
 			return true;
 		}),
 		this);

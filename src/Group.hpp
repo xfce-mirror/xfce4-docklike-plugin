@@ -51,7 +51,8 @@ class GroupWindow;
 class Group
 {
   public:
-	Group(AppInfo* appInfo, bool pinned);
+	Group(std::shared_ptr<AppInfo> appInfo, bool pinned);
+	~Group();
 
 	void add(GroupWindow* window);
 	void remove(GroupWindow* window);
@@ -92,7 +93,7 @@ class Group
 	Store::List<GroupWindow*> mWindows;
 	LogicalState<uint> mWindowsCount;
 
-	AppInfo* mAppInfo;
+	std::shared_ptr<AppInfo> mAppInfo;
 	GroupMenu mGroupMenu;
 
 	GtkWidget* mButton;

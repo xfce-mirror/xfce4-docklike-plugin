@@ -65,6 +65,16 @@ namespace Plugin
 				remoteEvent(name, value);
 			}),
 			NULL);
+
+		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
+			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
+				Wnck::mGroupWindows.clear();
+				Dock::mGroups.clear();
+				g_signal_handlers_disconnect_by_data(Wnck::mWnckScreen, NULL);
+				AppInfos::finalize();
+				Settings::finalize();
+			}),
+			NULL);
 	}
 
 	void aboutDialog()
