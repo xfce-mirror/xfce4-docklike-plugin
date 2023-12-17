@@ -39,7 +39,7 @@ To assist with troubleshooting plugin issues, please run Xfce Panel in debugging
 
 - Open a terminal
 - Quit the Xfce Panel using `xfce4-panel -q`
-- Start the panel in debugging mode with `PANEL_DEBUG=1 xfce4-panel`
+- Start the panel in debugging mode with `PANEL_DEBUG=1 G_MESSAGES_PREFIXED= G_MESSAGES_DEBUG=docklike xfce4-panel`
 - Perform any actions you want to debug and copy the relevant output
 - Stop debugging by pressing `Ctrl^C`
 - Start the panel again using `xfce4-panel &`

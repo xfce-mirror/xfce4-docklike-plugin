@@ -176,7 +176,7 @@ namespace AppInfos
 				loadDesktopEntry(xdgDir, entry->d_name);
 
 			closedir(directory);
-			PANEL_DEBUG("APPDIR: %s", xdgDir.c_str());
+			g_debug("APPDIR: %s", xdgDir.c_str());
 		}
 	}
 
@@ -264,7 +264,7 @@ namespace AppInfos
 		if (ai != nullptr)
 			return ai;
 
-		PANEL_DEBUG("NO MATCH: %s", id.c_str());
+		g_debug("NO MATCH: %s", id.c_str());
 
 		return std::make_shared<AppInfo>("", "", "", id);
 	}

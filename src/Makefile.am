@@ -1,4 +1,10 @@
-AM_CXXFLAGS = -DWNCK_I_KNOW_THIS_IS_UNSTABLE -DPACKAGE_LOCALE_DIR=\"$(localedir)\" $(GTK_CFLAGS) $(CAIRO_CFLAGS) $(WNCK_CFLAGS) --std=c++11
+AM_CXXFLAGS = \
+	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
+	-DG_LOG_DOMAIN=\"docklike\" \
+	$(GTK_CFLAGS) \
+	$(CAIRO_CFLAGS) \
+	$(WNCK_CFLAGS)
 
 plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = libdocklike.la
