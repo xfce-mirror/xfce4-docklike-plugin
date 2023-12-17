@@ -131,12 +131,16 @@ namespace AppInfos
 		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
 		mAppInfoIds.set(lower_id, info);
 
+		name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+		name = (name_ != nullptr) ? name_ : "";
+		g_free(name_);
+
 		if (!name.empty())
 		{
 			name = Help::String::toLowercase(Help::String::trim(name));
 
 			if (name.find(' ') == std::string::npos)
-				if (name != id)
+				if (name != lower_id)
 					mAppInfoNames.set(name, info);
 		}
 
@@ -148,7 +152,7 @@ namespace AppInfos
 			exec = Help::String::getWord(execLine, 0);
 
 			if (exec != "env" && exec != "exo-open")
-				if (exec != id && exec != name)
+				if (exec != lower_id && exec != name)
 					mAppInfoNames.set(Help::String::toLowercase(exec), info);
 		}
 		g_free(exec_);
@@ -228,13 +232,28 @@ namespace AppInfos
 	{
 		groupNameTransform(id);
 
+		g_debug("Searching a match for '%s'", id.c_str());
+
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
+		{
+			g_debug("App WMClass match");
 			return ai;
+		}
 
 		ai = mAppInfoIds.get(id);
 		if (ai != nullptr)
+		{
+			g_debug("App id match");
 			return ai;
+		}
+
+		ai = mAppInfoNames.get(id);
+		if (ai != nullptr)
+		{
+			g_debug("App name match");
+			return ai;
+		}
 
 		// Try to use just the first word of the window class; so that
 		// virtualbox manager, virtualbox machine get grouped together etc.
@@ -242,10 +261,21 @@ namespace AppInfos
 		if (pos != std::string::npos)
 		{
 			id = id.substr(0, pos);
-			ai = mAppInfoIds.get(id);
+			g_debug("No match for whole string, searching a match for first word '%s'", id.c_str());
 
+			ai = mAppInfoIds.get(id);
 			if (ai != nullptr)
+			{
+				g_debug("App id match");
 				return ai;
+			}
+
+			ai = mAppInfoNames.get(id);
+			if (ai != nullptr)
+			{
+				g_debug("App name match");
+				return ai;
+			}
 		}
 
 		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
@@ -262,9 +292,12 @@ namespace AppInfos
 		g_free(gioPath);
 
 		if (ai != nullptr)
+		{
+			g_debug("GIO search match");
 			return ai;
+		}
 
-		g_debug("NO MATCH: %s", id.c_str());
+		g_debug("No match");
 
 		return std::make_shared<AppInfo>("", "", "", id);
 	}
