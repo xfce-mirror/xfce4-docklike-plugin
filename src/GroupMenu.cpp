@@ -31,12 +31,10 @@ GroupMenu::GroupMenu(Group* dockButton)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
 			me->mMouseHover = true;
 
-			me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-				gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
-
-				if (Settings::showPreviews)
-					w->mGroupMenuItem->updatePreview();
-			});
+			if (Settings::showPreviews)
+				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+						w->mGroupMenuItem->updatePreview();
+				});
 
 			return true;
 		}),
@@ -157,6 +155,15 @@ void GroupMenu::hide()
 {
 	mVisible = false;
 	gtk_widget_hide(mWindow);
+}
+
+void GroupMenu::showPreviewsChanged()
+{
+	mGroup->mWindows.forEach([](GroupWindow* w) -> void {
+		gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+		w->mGroupMenuItem->mPreviewTimeout.stop();
+	});
+	gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 }
 
 uint GroupMenu::getPointerDistance()

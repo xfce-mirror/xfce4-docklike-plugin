@@ -141,11 +141,6 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
-
-	if (!Settings::showPreviews)
-		return;
-
 	if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
 		return; // minimized windows never need a new thumbnail
 

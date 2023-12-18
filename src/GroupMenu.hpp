@@ -28,6 +28,7 @@ class GroupMenu
 	void updateOrientation();
 	void updatePosition(gint wx, gint wy);
 	void hide();
+	void showPreviewsChanged();
 
 	uint getPointerDistance();
 

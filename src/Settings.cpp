@@ -62,6 +62,9 @@ namespace Settings
 			[](bool _showPreviews) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
 				saveFile();
+
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void
+					{ g.second->mGroupMenu.showPreviewsChanged(); });
 			});
 		
 		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", nullptr),
