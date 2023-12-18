@@ -224,6 +224,9 @@ void Group::add(GroupWindow* window)
 	if (mWindowsCount == 1 && !mPinned)
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
 
+	if (!mActive && wnck_window_is_active(window->mWnckWindow))
+		onWindowActivate(window);
+
 	gtk_widget_queue_draw(mButton);
 }
 
