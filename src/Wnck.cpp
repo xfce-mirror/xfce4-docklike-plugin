@@ -99,7 +99,6 @@ namespace Wnck
 						std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(prevXID);
 						if (prevWindow != nullptr)
 						{
-							prevWindow->mGroup->mSHover = false;
 							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
 							gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 						}
@@ -186,7 +185,7 @@ namespace Wnck
 			{
 				// Desktop actions get inserted into the menu above all the window manager controls.
 				// We need an extra separator only if the application is running.
-				if (i == 0 && group->mSOpened)
+				if (i == 0 && group->mWindowsCount > 0)
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
 				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());

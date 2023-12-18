@@ -125,8 +125,6 @@ namespace Dock
 			if (!gtk_widget_get_visible(widget))
 				continue;
 
-			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
-			group->mSSuper = on;
 			--grabbedKeys;
 		}
 
@@ -148,7 +146,7 @@ namespace Dock
 				{
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
-					if (group->mSFocus)
+					if (group->mActive)
 						group->scrollWindows(timestamp, GDK_SCROLL_DOWN);
 					else if (group->mWindowsCount > 0)
 						group->activate(timestamp);

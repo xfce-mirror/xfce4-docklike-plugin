@@ -82,11 +82,6 @@ class Group
 
 	bool mPinned;
 	bool mActive;
-	bool mSFocus;
-	bool mSOpened;
-	bool mSMany;
-	bool mSHover;
-	bool mSSuper;
 
 	uint mTolerablePointerDistance;
 	uint mTopWindowIndex;

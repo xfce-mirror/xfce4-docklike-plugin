@@ -16,7 +16,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	mAppInfo = appInfo;
 	mPinned = pinned;
 	mTopWindowIndex = 0;
-	mActive = mSFocus = mSOpened = mSMany = mSHover = mSSuper = false;
+	mActive = false;
 
 	//--------------------------------------------------
 
@@ -143,7 +143,6 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
-			me->mSHover = true;
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
@@ -159,7 +158,6 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	g_signal_connect(G_OBJECT(mButton), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
 			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
-			me->mSHover = false;
 			me->mMenuShowTimeout.stop();
 
 			if (me->mPinned && !me->mWindowsCount)
@@ -234,7 +232,6 @@ void Group::remove(GroupWindow* window)
 	mWindows.pop(window);
 	mWindowsCount.updateState();
 	mGroupMenu.remove(window->mGroupMenuItem);
-	mSFocus = false;
 
 	if (!mWindowsCount)
 		Help::Gtk::cssClassRemove(mButton, "open_group");
@@ -331,7 +328,7 @@ void Group::onDraw(cairo_t* cr)
 	else
 	{
 		std::shared_ptr<GdkRGBA> color;
-		if (mSFocus)
+		if (mActive)
 			color = Settings::indicatorColor;
 		else
 			color = Settings::inactiveColor;
@@ -372,7 +369,7 @@ void Group::onDraw(cairo_t* cr)
 	}
 	
 	int indicator_style = Settings::inactiveIndicatorStyle;
-	if (mSFocus)
+	if (mActive)
 		indicator_style = Settings::indicatorStyle;
 
 	switch (indicator_style)
@@ -382,7 +379,7 @@ void Group::onDraw(cairo_t* cr)
 
 	case STYLE_BARS:
 	{
-		if (mSOpened)
+		if (mWindowsCount > 0)
 		{
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 
@@ -398,7 +395,7 @@ void Group::onDraw(cairo_t* cr)
 			cairo_fill(cr);
 		}
 
-		if (mSMany && (mSOpened || mSHover))
+		if (mWindowsCount > 1)
 		{
 			int pat0;
 			cairo_pattern_t* pat;
@@ -436,14 +433,14 @@ void Group::onDraw(cairo_t* cr)
 
 	case STYLE_CILIORA:
 	{
-		if (mSOpened)
+		if (mWindowsCount > 0)
 		{
 		    int offset;
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
 			
 			offset = 0;
 			
-			if (mSMany) {
+			if (mWindowsCount > 1) {
 			    if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP) {
 			        offset = 2 * (round(h * (1 - BAR_WEIGHT)));
 			    } else {
@@ -463,7 +460,7 @@ void Group::onDraw(cairo_t* cr)
 			cairo_fill(cr);
 		}
 
-		if (mSMany && (mSOpened || mSHover))
+		if (mWindowsCount > 1)
 		{
 		    int size;
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
@@ -491,9 +488,9 @@ void Group::onDraw(cairo_t* cr)
 
 	case STYLE_CIRCLES:
 	{
-		if (mSOpened)
+		if (mWindowsCount > 0)
 		{
-			if (mSMany)
+			if (mWindowsCount > 1)
 			{
 				double x0 = 0, y0 = 0, x1 = 0, y1 = 0, radius = 0;
 
@@ -576,9 +573,9 @@ void Group::onDraw(cairo_t* cr)
 
 	case STYLE_DOTS:
 	{
-		if (mSOpened)
+		if (mWindowsCount > 0)
 		{
-			if (mSMany)
+			if (mWindowsCount > 1)
 			{
 				double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
 
@@ -668,7 +665,7 @@ void Group::onDraw(cairo_t* cr)
 
 	case STYLE_RECTS:
 	{
-		if (mSOpened)
+		if (mWindowsCount > 0)
 		{
 			int vw;
 
@@ -677,7 +674,7 @@ void Group::onDraw(cairo_t* cr)
 			else
 				vw = h;
 
-			if (mSMany)
+			if (mWindowsCount > 1)
 			{
 				int space = floor(vw / 4.5);
 				int sep = vw / 11.;
@@ -741,7 +738,6 @@ void Group::onMouseEnter()
 	});
 
 	mGroupMenu.popup();
-	mSHover = true;
 }
 
 void Group::onMouseLeave()
@@ -758,30 +754,21 @@ void Group::setMouseLeaveTimeout()
 
 void Group::updateStyle()
 {
-	int wCount = mWindowsCount;
-
-	if (mPinned || wCount)
+	if (mPinned || mWindowsCount > 0)
 		gtk_widget_show_all(mButton);
 	else
 		gtk_widget_hide(mButton);
 
-	if (wCount)
+	if (mWindowsCount > 0)
 	{
-		if (wCount == 1 && Settings::noWindowsListIfSingle)
+		if (mWindowsCount == 1 && Settings::noWindowsListIfSingle)
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
 
-		mSOpened = true;
-
-		if (wCount > 1)
-			mSMany = true;
-		else
-			mSMany = false;
-
-		if (wCount > 2 && Settings::showWindowCount)
+		if (mWindowsCount > 2 && Settings::showWindowCount)
 		{
-			gchar* markup = g_strdup_printf("<b>%d</b>", wCount);
+			gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
 			gtk_label_set_markup(GTK_LABEL(mLabel), markup);
 			g_free(markup);
 		}
@@ -791,8 +778,6 @@ void Group::updateStyle()
 	else
 	{
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
-		mSOpened = false;
-		mSFocus = false;
 	}
 }
 
@@ -820,7 +805,6 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 	if (!groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
 	{
 		mActive = true;
-		mSFocus = true;
 		setTopWindow(groupWindow);
 		Help::Gtk::cssClassAdd(mButton, "active_group");
 	}
@@ -829,7 +813,6 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 void Group::onWindowUnactivate()
 {
 	mActive = false;
-	mSFocus = false;
 	Help::Gtk::cssClassRemove(mButton, "active_group");
 }
 
