@@ -73,6 +73,9 @@ GroupMenu::~GroupMenu()
 void GroupMenu::add(GroupMenuItem* menuItem)
 {
 	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);
+
+	if (mVisible)
+		g_idle_add([](gpointer data) { ((GroupMenu*)data)->popup(); return FALSE; }, this);
 }
 
 void GroupMenu::remove(GroupMenuItem* menuItem)
@@ -82,6 +85,9 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 
 	if (mGroup->mWindowsCount < (Settings::noWindowsListIfSingle ? 2 : 1))
 		gtk_widget_hide(mWindow);
+
+	if (mVisible)
+		g_idle_add([](gpointer data) { ((GroupMenu*)data)->popup(); return FALSE; }, this);
 }
 
 void GroupMenu::popup()
