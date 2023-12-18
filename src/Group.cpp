@@ -255,7 +255,6 @@ void Group::activate(guint32 timestamp)
 	});
 
 	groupWindow->activate(timestamp);
-	onWindowActivate(groupWindow);
 }
 
 void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
