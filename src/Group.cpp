@@ -804,12 +804,9 @@ void Group::electNewTopWindow()
 
 void Group::onWindowActivate(GroupWindow* groupWindow)
 {
-	if (!groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
-	{
-		mActive = true;
-		setTopWindow(groupWindow);
-		Help::Gtk::cssClassAdd(mButton, "active_group");
-	}
+	mActive = true;
+	setTopWindow(groupWindow);
+	Help::Gtk::cssClassAdd(mButton, "active_group");
 }
 
 void Group::onWindowUnactivate()
