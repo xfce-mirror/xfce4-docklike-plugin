@@ -152,11 +152,9 @@ namespace Wnck
 	void setActiveWindow()
 	{
 		gulong activeXID = getActiveWindowXID();
+		mGroupWindows.first()->onUnactivate();
 		if (activeXID)
-		{
-			mGroupWindows.first()->onUnactivate();
 			mGroupWindows.moveToStart(activeXID)->onActivate();
-		}
 	}
 
 	void setVisibleGroups()
