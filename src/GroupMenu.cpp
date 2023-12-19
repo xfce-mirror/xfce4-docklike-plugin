@@ -107,9 +107,12 @@ void GroupMenu::popup()
 
 		// Update the previews before showing the window
 		if (Settings::showPreviews)
+		{
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
 			});
+			gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
+		}
 
 		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		updatePosition(wx, wy);
