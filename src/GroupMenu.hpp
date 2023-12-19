@@ -12,6 +12,8 @@
 
 #include <iostream>
 
+#include "Helpers.hpp"
+
 class Group;
 class GroupMenuItem;
 
@@ -39,6 +41,8 @@ class GroupMenu
 
 	bool mVisible;
 	bool mMouseHover;
+
+	Help::Gtk::Idle mPopupIdle;
 };
 
 #endif // GROUP_MENU_HPP

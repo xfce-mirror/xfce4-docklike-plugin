@@ -181,6 +181,37 @@ namespace Help
 				mTimeoutId = 0;
 			}
 		}
+
+		Idle::Idle()
+		{
+			mIdleId = 0;
+		}
+
+		void Idle::setup(std::function<bool()> function)
+		{
+			mFunction = function;
+		}
+
+		void Idle::start()
+		{
+			stop();
+			mIdleId = g_idle_add(G_SOURCE_FUNC(+[](Idle* me) {
+				bool cont = me->mFunction();
+				if (!cont)
+					me->mIdleId = 0;
+				return cont;
+			}),
+			this);
+		}
+
+		void Idle::stop()
+		{
+			if (mIdleId != 0)
+			{
+				g_source_remove(mIdleId);
+				mIdleId = 0;
+			}
+		}
 	} // namespace Gtk
 
 } // namespace Help

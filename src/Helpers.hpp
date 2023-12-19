@@ -56,6 +56,19 @@ namespace Help
 
 			uint mTimeoutId;
 		};
+
+		class Idle
+		{
+			public:
+			Idle();
+
+			void setup(std::function<bool()> function);
+			void start();
+			void stop();
+
+			std::function<bool()> mFunction;
+			uint mIdleId;
+		};
 	} // namespace Gtk
 } // namespace Help
 

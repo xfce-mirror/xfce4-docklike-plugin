@@ -25,6 +25,11 @@ GroupMenu::GroupMenu(Group* dockButton)
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
 	gtk_widget_show(mBox);
 
+	mPopupIdle.setup([this]() {
+		popup();
+		return false;
+	});
+
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mWindow), "enter-notify-event",
@@ -67,6 +72,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 GroupMenu::~GroupMenu()
 {
+	mPopupIdle.stop();
 	gtk_widget_destroy(mWindow);
 }
 
@@ -75,7 +81,7 @@ void GroupMenu::add(GroupMenuItem* menuItem)
 	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);
 
 	if (mVisible)
-		g_idle_add([](gpointer data) { ((GroupMenu*)data)->popup(); return FALSE; }, this);
+		mPopupIdle.start();
 }
 
 void GroupMenu::remove(GroupMenuItem* menuItem)
@@ -87,7 +93,7 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 		gtk_widget_hide(mWindow);
 
 	if (mVisible)
-		g_idle_add([](gpointer data) { ((GroupMenu*)data)->popup(); return FALSE; }, this);
+		mPopupIdle.start();
 }
 
 void GroupMenu::popup()
