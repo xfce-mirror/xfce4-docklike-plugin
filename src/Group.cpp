@@ -205,6 +205,9 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 
 Group::~Group()
 {
+	mLeaveTimeout.stop();
+	mMenuShowTimeout.stop();
+
 	// can be unparented before the group is destroyed on exit
 	if (gtk_widget_get_parent(mButton) != nullptr)
 		gtk_container_remove(GTK_CONTAINER(gtk_widget_get_parent(mButton)), mButton);
