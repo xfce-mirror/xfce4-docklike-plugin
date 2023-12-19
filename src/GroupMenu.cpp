@@ -11,17 +11,24 @@
 #include "GroupMenuItem.hpp"
 #include "Plugin.hpp"
 
+static GtkWidget*
+create_window()
+{
+	GtkWidget* window = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
+	gtk_widget_add_events(window, GDK_SCROLL_MASK);
+	gtk_window_set_default_size(GTK_WINDOW(window), 1, 1);
+	return window;
+}
+
 GroupMenu::GroupMenu(Group* dockButton)
 {
 	mGroup = dockButton;
 	mVisible = false;
 	mMouseHover = false;
-	mWindow = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
+	mWindow = create_window();
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	Help::Gtk::cssClassAdd(mBox, "menu");
-	gtk_widget_add_events(mWindow, GDK_SCROLL_MASK);
-	gtk_window_set_default_size(GTK_WINDOW(mWindow), 1, 1);
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
 	gtk_widget_show(mBox);
 
@@ -66,6 +73,17 @@ GroupMenu::GroupMenu(Group* dockButton)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, GroupMenu* me) {
 			((Group*)me->mGroup)->scrollWindows(event->time, event->direction);
 			return true;
+		}),
+		this);
+
+	g_signal_connect(G_OBJECT(Plugin::mXfPlugin), "notify::scale-factor",
+		G_CALLBACK(+[](GtkWidget* widget, GParamSpec* pspec, GroupMenu* me) {
+			g_object_ref(me->mBox);
+			gtk_container_remove(GTK_CONTAINER(me->mWindow), me->mBox);
+			gtk_widget_destroy(me->mWindow);
+			me->mWindow = create_window();
+			gtk_container_add(GTK_CONTAINER(me->mWindow), me->mBox);
+			g_object_unref(me->mBox);
 		}),
 		this);
 }

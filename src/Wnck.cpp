@@ -65,6 +65,16 @@ namespace Wnck
 	{
 		mWnckScreen = wnck_screen_get_default();
 
+		auto scale_factor_changed = [](GtkWidget* plugin) {
+			gint scale_factor = gtk_widget_get_scale_factor(plugin);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+			wnck_set_default_icon_size(WNCK_DEFAULT_ICON_SIZE * scale_factor);
+			wnck_set_default_mini_icon_size(WNCK_DEFAULT_MINI_ICON_SIZE * scale_factor);
+G_GNUC_END_IGNORE_DEPRECATIONS
+		};
+		scale_factor_changed(GTK_WIDGET(Plugin::mXfPlugin));
+		g_signal_connect(G_OBJECT(Plugin::mXfPlugin), "notify::scale-factor", G_CALLBACK(+scale_factor_changed), nullptr);
+
 		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
 			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
 				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(wnckWindow);

@@ -189,10 +189,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	if (mAppInfo != nullptr && !mAppInfo->icon.empty())
 	{
 		if (mAppInfo->icon[0] == '/' && g_file_test(mAppInfo->icon.c_str(), G_FILE_TEST_IS_REGULAR))
-		{
 			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), nullptr);
-			gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), mIconPixbuf);
-		}
 		else
 			gtk_image_set_from_icon_name(GTK_IMAGE(mImage), mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON);
 	}
@@ -295,8 +292,12 @@ void Group::resize()
 	
 	if (mIconPixbuf != nullptr)
 	{
-		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER);
-		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage), scaled);
+		gint scale_factor = gtk_widget_get_scale_factor(mButton);
+		gint size = Dock::mIconSize * scale_factor;
+		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
+		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
+		gtk_image_set_from_surface(GTK_IMAGE(mImage), surface);
+		cairo_surface_destroy (surface);
 		g_object_unref(scaled);
 	}
 	else
@@ -933,7 +934,16 @@ void Group::onDragBegin(GdkDragContext* context)
 {
 	if (mIconPixbuf != nullptr)
 	{
-		gtk_drag_set_icon_pixbuf(context, mIconPixbuf, 0, 0);
+		gint scale_factor = gtk_widget_get_scale_factor(mButton);
+		gint size;
+		if (!gtk_icon_size_lookup(GTK_ICON_SIZE_DND, &size, NULL))
+			size = 32;
+		size *= scale_factor;
+		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
+		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
+		gtk_drag_set_icon_surface(context, surface);
+		cairo_surface_destroy (surface);
+		g_object_unref(scaled);
 	}
 	else
 	{
