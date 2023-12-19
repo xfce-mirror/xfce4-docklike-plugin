@@ -28,6 +28,9 @@ namespace Settings
 
 	void saveFile();
 
+	const int minIconSize = 16;
+	const int maxIconSize = 128;
+
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
 

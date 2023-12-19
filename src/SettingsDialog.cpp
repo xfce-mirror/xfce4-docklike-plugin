@@ -169,9 +169,14 @@ namespace SettingsDialog
 		g_signal_connect(iconSize, "changed",
 			G_CALLBACK(+[](GtkComboBox* _iconSize) {
 				GtkEntry* entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(_iconSize)));
-				std::string value = Help::String::numericOnly(gtk_entry_get_text(entry));
-				gtk_entry_set_text(entry, value.c_str());
-				Settings::iconSize.set(std::stoi("0" + value));
+				std::string svalue = Help::String::numericOnly(gtk_entry_get_text(entry));
+				int value = std::stoi("0" + svalue);
+				Settings::iconSize.set(value);
+				gtk_entry_set_text(entry, svalue.c_str());
+				if (value < Settings::minIconSize || value > Settings::maxIconSize)
+					gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(entry)), GTK_STYLE_CLASS_ERROR);
+				else
+					gtk_style_context_remove_class(gtk_widget_get_style_context(GTK_WIDGET(entry)), GTK_STYLE_CLASS_ERROR);
 			}),
 			nullptr);
 

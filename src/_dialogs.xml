@@ -439,7 +439,7 @@
                           <item>48</item>
                           <item>64</item>
                           <item>96</item>
-                          <item>256</item>
+                          <item>128</item>
                         </items>
                         <child internal-child="entry">
                           <object class="GtkEntry">

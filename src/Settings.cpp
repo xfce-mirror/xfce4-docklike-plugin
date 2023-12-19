@@ -97,8 +97,14 @@ namespace Settings
 				Dock::onPanelResize();
 			});
 
-		iconSize.setup(g_key_file_get_integer(file, "user", "iconSize", nullptr),
+		iconSize.setup(CLAMP(g_key_file_get_integer(file, "user", "iconSize", nullptr), Settings::minIconSize, Settings::maxIconSize),
 			[](int _iconSize) -> void {
+				int clamped = CLAMP(_iconSize, Settings::minIconSize, Settings::maxIconSize);
+				if (clamped != _iconSize)
+				{
+					iconSize.set(clamped);
+					return;
+				}
 				g_key_file_set_integer(mFile.get(), "user", "iconSize", _iconSize);
 				saveFile();
 
