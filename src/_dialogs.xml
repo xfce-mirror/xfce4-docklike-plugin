@@ -507,7 +507,7 @@
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
-                        <property name="stock">gtk-dialog-warning</property>
+                        <property name="stock">dialog-warning</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -536,7 +536,7 @@
 It requires X11 XInput2.0 extension which is is not provided by your system.</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
-                        <property name="stock">gtk-dialog-warning</property>
+                        <property name="stock">dialog-warning</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

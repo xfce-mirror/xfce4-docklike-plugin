@@ -234,7 +234,7 @@ namespace SettingsDialog
 			g_free(markup);
 
 			gtk_widget_set_tooltip_markup(widget, tooltip.c_str());
-			gtk_image_set_from_icon_name(GTK_IMAGE(widget), (Hotkeys::mGrabbedKeys == 0) ? "gtk-dialog-error" : "gtk-dialog-warning", GTK_ICON_SIZE_SMALL_TOOLBAR);
+			gtk_image_set_from_icon_name(GTK_IMAGE(widget), (Hotkeys::mGrabbedKeys == 0) ? "dialog-error" : "dialog-warning", GTK_ICON_SIZE_SMALL_TOOLBAR);
 			gtk_widget_show(widget);
 		}
 	}
