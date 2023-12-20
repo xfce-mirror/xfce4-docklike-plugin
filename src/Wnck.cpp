@@ -162,7 +162,8 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 	void setActiveWindow()
 	{
 		gulong activeXID = getActiveWindowXID();
-		mGroupWindows.first()->onUnactivate();
+		if (mGroupWindows.size() > 0)
+			mGroupWindows.first()->onUnactivate();
 		if (activeXID)
 			mGroupWindows.moveToStart(activeXID)->onActivate();
 	}
