@@ -140,7 +140,7 @@ namespace Settings
 		std::shared_ptr<GdkRGBA> color(g_new(GdkRGBA, 1), g_free);
 
 		if (colorString == nullptr || !gdk_rgba_parse(color.get(), colorString))
-			gdk_rgba_parse(color.get(), "rgb(76,166,230)");
+			gdk_rgba_parse(color.get(), "rgb(53,132,228)");
 		g_free(colorString);
 
 		indicatorColor.setup(color,
@@ -158,7 +158,7 @@ namespace Settings
 		color = std::shared_ptr<GdkRGBA>(g_new(GdkRGBA, 1), g_free);
 
 		if (colorString == nullptr || !gdk_rgba_parse(color.get(), colorString))
-			gdk_rgba_parse(color.get(), "rgb(76,166,230)");
+			gdk_rgba_parse(color.get(), "rgb(51,209,122)");
 		g_free(colorString);
 
 		inactiveColor.setup(color,
