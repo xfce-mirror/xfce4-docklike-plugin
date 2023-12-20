@@ -100,7 +100,7 @@ namespace Plugin
 
 		gtk_show_about_dialog(nullptr,
 			"program-name", "Docklike Taskbar",
-			"logo-icon-name", "preferences-system-windows",
+			"logo-icon-name", "preferences-system",
 			"version", PACKAGE_VERSION,
 			"copyright", "Copyright \302\251 2003-2023 The Xfce development team",
 			"license-type", GTK_LICENSE_GPL_3_0,
