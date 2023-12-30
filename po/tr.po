@@ -5,18 +5,18 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2023
-# Sabri Ünal <libreajans@gmail.com>, 2023
 # Demiray Muhterem <mdemiray@msn.com>, 2023
+# Sabri Ünal <libreajans@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 12:55+0100\n"
+"POT-Creation-Date: 2023-10-23 12:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Demiray Muhterem <mdemiray@msn.com>, 2023\n"
-"Language-Team: Turkish (https://www.transifex.com/xfce/teams/16840/tr/)\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>, 2023\n"
+"Language-Team: Turkish (https://app.transifex.com/xfce/teams/16840/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,94 +103,98 @@ msgid "Launch new instance"
 msgstr "Yeni örneği başlat"
 
 #: ../src/_dialogs.xml.h:11
+msgid "Do Nothing"
+msgstr "Bir Şey Yapma"
+
+#: ../src/_dialogs.xml.h:12
 msgid "Behavior"
 msgstr "Davranış"
 
-#: ../src/_dialogs.xml.h:12
+#: ../src/_dialogs.xml.h:13
 msgid "Active indicator style:"
 msgstr "Aktif gösterge biçemi:"
 
-#: ../src/_dialogs.xml.h:13
+#: ../src/_dialogs.xml.h:14
 msgid "Bars"
 msgstr "Barlar"
 
-#: ../src/_dialogs.xml.h:14
+#: ../src/_dialogs.xml.h:15
 msgid "Dots"
 msgstr "Noktalar"
 
-#: ../src/_dialogs.xml.h:15
+#: ../src/_dialogs.xml.h:16
 msgid "Rectangles"
 msgstr "Dikdörtgenler"
 
-#: ../src/_dialogs.xml.h:16
+#: ../src/_dialogs.xml.h:17
 msgid "Ciliora"
 msgstr "Kirpikler"
 
-#: ../src/_dialogs.xml.h:17
+#: ../src/_dialogs.xml.h:18
 msgid "Circles"
 msgstr "Daireler"
 
-#: ../src/_dialogs.xml.h:18
+#: ../src/_dialogs.xml.h:19
 msgid "None"
 msgstr "Hiçbiri"
 
-#: ../src/_dialogs.xml.h:19
+#: ../src/_dialogs.xml.h:20
 msgid "Inactive indicator style:"
 msgstr "Pasif gösterge biçemi:"
 
-#: ../src/_dialogs.xml.h:20
+#: ../src/_dialogs.xml.h:21
 msgid "Indicator orientation:"
 msgstr "Gösterge yönü:"
 
-#: ../src/_dialogs.xml.h:21
+#: ../src/_dialogs.xml.h:22
 msgid "Automatic"
 msgstr "Otomatik"
 
-#: ../src/_dialogs.xml.h:22
+#: ../src/_dialogs.xml.h:23
 msgid "Bottom"
 msgstr "Aşağı"
 
-#: ../src/_dialogs.xml.h:23
+#: ../src/_dialogs.xml.h:24
 msgid "Right"
 msgstr "Sağ"
 
-#: ../src/_dialogs.xml.h:24
+#: ../src/_dialogs.xml.h:25
 msgid "Top"
 msgstr "Yukarı"
 
-#: ../src/_dialogs.xml.h:25
+#: ../src/_dialogs.xml.h:26
 msgid "Left"
 msgstr "Sol"
 
-#: ../src/_dialogs.xml.h:26
+#: ../src/_dialogs.xml.h:27
 msgid "Get indicator color from theme"
 msgstr "Gösterge rengini temadan al"
 
-#: ../src/_dialogs.xml.h:27
+#: ../src/_dialogs.xml.h:28
 msgid "Active indicator:"
 msgstr "Aktif gösterge:"
 
-#: ../src/_dialogs.xml.h:28
+#: ../src/_dialogs.xml.h:29
 msgid "Inactive indicator:"
 msgstr "Aktif olmayan gösterge:"
 
-#: ../src/_dialogs.xml.h:29
+#: ../src/_dialogs.xml.h:30
 msgid "Force icon size:"
 msgstr "Simgelerin boyutlarını zorla:"
 
-#: ../src/_dialogs.xml.h:30
+#: ../src/_dialogs.xml.h:31
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: ../src/_dialogs.xml.h:31
+#: ../src/_dialogs.xml.h:32
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "<SUPER>+[1, 2, ...] ile uygulamalar araşında geçiş yap"
 
-#: ../src/_dialogs.xml.h:32
+#: ../src/_dialogs.xml.h:33
 msgid "Switch to the last window with <SUPER>"
 msgstr "<SUPER> ile son pencereye geçiş yap"
 
-#: ../src/_dialogs.xml.h:33
+#: ../src/_dialogs.xml.h:34
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -198,6 +202,6 @@ msgstr ""
 "<b>Bu özellik kapalı.</b>\n"
 "Sisteminiz tarafından sağlanmayan X11 XInput2.0 eklentisini gerektiriyor."
 
-#: ../src/_dialogs.xml.h:35
+#: ../src/_dialogs.xml.h:36
 msgid "Keyboard hotkeys"
 msgstr "Klavye kısayol tuşları"
