@@ -5,6 +5,10 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#ifdef ENABLE_X11
+#include <gdk/gdkx.h>
+#endif
+
 #include "Wnck.hpp"
 
 namespace Xfw
@@ -131,8 +135,10 @@ namespace Xfw
 
 	void activate(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
 		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
@@ -143,8 +149,10 @@ namespace Xfw
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
 		xfw_window_close(groupWindow->mXfwWindow, timestamp, NULL);
 	}

@@ -5,6 +5,10 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#ifdef ENABLE_X11
+#include <gdk/gdkx.h>
+#endif
+
 #include "GroupMenuItem.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"any", 0, 0}};
@@ -152,7 +156,7 @@ void GroupMenuItem::updatePreview()
 	// This needs work to survive porting to GTK4 and/or Wayland.
 	// use gdk_pixbuf_get_from_surface in GTK4
 	// use gdk_device_get_window_at_position in Wayland
-
+#ifdef ENABLE_X11
 	if (GDK_IS_X11_DISPLAY(Plugin::mDisplay))
 	{
 		GdkWindow* window;
@@ -188,4 +192,5 @@ void GroupMenuItem::updatePreview()
 			g_object_unref(window);
 		}
 	}
+#endif
 }

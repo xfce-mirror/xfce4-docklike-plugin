@@ -7,6 +7,9 @@
 
 #include "Plugin.hpp"
 #include "Helpers.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 
 namespace Plugin
 {
@@ -27,7 +30,10 @@ namespace Plugin
 		Xfw::init();
 		Dock::init();
 		Theme::init();
-		Hotkeys::init();
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+			Hotkeys::init();
+#endif
 
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
