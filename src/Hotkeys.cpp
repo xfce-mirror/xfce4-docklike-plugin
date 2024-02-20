@@ -107,7 +107,7 @@ namespace Hotkeys
 
 	static gboolean threadSafeSwitch(gpointer data)
 	{
-		Wnck::switchToLastWindow(g_get_monotonic_time() / 1000);
+		Xfw::switchToLastWindow(g_get_monotonic_time() / 1000);
 		return false;
 	}
 

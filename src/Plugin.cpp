@@ -24,7 +24,7 @@ namespace Plugin
 
 		Settings::init();
 		AppInfos::init();
-		Wnck::init();
+		Xfw::init();
 		Dock::init();
 		Theme::init();
 		Hotkeys::init();
@@ -68,9 +68,8 @@ namespace Plugin
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Wnck::mGroupWindows.clear();
+				Xfw::finalize();
 				Dock::mGroups.clear();
-				g_signal_handlers_disconnect_by_data(Wnck::mWnckScreen, nullptr);
 				AppInfos::finalize();
 				Settings::finalize();
 			}),
