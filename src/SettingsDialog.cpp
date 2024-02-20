@@ -7,6 +7,9 @@
 
 #include "SettingsDialog.hpp"
 #include "Plugin.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 
 namespace SettingsDialog
 {
@@ -80,12 +83,21 @@ namespace SettingsDialog
 			nullptr);
 
 		GObject* showPreviews = gtk_builder_get_object(builder, "c_showPreviews");
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showPreviews), Settings::showPreviews);
-		g_signal_connect(showPreviews, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _showPreviews) {
-				Settings::showPreviews.set(gtk_toggle_button_get_active(_showPreviews));
-			}),
-			nullptr);
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+		{
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showPreviews), Settings::showPreviews);
+			g_signal_connect(showPreviews, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* _showPreviews) {
+					Settings::showPreviews.set(gtk_toggle_button_get_active(_showPreviews));
+				}),
+				nullptr);
+		}
+		else
+#endif
+		{
+			gtk_widget_hide(GTK_WIDGET(showPreviews));
+		}
 		
 		GObject* showWindowCount = gtk_builder_get_object(builder, "c_showWindowCount");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showWindowCount), Settings::showWindowCount);
@@ -191,33 +203,43 @@ namespace SettingsDialog
 
 		// =====================================================================
 
-		GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
-		GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
-		g_signal_connect(keyComboActive, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
-				Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
-				updateKeyComboActiveWarning(tooltip);
-			}),
-			keyComboActiveWarning);
-
-		GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);
-		g_signal_connect(keyAloneActive, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _keyAloneActive) {
-				Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
-			}),
-			nullptr);
-
-		if (!Hotkeys::mXIExtAvailable)
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 		{
-			gtk_widget_set_sensitive(GTK_WIDGET(keyAloneActive), false);
-			gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "c_keyAloneActiveWarning")));
-		}
+			GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
+			GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
+			g_signal_connect(keyComboActive, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
+					Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
+					updateKeyComboActiveWarning(tooltip);
+				}),
+				keyComboActiveWarning);
 
-		updateKeyComboActiveWarning(GTK_WIDGET(keyComboActiveWarning));
+			GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);
+			g_signal_connect(keyAloneActive, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* _keyAloneActive) {
+					Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
+				}),
+				nullptr);
+
+			if (!Hotkeys::mXIExtAvailable)
+			{
+				gtk_widget_set_sensitive(GTK_WIDGET(keyAloneActive), false);
+				gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "c_keyAloneActiveWarning")));
+			}
+
+			updateKeyComboActiveWarning(GTK_WIDGET(keyComboActiveWarning));
+		}
+		else
+#endif
+		{
+			gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "hotkeysFrame")));
+		}
 	}
 
+#ifdef ENABLE_X11
 	void updateKeyComboActiveWarning(GtkWidget* widget)
 	{
 		if (!Settings::keyComboActive || Hotkeys::mGrabbedKeys == Hotkeys::NbHotkeys)
@@ -243,4 +265,5 @@ namespace SettingsDialog
 			gtk_widget_show(widget);
 		}
 	}
+#endif
 } // namespace SettingsDialog

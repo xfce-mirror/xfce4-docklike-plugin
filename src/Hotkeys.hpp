@@ -8,17 +8,6 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
-#include <iostream>
-#include <string>
-
-#include <X11/XKBlib.h>
-#include <X11/extensions/XInput2.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-#include <gtk/gtk.h>
-
-#include "Settings.hpp"
-
 namespace Hotkeys
 {
 	void init();

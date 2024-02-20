@@ -17,7 +17,6 @@
 
 #include "Dock.hpp"
 #include "Helpers.hpp"
-#include "Hotkeys.hpp"
 #include "Plugin.hpp"
 #include "State.tpp"
 
