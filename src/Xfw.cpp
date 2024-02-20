@@ -5,6 +5,10 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#ifdef ENABLE_X11
+#include <gdk/gdkx.h>
+#endif
+
 #include "Xfw.hpp"
 
 namespace Xfw
@@ -23,7 +27,7 @@ namespace Xfw
 				return class_ids[0];
 
 			// proc/{pid}/cmdline method
-			XfwApplicationInstance* instance = xfw_application_get_instance (xfw_window_get_application(xfwWindow), xfwWindow);
+			XfwApplicationInstance* instance = xfw_application_get_instance(xfw_window_get_application(xfwWindow), xfwWindow);
 			char buffer[512];
 			std::string path = "/proc/" + std::to_string(xfw_application_instance_get_pid(instance)) + "/cmdline";
 			int fd = open(path.c_str(), O_RDONLY);
@@ -104,7 +108,7 @@ namespace Xfw
 			nullptr);
 
 		XfwWorkspaceManager* wpManager = xfw_screen_get_workspace_manager(Xfw::mXfwScreen);
-		mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP (xfw_workspace_manager_list_workspace_groups(wpManager)->data);
+		mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(xfw_workspace_manager_list_workspace_groups(wpManager)->data);
 		g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
 			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
 				setVisibleGroups();
@@ -132,8 +136,10 @@ namespace Xfw
 
 	void activate(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
 		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
@@ -144,8 +150,10 @@ namespace Xfw
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
 		xfw_window_close(groupWindow->mXfwWindow, timestamp, NULL);
 	}
