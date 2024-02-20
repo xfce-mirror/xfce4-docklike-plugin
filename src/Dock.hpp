@@ -9,7 +9,7 @@
 #define DOCK_HPP
 
 #include <gtk/gtk.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 #include <string>
