@@ -5,7 +5,15 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#include <iostream>
+#include <string>
+
+#include <X11/XKBlib.h>
+#include <X11/extensions/XInput2.h>
+#include <gdk/gdkx.h>
+
 #include "Hotkeys.hpp"
+#include "Settings.hpp"
 
 #define ModifierChange 85 //? this event type isn't listed in libX11
 
@@ -107,7 +115,7 @@ namespace Hotkeys
 
 	static gboolean threadSafeSwitch(gpointer data)
 	{
-		Wnck::switchToLastWindow(g_get_monotonic_time() / 1000);
+		Xfw::switchToLastWindow(g_get_monotonic_time() / 1000);
 		return false;
 	}
 

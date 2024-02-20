@@ -6,6 +6,9 @@
  */
 
 #include "Dock.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 
 namespace Dock
 {
@@ -75,7 +78,7 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		Wnck::mGroupWindows.clear();
+		Xfw::mGroupWindows.clear();
 		mGroups.clear();
 
 		// Add pinned groups
@@ -93,20 +96,19 @@ namespace Dock
 		}
 
 		// Add open windows
-		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
+		for (GList* window_l = xfw_screen_get_windows(Xfw::mXfwScreen);
 			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			gulong windowXID = wnck_window_get_xid(wnckWindow);
-			std::shared_ptr<GroupWindow> groupWindow = Wnck::mGroupWindows.get(windowXID);
+			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
+			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
-				groupWindow = std::make_shared<GroupWindow>(wnckWindow);
+				groupWindow = std::make_shared<GroupWindow>(xfwWindow);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Wnck::mGroupWindows.push(windowXID, groupWindow);
+			Xfw::mGroupWindows.push(xfwWindow, groupWindow);
 			groupWindow->updateState();
 		}
 
@@ -115,20 +117,25 @@ namespace Dock
 
 	void hoverSupered(bool on)
 	{
-		int grabbedKeys = Hotkeys::mGrabbedKeys;
-		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
-
-		for (GList* child = children; child != nullptr && grabbedKeys; child = child->next)
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 		{
-			GtkWidget* widget = (GtkWidget*)child->data;
+			int grabbedKeys = Hotkeys::mGrabbedKeys;
+			GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
-			if (!gtk_widget_get_visible(widget))
-				continue;
+			for (GList* child = children; child != nullptr && grabbedKeys; child = child->next)
+			{
+				GtkWidget* widget = (GtkWidget*)child->data;
 
-			--grabbedKeys;
-		}
+				if (!gtk_widget_get_visible(widget))
+					continue;
 
-		g_list_free(children);
+				--grabbedKeys;
+			}
+
+			g_list_free(children);
+	  }
+#endif
 	}
 
 	void activateGroup(int nb, guint32 timestamp)
