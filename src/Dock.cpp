@@ -75,7 +75,7 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		Wnck::mGroupWindows.clear();
+		Xfw::mGroupWindows.clear();
 		mGroups.clear();
 
 		// Add pinned groups
@@ -93,20 +93,19 @@ namespace Dock
 		}
 
 		// Add open windows
-		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
+		for (GList* window_l = xfw_screen_get_windows(Xfw::mXfwScreen);
 			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			gulong windowXID = wnck_window_get_xid(wnckWindow);
-			std::shared_ptr<GroupWindow> groupWindow = Wnck::mGroupWindows.get(windowXID);
+			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
+			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
-				groupWindow = std::make_shared<GroupWindow>(wnckWindow);
+				groupWindow = std::make_shared<GroupWindow>(xfwWindow);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Wnck::mGroupWindows.push(windowXID, groupWindow);
+			Xfw::mGroupWindows.push(xfwWindow, groupWindow);
 			groupWindow->updateState();
 		}
 

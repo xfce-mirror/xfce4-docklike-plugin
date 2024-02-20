@@ -1,10 +1,10 @@
 AM_CXXFLAGS = \
-	-DWNCK_I_KNOW_THIS_IS_UNSTABLE \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DG_LOG_DOMAIN=\"docklike\" \
 	$(GTK_CFLAGS) \
 	$(CAIRO_CFLAGS) \
-	$(WNCK_CFLAGS)
+	$(LIBXFCE4WINDOWING_CFLAGS) \
+	$(LIBXFCE4WINDOWINGUI_CFLAGS)
 
 plugindir = $(libdir)/xfce4/panel/plugins
 plugin_LTLIBRARIES = libdocklike.la
@@ -36,7 +36,7 @@ libdocklike_la_CPPFLAGS = @LIBXFCE4PANEL_CFLAGS@ @LIBXFCE4UI_CFLAGS@ $(X11_CFLAG
 
 libdocklike_la_LDFLAGS = -avoid-version -module -no-undefined -export-symbols-regex '^xfce_panel_module_(preinit|init|construct)'
 
-libdocklike_la_LIBADD = @LIBXFCE4PANEL_LIBS@ @LIBXFCE4UI_LIBS@ $(X11_LIBS) $(GTK_LIBS) $(CAIRO_LIBS) $(WNCK_LIBS)
+libdocklike_la_LIBADD = @LIBXFCE4PANEL_LIBS@ @LIBXFCE4UI_LIBS@ $(X11_LIBS) $(GTK_LIBS) $(CAIRO_LIBS) $(LIBXFCE4WINDOWING_LIBS) $(LIBXFCE4WINDOWINGUI_LIBS)
 
 pluginsdir = $(datadir)/xfce4/panel/plugins
 plugins_in_files = docklike.desktop.in

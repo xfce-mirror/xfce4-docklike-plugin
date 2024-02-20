@@ -5,6 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#include <libxfce4windowing/xfw-x11.h>
+
 #include "GroupMenuItem.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"any", 0, 0}};
@@ -53,7 +55,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
-	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
 	int sleepMS = 1000;
@@ -96,7 +98,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mCloseButton), "clicked",
 		G_CALLBACK(+[](GtkButton* button, GroupMenuItem* me) {
-			Wnck::close(me->mGroupWindow, 0);
+			Xfw::close(me->mGroupWindow, 0);
 		}),
 		this);
 }
@@ -109,9 +111,9 @@ GroupMenuItem::~GroupMenuItem()
 
 void GroupMenuItem::updateLabel()
 {
-	const char* winName = wnck_window_get_name(mGroupWindow->mWnckWindow);
+	const char* winName = xfw_window_get_name(mGroupWindow->mXfwWindow);
 
-	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
 	{
 		gchar* escaped = g_markup_escape_text(winName, -1);
 		gchar* markup = g_strdup_printf("<b>%s</b>", escaped);
@@ -119,7 +121,7 @@ void GroupMenuItem::updateLabel()
 		g_free(markup);
 		g_free(escaped);
 	}
-	else if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
+	else if (mGroupWindow->getState(XFW_WINDOW_STATE_MINIMIZED))
 	{
 		gchar* escaped = g_markup_escape_text(winName, -1);
 		gchar* markup = g_strdup_printf("<i>%s</i>", escaped);
@@ -133,11 +135,11 @@ void GroupMenuItem::updateLabel()
 
 void GroupMenuItem::updateIcon()
 {
-	GdkPixbuf* iconPixbuf = wnck_window_get_mini_icon(mGroupWindow->mWnckWindow);
+	gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mIcon));
+	GdkPixbuf* iconPixbuf = xfw_window_get_icon(mGroupWindow->mXfwWindow, 16, scale_factor);
 
 	if (iconPixbuf != nullptr)
 	{
-		gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mIcon));
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(iconPixbuf, scale_factor, NULL);
 		gtk_image_set_from_surface(mIcon, surface);
 		cairo_surface_destroy (surface);
@@ -146,7 +148,7 @@ void GroupMenuItem::updateIcon()
 
 void GroupMenuItem::updatePreview()
 {
-	if (mGroupWindow->getState(WNCK_WINDOW_STATE_MINIMIZED))
+	if (mGroupWindow->getState(XFW_WINDOW_STATE_MINIMIZED))
 		return; // minimized windows never need a new thumbnail
 
 	// This needs work to survive porting to GTK4 and/or Wayland.
@@ -164,7 +166,7 @@ void GroupMenuItem::updatePreview()
 			scale = Settings::previewScale;
 
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
-			wnck_window_get_xid(mGroupWindow->mWnckWindow));
+			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
 
 		if (window != nullptr)
 		{

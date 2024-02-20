@@ -66,7 +66,7 @@ namespace SettingsDialog
 		g_signal_connect(onlyDisplayVisible, "toggled",
 			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
 				Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
-				Wnck::setVisibleGroups();
+				Xfw::setVisibleGroups();
 			}),
 			nullptr);
 
@@ -75,7 +75,7 @@ namespace SettingsDialog
 		g_signal_connect(onlyDisplayScreen, "toggled",
 			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayScreen) {
 				Settings::onlyDisplayScreen.set(gtk_toggle_button_get_active(_onlyDisplayScreen));
-				Wnck::setVisibleGroups();
+				Xfw::setVisibleGroups();
 			}),
 			nullptr);
 
