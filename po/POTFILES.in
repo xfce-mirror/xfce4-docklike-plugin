@@ -1,5 +1,5 @@
 src/Plugin.cpp
-src/Wnck.cpp
+src/Xfw.cpp
 src/SettingsDialog.cpp
 src/docklike.desktop.in
 [type: gettext/glade]src/_dialogs.xml
