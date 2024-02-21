@@ -9,7 +9,7 @@
 #define PLUGIN_HPP
 
 #include <gtk/gtk.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 #include <string>
@@ -17,7 +17,6 @@
 
 #include "AppInfos.hpp"
 #include "Dock.hpp"
-#include "Hotkeys.hpp"
 #include "Settings.hpp"
 #include "SettingsDialog.hpp"
 #include "Theme.hpp"

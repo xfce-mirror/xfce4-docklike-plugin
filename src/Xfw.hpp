@@ -10,7 +10,8 @@
 
 #include <fcntl.h>
 #include <gio/gdesktopappinfo.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
+#include <libxfce4windowingui/libxfce4windowingui.h>
 
 #include <map>
 
@@ -21,11 +22,12 @@
 
 class GroupWindow;
 
-namespace Wnck
+namespace Xfw
 {
 	void init();
+	void finalize();
 
-	gulong getActiveWindowXID();
+	XfwWindow* getActiveWindow();
 	std::string getGroupName(GroupWindow* groupWindow);
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group);
 
@@ -37,8 +39,9 @@ namespace Wnck
 	void setActiveWindow();
 	void setVisibleGroups();
 
-	extern WnckScreen* mWnckScreen;
-	extern Store::KeyStore<gulong, std::shared_ptr<GroupWindow>> mGroupWindows;
-} // namespace Wnck
+	extern XfwScreen* mXfwScreen;
+	extern XfwWorkspaceGroup* mXfwWorkspaceGroup;
+	extern Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
+} // namespace Xfw
 
 #endif //WNCK_HPP

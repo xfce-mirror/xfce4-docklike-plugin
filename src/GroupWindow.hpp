@@ -9,7 +9,7 @@
 #define GROUP_WINDOW_HPP
 
 #include <gtk/gtk.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 
@@ -19,7 +19,7 @@
 #include "GroupMenuItem.hpp"
 #include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 class GroupMenuItem;
 class Group;
@@ -27,7 +27,7 @@ class Group;
 class GroupWindow
 {
   public:
-	GroupWindow(WnckWindow* wnckWindow);
+	GroupWindow(XfwWindow* xfwWindow);
 	~GroupWindow();
 
 	void updateState();
@@ -37,13 +37,12 @@ class GroupWindow
 	void onUnactivate() const;
 	void minimize();
 	void activate(guint32 timestamp);
-	bool getState(WnckWindowState flagMask) const;
+	bool getState(XfwWindowState flagMask) const;
 
 	Group* mGroup;
 	GroupMenuItem* mGroupMenuItem;
 
-	WnckWindow* mWnckWindow;
-	GdkMonitor* mMonitor = nullptr;
+	XfwWindow* mXfwWindow;
 
 	unsigned short mState{};
 	bool mGroupAssociated;
