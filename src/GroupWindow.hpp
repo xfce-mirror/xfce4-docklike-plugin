@@ -43,7 +43,6 @@ class GroupWindow
 	GroupMenuItem* mGroupMenuItem;
 
 	XfwWindow* mXfwWindow;
-	GdkMonitor* mMonitor = nullptr;
 
 	unsigned short mState{};
 	bool mGroupAssociated;

@@ -47,9 +47,10 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mXfwWindow), "geometry-changed",
-		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "notify::monitors",
+		G_CALLBACK(+[](XfwWindow* window, GParamSpec* pspec, GroupWindow* me) {
 			me->updateState();
+			Xfw::setActiveWindow();
 		}),
 		this);
 
@@ -132,7 +133,6 @@ void GroupWindow::onUnactivate() const
 void GroupWindow::updateState()
 {
 	bool onScreen = true;
-	bool monitorChanged = false;
 	bool onWorkspace = true;
 	bool onTasklist = !(mState & XfwWindowState::XFW_WINDOW_STATE_SKIP_TASKLIST);
 	mState = xfw_window_get_state(this->mXfwWindow);
@@ -152,28 +152,15 @@ void GroupWindow::updateState()
 
 	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::mDisplay) > 1)
 	{
-		GdkRectangle* geom = xfw_window_get_geometry(mXfwWindow);
+		GList* monitors = xfw_window_get_monitors(mXfwWindow);
 		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
-		GdkMonitor* currentMonitor = gdk_display_get_monitor_at_point(Plugin::mDisplay, geom->x + (geom->width / 2), geom->y + (geom->height / 2));
 
-		if (gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow) != currentMonitor)
+		if (!g_list_find(monitors, gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow)))
 			onScreen = false;
-
-		if (mMonitor != currentMonitor)
-		{
-			monitorChanged = true;
-			mMonitor = currentMonitor;
-		}
-		else
-			monitorChanged = false;
 	}
 
 	if (onWorkspace && onTasklist && onScreen)
-	{
 		getInGroup();
-		if (monitorChanged)
-			Xfw::setActiveWindow();
-	}
 	else
 		leaveGroup();
 
