@@ -5,8 +5,11 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#include "GroupMenu.hpp"
+#ifdef ENABLE_WAYLAND
+#include <gtk-layer-shell/gtk-layer-shell.h>
+#endif
 
+#include "GroupMenu.hpp"
 #include "Group.hpp"
 #include "GroupMenuItem.hpp"
 #include "Plugin.hpp"
@@ -17,6 +20,16 @@ create_window()
 	GtkWidget* window = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
 	gtk_widget_add_events(window, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(window), 1, 1);
+#ifdef ENABLE_WAYLAND
+	if (gtk_layer_is_supported())
+	{
+		gtk_layer_init_for_window(GTK_WINDOW(window));
+		gtk_layer_set_exclusive_zone(GTK_WINDOW(window), -1);
+		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
+		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+	}
+#endif
+
 	return window;
 }
 
@@ -54,14 +67,6 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 	g_signal_connect(G_OBJECT(mWindow), "leave-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
-			gint w;
-			gint h;
-			gtk_window_get_size(GTK_WINDOW(me->mWindow), &w, &h);
-			gint mx = ((GdkEventCrossing*)event)->x;
-			gint my = ((GdkEventCrossing*)event)->y;
-			if (mx >= 0 && mx < w && my >= 0 && my < h)
-				return true;
-
 			me->mGroup->setMouseLeaveTimeout();
 			me->mMouseHover = false;
 
@@ -181,7 +186,17 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 		}
 	}
 
-	gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
+#ifdef HAVE_GTK_LAYER_SHELL
+	if (gtk_layer_is_supported())
+	{
+		gtk_layer_set_margin(GTK_WINDOW(mWindow), GTK_LAYER_SHELL_EDGE_LEFT, wx - geometry.x);
+		gtk_layer_set_margin(GTK_WINDOW(mWindow), GTK_LAYER_SHELL_EDGE_TOP, wy - geometry.y);
+	}
+	else
+#endif
+	{
+		gtk_window_move(GTK_WINDOW(mWindow), wx, wy);
+	}
 }
 
 void GroupMenu::hide()

@@ -38,7 +38,8 @@ libdocklike_la_CPPFLAGS = \
 	$(GTK_CFLAGS) \
 	$(CAIRO_CFLAGS) \
 	$(LIBXFCE4WINDOWING_CFLAGS) \
-	$(LIBXFCE4WINDOWINGUI_CFLAGS)
+	$(LIBXFCE4WINDOWINGUI_CFLAGS) \
+	$(GTK_LAYER_SHELL_CFLAGS)
 
 libdocklike_la_LDFLAGS = -avoid-version -module -no-undefined -export-symbols-regex '^xfce_panel_module_(preinit|init|construct)'
 
@@ -48,7 +49,8 @@ libdocklike_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
 	$(LIBXFCE4WINDOWING_LIBS) \
-	$(LIBXFCE4WINDOWINGUI_LIBS)
+	$(LIBXFCE4WINDOWINGUI_LIBS) \
+	$(GTK_LAYER_SHELL_LIBS)
 
 if ENABLE_X11
 libdocklike_la_CPPFLAGS += \
