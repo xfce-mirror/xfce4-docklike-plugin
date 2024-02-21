@@ -14,7 +14,7 @@
 
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 class GroupWindow;
 

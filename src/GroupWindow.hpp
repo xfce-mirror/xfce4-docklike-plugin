@@ -19,7 +19,7 @@
 #include "GroupMenuItem.hpp"
 #include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 class GroupMenuItem;
 class Group;

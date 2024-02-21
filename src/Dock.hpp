@@ -19,7 +19,7 @@
 #include "Plugin.hpp"
 #include "Settings.hpp"
 #include "Store.tpp"
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 class Group;
 

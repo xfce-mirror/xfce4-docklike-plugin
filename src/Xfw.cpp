@@ -5,7 +5,7 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 namespace Xfw
 {

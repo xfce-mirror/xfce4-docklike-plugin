@@ -21,7 +21,7 @@ libdocklike_la_SOURCES =							\
 		Helpers.cpp Helpers.hpp						\
 		Plugin.cpp Plugin.hpp						\
 		Dock.cpp Dock.hpp							\
-		Wnck.cpp Wnck.hpp							\
+		Xfw.cpp Xfw.hpp							\
 		SettingsDialog.cpp SettingsDialog.hpp		\
 		State.tpp 									\
 		Store.tpp									\
