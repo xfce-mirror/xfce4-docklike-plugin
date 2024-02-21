@@ -24,6 +24,8 @@ m4_define([libxfce4windowing_min_version], [4.19.3])
 
 m4_define([libx11_min_version], [1.6.7])
 
+m4_define([gtk_layer_shell_min_version], [0.7.0])
+
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
@@ -82,6 +84,7 @@ XDT_CHECK_OPTIONAL_FEATURE([WAYLAND],
                            [wayland],
                            [
                              XDT_FEATURE_DEPENDENCY([GDK_WAYLAND], [gdk-wayland-3.0], [gtk_min_version])
+                             XDT_FEATURE_DEPENDENCY([GTK_LAYER_SHELL], [gtk-layer-shell-0], [gtk_layer_shell_min_version])
                            ],
                            [the Wayland windowing system])
 if test x"$ENABLE_X11" != x"yes" -a x"$ENABLE_WAYLAND" != x"yes"; then
