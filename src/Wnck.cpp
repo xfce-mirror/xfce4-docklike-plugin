@@ -63,6 +63,7 @@ namespace Wnck
 
 	void init()
 	{
+		wnck_set_client_type(WNCK_CLIENT_TYPE_PAGER);
 		mWnckScreen = wnck_screen_get_default();
 
 		auto scale_factor_changed = [](GtkWidget* plugin) {
