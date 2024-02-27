@@ -5,29 +5,31 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#include "Wnck.hpp"
+#ifdef ENABLE_X11
+#include <gdk/gdkx.h>
+#endif
 
-namespace Wnck
+#include "Xfw.hpp"
+
+namespace Xfw
 {
-	WnckScreen* mWnckScreen;
-	Store::KeyStore<gulong, std::shared_ptr<GroupWindow>> mGroupWindows;
+	XfwScreen* mXfwScreen;
+	XfwWorkspaceGroup* mXfwWorkspaceGroup;
+	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
 
 	namespace // private:
 	{
-		std::string getGroupNameSys(WnckWindow* wnckWindow)
+		std::string getGroupNameSys(XfwWindow* xfwWindow)
 		{
-			// Wnck method const char *
-			const char* buf = wnck_window_get_class_group_name(wnckWindow);
-			if (buf != nullptr && buf[0] != '\0')
-				return buf;
-
-			buf = wnck_window_get_class_instance_name(wnckWindow);
-			if (buf != nullptr && buf[0] != '\0')
-				return buf;
+			// Xfw method const char *
+			const gchar* const* class_ids = xfw_window_get_class_ids(xfwWindow);
+			if (!xfce_str_is_empty(class_ids[0]))
+				return class_ids[0];
 
 			// proc/{pid}/cmdline method
+			XfwApplicationInstance* instance = xfw_application_get_instance(xfw_window_get_application(xfwWindow), xfwWindow);
 			char buffer[512];
-			std::string path = "/proc/" + std::to_string(wnck_window_get_pid(wnckWindow)) + "/cmdline";
+			std::string path = "/proc/" + std::to_string(xfw_application_instance_get_pid(instance)) + "/cmdline";
 			int fd = open(path.c_str(), O_RDONLY);
 
 			if (fd >= 0)
@@ -55,7 +57,7 @@ namespace Wnck
 			}
 
 			// fallback : return window's name
-			return wnck_window_get_name(wnckWindow);
+			return xfw_window_get_name(xfwWindow);
 		}
 	} // namespace
 
@@ -63,23 +65,13 @@ namespace Wnck
 
 	void init()
 	{
-		wnck_set_client_type(WNCK_CLIENT_TYPE_PAGER);
-		mWnckScreen = wnck_screen_get_default();
+		xfw_set_client_type(XFW_CLIENT_TYPE_PAGER);
+		mWnckScreen = xfw_screen_get_default();
 
-		auto scale_factor_changed = [](GtkWidget* plugin) {
-			gint scale_factor = gtk_widget_get_scale_factor(plugin);
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-			wnck_set_default_icon_size(WNCK_DEFAULT_ICON_SIZE * scale_factor);
-			wnck_set_default_mini_icon_size(WNCK_DEFAULT_MINI_ICON_SIZE * scale_factor);
-G_GNUC_END_IGNORE_DEPRECATIONS
-		};
-		scale_factor_changed(GTK_WIDGET(Plugin::mXfPlugin));
-		g_signal_connect(G_OBJECT(Plugin::mXfPlugin), "notify::scale-factor", G_CALLBACK(+scale_factor_changed), nullptr);
-
-		g_signal_connect(G_OBJECT(mWnckScreen), "window-opened",
-			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(wnckWindow);
-				mGroupWindows.pushSecond(wnck_window_get_xid(wnckWindow), newWindow);
+		g_signal_connect(G_OBJECT(mXfwScreen), "window-opened",
+			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
+				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(xfwWindow);
+				mGroupWindows.pushSecond(xfwWindow, newWindow);
 				newWindow->mGroup->updateStyle();
 
 				if (Settings::showPreviews && newWindow->mGroup->mGroupMenu.mVisible)
@@ -87,96 +79,102 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 			}),
 			nullptr);
 
-		g_signal_connect(G_OBJECT(mWnckScreen), "window-closed",
-			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
-				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(wnck_window_get_xid(wnckWindow));
+		g_signal_connect(G_OBJECT(mXfwScreen), "window-closed",
+			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
+				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(xfwWindow);
 			}),
 			nullptr);
 
-		g_signal_connect(G_OBJECT(mWnckScreen), "active-window-changed",
-			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* previousActiveWindow) {
-				gulong activeXID = getActiveWindowXID();
-				if (activeXID)
+		g_signal_connect(G_OBJECT(mXfwScreen), "active-window-changed",
+			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* previousActiveWindow) {
+				XfwWindow* activeXfwWindow = getActiveWindow();
+				if (activeXfwWindow != nullptr)
 				{
-					std::shared_ptr<GroupWindow> activeWindow = mGroupWindows.get(activeXID);
+					std::shared_ptr<GroupWindow> activeWindow = mGroupWindows.get(activeXfwWindow);
 					Help::Gtk::cssClassAdd(GTK_WIDGET(activeWindow->mGroupMenuItem->mItem), "active_menu_item");
 					gtk_widget_queue_draw(activeWindow->mGroup->mButton);
 				}
 				if (previousActiveWindow != nullptr)
 				{
-					gulong prevXID = wnck_window_get_xid(previousActiveWindow);
-					if (prevXID)
+					std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(previousActiveWindow);
+					if (prevWindow)
 					{
-						std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(prevXID);
-						if (prevWindow != nullptr)
-						{
-							Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
-							gtk_widget_queue_draw(prevWindow->mGroup->mButton);
-						}
+						Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
+						gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 					}
 				}
 				setActiveWindow();
 			}),
 			nullptr);
 
-		g_signal_connect(G_OBJECT(mWnckScreen), "active-workspace-changed",
-			G_CALLBACK(+[](WnckScreen* screen, WnckWindow* wnckWindow) {
+		XfwWorkspaceManager* wpManager = xfw_screen_get_workspace_manager(Xfw::mXfwScreen);
+		mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(xfw_workspace_manager_list_workspace_groups(wpManager)->data);
+		g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
+			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
 				setVisibleGroups();
 			}),
 			nullptr);
 	}
 
-	gulong getActiveWindowXID()
+	void finalize()
 	{
-		WnckWindow* activeWindow = wnck_screen_get_active_window(mWnckScreen);
-		if (!WNCK_IS_WINDOW(activeWindow))
-			return 0;
+		mGroupWindows.clear();
+		g_signal_handlers_disconnect_by_data(mXfwWorkspaceGroup, nullptr);
+		g_signal_handlers_disconnect_by_data(mXfwScreen, nullptr);
+		g_object_unref(mXfwScreen);
+	}
 
-		return wnck_window_get_xid(activeWindow);
+	XfwWindow* getActiveWindow()
+	{
+		return xfw_screen_get_active_window(mXfwScreen);
 	}
 
 	std::string getGroupName(GroupWindow* groupWindow)
 	{
-		return Help::String::toLowercase(getGroupNameSys(groupWindow->mWnckWindow));
+		return Help::String::toLowercase(getGroupNameSys(groupWindow->mXfwWindow));
 	}
 
 	void activate(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
-		WnckWorkspace* workspace = wnck_window_get_workspace(groupWindow->mWnckWindow);
+		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
-			wnck_workspace_activate(workspace, timestamp);
+			xfw_workspace_activate(workspace, NULL);
 
-		wnck_window_activate(groupWindow->mWnckWindow, timestamp);
+		xfw_window_activate(groupWindow->mXfwWindow, timestamp, NULL);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
 	{
-		if (!timestamp)
+#ifdef ENABLE_X11
+		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
+#endif
 
-		wnck_window_close(groupWindow->mWnckWindow, timestamp);
+		xfw_window_close(groupWindow->mXfwWindow, timestamp, NULL);
 	}
 
 	void setActiveWindow()
 	{
-		gulong activeXID = getActiveWindowXID();
+		XfwWindow* activeWindow = getActiveWindow();
 		if (mGroupWindows.size() > 0)
 			mGroupWindows.first()->onUnactivate();
-		if (activeXID)
-			mGroupWindows.moveToStart(activeXID)->onActivate();
+		if (activeWindow != nullptr)
+			mGroupWindows.moveToStart(activeWindow)->onActivate();
 	}
 
 	void setVisibleGroups()
 	{
-		for (GList* window_l = wnck_screen_get_windows(mWnckScreen);
+		for (GList* window_l = xfw_screen_get_windows(mXfwScreen);
 			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
-			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(wnck_window_get_xid(wnckWindow));
+			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
+			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(xfwWindow);
 
 			groupWindow->leaveGroup();
 			groupWindow->updateState();
@@ -185,7 +183,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
-		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST)) ? wnck_action_menu_new(groupWindow->mWnckWindow) : gtk_menu_new();
+		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST)) ? xfw_window_action_menu_new(groupWindow->mXfwWindow) : gtk_menu_new();
 		std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
@@ -287,14 +285,14 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 	{
 		auto it = mGroupWindows.mList.begin();
 
-		while (it != mGroupWindows.mList.end() && it->second->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
+		while (it != mGroupWindows.mList.end() && it->second->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
 			++it; //skip dialogs
 		if (it != mGroupWindows.mList.end())
 			++it; //skip current window
 
 		while (it != mGroupWindows.mList.end())
 		{
-			if (!it->second->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
+			if (!it->second->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
 			{
 				it->second->activate(timestamp);
 				return;
@@ -302,4 +300,4 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 			++it;
 		}
 	}
-} // namespace Wnck
+} // namespace Xfw

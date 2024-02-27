@@ -7,6 +7,9 @@
 
 #include "Plugin.hpp"
 #include "Helpers.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 
 namespace Plugin
 {
@@ -24,10 +27,13 @@ namespace Plugin
 
 		Settings::init();
 		AppInfos::init();
-		Wnck::init();
+		Xfw::init();
 		Dock::init();
 		Theme::init();
-		Hotkeys::init();
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+			Hotkeys::init();
+#endif
 
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
@@ -68,9 +74,8 @@ namespace Plugin
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Wnck::mGroupWindows.clear();
+				Xfw::finalize();
 				Dock::mGroups.clear();
-				g_signal_handlers_disconnect_by_data(Wnck::mWnckScreen, nullptr);
 				AppInfos::finalize();
 				Settings::finalize();
 			}),

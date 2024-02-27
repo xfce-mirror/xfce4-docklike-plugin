@@ -6,6 +6,9 @@
  */
 
 #include "Settings.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 
 namespace Settings
 {
@@ -195,7 +198,10 @@ namespace Settings
 				g_key_file_set_boolean(mFile.get(), "user", "keyComboActive", _keyComboActive);
 				saveFile();
 
+#ifdef ENABLE_X11
+			if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 				Hotkeys::updateSettings();
+#endif
 			});
 
 		keyAloneActive.setup(g_key_file_get_boolean(file, "user", "keyAloneActive", nullptr),
@@ -203,7 +209,10 @@ namespace Settings
 				g_key_file_set_boolean(mFile.get(), "user", "keyAloneActive", _keyAloneActive);
 				saveFile();
 
-				Hotkeys::updateSettings();
+#ifdef ENABLE_X11
+				if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+					Hotkeys::updateSettings();
+#endif
 			});
 
 		gchar** pinnedListBuffer = g_key_file_get_string_list(file, "user", "pinned", nullptr, nullptr);

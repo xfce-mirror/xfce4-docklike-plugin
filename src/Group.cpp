@@ -26,7 +26,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 			uint count = 0;
 			
 			mWindows.findIf([&count](GroupWindow* e) -> bool {
-				if (!e->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
+				if (!e->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
 					++count;
 			return false;
 		
@@ -224,7 +224,7 @@ void Group::add(GroupWindow* window)
 	if (mWindowsCount == 1 && !mPinned)
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
 
-	if (!mActive && wnck_window_is_active(window->mWnckWindow))
+	if (!mActive && xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
 
 	gtk_widget_queue_draw(mButton);
@@ -280,8 +280,8 @@ void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
 void Group::closeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
-		if (!w->getState(WNCK_WINDOW_STATE_SKIP_TASKLIST))
-			Wnck::close(w, 0);
+		if (!w->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
+			Xfw::close(w, 0);
 	});
 }
 
@@ -796,7 +796,7 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
+			newTopWindow = Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
@@ -828,7 +828,7 @@ void Group::onButtonPress(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_SECONDARY)
 	{
-		std::shared_ptr<GroupWindow> win = Wnck::mGroupWindows.findIf([this](std::pair<gulong, std::shared_ptr<GroupWindow>> e) -> bool {
+		std::shared_ptr<GroupWindow> win = Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 			return (e.second->mGroupAssociated && e.second->mGroup == this);
 		});
 
@@ -837,7 +837,7 @@ void Group::onButtonPress(GdkEventButton* event)
 
 		if (mButton != nullptr)
 		{
-			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Wnck::buildActionMenu(win.get(), this)));
+			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Xfw::buildActionMenu(win.get(), this)));
 			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), nullptr);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);

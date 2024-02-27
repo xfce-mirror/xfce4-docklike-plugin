@@ -7,13 +7,13 @@
 
 #include "GroupWindow.hpp"
 
-GroupWindow::GroupWindow(WnckWindow* wnckWindow)
+GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 {
-	mWnckWindow = wnckWindow;
+	mXfwWindow = xfwWindow;
 	mGroupMenuItem = new GroupMenuItem(this);
 	mGroupAssociated = false;
 
-	std::string groupName = Wnck::getGroupName(this);
+	std::string groupName = Xfw::getGroupName(this);
 
 	g_debug("NEW: %s", groupName.c_str());
 
@@ -22,47 +22,48 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 
 	//--------------------------------------------------
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "name-changed",
-		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "name-changed",
+		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			me->mGroupMenuItem->updateLabel();
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "icon-changed",
-		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "icon-changed",
+		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			me->mGroupMenuItem->updateIcon();
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "state-changed",
-		G_CALLBACK(+[](WnckWindow* window, WnckWindowState changed_mask,
-						WnckWindowState new_state, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "state-changed",
+		G_CALLBACK(+[](XfwWindow* window, XfwWindowState changed_mask,
+						XfwWindowState new_state, GroupWindow* me) {
 			me->updateState();
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "workspace-changed",
-		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "workspace-changed",
+		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			me->updateState();
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "geometry-changed",
-		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {
+	g_signal_connect(G_OBJECT(mXfwWindow), "notify::monitors",
+		G_CALLBACK(+[](XfwWindow* window, GParamSpec* pspec, GroupWindow* me) {
 			me->updateState();
+			Xfw::setActiveWindow();
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mWnckWindow), "class-changed",
-		G_CALLBACK(+[](WnckWindow* window, GroupWindow* me) {
-			std::string _groupName = Wnck::getGroupName(me);
+	g_signal_connect(G_OBJECT(mXfwWindow), "class-changed",
+		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
+			std::string _groupName = Xfw::getGroupName(me);
 			Group* group = Dock::prepareGroup(AppInfos::search(_groupName));
 			if (group != me->mGroup)
 			{
 				me->leaveGroup();
 				me->mGroup = group;
 				me->getInGroup();
-				Wnck::setActiveWindow();
+				Xfw::setActiveWindow();
 			}
 		}),
 		this);
@@ -72,25 +73,25 @@ GroupWindow::GroupWindow(WnckWindow* wnckWindow)
 	mGroupMenuItem->updateLabel();
 }
 
-bool GroupWindow::getState(WnckWindowState flagMask) const
+bool GroupWindow::getState(XfwWindowState flagMask) const
 {
 	return (mState & flagMask) != 0;
 }
 
 void GroupWindow::activate(guint32 timestamp)
 {
-	Wnck::activate(this, timestamp);
+	Xfw::activate(this, timestamp);
 }
 
 void GroupWindow::minimize()
 {
-	wnck_window_minimize(this->mWnckWindow);
+	xfw_window_set_minimized(this->mXfwWindow, TRUE, NULL);
 }
 
 GroupWindow::~GroupWindow()
 {
 	leaveGroup();
-	g_signal_handlers_disconnect_by_data(this->mWnckWindow, this);
+	g_signal_handlers_disconnect_by_data(this->mXfwWindow, this);
 	delete mGroupMenuItem;
 }
 
@@ -132,18 +133,17 @@ void GroupWindow::onUnactivate() const
 void GroupWindow::updateState()
 {
 	bool onScreen = true;
-	bool monitorChanged = false;
 	bool onWorkspace = true;
-	bool onTasklist = !(mState & WnckWindowState::WNCK_WINDOW_STATE_SKIP_TASKLIST);
-	mState = wnck_window_get_state(this->mWnckWindow);
+	bool onTasklist = !(mState & XfwWindowState::XFW_WINDOW_STATE_SKIP_TASKLIST);
+	mState = xfw_window_get_state(this->mXfwWindow);
 
 	if (Settings::onlyDisplayVisible)
 	{
-		WnckWorkspace* windowWorkspace = wnck_window_get_workspace(mWnckWindow);
+		XfwWorkspace* windowWorkspace = xfw_window_get_workspace(mXfwWindow);
 
 		if (windowWorkspace != nullptr)
 		{
-			WnckWorkspace* activeWorkspace = wnck_screen_get_active_workspace(Wnck::mWnckScreen);
+			XfwWorkspace* activeWorkspace = xfw_workspace_group_get_active_workspace(Xfw::mXfwWorkspaceGroup);
 
 			if (windowWorkspace != activeWorkspace)
 				onWorkspace = false;
@@ -152,31 +152,15 @@ void GroupWindow::updateState()
 
 	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::mDisplay) > 1)
 	{
-		gint x, y, w, h;
-
-		wnck_window_get_geometry(mWnckWindow, &x, &y, &w, &h);
-
+		GList* monitors = xfw_window_get_monitors(mXfwWindow);
 		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
-		GdkMonitor* currentMonitor = gdk_display_get_monitor_at_point(Plugin::mDisplay, x + (w / 2), y + (h / 2));
 
-		if (gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow) != currentMonitor)
+		if (!g_list_find(monitors, gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow)))
 			onScreen = false;
-
-		if (mMonitor != currentMonitor)
-		{
-			monitorChanged = true;
-			mMonitor = currentMonitor;
-		}
-		else
-			monitorChanged = false;
 	}
 
 	if (onWorkspace && onTasklist && onScreen)
-	{
 		getInGroup();
-		if (monitorChanged)
-			Wnck::setActiveWindow();
-	}
 	else
 		leaveGroup();
 
