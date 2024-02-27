@@ -9,7 +9,7 @@
 #define DOCK_HPP
 
 #include <gtk/gtk.h>
-#include <libwnck/libwnck.h>
+#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 #include <string>
@@ -19,7 +19,7 @@
 #include "Plugin.hpp"
 #include "Settings.hpp"
 #include "Store.tpp"
-#include "Wnck.hpp"
+#include "Xfw.hpp"
 
 class Group;
 
