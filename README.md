@@ -16,7 +16,7 @@ make
 sudo make install
 ```
 
-Use `./configure --prefix=/usr/local` to change install location
+Use e.g. `./configure --prefix=/usr` to change install location
 
 ### From git
 
@@ -27,7 +27,7 @@ make
 sudo make install
 ```
 
-Use `./autogen.sh --prefix=/usr/local` to change install location
+Use e.g. `./autogen.sh --prefix=/usr` to change install location
 
 ## Reporting bugs
 
