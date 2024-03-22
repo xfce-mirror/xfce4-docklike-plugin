@@ -174,8 +174,12 @@ void GroupMenuItem::updatePreview()
 
 		if (window != nullptr)
 		{
-			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window),
-				gdk_window_get_height(window));
+			// we're probably not doing anything wrong at our level, but things can go wrong in cairo when
+			// multiple windows are closed and thumbnails are shown (#71), so let's catch X11 errors for it
+			GdkDisplay *display = gdk_display_get_default ();
+			gdk_x11_display_error_trap_push (display);
+			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window), gdk_window_get_height(window));
+			gdk_x11_display_error_trap_pop_ignored (display);
 
 			if (pixbuf != nullptr)
 			{
