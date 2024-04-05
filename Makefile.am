@@ -17,7 +17,4 @@ DISTCLEANFILES =				\
 	ltmain.sh					\
 	missing						\
 	mkinstalldirs				\
-	intltool-extract			\
-	intltool-merge				\
-	intltool-update				\
-	po/.intltool-merge-cache.lock
+	$(NULL)

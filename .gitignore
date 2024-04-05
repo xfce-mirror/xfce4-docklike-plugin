@@ -41,3 +41,16 @@ po/Makefile*
 Makecache
 xfce4-docklike-plugin-*.tar.*
 compile_commands.json
+ABOUT-NLS
+config.rpath
+po/Makevars.template
+po/Rules-quot
+po/boldquot.sed
+po/en@boldquot.header
+po/en@quot.header
+po/insert-header.sin
+po/quot.sed
+po/remove-potcdate.sed
+po/remove-potcdate.sin
+po/stamp-po
+po/xfce4-docklike-plugin.pot

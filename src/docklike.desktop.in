@@ -2,7 +2,7 @@
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
 Name=Docklike Taskbar
-_Comment=A modern, minimalist taskbar for Xfce
+Comment=A modern, minimalist taskbar for Xfce
 Icon=preferences-system
 X-XFCE-Module=docklike
 X-XFCE-Internal=false
