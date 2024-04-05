@@ -65,7 +65,8 @@ endif
 pluginsdir = $(datadir)/xfce4/panel/plugins
 plugins_in_files = docklike.desktop.in
 plugins_DATA = $(plugins_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
+$(plugins_DATA): $(plugins_in_files) Makefile
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 EXTRA_DIST = $(plugins_in_files)
 
