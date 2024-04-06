@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xfce Bot <transifex@xfce.org>, 2023
 # Charles Monzat <c.monzat@laposte.net>, 2023
 # Joel Carnat, 2023
+# Xfce Bot <transifex@xfce.org>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-06 00:51+0200\n"
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-04-06 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Joel Carnat, 2023\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2024\n"
 "Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,32 +23,32 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: ../src/Xfw.cpp:217
+#: src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Épinglé"
 
-#: ../src/Xfw.cpp:217
+#: src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Épingler"
 
-#: ../src/Xfw.cpp:218
+#: src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Modifier le lanceur"
 
-#: ../src/Xfw.cpp:249
+#: src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Tout fermer"
 
-#: ../src/Xfw.cpp:268
+#: src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Enlever"
 
-#: ../src/SettingsDialog.cpp:254
+#: src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Seules les %u premières touches de raccourci sont activées.</b>\n"
 
-#: ../src/SettingsDialog.cpp:259
+#: src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,3 +56,11 @@ msgid ""
 msgstr ""
 "La combinaison &lt;SUPER&gt;+%u semble déjà être utilisée par un autre processus.\n"
 "Vérifiez vos paramètres Xfce."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr ""
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Une barre des tâches moderne et minimaliste pour Xfce"
