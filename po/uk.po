@@ -5,7 +5,6 @@
 # 
 # Translators:
 # Yarema aka Knedlyk <yupadmin@gmail.com>, 2023
-# Nick Schermer <nick@xfce.org>, 2023
 # Gordon Freeman, 2023
 # 
 #, fuzzy
@@ -13,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Gordon Freeman, 2023\n"
 "Language-Team: Ukrainian (https://app.transifex.com/xfce/teams/16840/uk/)\n"
@@ -23,32 +22,32 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Прикріплено до доку"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Прикріпити до доку"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Редагувати значок запуску"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Закрити все"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Вилучити"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Увімкнено лише %u перших гарячих клавіш.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,152 +55,3 @@ msgid ""
 msgstr ""
 "Схоже, що комбінація &lt;SUPER&gt;+%u вже задіяна для іншої дії.\n"
 "Перевірте ваші налаштування Xfce."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Сучасна мінімалістична панель завдань для Xfce"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_Допомога"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Закрити"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "Сховати список вікон для одиночного вікна"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Показувати програми лише з поточної робочої області"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Показувати програми лише з поточного монітору"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Показувати мініатюри попереднього перегляду для відкритих вікон"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Показувати кількість відкритих вікон (якщо більше 2-х)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "Середня кнопка миші:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "Закрити все"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "Запуск нового екземпляру"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "Не робити нічого"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "Поведінка"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "Стиль активного індикатора:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "Шкала"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "Крапки"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "Прямокутники"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "Кола"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "Нічого"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "Стиль неактивного індикатора:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "Розташування індикатора:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "Автоматично"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "Внизу"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "Зправа"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "Зверху"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "Зліва"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "Отримати колір індикатора з теми"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "Активний індикатор:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "Неактивний індикатор:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "Розмір значків:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "Зовнішній вигляд"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Переключатися між програмами за допомогою <SUPER>+[1, 2, ...]"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "Переключатися на попереднє вікно за допомогою <SUPER>"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Ця функція вимкнена.</b>\n"
-"Вона потребує розширення X11 XInput2.0, якого немає у вашій системі."
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "Гарячі клавіші"
