@@ -4,8 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jackson Doak <noskcaj@ubuntu.com>, 2023
-# Nick Schermer <nick@xfce.org>, 2023
 # Andi Chandler <andi@gowling.com>, 2023
 # 
 #, fuzzy
@@ -13,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2023\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/xfce/teams/16840/en_GB/)\n"
@@ -23,32 +21,32 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Pinned to Dock"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Pin to Dock"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Edit Launcher"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Close All"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Remove"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,152 +54,3 @@ msgid ""
 msgstr ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "A modern, minimalist taskbar for Xfce"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_Help"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Close"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "Don't show the window list for a single window"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Only show applications on the current workspace"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Only show applications on the current display"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Show preview thumbnails for open windows"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Show the number of open windows (if more than 2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "Middle mouse button:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "Close all"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "Launch new instance"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "Do Nothing"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "Behaviour"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "Active indicator style:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "Bars"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "Dots"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "Rectangles"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "Circles"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "None"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "Inactive indicator style:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "Indicator orientation:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "Automatic"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "Bottom"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "Right"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "Top"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "Left"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "Get indicator colour from theme"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "Active indicator:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "Inactive indicator:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "Force icon size:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "Appearance"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Switch between applications with <SUPER>+[1, 2, ...]"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "Switch to the last window with <SUPER>"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "Keyboard hotkeys"
