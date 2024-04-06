@@ -4,8 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# gk <genghiskhan@gmx.ca>, 2023
-# עומר א״ש <omeritzicschwartz@gmail.com>, 2023
 # Elishai Eliyahu <elishai@mailfence.com>, 2023
 # 
 #, fuzzy
@@ -13,42 +11,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 12:55+0100\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Elishai Eliyahu <elishai@mailfence.com>, 2023\n"
-"Language-Team: Hebrew (https://www.transifex.com/xfce/teams/16840/he/)\n"
+"Language-Team: Hebrew (https://app.transifex.com/xfce/teams/16840/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "נעוץ למעגן"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "נעץ למעגן"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "ערוך מפעיל"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "סגור הכל"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "הסרה"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>רק מקש(ים) ישיר ראשון %u מופעל.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,148 +54,3 @@ msgid ""
 msgstr ""
 "השילוב &lt;SUPER&gt;+%u כנראה בשימוש בתהליך נוסף.\n"
 "בדוק את הגדרות Xfce שלך."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "סרגל משימות מודרני, מינימליסטי לXfce "
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_עזרה"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_סגור"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "אל תציג את רשימת החלונות עבור חלון בודד"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "הצג רק ישומים במרחב העבודה הנוכחי"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "הצג ישומים רק במסך הנוכחי"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "הצג תמונות ממוזערות של תצוגה מקדימה לחלונות פתוחים"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "הצג את מספר החלונות הפתוחים (אם יותר מ-2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "לחצן עכבר אמצעי:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "סגור הכל"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "הפעל מופע חדש"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Behavior"
-msgstr "התנהגות"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Active indicator style:"
-msgstr "סגנון אינדיקטור פעיל:"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Bars"
-msgstr "שורות"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Dots"
-msgstr "נקודות"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Rectangles"
-msgstr "מרובעים"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Circles"
-msgstr "מעגלים"
-
-#: ../src/_dialogs.xml.h:18
-msgid "None"
-msgstr "ללא"
-
-#: ../src/_dialogs.xml.h:19
-msgid "Inactive indicator style:"
-msgstr "סגנון אינדיקטור לא פעיל:"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Indicator orientation:"
-msgstr "אוריינטצית אינדיקטור:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Automatic"
-msgstr "אוטומטי"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Bottom"
-msgstr "למטה"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Right"
-msgstr "ימין"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Top"
-msgstr "למעלה"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Left"
-msgstr "שמאל"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Get indicator color from theme"
-msgstr "קח צבע אינדיקטור מערכת נושא"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Active indicator:"
-msgstr "אינדיקטור פעיל:"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Inactive indicator:"
-msgstr "אינדיקטור לא פעיל:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Force icon size:"
-msgstr "אלץ גודל איקון:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Appearance"
-msgstr "מראה"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "החלף בין ישומים עם <SUPER>+[1,2, ...]"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch to the last window with <SUPER>"
-msgstr "עבור אל החלון האחרון עם <SUPER>"
-
-#: ../src/_dialogs.xml.h:33
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>מאפיין זה כבוי.</b>\n"
-"נדרשת הרחבה X11 XInput2.0 שאינה מסופקת על ידי המערכת שלך."
-
-#: ../src/_dialogs.xml.h:35
-msgid "Keyboard hotkeys"
-msgstr "מקשים ישירים מקלדת"
