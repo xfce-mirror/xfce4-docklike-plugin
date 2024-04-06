@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2023
 # Саша Петровић <salepetronije@gmail.com>, 2023
 # 
 #, fuzzy
@@ -12,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>, 2023\n"
 "Language-Team: Serbian (https://app.transifex.com/xfce/teams/16840/sr/)\n"
@@ -22,32 +21,32 @@ msgstr ""
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Закачен за док"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Закачи за док"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Уреди покретач"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Затвори све"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Уклони"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Само прва пречица %u је омогућена.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -55,152 +54,3 @@ msgid ""
 msgstr ""
 "Сједињавање &lt;СУПЕР&gt;+%u је изгледа већ у употреби за неко друго дејство.\n"
 "Проверите поставке ИксФЦЕ-а."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Савремена, сажета трака задатака за ИксФЦЕ"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_Помоћ"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Затвори"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "Не приказуј списак прозора за само један прозор"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Само приказуј програме тренутног радног простора"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Само приказуј програме тренутног заслона"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Приказуј умањене сличице прегледа отворених прозора"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Приказуј број отворених прозора (ако их је више од 2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "Средње дугме миша"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "Затвори све"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "Покрени нови примерак"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "Не дејствуј ништа"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "Понашање"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "Начин приказа показивача у погону:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "Траке"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "Тачке"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "троуглови"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Трепавице"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "Кругови"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "Ништа"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "Начин приказа указивача ван погона:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "Усмерење указивача:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "Самостално"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "Доле"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "Десно"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "Горе"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "Лево"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "Добави боју указивача из теме"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "Указивач у погону:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "Указивач ван погона:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "Присили величину сличице:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "Изглед"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Мењај програме помоћу <СУПЕР>+[1,2, ..]"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "Пређи на последњи прозор помоћу <СУПЕР>"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Ова могућност је онемогућена.</b>\n"
-"Захтева проширење Х11 Хинпут2.0 које није обезбеђено у Вашем радном склопу."
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "Пречице дугмади"
