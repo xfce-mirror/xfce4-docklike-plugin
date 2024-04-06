@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2023
 # 玉堂白鹤 <yjwork@qq.com>, 2023
 # 
 #, fuzzy
@@ -12,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/xfce/teams/16840/zh_CN/)\n"
@@ -22,32 +21,32 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "已固定到 Dock"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "固定到 Dock"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "编辑启动器"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "全部关闭"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "移除"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>仅启用第一个热键 %u。</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -55,152 +54,3 @@ msgid ""
 msgstr ""
 "&lt;SUPER&gt;+%u 组合似乎已经被另一个进程使用。\n"
 "请检查 Xfce 设置。"
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "现代简约的 Xfce 任务栏"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "帮助(_H)"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "关闭(_C)"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "不显示单个窗口的窗口列表"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "仅在当前工作区上显示应用程序"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "仅在当前显示器上显示应用程序"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "显示打开窗口的预览缩略图"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "显示打开的窗口数 (如果超过 2 个)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "鼠标中键:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "全部关闭"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "启动新实例"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "什么都不做"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "行为"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "活动指示器样式："
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "长条"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "点"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "矩形"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "圆圈"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "无"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "非活动指示器样式:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "指示器方向:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "自动"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "底部"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "右边"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "顶部"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "左边"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "从主题获取指示器颜色"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "活动指示器："
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "非活动指示器:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "强制图标大小:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "外观"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "使用 <SUPER>+[1, 2, ...] 在应用程序之间切换"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "使用 <SUPER> 切换到最后一个窗口"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>此功能已禁用。</b>\n"
-"它需要 X11 XInput2.0 扩展，而您的系统不提供该扩展。"
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "键盘热键"
