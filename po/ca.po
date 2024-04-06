@@ -6,16 +6,15 @@
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2023
 # Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2023
-# Oscar Perez <oscarpc@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Oscar Perez <oscarpc@gmail.com>, 2023\n"
+"Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2023\n"
 "Language-Team: Catalan (https://app.transifex.com/xfce/teams/16840/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,32 +22,32 @@ msgstr ""
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Ancorat al Dock"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Ancora al Dock"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Edita el llançador"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Tanca-ho tot"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Només les primeres %u dreceres estan habilitades.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,152 +55,3 @@ msgid ""
 msgstr ""
 "Pareix que la combinació &lt;SUPER&gt;+%u ja s'empra per un altre procés.\n"
 "Comprova els teus ajusts d'Xfce."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Una barra de tasques moderna i minimalista per Xfce"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_Ajuda"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Tanca"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "No mostris la llista de finestres per a una sola finestra"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Mostra només les aplicacions a l'espai de treball actual"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Mostra només les aplicacions al monitor actual"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Mostra miniatures de previsualització per a finestres obertes"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Mostra el nombre de finestres obertes (si n'hi ha més de 2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "Botó del mig del ratolí:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "Tanca-ho tot"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "Llança una nova instància"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "No facis res"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "Comportament"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "Estil de l'indicador actiu:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "Barres"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "Punts"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "Rectangles"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "Cercles"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "Cap"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "Estil de l'indicador inactiu:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "Ubicació de l'indicador:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "Automàtica"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "Inferior"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "Dreta"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "Superior"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "Esquerra"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "Pren el color de l'indicador del tema"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "Indicador actiu:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "Indicador inactiu:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "Forçar mida de les icones:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "Aparença"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Canvia entre aplicacions amb <SUPER>+[1, 2, ...]"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "Canvia a la darrera finestra amb <SUPER>"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Aquesta característica està deshabilitada.</b>\n"
-"Requereix de l'extensió X11 XInput2.0 la qual no està proporcionada per el teu sistema."
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "Dreceres de teclat"
