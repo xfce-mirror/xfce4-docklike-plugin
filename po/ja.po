@@ -5,7 +5,6 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2023
-# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2023
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2023
 # 
 #, fuzzy
@@ -13,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2023\n"
 "Language-Team: Japanese (https://app.transifex.com/xfce/teams/16840/ja/)\n"
@@ -23,32 +22,32 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "ピン留め済み"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "ドックにピン留め"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "ランチャーを編集"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "全てのウィンドウを閉じる"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "削除"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>最初の %u ホットキーのみが有効です。</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -56,152 +55,3 @@ msgid ""
 msgstr ""
 "&lt;SUPER&gt;+%u の組み合わせは既に別のプロセス使用されているようです。\n"
 "Xfceの設定を確認して下さい。"
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Xfce用のモダンで小さなタスクバー"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "ヘルプ"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "閉じる"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "1つのウィンドウの場合にウィンドウリストを非表示"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "現在のワークスペースのアプリケーションのみ表示"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "現在のディスプレイのアプリケーションのみ表示"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "ウィンドウのプレビューを表示"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "開かれているウィンドウの数を表示（2つ以上の場合）"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "マウスの中ボタン:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "すべて閉じる"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "新しいインスタンスを起動"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "なにもしない"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "動作"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "アクティブなインジケーターのスタイル:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "バー"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "ドット"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "長方形"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "円"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "なし"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "アクティブでないインジケーターのスタイル:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "インジケータの向き:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "自動"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "下"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "右"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "上"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "左"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "テーマからインジケーターの色を取得"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "アクティブなインジケーター:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "アクティブでないインジケーター:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "アイコンサイズを強制的に変更する:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "見た目"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "アプリケーションを <SUPER>+[1, 2, ...] で切り替える"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "<SUPER> で最後のウィンドウに切り替える"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>この機能は無効化されています。</b>\n"
-"この機能を使うには X11 XInput2.0 extension が必要です。"
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "キーボードショートカット"
