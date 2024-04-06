@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 12:51+0200\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/xfce/teams/16840/ru/)\n"
@@ -24,32 +24,32 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Прикреплен к док-станции"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "прикрепить к док-станции"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Править запуск"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Закрыть Всё"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../src/SettingsDialog.cpp:225
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
 
-#: ../src/SettingsDialog.cpp:227
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -57,152 +57,3 @@ msgid ""
 msgstr ""
 "Похоже, что комбинация &lt;SUPER&gt;+%u уже используется.\n"
 "Проверьте свои настройки Xfce."
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Простая и современная панель задач для Xfce"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "_помощь"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Закрыть"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "Не показывать список окон для одного окна"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Показывать окна только с текущего рабочего места"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Показывать окна только с текущего монитора"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Показывать миниатюры предварительного просмотра для открытых окон"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Показать количество открытых окон (если их больше 2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Middle mouse button:"
-msgstr "Средняя кнопка мыши:"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Close all"
-msgstr "Закрыть всё"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Launch new instance"
-msgstr "Запуск нового экземпляра"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Do Nothing"
-msgstr "Ничего не делать"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Behavior"
-msgstr "Поведение"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Active indicator style:"
-msgstr "Стиль активного индикатора:"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Bars"
-msgstr "Полоса"
-
-#: ../src/_dialogs.xml.h:15
-msgid "Dots"
-msgstr "Точки"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Rectangles"
-msgstr "Линии"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Circles"
-msgstr "Круги"
-
-#: ../src/_dialogs.xml.h:19
-msgid "None"
-msgstr "ничто"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Inactive indicator style:"
-msgstr "Стиль неактивного индикатора:"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Indicator orientation:"
-msgstr "Расположение индикатора:"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Automatic"
-msgstr "автоматизированный"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Bottom"
-msgstr "Снизу"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Right"
-msgstr "Справа"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Top"
-msgstr "Сверху"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Left"
-msgstr "Слева"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Get indicator color from theme"
-msgstr "Получить цвет индикатора из темы"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Active indicator:"
-msgstr "Активный индикатор:"
-
-#: ../src/_dialogs.xml.h:29
-msgid "Inactive indicator:"
-msgstr "Неактивный индикатор:"
-
-#: ../src/_dialogs.xml.h:30
-msgid "Force icon size:"
-msgstr "Размер значков:"
-
-#: ../src/_dialogs.xml.h:31
-msgid "Appearance"
-msgstr "Внешний вид"
-
-#: ../src/_dialogs.xml.h:32
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Переключать окна с помощью <SUPER>+[1, 2, ...]"
-
-#: ../src/_dialogs.xml.h:33
-msgid "Switch to the last window with <SUPER>"
-msgstr "Переключать ранее выбранные окна с помощью <SUPER>"
-
-#: ../src/_dialogs.xml.h:34
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Эта функция недоступна.</b>\n"
-"Для её работы необходим X11 XInput2.0, который, вероятно, отсутствует в вашей системе."
-
-#: ../src/_dialogs.xml.h:36
-msgid "Keyboard hotkeys"
-msgstr "Комбинации клавиш"
