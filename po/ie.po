@@ -11,177 +11,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 12:49+0100\n"
+"POT-Creation-Date: 2024-04-06 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Caarmi, 2023\n"
-"Language-Team: Interlingue (https://www.transifex.com/xfce/teams/16840/ie/)\n"
+"Language-Team: Interlingue (https://app.transifex.com/xfce/teams/16840/ie/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ie\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr "Fixat al dock"
 
-#: ../src/Wnck.cpp:202
+#: ../src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr "Fixar al dock"
 
-#: ../src/Wnck.cpp:203
+#: ../src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Redacter li lansator"
 
-#: ../src/Wnck.cpp:230
+#: ../src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Cluder omni"
 
-#: ../src/Wnck.cpp:249
+#: ../src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Remover"
 
-#: ../src/SettingsDialog.cpp:217
+#: ../src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Solmen li prim %u rapid-taste(s) es activ.</b>\n"
 
-#: ../src/SettingsDialog.cpp:219
+#: ../src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Un modern, minimalist barra de taches por Xfce"
-
-#: ../src/_dialogs.xml.h:1
-msgid "_Help"
-msgstr "Au_xilie"
-
-#: ../src/_dialogs.xml.h:2
-msgid "_Close"
-msgstr "_Cluder"
-
-#: ../src/_dialogs.xml.h:3
-msgid "Don't show the window list for a single window"
-msgstr "Ne monstrar li liste de fenestres por un singul fenestre"
-
-#: ../src/_dialogs.xml.h:4
-msgid "Only show applications on the current workspace"
-msgstr "Monstrar solmen applicationes sur li actual labor-spacie"
-
-#: ../src/_dialogs.xml.h:5
-msgid "Only show applications on the current display"
-msgstr "Monstrar solmen applicationes sur li actual ecran"
-
-#: ../src/_dialogs.xml.h:6
-msgid "Show preview thumbnails for open windows"
-msgstr "Monstrar miniaturas por apertet fenestres"
-
-#: ../src/_dialogs.xml.h:7
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Monstrar li númere de apertet fenestres (si plu quam 2)"
-
-#: ../src/_dialogs.xml.h:8
-msgid "Behavior"
-msgstr "Conduida"
-
-#: ../src/_dialogs.xml.h:9
-msgid "Active indicator style:"
-msgstr "Stil de indication activ:"
-
-#: ../src/_dialogs.xml.h:10
-msgid "Bars"
-msgstr "Barras"
-
-#: ../src/_dialogs.xml.h:11
-msgid "Dots"
-msgstr "Punctus"
-
-#: ../src/_dialogs.xml.h:12
-msgid "Rectangles"
-msgstr "Rectangules"
-
-#: ../src/_dialogs.xml.h:13
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: ../src/_dialogs.xml.h:14
-msgid "Circles"
-msgstr "Circules"
-
-#: ../src/_dialogs.xml.h:15
-msgid "None"
-msgstr "Necú"
-
-#: ../src/_dialogs.xml.h:16
-msgid "Inactive indicator style:"
-msgstr "Stil de indication ínactiv:"
-
-#: ../src/_dialogs.xml.h:17
-msgid "Indicator orientation:"
-msgstr "Orientation de indicator:"
-
-#: ../src/_dialogs.xml.h:18
-msgid "Automatic"
-msgstr "Automatic"
-
-#: ../src/_dialogs.xml.h:19
-msgid "Bottom"
-msgstr "Bass"
-
-#: ../src/_dialogs.xml.h:20
-msgid "Right"
-msgstr "Dextri"
-
-#: ../src/_dialogs.xml.h:21
-msgid "Top"
-msgstr "Alt"
-
-#: ../src/_dialogs.xml.h:22
-msgid "Left"
-msgstr "Levul"
-
-#: ../src/_dialogs.xml.h:23
-msgid "Get indicator color from theme"
-msgstr "Obtener li color ex li tema"
-
-#: ../src/_dialogs.xml.h:24
-msgid "Active indicator:"
-msgstr "Indicator activ:"
-
-#: ../src/_dialogs.xml.h:25
-msgid "Inactive indicator:"
-msgstr "Indicator ínactiv:"
-
-#: ../src/_dialogs.xml.h:26
-msgid "Force icon size:"
-msgstr "Assignar li dimension de icones:"
-
-#: ../src/_dialogs.xml.h:27
-msgid "Appearance"
-msgstr "Aspecte"
-
-#: ../src/_dialogs.xml.h:28
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr ""
-
-#: ../src/_dialogs.xml.h:29
-msgid "Switch to the last window with <SUPER>"
-msgstr "Activar li ultim fenestre per <SUPER>"
-
-#: ../src/_dialogs.xml.h:30
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Ti function es ínactiv.</b>\n"
-"It besona li extension de X11 XInput2.0 quel ne es providet de vor sistema."
-
-#: ../src/_dialogs.xml.h:32
-msgid "Keyboard hotkeys"
-msgstr "Rapid-tastes"
