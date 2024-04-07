@@ -4,6 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Nick Schermer <nick@xfce.org>, 2024
 # 玉堂白鹤 <yjwork@qq.com>, 2024
 # 
 #, fuzzy
@@ -11,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-06 12:52+0200\n"
+"POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/xfce/teams/16840/zh_CN/)\n"
@@ -62,3 +63,147 @@ msgstr "停靠式任务栏"
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "现代简约的 Xfce 任务栏"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "帮助(_H)"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "关闭(_C)"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "不显示单个窗口的窗口列表"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "仅在当前工作区上显示应用程序"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "仅在当前显示器上显示应用程序"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "显示打开窗口的预览缩略图"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "显示打开的窗口数 (如果超过 2 个)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "鼠标中键:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "全部关闭"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "启动新实例"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr "什么都不做"
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "行为"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "活动指示器样式："
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "长条"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "点"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "矩形"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "圆圈"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "无"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "非活动指示器样式:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "指示器方向:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "自动"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "底部"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "右边"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "顶部"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "左边"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "从主题获取指示器颜色"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "活动指示器："
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "非活动指示器:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "强制图标大小:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "外观"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "使用 <SUPER>+[1, 2, ...] 在应用程序之间切换"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr "使用 <SUPER> 切换到最后一个窗口"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>此功能已禁用。</b>\n"
+"它需要 X11 XInput2.0 扩展，而您的系统不提供该扩展。"
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "键盘热键"
