@@ -4,6 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Dušan Kazik <prescott66@gmail.com>, 2024
+# Nick Schermer <nick@xfce.org>, 2024
 # Slavko <linux@slavino.sk>, 2024
 # 
 #, fuzzy
@@ -11,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-06 12:52+0200\n"
+"POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Slavko <linux@slavino.sk>, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/xfce/teams/16840/sk/)\n"
@@ -62,3 +64,147 @@ msgstr ""
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Moderný, minimalistický panel úloh pre Xfce"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "_Pomocník"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "_Zatvoriť"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "Nezobrazovať zoznam okien pre jedno okno"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "Zobraziť aplikácie len z aktívneho pracovného priestoru"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "Zobraziť aplikácie len z aktívneho displeja"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "Zobraziť ukážky otvorených okien"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Zobraziť počet otvorených okien (ak ich ej viac ako 2)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "Stredné tlačidlo myši:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "Zatvoriť všetko"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "Spustiť novú inštanciu"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr ""
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "Správanie"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "Štýl aktívneho indikátora:"
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "Stĺpce"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "Bodky"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "Štvorce"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr ""
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "Kruhy"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "Žiadne"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "Štýl neaktívneho indikátora:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "Orientácia indikátora:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "Automatická"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "Dole"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "Vpravo"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "Hore"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "Vľavo"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "Získať farbu indikátora z témy"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "Aktívny indikátor:"
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "Neaktívny indikátor:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "Vynútiť veľkosť ikony:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "Vzhľad"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Prepínať medzi aplikáciami pomocou <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr " Prepnúť na posledné okno pomocou <SUPER>"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>Táto funkcia je vypnutá.</b>\n"
+"Vyžaduje rozšírenie X11 XInput2.0, ktoré nie je vašim systémom poskytované."
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "Klávesové skratky"
