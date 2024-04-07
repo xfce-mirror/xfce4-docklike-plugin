@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-06 12:52+0200\n"
+"POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/xfce/teams/16840/et/)\n"
@@ -62,3 +62,147 @@ msgstr ""
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Moodne ja napp tegumiriba Xfce jaoks"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "_Abiteave"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "_Sulge"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "Ühe akna puhul ära näita akende loendit"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "Näita vaid praeguse tööala rakendusi"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "Näita vaid praeguse ekraani rakendusi"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "Näita avatud akende pisipilte"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Näita avatud akende arvu (kui see on suurem kui 2)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "Toiming hiire keskmise nupu klõpsimisel:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "Sulge kõik"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "Käivita uus rakenduse aken"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr "Ära tee midagi"
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "Käitumine"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "Aktiivse näidiku stiil:"
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "Tulbad"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "Punktid"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "Ruudud"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "Ringid"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "Mitte midagi"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "Mitteaktiivse näidiku stiil:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "Näidiku paigutus:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "Automaatne"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "All"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "Paremal"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "Üleval"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "Vasakul"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "Laadi näidiku värv teemast"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "Aktiivne näidik:"
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "Mitteaktiivne näidik:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "Määra ikooni suuruseks:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "Välimus"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Rakenduste vahetamiseks kasuta: <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr "Viimatikasutatud akna avamiseks kasuta: <SUPER>"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>See funktsionalsus on välja lülitatud.</b>\n"
+"See vajab X11 XInput2.0 laiendust, mida sinu arvutis ei leidu."
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "Klaviatuuri kiirklahvid"
