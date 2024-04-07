@@ -4,17 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Martin Srebotnjak <miles@filmsi.net>, 2023
+# Nick Schermer <nick@xfce.org>, 2024
+# Kernc, 2024
 # Arnold Marko <arnold.marko@gmail.com>, 2024
+# Martin Srebotnjak <miles@filmsi.net>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-06 12:52+0200\n"
+"POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2024\n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>, 2024\n"
 "Language-Team: Slovenian (https://app.transifex.com/xfce/teams/16840/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,3 +65,147 @@ msgstr ""
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Moderna, minimalistična opravilna vrstica za Xfce"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "Pomo_č"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "_Zapri"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "Ne pokaži seznama oken pri enem samem oknu"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "Pokaži le programe na trenutni delovni površini"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "Pokaži le programe na trenutnem zaslonu"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "Prikaži predogledne sličice odprtih oken"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Pokaži število odprtih oken (če sta več kot dva)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "Srednja tipka miške:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "Zapri vse"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "Zaženi novo instanco"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr "Ne naredi ničesar"
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "Obnašanje"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "Slog dejavnega kazalnika:"
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "Stolpce"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "Pike"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "Pravokotniki"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "Krogi"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "Brez"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "Slog nedejavnega kazalnika:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "Usmerjenost kazalnika:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "Samodejno"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "Spodaj"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "Desno"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "Zgoraj"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "Levo"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "Iz teme pridobi barvo kazalnika"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "Dejavni kazalnik: "
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "Nedejavni kazallnik:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "Vsili velikost ikon:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "Videz"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Preklopi med programi s/z <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr "Preklopi na zadnje okno s/z <SUPER>"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>Ta možnost je onemogočena.</b>\n"
+"Zahteva razširitev X11 XInput2.0, ki ni vsebovana na vašem sistemu."
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "Hitre tipke"
