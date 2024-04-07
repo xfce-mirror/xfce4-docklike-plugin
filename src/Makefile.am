@@ -21,7 +21,7 @@ libdocklike_la_SOURCES =							\
 		State.tpp 									\
 		Store.tpp									\
 		register.c									\
-		_gresources.xml _dialogs.xml				\
+		_gresources.xml _dialogs.ui				\
 		_gresources.c
 
 if ENABLE_X11
@@ -29,7 +29,7 @@ libdocklike_la_SOURCES += \
 	Hotkeys.cpp Hotkeys.hpp
 endif
 
-_gresources.c: _gresources.xml _dialogs.xml
+_gresources.c: _gresources.xml _dialogs.ui
 	glib-compile-resources --generate-source --target _gresources.c _gresources.xml
 
 libdocklike_la_CPPFLAGS = \
