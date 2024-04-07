@@ -1,198 +1,206 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xfce Bot <transifex@xfce.org>, 2023
-# Ivica  Kolić <ikoli@yahoo.com>, 2023
+# Nick Schermer <nick@xfce.org>, 2024
+# Ivica  Kolić <ikoli@yahoo.com>, 2024
+# Xfce Bot <transifex@xfce.org>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 12:55+0100\n"
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Ivica  Kolić <ikoli@yahoo.com>, 2023\n"
-"Language-Team: Croatian (https://www.transifex.com/xfce/teams/16840/hr/)\n"
+"Last-Translator: Xfce Bot <transifex@xfce.org>, 2024\n"
+"Language-Team: Croatian (https://app.transifex.com/xfce/teams/16840/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: ../src/Wnck.cpp:202
+#: src/Xfw.cpp:217
 msgid "Pinned to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:202
+#: src/Xfw.cpp:217
 msgid "Pin to Dock"
 msgstr ""
 
-#: ../src/Wnck.cpp:203
+#: src/Xfw.cpp:218
 msgid "Edit Launcher"
 msgstr "Uredi pokretač"
 
-#: ../src/Wnck.cpp:230
+#: src/Xfw.cpp:249
 msgid "Close All"
 msgstr "Zatvori sve"
 
-#: ../src/Wnck.cpp:249
+#: src/Xfw.cpp:268
 msgid "Remove"
 msgstr "Ukloni"
 
-#: ../src/SettingsDialog.cpp:225
+#: src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr ""
 
-#: ../src/SettingsDialog.cpp:227
+#: src/SettingsDialog.cpp:259
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
 
-#. namespace SettingsDialog
-#: ../src/docklike.desktop.in.h:1
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr ""
+
+#: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Moderna, minimalistička programska traka za Xfce"
 
-#: ../src/_dialogs.xml.h:1
+#: src/_dialogs.ui:35
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: ../src/_dialogs.xml.h:2
+#: src/_dialogs.ui:51
 msgid "_Close"
 msgstr "_Zatvori"
 
-#: ../src/_dialogs.xml.h:3
+#: src/_dialogs.ui:96
 msgid "Don't show the window list for a single window"
 msgstr "Ne prikazujte popis prozora za jedan prozor"
 
-#: ../src/_dialogs.xml.h:4
+#: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
 msgstr "Prikaži samo aplikacije iz trenutnog radnog prostora"
 
-#: ../src/_dialogs.xml.h:5
+#: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
 msgstr "Prikaži samo programe s trenutnog zaslona"
 
-#: ../src/_dialogs.xml.h:6
+#: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
 msgstr "Prikaži minijature pregleda za otvorene prozore"
 
-#: ../src/_dialogs.xml.h:7
+#: src/_dialogs.ui:157
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Prikaži broj otvorenih prozora (ako je veći od 2)"
 
-#: ../src/_dialogs.xml.h:8
+#: src/_dialogs.ui:182
 msgid "Middle mouse button:"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:9
+#: src/_dialogs.ui:195
 msgid "Close all"
 msgstr "Zatvori sve"
 
-#: ../src/_dialogs.xml.h:10
+#: src/_dialogs.ui:196
 msgid "Launch new instance"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:11
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr ""
+
+#: src/_dialogs.ui:219
 msgid "Behavior"
 msgstr "Ponašanje"
 
-#: ../src/_dialogs.xml.h:12
+#: src/_dialogs.ui:252
 msgid "Active indicator style:"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:13
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
 msgid "Bars"
-msgstr ""
+msgstr "Trake"
 
-#: ../src/_dialogs.xml.h:14
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
 msgid "Dots"
 msgstr "Točkice"
 
-#: ../src/_dialogs.xml.h:15
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
 msgid "Rectangles"
 msgstr "Pravokutnici"
 
-#: ../src/_dialogs.xml.h:16
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
 msgid "Ciliora"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:17
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
 msgid "Circles"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:18
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
 msgid "None"
 msgstr "Nijedna"
 
-#: ../src/_dialogs.xml.h:19
+#: src/_dialogs.ui:283
 msgid "Inactive indicator style:"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:20
+#: src/_dialogs.ui:314
 msgid "Indicator orientation:"
 msgstr "Orijentacija indikatora:"
 
-#: ../src/_dialogs.xml.h:21
+#: src/_dialogs.ui:326
 msgid "Automatic"
 msgstr "Automatski"
 
-#: ../src/_dialogs.xml.h:22
+#: src/_dialogs.ui:327
 msgid "Bottom"
 msgstr "Dno"
 
-#: ../src/_dialogs.xml.h:23
+#: src/_dialogs.ui:328
 msgid "Right"
 msgstr "Pravo"
 
-#: ../src/_dialogs.xml.h:24
+#: src/_dialogs.ui:329
 msgid "Top"
 msgstr "Vrh"
 
-#: ../src/_dialogs.xml.h:25
+#: src/_dialogs.ui:330
 msgid "Left"
 msgstr "Lijevo"
 
-#: ../src/_dialogs.xml.h:26
+#: src/_dialogs.ui:340
 msgid "Get indicator color from theme"
 msgstr ""
 
-#: ../src/_dialogs.xml.h:27
+#: src/_dialogs.ui:366
 msgid "Active indicator:"
 msgstr "Aktivni pokazatelj "
 
-#: ../src/_dialogs.xml.h:28
+#: src/_dialogs.ui:390
 msgid "Inactive indicator:"
 msgstr "Neaktivni pokazatelj:"
 
-#: ../src/_dialogs.xml.h:29
+#: src/_dialogs.ui:417
 msgid "Force icon size:"
 msgstr "Prisiliti veličinu ikona:"
 
-#: ../src/_dialogs.xml.h:30
+#: src/_dialogs.ui:462
 msgid "Appearance"
 msgstr "Izgled"
 
-#: ../src/_dialogs.xml.h:31
+#: src/_dialogs.ui:492
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Prebacivanje između aplikacija pomoću <SUPER> + [1, 2, ...]"
 
-#: ../src/_dialogs.xml.h:32
+#: src/_dialogs.ui:519
 msgid "Switch to the last window with <SUPER>"
 msgstr "Prebacite se na zadnji prozor pomoću <SUPER>"
 
-#: ../src/_dialogs.xml.h:33
+#: src/_dialogs.ui:535
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 
-#: ../src/_dialogs.xml.h:35
+#: src/_dialogs.ui:553
 msgid "Keyboard hotkeys"
 msgstr "Tipkovni prečaci"
