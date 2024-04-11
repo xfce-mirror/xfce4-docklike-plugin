@@ -5,10 +5,10 @@
 # 
 # Translators:
 # Charles Monzat <c.monzat@laposte.net>, 2023
-# David D, 2024
-# Wallon Wallon, 2024
 # Joel Carnat, 2024
+# David D, 2024
 # Xfce Bot <transifex@xfce.org>, 2024
+# Wallon Wallon, 2024
 # 
 #, fuzzy
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2024\n"
+"Last-Translator: Wallon Wallon, 2024\n"
 "Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr ""
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
-msgstr ""
+msgstr "Barre des tâches Docklike"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
@@ -81,15 +81,15 @@ msgstr "Cacher la liste pour une seule fenêtre"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "Ne voir que les applications de l'espace de travail courant"
+msgstr "Ne voir que les applications de l’espace de travail courant"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
-msgstr "Ne voir que les applications de l'écran courant"
+msgstr "Ne voir que les applications de l’écran courant"
 
 #: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
-msgstr "Afficher les vignettes d'aperçu des fenêtres ouvertes"
+msgstr "Afficher les vignettes d’aperçu des fenêtres ouvertes"
 
 #: src/_dialogs.ui:157
 msgid "Show the number of open windows (if more than 2)"
@@ -117,7 +117,7 @@ msgstr "Comportement"
 
 #: src/_dialogs.ui:252
 msgid "Active indicator style:"
-msgstr "Style de l'indicateur actif :"
+msgstr "Style de l’indicateur actif :"
 
 #: src/_dialogs.ui:265 src/_dialogs.ui:296
 msgid "Bars"
@@ -145,11 +145,11 @@ msgstr "Rien"
 
 #: src/_dialogs.ui:283
 msgid "Inactive indicator style:"
-msgstr "Style de l'indicateur inactif :"
+msgstr "Style de l’indicateur inactif :"
 
 #: src/_dialogs.ui:314
 msgid "Indicator orientation:"
-msgstr "Orientation de l'indicateur:"
+msgstr "Orientation de l’indicateur:"
 
 #: src/_dialogs.ui:326
 msgid "Automatic"
@@ -173,7 +173,7 @@ msgstr "Gauche"
 
 #: src/_dialogs.ui:340
 msgid "Get indicator color from theme"
-msgstr "Obtenir la couleur de l'indicateur à partir du thème"
+msgstr "Obtenir la couleur de l’indicateur à partir du thème"
 
 #: src/_dialogs.ui:366
 msgid "Active indicator:"
@@ -193,11 +193,11 @@ msgstr "Apparence"
 
 #: src/_dialogs.ui:492
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Changer d'application avec <SUPER>+[1, 2, ...]"
+msgstr "Changer d’application avec <SUPER>+[1, 2, ...]"
 
 #: src/_dialogs.ui:519
 msgid "Switch to the last window with <SUPER>"
-msgstr "Appeler l'application précédente avec <SUPER>"
+msgstr "Appeler l’application précédente avec <SUPER>"
 
 #: src/_dialogs.ui:535
 msgid ""
@@ -205,7 +205,7 @@ msgid ""
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
 "<b>Cette fonction est désactivée.</b>\n"
-"Elle nécessite l'extension X11 XInput2.0 qui n'est pas fournie par votre système."
+"Elle nécessite l’extension X11 XInput2.0 qui n’est pas fournie par votre système."
 
 #: src/_dialogs.ui:553
 msgid "Keyboard hotkeys"
