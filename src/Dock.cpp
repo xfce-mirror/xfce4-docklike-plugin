@@ -10,6 +10,7 @@
 #include "Hotkeys.hpp"
 #endif
 
+
 namespace Dock
 {
 	GtkWidget* mBox;
