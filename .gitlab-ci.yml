@@ -8,6 +8,9 @@ clang-format:
       exists:
         - .clang-format
   stage: build
+  before_script:
+    - apt-get update
+    - apt-get install -y clang-format
   allow_failure: true
   script:
     - 'git diff -U0 --no-color "$CI_MERGE_REQUEST_DIFF_BASE_SHA" | clang-format-diff -p1 > format-diff.log'
