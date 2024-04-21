@@ -13,7 +13,7 @@
 template <typename V>
 class State
 {
-  public:
+public:
 	void setup(V value, std::function<void(V)> feedback)
 	{
 		v = value;
@@ -33,7 +33,7 @@ class State
 
 	operator V() const { return v; }
 
-  private:
+private:
 	V v;
 	std::function<void(V)> f;
 };
@@ -41,7 +41,7 @@ class State
 template <typename V>
 class LogicalState
 {
-  public:
+public:
 	void setup(V value, std::function<V()> eval,
 		std::function<void(V)> feedback)
 	{
@@ -63,7 +63,7 @@ class LogicalState
 	operator V() const { return v; }
 	operator V*() const { return v; }
 
-  private:
+private:
 	V v;
 	std::function<V()> e;
 	std::function<void(V)> f;

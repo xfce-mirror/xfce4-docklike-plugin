@@ -12,15 +12,15 @@
 #include <functional>
 #include <list>
 #include <map>
-#include <utility>
 #include <memory>
+#include <utility>
 
 namespace Store
 {
 	template <typename K, typename V>
 	class KeyStore
 	{
-	  public:
+	public:
 		void push(K k, V v) { mList.push_front(std::make_pair(k, v)); }
 
 		void pushSecond(K k, V v) { mList.insert(std::next(mList.begin()), std::make_pair(k, v)); }
@@ -85,7 +85,7 @@ namespace Store
 	template <typename K, typename V>
 	class Map
 	{
-	  public:
+	public:
 		void set(K k, V v) { mMap[k] = v; }
 
 		V get(K k)
@@ -106,14 +106,14 @@ namespace Store
 
 		void clear() { mMap.clear(); }
 
-	  private:
+	private:
 		std::map<const K, V> mMap;
 	};
 
 	template <typename V>
 	class List
 	{
-	  public:
+	public:
 		void push(V v) { mList.push_back(v); }
 
 		void pop(V v) { mList.remove(v); }
@@ -139,12 +139,12 @@ namespace Store
 
 		uint size() { return mList.size(); }
 
-	  private:
+	private:
 		std::list<V> mList;
 	};
 
-	template<typename T>
-	using AutoPtr = std::unique_ptr<T,std::function<void(void*)>>;
+	template <typename T>
+	using AutoPtr = std::unique_ptr<T, std::function<void(void*)>>;
 } // namespace Store
 
 #endif // STORE_HPP

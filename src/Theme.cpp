@@ -10,8 +10,7 @@
 void Theme::init()
 {
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
-		G_CALLBACK(+[](GtkStyleContext* stylecontext)
-				   { load(); }),
+		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
 		nullptr);
 }
 

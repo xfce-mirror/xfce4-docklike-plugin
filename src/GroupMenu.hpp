@@ -19,7 +19,7 @@ class GroupMenuItem;
 
 class GroupMenu
 {
-  public:
+public:
 	GroupMenu(Group* dockButton);
 	~GroupMenu();
 

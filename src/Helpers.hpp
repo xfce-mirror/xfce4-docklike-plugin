@@ -43,7 +43,7 @@ namespace Help
 
 		class Timeout
 		{
-		  public:
+		public:
 			Timeout();
 
 			void setup(uint ms, std::function<bool()> function);
@@ -59,7 +59,7 @@ namespace Help
 
 		class Idle
 		{
-			public:
+		public:
 			Idle();
 
 			void setup(std::function<bool()> function);

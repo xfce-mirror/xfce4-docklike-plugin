@@ -9,8 +9,8 @@
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #endif
 
-#include "GroupMenu.hpp"
 #include "Group.hpp"
+#include "GroupMenu.hpp"
 #include "GroupMenuItem.hpp"
 #include "Plugin.hpp"
 
@@ -58,7 +58,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 
 			if (Settings::showPreviews)
 				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-						w->mGroupMenuItem->updatePreview();
+					w->mGroupMenuItem->updatePreview();
 				});
 
 			return true;
@@ -155,10 +155,10 @@ void GroupMenu::updateOrientation()
 
 void GroupMenu::updatePosition(gint wx, gint wy)
 {
-	GdkScreen *screen;
+	GdkScreen* screen;
 	GdkRectangle geometry;
-	GdkDisplay *display;
-	GdkMonitor *monitor;
+	GdkDisplay* display;
+	GdkMonitor* monitor;
 
 	screen = gtk_widget_get_screen(mGroup->mButton);
 	display = gdk_screen_get_display(screen);
@@ -170,18 +170,22 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 
 	gint button_width = gtk_widget_get_allocated_width(mGroup->mButton);
 	gint button_height = gtk_widget_get_allocated_height(mGroup->mButton);
-	
+
 	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
 
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
-		if (wx != geometry.x + geometry.width - window_width) {
-			wx -= (window_width/2) - (button_width/2);
+		if (wx != geometry.x + geometry.width - window_width)
+		{
+			wx -= (window_width / 2) - (button_width / 2);
 			wx = wx < geometry.x ? geometry.x : wx;
 		}
-	} else {
-		if (wy != geometry.y + geometry.height - window_height) {
-			wy -= (window_height/2) - (button_height/2);
+	}
+	else
+	{
+		if (wy != geometry.y + geometry.height - window_height)
+		{
+			wy -= (window_height / 2) - (button_height / 2);
 			wy = wy < geometry.y ? geometry.y : wy;
 		}
 	}

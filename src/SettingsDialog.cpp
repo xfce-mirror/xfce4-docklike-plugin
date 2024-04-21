@@ -98,7 +98,7 @@ namespace SettingsDialog
 		{
 			gtk_widget_hide(GTK_WIDGET(showPreviews));
 		}
-		
+
 		GObject* showWindowCount = gtk_builder_get_object(builder, "c_showWindowCount");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(showWindowCount), Settings::showWindowCount);
 		g_signal_connect(showWindowCount, "toggled",

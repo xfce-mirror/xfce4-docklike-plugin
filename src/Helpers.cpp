@@ -201,7 +201,7 @@ namespace Help
 					me->mIdleId = 0;
 				return cont;
 			}),
-			this);
+				this);
 		}
 
 		void Idle::stop()

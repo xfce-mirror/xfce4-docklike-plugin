@@ -66,10 +66,11 @@ namespace Settings
 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
 				saveFile();
 
-				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void
-					{ g.second->mGroupMenu.showPreviewsChanged(); });
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+					g.second->mGroupMenu.showPreviewsChanged();
+				});
 			});
-		
+
 		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", nullptr),
 			[](bool _showWindowCount) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showWindowCount", _showWindowCount);
@@ -199,8 +200,8 @@ namespace Settings
 				saveFile();
 
 #ifdef ENABLE_X11
-			if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-				Hotkeys::updateSettings();
+				if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+					Hotkeys::updateSettings();
 #endif
 			});
 
@@ -246,13 +247,13 @@ namespace Settings
 				g_key_file_set_integer(mFile.get(), "user", "dockSize", _dockSize);
 				saveFile();
 			});
-		
+
 		previewScale.setup(g_key_file_get_double(file, "user", "previewScale", nullptr),
 			[](int _previewScale) -> void {
 				g_key_file_set_double(mFile.get(), "user", "previewScale", _previewScale);
 				saveFile();
 			});
-		
+
 		previewSleep.setup(g_key_file_get_integer(file, "user", "previewSleep", nullptr),
 			[](int _previewSleep) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "previewSleep", _previewSleep);

@@ -50,7 +50,7 @@ class GroupWindow;
 
 class Group
 {
-  public:
+public:
 	Group(std::shared_ptr<AppInfo> appInfo, bool pinned);
 	~Group();
 

@@ -289,7 +289,7 @@ void Group::resize()
 {
 	// TODO: set `min-width` / `min-height` CSS property on button?
 	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
-	
+
 	if (mIconPixbuf != nullptr)
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
@@ -297,7 +297,7 @@ void Group::resize()
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
 		gtk_image_set_from_surface(GTK_IMAGE(mImage), surface);
-		cairo_surface_destroy (surface);
+		cairo_surface_destroy(surface);
 		g_object_unref(scaled);
 	}
 	else
@@ -373,7 +373,7 @@ void Group::onDraw(cairo_t* cr)
 				orientation = ORIENTATION_BOTTOM;
 		}
 	}
-	
+
 	int indicator_style = Settings::inactiveIndicatorStyle;
 	if (mActive)
 		indicator_style = Settings::indicatorStyle;
@@ -441,17 +441,21 @@ void Group::onDraw(cairo_t* cr)
 	{
 		if (mWindowsCount > 0)
 		{
-		    int offset;
+			int offset;
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
-			
+
 			offset = 0;
-			
-			if (mWindowsCount > 1) {
-			    if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP) {
-			        offset = 2 * (round(h * (1 - BAR_WEIGHT)));
-			    } else {
-			        offset = (2 * (round(w * (1 - BAR_WEIGHT))));
-			    }
+
+			if (mWindowsCount > 1)
+			{
+				if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP)
+				{
+					offset = 2 * (round(h * (1 - BAR_WEIGHT)));
+				}
+				else
+				{
+					offset = (2 * (round(w * (1 - BAR_WEIGHT))));
+				}
 			}
 
 			if (orientation == ORIENTATION_BOTTOM)
@@ -468,16 +472,18 @@ void Group::onDraw(cairo_t* cr)
 
 		if (mWindowsCount > 1)
 		{
-		    int size;
+			int size;
 			cairo_set_source_rgba(cr, rgba[0], rgba[1], rgba[2], rgba[3]);
-			
-			if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP) {
-			    size = round(h * (1 - BAR_WEIGHT));
-			} else {
-			    size = round(w * (1 - BAR_WEIGHT));
+
+			if (orientation == ORIENTATION_BOTTOM || orientation == ORIENTATION_TOP)
+			{
+				size = round(h * (1 - BAR_WEIGHT));
 			}
-			
-			
+			else
+			{
+				size = round(w * (1 - BAR_WEIGHT));
+			}
+
 			if (orientation == ORIENTATION_BOTTOM)
 				cairo_rectangle(cr, w - size, round(h * BAR_WEIGHT), size, size);
 			else if (orientation == ORIENTATION_RIGHT)
@@ -796,11 +802,11 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
+			newTopWindow = (Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
-			}).get();
+			})).get();
 
 		setTopWindow(newTopWindow);
 	}
@@ -851,22 +857,22 @@ void Group::onButtonRelease(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_MIDDLE)
 	{
-		switch(Settings::middleButtonBehavior)
+		switch (Settings::middleButtonBehavior)
 		{
-			case BEHAVIOR_CLOSE_ALL:
-			{
-				closeAll();
-				break;
-			}
-			case BEHAVIOR_LAUNCH_NEW:
-			{
-				mAppInfo->launch();
-				break;
-			}
-			case BEHAVIOR_DO_NOTHING:
-			{
-				break;
-			}
+		case BEHAVIOR_CLOSE_ALL:
+		{
+			closeAll();
+			break;
+		}
+		case BEHAVIOR_LAUNCH_NEW:
+		{
+			mAppInfo->launch();
+			break;
+		}
+		case BEHAVIOR_DO_NOTHING:
+		{
+			break;
+		}
 		}
 	}
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
@@ -942,12 +948,12 @@ void Group::onDragBegin(GdkDragContext* context)
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
 		gtk_drag_set_icon_surface(context, surface);
-		cairo_surface_destroy (surface);
+		cairo_surface_destroy(surface);
 		g_object_unref(scaled);
 	}
 	else
 	{
-		const gchar *icon_name;
+		const gchar* icon_name;
 		gtk_image_get_icon_name(GTK_IMAGE(mImage), &icon_name, nullptr);
 		gtk_drag_set_icon_name(context, icon_name, 0, 0);
 	}

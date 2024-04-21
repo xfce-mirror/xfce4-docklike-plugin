@@ -145,7 +145,7 @@ void GroupMenuItem::updateIcon()
 	{
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(iconPixbuf, scale_factor, NULL);
 		gtk_image_set_from_surface(mIcon, surface);
-		cairo_surface_destroy (surface);
+		cairo_surface_destroy(surface);
 	}
 }
 
@@ -154,11 +154,11 @@ void GroupMenuItem::updatePreview()
 	if (mGroupWindow->getState(XFW_WINDOW_STATE_MINIMIZED))
 		return; // minimized windows never need a new thumbnail
 
+#ifdef ENABLE_X11
 	// This needs work to survive porting to GTK4 and/or Wayland.
 	// GDK doesn't expose an API to get a foreign window on X11 anymore (so X11 code).
 	// Wayland may never have a public protocol for obtaining a preview of a foreign window,
 	// which goes against its security principles (so private protocol).
-#ifdef ENABLE_X11
 	if (GDK_IS_X11_DISPLAY(Plugin::mDisplay))
 	{
 		GdkWindow* window;
@@ -176,10 +176,10 @@ void GroupMenuItem::updatePreview()
 		{
 			// we're probably not doing anything wrong at our level, but things can go wrong in cairo when
 			// multiple windows are closed and thumbnails are shown (#71), so let's catch X11 errors for it
-			GdkDisplay *display = gdk_display_get_default ();
-			gdk_x11_display_error_trap_push (display);
+			GdkDisplay* display = gdk_display_get_default();
+			gdk_x11_display_error_trap_push(display);
 			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window), gdk_window_get_height(window));
-			gdk_x11_display_error_trap_pop_ignored (display);
+			gdk_x11_display_error_trap_pop_ignored(display);
 
 			if (pixbuf != nullptr)
 			{
@@ -191,7 +191,7 @@ void GroupMenuItem::updatePreview()
 
 				gtk_image_set_from_surface(mPreview, surface);
 
-				cairo_surface_destroy (surface);
+				cairo_surface_destroy(surface);
 				g_object_unref(thumbnail);
 				g_object_unref(pixbuf);
 			}

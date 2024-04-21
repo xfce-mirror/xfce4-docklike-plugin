@@ -286,9 +286,9 @@ namespace Xfw
 		auto it = mGroupWindows.mList.begin();
 
 		while (it != mGroupWindows.mList.end() && it->second->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			++it; //skip dialogs
+			++it; // skip dialogs
 		if (it != mGroupWindows.mList.end())
-			++it; //skip current window
+			++it; // skip current window
 
 		while (it != mGroupWindows.mList.end())
 		{

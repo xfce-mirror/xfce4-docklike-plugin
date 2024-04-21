@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef WNCK_HPP
-#define WNCK_HPP
+#ifndef XFW_HPP
+#define XFW_HPP
 
 #include <fcntl.h>
 #include <gio/gdesktopappinfo.h>
@@ -44,4 +44,4 @@ namespace Xfw
 	extern Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
 } // namespace Xfw
 
-#endif //WNCK_HPP
+#endif // XFW_HPP

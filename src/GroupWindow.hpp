@@ -26,7 +26,7 @@ class Group;
 
 class GroupWindow
 {
-  public:
+public:
 	GroupWindow(XfwWindow* xfwWindow);
 	~GroupWindow();
 

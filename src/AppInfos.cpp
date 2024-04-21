@@ -70,7 +70,7 @@ namespace AppInfos
 		std::list<std::string> dir_list, topdir_list;
 
 		dir_list.push_back(g_get_user_data_dir());
-		for (const gchar *const *p = g_get_system_data_dirs(); *p != nullptr; p++)
+		for (const gchar* const* p = g_get_system_data_dirs(); *p != nullptr; p++)
 			dir_list.push_back(*p);
 
 		for (std::string& dir : dir_list)
@@ -92,8 +92,7 @@ namespace AppInfos
 			// See man ftw(3) for more information.
 			ftw(
 				dir.c_str(),
-				[](const char* fpath, const struct stat* sb, int typeflag) -> int
-				{
+				[](const char* fpath, const struct stat* sb, int typeflag) -> int {
 					if (typeflag == FTW_D)
 						mXdgDataDirs.push_back(std::string(fpath) + '/');
 					return 0;
@@ -104,7 +103,7 @@ namespace AppInfos
 
 	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-		#define DOT_DESKTOP ".desktop"
+#define DOT_DESKTOP ".desktop"
 		constexpr size_t DOT_DESKTOP_SIZE = 8;
 
 		if (!g_str_has_suffix(filename.c_str(), DOT_DESKTOP))
@@ -189,14 +188,13 @@ namespace AppInfos
 		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
 
 		g_signal_connect(G_OBJECT(mMonitor.get()), "changed",
-			G_CALLBACK(+[](GAppInfoMonitor* monitor)
-				{
-					mAppInfoIds.clear();
-					mAppInfoNames.clear();
-					mAppInfoWMClasses.clear();
-					loadXDGDirectories();
-					Dock::drawGroups();
-				}),
+			G_CALLBACK(+[](GAppInfoMonitor* monitor) {
+				mAppInfoIds.clear();
+				mAppInfoNames.clear();
+				mAppInfoWMClasses.clear();
+				loadXDGDirectories();
+				Dock::drawGroups();
+			}),
 			nullptr);
 
 		findXDGDirectories();

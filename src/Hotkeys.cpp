@@ -106,12 +106,12 @@ namespace Hotkeys
 	}
 
 	/* =========================================================================
-	*
-	* The method used here to listen keyboard events globaly is taken from :
-	* github.com/anko/xkbcat
-	* It create a direct connection to X11 keyboard events without any grabbing,
-	* allowing us to determine the state (consumed or not) of the modifier key when released.
-	*/
+	 *
+	 * The method used here to listen keyboard events globaly is taken from :
+	 * github.com/anko/xkbcat
+	 * It create a direct connection to X11 keyboard events without any grabbing,
+	 * allowing us to determine the state (consumed or not) of the modifier key when released.
+	 */
 
 	static gboolean threadSafeSwitch(gpointer data)
 	{
@@ -170,7 +170,7 @@ namespace Hotkeys
 				pthread_create(&mThread, nullptr, threadedXIKeyListenner, nullptr);
 			else if (mThread)
 			{
-				pthread_cancel(mThread); //also close the XDisplay in the thread
+				pthread_cancel(mThread); // also close the XDisplay in the thread
 				void* ret = nullptr;
 				pthread_join(mThread, &ret);
 				mThread = 0;

@@ -20,7 +20,7 @@ class GroupWindow;
 
 class GroupMenuItem
 {
-  public:
+public:
 	GroupMenuItem(GroupWindow* groupWindow);
 	~GroupMenuItem();
 
