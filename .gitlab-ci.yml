@@ -8,8 +8,15 @@ clang-format:
       exists:
         - .clang-format
   stage: build
+  before_script:
+    - apt-get update
+    - apt-get install -y clang-format
   allow_failure: true
   script:
+    - 'git diff -U0 --no-color "$CI_MERGE_REQUEST_DIFF_BASE_SHA" >mr-diff'
+    - 'clang-format-diff -h'
+    - 'clang-format-diff -p1 <mr-diff || :'
+    - 'cat mr-diff | clang-format-diff -p1 || :'
     - 'git diff -U0 --no-color "$CI_MERGE_REQUEST_DIFF_BASE_SHA" | clang-format-diff -p1 > format-diff.log'
     - '! test -s format-diff.log || { cat format-diff.log; exit 1; }'
   artifacts:
@@ -17,3 +24,4 @@ clang-format:
       - format-diff.log
     when: on_failure
     expire_in: 1 week
+  needs: []
