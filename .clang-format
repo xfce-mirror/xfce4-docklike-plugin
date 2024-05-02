@@ -25,6 +25,7 @@ BraceWrapping:
 BreakBeforeBraces: Custom
 ColumnLimit: 0
 IndentWidth: 4
+InsertNewlineAtEOF: true
 NamespaceIndentation: All
 PointerAlignment: Left
 TabWidth: 4
