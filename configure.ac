@@ -8,12 +8,7 @@ dnl
 dnl ***************************
 dnl *** Version information ***
 dnl ***************************
-m4_define([project_version_major], [0])
-m4_define([project_version_minor], [4])
-m4_define([project_version_micro], [2])
-m4_define([project_version_build], [@REVISION@])
-m4_define([project_version_tag], [git]) # leave empty for release
-m4_define([project_version], [project_version_major().project_version_minor().project_version_micro()ifelse(project_version_tag(), [git], [project_version_tag()-project_version_build()], [project_version_tag()])])
+XDT_VERSION_INIT([0.4.2], [git])
 
 dnl minimum required versions
 m4_define([glib_min_version], [2.58.0])
@@ -31,10 +26,10 @@ dnl *** Initialize autoconf ***
 dnl ***************************
 AC_COPYRIGHT([Copyright (c) 2019-2023 The Xfce development team. All rights reserved.
   Written for Xfce by Nicolas Szabo <nszabo@vivaldi.net> and David Keogh <davidtkeogh@gmail.com>.])
-AC_INIT([xfce4-docklike-plugin], [project_version], [https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin])
+AC_INIT([xfce4-docklike-plugin], [xdt_version], [https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin])
 AC_PREREQ([2.69])
 AC_CANONICAL_TARGET()
-AC_REVISION([project_version_build])
+AC_REVISION([xdt_version_build])
 AC_CONFIG_MACRO_DIRS([m4])
 
 dnl ***************************
@@ -102,7 +97,7 @@ AM_GNU_GETTEXT_VERSION([0.19.8])
 dnl ***********************************
 dnl *** Check for debugging support ***
 dnl ***********************************
-XDT_FEATURE_DEBUG()
+XDT_FEATURE_DEBUG([xdt_debug_default])
 
 dnl ************************
 dnl *** Makefile outputs ***
