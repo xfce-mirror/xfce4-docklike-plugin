@@ -32,7 +32,7 @@ msgstr "Prisegti prie doko"
 
 #: src/Xfw.cpp:218
 msgid "Edit Launcher"
-msgstr "Taisyti leistuką"
+msgstr "Taisyti paleidyklę"
 
 #: src/Xfw.cpp:249
 msgid "Close All"
