@@ -59,7 +59,7 @@ msgstr ""
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
-msgstr ""
+msgstr "סרגל משימות Docklike "
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
@@ -107,7 +107,7 @@ msgstr "הפעל מופע חדש"
 
 #: src/_dialogs.ui:197
 msgid "Do Nothing"
-msgstr ""
+msgstr "אל תעשה כלום"
 
 #: src/_dialogs.ui:219
 msgid "Behavior"
