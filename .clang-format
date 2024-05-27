@@ -27,6 +27,7 @@ BreakBeforeBraces: Custom
 ColumnLimit: 0
 IndentWidth: 4
 InsertNewlineAtEOF: true
+KeepEmptyLinesAtTheStartOfBlocks: false
 NamespaceIndentation: All
 PointerAlignment: Left
 TabWidth: 4
