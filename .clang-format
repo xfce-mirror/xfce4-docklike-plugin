@@ -25,6 +25,21 @@ BraceWrapping:
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
 ColumnLimit: 0
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '"[^/]*"'
+    Priority: 0
+    SortPriority: 1
+    CaseSensitive: true
+  - Regex: '".*"'
+    Priority: 2
+    CaseSensitive: true
+  - Regex: '<[^.]*>'
+    Priority: 4
+    CaseSensitive: true
+  - Regex: '<.*>'
+    Priority: 3
+    CaseSensitive: true
 IndentWidth: 4
 InsertNewlineAtEOF: true
 KeepEmptyLinesAtTheStartOfBlocks: false
