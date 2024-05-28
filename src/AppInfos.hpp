@@ -8,15 +8,14 @@
 #ifndef APPINFOS_HPP
 #define APPINFOS_HPP
 
-#include <ftw.h>
+#include "Helpers.hpp"
+#include "Store.tpp"
 
+#include <ftw.h>
 #include <gio/gdesktopappinfo.h>
 
 #include <iostream>
 #include <memory>
-
-#include "Helpers.hpp"
-#include "Store.tpp"
 
 struct AppInfo
 {

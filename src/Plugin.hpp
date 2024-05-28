@@ -8,18 +8,18 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#include "AppInfos.hpp"
+#include "Dock.hpp"
+#include "Settings.hpp"
+#include "SettingsDialog.hpp"
+#include "Theme.hpp"
+
 #include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 #include <string>
 #include <vector>
-
-#include "AppInfos.hpp"
-#include "Dock.hpp"
-#include "Settings.hpp"
-#include "SettingsDialog.hpp"
-#include "Theme.hpp"
 
 extern "C"
 {

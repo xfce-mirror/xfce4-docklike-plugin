@@ -5,10 +5,10 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#include <unordered_set>
-
 #include "AppInfos.hpp"
 #include "Settings.hpp"
+
+#include <unordered_set>
 
 void AppInfo::launch()
 {

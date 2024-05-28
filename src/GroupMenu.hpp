@@ -8,11 +8,11 @@
 #ifndef GROUP_MENU_HPP
 #define GROUP_MENU_HPP
 
+#include "Helpers.hpp"
+
 #include <gtk/gtk.h>
 
 #include <iostream>
-
-#include "Helpers.hpp"
 
 class Group;
 class GroupMenuItem;

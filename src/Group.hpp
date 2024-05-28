@@ -8,17 +8,17 @@
 #ifndef GROUP_HPP
 #define GROUP_HPP
 
-#include <gtk/gtk.h>
-
-#include <algorithm>
-#include <iostream>
-#include <math.h>
-
 #include "AppInfos.hpp"
 #include "GroupMenu.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
 #include "State.tpp"
+
+#include <gtk/gtk.h>
+#include <math.h>
+
+#include <algorithm>
+#include <iostream>
 
 enum MiddleButtonBehavior
 {

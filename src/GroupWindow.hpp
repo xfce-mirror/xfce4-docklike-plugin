@@ -8,11 +8,6 @@
 #ifndef GROUP_WINDOW_HPP
 #define GROUP_WINDOW_HPP
 
-#include <gtk/gtk.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-
-#include <iostream>
-
 #include "AppInfos.hpp"
 #include "Dock.hpp"
 #include "Group.hpp"
@@ -20,6 +15,11 @@
 #include "Helpers.hpp"
 #include "Plugin.hpp"
 #include "Xfw.hpp"
+
+#include <gtk/gtk.h>
+#include <libxfce4windowing/libxfce4windowing.h>
+
+#include <iostream>
 
 class GroupMenuItem;
 class Group;

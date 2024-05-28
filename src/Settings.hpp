@@ -8,17 +8,17 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 
+#include "Dock.hpp"
+#include "Helpers.hpp"
+#include "Plugin.hpp"
+#include "State.tpp"
+
 #include <glib.h>
 
 #include <iostream>
 #include <list>
 #include <string>
 #include <vector>
-
-#include "Dock.hpp"
-#include "Helpers.hpp"
-#include "Plugin.hpp"
-#include "State.tpp"
 
 namespace Settings
 {

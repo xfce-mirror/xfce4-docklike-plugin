@@ -8,18 +8,18 @@
 #ifndef DOCK_HPP
 #define DOCK_HPP
 
-#include <gtk/gtk.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-
-#include <iostream>
-#include <string>
-
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
 #include "Plugin.hpp"
 #include "Settings.hpp"
 #include "Store.tpp"
 #include "Xfw.hpp"
+
+#include <gtk/gtk.h>
+#include <libxfce4windowing/libxfce4windowing.h>
+
+#include <iostream>
+#include <string>
 
 class Group;
 
