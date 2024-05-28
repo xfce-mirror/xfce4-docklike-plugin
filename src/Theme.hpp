@@ -11,12 +11,12 @@
 #define DEFAULT_THEME ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n" \
 					  ".hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
 
+#include "Dock.hpp"
+
 #include <gtk/gtk.h>
 
 #include <iostream>
 #include <string>
-
-#include "Dock.hpp"
 
 namespace Theme
 {

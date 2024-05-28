@@ -8,17 +8,17 @@
 #ifndef XFW_HPP
 #define XFW_HPP
 
+#include "Group.hpp"
+#include "GroupWindow.hpp"
+#include "Helpers.hpp"
+#include "Store.tpp"
+
 #include <fcntl.h>
 #include <gio/gdesktopappinfo.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
 
 #include <map>
-
-#include "Group.hpp"
-#include "GroupWindow.hpp"
-#include "Helpers.hpp"
-#include "Store.tpp"
 
 class GroupWindow;
 

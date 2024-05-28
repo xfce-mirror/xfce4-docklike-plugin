@@ -5,15 +5,15 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#include <iostream>
-#include <string>
+#include "Hotkeys.hpp"
+#include "Settings.hpp"
 
 #include <X11/XKBlib.h>
 #include <X11/extensions/XInput2.h>
 #include <gdk/gdkx.h>
 
-#include "Hotkeys.hpp"
-#include "Settings.hpp"
+#include <iostream>
+#include <string>
 
 #define ModifierChange 85 //? this event type isn't listed in libX11
 

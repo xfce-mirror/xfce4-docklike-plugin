@@ -8,13 +8,13 @@
 #ifndef GROUP_MENU_ITEM_HPP
 #define GROUP_MENU_ITEM_HPP
 
-#include <gtk/gtk.h>
-
-#include <iostream>
-
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
 #include "Xfw.hpp"
+
+#include <gtk/gtk.h>
+
+#include <iostream>
 
 class GroupWindow;
 
