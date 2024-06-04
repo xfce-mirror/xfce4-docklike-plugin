@@ -60,7 +60,7 @@ msgstr ""
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
-msgstr ""
+msgstr "도크형 작업 표시줄"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
