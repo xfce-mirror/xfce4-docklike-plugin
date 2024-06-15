@@ -183,7 +183,7 @@ namespace Xfw
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
-		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST)) ? xfw_window_action_menu_new(groupWindow->mXfwWindow) : gtk_menu_new();
+		GtkWidget* menu = gtk_menu_new();
 		std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
@@ -191,11 +191,6 @@ namespace Xfw
 			const gchar* const* actions = appInfo->get_actions();
 			for (int i = 0; actions[i]; i++)
 			{
-				// Desktop actions get inserted into the menu above all the window manager controls.
-				// We need an extra separator only if the application is running.
-				if (i == 0 && group->mWindowsCount > 0)
-					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
-
 				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
 				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, actions[i]);
 				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
@@ -206,8 +201,8 @@ namespace Xfw
 				gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
 
 				g_signal_connect(G_OBJECT(actionLauncher), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
-						_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
+					G_CALLBACK(+[](GtkMenuItem* menuItem, AppInfo* _appInfo) {
+						_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuItem, "action"));
 					}),
 					appInfo.get());
 			}
@@ -218,7 +213,9 @@ namespace Xfw
 				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
-				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+				
+				if (actions[0] != nullptr)
+					gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
 				gchar* program = g_find_program_in_path("exo-desktop-item-edit");
 				if (program != nullptr)
@@ -230,7 +227,7 @@ namespace Xfw
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
 
 				g_signal_connect(G_OBJECT(pinToggle), "toggled",
-					G_CALLBACK(+[](GtkCheckMenuItem* menuitem, Group* _group) {
+					G_CALLBACK(+[](GtkCheckMenuItem* menuItem, Group* _group) {
 						_group->mPinned = !_group->mPinned;
 						if (!_group->mPinned)
 							_group->updateStyle();
@@ -239,7 +236,7 @@ namespace Xfw
 					group);
 
 				g_signal_connect(G_OBJECT(editLauncher), "activate",
-					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
+					G_CALLBACK(+[](GtkMenuItem* menuItem, AppInfo* _appInfo) {
 						_appInfo->edit();
 					}),
 					appInfo.get());
@@ -252,7 +249,7 @@ namespace Xfw
 					gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
 
 					g_signal_connect(G_OBJECT(closeAll), "activate",
-						G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+						G_CALLBACK(+[](GtkMenuItem* menuItem, Group* _group) {
 							_group->closeAll();
 						}),
 						group);
@@ -269,7 +266,7 @@ namespace Xfw
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
 
 		g_signal_connect(G_OBJECT(remove), "activate",
-			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+			G_CALLBACK(+[](GtkMenuItem* menuItem, Group* _group) {
 				_group->mPinned = false;
 				Dock::savePinned();
 				Dock::drawGroups();
