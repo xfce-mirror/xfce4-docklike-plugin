@@ -860,19 +860,21 @@ void Group::onButtonRelease(GdkEventButton* event)
 		switch (Settings::middleButtonBehavior)
 		{
 		case BEHAVIOR_CLOSE_ALL:
-		{
 			closeAll();
 			break;
-		}
 		case BEHAVIOR_LAUNCH_NEW:
-		{
 			mAppInfo->launch();
 			break;
-		}
 		case BEHAVIOR_DO_NOTHING:
-		{
 			break;
-		}
+		case BEHAVIOUR_WINDOW_ACTIONS:
+			if (mWindowsCount > 0)
+			{
+				GtkWidget* menu = xfw_window_action_menu_new(mWindows.get(mTopWindowIndex)->mXfwWindow);
+				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+				gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+			}
+			break;
 		}
 	}
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))

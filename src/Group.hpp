@@ -24,7 +24,8 @@ enum MiddleButtonBehavior
 {
 	BEHAVIOR_CLOSE_ALL,
 	BEHAVIOR_LAUNCH_NEW,
-	BEHAVIOR_DO_NOTHING
+	BEHAVIOR_DO_NOTHING,
+	BEHAVIOUR_WINDOW_ACTIONS,
 };
 
 enum IndicatorOrientation
@@ -43,7 +44,7 @@ enum IndicatorStyle
 	STYLE_RECTS,
 	STYLE_CILIORA,
 	STYLE_CIRCLES,
-	STYLE_NONE
+	STYLE_NONE,
 };
 
 class GroupWindow;
