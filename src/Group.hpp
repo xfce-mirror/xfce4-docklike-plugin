@@ -59,6 +59,7 @@ public:
 	void remove(GroupWindow* window);
 	void electNewTopWindow();
 	void setTopWindow(GroupWindow* groupWindow);
+	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group);
 
 	void activate(guint32 timestamp);
 	void scrollWindows(guint32 timestamp, GdkScrollDirection direction);

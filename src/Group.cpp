@@ -307,6 +307,103 @@ void Group::resize()
 	gtk_widget_queue_draw(mButton);
 }
 
+GtkWidget* Group::buildActionMenu(GroupWindow* groupWindow, Group* group)
+{
+	GtkWidget* menu = gtk_menu_new();
+	std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
+
+	if (!appInfo->path.empty())
+	{
+		const gchar* const* actions = appInfo->get_actions();
+		for (int i = 0; actions[i]; i++)
+		{
+			GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
+			gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, actions[i]);
+			GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
+			g_free(action_name);
+			g_object_unref(GDAppInfo);
+
+			g_object_set_data((GObject*)actionLauncher, "action", (gpointer)actions[i]);
+			gtk_menu_shell_insert(GTK_MENU_SHELL(menu), actionLauncher, 0 + i);
+
+			g_signal_connect(G_OBJECT(actionLauncher), "activate",
+				G_CALLBACK(+[](GtkMenuItem* menuItem, AppInfo* _appInfo) {
+					_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuItem, "action"));
+				}),
+				appInfo.get());
+		}
+
+		if (group != nullptr)
+		{
+			GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
+			GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
+
+			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
+			
+			if (actions[0] != nullptr)
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+			gchar* program = g_find_program_in_path("exo-desktop-item-edit");
+			if (program != nullptr)
+			{
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
+				g_free(program);
+			}
+
+			gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), pinToggle);
+
+			g_signal_connect(G_OBJECT(pinToggle), "toggled",
+				G_CALLBACK(+[](GtkCheckMenuItem* menuItem, Group* _group) {
+					_group->mPinned = !_group->mPinned;
+					if (!_group->mPinned)
+						_group->updateStyle();
+					Dock::savePinned();
+				}),
+				group);
+
+			g_signal_connect(G_OBJECT(editLauncher), "activate",
+				G_CALLBACK(+[](GtkMenuItem* menuItem, AppInfo* _appInfo) {
+					_appInfo->edit();
+				}),
+				appInfo.get());
+
+			if (group->mWindowsCount > 1)
+			{
+				GtkWidget* closeAll = gtk_menu_item_new_with_label(_("Close All"));
+
+				gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+				gtk_menu_shell_append(GTK_MENU_SHELL(menu), closeAll);
+
+				g_signal_connect(G_OBJECT(closeAll), "activate",
+					G_CALLBACK(+[](GtkMenuItem* menuItem, Group* _group) {
+						_group->closeAll();
+					}),
+					group);
+			}
+		}
+
+		gtk_widget_show_all(menu);
+
+		return menu;
+	}
+
+	menu = gtk_menu_new();
+	GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
+
+	g_signal_connect(G_OBJECT(remove), "activate",
+		G_CALLBACK(+[](GtkMenuItem* menuItem, Group* _group) {
+			_group->mPinned = false;
+			Dock::savePinned();
+			Dock::drawGroups();
+		}),
+		group);
+
+	gtk_widget_show_all(menu);
+
+	return menu;
+}
+
 void Group::onDraw(cairo_t* cr)
 {
 	int w = gtk_widget_get_allocated_width(mButton);
@@ -843,7 +940,7 @@ void Group::onButtonPress(GdkEventButton* event)
 
 		if (mButton != nullptr)
 		{
-			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(Xfw::buildActionMenu(win.get(), this)));
+			GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(buildActionMenu(win.get(), this)));
 			xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
 			g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), nullptr);
 			gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
