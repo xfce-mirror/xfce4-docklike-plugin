@@ -339,7 +339,7 @@ GtkWidget* Group::buildActionMenu(GroupWindow* groupWindow, Group* group)
 			GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
 
 			gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
-			
+
 			if (actions[0] != nullptr)
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
