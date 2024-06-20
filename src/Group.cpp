@@ -1032,7 +1032,7 @@ void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selec
 
 void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time)
 {
-	Dock::moveButton((Group*)gtk_selection_data_get_data(selectionData), this);
+	Dock::moveButton((Group*)(gpointer)gtk_selection_data_get_data(selectionData), this);
 }
 
 void Group::onDragBegin(GdkDragContext* context)

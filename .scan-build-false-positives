@@ -1,0 +1,3 @@
+# a clang warning falsely recognized as a scan-build warning, and which doesn't seem to be
+# easy to fix (it's excluded by default from -Werror, hence the fact that it's here)
+warning: argument unused during compilation: '-pthread' \[-Wunused-command-line-argument\]
