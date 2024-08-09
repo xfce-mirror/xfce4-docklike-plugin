@@ -290,6 +290,10 @@ void Group::resize()
 	// TODO: set `min-width` / `min-height` CSS property on button?
 	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
 
+	// may not yet be initialized
+	if (Dock::mIconSize == 0)
+		return;
+
 	if (mIconPixbuf != nullptr)
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
