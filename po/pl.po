@@ -78,11 +78,11 @@ msgstr "Nie pokazuj listy okien dla pojedynczego okna"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "Pokazuj tylko aplikacje w bieżącym obszarze roboczym"
+msgstr "Pokazuj tylko programy w bieżącym obszarze roboczym"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
-msgstr "Pokazuj tylko aplikacje na bieżącym ekranie"
+msgstr "Pokazuj tylko programy na bieżącym ekranie"
 
 #: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
@@ -190,7 +190,7 @@ msgstr "Wygląd"
 
 #: src/_dialogs.ui:492
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Przełączaj się między aplikacjami za pomocą <SUPER>+[1, 2, ...]"
+msgstr "Przełączaj się między programami za pomocą <SUPER>+[1, 2, ...]"
 
 #: src/_dialogs.ui:519
 msgid "Switch to the last window with <SUPER>"
