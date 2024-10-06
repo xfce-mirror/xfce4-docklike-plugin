@@ -174,7 +174,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(mButton), "draw",
+	g_signal_connect_after(G_OBJECT(mButton), "draw",
 		G_CALLBACK(+[](GtkWidget* widget, cairo_t* cr, Group* me) {
 			me->onDraw(cr);
 			return false;
