@@ -145,7 +145,7 @@ namespace Xfw
 		if (workspace != nullptr)
 			xfw_workspace_activate(workspace, NULL);
 
-		xfw_window_activate(groupWindow->mXfwWindow, timestamp, NULL);
+		xfw_window_activate(groupWindow->mXfwWindow, NULL, timestamp, NULL);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
