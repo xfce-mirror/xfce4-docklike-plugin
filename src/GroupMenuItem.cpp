@@ -76,6 +76,12 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
+			else if (event->button == GDK_BUTTON_MIDDLE || event->button == GDK_BUTTON_SECONDARY)
+			{
+				GtkWidget* menu = xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow);
+				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+				gtk_menu_popup_at_widget(GTK_MENU(menu), me->mGroupWindow->mGroup->mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+			}
 			return true;
 		}),
 		this);
