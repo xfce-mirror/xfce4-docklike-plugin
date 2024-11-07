@@ -23,7 +23,8 @@ namespace Xfw
 		{
 			// Xfw method const char *
 			const gchar* const* class_ids = xfw_window_get_class_ids(xfwWindow);
-			if (!xfce_str_is_empty(class_ids[0])) {
+			if (!xfce_str_is_empty(class_ids[0])) 
+			{
 				if (!xfce_str_is_empty(class_ids[1]))
 					return class_ids[1]; // instance name
 				return class_ids[0]; // class name
