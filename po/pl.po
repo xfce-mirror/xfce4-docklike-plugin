@@ -78,7 +78,7 @@ msgstr "Nie pokazuj listy okien dla pojedynczego okna"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "Pokazuj tylko programy w bieżącym obszarze roboczym"
+msgstr "Pokazuj tylko programy w bieżącym obszarze roboczym"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
@@ -170,7 +170,7 @@ msgstr "Lewa"
 
 #: src/_dialogs.ui:340
 msgid "Get indicator color from theme"
-msgstr "Pobierz kolor wskaźnika z motywu"
+msgstr "Pobierz kolor wskaźnika z motywu"
 
 #: src/_dialogs.ui:366
 msgid "Active indicator:"
