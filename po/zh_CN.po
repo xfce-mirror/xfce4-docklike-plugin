@@ -74,15 +74,15 @@ msgstr "关闭(_C)"
 
 #: src/_dialogs.ui:96
 msgid "Don't show the window list for a single window"
-msgstr "不显示单个窗口的窗口列表"
+msgstr "不为单个窗口显示窗口列表"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "仅在当前工作区上显示应用程序"
+msgstr "仅显示当前工作区上的应用程序"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
-msgstr "仅在当前显示器上显示应用程序"
+msgstr "仅显示当前显示器上的应用程序"
 
 #: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
