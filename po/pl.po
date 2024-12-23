@@ -70,7 +70,7 @@ msgstr "_Pomoc"
 
 #: src/_dialogs.ui:51
 msgid "_Close"
-msgstr "_Zamknij"
+msgstr "Za_mknij"
 
 #: src/_dialogs.ui:96
 msgid "Don't show the window list for a single window"
