@@ -24,7 +24,7 @@ m4_define([gtk_layer_shell_min_version], [0.7.0])
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2019-2023 The Xfce development team. All rights reserved.
+AC_COPYRIGHT([Copyright (c) 2019-2024 The Xfce development team. All rights reserved.
   Written for Xfce by Nicolas Szabo <nszabo@vivaldi.net> and David Keogh <davidtkeogh@gmail.com>.])
 AC_INIT([xfce4-docklike-plugin], [xdt_version], [https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin])
 AC_PREREQ([2.69])
