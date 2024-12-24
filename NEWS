@@ -1,3 +1,47 @@
+0.4.3 (2024-12-24)
+=====
+- Update copyright year
+- build: Bump dependency versions and fix deprecation warnings
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- Use new xfw_window_activate() signature in libwindowing 4.19.6
+- group: Fix button drawing
+- Fix gtk-layer-shell includes
+- Switch to XfwMonitor
+- Group: Fix null icon size at startup
+- scan-build: Add false positive file
+- build: clang: Fix -Wcast-align
+- Apply .clang-format file
+- clang-format: Use IncludeBlocks::Regroup
+- clang-format: Do not KeepEmptyLinesAtTheStartOfBlocks
+- clang-format: Break after assignment operator
+- build: Use XDT_VERSION_INIT and get rid of configure.ac.in
+- clang-format: Insert a newline at end of file if missing
+- Apply updated .clang-format file
+- clang-format: Update according to current code
+- Rename _dialogs.xml to _dialogs.ui for gettext detection
+- I18n: Update po/LINGUAS list
+- build: Get rid of intltool
+- Require gio-unix-2.0 instead of gio-2.0
+- Ignore X11 erros around gdk_pixbuf_get_from_window()
+- Update custom install location in README
+- Adapt onlyDisplayScreen to Xfw
+- Use gtk-layer-shell to position group menu on Wayland
+- Guard X11 code paths
+- Rename Wnck.* to Xfw.*
+- Replace libwnck with libxfce4windowing
+- Wnck: Set EWMH hint so all wnck features work properly (Fixes #51)
+- Translation Updates:
+  Albanian, Basque, Bulgarian, Catalan, Chinese (China), Chinese
+  (Taiwan), Croatian, Czech, Danish, Dutch, English (United Kingdom),
+  Estonian, Finnish, French, Galician, German, Greek, Hebrew,
+  Indonesian, Interlingue, Italian, Japanese, Korean, Lithuanian,
+  Norwegian Bokmål, Polish, Portuguese, Portuguese (Brazil), Romanian,
+  Russian, Serbian, Slovak, Slovenian, Spanish, Swedish, Turkish,
+  Ukrainian
+
 0.4.2 (2023-12-23)
 =====
 - Wnck: Add missing sanity check
