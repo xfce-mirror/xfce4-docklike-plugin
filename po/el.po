@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ioannis LM, 2024
 # Πέτρος Σαμαράς <psamaras1@gmail.com>, 2024
 # Xfce Bot <transifex@xfce.org>, 2024
+# Ioannis LM, 2025
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2024-04-07 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2024\n"
+"Last-Translator: Ioannis LM, 2025\n"
 "Language-Team: Greek (https://app.transifex.com/xfce/teams/16840/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,19 +25,19 @@ msgstr ""
 
 #: src/Xfw.cpp:217
 msgid "Pinned to Dock"
-msgstr "Καρφιτσωμένα στη Γραμμή εργασιών"
+msgstr "Καρφιτσωμένο στη περιοχή εργασιών"
 
 #: src/Xfw.cpp:217
 msgid "Pin to Dock"
-msgstr "Καρφίτσωμα στη Γραμμή εργασιών"
+msgstr "Καρφίτσωμα στη περιοχή εργασιών"
 
 #: src/Xfw.cpp:218
 msgid "Edit Launcher"
-msgstr "Επεξεργασία Εκτελεστή"
+msgstr "Επεξεργασία εκκινητή"
 
 #: src/Xfw.cpp:249
 msgid "Close All"
-msgstr "Κλείσιμο όλων των εφαρμογών"
+msgstr "Κλείσιμο όλων"
 
 #: src/Xfw.cpp:268
 msgid "Remove"
@@ -46,7 +46,7 @@ msgstr "Αφαίρεση"
 #: src/SettingsDialog.cpp:254
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>Μόνο τα πρώτα %u πλήκτρα πρόσβασης είναι ενεργοποιημένα.</b>\n"
+msgstr "<b>Μόνο %u πρώτο(α) πλήκτρα πρόσβασης είναι ενεργοποιημένα.</b>\n"
 
 #: src/SettingsDialog.cpp:259
 #, c-format
@@ -54,16 +54,16 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u είναι κρατημένος απο μια άλλη εφαρμογή.\n"
+"Ο συνδυασμός πληκτρολογίου &lt;SUPER&gt;+%u φαίνεται να χρησιμοποιείται από άλλη εφαρμογή.\n"
 "Παρακαλώ ελέγξτε τις ρυθμίσεις στο Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
-msgstr ""
+msgstr "Περιοχή εργασιών"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Μία σύγχρονη, μινιμαλιστική γραμμή εργασιών για το Xfce"
+msgstr "Σύγχρονη, μινιμαλιστική περιοχή γραμμής εργασιών για το Xfce"
 
 #: src/_dialogs.ui:35
 msgid "_Help"
@@ -75,15 +75,15 @@ msgstr "_Κλείσιμο"
 
 #: src/_dialogs.ui:96
 msgid "Don't show the window list for a single window"
-msgstr "Να μην εμφανίζεται λίστα για ένα μόνο παράθυρο"
+msgstr "Να μην εμφανίζεται λίστα για ένα παράθυρο"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "Εμφάνιση παραθύρων μόνο από την ίδια επιφάνεια εργασίας"
+msgstr "Εμφάνιση παραθύρων από την ίδια επιφάνεια εργασίας"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
-msgstr "Εμφάνιση παραθύρων μόνο από την ίδια οθόνη"
+msgstr "Εμφάνιση παραθύρων από την ίδια οθόνη"
 
 #: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
@@ -107,7 +107,7 @@ msgstr "Εκκίνηση νέου παραθύρου εφαρμογής"
 
 #: src/_dialogs.ui:197
 msgid "Do Nothing"
-msgstr ""
+msgstr "Τίποτα"
 
 #: src/_dialogs.ui:219
 msgid "Behavior"
@@ -115,7 +115,7 @@ msgstr "Συμπεριφορά"
 
 #: src/_dialogs.ui:252
 msgid "Active indicator style:"
-msgstr "Μορφή δείκτη ενεργού:"
+msgstr "Μορφή ενεργού δείκτη:"
 
 #: src/_dialogs.ui:265 src/_dialogs.ui:296
 msgid "Bars"
@@ -143,7 +143,7 @@ msgstr "Καμία"
 
 #: src/_dialogs.ui:283
 msgid "Inactive indicator style:"
-msgstr "Μορφή δείκτη μη ενεργού:"
+msgstr "Μορφή μη ενεργού δείκτη:"
 
 #: src/_dialogs.ui:314
 msgid "Indicator orientation:"
@@ -151,11 +151,11 @@ msgstr "Προσανατολισμός δείκτη:"
 
 #: src/_dialogs.ui:326
 msgid "Automatic"
-msgstr "Αυτόματο"
+msgstr "Αυτόματα"
 
 #: src/_dialogs.ui:327
 msgid "Bottom"
-msgstr "Κάτω μέρος"
+msgstr "Κάτω"
 
 #: src/_dialogs.ui:328
 msgid "Right"
@@ -163,7 +163,7 @@ msgstr "Δεξιά"
 
 #: src/_dialogs.ui:329
 msgid "Top"
-msgstr "Πάνω"
+msgstr "Επάνω"
 
 #: src/_dialogs.ui:330
 msgid "Left"
@@ -171,15 +171,15 @@ msgstr "Αριστερά"
 
 #: src/_dialogs.ui:340
 msgid "Get indicator color from theme"
-msgstr "Ορισμός χρώματος δείκτη από το θέμα"
+msgstr "Χρώμα δείκτη από το θέμα"
 
 #: src/_dialogs.ui:366
 msgid "Active indicator:"
-msgstr "Δείκτης ενεργού:"
+msgstr "Ενεργός δείκτης:"
 
 #: src/_dialogs.ui:390
 msgid "Inactive indicator:"
-msgstr "Δείκτης μη ενεργού:"
+msgstr "Μη ενεργός δείκτης:"
 
 #: src/_dialogs.ui:417
 msgid "Force icon size:"
@@ -191,7 +191,7 @@ msgstr "Εμφάνιση"
 
 #: src/_dialogs.ui:492
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Εναλλαγή μεταξύ εφαρμογών με <SUPER>+[1, 2, ...]"
+msgstr "Εναλλαγή εφαρμογών με <SUPER>+[1, 2, ...]"
 
 #: src/_dialogs.ui:519
 msgid "Switch to the last window with <SUPER>"
