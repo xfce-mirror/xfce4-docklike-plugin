@@ -11,7 +11,7 @@
 #include "Dock.hpp"
 #include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "State.tpp"
+#include "State.ipp"
 
 #include <glib.h>
 

@@ -12,7 +12,7 @@
 #include "GroupMenu.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "State.tpp"
+#include "State.ipp"
 
 #include <gtk/gtk.h>
 #include <math.h>

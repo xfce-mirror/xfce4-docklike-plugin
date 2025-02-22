@@ -18,8 +18,8 @@ libdocklike_la_SOURCES =							\
 		Dock.cpp Dock.hpp							\
 		Xfw.cpp Xfw.hpp							\
 		SettingsDialog.cpp SettingsDialog.hpp		\
-		State.tpp 									\
-		Store.tpp									\
+		State.ipp 									\
+		Store.ipp									\
 		register.c									\
 		_gresources.xml _dialogs.ui				\
 		_gresources.c
