@@ -56,10 +56,12 @@ libdocklike_la_LIBADD = \
 
 if ENABLE_X11
 libdocklike_la_CPPFLAGS += \
-	$(LIBX11_CFLAGS)
+	$(LIBX11_CFLAGS) \
+	$(XI_CFLAGS)
 
 libdocklike_la_LIBADD += \
-	$(LIBX11_LIBS)
+	$(LIBX11_LIBS) \
+	$(XI_LIBS)
 endif
 
 pluginsdir = $(datadir)/xfce4/panel/plugins

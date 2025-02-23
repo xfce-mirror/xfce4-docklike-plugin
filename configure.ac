@@ -18,6 +18,7 @@ m4_define([xfce_build_version], [4.16.0])
 m4_define([libxfce4windowing_min_version], [4.19.4])
 
 m4_define([libx11_min_version], [1.6.7])
+m4_define([xi_min_version], [1.2.0])
 
 m4_define([gtk_layer_shell_min_version], [0.7.0])
 
@@ -71,6 +72,7 @@ XDT_CHECK_OPTIONAL_FEATURE([X11],
                            [
                              XDT_FEATURE_DEPENDENCY([GDK_X11], [gdk-x11-3.0], [gtk_min_version])
                              XDT_FEATURE_DEPENDENCY([LIBX11], [x11], [libx11_min_version])
+                             XDT_FEATURE_DEPENDENCY([XI], [xi], [xi_min_version])
                              XDT_FEATURE_DEPENDENCY([LIBXFCE4WINDOWING_X11], [libxfce4windowing-x11-0], [libxfce4windowing_min_version])
                            ],
                            [the X11 windowing system])
