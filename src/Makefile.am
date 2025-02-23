@@ -70,7 +70,10 @@ plugins_DATA = $(plugins_in_files:.desktop.in=.desktop)
 $(plugins_DATA): $(plugins_in_files) Makefile
 	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
-EXTRA_DIST = $(plugins_in_files)
+EXTRA_DIST = \
+	$(plugins_in_files) \
+	meson.build \
+	$(NULL)
 
 CLEANFILES = $(NULL)
 DISTCLEANFILES = docklike.desktop
