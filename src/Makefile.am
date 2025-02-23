@@ -18,8 +18,8 @@ libdocklike_la_SOURCES =							\
 		Dock.cpp Dock.hpp							\
 		Xfw.cpp Xfw.hpp							\
 		SettingsDialog.cpp SettingsDialog.hpp		\
-		State.tpp 									\
-		Store.tpp									\
+		State.ipp 									\
+		Store.ipp									\
 		register.c									\
 		_gresources.xml _dialogs.ui				\
 		_gresources.c
@@ -56,10 +56,12 @@ libdocklike_la_LIBADD = \
 
 if ENABLE_X11
 libdocklike_la_CPPFLAGS += \
-	$(LIBX11_CFLAGS)
+	$(LIBX11_CFLAGS) \
+	$(XI_CFLAGS)
 
 libdocklike_la_LIBADD += \
-	$(LIBX11_LIBS)
+	$(LIBX11_LIBS) \
+	$(XI_LIBS)
 endif
 
 pluginsdir = $(datadir)/xfce4/panel/plugins
@@ -68,7 +70,10 @@ plugins_DATA = $(plugins_in_files:.desktop.in=.desktop)
 $(plugins_DATA): $(plugins_in_files) Makefile
 	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
-EXTRA_DIST = $(plugins_in_files)
+EXTRA_DIST = \
+	$(plugins_in_files) \
+	meson.build \
+	$(NULL)
 
 CLEANFILES = $(NULL)
 DISTCLEANFILES = docklike.desktop

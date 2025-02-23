@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef STATE_TPP
-#define STATE_TPP
+#ifndef STATE_IPP
+#define STATE_IPP
 
 #include <functional>
 
@@ -69,4 +69,4 @@ private:
 	std::function<void(V)> f;
 };
 
-#endif // STATE_HPP
+#endif // STATE_IPP
