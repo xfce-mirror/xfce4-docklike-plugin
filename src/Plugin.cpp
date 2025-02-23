@@ -5,6 +5,9 @@
  * gnu.org/licenses/gpl-3.0
  */
 
+#ifdef HAVE_XFCE_REVISION_H
+#include "xfce-revision.h"
+#endif
 #include "Plugin.hpp"
 #include "Helpers.hpp"
 #ifdef ENABLE_X11
@@ -106,7 +109,7 @@ namespace Plugin
 		gtk_show_about_dialog(nullptr,
 			"program-name", "Docklike Taskbar",
 			"logo-icon-name", "preferences-system",
-			"version", PACKAGE_VERSION,
+			"version", VERSION_FULL,
 			"copyright", "Copyright \302\251 2003-2024 The Xfce development team",
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"authors", AUTHORS,

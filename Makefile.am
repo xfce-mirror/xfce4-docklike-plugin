@@ -5,7 +5,16 @@ SUBDIRS = src po
 distclean-local:
 	rm -rf *.cache *~
 
-EXTRA_DIST = AUTHORS COPYING README.md TODO.md
+EXTRA_DIST =					\
+	AUTHORS						\
+	COPYING						\
+	README.md					\
+	TODO.md						\
+	meson.build					\
+	meson_options.txt			\
+	po/meson.build				\
+	xfce-revision.h.in			\
+	$(NULL)
 
 DISTCLEANFILES =				\
 	aclocal.m4					\
