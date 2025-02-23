@@ -11,7 +11,7 @@
 #include "Group.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "Store.tpp"
+#include "Store.ipp"
 
 #include <fcntl.h>
 #include <gio/gdesktopappinfo.h>

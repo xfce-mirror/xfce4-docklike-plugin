@@ -5,8 +5,8 @@
  * gnu.org/licenses/gpl-3.0
  */
 
-#ifndef STORE_HPP
-#define STORE_HPP
+#ifndef STORE_IPP
+#define STORE_IPP
 
 #include <algorithm>
 #include <functional>
@@ -147,4 +147,4 @@ namespace Store
 	using AutoPtr = std::unique_ptr<T, std::function<void(void*)>>;
 } // namespace Store
 
-#endif // STORE_HPP
+#endif // STORE_IPP

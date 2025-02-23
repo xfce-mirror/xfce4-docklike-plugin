@@ -12,7 +12,7 @@
 #include "Helpers.hpp"
 #include "Plugin.hpp"
 #include "Settings.hpp"
-#include "Store.tpp"
+#include "Store.ipp"
 #include "Xfw.hpp"
 
 #include <gtk/gtk.h>

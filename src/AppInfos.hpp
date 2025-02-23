@@ -9,7 +9,7 @@
 #define APPINFOS_HPP
 
 #include "Helpers.hpp"
-#include "Store.tpp"
+#include "Store.ipp"
 
 #include <ftw.h>
 #include <gio/gdesktopappinfo.h>

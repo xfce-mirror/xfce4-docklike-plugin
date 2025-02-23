@@ -190,7 +190,7 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 		}
 	}
 
-#ifdef HAVE_GTK_LAYER_SHELL
+#ifdef ENABLE_WAYLAND
 	if (gtk_layer_is_supported())
 	{
 		gtk_layer_set_margin(GTK_WINDOW(mWindow), GTK_LAYER_SHELL_EDGE_LEFT, wx - geometry.x);
