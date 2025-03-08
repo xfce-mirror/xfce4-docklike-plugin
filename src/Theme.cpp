@@ -47,7 +47,7 @@ void Theme::load()
 
 std::string Theme::get_theme_colors()
 {
-	GtkWidget* menu = gtk_menu_new();
+	GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(gtk_menu_new()));
 	GtkStyleContext* sc = gtk_widget_get_style_context(menu);
 	gchar* str;
 
@@ -97,7 +97,7 @@ std::string Theme::get_theme_colors()
 		g_value_unset(&gv);
 	}
 
-	gtk_widget_destroy(menu);
+	g_object_unref(menu);
 
 	std::string css = "@define-color menu_bgcolor " + menuBg + ";\n";
 	css += "@define-color menu_item_color " + itemLabel + ";\n";
