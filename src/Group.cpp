@@ -327,7 +327,7 @@ void Group::onDraw(cairo_t* cr)
 		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
 		GdkRGBA* indicatorColor = (GdkRGBA*)g_value_get_boxed(&gv);
 
-		gtk_widget_destroy(menu);
+		g_object_unref(menu);
 
 		rgba[0] = (*indicatorColor).red;
 		rgba[1] = (*indicatorColor).green;
