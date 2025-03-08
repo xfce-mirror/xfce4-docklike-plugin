@@ -320,14 +320,14 @@ void Group::onDraw(cairo_t* cr)
 
 	if (Settings::indicatorColorFromTheme)
 	{
-		GtkWidget* menu = gtk_menu_new();
+		GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(gtk_menu_new()));
 		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
 
 		GValue gv = G_VALUE_INIT;
 		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
 		GdkRGBA* indicatorColor = (GdkRGBA*)g_value_get_boxed(&gv);
 
-		gtk_widget_destroy(menu);
+		g_object_unref(menu);
 
 		rgba[0] = (*indicatorColor).red;
 		rgba[1] = (*indicatorColor).green;
