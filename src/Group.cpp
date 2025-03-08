@@ -320,7 +320,7 @@ void Group::onDraw(cairo_t* cr)
 
 	if (Settings::indicatorColorFromTheme)
 	{
-		GtkWidget* menu = gtk_menu_new();
+		GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(gtk_menu_new()));
 		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
 
 		GValue gv = G_VALUE_INIT;
