@@ -258,23 +258,7 @@ namespace Xfw
 						group);
 				}
 			}
-
-			gtk_widget_show_all(menu);
-
-			return menu;
 		}
-
-		menu = gtk_menu_new();
-		GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
-
-		g_signal_connect(G_OBJECT(remove), "activate",
-			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
-				_group->mPinned = false;
-				Dock::savePinned();
-				Dock::drawGroups();
-			}),
-			group);
 
 		gtk_widget_show_all(menu);
 
