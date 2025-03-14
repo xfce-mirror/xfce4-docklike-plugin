@@ -183,7 +183,8 @@ namespace Xfw
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
-		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST)) ? xfw_window_action_menu_new(groupWindow->mXfwWindow) : gtk_menu_new();
+		const bool groupStaysInTaskList = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST));
+		GtkWidget* const menu = groupStaysInTaskList ? xfw_window_action_menu_new(groupWindow->mXfwWindow) : gtk_menu_new();
 		std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
 
 		if (!appInfo->path.empty())
@@ -258,23 +259,25 @@ namespace Xfw
 						group);
 				}
 			}
-
-			gtk_widget_show_all(menu);
-
-			return menu;
 		}
+		else
+		{
+			if (groupStaysInTaskList) // if the window entries exist, add a separator
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-		menu = gtk_menu_new();
-		GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
+			// when a pinned app loses its icon (typically the app is uninstalled) the user may want to remove it from the dock
+			// this can also happen when no icon is found for an app, but in this case this action does nothing
+			GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
+			gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), remove);
 
-		g_signal_connect(G_OBJECT(remove), "activate",
-			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
-				_group->mPinned = false;
-				Dock::savePinned();
-				Dock::drawGroups();
-			}),
-			group);
+			g_signal_connect(G_OBJECT(remove), "activate",
+				G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+					_group->mPinned = false;
+					Dock::savePinned();
+					Dock::drawGroups();
+				}),
+				group);
+		}
 
 		gtk_widget_show_all(menu);
 
