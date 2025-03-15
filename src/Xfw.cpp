@@ -183,8 +183,24 @@ namespace Xfw
 
 	GtkWidget* buildActionMenu(GroupWindow* groupWindow, Group* group)
 	{
-		GtkWidget* menu = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST)) ? xfw_window_action_menu_new(groupWindow->mXfwWindow) : gtk_menu_new();
+		const bool groupStaysInTaskList = (groupWindow != nullptr && !groupWindow->getState(XFW_WINDOW_STATE_SKIP_TASKLIST));
 		std::shared_ptr<AppInfo> appInfo = (groupWindow != nullptr) ? groupWindow->mGroup->mAppInfo : group->mAppInfo;
+
+		GtkWidget* menu = nullptr;
+		if (groupStaysInTaskList)
+		{
+			menu = xfw_window_action_menu_new(groupWindow->mXfwWindow);
+		}
+		else if (group->mPinned)
+		{
+			menu = gtk_menu_new();
+		}
+		else
+		{
+			// for the cases that the application is not pinned and it is not supposed to
+			// show up in the task list, just don't show a menu at all
+			return menu;
+		}
 
 		if (!appInfo->path.empty())
 		{
@@ -258,24 +274,28 @@ namespace Xfw
 						group);
 				}
 			}
+		}
+		else if (group->mPinned)
+		{
+			if (groupStaysInTaskList) // if the window entries exist, add a separator
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-			gtk_widget_show_all(menu);
+			// when a pinned app loses its icon (typically the app is uninstalled) the user may want to remove it from the dock
+			GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
+			gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), remove);
 
-			return menu;
+			g_signal_connect(G_OBJECT(remove), "activate",
+				G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
+					_group->mPinned = false;
+					Dock::savePinned();
+					Dock::drawGroups();
+				}),
+				group);
 		}
 
-		menu = gtk_menu_new();
-		GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), remove);
-
-		g_signal_connect(G_OBJECT(remove), "activate",
-			G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
-				_group->mPinned = false;
-				Dock::savePinned();
-				Dock::drawGroups();
-			}),
-			group);
-
+		// even for applications that don't have an icon and aren't pinned
+		// (they don't enter in any of the conditions above)
+		// we still want to show the window context menu
 		gtk_widget_show_all(menu);
 
 		return menu;
