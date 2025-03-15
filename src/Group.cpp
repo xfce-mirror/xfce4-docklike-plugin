@@ -885,6 +885,13 @@ void Group::onButtonRelease(GdkEventButton* event)
 	}
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
 		mAppInfo->launch();
+	else if (mWindowsCount > 1)
+	{
+		mWindows.forEach([](GroupWindow* w) -> void {
+			if (!w->getState(XFW_WINDOW_STATE_MINIMIZED))
+				w->minimize();
+		});
+	}
 	else if (mActive)
 		mWindows.get(mTopWindowIndex)->minimize();
 	else
