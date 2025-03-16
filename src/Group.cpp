@@ -826,6 +826,7 @@ void Group::onWindowActivate(GroupWindow* groupWindow)
 void Group::onWindowUnactivate()
 {
 	mActive = false;
+	mTopWindowIndex = 0;
 	Help::Gtk::cssClassRemove(mButton, "active_group");
 }
 
