@@ -11,6 +11,8 @@
 
 #include "Xfw.hpp"
 
+#include <libxfce4ui/libxfce4ui.h>
+
 namespace Xfw
 {
 	XfwScreen* mXfwScreen;
@@ -236,7 +238,11 @@ namespace Xfw
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
+#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
+				gchar* program = g_find_program_in_path("xfce-desktop-item-edit");
+#else
 				gchar* program = g_find_program_in_path("exo-desktop-item-edit");
+#endif
 				if (program != nullptr)
 				{
 					gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), editLauncher);
