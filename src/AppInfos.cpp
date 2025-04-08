@@ -8,6 +8,8 @@
 #include "AppInfos.hpp"
 #include "Settings.hpp"
 
+#include <libxfce4ui/libxfce4ui.h>
+
 #include <unordered_set>
 
 void AppInfo::launch()
@@ -44,7 +46,11 @@ void AppInfo::edit()
 {
 	GError* error = nullptr;
 	gchar* quoted = g_shell_quote(this->path.c_str());
+#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
+	gchar* command = g_strconcat("xfce-desktop-item-edit ", quoted, nullptr);
+#else
 	gchar* command = g_strconcat("exo-desktop-item-edit ", quoted, nullptr);
+#endif
 
 	if (!g_spawn_command_line_async(command, &error))
 	{
@@ -150,7 +156,11 @@ namespace AppInfos
 			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
 			exec = Help::String::getWord(execLine, 0);
 
+#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
+			if (exec != "env" && exec != "xfce-open")
+#else
 			if (exec != "env" && exec != "exo-open")
+#endif
 				if (exec != lower_id && exec != name)
 					mAppInfoNames.set(Help::String::toLowercase(exec), info);
 		}
