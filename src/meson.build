@@ -43,7 +43,7 @@ plugin_sources += gnome.compile_resources(
 
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
 
-plugin_lib = shared_library(
+plugin_lib = shared_module(
   'docklike',
   plugin_sources,
   gnu_symbol_visibility: 'hidden',

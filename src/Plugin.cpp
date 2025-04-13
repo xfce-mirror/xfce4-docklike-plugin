@@ -110,7 +110,7 @@ namespace Plugin
 			"program-name", "Docklike Taskbar",
 			"logo-icon-name", "preferences-system",
 			"version", VERSION_FULL,
-			"copyright", "Copyright \302\251 2003-2024 The Xfce development team",
+			"copyright", "Copyright \302\251 2003-" COPYRIGHT_YEAR " The Xfce development team",
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"authors", AUTHORS,
 			"translator-credits", TRANSLATORS,

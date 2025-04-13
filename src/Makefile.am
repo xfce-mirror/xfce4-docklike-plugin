@@ -35,6 +35,7 @@ _gresources.c: _gresources.xml _dialogs.ui
 libdocklike_la_CPPFLAGS = \
 	$(LIBXFCE4PANEL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
+	$(LIBXFCE4UTIL_CFLAGS) \
 	$(GIO_UNIX_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(CAIRO_CFLAGS) \
@@ -47,6 +48,7 @@ libdocklike_la_LDFLAGS = -avoid-version -module -no-undefined -export-symbols-re
 libdocklike_la_LIBADD = \
 	$(LIBXFCE4PANEL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
+	$(LIBXFCE4UTIL_LIBS) \
 	$(GIO_UNIX_LIBS) \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
