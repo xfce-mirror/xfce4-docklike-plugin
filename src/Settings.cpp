@@ -231,11 +231,9 @@ namespace Settings
 			for (gchar** p = pinnedListBuffer; *p != nullptr; p++)
 				if (**p == '/' && g_str_has_suffix(*p, ".desktop"))
 				{
-					gchar* basename = g_path_get_basename(*p);
-					std::string id = basename;
-					g_free(basename);
+					std::string id = Help::String::pathBasename(*p, true);
 					g_free(*p);
-					*p = g_strdup(id.substr(0, id.size() - 8).c_str());
+					*p = g_strdup(id.c_str());
 				}
 			pinnedAppList.set(Help::Gtk::bufferToStdStringList(pinnedListBuffer));
 			g_strfreev(pinnedListBuffer);

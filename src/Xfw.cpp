@@ -39,9 +39,7 @@ namespace Xfw
 				int nbr = read(fd, buffer, 512);
 				::close(fd);
 
-				char* exe = g_path_get_basename(buffer);
-				std::string exe_out = exe;
-				g_free(exe);
+				std::string exe_out = Help::String::pathBasename(buffer);
 				if (exe_out != "python") // ADDIT graphical interpreters here
 					return exe_out;
 
@@ -51,10 +49,7 @@ namespace Xfw
 
 				if (it < buffer + nbr)
 				{
-					gchar* basename = g_path_get_basename(it);
-					std::string basename_out = basename;
-					g_free(basename);
-					return basename_out;
+					return Help::String::pathBasename(it);
 				}
 			}
 
