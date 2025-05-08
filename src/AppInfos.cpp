@@ -107,6 +107,13 @@ namespace AppInfos
 		}
 	}
 
+	std::unordered_set<std::string> mExcludedBinaries = {
+		// clang-format off
+		"env", "exo-open", "xfce-open", "xdg-open",
+		"bash", "dash", "ksh", "sh", "tcsh", "zsh",
+		// clang-format on
+	};
+
 	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
 #define DOT_DESKTOP ".desktop"
@@ -156,13 +163,8 @@ namespace AppInfos
 			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
 			exec = Help::String::getWord(execLine, 0);
 
-#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
-			if (exec != "env" && exec != "xfce-open")
-#else
-			if (exec != "env" && exec != "exo-open")
-#endif
-				if (exec != lower_id && exec != name)
-					mAppInfoNames.set(Help::String::toLowercase(exec), info);
+			if (exec != lower_id && exec != name && mExcludedBinaries.find(exec) == mExcludedBinaries.end())
+				mAppInfoNames.set(exec, info);
 		}
 		g_free(exec_);
 
