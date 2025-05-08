@@ -97,6 +97,14 @@ namespace Help
 			return str_out;
 		}
 
+		std::string pathDirname(const std::string str)
+		{
+			gchar* dirname = g_path_get_dirname(str.c_str());
+			std::string str_out = dirname;
+			g_free(dirname);
+			return str_out;
+		}
+
 		std::string trim(const std::string str)
 		{
 			std::string::const_iterator s = str.begin();
