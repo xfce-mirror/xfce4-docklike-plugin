@@ -302,7 +302,7 @@ void Group::resize()
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
 		gint size = Dock::mIconSize * scale_factor;
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
-		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
+		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, nullptr);
 		gtk_image_set_from_surface(GTK_IMAGE(mImage), surface);
 		cairo_surface_destroy(surface);
 		g_object_unref(scaled);
@@ -958,11 +958,11 @@ void Group::onDragBegin(GdkDragContext* context)
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
 		gint size;
-		if (!gtk_icon_size_lookup(GTK_ICON_SIZE_DND, &size, NULL))
+		if (!gtk_icon_size_lookup(GTK_ICON_SIZE_DND, &size, nullptr))
 			size = 32;
 		size *= scale_factor;
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
-		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, NULL);
+		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, nullptr);
 		gtk_drag_set_icon_surface(context, surface);
 		cairo_surface_destroy(surface);
 		g_object_unref(scaled);

@@ -25,8 +25,8 @@ create_window()
 	{
 		gtk_layer_init_for_window(GTK_WINDOW(window));
 		gtk_layer_set_exclusive_zone(GTK_WINDOW(window), -1);
-		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_TOP, TRUE);
-		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_LEFT, TRUE);
+		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_TOP, true);
+		gtk_layer_set_anchor(GTK_WINDOW(window), GTK_LAYER_SHELL_EDGE_LEFT, true);
 	}
 #endif
 

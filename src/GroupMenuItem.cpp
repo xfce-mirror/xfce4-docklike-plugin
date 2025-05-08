@@ -143,7 +143,7 @@ void GroupMenuItem::updateIcon()
 
 	if (iconPixbuf != nullptr)
 	{
-		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(iconPixbuf, scale_factor, NULL);
+		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(iconPixbuf, scale_factor, nullptr);
 		gtk_image_set_from_surface(mIcon, surface);
 		cairo_surface_destroy(surface);
 	}
@@ -187,7 +187,7 @@ void GroupMenuItem::updatePreview()
 				scale *= scale_factor;
 				thumbnail = gdk_pixbuf_scale_simple(pixbuf,
 					gdk_pixbuf_get_width(pixbuf) * scale, gdk_pixbuf_get_height(pixbuf) * scale, GDK_INTERP_BILINEAR);
-				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, NULL);
+				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
 
