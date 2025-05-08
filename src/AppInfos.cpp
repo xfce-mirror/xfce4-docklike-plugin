@@ -68,6 +68,7 @@ namespace AppInfos
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoNames;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoUserSet;
 	Store::AutoPtr<GAppInfoMonitor> mMonitor;
 
 	static void findXDGDirectories()
@@ -192,6 +193,20 @@ namespace AppInfos
 		}
 	}
 
+	static bool addUserSetApp(std::string classId, std::string filename)
+	{
+		loadDesktopEntry(Help::String::pathDirname(filename), Help::String::pathBasename(filename));
+
+		std::shared_ptr<AppInfo> info = mAppInfoIds.get(Help::String::pathBasename(filename, true));
+		if (info != nullptr)
+		{
+			mAppInfoUserSet.set(Help::String::toLowercase(classId), info);
+			return true;
+		}
+
+		return false;
+	}
+
 	void init()
 	{
 		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
@@ -208,6 +223,15 @@ namespace AppInfos
 
 		findXDGDirectories();
 		loadXDGDirectories();
+
+		std::list<std::string> ids = Settings::userSetApps.get().first;
+		std::list<std::string> paths = Settings::userSetApps.get().second;
+		for (auto id = ids.begin(), path = paths.begin();
+			id != ids.end() && path != paths.end();
+			id++, path++)
+		{
+			addUserSetApp(*id, *path);
+		}
 	}
 
 	void finalize()
@@ -216,6 +240,7 @@ namespace AppInfos
 		mAppInfoWMClasses.clear();
 		mAppInfoIds.clear();
 		mAppInfoNames.clear();
+		mAppInfoUserSet.clear();
 		mMonitor.reset();
 	}
 
@@ -304,8 +329,52 @@ namespace AppInfos
 			return ai;
 		}
 
+		ai = mAppInfoUserSet.get(id);
+		if (ai != nullptr)
+		{
+			g_debug("User add match");
+			return ai;
+		}
+
 		g_debug("No match");
 
 		return std::make_shared<AppInfo>("", "", "", id);
+	}
+
+	bool selectLauncher(const gchar* classId)
+	{
+		GtkWidget* dialog = gtk_file_chooser_dialog_new(
+			_("Select Launcher"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN,
+			_("_Cancel"), GTK_RESPONSE_CANCEL, _("_Open"), GTK_RESPONSE_ACCEPT, NULL);
+		GtkFileFilter* filter = gtk_file_filter_new();
+		bool added = false;
+
+		gtk_file_filter_add_pattern(filter, "*.desktop");
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
+		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+		gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
+		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "/usr/share/applications");
+
+		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+		{
+			gchar* filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+			if (filename != nullptr)
+			{
+				added = addUserSetApp(classId, filename);
+				if (added)
+				{
+					std::list<std::string> ids = Settings::userSetApps.get().first;
+					std::list<std::string> paths = Settings::userSetApps.get().second;
+					ids.push_back(classId);
+					paths.push_back(filename);
+					Settings::userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
+				}
+				g_free(filename);
+			}
+		}
+
+		gtk_widget_destroy(dialog);
+
+		return added;
 	}
 } // namespace AppInfos
