@@ -244,25 +244,24 @@ namespace AppInfos
 		mMonitor.reset();
 	}
 
-	// TODO: Load these from a file so that the user can add their own aliases
-	std::map<std::string, std::string> mGroupNameRename = {
-		{"soffice", "libreoffice-startcenter"},
-		{"libreoffice", "libreoffice-startcenter"},
-		{"radium_linux.bin", "radium"},
-		{"viberpc", "viber"},
-		{"multimc5", "multimc"},
+	// some aliases we are obliged to use: these should be reserved for our apps
+	// and restricted as much as possible
+	std::map<std::string, std::string> mIdMap = {
+		// the best we can do is to group all panel/plugin dialogs together
+		{"xfce4-panel", "panel-preferences"},
+		{"wrapper-2.0", "panel-preferences"},
 	};
 
-	static void groupNameTransform(std::string& groupName)
+	static void translateId(std::string& id)
 	{
-		std::map<std::string, std::string>::iterator itRenamed;
-		if ((itRenamed = mGroupNameRename.find(groupName)) != mGroupNameRename.end())
-			groupName = itRenamed->second;
+		auto it = mIdMap.find(id);
+		if (it != mIdMap.end())
+			id = it->second;
 	}
 
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
-		groupNameTransform(id);
+		translateId(id);
 
 		g_debug("Searching a match for '%s'", id.c_str());
 
