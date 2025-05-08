@@ -116,13 +116,10 @@ namespace AppInfos
 
 	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-#define DOT_DESKTOP ".desktop"
-		constexpr size_t DOT_DESKTOP_SIZE = 8;
-
-		if (!g_str_has_suffix(filename.c_str(), DOT_DESKTOP))
+		if (!g_str_has_suffix(filename.c_str(), ".desktop"))
 			return;
 
-		std::string id = filename.substr(0, filename.size() - DOT_DESKTOP_SIZE);
+		std::string id = Help::String::pathBasename(filename, true);
 		std::string lower_id = Help::String::toLowercase(id);
 		if (mAppInfoIds.get(lower_id) != nullptr)
 			return;
@@ -293,7 +290,7 @@ namespace AppInfos
 		if (gioPath[0] != nullptr && gioPath[0][0] != nullptr && gioPath[0][0][0] != '\0')
 		{
 			std::string gioId = gioPath[0][0];
-			gioId = Help::String::toLowercase(gioId.substr(0, gioId.size() - 8));
+			gioId = Help::String::toLowercase(Help::String::pathBasename(gioId, true));
 			ai = mAppInfoIds.get(gioId);
 		}
 
