@@ -35,6 +35,7 @@ namespace Settings
 	State<bool> keyAloneActive;
 
 	State<std::list<std::string>> pinnedAppList;
+	State<std::pair<std::list<std::string>, std::list<std::string>>> userSetApps;
 
 	State<bool> showWindowCount;
 	State<int> dockSize;
@@ -231,15 +232,32 @@ namespace Settings
 			for (gchar** p = pinnedListBuffer; *p != nullptr; p++)
 				if (**p == '/' && g_str_has_suffix(*p, ".desktop"))
 				{
-					gchar* basename = g_path_get_basename(*p);
-					std::string id = basename;
-					g_free(basename);
+					std::string id = Help::String::pathBasename(*p, true);
 					g_free(*p);
-					*p = g_strdup(id.substr(0, id.size() - 8).c_str());
+					*p = g_strdup(id.c_str());
 				}
 			pinnedAppList.set(Help::Gtk::bufferToStdStringList(pinnedListBuffer));
 			g_strfreev(pinnedListBuffer);
 		}
+
+		gchar** userSetIds = g_key_file_get_string_list(file, "user", "userSetIds", nullptr, nullptr);
+		gchar** userSetPaths = g_key_file_get_string_list(file, "user", "userSetPaths", nullptr, nullptr);
+		std::list<std::string> ids = Help::Gtk::bufferToStdStringList(userSetIds);
+		std::list<std::string> paths = Help::Gtk::bufferToStdStringList(userSetPaths);
+		ids.resize(paths.size());
+		paths.resize(ids.size());
+		std::pair<std::list<std::string>, std::list<std::string>> _userSetApps{ids, paths};
+		g_strfreev(userSetIds);
+		g_strfreev(userSetPaths);
+
+		userSetApps.setup(_userSetApps,
+			[](std::pair<std::list<std::string>, std::list<std::string>> pair) -> void {
+				std::vector<char*> buf = Help::Gtk::stdToBufferStringList(pair.first);
+				g_key_file_set_string_list(mFile.get(), "user", "userSetIds", buf.data(), buf.size());
+				buf = Help::Gtk::stdToBufferStringList(pair.second);
+				g_key_file_set_string_list(mFile.get(), "user", "userSetPaths", buf.data(), buf.size());
+				saveFile();
+			});
 
 		// HIDDEN SETTINGS:
 		dockSize.setup(g_key_file_get_integer(file, "user", "dockSize", nullptr),

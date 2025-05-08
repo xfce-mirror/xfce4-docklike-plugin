@@ -39,9 +39,7 @@ namespace Xfw
 				int nbr = read(fd, buffer, 512);
 				::close(fd);
 
-				char* exe = g_path_get_basename(buffer);
-				std::string exe_out = exe;
-				g_free(exe);
+				std::string exe_out = Help::String::pathBasename(buffer);
 				if (exe_out != "python") // ADDIT graphical interpreters here
 					return exe_out;
 
@@ -51,10 +49,7 @@ namespace Xfw
 
 				if (it < buffer + nbr)
 				{
-					gchar* basename = g_path_get_basename(it);
-					std::string basename_out = basename;
-					g_free(basename);
-					return basename_out;
+					return Help::String::pathBasename(it);
 				}
 			}
 
@@ -145,9 +140,9 @@ namespace Xfw
 
 		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
-			xfw_workspace_activate(workspace, NULL);
+			xfw_workspace_activate(workspace, nullptr);
 
-		xfw_window_activate(groupWindow->mXfwWindow, NULL, timestamp, NULL);
+		xfw_window_activate(groupWindow->mXfwWindow, nullptr, timestamp, nullptr);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
@@ -157,7 +152,7 @@ namespace Xfw
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
 #endif
 
-		xfw_window_close(groupWindow->mXfwWindow, timestamp, NULL);
+		xfw_window_close(groupWindow->mXfwWindow, timestamp, nullptr);
 	}
 
 	void setActiveWindow()
@@ -233,7 +228,7 @@ namespace Xfw
 			if (group != nullptr)
 			{
 				GtkWidget* pinToggle = gtk_check_menu_item_new_with_label(group->mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
-				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher"));
+				GtkWidget* editLauncher = gtk_menu_item_new_with_label(_("Edit Launcher..."));
 
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(pinToggle), group->mPinned);
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
@@ -281,22 +276,36 @@ namespace Xfw
 				}
 			}
 		}
-		else if (group->mPinned)
+		else
 		{
 			if (groupStaysInTaskList) // if the window entries exist, add a separator
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-			// when a pinned app loses its icon (typically the app is uninstalled) the user may want to remove it from the dock
-			GtkWidget* remove = gtk_menu_item_new_with_label(_("Remove"));
-			gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), remove);
-
-			g_signal_connect(G_OBJECT(remove), "activate",
-				G_CALLBACK(+[](GtkMenuItem* menuitem, Group* _group) {
-					_group->mPinned = false;
-					Dock::savePinned();
-					Dock::drawGroups();
-				}),
-				group);
+			if (group->mPinned)
+			{
+				// when a pinned app loses its icon (typically the app is uninstalled) the user may want to remove it from the dock
+				GtkWidget* item = gtk_menu_item_new_with_label(_("Remove"));
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), item);
+				g_signal_connect(G_OBJECT(item), "activate",
+					G_CALLBACK(+[](GtkMenuItem* _item, Group* _group) {
+						_group->mPinned = false;
+						Dock::savePinned();
+						Dock::drawGroups();
+					}),
+					group);
+			}
+			else
+			{
+				// we weren't able to find a launcher for this app, let the user set it manually
+				GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), item);
+				g_signal_connect(G_OBJECT(item), "activate",
+					G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
+						if (AppInfos::selectLauncher(classId))
+							Dock::drawGroups();
+					}),
+					(gpointer)appInfo->name.c_str());
+			}
 		}
 
 		// even for applications that don't have an icon and aren't pinned

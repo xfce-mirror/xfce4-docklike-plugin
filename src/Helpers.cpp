@@ -79,11 +79,29 @@ namespace Help
 			return std::string(start, it);
 		}
 
-		std::string pathBasename(const std::string str)
+		std::string pathBasename(const std::string str, bool removeSuffix)
 		{
 			gchar* basename = g_path_get_basename(str.c_str());
+			if (removeSuffix)
+			{
+				gchar* dot = g_strrstr_len(basename, -1, ".");
+				if (dot != nullptr)
+				{
+					gchar* temp = g_strndup(basename, dot - basename);
+					g_free(basename);
+					basename = temp;
+				}
+			}
 			std::string str_out = basename;
 			g_free(basename);
+			return str_out;
+		}
+
+		std::string pathDirname(const std::string str)
+		{
+			gchar* dirname = g_path_get_dirname(str.c_str());
+			std::string str_out = dirname;
+			g_free(dirname);
 			return str_out;
 		}
 

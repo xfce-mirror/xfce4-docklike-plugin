@@ -68,6 +68,7 @@ namespace AppInfos
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoNames;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoUserSet;
 	Store::AutoPtr<GAppInfoMonitor> mMonitor;
 
 	static void findXDGDirectories()
@@ -107,15 +108,19 @@ namespace AppInfos
 		}
 	}
 
+	std::unordered_set<std::string> mExcludedBinaries = {
+		// clang-format off
+		"env", "exo-open", "xfce-open", "xdg-open",
+		"bash", "dash", "ksh", "sh", "tcsh", "zsh",
+		// clang-format on
+	};
+
 	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
 	{
-#define DOT_DESKTOP ".desktop"
-		constexpr size_t DOT_DESKTOP_SIZE = 8;
-
-		if (!g_str_has_suffix(filename.c_str(), DOT_DESKTOP))
+		if (!g_str_has_suffix(filename.c_str(), ".desktop"))
 			return;
 
-		std::string id = filename.substr(0, filename.size() - DOT_DESKTOP_SIZE);
+		std::string id = Help::String::pathBasename(filename, true);
 		std::string lower_id = Help::String::toLowercase(id);
 		if (mAppInfoIds.get(lower_id) != nullptr)
 			return;
@@ -156,13 +161,8 @@ namespace AppInfos
 			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
 			exec = Help::String::getWord(execLine, 0);
 
-#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
-			if (exec != "env" && exec != "xfce-open")
-#else
-			if (exec != "env" && exec != "exo-open")
-#endif
-				if (exec != lower_id && exec != name)
-					mAppInfoNames.set(Help::String::toLowercase(exec), info);
+			if (exec != lower_id && exec != name && mExcludedBinaries.find(exec) == mExcludedBinaries.end())
+				mAppInfoNames.set(exec, info);
 		}
 		g_free(exec_);
 
@@ -193,6 +193,23 @@ namespace AppInfos
 		}
 	}
 
+	static bool addUserSetApp(std::string classId, std::string filename)
+	{
+		loadDesktopEntry(Help::String::pathDirname(filename), Help::String::pathBasename(filename));
+
+		std::string id = Help::String::toLowercase(Help::String::pathBasename(filename, true));
+		std::shared_ptr<AppInfo> info = mAppInfoIds.get(id);
+		if (info != nullptr)
+		{
+			mAppInfoUserSet.set(Help::String::toLowercase(classId), info);
+			g_debug("Added user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
+			return true;
+		}
+
+		g_debug("Failed to add user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
+		return false;
+	}
+
 	void init()
 	{
 		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
@@ -209,6 +226,15 @@ namespace AppInfos
 
 		findXDGDirectories();
 		loadXDGDirectories();
+
+		std::list<std::string> ids = Settings::userSetApps.get().first;
+		std::list<std::string> paths = Settings::userSetApps.get().second;
+		for (auto id = ids.begin(), path = paths.begin();
+			id != ids.end() && path != paths.end();
+			id++, path++)
+		{
+			addUserSetApp(*id, *path);
+		}
 	}
 
 	void finalize()
@@ -217,28 +243,28 @@ namespace AppInfos
 		mAppInfoWMClasses.clear();
 		mAppInfoIds.clear();
 		mAppInfoNames.clear();
+		mAppInfoUserSet.clear();
 		mMonitor.reset();
 	}
 
-	// TODO: Load these from a file so that the user can add their own aliases
-	std::map<std::string, std::string> mGroupNameRename = {
-		{"soffice", "libreoffice-startcenter"},
-		{"libreoffice", "libreoffice-startcenter"},
-		{"radium_linux.bin", "radium"},
-		{"viberpc", "viber"},
-		{"multimc5", "multimc"},
+	// some aliases we are obliged to use: these should be reserved for our apps
+	// and restricted as much as possible
+	std::map<std::string, std::string> mIdMap = {
+		// the best we can do is to group all panel/plugin dialogs together
+		{"xfce4-panel", "panel-preferences"},
+		{"wrapper-2.0", "panel-preferences"},
 	};
 
-	static void groupNameTransform(std::string& groupName)
+	static void translateId(std::string& id)
 	{
-		std::map<std::string, std::string>::iterator itRenamed;
-		if ((itRenamed = mGroupNameRename.find(groupName)) != mGroupNameRename.end())
-			groupName = itRenamed->second;
+		auto it = mIdMap.find(id);
+		if (it != mIdMap.end())
+			id = it->second;
 	}
 
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
-		groupNameTransform(id);
+		translateId(id);
 
 		g_debug("Searching a match for '%s'", id.c_str());
 
@@ -291,7 +317,7 @@ namespace AppInfos
 		if (gioPath[0] != nullptr && gioPath[0][0] != nullptr && gioPath[0][0][0] != '\0')
 		{
 			std::string gioId = gioPath[0][0];
-			gioId = Help::String::toLowercase(gioId.substr(0, gioId.size() - 8));
+			gioId = Help::String::toLowercase(Help::String::pathBasename(gioId, true));
 			ai = mAppInfoIds.get(gioId);
 		}
 
@@ -305,8 +331,60 @@ namespace AppInfos
 			return ai;
 		}
 
+		ai = mAppInfoUserSet.get(id);
+		if (ai != nullptr)
+		{
+			g_debug("User-set app match");
+			return ai;
+		}
+
 		g_debug("No match");
 
 		return std::make_shared<AppInfo>("", "", "", id);
+	}
+
+	bool selectLauncher(const gchar* classId)
+	{
+		GtkWidget* dialog = gtk_file_chooser_dialog_new(
+			_("Select Launcher"), nullptr, GTK_FILE_CHOOSER_ACTION_OPEN,
+			_("_Cancel"), GTK_RESPONSE_CANCEL, _("_Open"), GTK_RESPONSE_ACCEPT, nullptr);
+		GtkFileFilter* filter = gtk_file_filter_new();
+		gtk_file_filter_add_pattern(filter, "*.desktop");
+		gtk_file_chooser_set_filter(GTK_FILE_CHOOSER(dialog), filter);
+		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+		gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), true);
+
+		if (g_file_test("/usr/share/applications", G_FILE_TEST_IS_DIR))
+			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "/usr/share/applications");
+		else
+			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), mXdgDataDirs.front().c_str());
+		for (auto dir : mXdgDataDirs)
+		{
+			if (g_str_has_suffix(dir.c_str(), "/applications/"))
+				gtk_file_chooser_add_shortcut_folder(GTK_FILE_CHOOSER(dialog), dir.c_str(), nullptr);
+		}
+
+		bool added = false;
+		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+		{
+			gchar* filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+			if (filename != nullptr)
+			{
+				added = addUserSetApp(classId, filename);
+				if (added)
+				{
+					std::list<std::string> ids = Settings::userSetApps.get().first;
+					std::list<std::string> paths = Settings::userSetApps.get().second;
+					ids.push_back(classId);
+					paths.push_back(filename);
+					Settings::userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
+				}
+				g_free(filename);
+			}
+		}
+
+		gtk_widget_destroy(dialog);
+
+		return added;
 	}
 } // namespace AppInfos
