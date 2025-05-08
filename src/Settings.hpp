@@ -51,6 +51,7 @@ namespace Settings
 	extern State<bool> keyAloneActive;
 
 	extern State<std::list<std::string>> pinnedAppList;
+	extern State<std::pair<std::list<std::string>, std::list<std::string>>> userSetApps;
 
 	// HIDDEN SETTINGS:
 	extern State<int> dockSize;
