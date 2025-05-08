@@ -85,7 +85,7 @@ void GroupWindow::activate(guint32 timestamp)
 
 void GroupWindow::minimize()
 {
-	xfw_window_set_minimized(this->mXfwWindow, TRUE, NULL);
+	xfw_window_set_minimized(this->mXfwWindow, TRUE, nullptr);
 }
 
 GroupWindow::~GroupWindow()

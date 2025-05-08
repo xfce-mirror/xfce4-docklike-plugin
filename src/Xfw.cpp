@@ -145,9 +145,9 @@ namespace Xfw
 
 		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
-			xfw_workspace_activate(workspace, NULL);
+			xfw_workspace_activate(workspace, nullptr);
 
-		xfw_window_activate(groupWindow->mXfwWindow, NULL, timestamp, NULL);
+		xfw_window_activate(groupWindow->mXfwWindow, nullptr, timestamp, nullptr);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
@@ -157,7 +157,7 @@ namespace Xfw
 			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
 #endif
 
-		xfw_window_close(groupWindow->mXfwWindow, timestamp, NULL);
+		xfw_window_close(groupWindow->mXfwWindow, timestamp, nullptr);
 	}
 
 	void setActiveWindow()
