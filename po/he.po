@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-07 12:52+0200\n"
+"POT-Creation-Date: 2025-05-09 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Elishai Eliyahu <elishai@mailfence.com>, 2024\n"
 "Language-Team: Hebrew (https://app.transifex.com/xfce/teams/16840/he/)\n"
@@ -23,25 +23,33 @@ msgstr ""
 "Language: he\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pinned to Dock"
 msgstr "נעוץ למעגן"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pin to Dock"
 msgstr "נעץ למעגן"
 
-#: src/Xfw.cpp:218
-msgid "Edit Launcher"
-msgstr "ערוך מפעיל"
+#: src/Xfw.cpp:231
+msgid "Edit Launcher..."
+msgstr ""
 
-#: src/Xfw.cpp:249
+#: src/Xfw.cpp:266
 msgid "Close All"
 msgstr "סגור הכל"
 
-#: src/Xfw.cpp:268
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Xfw.cpp:287
 msgid "Remove"
 msgstr "הסרה"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Xfw.cpp:300
+msgid "Select Launcher..."
+msgstr ""
 
 #: src/SettingsDialog.cpp:254
 #, c-format
