@@ -6,16 +6,16 @@
 # Translators:
 # Marius Ghita, 2024
 # Nick Schermer <nick@xfce.org>, 2024
-# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024
+# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-07 12:52+0200\n"
+"POT-Creation-Date: 2025-05-09 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2025\n"
 "Language-Team: Romanian (https://app.transifex.com/xfce/teams/16840/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,25 +23,33 @@ msgstr ""
 "Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pinned to Dock"
 msgstr "Fixat la doc"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pin to Dock"
 msgstr "Fixează la doc"
 
-#: src/Xfw.cpp:218
-msgid "Edit Launcher"
-msgstr "Editare pentru lansator"
+#: src/Xfw.cpp:231
+msgid "Edit Launcher..."
+msgstr "Editează lansatorul..."
 
-#: src/Xfw.cpp:249
+#: src/Xfw.cpp:266
 msgid "Close All"
 msgstr "Închide tot"
 
-#: src/Xfw.cpp:268
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Xfw.cpp:287
 msgid "Remove"
 msgstr "Elimină"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Xfw.cpp:300
+msgid "Select Launcher..."
+msgstr "Selectează lansatorul..."
 
 #: src/SettingsDialog.cpp:254
 #, c-format
