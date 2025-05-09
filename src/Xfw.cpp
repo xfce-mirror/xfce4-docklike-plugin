@@ -199,9 +199,9 @@ namespace Xfw
 			return menu;
 		}
 
-		if (!appInfo->path.empty())
+		if (!appInfo->mPath.empty())
 		{
-			const gchar* const* actions = appInfo->get_actions();
+			const gchar* const* actions = appInfo->getActions();
 			for (int i = 0; actions[i]; i++)
 			{
 				// Desktop actions get inserted into the menu above all the window manager controls.
@@ -209,7 +209,7 @@ namespace Xfw
 				if (i == 0 && group->mWindowsCount > 0)
 					gtk_menu_shell_insert(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new(), 0);
 
-				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->path.c_str());
+				GDesktopAppInfo* GDAppInfo = g_desktop_app_info_new_from_filename(appInfo->mPath.c_str());
 				gchar* action_name = g_desktop_app_info_get_action_name(GDAppInfo, actions[i]);
 				GtkWidget* actionLauncher = gtk_menu_item_new_with_label(action_name);
 				g_free(action_name);
@@ -220,7 +220,7 @@ namespace Xfw
 
 				g_signal_connect(G_OBJECT(actionLauncher), "activate",
 					G_CALLBACK(+[](GtkMenuItem* menuitem, AppInfo* _appInfo) {
-						_appInfo->launch_action((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
+						_appInfo->launchAction((const gchar*)g_object_get_data((GObject*)menuitem, "action"));
 					}),
 					appInfo.get());
 			}
@@ -304,7 +304,7 @@ namespace Xfw
 						if (AppInfos::selectLauncher(classId))
 							Dock::drawGroups();
 					}),
-					(gpointer)appInfo->name.c_str());
+					(gpointer)appInfo->mName.c_str());
 			}
 		}
 

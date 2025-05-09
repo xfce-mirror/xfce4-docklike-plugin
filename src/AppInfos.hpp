@@ -19,17 +19,17 @@
 
 struct AppInfo
 {
-	const std::string id;
-	const std::string path;
-	const std::string icon;
-	const std::string name;
-	const Store::AutoPtr<GDesktopAppInfo> gAppInfo;
+	const std::string mId;
+	const std::string mPath;
+	const std::string mIcon;
+	const std::string mName;
+	const Store::AutoPtr<GDesktopAppInfo> mGAppInfo;
 
-	AppInfo(std::string _id, std::string _path, std::string _icon, std::string _name, GDesktopAppInfo* _gAppInfo = nullptr)
-		: id(_id), path(_path), icon(_icon), name(_name), gAppInfo(_gAppInfo, [](gpointer o) { if (o) g_object_unref(o); }) {}
-	const gchar* const* get_actions() { return gAppInfo ? g_desktop_app_info_list_actions(gAppInfo.get()) : nullptr; };
+	AppInfo(std::string id, std::string path, std::string icon, std::string name, GDesktopAppInfo* gAppInfo = nullptr)
+		: mId(id), mPath(path), mIcon(icon), mName(name), mGAppInfo(gAppInfo, [](gpointer o) { if (o) g_object_unref(o); }) {}
+	const gchar* const* getActions() { return mGAppInfo ? g_desktop_app_info_list_actions(mGAppInfo.get()) : nullptr; };
 	void launch();
-	void launch_action(const gchar* action);
+	void launchAction(const gchar* action);
 	void edit();
 };
 

@@ -14,7 +14,7 @@
 
 void AppInfo::launch()
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
+	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(mPath.c_str());
 
 	if (info != nullptr)
 	{
@@ -27,9 +27,9 @@ void AppInfo::launch()
 	}
 }
 
-void AppInfo::launch_action(const gchar* action)
+void AppInfo::launchAction(const gchar* action)
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
+	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(mPath.c_str());
 
 	if (info != nullptr)
 	{
@@ -45,7 +45,7 @@ void AppInfo::launch_action(const gchar* action)
 void AppInfo::edit()
 {
 	GError* error = nullptr;
-	gchar* quoted = g_shell_quote(this->path.c_str());
+	gchar* quoted = g_shell_quote(mPath.c_str());
 #if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
 	gchar* command = g_strconcat("xfce-desktop-item-edit ", quoted, nullptr);
 #else
