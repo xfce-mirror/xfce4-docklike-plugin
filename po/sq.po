@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-07 12:52+0200\n"
+"POT-Creation-Date: 2025-05-09 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2024\n"
 "Language-Team: Albanian (https://app.transifex.com/xfce/teams/16840/sq/)\n"
@@ -22,25 +22,33 @@ msgstr ""
 "Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pinned to Dock"
 msgstr "U fiksua te Paneli"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pin to Dock"
 msgstr "Fiksoje te Paneli"
 
-#: src/Xfw.cpp:218
-msgid "Edit Launcher"
-msgstr "Përpunoni Nisës"
+#: src/Xfw.cpp:231
+msgid "Edit Launcher..."
+msgstr ""
 
-#: src/Xfw.cpp:249
+#: src/Xfw.cpp:266
 msgid "Close All"
 msgstr "Mbylli Krejt"
 
-#: src/Xfw.cpp:268
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Xfw.cpp:287
 msgid "Remove"
 msgstr "Hiqe"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Xfw.cpp:300
+msgid "Select Launcher..."
+msgstr ""
 
 #: src/SettingsDialog.cpp:254
 #, c-format
