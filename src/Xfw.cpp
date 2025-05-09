@@ -297,7 +297,15 @@ namespace Xfw
 			else
 			{
 				// we weren't able to find a launcher for this app, let the user set it manually
-				GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
+				GtkWidget* item = gtk_menu_item_new_with_label(_("Create Launcher..."));
+				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), item);
+				g_signal_connect(G_OBJECT(item), "activate",
+					G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
+						AppInfos::createLauncher(classId);
+					}),
+					(gpointer)appInfo->mName.c_str());
+
+				item = gtk_menu_item_new_with_label(_("Select Launcher..."));
 				gtk_menu_shell_prepend(GTK_MENU_SHELL(menu), item);
 				g_signal_connect(G_OBJECT(item), "activate",
 					G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {

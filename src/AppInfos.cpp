@@ -383,4 +383,30 @@ namespace AppInfos
 
 		return added;
 	}
+
+	void createLauncher(const gchar* classId)
+	{
+		GError* error = nullptr;
+		gchar* basename = g_strconcat(classId, ".desktop", nullptr);
+		gchar* path = g_build_filename(g_get_user_data_dir(), "applications", basename, nullptr);
+		gchar* quotedPath = g_shell_quote(path);
+		gchar* quotedId = g_shell_quote(classId);
+#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
+		gchar* command = g_strdup_printf("xfce-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+#else
+		gchar* command = g_strdup_printf("exo-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+#endif
+
+		if (!g_spawn_command_line_async(command, &error))
+		{
+			g_warning("Failed to open create launcher dialog: %s", error->message);
+			g_error_free(error);
+		}
+
+		g_free(command);
+		g_free(quotedId);
+		g_free(quotedPath);
+		g_free(path);
+		g_free(basename);
+	}
 } // namespace AppInfos

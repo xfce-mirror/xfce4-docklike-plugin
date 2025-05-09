@@ -39,6 +39,7 @@ namespace AppInfos
 	void finalize();
 	std::shared_ptr<AppInfo> search(std::string id);
 	bool selectLauncher(const gchar* classId);
+	void createLauncher(const gchar* classId);
 } // namespace AppInfos
 
 #endif // APPINFOS_HPP
