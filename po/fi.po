@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-07 12:52+0200\n"
+"POT-Creation-Date: 2025-05-09 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/xfce/teams/16840/fi/)\n"
@@ -23,25 +23,33 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pinned to Dock"
 msgstr "Kiinnitetty telakkaan"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pin to Dock"
 msgstr "Kiinnitä telakkaan"
 
-#: src/Xfw.cpp:218
-msgid "Edit Launcher"
-msgstr "Muokkaa käynnistintä"
+#: src/Xfw.cpp:231
+msgid "Edit Launcher..."
+msgstr ""
 
-#: src/Xfw.cpp:249
+#: src/Xfw.cpp:266
 msgid "Close All"
 msgstr "Sulje kaikki"
 
-#: src/Xfw.cpp:268
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Xfw.cpp:287
 msgid "Remove"
 msgstr "Poista"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Xfw.cpp:300
+msgid "Select Launcher..."
+msgstr ""
 
 #: src/SettingsDialog.cpp:254
 #, c-format
