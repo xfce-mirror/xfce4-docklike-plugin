@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2024
-# Besnik Bleta <besnik@programeshqip.org>, 2024
+# Besnik Bleta <besnik@programeshqip.org>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-09 00:51+0200\n"
+"POT-Creation-Date: 2025-05-09 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2024\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2025\n"
 "Language-Team: Albanian (https://app.transifex.com/xfce/teams/16840/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "Fiksoje te Paneli"
 
 #: src/Xfw.cpp:231
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Përpunoni Nisës…"
 
 #: src/Xfw.cpp:266
 msgid "Close All"
@@ -47,8 +47,12 @@ msgstr "Hiqe"
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
 #: src/Xfw.cpp:300
+msgid "Create Launcher..."
+msgstr "Krijoni Nisës…"
+
+#: src/Xfw.cpp:308
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Përzgjidhni Nisës…"
 
 #: src/SettingsDialog.cpp:254
 #, c-format
