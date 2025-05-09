@@ -8,16 +8,16 @@
 # Hsiu-Ming Chang <cges30901@gmail.com>, 2024
 # Cheng-Chia Tseng <pswo10680@gmail.com>, 2024
 # Nick Schermer <nick@xfce.org>, 2024
-# 黃柏諺 <s8321414@gmail.com>, 2024
+# 黃柏諺 <s8321414@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2024-04-07 12:52+0200\n"
+"POT-Creation-Date: 2025-05-09 00:51+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2024\n"
+"Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2025\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/xfce/teams/16840/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,25 +25,33 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pinned to Dock"
 msgstr "已釘選至 Dock"
 
-#: src/Xfw.cpp:217
+#: src/Xfw.cpp:230
 msgid "Pin to Dock"
 msgstr "釘選至 Dock"
 
-#: src/Xfw.cpp:218
-msgid "Edit Launcher"
-msgstr "編輯啟動器"
+#: src/Xfw.cpp:231
+msgid "Edit Launcher..."
+msgstr "編輯啟動器……"
 
-#: src/Xfw.cpp:249
+#: src/Xfw.cpp:266
 msgid "Close All"
 msgstr "關閉全部"
 
-#: src/Xfw.cpp:268
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Xfw.cpp:287
 msgid "Remove"
 msgstr "移除"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Xfw.cpp:300
+msgid "Select Launcher..."
+msgstr "選取啟動器……"
 
 #: src/SettingsDialog.cpp:254
 #, c-format
