@@ -14,38 +14,34 @@
 
 void AppInfo::launch()
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
-	if (info != nullptr)
+	if (mGAppInfo)
 	{
+		GError* error = nullptr;
 		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
 
-		g_app_info_launch(G_APP_INFO(info), nullptr, G_APP_LAUNCH_CONTEXT(context), nullptr);
-
+		if (!g_app_info_launch(G_APP_INFO(mGAppInfo.get()), nullptr, G_APP_LAUNCH_CONTEXT(context), &error))
+		{
+			g_warning("Failed to launch app '%s': %s", mName.c_str(), error->message);
+			g_error_free(error);
+		}
 		g_object_unref(context);
-		g_object_unref(info);
 	}
 }
 
-void AppInfo::launch_action(const gchar* action)
+void AppInfo::launchAction(const gchar* action)
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(this->path.c_str());
-
-	if (info != nullptr)
+	if (mGAppInfo)
 	{
 		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
-
-		g_desktop_app_info_launch_action(info, action, G_APP_LAUNCH_CONTEXT(context));
-
+		g_desktop_app_info_launch_action(mGAppInfo.get(), action, G_APP_LAUNCH_CONTEXT(context));
 		g_object_unref(context);
-		g_object_unref(info);
 	}
 }
 
 void AppInfo::edit()
 {
 	GError* error = nullptr;
-	gchar* quoted = g_shell_quote(this->path.c_str());
+	gchar* quoted = g_shell_quote(mPath.c_str());
 #if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
 	gchar* command = g_strconcat("xfce-desktop-item-edit ", quoted, nullptr);
 #else
@@ -386,5 +382,31 @@ namespace AppInfos
 		gtk_widget_destroy(dialog);
 
 		return added;
+	}
+
+	void createLauncher(const gchar* classId)
+	{
+		GError* error = nullptr;
+		gchar* basename = g_strconcat(classId, ".desktop", nullptr);
+		gchar* path = g_build_filename(g_get_user_data_dir(), "applications", basename, nullptr);
+		gchar* quotedPath = g_shell_quote(path);
+		gchar* quotedId = g_shell_quote(classId);
+#if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
+		gchar* command = g_strdup_printf("xfce-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+#else
+		gchar* command = g_strdup_printf("exo-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+#endif
+
+		if (!g_spawn_command_line_async(command, &error))
+		{
+			g_warning("Failed to open create launcher dialog: %s", error->message);
+			g_error_free(error);
+		}
+
+		g_free(command);
+		g_free(quotedId);
+		g_free(quotedPath);
+		g_free(path);
+		g_free(basename);
 	}
 } // namespace AppInfos

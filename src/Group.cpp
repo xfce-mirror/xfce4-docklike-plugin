@@ -186,12 +186,12 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	if (mPinned)
 		gtk_widget_show_all(mButton);
 
-	if (mAppInfo != nullptr && !mAppInfo->icon.empty())
+	if (mAppInfo != nullptr && !mAppInfo->mIcon.empty())
 	{
-		if (mAppInfo->icon[0] == '/' && g_file_test(mAppInfo->icon.c_str(), G_FILE_TEST_IS_REGULAR))
-			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->icon.c_str(), nullptr);
+		if (mAppInfo->mIcon[0] == '/' && g_file_test(mAppInfo->mIcon.c_str(), G_FILE_TEST_IS_REGULAR))
+			mIconPixbuf = gdk_pixbuf_new_from_file(mAppInfo->mIcon.c_str(), nullptr);
 		else
-			gtk_image_set_from_icon_name(GTK_IMAGE(mImage), mAppInfo->icon.c_str(), GTK_ICON_SIZE_BUTTON);
+			gtk_image_set_from_icon_name(GTK_IMAGE(mImage), mAppInfo->mIcon.c_str(), GTK_ICON_SIZE_BUTTON);
 	}
 	else
 		gtk_image_set_from_icon_name(GTK_IMAGE(mImage), "application-x-executable", GTK_ICON_SIZE_BUTTON);
@@ -781,7 +781,7 @@ void Group::updateStyle()
 	if (mWindowsCount > 0)
 	{
 		if (mWindowsCount == 1 && Settings::noWindowsListIfSingle)
-			gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
+			gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
 
@@ -796,7 +796,7 @@ void Group::updateStyle()
 	}
 	else
 	{
-		gtk_widget_set_tooltip_text(mButton, mAppInfo->name.c_str());
+		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 	}
 }
 
