@@ -16,8 +16,14 @@ void AppInfo::launch()
 {
 	if (mGAppInfo)
 	{
+		GError* error = nullptr;
 		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
-		g_app_info_launch(G_APP_INFO(mGAppInfo.get()), nullptr, G_APP_LAUNCH_CONTEXT(context), nullptr);
+
+		if (!g_app_info_launch(G_APP_INFO(mGAppInfo.get()), nullptr, G_APP_LAUNCH_CONTEXT(context), &error))
+		{
+			g_warning("Failed to launch app '%s': %s", mName.c_str(), error->message);
+			g_error_free(error);
+		}
 		g_object_unref(context);
 	}
 }
