@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-09 00:51+0200\n"
+"POT-Creation-Date: 2025-05-09 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Marek Adamski, 2025\n"
 "Language-Team: Polish (https://app.transifex.com/xfce/teams/16840/pl/)\n"
@@ -47,6 +47,10 @@ msgstr "Usuń"
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
 #: src/Xfw.cpp:300
+msgid "Create Launcher..."
+msgstr "Utwórz aktywator..."
+
+#: src/Xfw.cpp:308
 msgid "Select Launcher..."
 msgstr "Wybierz aktywator..."
 
