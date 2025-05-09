@@ -14,31 +14,21 @@
 
 void AppInfo::launch()
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(mPath.c_str());
-
-	if (info != nullptr)
+	if (mGAppInfo)
 	{
 		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
-
-		g_app_info_launch(G_APP_INFO(info), nullptr, G_APP_LAUNCH_CONTEXT(context), nullptr);
-
+		g_app_info_launch(G_APP_INFO(mGAppInfo.get()), nullptr, G_APP_LAUNCH_CONTEXT(context), nullptr);
 		g_object_unref(context);
-		g_object_unref(info);
 	}
 }
 
 void AppInfo::launchAction(const gchar* action)
 {
-	GDesktopAppInfo* info = g_desktop_app_info_new_from_filename(mPath.c_str());
-
-	if (info != nullptr)
+	if (mGAppInfo)
 	{
 		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
-
-		g_desktop_app_info_launch_action(info, action, G_APP_LAUNCH_CONTEXT(context));
-
+		g_desktop_app_info_launch_action(mGAppInfo.get(), action, G_APP_LAUNCH_CONTEXT(context));
 		g_object_unref(context);
-		g_object_unref(info);
 	}
 }
 
