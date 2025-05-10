@@ -69,6 +69,7 @@ public:
 	void onDraw(cairo_t* cr);
 	void onWindowActivate(GroupWindow* groupWindow);
 	void onWindowUnactivate();
+	GtkWidget* buildContextMenu();
 	void onButtonPress(GdkEventButton* event);
 	void onButtonRelease(GdkEventButton* event);
 	void onMouseEnter();

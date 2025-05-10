@@ -839,29 +839,112 @@ void Group::setTopWindow(GroupWindow* groupWindow)
 	mTopWindowIndex = mWindows.getIndex(groupWindow);
 }
 
-void Group::onButtonPress(GdkEventButton* event)
+GtkWidget* Group::buildContextMenu()
 {
-	if (event->button == GDK_BUTTON_SECONDARY)
+	GtkWidget* menu = gtk_menu_new();
+
+	if (mAppInfo->mGAppInfo != nullptr)
 	{
-		std::shared_ptr<GroupWindow> win = Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
-			return (e.second->mGroupAssociated && e.second->mGroup == this);
-		});
+		GtkWidget* item = gtk_check_menu_item_new_with_label(mPinned ? _("Pinned to Dock") : _("Pin to Dock"));
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), mPinned);
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		g_signal_connect(G_OBJECT(item), "toggled",
+			G_CALLBACK(+[](GtkCheckMenuItem* _item, Group* group) {
+				group->mPinned = !group->mPinned;
+				if (!group->mPinned)
+					group->updateStyle();
+				Dock::savePinned();
+			}),
+			this);
 
-		if (!win && !mPinned)
-			return;
+		item = gtk_menu_item_new_with_label(_("Edit Launcher..."));
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		g_signal_connect(G_OBJECT(item), "activate",
+			G_CALLBACK(+[](GtkMenuItem* _item, AppInfo* appInfo) {
+				appInfo->edit();
+			}),
+			mAppInfo.get());
 
-		if (mButton != nullptr)
+		const gchar* const* actions = mAppInfo->getActions();
+		if (actions[0] != nullptr)
 		{
-			mContextMenu = Xfw::buildActionMenu(win.get(), this);
-			if (mContextMenu != nullptr)
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+			for (int i = 0; actions[i] != nullptr; i++)
 			{
-				mContextMenu = GTK_WIDGET(g_object_ref_sink(mContextMenu));
-				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
-				g_signal_connect_swapped(mContextMenu, "deactivate", G_CALLBACK(g_clear_object), &mContextMenu);
-				gtk_menu_popup_at_widget(GTK_MENU(mContextMenu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+				gchar* action_name = g_desktop_app_info_get_action_name(mAppInfo->mGAppInfo.get(), actions[i]);
+				item = gtk_menu_item_new_with_label(action_name);
+				g_free(action_name);
+				g_object_set_data((GObject*)item, "action", (gpointer)actions[i]);
+				gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+				g_signal_connect(G_OBJECT(item), "activate",
+					G_CALLBACK(+[](GtkMenuItem* _item, AppInfo* appInfo) {
+						appInfo->launchAction((const gchar*)g_object_get_data((GObject*)_item, "action"));
+					}),
+					mAppInfo.get());
 			}
 		}
 
+		item = gtk_menu_item_new_with_label(_("Close All"));
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		g_signal_connect(G_OBJECT(item), "activate",
+			G_CALLBACK(+[](GtkMenuItem* _item, Group* group) {
+				group->closeAll();
+			}),
+			this);
+	}
+	else
+	{
+		if (mPinned)
+		{
+			// when a pinned app loses its icon (typically the app is uninstalled) the user may want to remove it from the dock
+			GtkWidget* item = gtk_menu_item_new_with_label(_("Remove"));
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+			g_signal_connect(G_OBJECT(item), "activate",
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* group) {
+					group->mPinned = false;
+					Dock::savePinned();
+					Dock::drawGroups();
+				}),
+				this);
+		}
+		else
+		{
+			// we weren't able to find a launcher for this app, let the user set it manually
+			GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+			g_signal_connect(G_OBJECT(item), "activate",
+				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
+					if (AppInfos::selectLauncher(classId))
+						Dock::drawGroups();
+				}),
+				(gpointer)mAppInfo->mName.c_str());
+
+			item = gtk_menu_item_new_with_label(_("Create Launcher..."));
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+			g_signal_connect(G_OBJECT(item), "activate",
+				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
+					AppInfos::createLauncher(classId);
+				}),
+				(gpointer)mAppInfo->mName.c_str());
+		}
+	}
+
+	gtk_widget_show_all(menu);
+
+	return menu;
+}
+
+void Group::onButtonPress(GdkEventButton* event)
+{
+	if (event->button == GDK_BUTTON_SECONDARY
+		&& mButton != nullptr
+		&& (mWindowsCount > 0 || mPinned))
+	{
+		mContextMenu = GTK_WIDGET(g_object_ref_sink(buildContextMenu()));
+		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
+		g_signal_connect_swapped(mContextMenu, "deactivate", G_CALLBACK(g_clear_object), &mContextMenu);
+		gtk_menu_popup_at_widget(GTK_MENU(mContextMenu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 		mGroupMenu.hide();
 	}
 }
