@@ -95,6 +95,7 @@ public:
 	GtkWidget* mLabel;
 	GtkWidget* mImage;
 	GdkPixbuf* mIconPixbuf;
+	GtkWidget* mContextMenu;
 
 	Help::Gtk::Timeout mLeaveTimeout;
 	Help::Gtk::Timeout mMenuShowTimeout;
