@@ -13,11 +13,16 @@
 
 #include <libxfce4ui/libxfce4ui.h>
 
+#include <unordered_set>
+
 namespace Xfw
 {
 	XfwScreen* mXfwScreen;
 	XfwWorkspaceGroup* mXfwWorkspaceGroup;
 	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
+	std::unordered_set<std::string> mInvalidClassIds = {
+		"wine",
+	};
 
 	namespace // private:
 	{
@@ -26,7 +31,16 @@ namespace Xfw
 			// Xfw method const char *
 			const gchar* const* class_ids = xfw_window_get_class_ids(xfwWindow);
 			if (!xfce_str_is_empty(class_ids[0]))
-				return class_ids[0];
+			{
+				// On X11, the class-id is generally the right app-id, but there is sometimes
+				// an inversion with the instance-id. If there is only one 'class_ids' (wayland),
+				// it's considered valid anyway
+				if (!xfce_str_is_empty(class_ids[1])
+					&& mInvalidClassIds.find(Help::String::toLowercase(class_ids[0])) != mInvalidClassIds.end())
+					return class_ids[1];
+				else
+					return class_ids[0];
+			}
 
 			// proc/{pid}/cmdline method
 			XfwApplicationInstance* instance = xfw_application_get_instance(xfw_window_get_application(xfwWindow), xfwWindow);

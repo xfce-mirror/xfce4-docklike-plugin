@@ -13,6 +13,7 @@ static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 {
 	mIconPixbuf = nullptr;
+	mContextMenu = nullptr;
 	mAppInfo = appInfo;
 	mPinned = pinned;
 	mTopWindowIndex = 0;
@@ -756,7 +757,8 @@ void Group::onMouseEnter()
 			g.second->mGroupMenu.mGroup->onMouseLeave();
 	});
 
-	mGroupMenu.popup();
+	if (mContextMenu == nullptr)
+		mGroupMenu.popup();
 }
 
 void Group::onMouseLeave()
@@ -850,13 +852,13 @@ void Group::onButtonPress(GdkEventButton* event)
 
 		if (mButton != nullptr)
 		{
-			GtkWidget* menu = Xfw::buildActionMenu(win.get(), this);
-			if (menu != nullptr)
+			mContextMenu = Xfw::buildActionMenu(win.get(), this);
+			if (mContextMenu != nullptr)
 			{
-				menu = GTK_WIDGET(g_object_ref_sink(menu));
-				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
-				g_signal_connect(menu, "deactivate", G_CALLBACK(g_object_unref), nullptr);
-				gtk_menu_popup_at_widget(GTK_MENU(menu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
+				mContextMenu = GTK_WIDGET(g_object_ref_sink(mContextMenu));
+				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
+				g_signal_connect_swapped(mContextMenu, "deactivate", G_CALLBACK(g_clear_object), &mContextMenu);
+				gtk_menu_popup_at_widget(GTK_MENU(mContextMenu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 			}
 		}
 
