@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-09 00:51+0200\n"
+"POT-Creation-Date: 2025-05-11 12:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Cas Pascal <casboi86@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/xfce/teams/16840/vi/)\n"
@@ -22,40 +22,12 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/Xfw.cpp:230
-msgid "Pinned to Dock"
-msgstr "Đã ghim vào Dock"
-
-#: src/Xfw.cpp:230
-msgid "Pin to Dock"
-msgstr "Ghim vào Dock"
-
-#: src/Xfw.cpp:231
-msgid "Edit Launcher..."
-msgstr ""
-
-#: src/Xfw.cpp:266
-msgid "Close All"
-msgstr "Đóng tất cả"
-
-#. when a pinned app loses its icon (typically the app is uninstalled) the
-#. user may want to remove it from the dock
-#: src/Xfw.cpp:287
-msgid "Remove"
-msgstr "Gỡ bỏ"
-
-#. we weren't able to find a launcher for this app, let the user set it
-#. manually
-#: src/Xfw.cpp:300
-msgid "Select Launcher..."
-msgstr ""
-
-#: src/SettingsDialog.cpp:254
+#: src/SettingsDialog.cpp:265
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Chỉ %u phím tắt đầu tiên được bật.</b>\n"
 
-#: src/SettingsDialog.cpp:259
+#: src/SettingsDialog.cpp:270
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
