@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Igor <f2404@yandex.ru>, 2023
 # Arthur D., 2024
 # Igor Vornovskii, 2024
 # Xfce Bot <transifex@xfce.org>, 2024
@@ -15,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-09 00:51+0200\n"
+"POT-Creation-Date: 2025-05-11 12:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Andrei Stepanov, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/xfce/teams/16840/ru/)\n"
@@ -25,40 +24,12 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/Xfw.cpp:230
-msgid "Pinned to Dock"
-msgstr "Прикреплен к док-станции"
-
-#: src/Xfw.cpp:230
-msgid "Pin to Dock"
-msgstr "прикрепить к док-станции"
-
-#: src/Xfw.cpp:231
-msgid "Edit Launcher..."
-msgstr ""
-
-#: src/Xfw.cpp:266
-msgid "Close All"
-msgstr "Закрыть Всё"
-
-#. when a pinned app loses its icon (typically the app is uninstalled) the
-#. user may want to remove it from the dock
-#: src/Xfw.cpp:287
-msgid "Remove"
-msgstr "Удалить"
-
-#. we weren't able to find a launcher for this app, let the user set it
-#. manually
-#: src/Xfw.cpp:300
-msgid "Select Launcher..."
-msgstr ""
-
-#: src/SettingsDialog.cpp:254
+#: src/SettingsDialog.cpp:265
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
 
-#: src/SettingsDialog.cpp:259
+#: src/SettingsDialog.cpp:270
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
