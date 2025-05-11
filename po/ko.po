@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2023
 # AlexKoala, 2024
 # Nick Schermer <nick@xfce.org>, 2024
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2024
@@ -14,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-09 00:51+0200\n"
+"POT-Creation-Date: 2025-05-11 12:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2024\n"
 "Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
@@ -24,40 +23,12 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/Xfw.cpp:230
-msgid "Pinned to Dock"
-msgstr "도크에 고정했습니다"
-
-#: src/Xfw.cpp:230
-msgid "Pin to Dock"
-msgstr "도크에 고정"
-
-#: src/Xfw.cpp:231
-msgid "Edit Launcher..."
-msgstr ""
-
-#: src/Xfw.cpp:266
-msgid "Close All"
-msgstr "모두 닫기"
-
-#. when a pinned app loses its icon (typically the app is uninstalled) the
-#. user may want to remove it from the dock
-#: src/Xfw.cpp:287
-msgid "Remove"
-msgstr "제거"
-
-#. we weren't able to find a launcher for this app, let the user set it
-#. manually
-#: src/Xfw.cpp:300
-msgid "Select Launcher..."
-msgstr ""
-
-#: src/SettingsDialog.cpp:254
+#: src/SettingsDialog.cpp:265
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>처음 %u 바로 가기 키만 사용할 수 있습니다.</b>\n"
 
-#: src/SettingsDialog.cpp:259
+#: src/SettingsDialog.cpp:270
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
