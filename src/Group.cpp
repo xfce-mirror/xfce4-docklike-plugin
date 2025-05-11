@@ -18,6 +18,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 	mPinned = pinned;
 	mTopWindowIndex = 0;
 	mActive = false;
+	mWindowMenuShown = false;
 
 	//--------------------------------------------------
 
@@ -763,7 +764,7 @@ void Group::onMouseEnter()
 
 void Group::onMouseLeave()
 {
-	if (!mGroupMenu.mMouseHover)
+	if (!mGroupMenu.mMouseHover && !mWindowMenuShown)
 		mGroupMenu.hide();
 }
 

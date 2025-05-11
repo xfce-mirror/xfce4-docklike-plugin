@@ -83,6 +83,7 @@ public:
 
 	bool mPinned;
 	bool mActive;
+	bool mWindowMenuShown;
 
 	uint mTolerablePointerDistance;
 	uint mTopWindowIndex;

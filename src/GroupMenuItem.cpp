@@ -76,6 +76,20 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
+			else if (event->button == GDK_BUTTON_SECONDARY)
+			{
+				GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow)));
+				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+				g_signal_connect(G_OBJECT(menu), "deactivate",
+					G_CALLBACK(+[](GtkMenuShell* _menu, GroupMenuItem* _me) {
+						g_object_unref(_menu);
+						_me->mGroupWindow->mGroup->mWindowMenuShown = false;
+						_me->mGroupWindow->mGroup->setMouseLeaveTimeout();
+					}),
+					me);
+				gtk_menu_popup_at_pointer(GTK_MENU(menu), (GdkEvent*)event);
+				me->mGroupWindow->mGroup->mWindowMenuShown = true;
+			}
 			return true;
 		}),
 		this);
