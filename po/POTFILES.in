@@ -1,5 +1,6 @@
+src/AppInfos.cpp
+src/Group.cpp
 src/Plugin.cpp
-src/Xfw.cpp
 src/SettingsDialog.cpp
 src/docklike.desktop.in
 src/_dialogs.ui

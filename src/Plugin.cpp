@@ -103,28 +103,14 @@ namespace Plugin
 			"David Keogh <davidtkeogh@gmail.com>",
 			nullptr};
 
-		// TODO: Load these from a TRANSLATORS text file, so people can add themselves.
-		const gchar* TRANSLATORS =
-			"Yamada Hayao <hayao@fascode.net> : ja\n"
-			"Dmitry K <dkabishchev@ya.ru> : ru\n"
-			"Fábio Meneghetti <fabiom@riseup.net> : pt\n"
-			"Mirko Brombin <send@mirko.pm> : it\n"
-			"Adem Kürşat Uzun <ademkursatuzun@gmail.com> : tr\n"
-			"Santiago Soler <santiago.r.soler@gmail.com> : es\n"
-			"fredii: de\n"
-			"Lucas Hadjilucas <puzzle@outlook.com> : el\n"
-			"Jan Kazemier : nl\n"
-			"Matthaiks : pl\n"
-			"Faisal Rachmadin <frachmadin@gmail.com> : id\n";
-
 		gtk_show_about_dialog(nullptr,
-			"program-name", "Docklike Taskbar",
+			"program-name", PACKAGE_NAME,
 			"logo-icon-name", "preferences-system",
 			"version", VERSION_FULL,
 			"copyright", "Copyright \302\251 2003-" COPYRIGHT_YEAR " The Xfce development team",
 			"license-type", GTK_LICENSE_GPL_3_0,
 			"authors", AUTHORS,
-			"translator-credits", TRANSLATORS,
+			"translator-credits", _("translator-credits"),
 			nullptr);
 	}
 
