@@ -4,8 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2024
 # Xfce Bot <transifex@xfce.org>, 2024
+# Πέτρος Σαμαράς <psamaras1@gmail.com>, 2025
+# Στέργιος Γέμελας <sgemelas@protonmail.com>, 2025
 # Ioannis LM, 2025
 # 
 #, fuzzy
@@ -13,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-11 12:50+0200\n"
+"POT-Creation-Date: 2025-05-13 00:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Ioannis LM, 2025\n"
 "Language-Team: Greek (https://app.transifex.com/xfce/teams/16840/el/)\n"
@@ -22,6 +23,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/AppInfos.cpp:356
+msgid "Select Launcher"
+msgstr ""
+
+#: src/AppInfos.cpp:357
+msgid "_Cancel"
+msgstr "Άκ_υρο"
+
+#: src/AppInfos.cpp:357
+msgid "_Open"
+msgstr "_Άνοιγμα"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "Καρφιτσωμένο στη περιοχή εργασιών"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "Καρφίτσωμα στη περιοχή εργασιών"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr ""
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "Κλείσιμο όλων"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr ""
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr ""
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr ""
+"Ευάγγελος Μπαλάσκας <ebalaskas@ebalaskas.gr>\n"
+"Σταύρος Γιαννούρης <stavrosg@hellug.gr>\n"
+"Στάθης Καμπέρης <ekamperi@auth.gr>\n"
+"Ιωάννης"
 
 #: src/SettingsDialog.cpp:265
 #, c-format
