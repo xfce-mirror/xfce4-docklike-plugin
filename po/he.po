@@ -6,22 +6,70 @@
 # Translators:
 # 63f334ffc0709ba0fc2361b80bf3c0f0_00ffd1e <ab96c93ca0ac55ba7fa06385427e60dd_878890>, 2024
 # gk <genghiskhan@gmx.ca>, 2024
-# Elishai Eliyahu <elishai@mailfence.com>, 2024
+# Elishai Eliyahu <elishai@mailfence.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-11 12:50+0200\n"
+"POT-Creation-Date: 2025-05-13 00:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Elishai Eliyahu <elishai@mailfence.com>, 2024\n"
+"Last-Translator: Elishai Eliyahu <elishai@mailfence.com>, 2025\n"
 "Language-Team: Hebrew (https://app.transifex.com/xfce/teams/16840/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
+
+#: src/AppInfos.cpp:356
+msgid "Select Launcher"
+msgstr ""
+
+#: src/AppInfos.cpp:357
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: src/AppInfos.cpp:357
+msgid "_Open"
+msgstr "_פתח"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "נעוץ למעגן"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "נעץ למעגן"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr ""
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "סגור הכל"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "הסרה"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr ""
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr ""
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr "שבחים-מתרגמים"
 
 #: src/SettingsDialog.cpp:265
 #, c-format
