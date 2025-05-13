@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2024
+# 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2025
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2025
 # 
 #, fuzzy
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-11 12:50+0200\n"
+"POT-Creation-Date: 2025-05-13 00:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
@@ -21,6 +22,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/AppInfos.cpp:356
+msgid "Select Launcher"
+msgstr "실행 아이콘 선택"
+
+#: src/AppInfos.cpp:357
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: src/AppInfos.cpp:357
+msgid "_Open"
+msgstr "열기(_O)"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "도크에 고정했습니다"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "도크에 고정"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr "실행 아이콘 편집..."
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "모두 닫기"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "제거"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr "실행 아이콘 선택..."
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr "실행 아이콘 만들기..."
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr ""
+"Seong-ho Cho <darkcircle.0426@gmail.com>\n"
+"Junggyu Bag <bagjunggyu@gmail.com>"
 
 #: src/SettingsDialog.cpp:265
 #, c-format
@@ -42,7 +93,7 @@ msgstr "도크형 작업 표시줄"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "최신 초단순 Xfce용 작업 표시줄"
+msgstr "최신 초단순 xfce용 작업 표시줄"
 
 #: src/_dialogs.ui:35
 msgid "_Help"
