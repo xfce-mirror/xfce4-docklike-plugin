@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Përzgjidhni Nisës"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
