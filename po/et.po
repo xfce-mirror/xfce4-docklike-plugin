@@ -23,7 +23,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Vali käivitaja"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -63,7 +63,7 @@ msgstr "Vali käivitaja..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Loo käiviaja..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
