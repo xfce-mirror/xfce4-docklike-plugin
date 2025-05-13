@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Изаберите покретач"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -44,7 +44,7 @@ msgstr "Закачи за док"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Уреди покретач..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -60,11 +60,11 @@ msgstr "Уклони"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Изабери покретач..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Направи покретач..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
@@ -73,7 +73,7 @@ msgstr "Саша Петровић <salepetronije@gmail.com>"
 #: src/SettingsDialog.cpp:265
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>Само прва пречица %u је омогућена.</b>\n"
+msgstr "<b>Само првих  %u пречица је омогућен(а).</b>\n"
 
 #: src/SettingsDialog.cpp:270
 #, c-format
