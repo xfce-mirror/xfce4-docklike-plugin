@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Duy Truong Nguyen <truongap.ars@gmail.com>, 2024
+# Nick Schermer <nick@xfce.org>, 2025
 # Cas Pascal <casboi86@gmail.com>, 2025
 # 
 #, fuzzy
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-11 12:50+0200\n"
+"POT-Creation-Date: 2025-05-13 00:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Cas Pascal <casboi86@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/xfce/teams/16840/vi/)\n"
@@ -21,6 +22,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/AppInfos.cpp:356
+msgid "Select Launcher"
+msgstr ""
+
+#: src/AppInfos.cpp:357
+msgid "_Cancel"
+msgstr "Huỷ"
+
+#: src/AppInfos.cpp:357
+msgid "_Open"
+msgstr ""
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "Đã ghim vào Dock"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "Ghim vào Dock"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr ""
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "Đóng tất cả"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "Gỡ bỏ"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr ""
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr ""
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr "Công trạng người dịch:"
 
 #: src/SettingsDialog.cpp:265
 #, c-format
