@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xfce Bot <transifex@xfce.org>, 2025
+# Xfce Bot <transifex@xfce.org>, 2024
 # Pjotr <pjotrvertaalt@gmail.com>, 2025
 # 
 #, fuzzy
@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Starter kiezen"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -36,11 +36,11 @@ msgstr "_Openen"
 
 #: src/Group.cpp:860
 msgid "Pinned to Dock"
-msgstr "Vastgemaakt aan Dock"
+msgstr "Vastgemaakt aan Dok"
 
 #: src/Group.cpp:860
 msgid "Pin to Dock"
-msgstr "Vastmaken aan Dock"
+msgstr "Vastmaken aan Dok"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
@@ -48,7 +48,7 @@ msgstr "Starter bewerken..."
 
 #: src/Group.cpp:899
 msgid "Close All"
-msgstr "Sluit alle"
+msgstr "Alles sluiten"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
