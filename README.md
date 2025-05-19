@@ -10,24 +10,20 @@ For usage instructions, keyboard shortcuts, and screenshots, see:
 ## Build & Install
 
 ```bash
-tar xvf xfce4-docklike-plugin-0.4.0.tar.gz && cd xfce4-docklike-plugin-0.4.0
-./configure
-make
-sudo make install
+tar xvf xfce4-docklike-plugin-<version>.tar.xz && cd xfce4-docklike-plugin-<version>
+meson setup build 
+meson compile -C build 
+sudo meson install -C build
 ```
-
-Use e.g. `./configure --prefix=/usr` to change install location
 
 ### From git
 
 ```bash
 git clone https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin.git && cd xfce4-docklike-plugin
-./autogen.sh
-make
-sudo make install
+meson setup build
+meson compile -C build
+sudo meson install -C build
 ```
-
-Use e.g. `./autogen.sh --prefix=/usr` to change install location
 
 ## Reporting bugs
 
