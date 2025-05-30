@@ -26,7 +26,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Välj programstartare"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -46,7 +46,7 @@ msgstr "Fäst till Dock"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Redigera programstartare..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -62,11 +62,11 @@ msgstr "Ta bort"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Välj programstartare..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Skapa programstartare..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
