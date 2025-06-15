@@ -240,6 +240,7 @@ void Group::add(GroupWindow* window)
 	if (!mActive && xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
 
+	updateIconFromWindows();
 	gtk_widget_queue_draw(mButton);
 }
 
@@ -811,6 +812,31 @@ void Group::updateStyle()
 	else
 	{
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
+	}
+}
+
+void Group::updateIconFromWindows()
+{
+	if (mAppInfo != nullptr && !mAppInfo->mIcon.empty())
+		return;
+
+	if (mIconPixbuf != nullptr)
+		return;
+
+	for (uint i = 0; i < mWindows.size(); i++)
+	{
+		GroupWindow* window = mWindows.get(i);
+		if (window && window->mXfwWindow)
+		{
+			gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mImage));
+			GdkPixbuf* windowIcon = xfw_window_get_icon(window->mXfwWindow, 32, scale_factor);
+			if (windowIcon != nullptr)
+			{
+				mIconPixbuf = windowIcon;
+				resize();
+				return;
+			}
+		}
 	}
 }
 
