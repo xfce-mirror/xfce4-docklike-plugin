@@ -9,6 +9,7 @@
 # Xfce Bot <transifex@xfce.org>, 2025
 # Emin Tufan Çetin <etcetin@gmail.com>, 2025
 # b83946de5835331df42b9ffcc43e6a33_05e65cd <73a30e0a984b2291d4915f37112ad292_814039>, 2025
+# Serdar Sağlam <teknomobil@msn.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2025-05-13 00:50+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: b83946de5835331df42b9ffcc43e6a33_05e65cd <73a30e0a984b2291d4915f37112ad292_814039>, 2025\n"
+"Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2025\n"
 "Language-Team: Turkish (https://app.transifex.com/xfce/teams/16840/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Başlatıcı Seç"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -47,7 +48,7 @@ msgstr "Dock'a Sabitle"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Başlatıcıyı Düzenle..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -63,11 +64,11 @@ msgstr "Kaldır"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Başlatıcı Seç..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Başlatıcı Oluştur..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
