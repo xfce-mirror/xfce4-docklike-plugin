@@ -41,6 +41,7 @@ namespace SettingsDialog
 		GtkBuilder* builder = gtk_builder_new_from_resource("/_dialogs.ui");
 		GtkWidget* dialog = (GtkWidget*)gtk_builder_get_object(builder, "dialog");
 		mSettingsDialog = dialog;
+		g_object_add_weak_pointer(G_OBJECT(dialog), (gpointer*)&mSettingsDialog);
 		gtk_window_set_role(GTK_WINDOW(dialog), "xfce4-panel");
 		gtk_widget_show(dialog);
 
@@ -59,17 +60,15 @@ namespace SettingsDialog
 			}),
 			dialog);
 
-		g_signal_connect(dialog, "close",
+		g_signal_connect(dialog, "destroy",
 			G_CALLBACK(+[](GtkDialog* _dialog, GtkBuilder* _builder) {
 				g_object_unref(_builder);
-				mSettingsDialog = nullptr;
 			}),
 			builder);
 
 		g_signal_connect(dialog, "response",
 			G_CALLBACK(+[](GtkDialog* _dialog, gint response, GtkBuilder* _builder) {
-				g_object_unref(_builder);
-				mSettingsDialog = nullptr;
+				gtk_widget_destroy(GTK_WIDGET(_dialog));
 			}),
 			builder);
 
