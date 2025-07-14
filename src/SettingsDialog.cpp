@@ -24,17 +24,25 @@
 
 namespace SettingsDialog
 {
+	GtkWidget* mSettingsDialog = nullptr;
+
 	void popup()
 	{
+		if (mSettingsDialog != nullptr)
+		{
+			gtk_window_present(GTK_WINDOW(mSettingsDialog));
+			return;
+		}
+
 		/* Hook to make sure GtkBuilder knows this is an XfceTitledDialog object */
 		if (xfce_titled_dialog_get_type() == 0)
 			return;
 
 		GtkBuilder* builder = gtk_builder_new_from_resource("/_dialogs.ui");
 		GtkWidget* dialog = (GtkWidget*)gtk_builder_get_object(builder, "dialog");
+		mSettingsDialog = dialog;
 		gtk_window_set_role(GTK_WINDOW(dialog), "xfce4-panel");
 		gtk_widget_show(dialog);
-		xfce_panel_plugin_block_menu(Plugin::mXfPlugin);
 
 		g_signal_connect(
 			gtk_builder_get_object(builder, "b_close"), "clicked",
@@ -53,15 +61,15 @@ namespace SettingsDialog
 
 		g_signal_connect(dialog, "close",
 			G_CALLBACK(+[](GtkDialog* _dialog, GtkBuilder* _builder) {
-				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
 				g_object_unref(_builder);
+				mSettingsDialog = nullptr;
 			}),
 			builder);
 
 		g_signal_connect(dialog, "response",
 			G_CALLBACK(+[](GtkDialog* _dialog, gint response, GtkBuilder* _builder) {
-				xfce_panel_plugin_unblock_menu(Plugin::mXfPlugin);
 				g_object_unref(_builder);
+				mSettingsDialog = nullptr;
 			}),
 			builder);
 
