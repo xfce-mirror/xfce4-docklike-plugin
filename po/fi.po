@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -12,9 +12,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Ammuu5, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/xfce/teams/16840/fi/)\n"
@@ -24,60 +24,60 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr ""
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "_Avaa"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Kiinnitetty telakkaan"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Kiinnitä telakkaan"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr ""
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "Sulje kaikki"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "Poista"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr ""
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr ""
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr "Jari Rahkonen <jari.rahkonen@pp1.inet.fi>"
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Vain ensimmäiset %u pikanäppäimet ovat käytössä.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -85,155 +85,3 @@ msgid ""
 msgstr ""
 "Pikanäppäin &lt;SUPER&gt;+%u vaikuttaa olevan jo toisen prosessin käytössä.\n"
 "Tarkista Xfce:n asetukset."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "Telakanomainen tehtäväpalkki"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Moderni, minimalistinen tehtäväpalkki Xfce:lle"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "_Ohje"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "_Sulje"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "Älä näytä luetteloa yksittäisistä ikkunoista"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "Näytä vain nykyisen työtilan sovellukset"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "Näytä sovellukset vain nykyisellä näytöllä"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "Näytä esikatselukuvat avoimille ikkunoille"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Näytä avoinna olevien ikkunoiden määrä (jos yli 2)"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "Hiiren keskimmäinen painike:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "Sulje kaikki"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "Käynnistä uusi instanssi"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "Älä tee mitään"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "Toiminta"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "Aktiivisen ilmaisimen tyyli:"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "Palkit"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "Pisteet"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "Suorakulmiot"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr ""
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr ""
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "Ei mitään"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "Passiivisen ilmaisimen tyyli:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "Ilmaisimen suunta:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "Automaattinen"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "Alas"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "Oikealle"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "Ylös"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "Vasemmalle"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "Määritä ilmaisimen väri teemasta"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "Aktiivinen ilmaisin:"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "Passiivinen ilmaisin:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "Pakota kuvakkeiden koko:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "Ulkoasu"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Vaihda sovellusten välillä painikkeilla <SUPER> + [1, 2, ...]"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "Vaihda viimeiseen ikkunaan näppäimellä <SUPER>"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Tämä ominaisuus on poistettu käytöstä.</b>\n"
-"Se vaatii X11 XInput2.0 -laajennuksen, jota järjestelmäsi ei tarjoa."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "Pikanäppäimet"
