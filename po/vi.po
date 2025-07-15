@@ -1,19 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Duy Truong Nguyen <truongap.ars@gmail.com>, 2024
 # Nick Schermer <nick@xfce.org>, 2025
 # Cas Pascal <casboi86@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Cas Pascal <casboi86@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/xfce/teams/16840/vi/)\n"
@@ -23,60 +22,60 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr ""
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "Huỷ"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr ""
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Đã ghim vào Dock"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Ghim vào Dock"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr ""
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "Đóng tất cả"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "Gỡ bỏ"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr ""
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr ""
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr "Công trạng người dịch:"
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Chỉ %u phím tắt đầu tiên được bật.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -84,155 +83,3 @@ msgid ""
 msgstr ""
 "&lt;SUPER&gt;+%u có vẻ đang được sử dụng với một tiến trình khác.\n"
 "Hãy kiểm tra cài đặt xfce của bạn."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "Thanh tác vụ Docklike"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Thanh tác vụ đơn giản, thu gọn cho Xfce"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "Trợ giúp"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "Đóng"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "Không hiển thị danh sách cửa sổ khi chỉ có một cửa sổ"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "Chỉ hiển thị các ứng dụng trên không gian làm việc hiện tại"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "Chỉ hiển thị các ứng dụng trên màn hình hiện tại"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "Hiển thị preview các cửa sổ"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Hiển thị số cửa sổ hiện hành (nếu lớn hơn 2)"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "Nút chuột giữa:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "Đóng tất cả"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "Chạy một trình mới"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "Không làm gì"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "Hành vi"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "Kiểu chỉ thị hoạt động"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "Thanh"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "Chấm"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "Hình chữ nhật"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr "Hình tròn"
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "Không"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "Kiểu chỉ thị không hoạt động:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "Hướng của chỉ thị:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "Tự động"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "Dưới"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "Bên phải"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "Trên"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "Bên trái"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "Lấy màu cho chỉ thị từ chủ đề hệ thống"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "Chỉ thị hoạt động"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "Chỉ thị không hoạt động:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "Ép kích cỡ biểu tượng:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "Diện mạo"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Chuyển đổi giữa các ứng dụng bằng <SUPER>+[1, 2, ...]"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "Chuyển đến cửa sổ vừa dùng với <SUPER>"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Tính năng này đang bị vô hiệu.</b>\n"
-"Yêu cầu phần mở rộng Xinput2.0 của X11 nhưng phần mở rộng này không có trên hệ thống của bạn."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "Phím nóng"
