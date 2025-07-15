@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: scootergrisen, 2025\n"
 "Language-Team: Danish (https://app.transifex.com/xfce/teams/16840/da/)\n"
@@ -22,60 +22,60 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr "Vælg programstarter"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "_Annuller"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "_Åbn"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Fastgjort til dok"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Fastgør til dok"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr "Rediger programstarter ..."
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "Luk alle"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "Fjern"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr "Vælg programstarter ..."
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr "Opret programstarter ..."
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr "Per Kongstad <p_kongstad@op.pl>"
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Kun de første %u genvejstaster er aktiveret.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -83,155 +83,3 @@ msgid ""
 msgstr ""
 "Kombinationen &lt;SUPER&gt;+%u ser allerede ud til at være i brug af en anden process.\n"
 "Tjek dine Xfce-indstillinger."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "Docklike-opgavelinje"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "En moderne, minimalistisk opgavelinje til Xfce"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "_Hjælp"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "_Luk"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "Vis ikke vindueslisten for et enkelt vindue"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "Vis kun programmer på det nuværende arbejdsområde"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "Vis kun programmer på den nuværende skærm"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "Vis forhåndsvisningsminiaturer for åbne vinduer"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Vis antallet af åbne vinduer (hvis mere end 2)"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "Midterste museknap:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "Luk alle"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "Start ny instans"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "Gør ingenting"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "Opførsel"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "Stil for aktiv indikator:"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "Bjælker"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "Prikker"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "Rektangler"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr "Cirkler"
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "Ingen"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "Stil for inaktiv indikator:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "Indikatorretning:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "Automatisk"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "Nederst"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "Højre"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "Øverst"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "Venstre"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "Hent indikatorfarve fra tema"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "Aktiv indikator:"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "Inaktiv indikator:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "Tving ikonstørrelse:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "Udseende"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Skift mellem programmer med <SUPER>+[1, 2, ...]"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "Skift til den sidste vindue med <SUPER>"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Funktionaliteten er deaktiveret.</b>\n"
-"Den kræver X11 XInput2.0-udvidelsen, som ikke findes på dit system."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "Tastaturgenveje"
