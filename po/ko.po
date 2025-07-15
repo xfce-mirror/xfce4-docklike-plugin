@@ -1,19 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2024
 # 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2025
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
@@ -23,62 +22,62 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr "실행 아이콘 선택"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "취소(_C)"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "열기(_O)"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "도크에 고정했습니다"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "도크에 고정"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr "실행 아이콘 편집..."
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "모두 닫기"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "제거"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr "실행 아이콘 선택..."
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr "실행 아이콘 만들기..."
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr ""
 "Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Junggyu Bag <bagjunggyu@gmail.com>"
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>처음 %u 바로 가기 키만 사용할 수 있습니다.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -86,155 +85,3 @@ msgid ""
 msgstr ""
 "&lt;SUPER&gt;+%u 키 조합을 다른 프로세스에서 이미 사용하고 있는 것 같습니다.\n"
 "Xfce 설정을 확인하십시오."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "도크형 작업 표시줄"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "최신 초단순 xfce용 작업 표시줄"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "도움말(_H)"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "닫기(_C)"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "단일 창 목록을 나타내지 않음"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "현재 작업 공간에만 앱 표시"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "현재 화면에만 앱 표시"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "열어둘 창의 미리 보기 그림 표시"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "창 갯수(가 2개 이상일 경우) 표시"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "가운데 마우스 단추:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "모두 닫기"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "새 인스턴스 실행"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "아무것도 안 함"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "동작"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "활성 표시 방식:"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "막대"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "반점"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "사각형"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr "실리오라"
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr "동글뱅이"
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "없음"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "비활성 표시 방식:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "표시 방향:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "자동"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "아래"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "오른쪽"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "위"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "왼쪽"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "테마에서 표시 색상 가져오기"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "활성 표시:"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "비활성 표시:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "아이콘 강제 크기:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "모양새"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "<SUPER>+[1, 2, ...] 키로 앱 전환"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "<SUPER> 키로 마지막에 사용한 창 전환"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>이 기능은 사용할 수 없습니다.</b>\n"
-"시스템에 설치하지 않은 X11 XInput 2.0 확장이 필요합니다."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "키보드 바로 가기 키"
