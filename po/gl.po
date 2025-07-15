@@ -1,20 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Xosé, 2024
-# Nick Schermer <nick@xfce.org>, 2024
 # Daniel Muñiz Fontoira <dani@damufo.eu>, 2025
 # Yago Raña Gayoso <yago.rana.gayoso@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Yago Raña Gayoso <yago.rana.gayoso@gmail.com>, 2025\n"
 "Language-Team: Galician (https://app.transifex.com/xfce/teams/16840/gl/)\n"
@@ -24,60 +22,60 @@ msgstr ""
 "Language: gl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr "Elixir o iniciador"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Fixado á doca "
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Fixar á doca"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr "Modificar o iniciador…"
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "Pechar todo"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "Eliminar"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr "Elixir o iniciador…"
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr "Crear o iniciador…"
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr "Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009, 2010."
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Só están habilitados os %u primeiros atallos.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -85,155 +83,3 @@ msgid ""
 msgstr ""
 "Parece que a combinación &lt;SUPER&gt;+%uxa está en uso por outro proceso.\n"
 "Comprobe a súa configuración do Xfce."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "Barra de tarefas tipo doca"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Unha barra de tarefas moderna e minimalista para o Xfce"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "_Axuda"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "_Pechar"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "Non amosar a lista de xanelas dunha única xanela"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "Amosar só aplicacións no espazo de traballo actual"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "Amosar só aplicacións na pantalla actual"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "Amosar miniaturas de vista previa para as xanelas abertas"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Amosar o número de xanelas abertas (se é superior a 2)"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "Botón do medio do rato:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "Pechar todo"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "Iniciar unha nova instancia"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "Non facer nada"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "Comportamento"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "Estilo do indicador activo:"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "Barras"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "Puntos"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "Rectángulos"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr "Círculos"
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "Ningún"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "Estilo do indicador inactivo:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "Orientación do indicador:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "Automática"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "Fondo"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "Dereita"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "Arriba"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "Esquerda"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "Obter a cor do indicador a partir do tema"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "Indicador activo:"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "Indicador inactivo:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "Forzar o tamaño da icona:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "Aparencia"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Alternar entre aplicacións con <SUPER>+[1, 2, ...]"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "Alternar á última xanela con <SUPER>"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Esta característica está desactivada.</b>\n"
-"A extensión requirida XInput2.0 de X11 non está no seu sistema."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "Atallos de teclado"
