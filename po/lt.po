@@ -1,18 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Xfce
-# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2024
 # Moo, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
-"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 12:52+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Moo, 2025\n"
 "Language-Team: Lithuanian (https://app.transifex.com/xfce/teams/16840/lt/)\n"
@@ -22,62 +21,62 @@ msgstr ""
 "Language: lt\n"
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: src/AppInfos.cpp:356
+#: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr ""
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: src/AppInfos.cpp:357
+#: ../src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "_Atverti"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Prisegta prie doko"
 
-#: src/Group.cpp:860
+#: ../src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Prisegti prie doko"
 
-#: src/Group.cpp:872
+#: ../src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr ""
 
-#: src/Group.cpp:899
+#: ../src/Group.cpp:899
 msgid "Close All"
 msgstr "Užverti visus"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: ../src/Group.cpp:913
 msgid "Remove"
 msgstr "Šalinti"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: ../src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr ""
 
-#: src/Group.cpp:935
+#: ../src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr ""
 
-#: src/Plugin.cpp:113
+#: ../src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr ""
 "Algimantas Margevičius <margevicius.algimantas@gmail.com>\n"
 "Moo"
 
-#: src/SettingsDialog.cpp:265
+#: ../src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Yra įjungtas tik pirmasis %u susiejimas(-ai).</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: ../src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -85,155 +84,3 @@ msgid ""
 msgstr ""
 "Atrodo, kad kombinaciją &lt;SUPER&gt;+%u jau naudoja kitas procesas.\n"
 "Patikrinkite Xfce nustatymus."
-
-#: src/docklike.desktop.in:5
-msgid "Docklike Taskbar"
-msgstr "Doko pavidalo užduočių juosta"
-
-#: src/docklike.desktop.in:6
-msgid "A modern, minimalist taskbar for Xfce"
-msgstr "Šiuolaikinė, minimalistinė užduočių juosta, skirta Xfce"
-
-#: src/_dialogs.ui:35
-msgid "_Help"
-msgstr "Ž_inynas"
-
-#: src/_dialogs.ui:51
-msgid "_Close"
-msgstr "_Užverti"
-
-#: src/_dialogs.ui:96
-msgid "Don't show the window list for a single window"
-msgstr "Nerodyti langų sąrašo, kai yra vienas langas"
-
-#: src/_dialogs.ui:111
-msgid "Only show applications on the current workspace"
-msgstr "Rodyti tik dabartinėje darbo srityje esančias programas"
-
-#: src/_dialogs.ui:126
-msgid "Only show applications on the current display"
-msgstr "Rodyti tik dabartiniame ekrane esančias programas"
-
-#: src/_dialogs.ui:141
-msgid "Show preview thumbnails for open windows"
-msgstr "Rodyti atvertų langų peržiūros miniatiūras"
-
-#: src/_dialogs.ui:157
-msgid "Show the number of open windows (if more than 2)"
-msgstr "Rodyti atvertų langų skaičių (jeigu jų yra daugiau nei 2)"
-
-#: src/_dialogs.ui:182
-msgid "Middle mouse button:"
-msgstr "Vidurinis pelės mygtukas:"
-
-#: src/_dialogs.ui:195
-msgid "Close all"
-msgstr "Užverti visus"
-
-#: src/_dialogs.ui:196
-msgid "Launch new instance"
-msgstr "Paleisti naują egzempliorių"
-
-#: src/_dialogs.ui:197
-msgid "Do Nothing"
-msgstr "Nieko nedaryti"
-
-#: src/_dialogs.ui:219
-msgid "Behavior"
-msgstr "Elgsena"
-
-#: src/_dialogs.ui:252
-msgid "Active indicator style:"
-msgstr "Aktyvaus indikatoriaus stilius:"
-
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
-msgid "Bars"
-msgstr "Juostos"
-
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
-msgid "Dots"
-msgstr "Taškai"
-
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
-msgid "Rectangles"
-msgstr "Stačiakampiai"
-
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
-msgid "Ciliora"
-msgstr "Ciliora"
-
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
-msgid "Circles"
-msgstr "Apskritimai"
-
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
-msgid "None"
-msgstr "Nėra"
-
-#: src/_dialogs.ui:283
-msgid "Inactive indicator style:"
-msgstr "Neaktyvaus indikatoriaus stilius:"
-
-#: src/_dialogs.ui:314
-msgid "Indicator orientation:"
-msgstr "Indikatoriaus orientacija:"
-
-#: src/_dialogs.ui:326
-msgid "Automatic"
-msgstr "Automatiškai"
-
-#: src/_dialogs.ui:327
-msgid "Bottom"
-msgstr "Apačia"
-
-#: src/_dialogs.ui:328
-msgid "Right"
-msgstr "Dešinė"
-
-#: src/_dialogs.ui:329
-msgid "Top"
-msgstr "Viršus"
-
-#: src/_dialogs.ui:330
-msgid "Left"
-msgstr "Kairė"
-
-#: src/_dialogs.ui:340
-msgid "Get indicator color from theme"
-msgstr "Gauti indikatoriaus spalvą iš apipavidalinimo"
-
-#: src/_dialogs.ui:366
-msgid "Active indicator:"
-msgstr "Aktyvus indikatorius:"
-
-#: src/_dialogs.ui:390
-msgid "Inactive indicator:"
-msgstr "Neaktyvus indikatorius:"
-
-#: src/_dialogs.ui:417
-msgid "Force icon size:"
-msgstr "Priverstinis piktogramų dydis:"
-
-#: src/_dialogs.ui:462
-msgid "Appearance"
-msgstr "Išvaizda"
-
-#: src/_dialogs.ui:492
-msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Perjunginėkite programas naudodami <SUPER>+[1, 2, ...]"
-
-#: src/_dialogs.ui:519
-msgid "Switch to the last window with <SUPER>"
-msgstr "Perjunkite į paskutinį langą naudodami <SUPER>"
-
-#: src/_dialogs.ui:535
-msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
-msgstr ""
-"<b>Ši ypatybė yra išjungta.</b>\n"
-"Ji reikalauja X11 XInput2.0 plėtinio, kurio jūsų sistema neteikia."
-
-#: src/_dialogs.ui:553
-msgid "Keyboard hotkeys"
-msgstr "Spartieji klavišai"
