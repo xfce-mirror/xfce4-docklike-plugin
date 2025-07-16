@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Pasirinkti paleidyklę"
 
 #: ../src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -43,7 +43,7 @@ msgstr "Prisegti prie doko"
 
 #: ../src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Taisyti paleidyklę..."
 
 #: ../src/Group.cpp:899
 msgid "Close All"
@@ -59,11 +59,11 @@ msgstr "Šalinti"
 #. manually
 #: ../src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Pasirinkti paleidyklę..."
 
 #: ../src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Sukurti paleidyklę..."
 
 #: ../src/Plugin.cpp:113
 msgid "translator-credits"
