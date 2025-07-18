@@ -1,9 +1,11 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Asier Iturralde Sarasola <asier.iturralde@gmail.com>, 2025
+# Piarres Beobide <pi@beobide.net>, 2025
 # Eder Etxebarria Rojo, 2025
 # Nick Schermer <nick@xfce.org>, 2025
 # beriain, 2025
@@ -11,9 +13,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-15 12:52+0200\n"
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: beriain, 2025\n"
 "Language-Team: Basque (https://app.transifex.com/xfce/teams/16840/eu/)\n"
@@ -23,60 +25,60 @@ msgstr ""
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/AppInfos.cpp:356
+#: src/AppInfos.cpp:356
 msgid "Select Launcher"
 msgstr ""
 
-#: ../src/AppInfos.cpp:357
+#: src/AppInfos.cpp:357
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: ../src/AppInfos.cpp:357
+#: src/AppInfos.cpp:357
 msgid "_Open"
 msgstr "Ireki"
 
-#: ../src/Group.cpp:860
+#: src/Group.cpp:860
 msgid "Pinned to Dock"
 msgstr "Panelari gehituta"
 
-#: ../src/Group.cpp:860
+#: src/Group.cpp:860
 msgid "Pin to Dock"
 msgstr "Gehitu panelari"
 
-#: ../src/Group.cpp:872
+#: src/Group.cpp:872
 msgid "Edit Launcher..."
 msgstr ""
 
-#: ../src/Group.cpp:899
+#: src/Group.cpp:899
 msgid "Close All"
 msgstr "Denak itxi"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: ../src/Group.cpp:913
+#: src/Group.cpp:913
 msgid "Remove"
 msgstr "Kendu"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: ../src/Group.cpp:926
+#: src/Group.cpp:926
 msgid "Select Launcher..."
 msgstr ""
 
-#: ../src/Group.cpp:935
+#: src/Group.cpp:935
 msgid "Create Launcher..."
 msgstr ""
 
-#: ../src/Plugin.cpp:113
+#: src/Plugin.cpp:113
 msgid "translator-credits"
 msgstr "Piarres Beobide <pi+xfce@beobide.net>"
 
-#: ../src/SettingsDialog.cpp:272
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Bakarrik lehen%ulaster-tekla(k) onartuta daude.</b>\n"
 
-#: ../src/SettingsDialog.cpp:277
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -84,3 +86,155 @@ msgid ""
 msgstr ""
 "Badirudi &lt;SUPER&gt;+%ukonbinazioa beste prozesu batek darabilela.\n"
 "Zure Xfce ezarpenak kontsultatu."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "Docklike ataza-barra"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Ataza-barra modernoa eta minimalista Xfce-rentzat"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "_Laguntza"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "_Itxi"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "Ez erakutsi leiho bakarreko leihoen zerrenda"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "Erakutsi aplikazioak uneko lan-eremuan soilik"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "Erakutsi aplikazioak uneko pantailan soilik"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "Erakutsi irekitako leihoen aurrebista txikiak"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Erakutsi irekitako leihoen kopurua (2 baino gehiago badira)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "Saguaren erdiko botoia:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "Denak itxi"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "Instantzia berria abiatu"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr "Ez egin ezer"
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "Portaera"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "Adierazle aktiboaren estiloa:"
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "Barrak"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "Puntuak"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "Laukizuzenak"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr "Fitxa"
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "Zirkuluak"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "Bat ere ez"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "Adierazle inaktiboen estiloa:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "Indikatzailearen orientazioa:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "Automatikoa"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "Behean"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "Eskuinean"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "Goian"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "Ezkerrean"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "Indikatzailearen kolorea lortu gaitik"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "Indikatzaile aktiboa:"
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "Indikatzaile inaktiboa:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "Behartu ikokoen tamaina:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "Itxura"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Aplikazio batetik bestera aldatu<SUPER>+[1, 2, ...]-ekin"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr "Aldatu azken leihora <SUPER>-rekin"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>Ezaugarri hau desgaituta dago.</b>\n"
+"X11 XInput2.0 hedapena behar du eta zure sistemak ez du barneratzen."
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "Teklatuko laster-teklak"
