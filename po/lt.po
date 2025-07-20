@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2024
+# Nick Schermer <nick@xfce.org>, 2025
 # Moo, 2025
 # 
 #, fuzzy
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Moo, 2025\n"
 "Language-Team: Lithuanian (https://app.transifex.com/xfce/teams/16840/lt/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Pasirinkti paleidyklę"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -44,7 +44,7 @@ msgstr "Prisegti prie doko"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Taisyti paleidyklę..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -60,11 +60,11 @@ msgstr "Šalinti"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Pasirinkti paleidyklę..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Sukurti paleidyklę..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
@@ -72,12 +72,12 @@ msgstr ""
 "Algimantas Margevičius <margevicius.algimantas@gmail.com>\n"
 "Moo"
 
-#: src/SettingsDialog.cpp:265
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Yra įjungtas tik pirmasis %u susiejimas(-ai).</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"

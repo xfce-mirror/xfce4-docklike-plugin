@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2024
-# Kernc, 2024
+# Nick Schermer <nick@xfce.org>, 2025
 # Martin Srebotnjak <miles@filmsi.net>, 2025
+# Kernc, 2025
 # Arnold Marko <arnold.marko@gmail.com>, 2025
 # 
 #, fuzzy
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2025\n"
 "Language-Team: Slovenian (https://app.transifex.com/xfce/teams/16840/sl/)\n"
@@ -72,12 +72,12 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Prevod: Kiberpipa, KaBUM"
 
-#: src/SettingsDialog.cpp:265
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Vključenih je zgolj prvih %u hitrih tipk.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"

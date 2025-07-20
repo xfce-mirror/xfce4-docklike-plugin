@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Allan Nordhøy <epost@anotheragency.no>, 2024
 # Erlend Østlie <erlendandreas12368@gmail.com>, 2025
+# Allan Nordhøy <epost@anotheragency.no>, 2025
 # Harald H. <haarektrans@gmail.com>, 2025
 # heskjestad, 2025
 # 
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: heskjestad, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/xfce/teams/16840/nb/)\n"
@@ -76,12 +76,12 @@ msgstr ""
 "papparonny - Ronny K. M. Olufsen <https://www.transifex.com/accounts/profile/papparonny/>\n"
 "Terje Uriansrud <terje@uriansrud.net>"
 
-#: src/SettingsDialog.cpp:265
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Kun de(n) første %u hurtigtasten(e) er slått på.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"

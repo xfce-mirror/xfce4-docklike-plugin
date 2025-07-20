@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Asier Iturralde Sarasola <asier.iturralde@gmail.com>, 2024
-# Piarres Beobide <pi@beobide.net>, 2024
+# Asier Iturralde Sarasola <asier.iturralde@gmail.com>, 2025
+# Piarres Beobide <pi@beobide.net>, 2025
 # Eder Etxebarria Rojo, 2025
 # Nick Schermer <nick@xfce.org>, 2025
 # beriain, 2025
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: beriain, 2025\n"
 "Language-Team: Basque (https://app.transifex.com/xfce/teams/16840/eu/)\n"
@@ -73,12 +73,12 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Piarres Beobide <pi+xfce@beobide.net>"
 
-#: src/SettingsDialog.cpp:265
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Bakarrik lehen%ulaster-tekla(k) onartuta daude.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"

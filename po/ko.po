@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2024
 # 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2025
+# Nick Schermer <nick@xfce.org>, 2025
 # Seong-ho Cho <darkcircle.0426@gmail.com>, 2025
 # 
 #, fuzzy
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-05-13 00:50+0200\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
@@ -73,12 +73,12 @@ msgstr ""
 "Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Junggyu Bag <bagjunggyu@gmail.com>"
 
-#: src/SettingsDialog.cpp:265
+#: src/SettingsDialog.cpp:272
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>처음 %u 바로 가기 키만 사용할 수 있습니다.</b>\n"
 
-#: src/SettingsDialog.cpp:270
+#: src/SettingsDialog.cpp:277
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
