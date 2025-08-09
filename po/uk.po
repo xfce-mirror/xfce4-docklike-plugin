@@ -8,6 +8,7 @@
 # Gordon Freeman, 2025
 # Nick Schermer <nick@xfce.org>, 2025
 # Yarema aka Knedlyk <yupadmin@gmail.com>, 2025
+# dsafsadf <heneral@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>, 2025\n"
+"Last-Translator: dsafsadf <heneral@gmail.com>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/xfce/teams/16840/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Вибрати запускач"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -46,7 +47,7 @@ msgstr "Прикріпити до доку"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Змінити запускач..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -62,11 +63,11 @@ msgstr "Вилучити"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Вибрати запускач..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Створити запускач..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
