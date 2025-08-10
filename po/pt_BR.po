@@ -6,10 +6,10 @@
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2025
 # Felipe Nogueira <contato.fnog@gmail.com>, 2025
-# Michael Martins, 2025
 # The Cat, 2025
 # Xfce Bot <transifex@xfce.org>, 2025
 # Andre Miranda <andre@andreldm.com>, 2025
+# Michael Martins, 2025
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2025-07-18 11:06+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Andre Miranda <andre@andreldm.com>, 2025\n"
+"Last-Translator: Michael Martins, 2025\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/xfce/teams/16840/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,15 +114,15 @@ msgstr "Não mostrar a lista de janelas para uma única janela"
 
 #: src/_dialogs.ui:111
 msgid "Only show applications on the current workspace"
-msgstr "Mostrar apenas aplicativos no espaço de trabalho atual"
+msgstr "Mostrar aplicativos apenas no espaço de trabalho atual"
 
 #: src/_dialogs.ui:126
 msgid "Only show applications on the current display"
-msgstr "Mostrar apenas aplicativos no monitor atual"
+msgstr "Mostrar aplicativos apenas no monitor atual"
 
 #: src/_dialogs.ui:141
 msgid "Show preview thumbnails for open windows"
-msgstr "Mostrar miniaturas de pré-visualização para janelas abertas"
+msgstr "Mostrar miniaturas de visualização para janelas abertas"
 
 #: src/_dialogs.ui:157
 msgid "Show the number of open windows (if more than 2)"
@@ -237,7 +237,7 @@ msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
 msgstr ""
-"<b>Este recurso está desabilitado.</b>\n"
+"<b>Este recurso está desativado.</b>\n"
 "Ele requer a extensão X11 XInput2.0, que não é fornecida pelo seu sistema."
 
 #: src/_dialogs.ui:553

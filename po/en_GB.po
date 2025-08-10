@@ -25,7 +25,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:356
 msgid "Select Launcher"
-msgstr ""
+msgstr "Select Launcher"
 
 #: src/AppInfos.cpp:357
 msgid "_Cancel"
@@ -45,7 +45,7 @@ msgstr "Pin to Dock"
 
 #: src/Group.cpp:872
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Edit Launcher..."
 
 #: src/Group.cpp:899
 msgid "Close All"
@@ -61,11 +61,11 @@ msgstr "Remove"
 #. manually
 #: src/Group.cpp:926
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Select Launcher..."
 
 #: src/Group.cpp:935
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Create Launcher..."
 
 #: src/Plugin.cpp:113
 msgid "translator-credits"
