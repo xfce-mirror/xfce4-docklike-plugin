@@ -25,6 +25,12 @@ meson compile -C build
 sudo meson install -C build
 ```
 
+### Uninstallation
+
+```bash
+sudo ninja uninstall -C build
+```
+
 ## Reporting bugs
 
 To assist with troubleshooting plugin issues, please run Xfce Panel in debugging mode, and include the relevant output in issues.
