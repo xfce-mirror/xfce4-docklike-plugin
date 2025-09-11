@@ -1,0 +1,239 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Nick Schermer <nick@xfce.org>, 2025
+# Abduqadir Abliz <sahranbay@gmail.com>, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>, 2025\n"
+"Language-Team: Uyghur (https://app.transifex.com/xfce/teams/16840/ug/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ug\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/AppInfos.cpp:356
+msgid "Select Launcher"
+msgstr "قوزغاتقۇچ تاللىنىدۇ"
+
+#: src/AppInfos.cpp:357
+msgid "_Cancel"
+msgstr "ۋاز كەچ(_C)"
+
+#: src/AppInfos.cpp:357
+msgid "_Open"
+msgstr "ئاچ(_O)"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "لەڭگەرگە مىخلاندى"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "لەڭگەرگە مىخلا"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr "قوزغاتقۇچ تەھرىر…"
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "ھەممىنى ياپ"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "چىقىرىۋەت"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr "قوزغاتقۇچ تاللىنىدۇ…"
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr "قوزغاتقۇچ قۇر…"
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr ""
+"غەيرەت ت.كەنجى <gheyret@gmail.com>\n"
+"ئابدۇقادىر ئابلىز <sahranbay@gmail.com>"
+
+#: src/SettingsDialog.cpp:272
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>پەقەت تۇنجى %u تېز كۇنۇپكا قوزغىتىلدى.</b>\n"
+
+#: src/SettingsDialog.cpp:277
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"«SUPER»+%u بىرىكمىسىنى باشقا بىر جەريان ئىشلىتىۋاتقاندەك قىلىدۇ.\n"
+"Xfce تەڭشىكىنى تەكشۈرۈڭ."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "لەڭگەرسىمان ۋەزىپە بالداق"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "زامانىۋى ئاددىي Xfce ۋەزىپە بالداق"
+
+#: src/_dialogs.ui:35
+msgid "_Help"
+msgstr "ياردەم(_H)"
+
+#: src/_dialogs.ui:51
+msgid "_Close"
+msgstr "ياپ(_C)"
+
+#: src/_dialogs.ui:96
+msgid "Don't show the window list for a single window"
+msgstr "يەككە كۆزنەككە كۆزنەك تىزىمى كۆرسەتمەيدۇ"
+
+#: src/_dialogs.ui:111
+msgid "Only show applications on the current workspace"
+msgstr "پەقەت نۆۋەتتىكى خىزمەت بوشلۇقىدىكى پىروگراممىنىلا كۆرسىتىدۇ"
+
+#: src/_dialogs.ui:126
+msgid "Only show applications on the current display"
+msgstr "پەقەت نۆۋەتتىكى كۆرسەتكۈچتىكى پىروگراممىنىلا كۆرسىتىدۇ"
+
+#: src/_dialogs.ui:141
+msgid "Show preview thumbnails for open windows"
+msgstr "ئوچۇق كۆزنەكنىڭ ئالدىن كۆزىتىش كىچىك سۈرىتىنى كۆرسىتىدۇ"
+
+#: src/_dialogs.ui:157
+msgid "Show the number of open windows (if more than 2)"
+msgstr "ئوچۇق كۆزنەك سانىنى كۆرسىتىدۇ (ئەگەر 2 دىن كۆپ بولسا)"
+
+#: src/_dialogs.ui:182
+msgid "Middle mouse button:"
+msgstr "چاشقىنەك ئوتتۇرا توپچىسى:"
+
+#: src/_dialogs.ui:195
+msgid "Close all"
+msgstr "ھەممىنى ياپ"
+
+#: src/_dialogs.ui:196
+msgid "Launch new instance"
+msgstr "يېڭى مىسالنى قوزغات"
+
+#: src/_dialogs.ui:197
+msgid "Do Nothing"
+msgstr "ھېچقانداق قىلما"
+
+#: src/_dialogs.ui:219
+msgid "Behavior"
+msgstr "ھەرىكەت"
+
+#: src/_dialogs.ui:252
+msgid "Active indicator style:"
+msgstr "ئاكتىپ كۆرسەتكۈچ ئۇسلۇبى:"
+
+#: src/_dialogs.ui:265 src/_dialogs.ui:296
+msgid "Bars"
+msgstr "بالداق"
+
+#: src/_dialogs.ui:266 src/_dialogs.ui:297
+msgid "Dots"
+msgstr "چېكىت"
+
+#: src/_dialogs.ui:267 src/_dialogs.ui:298
+msgid "Rectangles"
+msgstr "تىك تۆت بۇلۇڭ"
+
+#: src/_dialogs.ui:268 src/_dialogs.ui:299
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:269 src/_dialogs.ui:300
+msgid "Circles"
+msgstr "چەمبەر"
+
+#: src/_dialogs.ui:270 src/_dialogs.ui:301
+msgid "None"
+msgstr "يوق"
+
+#: src/_dialogs.ui:283
+msgid "Inactive indicator style:"
+msgstr "ئاكتىپ بولمىغان كۆرسەتكۈچ ئۇسلۇبى:"
+
+#: src/_dialogs.ui:314
+msgid "Indicator orientation:"
+msgstr "كۆرسەتكۈچ يۆنىلىشى:"
+
+#: src/_dialogs.ui:326
+msgid "Automatic"
+msgstr "ئاپتوماتىك"
+
+#: src/_dialogs.ui:327
+msgid "Bottom"
+msgstr "ئاستى"
+
+#: src/_dialogs.ui:328
+msgid "Right"
+msgstr "ئوڭ"
+
+#: src/_dialogs.ui:329
+msgid "Top"
+msgstr "ئۈستى"
+
+#: src/_dialogs.ui:330
+msgid "Left"
+msgstr "سول"
+
+#: src/_dialogs.ui:340
+msgid "Get indicator color from theme"
+msgstr "ئۆرنەكتىن كۆرسەتكۈچنىڭ رەڭگىگە ئېرىشىدۇ"
+
+#: src/_dialogs.ui:366
+msgid "Active indicator:"
+msgstr "ئاكتىپ كۆرسەتكۈچ:"
+
+#: src/_dialogs.ui:390
+msgid "Inactive indicator:"
+msgstr "ئاكتىپ بولمىغان كۆرسەتكۈچ:"
+
+#: src/_dialogs.ui:417
+msgid "Force icon size:"
+msgstr "مەجبۇرىي سىنبەلگە چوڭلۇقى:"
+
+#: src/_dialogs.ui:462
+msgid "Appearance"
+msgstr "كۆرۈنۈشى"
+
+#: src/_dialogs.ui:492
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "«<SUPER>+[1, 2, ...]» ئارقىلىق پىروگراممىلار ئارا ئالماشتۇرىدۇ"
+
+#: src/_dialogs.ui:519
+msgid "Switch to the last window with <SUPER>"
+msgstr "<SUPER> ئارقىلىق ئاخىرقى كۆزنەككە ئالماشتۇرىدۇ"
+
+#: src/_dialogs.ui:535
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>بۇ ئىقتىدار چەكلەنگەن.</b>\n"
+"ئۇ X11 XInput2.0 كېڭەيتىلمىسىگە ئېھتىياجلىق ئەمما سىستېمىڭىز ئۇنى تەمىنلىمىگەن."
+
+#: src/_dialogs.ui:553
+msgid "Keyboard hotkeys"
+msgstr "ھەرپتاختا قىزىق كۇنۇپكا"
