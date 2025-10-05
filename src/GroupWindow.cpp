@@ -119,7 +119,6 @@ void GroupWindow::leaveGroup()
 	if (!mGroupAssociated)
 		return;
 	mGroup->remove(this);
-	mGroup->onWindowUnactivate();
 	mGroupAssociated = false;
 }
 
