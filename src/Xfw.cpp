@@ -125,7 +125,7 @@ namespace Xfw
 						gtk_widget_queue_draw(prevWindow->mGroup->mButton);
 					}
 				}
-				setActiveWindow();
+				setActiveWindow(previousActiveWindow);
 			}),
 			nullptr);
 
@@ -180,13 +180,13 @@ namespace Xfw
 		xfw_window_close(groupWindow->mXfwWindow, timestamp, nullptr);
 	}
 
-	void setActiveWindow()
+	void setActiveWindow(XfwWindow* previousActiveWindow)
 	{
 		XfwWindow* activeWindow = getActiveWindow();
-		if (mGroupWindows.size() > 0)
-			mGroupWindows.first()->onUnactivate();
+		if (previousActiveWindow != nullptr)
+			mGroupWindows.get(previousActiveWindow)->onUnactivate();
 		if (activeWindow != nullptr)
-			mGroupWindows.moveToStart(activeWindow)->onActivate();
+			mGroupWindows.get(activeWindow)->onActivate();
 	}
 
 	void setVisibleGroups()
