@@ -46,7 +46,7 @@ namespace Xfw
 
 	void switchToLastWindow(guint32 timestamp);
 
-	void setActiveWindow();
+	void setActiveWindow(XfwWindow* previousActiveWindow = nullptr);
 	void setVisibleGroups();
 
 	extern XfwScreen* mXfwScreen;
