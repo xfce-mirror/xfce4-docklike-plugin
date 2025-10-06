@@ -83,13 +83,23 @@ namespace SettingsDialog
 			nullptr);
 
 		GObject* onlyDisplayVisible = gtk_builder_get_object(builder, "c_onlyDisplayVisible");
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayVisible), Settings::onlyDisplayVisible);
-		g_signal_connect(onlyDisplayVisible, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
-				Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
-				Xfw::setVisibleGroups();
-			}),
-			nullptr);
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+		{
+			// window<->workspace association only works on X11
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayVisible), Settings::onlyDisplayVisible);
+			g_signal_connect(onlyDisplayVisible, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
+					Settings::onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
+					Xfw::setVisibleGroups();
+				}),
+				nullptr);
+		}
+		else
+#endif
+		{
+			gtk_widget_hide(GTK_WIDGET(onlyDisplayVisible));
+		}
 
 		GObject* onlyDisplayScreen = gtk_builder_get_object(builder, "c_onlyDisplayScreen");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayScreen), Settings::onlyDisplayScreen);

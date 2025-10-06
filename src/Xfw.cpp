@@ -29,7 +29,7 @@
 namespace Xfw
 {
 	XfwScreen* mXfwScreen;
-	XfwWorkspaceGroup* mXfwWorkspaceGroup;
+	XfwWorkspaceGroup* mXfwWorkspaceGroup = nullptr;
 	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
 	std::unordered_set<std::string> mInvalidClassIds = {
 		"wine",
@@ -129,18 +129,28 @@ namespace Xfw
 			}),
 			nullptr);
 
-		XfwWorkspaceManager* wpManager = xfw_screen_get_workspace_manager(Xfw::mXfwScreen);
-		mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(xfw_workspace_manager_list_workspace_groups(wpManager)->data);
-		g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
-			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
-				setVisibleGroups();
-			}),
-			nullptr);
+		// window<->workspace association only works on X11, where there is only one workspace group,
+		// but it can be destroyed on wayland, so let's manage this in a minimalist way
+		XfwWorkspaceManager* wpManager = xfw_screen_get_workspace_manager(mXfwScreen);
+		auto workspaceGroupDestroyed = +[](XfwWorkspaceManager* manager, XfwWorkspaceGroup* group, gpointer data) {
+			if (group == mXfwWorkspaceGroup)
+			{
+				mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(xfw_workspace_manager_list_workspace_groups(manager)->data);
+				g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
+					G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
+						setVisibleGroups();
+					}),
+					nullptr);
+			}
+		};
+		g_signal_connect(wpManager, "workspace-group-destroyed", G_CALLBACK(workspaceGroupDestroyed), nullptr);
+		workspaceGroupDestroyed(wpManager, nullptr, nullptr);
 	}
 
 	void finalize()
 	{
 		mGroupWindows.clear();
+		g_signal_handlers_disconnect_by_data(xfw_screen_get_workspace_manager(mXfwScreen), nullptr);
 		g_signal_handlers_disconnect_by_data(mXfwWorkspaceGroup, nullptr);
 		g_signal_handlers_disconnect_by_data(mXfwScreen, nullptr);
 		g_object_unref(mXfwScreen);
