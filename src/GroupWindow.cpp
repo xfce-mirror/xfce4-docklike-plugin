@@ -165,7 +165,8 @@ void GroupWindow::updateState()
 		GList* monitors = xfw_window_get_monitors(mXfwWindow);
 		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
 
-		if (!g_list_find_custom(
+		if (pluginWindow == nullptr
+			|| !g_list_find_custom(
 				monitors,
 				gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow),
 				[](gconstpointer a, gconstpointer b) { return xfw_monitor_get_gdk_monitor((XfwMonitor*)a) == b ? 0 : 1; }))
