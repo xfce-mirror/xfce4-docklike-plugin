@@ -36,6 +36,8 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 	g_signal_connect(G_OBJECT(mXfwWindow), "name-changed",
 		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			me->mGroupMenuItem->updateLabel();
+			if (me->mGroupAssociated)
+				me->mGroup->updateStyle();
 		}),
 		this);
 
