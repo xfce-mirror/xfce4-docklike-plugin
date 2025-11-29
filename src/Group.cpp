@@ -796,15 +796,20 @@ void Group::updateStyle()
 	{
 		if (mWindowsCount == 1 && Settings::noWindowsListIfSingle)
 		{
-			const gchar* tooltip = mAppInfo->mName.c_str();
-			GroupWindow* gw = mWindows.get(0);
-			if (gw && gw->mXfwWindow)
+			if (!mPinned && !mAppInfo->mGAppInfo)
 			{
-				const gchar* n = xfw_window_get_name(gw->mXfwWindow);
-				if (n && *n)
-					tooltip = n;
+				const gchar* tooltip = mAppInfo->mName.c_str();
+				GroupWindow* gw = mWindows.get(0);
+				if (gw && gw->mXfwWindow)
+				{
+					const gchar* n = xfw_window_get_name(gw->mXfwWindow);
+					if (n && *n)
+						tooltip = n;
+				}
+				gtk_widget_set_tooltip_text(mButton, tooltip);
 			}
-			gtk_widget_set_tooltip_text(mButton, tooltip);
+			else
+				gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		}
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
