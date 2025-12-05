@@ -84,8 +84,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
 "Check your Xfce settings."
 msgstr ""
-"Ta  &lt;SUPER&gt;+%u kombinacija je že uporabljena s strani drugega procesa.\n"
-"Preverite Xfce nastavitve."
+"Kombinacijo &lt;SUPER&gt;+%u že uporablja drug proces.\n"
+"Preverite vaše Xfce nastavitve."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -149,7 +149,7 @@ msgstr "Slog dejavnega kazalnika:"
 
 #: src/_dialogs.ui:265 src/_dialogs.ui:296
 msgid "Bars"
-msgstr "Stolpce"
+msgstr "Stolpci"
 
 #: src/_dialogs.ui:266 src/_dialogs.ui:297
 msgid "Dots"
@@ -205,11 +205,11 @@ msgstr "Iz teme pridobi barvo kazalnika"
 
 #: src/_dialogs.ui:366
 msgid "Active indicator:"
-msgstr "Dejavni kazalnik: "
+msgstr "Dejavni kazalnik:"
 
 #: src/_dialogs.ui:390
 msgid "Inactive indicator:"
-msgstr "Nedejavni kazallnik:"
+msgstr "Nedejavni kazalnik:"
 
 #: src/_dialogs.ui:417
 msgid "Force icon size:"
