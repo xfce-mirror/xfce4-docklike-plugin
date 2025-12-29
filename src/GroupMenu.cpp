@@ -31,6 +31,13 @@ create_window()
 	GtkWidget* window = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
 	gtk_widget_add_events(window, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(window), 1, 1);
+
+        GdkScreen *screen = gtk_widget_get_screen(window);
+        GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
+        if (visual != NULL) {
+            gtk_widget_set_visual(window, visual);
+        }
+
 #ifdef ENABLE_WAYLAND
 	if (gtk_layer_is_supported())
 	{
@@ -52,7 +59,9 @@ GroupMenu::GroupMenu(Group* dockButton)
 	mWindow = create_window();
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
+	Help::Gtk::cssClassAdd(mWindow, "xfce-docklike-menu");
 	Help::Gtk::cssClassAdd(mBox, "menu");
+
 	gtk_container_add(GTK_CONTAINER(mWindow), mBox);
 	gtk_widget_show(mBox);
 
