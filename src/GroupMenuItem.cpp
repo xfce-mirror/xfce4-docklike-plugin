@@ -40,18 +40,16 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	mGrid = GTK_GRID(gtk_grid_new());
 	gtk_grid_set_column_spacing(mGrid, 6);
-	gtk_widget_set_margin_start(GTK_WIDGET(mGrid), 6);
-	gtk_widget_set_margin_end(GTK_WIDGET(mGrid), 6);
-	gtk_widget_set_margin_top(GTK_WIDGET(mGrid), 2);
-	gtk_widget_set_margin_bottom(GTK_WIDGET(mGrid), 2);
 	gtk_widget_show(GTK_WIDGET(mGrid));
 	gtk_container_add(GTK_CONTAINER(mItem), GTK_WIDGET(mGrid));
 
 	mIcon = GTK_IMAGE(gtk_image_new());
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mIcon), "icon");
 	gtk_widget_show(GTK_WIDGET(mIcon));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mIcon), 0, 0, 1, 1);
 
 	mLabel = GTK_LABEL(gtk_label_new(""));
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mLabel), "title");
 	gtk_label_set_xalign(mLabel, 0);
 	gtk_label_set_ellipsize(mLabel, PANGO_ELLIPSIZE_END);
 	gtk_label_set_width_chars(mLabel, 26);
@@ -64,8 +62,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
 	mPreview = GTK_IMAGE(gtk_image_new());
-	gtk_widget_set_margin_top(GTK_WIDGET(mPreview), 6);
-	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
+	Help::Gtk::cssClassAdd(GTK_WIDGET(mPreview), "preview");
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
