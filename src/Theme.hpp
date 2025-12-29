@@ -19,8 +19,10 @@
 #ifndef THEME_HPP
 #define THEME_HPP
 
-#define DEFAULT_THEME ".menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n" \
-					  ".hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
+#define DEFAULT_THEME ".xfce-docklike-menu { margin: 0; padding: 0; border: 0; background-color: @menu_bgcolor; }\n" \
+					  ".xfce-docklike-menu .menu_item grid {margin: 6px 2px 6px 2px;}\n"                             \
+					  ".xfce-docklike-menu .menu_item .preview {margin-top:6px;margin-bottom:6px}\n"                 \
+					  ".xfce-docklike-menu .hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
 
 #include "Dock.hpp"
 
