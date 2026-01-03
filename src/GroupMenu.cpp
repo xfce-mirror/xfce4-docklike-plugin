@@ -88,7 +88,11 @@ GroupMenu::GroupMenu(Group* dockButton)
 		this);
 
 	g_signal_connect(G_OBJECT(mWindow), "leave-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenu* me) {
+			if (event->detail == GDK_NOTIFY_INFERIOR)
+			{
+				return false;
+			}
 			me->mGroup->setMouseLeaveTimeout();
 			me->mMouseHover = false;
 
