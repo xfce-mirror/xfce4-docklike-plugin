@@ -132,8 +132,8 @@ namespace Xfw
 		// window<->workspace association only works on X11, where there is only one workspace group,
 		// but it can be destroyed on wayland, so let's manage this in a minimalist way
 		XfwWorkspaceManager* wpManager = xfw_screen_get_workspace_manager(mXfwScreen);
-		auto workspaceGroupDestroyed = +[](XfwWorkspaceManager* manager, XfwWorkspaceGroup* group, gpointer data) {
-			if (group == mXfwWorkspaceGroup)
+		auto workspaceGroupCreated = +[](XfwWorkspaceManager* manager, XfwWorkspaceGroup* group, gpointer data) {
+			if (mXfwWorkspaceGroup == nullptr)
 			{
 				mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(xfw_workspace_manager_list_workspace_groups(manager)->data);
 				g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
@@ -143,6 +143,26 @@ namespace Xfw
 					nullptr);
 			}
 		};
+		auto workspaceGroupDestroyed = +[](XfwWorkspaceManager* manager, XfwWorkspaceGroup* group, gpointer data) {
+			if (group == mXfwWorkspaceGroup)
+			{
+				GList* groups = xfw_workspace_manager_list_workspace_groups(manager);
+				if (groups == nullptr)
+				{
+					mXfwWorkspaceGroup = nullptr;
+				}
+				else
+				{
+					mXfwWorkspaceGroup = XFW_WORKSPACE_GROUP(groups->data);
+					g_signal_connect(G_OBJECT(mXfwWorkspaceGroup), "active-workspace-changed",
+						G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
+							setVisibleGroups();
+						}),
+						nullptr);
+				}
+			}
+		};
+		g_signal_connect(wpManager, "workspace-group-created", G_CALLBACK(workspaceGroupCreated), nullptr);
 		g_signal_connect(wpManager, "workspace-group-destroyed", G_CALLBACK(workspaceGroupDestroyed), nullptr);
 		workspaceGroupDestroyed(wpManager, nullptr, nullptr);
 	}
