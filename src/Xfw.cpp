@@ -43,6 +43,17 @@ namespace Xfw
 			const gchar* const* class_ids = xfw_window_get_class_ids(xfwWindow);
 			if (!xfce_str_is_empty(class_ids[0]))
 			{
+				// Check if class_ids[1] (class name) matches a registered StartupWMClass.
+				// This is important for Chromium-based web apps where the --class parameter
+				// sets the class name, and StartupWMClass in .desktop files matches it.
+				if (!xfce_str_is_empty(class_ids[1]))
+				{
+					std::string classId1 = Help::String::toLowercase(class_ids[1]);
+					std::shared_ptr<AppInfo> appInfo = AppInfos::search(classId1);
+					if (appInfo && !appInfo->mPath.empty())
+						return class_ids[1];
+				}
+
 				// On X11, the class-id is generally the right app-id, but there is sometimes
 				// an inversion with the instance-id. If there is only one 'class_ids' (wayland),
 				// it's considered valid anyway
