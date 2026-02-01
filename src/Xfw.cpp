@@ -31,9 +31,14 @@ namespace Xfw
 	XfwScreen* mXfwScreen;
 	XfwWorkspaceGroup* mXfwWorkspaceGroup = nullptr;
 	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
+	// clang-format off
 	std::unordered_set<std::string> mInvalidClassIds = {
+		// https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/issues/75
 		"wine",
+		// https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/issues/21
+		"brave-browser", "chromium", "google-chrome", "vivaldi-stable", "microsoft-edge",
 	};
+	// clang-format on
 
 	namespace // private:
 	{
