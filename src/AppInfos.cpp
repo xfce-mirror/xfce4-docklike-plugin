@@ -319,25 +319,6 @@ namespace AppInfos
 			}
 		}
 
-		gchar*** gioPath = g_desktop_app_info_search(id.c_str());
-
-		if (gioPath[0] != nullptr && gioPath[0][0] != nullptr && gioPath[0][0][0] != '\0')
-		{
-			std::string gioId = gioPath[0][0];
-			gioId = Help::String::toLowercase(Help::String::pathBasename(gioId, true));
-			ai = mAppInfoIds.get(gioId);
-		}
-
-		for (int i = 0; gioPath[i] != nullptr; ++i)
-			g_strfreev(gioPath[i]);
-		g_free(gioPath);
-
-		if (ai != nullptr)
-		{
-			g_debug("GIO search match");
-			return ai;
-		}
-
 		ai = mAppInfoUserSet.get(id);
 		if (ai != nullptr)
 		{
