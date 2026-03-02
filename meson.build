@@ -2,7 +2,7 @@ project(
   'xfce4-docklike-plugin',
   'c',
   'cpp',
-version : '0.5.0-dev',
+version : '0.5.1',
   license : 'GPL-3.0-or-later',
   meson_version : '>= 0.54.0',
   default_options : ['c_std=gnu11', 'cpp_std=gnu++11', 'buildtype=debugoptimized', 'warning_level=2']
@@ -10,7 +10,7 @@ version : '0.5.0-dev',
 
 project_namespace = 'panel-plugins'
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-copyright_year = '2025'
+copyright_year = '2026'
 
 cc = meson.get_compiler('c')
 cxx = meson.get_compiler('cpp')

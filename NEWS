@@ -1,3 +1,36 @@
+0.5.1 (2026-03-02)
+=====
+- build: Rename POTFILES.in to POTFILES
+- AppInfos: Remove GIO search
+- Update debug instructions
+- x11: Add exceptions where instance-id should be preferred to class-id
+- I18n: Update po/LINGUAS list
+- wayland: Handle null workspace group list when a group is destroyed
+- fix docklike menus disappear even if the mouse is on them
+- Improve GroupMenu CSS
+- build: Fix typo in optimization level
+- I18n: Update po/LINGUAS list
+- GroupWindow: Add missing sanity check
+- Xfw: Do not rely on window list order to determine last active window
+- Hide workspace-related visibility option on wayland
+- GroupWindow: Don't unactivate group when a window is closed
+- I18n: Update po/LINGUAS list
+- README.md: Add uninstall info
+- I18n: Update po/LINGUAS list
+- SettingsDialog: Fix leak when closing via close button
+- Stop using xfce_panel_plugin_(block|unblock)_menu
+- Remove autotools build
+- I18n: Update po/LINGUAS list
+- Translation Updates:
+  Albanian, Basque, Bulgarian, Catalan, Chinese (China), Chinese
+  (Taiwan), Croatian, Czech, Danish, Dutch, English (Canada), English
+  (United Kingdom), Estonian, Finnish, French, Galician, German, Greek,
+  Hebrew, Indonesian, Interlingue, Italian, Japanese, Kazakh, Korean,
+  Lithuanian, Norwegian Bokmål, Occitan (post 1500), Polish,
+  Portuguese, Portuguese (Brazil), Romanian, Russian, Serbian, Slovak,
+  Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Uyghur,
+  Vietnamese
+
 0.5.0 (2025-05-19)
 =====
 Meson has been added as a build system in this release, and the
