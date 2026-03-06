@@ -89,6 +89,9 @@ namespace AppInfos
 
 		for (std::string& dir : dir_list)
 		{
+			if (dir.empty())
+				continue;
+
 			if (dir.back() == '/')
 				dir += "applications/";
 			else
