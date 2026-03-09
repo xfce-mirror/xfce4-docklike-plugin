@@ -240,7 +240,6 @@ namespace SettingsDialog
 
 		GObject* previewHeightButton = gtk_builder_get_object(builder, "previewHeightButton");
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(previewHeightButton), Settings::previewHeight);
-		gtk_widget_set_sensitive(GTK_WIDGET(previewHeightButton), Settings::showPreviews);
 		g_object_bind_property(showPreviews, "active", previewHeightButton, "sensitive", G_BINDING_DEFAULT);
 		g_signal_connect(previewHeightButton, "value-changed",
 			G_CALLBACK(+[](GtkSpinButton* _previewHeightButton) {
