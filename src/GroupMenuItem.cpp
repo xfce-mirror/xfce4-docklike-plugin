@@ -212,17 +212,15 @@ void GroupMenuItem::updatePreview()
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
 
-				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf) * scale_factor;
-				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf) * scale_factor;
-				previewWidth *= scale_factor;
-				previewHeight *= scale_factor;
+				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
+				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
 
 				gdouble ratio = MIN((gdouble)previewWidth / pixbufWidth, (gdouble)previewHeight / pixbufHeight);
 
 				gdouble scaledWidth = MIN(pixbufWidth * ratio, previewWidth);
 				gdouble scaledHeight = MAX(MIN(pixbufHeight * ratio, previewHeight), previewHeight);
 
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf, scaledWidth, scaledHeight, GDK_INTERP_BILINEAR);
+				thumbnail = gdk_pixbuf_scale_simple(pixbuf, scaledWidth * scale_factor, scaledHeight * scale_factor, GDK_INTERP_BILINEAR);
 				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
