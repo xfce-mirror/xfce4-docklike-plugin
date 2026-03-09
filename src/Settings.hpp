@@ -48,6 +48,8 @@ namespace Settings
 	extern State<bool> onlyDisplayVisible;
 	extern State<bool> onlyDisplayScreen;
 	extern State<bool> showPreviews;
+        extern State<int> previewWidth;
+        extern State<int> previewHeight;
 	extern State<bool> showWindowCount;
 	extern State<int> middleButtonBehavior;
 
@@ -66,7 +68,6 @@ namespace Settings
 
 	// HIDDEN SETTINGS:
 	extern State<int> dockSize;
-	extern State<double> previewScale;
 	extern State<int> previewSleep;
 }; // namespace Settings
 
