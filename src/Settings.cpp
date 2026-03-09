@@ -50,7 +50,8 @@ namespace Settings
 
 	State<bool> showWindowCount;
 	State<int> dockSize;
-	State<double> previewScale;
+	State<int> previewWidth;
+	State<int> previewHeight;
 	State<int> previewSleep;
 
 	void init()
@@ -76,6 +77,26 @@ namespace Settings
 		showPreviews.setup(g_key_file_get_boolean(file, "user", "showPreviews", nullptr),
 			[](bool _showPreviews) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
+				saveFile();
+
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+					g.second->mGroupMenu.showPreviewsChanged();
+				});
+			});
+
+		previewWidth.setup(g_key_file_get_double(file, "user", "previewWidth", nullptr),
+			[](int _previewWidth) -> void {
+				g_key_file_set_integer(mFile.get(), "user", "previewWidth", _previewWidth);
+				saveFile();
+
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+					g.second->mGroupMenu.showPreviewsChanged();
+				});
+			});
+
+		previewHeight.setup(g_key_file_get_double(file, "user", "previewHeight", nullptr),
+			[](int _previewHeight) -> void {
+				g_key_file_set_integer(mFile.get(), "user", "previewHeight", _previewHeight);
 				saveFile();
 
 				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
@@ -274,12 +295,6 @@ namespace Settings
 		dockSize.setup(g_key_file_get_integer(file, "user", "dockSize", nullptr),
 			[](int _dockSize) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "dockSize", _dockSize);
-				saveFile();
-			});
-
-		previewScale.setup(g_key_file_get_double(file, "user", "previewScale", nullptr),
-			[](int _previewScale) -> void {
-				g_key_file_set_double(mFile.get(), "user", "previewScale", _previewScale);
 				saveFile();
 			});
 
