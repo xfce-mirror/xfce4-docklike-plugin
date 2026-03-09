@@ -244,7 +244,9 @@ namespace SettingsDialog
 		gtk_widget_set_sensitive(GTK_WIDGET(previewHeightButton), Settings::showPreviews);
 		g_object_bind_property(showPreviews, "active", previewHeightButton, "sensitive", G_BINDING_DEFAULT);
 		g_signal_connect(previewHeightButton, "value-changed",
-			G_CALLBACK(+[](GtkSpinButton* _previewHeightButton) { Settings::previewHeight.set(gtk_spin_button_get_value_as_int(_previewHeightButton)); }),
+			G_CALLBACK(+[](GtkSpinButton* _previewHeightButton) {
+				Settings::previewHeight.set(gtk_spin_button_get_value_as_int(_previewHeightButton));
+			}),
 			NULL);
 
 		// =====================================================================

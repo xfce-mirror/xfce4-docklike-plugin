@@ -199,6 +199,12 @@ void GroupMenuItem::updatePreview()
 			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window), gdk_window_get_height(window));
 			gdk_x11_display_error_trap_pop_ignored(display);
 
+			if (!Settings::previewWidth)
+				Settings::previewWidth.set(192);
+
+			if (!Settings::previewHeight)
+				Settings::previewHeight.set(108);
+
 			gint previewWidth = Settings::previewWidth;
 			gint previewHeight = Settings::previewHeight;
 
@@ -206,12 +212,15 @@ void GroupMenuItem::updatePreview()
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
 
-				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
-				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
+				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf) * scale_factor;
+				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf) * scale_factor;
+				previewWidth *= scale_factor;
+				previewHeight *= scale_factor;
+
 				gdouble ratio = MIN((gdouble)previewWidth / pixbufWidth, (gdouble)previewHeight / pixbufHeight);
 
-				gdouble scaledWidth = MIN(pixbufWidth * ratio * scale_factor, previewWidth * scale_factor);
-				gdouble scaledHeight = MIN(pixbufHeight * ratio * scale_factor, previewHeight * scale_factor);
+				gdouble scaledWidth = MIN(pixbufWidth * ratio, previewWidth);
+				gdouble scaledHeight = MAX(MIN(pixbufHeight * ratio, previewHeight), previewHeight);
 
 				thumbnail = gdk_pixbuf_scale_simple(pixbuf, scaledWidth, scaledHeight, GDK_INTERP_BILINEAR);
 				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
