@@ -84,7 +84,7 @@ namespace Settings
 				});
 			});
 
-		previewWidth.setup(g_key_file_get_double(file, "user", "previewWidth", nullptr),
+		previewWidth.setup(g_key_file_get_integer(file, "user", "previewWidth", nullptr),
 			[](int _previewWidth) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "previewWidth", _previewWidth);
 				saveFile();
@@ -94,7 +94,7 @@ namespace Settings
 				});
 			});
 
-		previewHeight.setup(g_key_file_get_double(file, "user", "previewHeight", nullptr),
+		previewHeight.setup(g_key_file_get_integer(file, "user", "previewHeight", nullptr),
 			[](int _previewHeight) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "previewHeight", _previewHeight);
 				saveFile();
