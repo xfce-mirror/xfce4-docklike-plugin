@@ -187,10 +187,6 @@ void GroupMenuItem::updatePreview()
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
-		double scale = 0.125;
-		if (Settings::previewScale)
-			scale = Settings::previewScale;
-
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
 
@@ -203,12 +199,20 @@ void GroupMenuItem::updatePreview()
 			pixbuf = gdk_pixbuf_get_from_window(window, 0, 0, gdk_window_get_width(window), gdk_window_get_height(window));
 			gdk_x11_display_error_trap_pop_ignored(display);
 
+			if (!Settings::previewWidth)
+				Settings::previewWidth.set(288);
+
+			if (!Settings::previewHeight)
+				Settings::previewHeight.set(162);
+
 			if (pixbuf != nullptr)
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
-				scale *= scale_factor;
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf,
-					gdk_pixbuf_get_width(pixbuf) * scale, gdk_pixbuf_get_height(pixbuf) * scale, GDK_INTERP_BILINEAR);
+				gint previewWidth = Settings::previewWidth * scale_factor;
+				gint previewHeight = Settings::previewHeight * scale_factor;
+				gtk_widget_set_size_request(GTK_WIDGET(mPreview), previewWidth, previewHeight);
+
+				thumbnail = xfce_gdk_pixbuf_scale_down(pixbuf, true, previewWidth, previewHeight);
 				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
