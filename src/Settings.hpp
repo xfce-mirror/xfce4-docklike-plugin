@@ -40,6 +40,10 @@ namespace Settings
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;
+	const int defPreviewWidth = 288;
+	const int defPreviewHeight = 162;
+	const int minPreviewSize = 1;
+	const int maxPreviewSize = 10000;
 
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
@@ -48,6 +52,8 @@ namespace Settings
 	extern State<bool> onlyDisplayVisible;
 	extern State<bool> onlyDisplayScreen;
 	extern State<bool> showPreviews;
+	extern State<int> previewWidth;
+	extern State<int> previewHeight;
 	extern State<bool> showWindowCount;
 	extern State<int> middleButtonBehavior;
 
@@ -66,7 +72,6 @@ namespace Settings
 
 	// HIDDEN SETTINGS:
 	extern State<int> dockSize;
-	extern State<double> previewScale;
 	extern State<int> previewSleep;
 }; // namespace Settings
 
