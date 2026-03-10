@@ -200,10 +200,10 @@ void GroupMenuItem::updatePreview()
 			gdk_x11_display_error_trap_pop_ignored(display);
 
 			if (!Settings::previewWidth)
-				Settings::previewWidth.set(192);
+				Settings::previewWidth.set(288);
 
 			if (!Settings::previewHeight)
-				Settings::previewHeight.set(108);
+				Settings::previewHeight.set(162);
 
 			if (pixbuf != nullptr)
 			{
