@@ -42,8 +42,6 @@ namespace Settings
 	const int maxIconSize = 128;
 	const int defPreviewWidth = 288;
 	const int defPreviewHeight = 162;
-	const int minPreviewSize = 1;
-	const int maxPreviewSize = 10000;
 
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
