@@ -205,22 +205,14 @@ void GroupMenuItem::updatePreview()
 			if (!Settings::previewHeight)
 				Settings::previewHeight.set(108);
 
-			gint previewWidth = Settings::previewWidth;
-			gint previewHeight = Settings::previewHeight;
-
 			if (pixbuf != nullptr)
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
+				gint previewWidth =  Settings::previewWidth * scale_factor;
+				gint previewHeight = Settings::previewHeight * scale_factor;
+				gtk_widget_set_size_request (GTK_WIDGET(mPreview), previewWidth, previewHeight);
 
-				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
-				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
-
-				gdouble ratio = MIN((gdouble)previewWidth / pixbufWidth, (gdouble)previewHeight / pixbufHeight);
-
-				gdouble scaledWidth = MIN(pixbufWidth * ratio, previewWidth);
-				gdouble scaledHeight = MAX(MIN(pixbufHeight * ratio, previewHeight), previewHeight);
-
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf, scaledWidth * scale_factor, scaledHeight * scale_factor, GDK_INTERP_BILINEAR);
+				thumbnail = xfce_gdk_pixbuf_scale_down(pixbuf, true, previewWidth, previewHeight);
 				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
