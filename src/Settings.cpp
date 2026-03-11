@@ -84,7 +84,6 @@ namespace Settings
 				});
 			});
 
-  int previewWidth = g_key_file_get_integer(file, "user", "previewWidth", nullptr);
 		previewWidth.setup(previewWidth > 0 ? previewWidth : defPreviewWidth,
 			[](int _previewWidth) -> void {
 				if (_previewWidth <= 0)
@@ -100,10 +99,11 @@ namespace Settings
 					g.second->mGroupMenu.showPreviewsChanged();
 				});
 			});
+		previewWidth.set(g_key_file_get_integer(file, "user", "previewWidth", nullptr));
 
-		previewHeight.setup(g_key_file_get_integer(file, "user", "previewHeight", nullptr),
+		previewHeight.setup(previewHeight > 0 ? previewHeight : defPreviewWidth,
 			[](int _previewHeight) -> void {
-				if (_previewHeight == 0)
+				if (_previewHeight <= 0)
 				{
 					previewHeight.set(defPreviewHeight);
 					return;
@@ -116,6 +116,7 @@ namespace Settings
 					g.second->mGroupMenu.showPreviewsChanged();
 				});
 			});
+		previewHeight.set(g_key_file_get_integer(file, "user", "previewHeight", nullptr));
 
 		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", nullptr),
 			[](bool _showWindowCount) -> void {
