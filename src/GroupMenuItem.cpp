@@ -205,13 +205,8 @@ void GroupMenuItem::updatePreview()
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
 
-				gint previewWidth = Settings::defPreviewWidth;
-				gint previewHeight = Settings::defPreviewHeight;
-
-				if (Settings::previewWidth)
-					previewWidth = Settings::previewWidth * scale_factor;
-				if (Settings::previewHeight)
-					previewHeight = Settings::previewHeight * scale_factor;
+				gint previewWidth = Settings::PreviewWidth * scale_factor;
+				gint previewHeight = Settings::PreviewHeight * scale_factor;
 
 				gtk_widget_set_size_request(GTK_WIDGET(mPreview), Settings::previewWidth, Settings::previewHeight);
 
