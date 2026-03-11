@@ -86,8 +86,8 @@ namespace Settings
 				});
 			});
 
-  int previewWidth = g_key_file_get_integer(file, "user", "previewWidth", nullptr);
-		previewWidth.setup(previewWidth > 0 ? previewWidth : defPreviewWidth,
+		int pWidth = g_key_file_get_integer(file, "user", "previewWidth", nullptr);
+		previewWidth.setup(pWidth > 0 ? pWidth : defPreviewWidth,
 			[](int _previewWidth) -> void {
 				if (_previewWidth <= 0)
 				{
@@ -103,9 +103,10 @@ namespace Settings
 				});
 			});
 
-		previewHeight.setup(g_key_file_get_integer(file, "user", "previewHeight", nullptr),
+		int pHeight = g_key_file_get_integer(file, "user", "previewHeight", nullptr);
+		previewHeight.setup(pHeight > 0 ? pHeight : defPreviewHeight,
 			[](int _previewHeight) -> void {
-				if (_previewHeight == 0)
+				if (_previewHeight <= 0)
 				{
 					previewHeight.set(defPreviewHeight);
 					return;
