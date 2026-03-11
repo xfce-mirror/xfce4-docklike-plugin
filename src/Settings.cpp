@@ -84,9 +84,10 @@ namespace Settings
 				});
 			});
 
-		previewWidth.setup(g_key_file_get_integer(file, "user", "previewWidth", nullptr),
+  int previewWidth = g_key_file_get_integer(file, "user", "previewWidth", nullptr);
+		previewWidth.setup(previewWidth > 0 ? previewWidth : defPreviewWidth,
 			[](int _previewWidth) -> void {
-				if (_previewWidth == 0)
+				if (_previewWidth <= 0)
 				{
 					previewWidth.set(defPreviewWidth);
 					return;
