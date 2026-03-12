@@ -59,6 +59,8 @@ namespace Settings
 		GKeyFile* file = g_key_file_new();
 		mPath = Store::AutoPtr<gchar>(path, g_free);
 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);
+		GError* error = NULL;
+		int intValue;
 
 		if (g_file_test(path, G_FILE_TEST_IS_REGULAR))
 			g_key_file_load_from_file(file, path, G_KEY_FILE_NONE, nullptr);
@@ -91,7 +93,13 @@ namespace Settings
 				Dock::drawGroups();
 			});
 
-		middleButtonBehavior.setup(g_key_file_get_integer(file, "user", "middleButtonBehavior", nullptr),
+		intValue = g_key_file_get_integer(file, "user", "middleButtonBehavior", &error);
+		if (error != nullptr)
+		{
+			intValue = BEHAVIOR_DO_NOTHING;
+			g_clear_error(&error);
+		}
+		middleButtonBehavior.setup(intValue,
 			[](int _middleButtonBehavior) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "middleButtonBehavior", _middleButtonBehavior);
 				saveFile();
