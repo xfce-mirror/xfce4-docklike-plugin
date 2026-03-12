@@ -84,7 +84,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
-			else if (event->button == GDK_BUTTON_MIDDLE)
+			else if (event->button == GDK_BUTTON_MIDDLE && Settings::middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
 				Xfw::close(me->mGroupWindow, event->time);
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
