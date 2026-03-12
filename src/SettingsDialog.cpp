@@ -230,7 +230,7 @@ namespace SettingsDialog
 			iconSize);
 
 		GObject* previewWidthButton = gtk_builder_get_object(builder, "previewWidthButton");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON(previewWidthButton), Settings::previewWidth);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(previewWidthButton), Settings::previewWidth);
 		g_object_bind_property(showPreviews, "active", previewWidthButton, "sensitive", G_BINDING_SYNC_CREATE);
 		g_signal_connect(previewWidthButton, "value-changed",
 			G_CALLBACK(+[](GtkSpinButton* _previewWidthButton) {
@@ -239,7 +239,7 @@ namespace SettingsDialog
 			NULL);
 
 		GObject* previewHeightButton = gtk_builder_get_object(builder, "previewHeightButton");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON(previewHeightButton), Settings::previewHeight);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(previewHeightButton), Settings::previewHeight);
 		g_object_bind_property(showPreviews, "active", previewHeightButton, "sensitive", G_BINDING_SYNC_CREATE);
 		g_signal_connect(previewHeightButton, "value-changed",
 			G_CALLBACK(+[](GtkSpinButton* _previewHeightButton) {
