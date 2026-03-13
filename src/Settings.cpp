@@ -60,7 +60,7 @@ namespace Settings
 		GKeyFile* file = g_key_file_new();
 		mPath = Store::AutoPtr<gchar>(path, g_free);
 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);
-		GError* error = NULL;
+		GError* error = nullptr;
 		int intValue;
 
 		if (g_file_test(path, G_FILE_TEST_IS_REGULAR))

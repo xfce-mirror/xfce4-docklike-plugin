@@ -236,7 +236,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkSpinButton* _previewWidthButton) {
 				Settings::previewWidth.set(gtk_spin_button_get_value_as_int(_previewWidthButton));
 			}),
-			NULL);
+			nullptr);
 
 		GObject* previewHeightButton = gtk_builder_get_object(builder, "previewHeightButton");
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(previewHeightButton), Settings::previewHeight);
@@ -245,7 +245,7 @@ namespace SettingsDialog
 			G_CALLBACK(+[](GtkSpinButton* _previewHeightButton) {
 				Settings::previewHeight.set(gtk_spin_button_get_value_as_int(_previewHeightButton));
 			}),
-			NULL);
+			nullptr);
 
 		// =====================================================================
 

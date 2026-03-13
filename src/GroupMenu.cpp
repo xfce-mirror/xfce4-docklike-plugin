@@ -32,10 +32,10 @@ create_window()
 	gtk_widget_add_events(window, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(window), 1, 1);
 
-	gtk_widget_set_app_paintable(window, TRUE);
+	gtk_widget_set_app_paintable(window, true);
 	GdkScreen* screen = gtk_widget_get_screen(window);
 	GdkVisual* visual = gdk_screen_get_rgba_visual(screen);
-	if (visual != NULL)
+	if (visual != nullptr)
 	{
 		gtk_widget_set_visual(window, visual);
 	}

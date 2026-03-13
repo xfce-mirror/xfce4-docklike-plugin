@@ -46,7 +46,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mIcon = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mIcon), "icon");
 	gtk_widget_set_halign(GTK_WIDGET(mIcon), GTK_ALIGN_START);
-	gtk_widget_set_hexpand(GTK_WIDGET(mIcon), FALSE);
+	gtk_widget_set_hexpand(GTK_WIDGET(mIcon), false);
 	gtk_widget_show(GTK_WIDGET(mIcon));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mIcon), 0, 0, 1, 1);
 
@@ -55,14 +55,14 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_label_set_xalign(mLabel, 0);
 	gtk_label_set_ellipsize(mLabel, PANGO_ELLIPSIZE_END);
 	gtk_label_set_width_chars(mLabel, 26);
-	gtk_widget_set_hexpand(GTK_WIDGET(mLabel), TRUE);
+	gtk_widget_set_hexpand(GTK_WIDGET(mLabel), true);
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
 	mCloseButton = GTK_BUTTON(gtk_button_new_from_icon_name("window-close", GTK_ICON_SIZE_MENU));
 	gtk_button_set_relief(mCloseButton, GTK_RELIEF_NONE);
 	gtk_widget_set_halign(GTK_WIDGET(mCloseButton), GTK_ALIGN_END);
-	gtk_widget_set_hexpand(GTK_WIDGET(mCloseButton), FALSE);
+	gtk_widget_set_hexpand(GTK_WIDGET(mCloseButton), false);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
