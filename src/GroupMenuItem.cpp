@@ -45,6 +45,8 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	mIcon = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mIcon), "icon");
+	gtk_widget_set_halign(GTK_WIDGET(mIcon), GTK_ALIGN_START);
+	gtk_widget_set_hexpand(GTK_WIDGET(mIcon), FALSE);
 	gtk_widget_show(GTK_WIDGET(mIcon));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mIcon), 0, 0, 1, 1);
 
@@ -53,17 +55,24 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_label_set_xalign(mLabel, 0);
 	gtk_label_set_ellipsize(mLabel, PANGO_ELLIPSIZE_END);
 	gtk_label_set_width_chars(mLabel, 26);
+	gtk_widget_set_hexpand(GTK_WIDGET(mLabel), TRUE);
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
 	mCloseButton = GTK_BUTTON(gtk_button_new_from_icon_name("window-close", GTK_ICON_SIZE_MENU));
 	gtk_button_set_relief(mCloseButton, GTK_RELIEF_NONE);
+	gtk_widget_set_halign(GTK_WIDGET(mCloseButton), GTK_ALIGN_END);
+	gtk_widget_set_hexpand(GTK_WIDGET(mCloseButton), FALSE);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
 
 	mPreview = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mPreview), "preview");
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
+	gtk_widget_set_halign(GTK_WIDGET(mPreview), GTK_ALIGN_CENTER);
+	gtk_widget_set_valign(GTK_WIDGET(mPreview), GTK_ALIGN_CENTER);
+	gtk_widget_set_hexpand(GTK_WIDGET(mPreview), FALSE);
+	gtk_widget_set_vexpand(GTK_WIDGET(mPreview), FALSE);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
 	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
@@ -189,10 +198,6 @@ void GroupMenuItem::updatePreview()
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
-		double scale = 0.125;
-		if (Settings::previewScale)
-			scale = Settings::previewScale;
-
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
 
@@ -208,14 +213,43 @@ void GroupMenuItem::updatePreview()
 			if (pixbuf != nullptr)
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
-				scale *= scale_factor;
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf,
-					gdk_pixbuf_get_width(pixbuf) * scale, gdk_pixbuf_get_height(pixbuf) * scale, GDK_INTERP_BILINEAR);
-				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
+
+				gint previewWidth = Settings::previewWidth * scale_factor;
+				gint previewHeight = Settings::previewHeight * scale_factor;
+
+				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
+				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
+
+				/* calculate the new dimensions */
+				gdouble wRatio = (gdouble)pixbufWidth / (gdouble)previewWidth;
+				gdouble hRatio = (gdouble)pixbufHeight / (gdouble)previewHeight;
+
+				if (hRatio > wRatio)
+				{
+					pixbufWidth = MAX(1, pixbufWidth / hRatio);
+					pixbufHeight = MIN(pixbufHeight, previewHeight);
+				}
+				else
+				{
+					pixbufWidth = MIN(pixbufWidth, previewWidth);
+					pixbufHeight = MAX(1, pixbufHeight / wRatio);
+				}
+
+				thumbnail = gdk_pixbuf_scale_simple(pixbuf, pixbufWidth, pixbufHeight, GDK_INTERP_BILINEAR);
+
+				GdkPixbuf* sized = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8, previewWidth, previewHeight);
+				gint thumbWidth = gdk_pixbuf_get_width(thumbnail);
+				gint thumbHeight = gdk_pixbuf_get_height(thumbnail);
+				gint xOffset = (previewWidth - thumbWidth) / 2;
+				gint yOffset = (previewHeight - thumbHeight) / 2;
+				gdk_pixbuf_composite(thumbnail, sized, xOffset, yOffset, thumbWidth, thumbHeight, xOffset, yOffset, 1, 1, GDK_INTERP_BILINEAR, 255);
+
+				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(sized, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
 
 				cairo_surface_destroy(surface);
+				g_object_unref(sized);
 				g_object_unref(thumbnail);
 				g_object_unref(pixbuf);
 			}

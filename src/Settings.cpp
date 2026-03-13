@@ -50,7 +50,8 @@ namespace Settings
 
 	State<bool> showWindowCount;
 	State<int> dockSize;
-	State<double> previewScale;
+	State<int> previewWidth;
+	State<int> previewHeight;
 	State<int> previewSleep;
 
 	void init()
@@ -78,6 +79,40 @@ namespace Settings
 		showPreviews.setup(g_key_file_get_boolean(file, "user", "showPreviews", nullptr),
 			[](bool _showPreviews) -> void {
 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
+				saveFile();
+
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+					g.second->mGroupMenu.showPreviewsChanged();
+				});
+			});
+
+		intValue = g_key_file_get_integer(file, "user", "previewWidth", nullptr);
+		previewWidth.setup(intValue > 0 ? intValue : defPreviewWidth,
+			[](int _previewWidth) -> void {
+				if (_previewWidth <= 0)
+				{
+					previewWidth.set(defPreviewWidth);
+					return;
+				}
+
+				g_key_file_set_integer(mFile.get(), "user", "previewWidth", _previewWidth);
+				saveFile();
+
+				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+					g.second->mGroupMenu.showPreviewsChanged();
+				});
+			});
+
+		intValue = g_key_file_get_integer(file, "user", "previewHeight", nullptr);
+		previewHeight.setup(intValue > 0 ? intValue : defPreviewHeight,
+			[](int _previewHeight) -> void {
+				if (_previewHeight <= 0)
+				{
+					previewHeight.set(defPreviewHeight);
+					return;
+				}
+
+				g_key_file_set_integer(mFile.get(), "user", "previewHeight", _previewHeight);
 				saveFile();
 
 				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
@@ -282,12 +317,6 @@ namespace Settings
 		dockSize.setup(g_key_file_get_integer(file, "user", "dockSize", nullptr),
 			[](int _dockSize) -> void {
 				g_key_file_set_integer(mFile.get(), "user", "dockSize", _dockSize);
-				saveFile();
-			});
-
-		previewScale.setup(g_key_file_get_double(file, "user", "previewScale", nullptr),
-			[](int _previewScale) -> void {
-				g_key_file_set_double(mFile.get(), "user", "previewScale", _previewScale);
 				saveFile();
 			});
 
