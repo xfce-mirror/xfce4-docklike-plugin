@@ -69,10 +69,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mPreview = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mPreview), "preview");
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
-	gtk_widget_set_halign(GTK_WIDGET(mPreview), GTK_ALIGN_CENTER);
-	gtk_widget_set_valign(GTK_WIDGET(mPreview), GTK_ALIGN_CENTER);
-	gtk_widget_set_hexpand(GTK_WIDGET(mPreview), FALSE);
-	gtk_widget_set_vexpand(GTK_WIDGET(mPreview), FALSE);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
 
 	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
