@@ -55,7 +55,6 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_label_set_xalign(mLabel, 0);
 	gtk_label_set_ellipsize(mLabel, PANGO_ELLIPSIZE_END);
 	gtk_label_set_width_chars(mLabel, 26);
-	gtk_widget_set_halign(GTK_WIDGET(mLabel), GTK_ALIGN_CENTER);
 	gtk_widget_set_hexpand(GTK_WIDGET(mLabel), TRUE);
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
