@@ -217,8 +217,6 @@ void GroupMenuItem::updatePreview()
 				gint previewWidth = Settings::previewWidth * scale_factor;
 				gint previewHeight = Settings::previewHeight * scale_factor;
 
-				gtk_widget_set_size_request(GTK_WIDGET(mPreview), Settings::previewWidth, Settings::previewHeight);
-
 				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
 				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
 
@@ -227,17 +225,31 @@ void GroupMenuItem::updatePreview()
 				gdouble hRatio = (gdouble)pixbufHeight / (gdouble)previewHeight;
 
 				if (hRatio > wRatio)
-					pixbufWidth /= hRatio;
+				{
+					pixbufWidth = MAX(1, pixbufWidth / hRatio);
+					pixbufHeight = MIN(pixbufHeight, previewHeight);
+				}
 				else
-					pixbufHeight /= wRatio;
+				{
+					pixbufWidth = MIN(pixbufWidth, previewWidth);
+					pixbufHeight = MAX(1, pixbufHeight / wRatio);
+				}
 
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf, rint(MIN(pixbufWidth, previewWidth)), rint(MIN(pixbufHeight, previewHeight)), GDK_INTERP_BILINEAR);
+				thumbnail = gdk_pixbuf_scale_simple(pixbuf, pixbufWidth, pixbufHeight, GDK_INTERP_BILINEAR);
 
-				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(thumbnail, scale_factor, nullptr);
+				GdkPixbuf* sized = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8, previewWidth, previewHeight);
+				gint thumbWidth = gdk_pixbuf_get_width(thumbnail);
+				gint thumbHeight = gdk_pixbuf_get_height(thumbnail);
+				gint xOffset = (previewWidth - thumbWidth) / 2;
+				gint yOffset = (previewHeight - thumbHeight) / 2;
+				gdk_pixbuf_composite(thumbnail, sized, xOffset, yOffset, thumbWidth, thumbHeight, xOffset, yOffset, 1, 1, GDK_INTERP_BILINEAR, 255);
+
+				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(sized, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
 
 				cairo_surface_destroy(surface);
+				g_object_unref(sized);
 				g_object_unref(thumbnail);
 				g_object_unref(pixbuf);
 			}
