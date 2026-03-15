@@ -254,4 +254,3 @@ void GroupMenuItem::updatePreview()
 	}
 #endif
 }
-
