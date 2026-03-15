@@ -275,18 +275,7 @@ namespace AppInfos
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
 		translateId(id);
-
-		// Strip file extensions like .py .sh .rb from WM_CLASS before matching
-		for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
-		{
-			if (id.size() > ext.size() && id.substr(id.size() - ext.size()) == ext)
-			{
-				id = id.substr(0, id.size() - ext.size());
-				break;
-			}
-		}
-
-		g_debug("Searching a match for '%s'", id.c_str());
+        g_debug("Searching a match for '%s'", id.c_str());
 
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
@@ -307,6 +296,29 @@ namespace AppInfos
 		{
 			g_debug("App name match");
 			return ai;
+		}
+        // Fallback: retry without file extension (e.g. mintinstall.py -> mintinstall)
+		for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
+		{
+			if (id.size() > ext.size() &&
+				id.substr(id.size() - ext.size()) == ext)
+			{
+				std::string stripped = id.substr(0, id.size() - ext.size());
+				g_debug("Retrying without extension '%s'", stripped.c_str());
+				ai = mAppInfoIds.get(stripped);
+				if (ai != nullptr)
+				{
+					g_debug("App id match after extension strip");
+					return ai;
+				}
+				ai = mAppInfoNames.get(stripped);
+				if (ai != nullptr)
+				{
+					g_debug("App name match after extension strip");
+					return ai;
+				}
+				break;
+			}
 		}
 
 		// Try to use just the first word of the window class; so that

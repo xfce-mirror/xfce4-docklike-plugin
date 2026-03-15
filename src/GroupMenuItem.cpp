@@ -168,31 +168,8 @@ void GroupMenuItem::updateLabel()
 void GroupMenuItem::updateIcon()
 {
 	gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mIcon));
-	// Use same theme icon as the dock button (from .desktop file)
-	std::shared_ptr<AppInfo> appInfo = mGroupWindow->mGroup->mAppInfo;
-	if (appInfo != nullptr && !appInfo->mIcon.empty())
-	{
-		if (appInfo->mIcon[0] == '/' && g_file_test(appInfo->mIcon.c_str(), G_FILE_TEST_IS_REGULAR))
-		{
-			GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file_at_size(appInfo->mIcon.c_str(), 16, 16, nullptr);
-			if (pixbuf != nullptr)
-			{
-				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(pixbuf, scale_factor, nullptr);
-				gtk_image_set_from_surface(mIcon, surface);
-				cairo_surface_destroy(surface);
-				g_object_unref(pixbuf);
-				return;
-			}
-		}
-		else
-		{
-			gtk_image_set_from_icon_name(GTK_IMAGE(mIcon), appInfo->mIcon.c_str(), GTK_ICON_SIZE_LARGE_TOOLBAR);
-			gtk_image_set_pixel_size(GTK_IMAGE(mIcon), 16);
-			return;
-		}
-	}
-	// Fallback to window icon if no .desktop icon found
 	GdkPixbuf* iconPixbuf = xfw_window_get_icon(mGroupWindow->mXfwWindow, 16, scale_factor);
+
 	if (iconPixbuf != nullptr)
 	{
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(iconPixbuf, scale_factor, nullptr);
@@ -277,3 +254,4 @@ void GroupMenuItem::updatePreview()
 	}
 #endif
 }
+
