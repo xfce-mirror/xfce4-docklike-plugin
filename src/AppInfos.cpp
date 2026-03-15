@@ -240,8 +240,8 @@ namespace AppInfos
 		std::list<std::string> ids = Settings::userSetApps.get().first;
 		std::list<std::string> paths = Settings::userSetApps.get().second;
 		for (auto id = ids.begin(), path = paths.begin();
-			id != ids.end() && path != paths.end();
-			id++, path++)
+			 id != ids.end() && path != paths.end();
+			 id++, path++)
 		{
 			addUserSetApp(*id, *path);
 		}
@@ -274,20 +274,19 @@ namespace AppInfos
 
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
-    translateId(id);
+		translateId(id);
 
-    // Strip file extensions like .py .sh .rb from WM_CLASS before matching
-    for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
-    {
-        if (id.size() > ext.size() &&
-            id.substr(id.size() - ext.size()) == ext)
-        {
-            id = id.substr(0, id.size() - ext.size());
-            break;
-        }
-    }
+		// Strip file extensions like .py .sh .rb from WM_CLASS before matching
+		for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
+		{
+			if (id.size() > ext.size() && id.substr(id.size() - ext.size()) == ext)
+			{
+				id = id.substr(0, id.size() - ext.size());
+				break;
+			}
+		}
 
-    g_debug("Searching a match for '%s'", id.c_str());
+		g_debug("Searching a match for '%s'", id.c_str());
 
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
