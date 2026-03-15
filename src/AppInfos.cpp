@@ -274,9 +274,20 @@ namespace AppInfos
 
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
-		translateId(id);
+    translateId(id);
 
-		g_debug("Searching a match for '%s'", id.c_str());
+    // Strip file extensions like .py .sh .rb from WM_CLASS before matching
+    for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
+    {
+        if (id.size() > ext.size() &&
+            id.substr(id.size() - ext.size()) == ext)
+        {
+            id = id.substr(0, id.size() - ext.size());
+            break;
+        }
+    }
+
+    g_debug("Searching a match for '%s'", id.c_str());
 
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
