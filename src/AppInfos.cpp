@@ -148,7 +148,12 @@ namespace AppInfos
 		std::string icon = (icon_ != nullptr) ? icon_ : "";
 		g_free(icon_);
 
-		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
+		std::string exec;
+		char* exec_raw = g_desktop_app_info_get_string(gAppInfo, "Exec");
+		if (exec_raw != nullptr)
+			exec = Help::String::toLowercase(Help::String::trim(exec_raw));
+		g_free(exec_raw);
+		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, exec, gAppInfo);
 		mAppInfoIds.set(lower_id, info);
 
 		name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
@@ -164,7 +169,6 @@ namespace AppInfos
 					mAppInfoNames.set(name, info);
 		}
 
-		std::string exec;
 		char* exec_ = g_desktop_app_info_get_string(gAppInfo, "Exec");
 		if (exec_ != nullptr && exec_[0] != '\0')
 		{
@@ -272,6 +276,38 @@ namespace AppInfos
 			id = it->second;
 	}
 
+	static std::shared_ptr<AppInfo> searchByPrefix(const std::string& id, char sep)
+	{
+		auto pos = id.find(sep);
+		if (pos == std::string::npos)
+			return nullptr;
+		std::string prefix = id.substr(0, pos);
+		g_debug("Searching a match for prefix '%s' (separator '%c')", prefix.c_str(), sep);
+		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
+		if (ai != nullptr)
+		{
+			if (sep == '.' && ai->mExec.find(prefix) == std::string::npos)
+				g_debug("Rejected: Exec does not contain '%s'", id.c_str());
+			else
+			{
+				g_debug("App id match");
+				return ai;
+			}
+		}
+		ai = mAppInfoNames.get(prefix);
+		if (ai != nullptr)
+		{
+			if (sep == '.' && ai->mExec.find(prefix) == std::string::npos)
+			{
+				g_debug("Rejected: Exec does not contain '%s'", id.c_str());
+				return nullptr;
+			}
+			g_debug("App name match");
+			return ai;
+		}
+		return nullptr;
+	}
+
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
 		translateId(id);
@@ -297,51 +333,16 @@ namespace AppInfos
 			g_debug("App name match");
 			return ai;
 		}
-		// Fallback: retry without file extension (e.g. mintinstall.py -> mintinstall)
-		for (const std::string ext : {".py", ".sh", ".rb", ".pl", ".exe"})
-		{
-			if (id.size() > ext.size() && id.substr(id.size() - ext.size()) == ext)
-			{
-				std::string stripped = id.substr(0, id.size() - ext.size());
-				g_debug("Retrying without extension '%s'", stripped.c_str());
-				ai = mAppInfoIds.get(stripped);
-				if (ai != nullptr)
-				{
-					g_debug("App id match after extension strip");
-					return ai;
-				}
-				ai = mAppInfoNames.get(stripped);
-				if (ai != nullptr)
-				{
-					g_debug("App name match after extension strip");
-					return ai;
-				}
-				break;
-			}
-		}
 
 		// Try to use just the first word of the window class; so that
 		// virtualbox manager, virtualbox machine get grouped together etc.
-		auto pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			g_debug("No match for whole string, searching a match for first word '%s'", id.c_str());
+		ai = searchByPrefix(id, ' ');
+		if (ai != nullptr)
+			return ai;
 
-			ai = mAppInfoIds.get(id);
-			if (ai != nullptr)
-			{
-				g_debug("App id match");
-				return ai;
-			}
-
-			ai = mAppInfoNames.get(id);
-			if (ai != nullptr)
-			{
-				g_debug("App name match");
-				return ai;
-			}
-		}
+		ai = searchByPrefix(id, '.');
+		if (ai != nullptr)
+			return ai;
 
 		ai = mAppInfoUserSet.get(id);
 		if (ai != nullptr)
@@ -352,7 +353,7 @@ namespace AppInfos
 
 		g_debug("No match");
 
-		return std::make_shared<AppInfo>("", "", "", id);
+		return std::make_shared<AppInfo>("", "", "", id, "");
 	}
 
 	bool selectLauncher(const gchar* classId)
