@@ -54,8 +54,9 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mLabel), "title");
 	gtk_label_set_xalign(mLabel, 0);
 	gtk_label_set_ellipsize(mLabel, PANGO_ELLIPSIZE_END);
-	gtk_label_set_width_chars(mLabel, 26);
+	gtk_label_set_max_width_chars(mLabel, 26);
 	gtk_widget_set_hexpand(GTK_WIDGET(mLabel), true);
+	gtk_widget_set_halign(GTK_WIDGET(mLabel), GTK_ALIGN_START);
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
@@ -192,7 +193,6 @@ void GroupMenuItem::updatePreview()
 	{
 		GdkWindow* window;
 		GdkPixbuf* pixbuf;
-		GdkPixbuf* thumbnail;
 
 		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
 			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
@@ -216,37 +216,24 @@ void GroupMenuItem::updatePreview()
 				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
 				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
 
-				/* calculate the new dimensions */
-				gdouble wRatio = (gdouble)pixbufWidth / (gdouble)previewWidth;
-				gdouble hRatio = (gdouble)pixbufHeight / (gdouble)previewHeight;
+				/* fit to height: scale to previewHeight, cap width at previewWidth */
+				gdouble scale = (gdouble)previewHeight / (gdouble)pixbufHeight;
 
-				if (hRatio > wRatio)
-				{
-					pixbufWidth = MAX(1, pixbufWidth / hRatio);
-					pixbufHeight = MIN(pixbufHeight, previewHeight);
-				}
-				else
-				{
-					pixbufWidth = MIN(pixbufWidth, previewWidth);
-					pixbufHeight = MAX(1, pixbufHeight / wRatio);
-				}
+				gint thumbWidth = MAX(1, (gint)(pixbufWidth * scale));
+				gint canvasWidth = MIN(thumbWidth, previewWidth);
 
-				thumbnail = gdk_pixbuf_scale_simple(pixbuf, pixbufWidth, pixbufHeight, GDK_INTERP_BILINEAR);
-
-				GdkPixbuf* sized = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8, previewWidth, previewHeight);
-				gint thumbWidth = gdk_pixbuf_get_width(thumbnail);
-				gint thumbHeight = gdk_pixbuf_get_height(thumbnail);
-				gint xOffset = (previewWidth - thumbWidth) / 2;
-				gint yOffset = (previewHeight - thumbHeight) / 2;
-				gdk_pixbuf_composite(thumbnail, sized, xOffset, yOffset, thumbWidth, thumbHeight, xOffset, yOffset, 1, 1, GDK_INTERP_BILINEAR, 255);
-
+				GdkPixbuf* sized = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8, canvasWidth, previewHeight);
+				gdk_pixbuf_fill(sized, 0x00000000);
+				gdk_pixbuf_composite(pixbuf, sized, 0, 0, canvasWidth, previewHeight, 0, 0, scale, scale, GDK_INTERP_BILINEAR, 255);
 				cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(sized, scale_factor, nullptr);
 
 				gtk_image_set_from_surface(mPreview, surface);
+				gtk_widget_set_size_request(GTK_WIDGET(mPreview), canvasWidth / scale_factor, Settings::previewHeight);
+				gtk_widget_set_size_request(GTK_WIDGET(mGrid), canvasWidth / scale_factor, -1);
+				gtk_widget_set_size_request(GTK_WIDGET(mItem), canvasWidth / scale_factor, -1);
 
 				cairo_surface_destroy(surface);
 				g_object_unref(sized);
-				g_object_unref(thumbnail);
 				g_object_unref(pixbuf);
 			}
 			g_object_unref(window);
