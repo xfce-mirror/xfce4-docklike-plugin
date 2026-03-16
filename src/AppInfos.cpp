@@ -148,12 +148,7 @@ namespace AppInfos
 		std::string icon = (icon_ != nullptr) ? icon_ : "";
 		g_free(icon_);
 
-		std::string exec;
-		char* exec_raw = g_desktop_app_info_get_string(gAppInfo, "Exec");
-		if (exec_raw != nullptr)
-			exec = Help::String::toLowercase(Help::String::trim(exec_raw));
-		g_free(exec_raw);
-		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, exec, gAppInfo);
+		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
 		mAppInfoIds.set(lower_id, info);
 
 		name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
@@ -169,6 +164,7 @@ namespace AppInfos
 					mAppInfoNames.set(name, info);
 		}
 
+		std::string exec;
 		char* exec_ = g_desktop_app_info_get_string(gAppInfo, "Exec");
 		if (exec_ != nullptr && exec_[0] != '\0')
 		{
@@ -344,7 +340,7 @@ namespace AppInfos
 
 		g_debug("No match");
 
-		return std::make_shared<AppInfo>("", "", "", id, "");
+		return std::make_shared<AppInfo>("", "", "", id);
 	}
 
 	bool selectLauncher(const gchar* classId)
