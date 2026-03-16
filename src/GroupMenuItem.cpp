@@ -213,13 +213,13 @@ void GroupMenuItem::updatePreview()
 				gint previewWidth = Settings::previewWidth * scale_factor;
 				gint previewHeight = Settings::previewHeight * scale_factor;
 
-				gint pixbufWidth  = gdk_pixbuf_get_width(pixbuf);
+				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
 				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);
 
 				/* fit to height: scale to previewHeight, cap width at previewWidth */
 				gdouble scale = (gdouble)previewHeight / (gdouble)pixbufHeight;
 
-				gint thumbWidth  = MAX(1, (gint)(pixbufWidth  * scale));
+				gint thumbWidth = MAX(1, (gint)(pixbufWidth * scale));
 				gint canvasWidth = MIN(thumbWidth, previewWidth);
 
 				GdkPixbuf* sized = gdk_pixbuf_new(GDK_COLORSPACE_RGB, true, 8, canvasWidth, previewHeight);
