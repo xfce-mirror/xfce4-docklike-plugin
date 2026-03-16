@@ -282,9 +282,8 @@ namespace AppInfos
 		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
 		if (ai != nullptr)
 		{
-				g_debug("App id match");
-				return ai;
-
+			g_debug("App id match");
+			return ai;
 		}
 		ai = mAppInfoNames.get(prefix);
 		if (ai != nullptr)
