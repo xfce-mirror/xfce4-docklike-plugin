@@ -286,22 +286,13 @@ namespace AppInfos
 		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
 		if (ai != nullptr)
 		{
-			if (sep == '.' && ai->mExec.find(prefix) == std::string::npos)
-				g_debug("Rejected: Exec does not contain '%s'", id.c_str());
-			else
-			{
 				g_debug("App id match");
 				return ai;
-			}
+
 		}
 		ai = mAppInfoNames.get(prefix);
 		if (ai != nullptr)
 		{
-			if (sep == '.' && ai->mExec.find(prefix) == std::string::npos)
-			{
-				g_debug("Rejected: Exec does not contain '%s'", id.c_str());
-				return nullptr;
-			}
 			g_debug("App name match");
 			return ai;
 		}
