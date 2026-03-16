@@ -35,6 +35,7 @@ struct AppInfo
 	const std::string mIcon;
 	const std::string mName;
 	const Store::AutoPtr<GDesktopAppInfo> mGAppInfo;
+
 	AppInfo(std::string id, std::string path, std::string icon, std::string name, GDesktopAppInfo* gAppInfo = nullptr)
 		: mId(id), mPath(path), mIcon(icon), mName(name), mGAppInfo(gAppInfo, [](gpointer o) { if (o) g_object_unref(o); }) {}
 	const gchar* const* getActions() { return mGAppInfo ? g_desktop_app_info_list_actions(mGAppInfo.get()) : nullptr; };

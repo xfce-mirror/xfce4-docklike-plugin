@@ -233,8 +233,10 @@ void Group::add(GroupWindow* window)
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
 	Help::Gtk::cssClassAdd(mButton, "open_group");
+
 	if (mWindowsCount == 1 && !mPinned)
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
+
 	if (mWindowsCount == 1 && (mAppInfo == nullptr || mAppInfo->mIcon.empty()))
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
