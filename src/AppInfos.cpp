@@ -240,8 +240,8 @@ namespace AppInfos
 		std::list<std::string> ids = Settings::userSetApps.get().first;
 		std::list<std::string> paths = Settings::userSetApps.get().second;
 		for (auto id = ids.begin(), path = paths.begin();
-                       id != ids.end() && path != paths.end();
-                       id++, path++)
+			id != ids.end() && path != paths.end();
+			id++, path++)
 		{
 			addUserSetApp(*id, *path);
 		}
