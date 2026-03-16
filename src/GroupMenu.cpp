@@ -127,7 +127,7 @@ GroupMenu::~GroupMenu()
 
 void GroupMenu::add(GroupMenuItem* menuItem)
 {
-	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, true, 0);
+	gtk_box_pack_end(GTK_BOX(mBox), GTK_WIDGET(menuItem->mItem), false, false, 0);
 
 	if (mVisible)
 		mPopupIdle.start();
