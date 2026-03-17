@@ -337,7 +337,8 @@ namespace Hotkeys
 				if (!keycode)
 					continue;
 
-			unsigned int modmask = (unsigned int)mods & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);				grabUngrabCustomKey(rootwin, display, keycode, modmask, true);
+				unsigned int modmask = (unsigned int)mods & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);
+				grabUngrabCustomKey(rootwin, display, keycode, modmask, true);
 
 				CustomGrab cg;
 				cg.keycode = keycode;
