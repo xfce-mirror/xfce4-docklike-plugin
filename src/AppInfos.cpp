@@ -277,20 +277,24 @@ namespace AppInfos
 		auto pos = id.find(sep);
 		if (pos == std::string::npos)
 			return nullptr;
+
 		std::string prefix = id.substr(0, pos);
 		g_debug("Searching a match for prefix '%s' (separator '%c')", prefix.c_str(), sep);
+
 		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
 		if (ai != nullptr)
 		{
 			g_debug("App id match");
 			return ai;
 		}
+
 		ai = mAppInfoNames.get(prefix);
 		if (ai != nullptr)
 		{
 			g_debug("App name match");
 			return ai;
 		}
+
 		return nullptr;
 	}
 
@@ -299,6 +303,7 @@ namespace AppInfos
 		translateId(id);
 
 		g_debug("Searching a match for '%s'", id.c_str());
+
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
 		{
@@ -326,6 +331,7 @@ namespace AppInfos
 		if (ai != nullptr)
 			return ai;
 
+		// Try to remove extension, see https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/merge_requests/49
 		ai = searchByPrefix(id, '.');
 		if (ai != nullptr)
 			return ai;
