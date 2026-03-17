@@ -19,13 +19,20 @@
 #ifndef SETTINGS_DIALOG_HPP
 #define SETTINGS_DIALOG_HPP
 
+#include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "Helpers.hpp"
+#ifdef ENABLE_X11
+#include "Hotkeys.hpp"
+#endif
 #include "Plugin.hpp"
 #include "Settings.hpp"
+#include "Xfw.hpp"
 
 #include <gtk/gtk.h>
 
 #include <string>
+#include <vector>
 
 namespace SettingsDialog
 {

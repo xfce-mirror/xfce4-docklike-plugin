@@ -31,12 +31,26 @@
 #include <string>
 #include <vector>
 
+// Per-pinned-app entry: holds the desktop file ID, full path, whether the default
+// positional Super+N key is disabled, and a list of user-assigned custom keys.
+struct PinnedAppEntry
+{
+	std::string id;   // desktop id, e.g. "firefox"  (used for AppInfos::search)
+	std::string path; // full .desktop path, e.g. "/usr/share/applications/firefox.desktop"
+	bool defaultKeyDisabled = false;
+	std::vector<std::string> customKeys; // e.g. {"<Control><Alt>f"}
+};
+
 namespace Settings
 {
 	void init();
 	void finalize();
 
 	void saveFile();
+
+	// Load/save helpers for PinnedAppEntry list
+	std::vector<PinnedAppEntry> loadPinnedAppEntries();
+	void savePinnedAppEntries(const std::vector<PinnedAppEntry>& entries);
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;

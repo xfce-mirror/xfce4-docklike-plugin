@@ -19,10 +19,23 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include <string>
+#include <vector>
+
+#include <gtk/gtk.h>
+
 namespace Hotkeys
 {
 	void init();
 	void updateSettings();
+	void updateCustomKeys();
+
+	// Capture a key combination interactively; returns accel string or "".
+	std::string captureKey(GtkWindow* parent);
+
+	// Convert a GTK accel string (e.g. "<Mod4>a") to a human-readable label
+	// (e.g. "Super+A"), replacing raw modifier names with friendly ones.
+	std::string accelToReadableLabel(const std::string& accel);
 
 	extern bool mXIExtAvailable;
 	extern int mGrabbedKeys;
