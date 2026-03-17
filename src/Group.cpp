@@ -17,6 +17,7 @@
  */
 
 #include "Group.hpp"
+#include "SettingsDialog.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
@@ -941,6 +942,16 @@ GtkWidget* Group::buildContextMenu()
 				(gpointer)mAppInfo->mName.c_str());
 		}
 	}
+
+	// ---- Taskbar settings entry (always shown at the bottom) ----
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+	GtkWidget* settingsItem = gtk_menu_item_new_with_label(_("Dock Settings"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), settingsItem);
+	g_signal_connect(G_OBJECT(settingsItem), "activate",
+		G_CALLBACK(+[](GtkMenuItem*, gpointer) {
+			SettingsDialog::popup();
+		}),
+		nullptr);
 
 	gtk_widget_show_all(menu);
 

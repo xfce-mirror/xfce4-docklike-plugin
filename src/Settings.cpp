@@ -17,9 +17,12 @@
  */
 
 #include "Settings.hpp"
+#include "AppInfos.hpp"
 #ifdef ENABLE_X11
 #include "Hotkeys.hpp"
 #endif
+
+#include <unordered_set>
 
 namespace Settings
 {
@@ -339,5 +342,182 @@ namespace Settings
 	void saveFile()
 	{
 		g_key_file_save_to_file(mFile.get(), mPath.get(), nullptr);
+	}
+
+	// ---------------------------------------------------------------------------
+	// PinnedAppEntry persistence helpers
+	// ---------------------------------------------------------------------------
+
+	std::vector<PinnedAppEntry> loadPinnedAppEntries()
+	{
+		std::vector<PinnedAppEntry> entries;
+
+		// Read the pinned id list directly from the config — do NOT write back
+		std::list<std::string> ids = pinnedAppList.get();
+
+		// Pre-load the disabled-default set once (keyed by app id)
+		std::unordered_set<std::string> disabledSet;
+		gsize disabledLen = 0;
+		gchar** disabledList = g_key_file_get_string_list(mFile.get(), "user", "pinnedDisabledDefault", &disabledLen, nullptr);
+		if (disabledList != nullptr)
+		{
+			for (gsize d = 0; d < disabledLen; ++d)
+				disabledSet.insert(disabledList[d]);
+			g_strfreev(disabledList);
+		}
+
+		int idx = 0;
+		for (const std::string& id : ids)
+		{
+			// Skip any empty/blank ids that may have been left by old builds
+			if (id.empty())
+			{
+				++idx;
+				continue;
+			}
+
+			PinnedAppEntry e;
+			e.id = id;
+
+			// Resolve the full .desktop path (read-only, no side effects).
+			// AppInfos stores everything under lowercase keys (same as drawGroups),
+			// so search with the lowercased id to get a hit.
+			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(id));
+			e.path = (appInfo && !appInfo->mPath.empty()) ? appInfo->mPath : id;
+
+			e.defaultKeyDisabled = (disabledSet.count(id) > 0);
+
+			// Custom keys: prefer the launcher-identity-based key "pinnedKeys_id_<id>"
+			// (new scheme), fall back to the legacy position-based "pinnedKeys_<idx>"
+			// for backward compatibility with existing configs.
+			// Note: only apps with a resolved .desktop file (non-empty id) use the
+			// id-based key.  Apps whose id couldn't be resolved (empty id, raw
+			// command launchers, etc.) always use the positional fallback so they
+			// don't all collide on the same "pinnedKeys_id_" key.
+			std::string posKeyName = "pinnedKeys_" + std::to_string(idx);
+
+			gsize keysLen = 0;
+			gchar** keysList = nullptr;
+			if (!id.empty())
+			{
+				std::string idKeyName = "pinnedKeys_id_" + id;
+				keysList = g_key_file_get_string_list(mFile.get(), "user", idKeyName.c_str(), &keysLen, nullptr);
+			}
+			if (keysList == nullptr)
+			{
+				// Fall back to the legacy positional key (covers empty-id apps and
+				// configs written before this feature was introduced)
+				keysList = g_key_file_get_string_list(mFile.get(), "user", posKeyName.c_str(), &keysLen, nullptr);
+			}
+			if (keysList != nullptr)
+			{
+				for (gsize k = 0; k < keysLen; ++k)
+					e.customKeys.push_back(keysList[k]);
+				g_strfreev(keysList);
+			}
+
+			entries.push_back(e);
+			++idx;
+		}
+
+		return entries;
+	}
+
+	void savePinnedAppEntries(const std::vector<PinnedAppEntry>& entries)
+	{
+		// IMPORTANT: Do NOT touch pinnedAppList / "pinned=" here.
+		// The pinned order is owned by Dock::savePinned() and the existing
+		// drag-drop / reorder machinery.  We only persist our extra metadata:
+		//   • pinnedDisabledDefault      — ids whose positional Super+N key is off
+		//   • pinnedKeys_id_<appId>      — per-launcher custom key bindings (new scheme,
+		//                                  only used when the app has a known .desktop id)
+		//   • pinnedKeys_<N>             — positional fallback for apps with no resolved id
+		//
+		// The old positional keys for apps that now have an id-based key are removed
+		// on save so they don't linger.
+
+		// 1. Write the disabled-default id list (already id-based — unchanged)
+		std::vector<const char*> disabledBuf;
+		for (const auto& e : entries)
+			if (e.defaultKeyDisabled)
+				disabledBuf.push_back(e.id.c_str());
+		g_key_file_set_string_list(mFile.get(), "user", "pinnedDisabledDefault",
+			disabledBuf.data(), disabledBuf.size());
+
+		// 2. Remove legacy positional custom key entries for apps that now have an
+		//    id-based key (they've been migrated).  Keep positional keys for any
+		//    entries whose id is still empty (unresolved / command-based launchers).
+		std::unordered_set<int> keepPositional;
+		for (int i = 0; i < (int)entries.size(); ++i)
+			if (entries[i].id.empty())
+				keepPositional.insert(i);
+
+		for (int i = 0; i < 128; ++i)
+		{
+			if (keepPositional.find(i) == keepPositional.end())
+			{
+				std::string posKeyName = "pinnedKeys_" + std::to_string(i);
+				g_key_file_remove_key(mFile.get(), "user", posKeyName.c_str(), nullptr);
+			}
+		}
+
+		// 3. Collect the set of app ids currently in the entries so we can remove
+		//    stale id-based entries for apps that are no longer pinned.
+		std::unordered_set<std::string> currentIds;
+		for (const auto& e : entries)
+			if (!e.id.empty())
+				currentIds.insert(e.id);
+
+		// Remove any id-based key entries whose app is no longer present.
+		// We must enumerate the keys in the group to find them.
+		gsize nkeys = 0;
+		gchar** keys = g_key_file_get_keys(mFile.get(), "user", &nkeys, nullptr);
+		if (keys != nullptr)
+		{
+			for (gsize k = 0; k < nkeys; ++k)
+			{
+				std::string key(keys[k]);
+				const std::string prefix = "pinnedKeys_id_";
+				if (key.substr(0, prefix.size()) == prefix)
+				{
+					std::string storedId = key.substr(prefix.size());
+					if (currentIds.find(storedId) == currentIds.end())
+						g_key_file_remove_key(mFile.get(), "user", keys[k], nullptr);
+				}
+			}
+			g_strfreev(keys);
+		}
+
+		// 4. Write custom keys:
+		//    • Known apps (non-empty id) → "pinnedKeys_id_<appId>"
+		//    • Unresolved apps (empty id) → "pinnedKeys_<idx>" (positional fallback)
+		for (int i = 0; i < (int)entries.size(); ++i)
+		{
+			const auto& e = entries[i];
+			std::string keyName = e.id.empty()
+				? "pinnedKeys_" + std::to_string(i)
+				: "pinnedKeys_id_" + e.id;
+
+			if (!e.customKeys.empty())
+			{
+				std::vector<const char*> buf;
+				for (const auto& k : e.customKeys)
+					buf.push_back(k.c_str());
+				g_key_file_set_string_list(mFile.get(), "user", keyName.c_str(),
+					buf.data(), buf.size());
+			}
+			else
+			{
+				// Ensure no stale key exists for this app
+				g_key_file_remove_key(mFile.get(), "user", keyName.c_str(), nullptr);
+			}
+		}
+
+		saveFile();
+
+#ifdef ENABLE_X11
+		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
+			Hotkeys::updateCustomKeys();
+#endif
 	}
 } // namespace Settings
