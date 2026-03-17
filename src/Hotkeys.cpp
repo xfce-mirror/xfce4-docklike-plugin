@@ -4,7 +4,8 @@
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation, either version 3 of the Li			unsigned int keycode = XKeysymToKeycode(xdisplay, keyval);
+			if (!keycode)nse, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -44,7 +45,7 @@ namespace Hotkeys
 	// Custom-key grab tracking: keycode+modmask → app-path
 	struct CustomGrab
 	{
-		int keycode;
+		unsigned int keycode;
 		unsigned int modmask;
 		std::string appPath;
 	};
@@ -94,7 +95,7 @@ namespace Hotkeys
 	}
 
 	static void grabUngrabCustomKey(GdkWindow* rootwin, GdkDisplay* display,
-		int keycode, unsigned int modmask, bool grab)
+		unsigned int keycode, unsigned int modmask, bool grab)
 	{
 		for (int ignoredModifiers : {0, (int)GDK_MOD2_MASK, (int)GDK_LOCK_MASK,
 			(int)(GDK_MOD2_MASK | GDK_LOCK_MASK)})
@@ -105,7 +106,8 @@ namespace Hotkeys
 				XGrabKey(GDK_WINDOW_XDISPLAY(rootwin), keycode,
 					modmask | ignoredModifiers,
 					GDK_WINDOW_XID(rootwin), False, GrabModeAsync, GrabModeAsync);
-				gdk_x11_display_error_trap_pop(display);
+				gint grabError = gdk_x11_display_error_trap_pop(display);
+				(void)grabError;
 			}
 			else
 			{
@@ -448,10 +450,10 @@ namespace Hotkeys
 		CaptureData cd = { "", keyLabel, GTK_DIALOG(dialog), false };
 
 		gulong keyPressId = g_signal_connect(dialog, "key-press-event",
-			G_CALLBACK(+[](GtkWidget* widget, GdkEventKey* event, CaptureData* cd) -> gboolean {
+			G_CALLBACK(+[](GtkWidget* widget, GdkEventKey* event, CaptureData* captureData) -> gboolean {
 				if (event->keyval == GDK_KEY_Escape)
 				{
-					gtk_dialog_response(cd->dialog, GTK_RESPONSE_CANCEL);
+					gtk_dialog_response(captureData->dialog, GTK_RESPONSE_CANCEL);
 					return TRUE;
 				}
 				// Ignore bare modifiers
@@ -464,15 +466,15 @@ namespace Hotkeys
 				// Build accel string
 				guint modMask = event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);
 				gchar* accel = gtk_accelerator_name(event->keyval, (GdkModifierType)modMask);
-				cd->result = accel ? accel : "";
+				captureData->result = accel ? accel : "";
 				g_free(accel);
-				cd->captured = true;
+				captureData->captured = true;
 
 				// Show readable label
-				std::string readableLabel = accelToReadableLabel(cd->result);
-				gtk_label_set_text(GTK_LABEL(cd->keyLabel), readableLabel.c_str());
+				std::string readableLabel = accelToReadableLabel(captureData->result);
+				gtk_label_set_text(GTK_LABEL(captureData->keyLabel), readableLabel.c_str());
 
-				gtk_dialog_response(cd->dialog, GTK_RESPONSE_OK);
+				gtk_dialog_response(captureData->dialog, GTK_RESPONSE_OK);
 				return TRUE;
 			}),
 			&cd);
