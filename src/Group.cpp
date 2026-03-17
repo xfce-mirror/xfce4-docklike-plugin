@@ -237,18 +237,9 @@ void Group::add(GroupWindow* window)
 	if (mWindowsCount == 1 && !mPinned)
 		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
 
-	if (mWindowsCount == 1 && (mAppInfo == nullptr || mAppInfo->mIcon.empty()))
-	{
-		gint scale_factor = gtk_widget_get_scale_factor(mButton);
-		GdkPixbuf* windowIcon = xfw_window_get_icon(window->mXfwWindow, Dock::mIconSize, scale_factor);
-		if (windowIcon != nullptr)
-		{
-			mIconPixbuf = GDK_PIXBUF(g_object_ref(windowIcon));
-			resize();
-		}
-	}
 	if (!mActive && xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
+
 	gtk_widget_queue_draw(mButton);
 }
 
