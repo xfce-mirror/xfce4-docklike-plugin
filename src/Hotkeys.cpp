@@ -69,7 +69,8 @@ namespace Hotkeys
 		while (std::getline(ss, tok, '+'))
 		{
 			std::string lower = tok;
-			for (auto& c : lower) c = tolower(c);
+			for (auto& c : lower)
+				c = tolower(c);
 			if (lower == "ctrl" || lower == "control")
 				parsedMods |= GDK_CONTROL_MASK;
 			else if (lower == "alt" || lower == "mod1")
@@ -97,7 +98,7 @@ namespace Hotkeys
 		unsigned int keycode, unsigned int modmask, bool grab)
 	{
 		for (int ignoredModifiers : {0, (int)GDK_MOD2_MASK, (int)GDK_LOCK_MASK,
-			(int)(GDK_MOD2_MASK | GDK_LOCK_MASK)})
+				 (int)(GDK_MOD2_MASK | GDK_LOCK_MASK)})
 		{
 			if (grab)
 			{
@@ -139,8 +140,7 @@ namespace Hotkeys
 			else
 			{
 				// Check custom grabs
-				unsigned int stateMask = xevent->xkey.state &
-					(GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);
+				unsigned int stateMask = xevent->xkey.state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);
 				for (const auto& cg : mCustomGrabs)
 				{
 					if (cg.keycode == xevent->xkey.keycode && cg.modmask == stateMask)
@@ -337,10 +337,7 @@ namespace Hotkeys
 				if (!keycode)
 					continue;
 
-				unsigned int modmask = (unsigned int)mods &
-					(GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);
-
-				grabUngrabCustomKey(rootwin, display, keycode, modmask, true);
+			unsigned int modmask = (unsigned int)mods & (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD4_MASK);				grabUngrabCustomKey(rootwin, display, keycode, modmask, true);
 
 				CustomGrab cg;
 				cg.keycode = keycode;
@@ -388,7 +385,8 @@ namespace Hotkeys
 
 	std::string accelToReadableLabel(const std::string& accel)
 	{
-		if (accel.empty()) return accel;
+		if (accel.empty())
+			return accel;
 
 		guint keyval = 0;
 		GdkModifierType mods = (GdkModifierType)0;
@@ -396,17 +394,22 @@ namespace Hotkeys
 
 		// Build modifier prefix with friendly names
 		std::string label;
-		if (mods & GDK_MOD4_MASK)    label += "Super+";
-		if (mods & GDK_CONTROL_MASK)  label += "Ctrl+";
-		if (mods & GDK_MOD1_MASK)     label += "Alt+";
-		if (mods & GDK_SHIFT_MASK)    label += "Shift+";
+		if (mods & GDK_MOD4_MASK)
+			label += "Super+";
+		if (mods & GDK_CONTROL_MASK)
+			label += "Ctrl+";
+		if (mods & GDK_MOD1_MASK)
+			label += "Alt+";
+		if (mods & GDK_SHIFT_MASK)
+			label += "Shift+";
 
 		// Key name: use GDK's name, upper-case the first character
 		const gchar* keyName = gdk_keyval_name(keyval);
 		if (keyName)
 		{
 			std::string k(keyName);
-			if (!k.empty()) k[0] = g_ascii_toupper(k[0]);
+			if (!k.empty())
+				k[0] = g_ascii_toupper(k[0]);
 			label += k;
 		}
 		return label.empty() ? accel : label;
@@ -440,13 +443,14 @@ namespace Hotkeys
 		gtk_box_pack_start(GTK_BOX(content), keyLabel, FALSE, FALSE, 0);
 		gtk_widget_show_all(dialog);
 
-		struct CaptureData {
+		struct CaptureData
+		{
 			std::string result;
 			GtkWidget* keyLabel;
 			GtkDialog* dialog;
 			bool captured;
 		};
-		CaptureData cd = { "", keyLabel, GTK_DIALOG(dialog), false };
+		CaptureData cd = {"", keyLabel, GTK_DIALOG(dialog), false};
 
 		gulong keyPressId = g_signal_connect(dialog, "key-press-event",
 			G_CALLBACK(+[](GtkWidget* widget, GdkEventKey* event, CaptureData* captureData) -> gboolean {
@@ -456,10 +460,7 @@ namespace Hotkeys
 					return TRUE;
 				}
 				// Ignore bare modifiers
-				if (event->keyval == GDK_KEY_Control_L || event->keyval == GDK_KEY_Control_R ||
-					event->keyval == GDK_KEY_Shift_L   || event->keyval == GDK_KEY_Shift_R   ||
-					event->keyval == GDK_KEY_Alt_L      || event->keyval == GDK_KEY_Alt_R      ||
-					event->keyval == GDK_KEY_Super_L    || event->keyval == GDK_KEY_Super_R)
+				if (event->keyval == GDK_KEY_Control_L || event->keyval == GDK_KEY_Control_R || event->keyval == GDK_KEY_Shift_L || event->keyval == GDK_KEY_Shift_R || event->keyval == GDK_KEY_Alt_L || event->keyval == GDK_KEY_Alt_R || event->keyval == GDK_KEY_Super_L || event->keyval == GDK_KEY_Super_R)
 					return TRUE;
 
 				// Build accel string
