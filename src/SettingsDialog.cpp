@@ -124,11 +124,11 @@ static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
 			DefaultKeyData* dkd = new DefaultKeyData{idx, listBox, parentWindow};
 
 			g_signal_connect_data(defaultKeyCheck, "toggled",
-				G_CALLBACK(+[](GtkToggleButton* btn, DefaultKeyData* dkd) {
+				G_CALLBACK(+[](GtkToggleButton* btn, DefaultKeyData* data) {
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
-					if (dkd->index < (int)es.size())
+					if (data->index < (int)es.size())
 					{
-						es[dkd->index].defaultKeyDisabled = !gtk_toggle_button_get_active(btn);
+						es[data->index].defaultKeyDisabled = !gtk_toggle_button_get_active(btn);
 						Settings::savePinnedAppEntries(es);
 					}
 				}),
@@ -181,16 +181,16 @@ static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
 			KeyAssignData* kad = new KeyAssignData{idx, ki, listBox, parentWindow};
 
 			g_signal_connect_data(keyBtn, "clicked",
-				G_CALLBACK(+[](GtkButton* btn, KeyAssignData* kad) {
+				G_CALLBACK(+[](GtkButton* btn, KeyAssignData* data) {
 #ifdef ENABLE_X11
-					std::string newKey = Hotkeys::captureKey(kad->parentWindow);
+					std::string newKey = Hotkeys::captureKey(data->parentWindow);
 					if (newKey.empty()) return;
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
-					if (kad->appIdx < (int)es.size() && kad->keyIdx < (int)es[kad->appIdx].customKeys.size())
+					if (data->appIdx < (int)es.size() && data->keyIdx < (int)es[data->appIdx].customKeys.size())
 					{
-						es[kad->appIdx].customKeys[kad->keyIdx] = newKey;
+						es[data->appIdx].customKeys[data->keyIdx] = newKey;
 						Settings::savePinnedAppEntries(es);
-						rebuildPinnedPanel(kad->listBox, kad->parentWindow);
+						rebuildPinnedPanel(data->listBox, data->parentWindow);
 					}
 #endif
 				}),
@@ -213,13 +213,13 @@ static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
 			KeyRemoveData* krd = new KeyRemoveData{idx, ki, listBox, parentWindow};
 
 			g_signal_connect_data(removeBtn, "clicked",
-				G_CALLBACK(+[](GtkButton* btn, KeyRemoveData* krd) {
+				G_CALLBACK(+[](GtkButton* btn, KeyRemoveData* data) {
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
-					if (krd->appIdx < (int)es.size() && krd->keyIdx < (int)es[krd->appIdx].customKeys.size())
+					if (data->appIdx < (int)es.size() && data->keyIdx < (int)es[data->appIdx].customKeys.size())
 					{
-						es[krd->appIdx].customKeys.erase(es[krd->appIdx].customKeys.begin() + krd->keyIdx);
+						es[data->appIdx].customKeys.erase(es[data->appIdx].customKeys.begin() + data->keyIdx);
 						Settings::savePinnedAppEntries(es);
-						rebuildPinnedPanel(krd->listBox, krd->parentWindow);
+						rebuildPinnedPanel(data->listBox, data->parentWindow);
 					}
 				}),
 				krd,
@@ -245,16 +245,16 @@ static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
 		KeyAddData* kadd = new KeyAddData{idx, listBox, parentWindow};
 
 		g_signal_connect_data(addKeyBtn, "clicked",
-			G_CALLBACK(+[](GtkButton* btn, KeyAddData* kadd) {
+			G_CALLBACK(+[](GtkButton* btn, KeyAddData* data) {
 #ifdef ENABLE_X11
-				std::string newKey = Hotkeys::captureKey(kadd->parentWindow);
+				std::string newKey = Hotkeys::captureKey(data->parentWindow);
 				if (newKey.empty()) return;
 				std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
-				if (kadd->appIdx < (int)es.size())
+				if (data->appIdx < (int)es.size())
 				{
-					es[kadd->appIdx].customKeys.push_back(newKey);
+					es[data->appIdx].customKeys.push_back(newKey);
 					Settings::savePinnedAppEntries(es);
-					rebuildPinnedPanel(kadd->listBox, kadd->parentWindow);
+					rebuildPinnedPanel(data->listBox, data->parentWindow);
 				}
 #endif
 			}),
