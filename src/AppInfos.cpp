@@ -272,12 +272,33 @@ namespace AppInfos
 			id = it->second;
 	}
 
+	static std::shared_ptr<AppInfo> searchByPrefix(const std::string& id, char sep)
+	{
+		auto pos = id.find(sep);
+		if (pos == std::string::npos)
+			return nullptr;
+		std::string prefix = id.substr(0, pos);
+		g_debug("Searching a match for prefix '%s' (separator '%c')", prefix.c_str(), sep);
+		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
+		if (ai != nullptr)
+		{
+			g_debug("App id match");
+			return ai;
+		}
+		ai = mAppInfoNames.get(prefix);
+		if (ai != nullptr)
+		{
+			g_debug("App name match");
+			return ai;
+		}
+		return nullptr;
+	}
+
 	std::shared_ptr<AppInfo> search(std::string id)
 	{
 		translateId(id);
 
 		g_debug("Searching a match for '%s'", id.c_str());
-
 		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
 		if (ai != nullptr)
 		{
@@ -301,26 +322,13 @@ namespace AppInfos
 
 		// Try to use just the first word of the window class; so that
 		// virtualbox manager, virtualbox machine get grouped together etc.
-		auto pos = id.find(' ');
-		if (pos != std::string::npos)
-		{
-			id = id.substr(0, pos);
-			g_debug("No match for whole string, searching a match for first word '%s'", id.c_str());
+		ai = searchByPrefix(id, ' ');
+		if (ai != nullptr)
+			return ai;
 
-			ai = mAppInfoIds.get(id);
-			if (ai != nullptr)
-			{
-				g_debug("App id match");
-				return ai;
-			}
-
-			ai = mAppInfoNames.get(id);
-			if (ai != nullptr)
-			{
-				g_debug("App name match");
-				return ai;
-			}
-		}
+		ai = searchByPrefix(id, '.');
+		if (ai != nullptr)
+			return ai;
 
 		ai = mAppInfoUserSet.get(id);
 		if (ai != nullptr)
