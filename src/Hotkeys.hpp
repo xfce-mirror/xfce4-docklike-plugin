@@ -19,10 +19,10 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include <gtk/gtk.h>
+
 #include <string>
 #include <vector>
-
-#include <gtk/gtk.h>
 
 namespace Hotkeys
 {

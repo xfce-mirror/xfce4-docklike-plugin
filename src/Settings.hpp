@@ -35,7 +35,7 @@
 // positional Super+N key is disabled, and a list of user-assigned custom keys.
 struct PinnedAppEntry
 {
-	std::string id;   // desktop id, e.g. "firefox"  (used for AppInfos::search)
+	std::string id;	  // desktop id, e.g. "firefox"  (used for AppInfos::search)
 	std::string path; // full .desktop path, e.g. "/usr/share/applications/firefox.desktop"
 	bool defaultKeyDisabled = false;
 	std::vector<std::string> customKeys; // e.g. {"<Control><Alt>f"}

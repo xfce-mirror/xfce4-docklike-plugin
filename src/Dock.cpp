@@ -108,8 +108,8 @@ namespace Dock
 
 		// Add open windows
 		for (GList* window_l = xfw_screen_get_windows(Xfw::mXfwScreen);
-			 window_l != nullptr;
-			 window_l = window_l->next)
+			window_l != nullptr;
+			window_l = window_l->next)
 		{
 			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
 			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);

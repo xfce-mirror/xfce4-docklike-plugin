@@ -231,8 +231,8 @@ namespace Xfw
 	void setVisibleGroups()
 	{
 		for (GList* window_l = xfw_screen_get_windows(mXfwScreen);
-			 window_l != nullptr;
-			 window_l = window_l->next)
+			window_l != nullptr;
+			window_l = window_l->next)
 		{
 			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
 			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(xfwWindow);
