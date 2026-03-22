@@ -19,8 +19,8 @@
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
 #endif
-#include "Helpers.hpp"
 #include "Plugin.hpp"
+#include "Helpers.hpp"
 #ifdef ENABLE_X11
 #include "Hotkeys.hpp"
 #endif

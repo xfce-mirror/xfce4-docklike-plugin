@@ -26,162 +26,165 @@ namespace SettingsDialog
 {
 	GtkWidget* mSettingsDialog = nullptr;
 
-	// ---------------------------------------------------------------------------
-	// Pinned Shortcuts panel: rebuild rows inside the given GtkBox container.
-	// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Pinned Shortcuts panel: rebuild rows inside the given GtkBox container.
+// ---------------------------------------------------------------------------
 
-	static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow);
+static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow);
 
-	static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
+static void rebuildPinnedPanel(GtkBox* listBox, GtkWindow* parentWindow)
+{
+	// Remove all existing children
+	GList* children = gtk_container_get_children(GTK_CONTAINER(listBox));
+	for (GList* l = children; l != nullptr; l = l->next)
+		gtk_widget_destroy(GTK_WIDGET(l->data));
+	g_list_free(children);
+
+	std::vector<PinnedAppEntry> entries = Settings::loadPinnedAppEntries();
+	const int totalEntries = (int)entries.size();
+
+	static const char defaultKeyLabels[10][4] = {
+		"1","2","3","4","5","6","7","8","9","0"
+	};
+
+	const int KEY_BTN_WIDTH  = 140;
+	const int REMOVE_BTN_WIDTH = 20;
+	const int KEY_ROW_SPACING = 2;
+	const int ADD_KEY_WIDTH  = KEY_BTN_WIDTH + KEY_ROW_SPACING + REMOVE_BTN_WIDTH;
+
+	for (int idx = 0; idx < totalEntries; ++idx)
 	{
-		// Remove all existing children
-		GList* children = gtk_container_get_children(GTK_CONTAINER(listBox));
-		for (GList* l = children; l != nullptr; l = l->next)
-			gtk_widget_destroy(GTK_WIDGET(l->data));
-		g_list_free(children);
+		const PinnedAppEntry& entry = entries[idx];
+		std::shared_ptr<AppInfo> appInfo = AppInfos::search(entry.id);
 
-		std::vector<PinnedAppEntry> entries = Settings::loadPinnedAppEntries();
-		const int totalEntries = (int)entries.size();
+		// ---- Card frame for this row ----
+		GtkWidget* rowFrame = gtk_frame_new(nullptr);
+		gtk_frame_set_shadow_type(GTK_FRAME(rowFrame), GTK_SHADOW_ETCHED_IN);
+		gtk_widget_set_margin_bottom(rowFrame, 6);
 
-		static const char defaultKeyLabels[10][4] = {
-			"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+		// ---- Outer grid: 5 columns [app-info | sep | custom-keys | sep | reorder] ----
+		GtkWidget* grid = gtk_grid_new();
+		gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+		gtk_widget_set_margin_start(grid, 10);
+		gtk_widget_set_margin_end(grid, 6);
+		gtk_widget_set_margin_top(grid, 8);
+		gtk_widget_set_margin_bottom(grid, 8);
+		gtk_container_add(GTK_CONTAINER(rowFrame), grid);
 
-		const int KEY_BTN_WIDTH = 140;
-		const int REMOVE_BTN_WIDTH = 20;
-		const int KEY_ROW_SPACING = 2;
-		const int ADD_KEY_WIDTH = KEY_BTN_WIDTH + KEY_ROW_SPACING + REMOVE_BTN_WIDTH;
+		// ========== COLUMN 0: App icon + name + default-key checkbox ==========
+		GtkWidget* leftVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
+		gtk_widget_set_hexpand(leftVBox, TRUE);
+		gtk_widget_set_valign(leftVBox, GTK_ALIGN_CENTER);
 
-		for (int idx = 0; idx < totalEntries; ++idx)
+		GtkWidget* appHBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+		GtkWidget* iconWidget = gtk_image_new();
+		if (appInfo && !appInfo->mIcon.empty())
 		{
-			const PinnedAppEntry& entry = entries[idx];
-			std::shared_ptr<AppInfo> appInfo = AppInfos::search(entry.id);
-
-			// ---- Card frame for this row ----
-			GtkWidget* rowFrame = gtk_frame_new(nullptr);
-			gtk_frame_set_shadow_type(GTK_FRAME(rowFrame), GTK_SHADOW_ETCHED_IN);
-			gtk_widget_set_margin_bottom(rowFrame, 6);
-
-			// ---- Outer grid: 5 columns [app-info | sep | custom-keys | sep | reorder] ----
-			GtkWidget* grid = gtk_grid_new();
-			gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
-			gtk_widget_set_margin_start(grid, 10);
-			gtk_widget_set_margin_end(grid, 6);
-			gtk_widget_set_margin_top(grid, 8);
-			gtk_widget_set_margin_bottom(grid, 8);
-			gtk_container_add(GTK_CONTAINER(rowFrame), grid);
-
-			// ========== COLUMN 0: App icon + name + default-key checkbox ==========
-			GtkWidget* leftVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
-			gtk_widget_set_hexpand(leftVBox, TRUE);
-			gtk_widget_set_valign(leftVBox, GTK_ALIGN_CENTER);
-
-			GtkWidget* appHBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
-			GtkWidget* iconWidget = gtk_image_new();
-			if (appInfo && !appInfo->mIcon.empty())
+			if (appInfo->mIcon[0] == '/' && g_file_test(appInfo->mIcon.c_str(), G_FILE_TEST_IS_REGULAR))
 			{
-				if (appInfo->mIcon[0] == '/' && g_file_test(appInfo->mIcon.c_str(), G_FILE_TEST_IS_REGULAR))
-				{
-					GdkPixbuf* pb = gdk_pixbuf_new_from_file_at_size(appInfo->mIcon.c_str(), 24, 24, nullptr);
-					gtk_image_set_from_pixbuf(GTK_IMAGE(iconWidget), pb);
-					if (pb)
-						g_object_unref(pb);
-				}
-				else
-					gtk_image_set_from_icon_name(GTK_IMAGE(iconWidget), appInfo->mIcon.c_str(), GTK_ICON_SIZE_LARGE_TOOLBAR);
+				GdkPixbuf* pb = gdk_pixbuf_new_from_file_at_size(appInfo->mIcon.c_str(), 24, 24, nullptr);
+				gtk_image_set_from_pixbuf(GTK_IMAGE(iconWidget), pb);
+				if (pb) g_object_unref(pb);
 			}
 			else
-				gtk_image_set_from_icon_name(GTK_IMAGE(iconWidget), "application-x-executable", GTK_ICON_SIZE_LARGE_TOOLBAR);
+				gtk_image_set_from_icon_name(GTK_IMAGE(iconWidget), appInfo->mIcon.c_str(), GTK_ICON_SIZE_LARGE_TOOLBAR);
+		}
+		else
+			gtk_image_set_from_icon_name(GTK_IMAGE(iconWidget), "application-x-executable", GTK_ICON_SIZE_LARGE_TOOLBAR);
 
-			GtkWidget* nameLabel = gtk_label_new(appInfo ? appInfo->mName.c_str() : entry.path.c_str());
-			gtk_label_set_ellipsize(GTK_LABEL(nameLabel), PANGO_ELLIPSIZE_END);
-			gtk_label_set_xalign(GTK_LABEL(nameLabel), 0.0f);
-			gtk_widget_set_hexpand(nameLabel, TRUE);
+		GtkWidget* nameLabel = gtk_label_new(appInfo ? appInfo->mName.c_str() : entry.path.c_str());
+		gtk_label_set_ellipsize(GTK_LABEL(nameLabel), PANGO_ELLIPSIZE_END);
+		gtk_label_set_xalign(GTK_LABEL(nameLabel), 0.0f);
+		gtk_widget_set_hexpand(nameLabel, TRUE);
 
-			gtk_box_pack_start(GTK_BOX(appHBox), iconWidget, FALSE, FALSE, 0);
-			gtk_box_pack_start(GTK_BOX(appHBox), nameLabel, TRUE, TRUE, 0);
-			gtk_box_pack_start(GTK_BOX(leftVBox), appHBox, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(appHBox), iconWidget, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(appHBox), nameLabel, TRUE, TRUE, 0);
+		gtk_box_pack_start(GTK_BOX(leftVBox), appHBox, FALSE, FALSE, 0);
 
-			// Default-key checkbox (positions 0..9 only)
-			if (idx < 10)
-			{
-				gchar* checkMarkup = g_strdup_printf(
-					"<span letter_spacing='1024'>Super + %s</span>",
-					defaultKeyLabels[idx]);
-				GtkWidget* defaultKeyCheck = gtk_check_button_new();
-				GtkWidget* checkLbl = gtk_label_new(nullptr);
-				gtk_label_set_markup(GTK_LABEL(checkLbl), checkMarkup);
-				g_free(checkMarkup);
-				gtk_widget_set_margin_start(checkLbl, 4);
-				gtk_container_add(GTK_CONTAINER(defaultKeyCheck), checkLbl);
-				gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(defaultKeyCheck), !entry.defaultKeyDisabled);
-				gtk_widget_set_margin_top(defaultKeyCheck, 4);
+		// Default-key checkbox (positions 0..9 only)
+		if (idx < 10)
+		{
+			gchar* checkMarkup = g_strdup_printf(
+				"<span letter_spacing='1024'>Super + %s</span>",
+				defaultKeyLabels[idx]);
+			GtkWidget* defaultKeyCheck = gtk_check_button_new();
+			GtkWidget* checkLbl = gtk_label_new(nullptr);
+			gtk_label_set_markup(GTK_LABEL(checkLbl), checkMarkup);
+			g_free(checkMarkup);
+			gtk_widget_set_margin_start(checkLbl, 4);
+			gtk_container_add(GTK_CONTAINER(defaultKeyCheck), checkLbl);
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(defaultKeyCheck), !entry.defaultKeyDisabled);
+			gtk_widget_set_margin_top(defaultKeyCheck, 4);
 
-				struct DefaultKeyData
-				{
-					int index;
-					GtkBox* listBox;
-					GtkWindow* parentWindow;
-				};
-				DefaultKeyData* dkd = new DefaultKeyData{idx, listBox, parentWindow};
+			struct DefaultKeyData {
+				int index;
+				GtkBox* listBox;
+				GtkWindow* parentWindow;
+			};
+			DefaultKeyData* dkd = new DefaultKeyData{idx, listBox, parentWindow};
 
-				g_signal_connect_data(defaultKeyCheck, "toggled", G_CALLBACK(+[](GtkToggleButton* btn, DefaultKeyData* data) {
+			g_signal_connect_data(defaultKeyCheck, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* btn, DefaultKeyData* data) {
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 					if (data->index < (int)es.size())
 					{
 						es[data->index].defaultKeyDisabled = !gtk_toggle_button_get_active(btn);
 						Settings::savePinnedAppEntries(es);
-					} }), dkd, [](gpointer data, GClosure*) { delete static_cast<DefaultKeyData*>(data); }, (GConnectFlags)0);
+					}
+				}),
+				dkd,
+				[](gpointer data, GClosure*) { delete static_cast<DefaultKeyData*>(data); },
+				(GConnectFlags)0);
 
-				gtk_box_pack_start(GTK_BOX(leftVBox), defaultKeyCheck, FALSE, FALSE, 0);
-			}
+			gtk_box_pack_start(GTK_BOX(leftVBox), defaultKeyCheck, FALSE, FALSE, 0);
+		}
 
-			gtk_grid_attach(GTK_GRID(grid), leftVBox, 0, 0, 1, 1);
+		gtk_grid_attach(GTK_GRID(grid), leftVBox, 0, 0, 1, 1);
 
-			// ---- Vertical separator ----
-			GtkWidget* sep1 = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
-			gtk_widget_set_margin_start(sep1, 4);
-			gtk_widget_set_margin_end(sep1, 4);
-			gtk_grid_attach(GTK_GRID(grid), sep1, 1, 0, 1, 1);
+		// ---- Vertical separator ----
+		GtkWidget* sep1 = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
+		gtk_widget_set_margin_start(sep1, 4);
+		gtk_widget_set_margin_end(sep1, 4);
+		gtk_grid_attach(GTK_GRID(grid), sep1, 1, 0, 1, 1);
 
-			// ========== COLUMN 2: Custom Keys ==========
-			GtkWidget* rightVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
-			gtk_widget_set_valign(rightVBox, GTK_ALIGN_CENTER);
+		// ========== COLUMN 2: Custom Keys ==========
+		GtkWidget* rightVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
+		gtk_widget_set_valign(rightVBox, GTK_ALIGN_CENTER);
 
-			GtkWidget* keysLabel = gtk_label_new(nullptr);
-			gtk_label_set_markup(GTK_LABEL(keysLabel), "<b>Custom Keys</b>");
-			gtk_widget_set_halign(keysLabel, GTK_ALIGN_START);
-			gtk_widget_set_margin_bottom(keysLabel, 2);
-			gtk_box_pack_start(GTK_BOX(rightVBox), keysLabel, FALSE, FALSE, 0);
+		GtkWidget* keysLabel = gtk_label_new(nullptr);
+		gtk_label_set_markup(GTK_LABEL(keysLabel), "<b>Custom Keys</b>");
+		gtk_widget_set_halign(keysLabel, GTK_ALIGN_START);
+		gtk_widget_set_margin_bottom(keysLabel, 2);
+		gtk_box_pack_start(GTK_BOX(rightVBox), keysLabel, FALSE, FALSE, 0);
 
-			for (int ki = 0; ki < (int)entry.customKeys.size(); ++ki)
-			{
-				const std::string& keyStr = entry.customKeys[ki];
-				GtkWidget* keyRow = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, KEY_ROW_SPACING);
+		for (int ki = 0; ki < (int)entry.customKeys.size(); ++ki)
+		{
+			const std::string& keyStr = entry.customKeys[ki];
+			GtkWidget* keyRow = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, KEY_ROW_SPACING);
 
 #ifdef ENABLE_X11
-				std::string displayLabel = Hotkeys::accelToReadableLabel(keyStr);
+			std::string displayLabel = Hotkeys::accelToReadableLabel(keyStr);
 #else
-				std::string displayLabel = keyStr;
+			std::string displayLabel = keyStr;
 #endif
-				GtkWidget* keyBtn = gtk_button_new_with_label(displayLabel.c_str());
-				gtk_widget_set_size_request(keyBtn, KEY_BTN_WIDTH, -1);
-				gtk_widget_set_margin_top(keyBtn, 1);
-				gtk_widget_set_margin_bottom(keyBtn, 1);
+			GtkWidget* keyBtn = gtk_button_new_with_label(displayLabel.c_str());
+			gtk_widget_set_size_request(keyBtn, KEY_BTN_WIDTH, -1);
+			gtk_widget_set_margin_top(keyBtn, 1);
+			gtk_widget_set_margin_bottom(keyBtn, 1);
 
-				struct KeyAssignData
-				{
-					int appIdx;
-					int keyIdx;
-					GtkBox* listBox;
-					GtkWindow* parentWindow;
-				};
-				KeyAssignData* kad = new KeyAssignData{idx, ki, listBox, parentWindow};
+			struct KeyAssignData {
+				int appIdx;
+				int keyIdx;
+				GtkBox* listBox;
+				GtkWindow* parentWindow;
+			};
+			KeyAssignData* kad = new KeyAssignData{idx, ki, listBox, parentWindow};
 
-				g_signal_connect_data(keyBtn, "clicked", G_CALLBACK(+[](GtkButton* btn, KeyAssignData* data) {
+			g_signal_connect_data(keyBtn, "clicked",
+				G_CALLBACK(+[](GtkButton* btn, KeyAssignData* data) {
 #ifdef ENABLE_X11
 					std::string newKey = Hotkeys::captureKey(data->parentWindow);
-					if (newKey.empty())
-						return;
+					if (newKey.empty()) return;
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 					if (data->appIdx < (int)es.size() && data->keyIdx < (int)es[data->appIdx].customKeys.size())
 					{
@@ -191,56 +194,61 @@ namespace SettingsDialog
 					}
 #endif
 				}),
-					kad, [](gpointer data, GClosure*) { delete static_cast<KeyAssignData*>(data); }, (GConnectFlags)0);
+				kad,
+				[](gpointer data, GClosure*) { delete static_cast<KeyAssignData*>(data); },
+				(GConnectFlags)0);
 
-				GtkWidget* removeBtn = gtk_button_new_from_icon_name("list-remove-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
-				gtk_button_set_relief(GTK_BUTTON(removeBtn), GTK_RELIEF_NONE);
-				gtk_widget_set_size_request(removeBtn, 20, 20);
-				gtk_widget_set_tooltip_text(removeBtn, _("Remove this key"));
-				gtk_widget_set_valign(removeBtn, GTK_ALIGN_CENTER);
+			GtkWidget* removeBtn = gtk_button_new_from_icon_name("list-remove-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+			gtk_button_set_relief(GTK_BUTTON(removeBtn), GTK_RELIEF_NONE);
+			gtk_widget_set_size_request(removeBtn, 20, 20);
+			gtk_widget_set_tooltip_text(removeBtn, _("Remove this key"));
+			gtk_widget_set_valign(removeBtn, GTK_ALIGN_CENTER);
 
-				struct KeyRemoveData
-				{
-					int appIdx;
-					int keyIdx;
-					GtkBox* listBox;
-					GtkWindow* parentWindow;
-				};
-				KeyRemoveData* krd = new KeyRemoveData{idx, ki, listBox, parentWindow};
+			struct KeyRemoveData {
+				int appIdx;
+				int keyIdx;
+				GtkBox* listBox;
+				GtkWindow* parentWindow;
+			};
+			KeyRemoveData* krd = new KeyRemoveData{idx, ki, listBox, parentWindow};
 
-				g_signal_connect_data(removeBtn, "clicked", G_CALLBACK(+[](GtkButton* btn, KeyRemoveData* data) {
+			g_signal_connect_data(removeBtn, "clicked",
+				G_CALLBACK(+[](GtkButton* btn, KeyRemoveData* data) {
 					std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 					if (data->appIdx < (int)es.size() && data->keyIdx < (int)es[data->appIdx].customKeys.size())
 					{
 						es[data->appIdx].customKeys.erase(es[data->appIdx].customKeys.begin() + data->keyIdx);
 						Settings::savePinnedAppEntries(es);
 						rebuildPinnedPanel(data->listBox, data->parentWindow);
-					} }), krd, [](gpointer data, GClosure*) { delete static_cast<KeyRemoveData*>(data); }, (GConnectFlags)0);
+					}
+				}),
+				krd,
+				[](gpointer data, GClosure*) { delete static_cast<KeyRemoveData*>(data); },
+				(GConnectFlags)0);
 
-				gtk_box_pack_start(GTK_BOX(keyRow), keyBtn, FALSE, FALSE, 0);
-				gtk_box_pack_start(GTK_BOX(keyRow), removeBtn, FALSE, FALSE, 0);
-				gtk_box_pack_start(GTK_BOX(rightVBox), keyRow, FALSE, FALSE, 0);
-			}
+			gtk_box_pack_start(GTK_BOX(keyRow), keyBtn,    FALSE, FALSE, 0);
+			gtk_box_pack_start(GTK_BOX(keyRow), removeBtn, FALSE, FALSE, 0);
+			gtk_box_pack_start(GTK_BOX(rightVBox), keyRow, FALSE, FALSE, 0);
+		}
 
-			// "+ Add Key" button
-			GtkWidget* addKeyBtn = gtk_button_new_with_label(_("+ Add Key"));
-			gtk_widget_set_size_request(addKeyBtn, ADD_KEY_WIDTH, -1);
-			gtk_widget_set_halign(addKeyBtn, GTK_ALIGN_START);
-			gtk_widget_set_margin_top(addKeyBtn, 2);
+		// "+ Add Key" button
+		GtkWidget* addKeyBtn = gtk_button_new_with_label(_("+ Add Key"));
+		gtk_widget_set_size_request(addKeyBtn, ADD_KEY_WIDTH, -1);
+		gtk_widget_set_halign(addKeyBtn, GTK_ALIGN_START);
+		gtk_widget_set_margin_top(addKeyBtn, 2);
 
-			struct KeyAddData
-			{
-				int appIdx;
-				GtkBox* listBox;
-				GtkWindow* parentWindow;
-			};
-			KeyAddData* kadd = new KeyAddData{idx, listBox, parentWindow};
+		struct KeyAddData {
+			int appIdx;
+			GtkBox* listBox;
+			GtkWindow* parentWindow;
+		};
+		KeyAddData* kadd = new KeyAddData{idx, listBox, parentWindow};
 
-			g_signal_connect_data(addKeyBtn, "clicked", G_CALLBACK(+[](GtkButton* btn, KeyAddData* data) {
+		g_signal_connect_data(addKeyBtn, "clicked",
+			G_CALLBACK(+[](GtkButton* btn, KeyAddData* data) {
 #ifdef ENABLE_X11
 				std::string newKey = Hotkeys::captureKey(data->parentWindow);
-				if (newKey.empty())
-					return;
+				if (newKey.empty()) return;
 				std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 				if (data->appIdx < (int)es.size())
 				{
@@ -250,42 +258,44 @@ namespace SettingsDialog
 				}
 #endif
 			}),
-				kadd, [](gpointer data, GClosure*) { delete static_cast<KeyAddData*>(data); }, (GConnectFlags)0);
+			kadd,
+			[](gpointer data, GClosure*) { delete static_cast<KeyAddData*>(data); },
+			(GConnectFlags)0);
 
-			gtk_box_pack_start(GTK_BOX(rightVBox), addKeyBtn, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(rightVBox), addKeyBtn, FALSE, FALSE, 0);
 
-			gtk_grid_attach(GTK_GRID(grid), rightVBox, 2, 0, 1, 1);
+		gtk_grid_attach(GTK_GRID(grid), rightVBox, 2, 0, 1, 1);
 
-			// ---- Vertical separator ----
-			GtkWidget* sep2 = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
-			gtk_widget_set_margin_start(sep2, 2);
-			gtk_widget_set_margin_end(sep2, 2);
-			gtk_grid_attach(GTK_GRID(grid), sep2, 3, 0, 1, 1);
+		// ---- Vertical separator ----
+		GtkWidget* sep2 = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
+		gtk_widget_set_margin_start(sep2, 2);
+		gtk_widget_set_margin_end(sep2, 2);
+		gtk_grid_attach(GTK_GRID(grid), sep2, 3, 0, 1, 1);
 
-			// ========== COLUMN 4: Reorder ==========
-			GtkWidget* reorderVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-			gtk_widget_set_valign(reorderVBox, GTK_ALIGN_CENTER);
+		// ========== COLUMN 4: Reorder ==========
+		GtkWidget* reorderVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+		gtk_widget_set_valign(reorderVBox, GTK_ALIGN_CENTER);
 
-			GtkWidget* upBtn = gtk_button_new_from_icon_name("go-up-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
-			GtkWidget* downBtn = gtk_button_new_from_icon_name("go-down-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
-			gtk_button_set_relief(GTK_BUTTON(upBtn), GTK_RELIEF_NONE);
-			gtk_button_set_relief(GTK_BUTTON(downBtn), GTK_RELIEF_NONE);
-			gtk_widget_set_size_request(upBtn, 20, 20);
-			gtk_widget_set_size_request(downBtn, 20, 20);
-			gtk_widget_set_sensitive(upBtn, idx > 0);
-			gtk_widget_set_sensitive(downBtn, idx < totalEntries - 1);
-			gtk_widget_set_tooltip_text(upBtn, _("Move up"));
-			gtk_widget_set_tooltip_text(downBtn, _("Move down"));
+		GtkWidget* upBtn   = gtk_button_new_from_icon_name("go-up-symbolic",   GTK_ICON_SIZE_SMALL_TOOLBAR);
+		GtkWidget* downBtn = gtk_button_new_from_icon_name("go-down-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
+		gtk_button_set_relief(GTK_BUTTON(upBtn),   GTK_RELIEF_NONE);
+		gtk_button_set_relief(GTK_BUTTON(downBtn), GTK_RELIEF_NONE);
+		gtk_widget_set_size_request(upBtn,   20, 20);
+		gtk_widget_set_size_request(downBtn, 20, 20);
+		gtk_widget_set_sensitive(upBtn,   idx > 0);
+		gtk_widget_set_sensitive(downBtn, idx < totalEntries - 1);
+		gtk_widget_set_tooltip_text(upBtn,   _("Move up"));
+		gtk_widget_set_tooltip_text(downBtn, _("Move down"));
 
-			struct MoveData
-			{
-				int appIdx;
-				GtkBox* listBox;
-				GtkWindow* parentWindow;
-			};
+		struct MoveData {
+			int appIdx;
+			GtkBox* listBox;
+			GtkWindow* parentWindow;
+		};
 
-			MoveData* moveUp = new MoveData{idx, listBox, parentWindow};
-			g_signal_connect_data(upBtn, "clicked", G_CALLBACK(+[](GtkButton* btn, MoveData* md) {
+		MoveData* moveUp = new MoveData{idx, listBox, parentWindow};
+		g_signal_connect_data(upBtn, "clicked",
+			G_CALLBACK(+[](GtkButton* btn, MoveData* md) {
 				std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 				int i = md->appIdx;
 				if (i > 0)
@@ -299,10 +309,15 @@ namespace SettingsDialog
 					Settings::savePinnedAppEntries(es);
 					Dock::drawGroups();
 					rebuildPinnedPanel(md->listBox, md->parentWindow);
-				} }), moveUp, [](gpointer data, GClosure*) { delete static_cast<MoveData*>(data); }, (GConnectFlags)0);
+				}
+			}),
+			moveUp,
+			[](gpointer data, GClosure*) { delete static_cast<MoveData*>(data); },
+			(GConnectFlags)0);
 
-			MoveData* moveDown = new MoveData{idx, listBox, parentWindow};
-			g_signal_connect_data(downBtn, "clicked", G_CALLBACK(+[](GtkButton* btn, MoveData* md) {
+		MoveData* moveDown = new MoveData{idx, listBox, parentWindow};
+		g_signal_connect_data(downBtn, "clicked",
+			G_CALLBACK(+[](GtkButton* btn, MoveData* md) {
 				std::vector<PinnedAppEntry> es = Settings::loadPinnedAppEntries();
 				int i = md->appIdx;
 				if (i < (int)es.size() - 1)
@@ -316,29 +331,33 @@ namespace SettingsDialog
 					Settings::savePinnedAppEntries(es);
 					Dock::drawGroups();
 					rebuildPinnedPanel(md->listBox, md->parentWindow);
-				} }), moveDown, [](gpointer data, GClosure*) { delete static_cast<MoveData*>(data); }, (GConnectFlags)0);
+				}
+			}),
+			moveDown,
+			[](gpointer data, GClosure*) { delete static_cast<MoveData*>(data); },
+			(GConnectFlags)0);
 
-			gtk_box_pack_start(GTK_BOX(reorderVBox), upBtn, FALSE, FALSE, 0);
-			gtk_box_pack_start(GTK_BOX(reorderVBox), downBtn, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(reorderVBox), upBtn,   FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(reorderVBox), downBtn, FALSE, FALSE, 0);
 
-			gtk_grid_attach(GTK_GRID(grid), reorderVBox, 4, 0, 1, 1);
+		gtk_grid_attach(GTK_GRID(grid), reorderVBox, 4, 0, 1, 1);
 
-			gtk_box_pack_start(GTK_BOX(listBox), rowFrame, FALSE, TRUE, 0);
-			gtk_widget_show_all(rowFrame);
-		}
-
-		if (totalEntries == 0)
-		{
-			GtkWidget* emptyLabel = gtk_label_new(_("No pinned applications."));
-			gtk_widget_set_margin_top(emptyLabel, 12);
-			gtk_widget_set_margin_bottom(emptyLabel, 12);
-			gtk_widget_set_halign(emptyLabel, GTK_ALIGN_CENTER);
-			gtk_box_pack_start(GTK_BOX(listBox), emptyLabel, FALSE, FALSE, 0);
-			gtk_widget_show(emptyLabel);
-		}
+		gtk_box_pack_start(GTK_BOX(listBox), rowFrame, FALSE, TRUE, 0);
+		gtk_widget_show_all(rowFrame);
 	}
 
-	// ---------------------------------------------------------------------------
+	if (totalEntries == 0)
+	{
+		GtkWidget* emptyLabel = gtk_label_new(_("No pinned applications."));
+		gtk_widget_set_margin_top(emptyLabel, 12);
+		gtk_widget_set_margin_bottom(emptyLabel, 12);
+		gtk_widget_set_halign(emptyLabel, GTK_ALIGN_CENTER);
+		gtk_box_pack_start(GTK_BOX(listBox), emptyLabel, FALSE, FALSE, 0);
+		gtk_widget_show(emptyLabel);
+	}
+}
+
+// ---------------------------------------------------------------------------
 
 	void popup()
 	{

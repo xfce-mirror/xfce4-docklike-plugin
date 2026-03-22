@@ -945,7 +945,7 @@ GtkWidget* Group::buildContextMenu()
 
 	// ---- Taskbar settings entry (always shown at the bottom) ----
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-	GtkWidget* settingsItem = gtk_menu_item_new_with_label(_("Docklike Taskbar Settings"));
+	GtkWidget* settingsItem = gtk_menu_item_new_with_label(_("Dock Settings"));
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), settingsItem);
 	g_signal_connect(G_OBJECT(settingsItem), "activate",
 		G_CALLBACK(+[](GtkMenuItem*, gpointer) {
