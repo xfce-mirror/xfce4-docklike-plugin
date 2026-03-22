@@ -120,6 +120,28 @@ namespace Plugin
 			SettingsDialog::popup();
 		else if (g_strcmp0(name, "about") == 0)
 			aboutDialog();
+		// Activate the Nth visible dock group (1-based, matching xfce4-keyboard-shortcuts convention).
+		// Wire via: xfce4-panel --plugin-event=docklike-<id>:activate-group:uint:<N>
+		else if (g_strcmp0(name, "activate-group") == 0 && value != nullptr && G_VALUE_HOLDS_UINT(value))
+		{
+			guint n = g_value_get_uint(value);
+			if (n >= 1)
+			{
+				guint32 timestamp = (guint32)(g_get_monotonic_time() / 1000);
+				Dock::activateGroup((int)(n - 1), timestamp);
+			}
+		}
+		// Activate a dock group by its .desktop file path.
+		// Wire via: xfce4-panel --plugin-event=docklike-<id>:activate-group-by-path:str:/path/to/app.desktop
+		else if (g_strcmp0(name, "activate-group-by-path") == 0 && value != nullptr && G_VALUE_HOLDS_STRING(value))
+		{
+			const gchar* path = g_value_get_string(value);
+			if (path != nullptr && path[0] != '\0')
+			{
+				guint32 timestamp = (guint32)(g_get_monotonic_time() / 1000);
+				Dock::activateGroupByPath(std::string(path), timestamp);
+			}
+		}
 	}
 
 } // namespace Plugin

@@ -181,6 +181,36 @@ namespace Dock
 		g_list_free(children);
 	}
 
+	void activateGroupByPath(const std::string& path, guint32 timestamp)
+	{
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+
+		for (GList* child = children; child != nullptr; child = child->next)
+		{
+			GtkWidget* widget = (GtkWidget*)child->data;
+
+			if (!gtk_widget_get_visible(widget))
+				continue;
+
+			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
+
+			if (group && group->mAppInfo && group->mAppInfo->mPath == path)
+			{
+				if (group->mActive)
+					group->scrollWindows(timestamp, GDK_SCROLL_DOWN);
+				else if (group->mWindowsCount > 0)
+					group->activate(timestamp);
+				else
+					group->mAppInfo->launch();
+
+				g_list_free(children);
+				return;
+			}
+		}
+
+		g_list_free(children);
+	}
+
 	void onPanelResize(int size)
 	{
 		if (size != -1)
