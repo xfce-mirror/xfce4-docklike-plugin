@@ -120,6 +120,15 @@ namespace Plugin
 			SettingsDialog::popup();
 		else if (g_strcmp0(name, "about") == 0)
 			aboutDialog();
+		else if (g_strcmp0(name, "activate-group-by-path") == 0 && value != nullptr && G_VALUE_HOLDS_STRING(value))
+		{
+			const gchar* path = g_value_get_string(value);
+			if (path != nullptr && path[0] != '\0')
+			{
+				guint32 timestamp = (guint32)(g_get_monotonic_time() / 1000);
+				Dock::activateGroupByPath(std::string(path), timestamp);
+			}
+		}
 	}
 
 } // namespace Plugin
