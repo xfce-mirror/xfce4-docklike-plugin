@@ -181,8 +181,13 @@ namespace Dock
 		g_list_free(children);
 	}
 
-	void activateGroupByPath(const std::string& path, guint32 timestamp)
+	void activateGroupByPath(const std::string& query, guint32 timestamp)
 	{
+		// If the argument ends with ".desktop" treat it as a full path, otherwise
+		// match against the app id (e.g. "firefox" matches "firefox.desktop").
+		bool isPath = g_str_has_suffix(query.c_str(), ".desktop");
+		std::string lowerQuery = Help::String::toLowercase(query);
+
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
 
 		for (GList* child = children; child != nullptr; child = child->next)
@@ -194,7 +199,14 @@ namespace Dock
 
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
-			if (group && group->mAppInfo && group->mAppInfo->mPath == path)
+			if (!group || !group->mAppInfo)
+				continue;
+
+			bool matched = isPath
+				? (group->mAppInfo->mPath == query)
+				: (Help::String::toLowercase(group->mAppInfo->mId) == lowerQuery);
+
+			if (matched)
 			{
 				if (group->mActive)
 					group->scrollWindows(timestamp, GDK_SCROLL_DOWN);

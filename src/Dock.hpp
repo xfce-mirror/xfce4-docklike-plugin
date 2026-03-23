@@ -46,7 +46,7 @@ namespace Dock
 
 	void hoverSupered(bool on);
 	void activateGroup(int nb, guint32 timestamp);
-	void activateGroupByPath(const std::string& path, guint32 timestamp);
+	void activateGroupByPath(const std::string& query, guint32 timestamp);
 
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);
