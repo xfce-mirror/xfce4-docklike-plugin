@@ -83,6 +83,8 @@ namespace Plugin
 		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) {
 				remoteEvent(name, value);
+				// stop signal emission to other plugins
+				return true;
 			}),
 			nullptr);
 
