@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2025
-# 玉堂白鹤 <yjwork@qq.com>, 2025
+# 玉堂白鹤 <yjwork@qq.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2025\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/xfce/teams/16840/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:356
+#: src/AppInfos.cpp:340
 msgid "Select Launcher"
 msgstr "选择启动器"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Open"
 msgstr "打开(_O)"
 
@@ -74,12 +74,12 @@ msgstr ""
 "Chipong Luo <chipong.luo@yahoo.com>, 2011, 2012.\n"
 "玉堂白鹤 <yjwork@qq.com>, 2024."
 
-#: src/SettingsDialog.cpp:272
+#: src/SettingsDialog.cpp:300
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>仅启用第一个热键 %u。</b>\n"
 
-#: src/SettingsDialog.cpp:277
+#: src/SettingsDialog.cpp:305
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -96,139 +96,147 @@ msgstr "停靠式任务栏"
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "现代简约的 Xfce 任务栏"
 
-#: src/_dialogs.ui:35
+#: src/_dialogs.ui:49
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: src/_dialogs.ui:51
+#: src/_dialogs.ui:65
 msgid "_Close"
 msgstr "关闭(_C)"
 
-#: src/_dialogs.ui:96
+#: src/_dialogs.ui:110
 msgid "Don't show the window list for a single window"
 msgstr "不为单个窗口显示窗口列表"
 
-#: src/_dialogs.ui:111
+#: src/_dialogs.ui:125
 msgid "Only show applications on the current workspace"
 msgstr "仅显示当前工作区上的应用程序"
 
-#: src/_dialogs.ui:126
+#: src/_dialogs.ui:140
 msgid "Only show applications on the current display"
 msgstr "仅显示当前显示器上的应用程序"
 
-#: src/_dialogs.ui:141
+#: src/_dialogs.ui:155
 msgid "Show preview thumbnails for open windows"
 msgstr "显示打开窗口的预览缩略图"
 
-#: src/_dialogs.ui:157
+#: src/_dialogs.ui:171
 msgid "Show the number of open windows (if more than 2)"
 msgstr "显示打开的窗口数 (如果超过 2 个)"
 
-#: src/_dialogs.ui:182
+#: src/_dialogs.ui:196
 msgid "Middle mouse button:"
 msgstr "鼠标中键:"
 
-#: src/_dialogs.ui:195
+#: src/_dialogs.ui:209
 msgid "Close all"
 msgstr "全部关闭"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:210
 msgid "Launch new instance"
 msgstr "启动新实例"
 
-#: src/_dialogs.ui:197
+#: src/_dialogs.ui:211
 msgid "Do Nothing"
 msgstr "什么都不做"
 
-#: src/_dialogs.ui:219
+#: src/_dialogs.ui:233
 msgid "Behavior"
 msgstr "行为"
 
-#: src/_dialogs.ui:252
+#: src/_dialogs.ui:266
 msgid "Active indicator style:"
 msgstr "活动指示器样式："
 
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
 msgid "Bars"
 msgstr "长条"
 
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
 msgid "Dots"
 msgstr "点"
 
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
 msgid "Rectangles"
 msgstr "矩形"
 
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
 msgid "Circles"
 msgstr "圆圈"
 
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "None"
 msgstr "无"
 
-#: src/_dialogs.ui:283
+#: src/_dialogs.ui:297
 msgid "Inactive indicator style:"
 msgstr "非活动指示器样式:"
 
-#: src/_dialogs.ui:314
+#: src/_dialogs.ui:328
 msgid "Indicator orientation:"
 msgstr "指示器方向:"
 
-#: src/_dialogs.ui:326
+#: src/_dialogs.ui:340
 msgid "Automatic"
 msgstr "自动"
 
-#: src/_dialogs.ui:327
+#: src/_dialogs.ui:341
 msgid "Bottom"
 msgstr "底部"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:342
 msgid "Right"
 msgstr "右边"
 
-#: src/_dialogs.ui:329
+#: src/_dialogs.ui:343
 msgid "Top"
 msgstr "顶部"
 
-#: src/_dialogs.ui:330
+#: src/_dialogs.ui:344
 msgid "Left"
 msgstr "左边"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:354
 msgid "Get indicator color from theme"
 msgstr "从主题获取指示器颜色"
 
-#: src/_dialogs.ui:366
+#: src/_dialogs.ui:380
 msgid "Active indicator:"
 msgstr "活动指示器："
 
-#: src/_dialogs.ui:390
+#: src/_dialogs.ui:404
 msgid "Inactive indicator:"
 msgstr "非活动指示器:"
 
-#: src/_dialogs.ui:417
+#: src/_dialogs.ui:431
 msgid "Force icon size:"
 msgstr "强制图标大小:"
 
-#: src/_dialogs.ui:462
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr "预览宽度:"
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr "预览高度:"
+
+#: src/_dialogs.ui:532
 msgid "Appearance"
 msgstr "外观"
 
-#: src/_dialogs.ui:492
+#: src/_dialogs.ui:562
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "使用 <SUPER>+[1, 2, ...] 在应用程序之间切换"
 
-#: src/_dialogs.ui:519
+#: src/_dialogs.ui:589
 msgid "Switch to the last window with <SUPER>"
 msgstr "使用 <SUPER> 切换到最后一个窗口"
 
-#: src/_dialogs.ui:535
+#: src/_dialogs.ui:605
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -236,6 +244,6 @@ msgstr ""
 "<b>此功能已禁用。</b>\n"
 "它需要 X11 XInput2.0 扩展，而您的系统不提供该扩展。"
 
-#: src/_dialogs.ui:553
+#: src/_dialogs.ui:623
 msgid "Keyboard hotkeys"
 msgstr "键盘热键"
