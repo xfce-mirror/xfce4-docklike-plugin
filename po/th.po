@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Theppitak Karoonboonyanan <theppitak@gmail.com>, 2025
-# Warut Bunprasert <warut.b@disroot.org>, 2025
+# Warut Bunprasert <warut.b@disroot.org>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Warut Bunprasert <warut.b@disroot.org>, 2025\n"
+"Last-Translator: Warut Bunprasert <warut.b@disroot.org>, 2026\n"
 "Language-Team: Thai (https://app.transifex.com/xfce/teams/16840/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:356
+#: src/AppInfos.cpp:340
 msgid "Select Launcher"
 msgstr "เลือกตัวเรียกใช้"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Open"
 msgstr "_เปิด"
 
@@ -70,12 +70,12 @@ msgstr "สร้างตัวเรียกใช้..."
 msgid "translator-credits"
 msgstr "Theppitak Karoonboonyanan"
 
-#: src/SettingsDialog.cpp:272
+#: src/SettingsDialog.cpp:300
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>เปิดใช้งานเฉพาะปุ่มลัด%uแรกเท่านั้น</b>\n"
 
-#: src/SettingsDialog.cpp:277
+#: src/SettingsDialog.cpp:305
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -92,139 +92,147 @@ msgstr "แถบงานที่คล้ายกับด็อค"
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "แถบงานที่ทันสมัยและเรียบง่ายสำหรับ Xfce"
 
-#: src/_dialogs.ui:35
+#: src/_dialogs.ui:49
 msgid "_Help"
 msgstr "_วิธีใช้"
 
-#: src/_dialogs.ui:51
+#: src/_dialogs.ui:65
 msgid "_Close"
 msgstr "ปิ_ด"
 
-#: src/_dialogs.ui:96
+#: src/_dialogs.ui:110
 msgid "Don't show the window list for a single window"
 msgstr "ไม่แสดงรายการหน้าต่างสำหรับหน้าต่างเดียว"
 
-#: src/_dialogs.ui:111
+#: src/_dialogs.ui:125
 msgid "Only show applications on the current workspace"
 msgstr "แสดงเฉพาะโปรแกรมบนพื้นที่ทำงานปัจจุบันเท่านั้น"
 
-#: src/_dialogs.ui:126
+#: src/_dialogs.ui:140
 msgid "Only show applications on the current display"
 msgstr "แสดงเฉพาะโปรแกรมบนหน้าจอปัจจุบันเท่านั้น"
 
-#: src/_dialogs.ui:141
+#: src/_dialogs.ui:155
 msgid "Show preview thumbnails for open windows"
 msgstr "แสดงภาพย่อสำหรับหน้าต่างที่เปิดอยู่"
 
-#: src/_dialogs.ui:157
+#: src/_dialogs.ui:171
 msgid "Show the number of open windows (if more than 2)"
 msgstr "แสดงจำนวนหน้าต่างที่เปิดอยู่ (ถ้ามีมากกว่า 2)"
 
-#: src/_dialogs.ui:182
+#: src/_dialogs.ui:196
 msgid "Middle mouse button:"
 msgstr "ปุ่มกลางของเมาส์:"
 
-#: src/_dialogs.ui:195
+#: src/_dialogs.ui:209
 msgid "Close all"
 msgstr "ปิดทั้งหมด"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:210
 msgid "Launch new instance"
 msgstr "เปิดอินสแตนซ์ใหม่"
 
-#: src/_dialogs.ui:197
+#: src/_dialogs.ui:211
 msgid "Do Nothing"
 msgstr "ไม่ต้องทำอะไรเลย"
 
-#: src/_dialogs.ui:219
+#: src/_dialogs.ui:233
 msgid "Behavior"
 msgstr "พฤติกรรม"
 
-#: src/_dialogs.ui:252
+#: src/_dialogs.ui:266
 msgid "Active indicator style:"
 msgstr "รูปแบบตัวบ่งชี้ที่ใช้งานอยู่:"
 
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
 msgid "Bars"
 msgstr "แถบ"
 
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
 msgid "Dots"
 msgstr "จุด"
 
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
 msgid "Rectangles"
 msgstr "สี่เหลี่ยม"
 
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
 msgid "Ciliora"
 msgstr "ซิลิอารี"
 
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
 msgid "Circles"
 msgstr "วงกลม"
 
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "None"
 msgstr "ไม่ใช้"
 
-#: src/_dialogs.ui:283
+#: src/_dialogs.ui:297
 msgid "Inactive indicator style:"
 msgstr "รูปแบบตัวบ่งชี้ที่ไม่ได้ใช้งาน:"
 
-#: src/_dialogs.ui:314
+#: src/_dialogs.ui:328
 msgid "Indicator orientation:"
 msgstr "การวางแนวตัวบ่งชี้:"
 
-#: src/_dialogs.ui:326
+#: src/_dialogs.ui:340
 msgid "Automatic"
 msgstr "อัตโนมัติ"
 
-#: src/_dialogs.ui:327
+#: src/_dialogs.ui:341
 msgid "Bottom"
 msgstr "ด้านล่าง"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:342
 msgid "Right"
 msgstr "ด้านขวา"
 
-#: src/_dialogs.ui:329
+#: src/_dialogs.ui:343
 msgid "Top"
 msgstr "ด้านบน"
 
-#: src/_dialogs.ui:330
+#: src/_dialogs.ui:344
 msgid "Left"
 msgstr "ด้านซ้าย"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:354
 msgid "Get indicator color from theme"
 msgstr "รับสีตัวบ่งชี้จากชุดตกแต่ง"
 
-#: src/_dialogs.ui:366
+#: src/_dialogs.ui:380
 msgid "Active indicator:"
 msgstr "ตัวบ่งชี้ที่ใช้งานอยู่:"
 
-#: src/_dialogs.ui:390
+#: src/_dialogs.ui:404
 msgid "Inactive indicator:"
 msgstr "ตัวบ่งชี้ที่ไม่ได้ใช้งาน:"
 
-#: src/_dialogs.ui:417
+#: src/_dialogs.ui:431
 msgid "Force icon size:"
 msgstr "ขนาดไอคอนบังคับ:"
 
-#: src/_dialogs.ui:462
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr "ความกว้างตัวอย่าง:"
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr "ความสูงตัวอย่าง:"
+
+#: src/_dialogs.ui:532
 msgid "Appearance"
 msgstr "รูปลักษณ์"
 
-#: src/_dialogs.ui:492
+#: src/_dialogs.ui:562
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "สลับโปรแกรมด้วย <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:519
+#: src/_dialogs.ui:589
 msgid "Switch to the last window with <SUPER>"
 msgstr "สลับไปที่หน้าต่างสุดท้ายด้วย<SUPER>"
 
-#: src/_dialogs.ui:535
+#: src/_dialogs.ui:605
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -232,6 +240,6 @@ msgstr ""
 "<b>คุณลักษณะนี้ถูกปิดใช้งาน</b>\n"
 "ต้องใช้ส่วนขยาย X11 Xinput2.0 ซึ่งระบบของคุณไม่ได้จัดเตรียมไว้ให้"
 
-#: src/_dialogs.ui:553
+#: src/_dialogs.ui:623
 msgid "Keyboard hotkeys"
 msgstr "ปุ่มลัดแป้นพิมพ์"
