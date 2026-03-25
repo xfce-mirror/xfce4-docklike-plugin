@@ -6,16 +6,16 @@
 # Translators:
 # 1763f4a4329a2376c933c5e919a36cbc_341ca53 <1f851310383599d03339229d772e1290_119292>, 2025
 # Nick Schermer <nick@xfce.org>, 2025
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2025
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2025\n"
+"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2026\n"
 "Language-Team: Korean (https://app.transifex.com/xfce/teams/16840/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,15 +23,15 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:356
+#: src/AppInfos.cpp:340
 msgid "Select Launcher"
 msgstr "실행 아이콘 선택"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Cancel"
 msgstr "취소(_C)"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Open"
 msgstr "열기(_O)"
 
@@ -73,12 +73,12 @@ msgstr ""
 "Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Junggyu Bag <bagjunggyu@gmail.com>"
 
-#: src/SettingsDialog.cpp:272
+#: src/SettingsDialog.cpp:300
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>처음 %u 바로 가기 키만 사용할 수 있습니다.</b>\n"
 
-#: src/SettingsDialog.cpp:277
+#: src/SettingsDialog.cpp:305
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -93,141 +93,149 @@ msgstr "도크형 작업 표시줄"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
-msgstr "최신 초단순 xfce용 작업 표시줄"
+msgstr " xfce용 최신 초간단 작업 표시줄"
 
-#: src/_dialogs.ui:35
+#: src/_dialogs.ui:49
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: src/_dialogs.ui:51
+#: src/_dialogs.ui:65
 msgid "_Close"
 msgstr "닫기(_C)"
 
-#: src/_dialogs.ui:96
+#: src/_dialogs.ui:110
 msgid "Don't show the window list for a single window"
 msgstr "단일 창 목록을 나타내지 않음"
 
-#: src/_dialogs.ui:111
+#: src/_dialogs.ui:125
 msgid "Only show applications on the current workspace"
 msgstr "현재 작업 공간에만 앱 표시"
 
-#: src/_dialogs.ui:126
+#: src/_dialogs.ui:140
 msgid "Only show applications on the current display"
 msgstr "현재 화면에만 앱 표시"
 
-#: src/_dialogs.ui:141
+#: src/_dialogs.ui:155
 msgid "Show preview thumbnails for open windows"
 msgstr "열어둘 창의 미리 보기 그림 표시"
 
-#: src/_dialogs.ui:157
+#: src/_dialogs.ui:171
 msgid "Show the number of open windows (if more than 2)"
 msgstr "창 갯수(가 2개 이상일 경우) 표시"
 
-#: src/_dialogs.ui:182
+#: src/_dialogs.ui:196
 msgid "Middle mouse button:"
 msgstr "가운데 마우스 단추:"
 
-#: src/_dialogs.ui:195
+#: src/_dialogs.ui:209
 msgid "Close all"
 msgstr "모두 닫기"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:210
 msgid "Launch new instance"
 msgstr "새 인스턴스 실행"
 
-#: src/_dialogs.ui:197
+#: src/_dialogs.ui:211
 msgid "Do Nothing"
 msgstr "아무것도 안 함"
 
-#: src/_dialogs.ui:219
+#: src/_dialogs.ui:233
 msgid "Behavior"
 msgstr "동작"
 
-#: src/_dialogs.ui:252
+#: src/_dialogs.ui:266
 msgid "Active indicator style:"
 msgstr "활성 표시 방식:"
 
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
 msgid "Bars"
 msgstr "막대"
 
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
 msgid "Dots"
 msgstr "반점"
 
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
 msgid "Rectangles"
 msgstr "사각형"
 
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
 msgid "Ciliora"
 msgstr "실리오라"
 
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
 msgid "Circles"
 msgstr "동글뱅이"
 
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "None"
 msgstr "없음"
 
-#: src/_dialogs.ui:283
+#: src/_dialogs.ui:297
 msgid "Inactive indicator style:"
 msgstr "비활성 표시 방식:"
 
-#: src/_dialogs.ui:314
+#: src/_dialogs.ui:328
 msgid "Indicator orientation:"
 msgstr "표시 방향:"
 
-#: src/_dialogs.ui:326
+#: src/_dialogs.ui:340
 msgid "Automatic"
 msgstr "자동"
 
-#: src/_dialogs.ui:327
+#: src/_dialogs.ui:341
 msgid "Bottom"
 msgstr "아래"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:342
 msgid "Right"
 msgstr "오른쪽"
 
-#: src/_dialogs.ui:329
+#: src/_dialogs.ui:343
 msgid "Top"
 msgstr "위"
 
-#: src/_dialogs.ui:330
+#: src/_dialogs.ui:344
 msgid "Left"
 msgstr "왼쪽"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:354
 msgid "Get indicator color from theme"
 msgstr "테마에서 표시 색상 가져오기"
 
-#: src/_dialogs.ui:366
+#: src/_dialogs.ui:380
 msgid "Active indicator:"
 msgstr "활성 표시:"
 
-#: src/_dialogs.ui:390
+#: src/_dialogs.ui:404
 msgid "Inactive indicator:"
 msgstr "비활성 표시:"
 
-#: src/_dialogs.ui:417
+#: src/_dialogs.ui:431
 msgid "Force icon size:"
 msgstr "아이콘 강제 크기:"
 
-#: src/_dialogs.ui:462
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr "미리 보기 너비:"
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr "미리 보기 높이:"
+
+#: src/_dialogs.ui:532
 msgid "Appearance"
 msgstr "모양새"
 
-#: src/_dialogs.ui:492
+#: src/_dialogs.ui:562
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "<SUPER>+[1, 2, ...] 키로 앱 전환"
 
-#: src/_dialogs.ui:519
+#: src/_dialogs.ui:589
 msgid "Switch to the last window with <SUPER>"
 msgstr "<SUPER> 키로 마지막에 사용한 창 전환"
 
-#: src/_dialogs.ui:535
+#: src/_dialogs.ui:605
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -235,6 +243,6 @@ msgstr ""
 "<b>이 기능은 사용할 수 없습니다.</b>\n"
 "시스템에 설치하지 않은 X11 XInput 2.0 확장이 필요합니다."
 
-#: src/_dialogs.ui:553
+#: src/_dialogs.ui:623
 msgid "Keyboard hotkeys"
 msgstr "키보드 바로 가기 키"
