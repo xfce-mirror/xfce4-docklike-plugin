@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# ზურაბი დავითაშვილი <zurabi@tuta.io>, 2025
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026\n"
+"Language-Team: Georgian (https://app.transifex.com/xfce/teams/16840/ka/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: src/AppInfos.cpp:340
+msgid "Select Launcher"
+msgstr "გამშვების არჩევა"
+
+#: src/AppInfos.cpp:341
+msgid "_Cancel"
+msgstr "გაუ_ქმება"
+
+#: src/AppInfos.cpp:341
+msgid "_Open"
+msgstr "_გახსნა"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "მიმაგრებულია პანელზე"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "დოკზე მიმაგრება"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr "გამშვების ცასწორება..."
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "ყველას დახურვა"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "წაშლა"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr "გამშვების არჩევა..."
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr "გამშვების შექმნა..."
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr "ეკატერინე პაპავა"
+
+#: src/SettingsDialog.cpp:300
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>ჩართულია, მხოლოდ, პირველი %u კლავიატურის მალსახმობი.</b>\n"
+
+#: src/SettingsDialog.cpp:305
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"როგორც ჩანს, კომბინაციას &lt;SUPER&gt;+%u უკვე იყენებს სხვა პროცესი.\n"
+"შეამოწმეთ თქვენი Xfce-ის პარამეტრები."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "პანელის მსგავსი ამოცანათა ბანელი"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "თანამედროვე, მინიმალისტური ამოცანათა პანელი Xfce-ისთვის"
+
+#: src/_dialogs.ui:49
+msgid "_Help"
+msgstr "_დახმარება"
+
+#: src/_dialogs.ui:65
+msgid "_Close"
+msgstr "და_ხურვა"
+
+#: src/_dialogs.ui:110
+msgid "Don't show the window list for a single window"
+msgstr "ფანჯრების სია ერთი ფანჯრისთვის ნაჩვენები არ იქნება"
+
+#: src/_dialogs.ui:125
+msgid "Only show applications on the current workspace"
+msgstr "მხოლოდ მიმდინარე სამუშაო სივრცეში არსებული აპლიკაციების ჩვენება"
+
+#: src/_dialogs.ui:140
+msgid "Only show applications on the current display"
+msgstr "მხოლოდ მიმდინარე ეკრანზე არსებული აპლიკაციების ჩვენება"
+
+#: src/_dialogs.ui:155
+msgid "Show preview thumbnails for open windows"
+msgstr "მინიატურების ჩვენება ღია ფანჯრებისთვის"
+
+#: src/_dialogs.ui:171
+msgid "Show the number of open windows (if more than 2)"
+msgstr "ღია ფანჯრების რაოდენობის ჩვენება (თუ >2)"
+
+#: src/_dialogs.ui:196
+msgid "Middle mouse button:"
+msgstr "შუა თაგუნას ღილაკი:"
+
+#: src/_dialogs.ui:209
+msgid "Close all"
+msgstr "ყველას დახურვა"
+
+#: src/_dialogs.ui:210
+msgid "Launch new instance"
+msgstr "ახალი გაშვებული ასლის გაშვება"
+
+#: src/_dialogs.ui:211
+msgid "Do Nothing"
+msgstr "არაფერი"
+
+#: src/_dialogs.ui:233
+msgid "Behavior"
+msgstr "ქცევა"
+
+#: src/_dialogs.ui:266
+msgid "Active indicator style:"
+msgstr "აქტიური მაჩვენებლის სტილი:"
+
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
+msgid "Bars"
+msgstr "ბარი"
+
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
+msgid "Dots"
+msgstr "წერტილები"
+
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
+msgid "Rectangles"
+msgstr "ოთხკუთხედები"
+
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
+msgid "Ciliora"
+msgstr "ხაზი წერტილებით"
+
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
+msgid "Circles"
+msgstr "წრეები"
+
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
+msgid "None"
+msgstr "არცერთი"
+
+#: src/_dialogs.ui:297
+msgid "Inactive indicator style:"
+msgstr "არააქტიური მაჩვენებლის სტილი:"
+
+#: src/_dialogs.ui:328
+msgid "Indicator orientation:"
+msgstr "მაჩვენებლის ორიენტაცია:"
+
+#: src/_dialogs.ui:340
+msgid "Automatic"
+msgstr "ავტომატური"
+
+#: src/_dialogs.ui:341
+msgid "Bottom"
+msgstr "ქვემო"
+
+#: src/_dialogs.ui:342
+msgid "Right"
+msgstr "მარჯვენა"
+
+#: src/_dialogs.ui:343
+msgid "Top"
+msgstr "ზედა"
+
+#: src/_dialogs.ui:344
+msgid "Left"
+msgstr "მარცხენა"
+
+#: src/_dialogs.ui:354
+msgid "Get indicator color from theme"
+msgstr "მაჩვენებლის ფერის თემიდან აღება"
+
+#: src/_dialogs.ui:380
+msgid "Active indicator:"
+msgstr "აქტიური მაჩვენებელი:"
+
+#: src/_dialogs.ui:404
+msgid "Inactive indicator:"
+msgstr "არააქტიური მაჩვენებელი:"
+
+#: src/_dialogs.ui:431
+msgid "Force icon size:"
+msgstr "ნაძალადევი ხატულას ზომა:"
+
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr ""
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr ""
+
+#: src/_dialogs.ui:532
+msgid "Appearance"
+msgstr "გარეგნობა"
+
+#: src/_dialogs.ui:562
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "აპლიკაციებს შორის გადართვა ღილაკებით <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:589
+msgid "Switch to the last window with <SUPER>"
+msgstr "ბოლო ფანჯარაზე გადართვა ღილაკით <SUPER>"
+
+#: src/_dialogs.ui:605
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>ეს ფუნქცია გამორთულია</b>\n"
+"მას სჭირდება გაფართოება X11 XInput2.0, რომელიც თქვენს სისტემაზე ხელმისაწვდომი არაა."
+
+#: src/_dialogs.ui:623
+msgid "Keyboard hotkeys"
+msgstr "კლავიატურის მალსახმობები"
