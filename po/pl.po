@@ -5,17 +5,17 @@
 # 
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2025
-# Marek Adamski, 2025
 # Xfce Bot <transifex@xfce.org>, 2025
+# Marek Adamski, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2025-07-18 11:06+0200\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Xfce Bot <transifex@xfce.org>, 2025\n"
+"Last-Translator: Marek Adamski, 2026\n"
 "Language-Team: Polish (https://app.transifex.com/xfce/teams/16840/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,15 +23,15 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: src/AppInfos.cpp:356
+#: src/AppInfos.cpp:340
 msgid "Select Launcher"
 msgstr "Wybierz aktywator"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/AppInfos.cpp:357
+#: src/AppInfos.cpp:341
 msgid "_Open"
 msgstr "_Otwórz"
 
@@ -71,12 +71,12 @@ msgstr "Utwórz aktywator..."
 msgid "translator-credits"
 msgstr "Piotr Sokół <psokol@jabster.pl>, 2012."
 
-#: src/SettingsDialog.cpp:272
+#: src/SettingsDialog.cpp:300
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
 msgstr "<b>Włączono tylko pierwsze skróty klawiszowe: %u</b>\n"
 
-#: src/SettingsDialog.cpp:277
+#: src/SettingsDialog.cpp:305
 #, c-format
 msgid ""
 "The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
@@ -93,139 +93,147 @@ msgstr "Dokowy pasek zadań"
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Nowoczesny, minimalistyczny pasek zadań dla Xfce"
 
-#: src/_dialogs.ui:35
+#: src/_dialogs.ui:49
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: src/_dialogs.ui:51
+#: src/_dialogs.ui:65
 msgid "_Close"
 msgstr "Za_mknij"
 
-#: src/_dialogs.ui:96
+#: src/_dialogs.ui:110
 msgid "Don't show the window list for a single window"
 msgstr "Nie pokazuj listy okien dla pojedynczego okna"
 
-#: src/_dialogs.ui:111
+#: src/_dialogs.ui:125
 msgid "Only show applications on the current workspace"
 msgstr "Pokazuj tylko programy w bieżącym obszarze roboczym"
 
-#: src/_dialogs.ui:126
+#: src/_dialogs.ui:140
 msgid "Only show applications on the current display"
 msgstr "Pokazuj tylko programy na bieżącym ekranie"
 
-#: src/_dialogs.ui:141
+#: src/_dialogs.ui:155
 msgid "Show preview thumbnails for open windows"
 msgstr "Pokazuj miniatury podglądu dla otwartych okien"
 
-#: src/_dialogs.ui:157
+#: src/_dialogs.ui:171
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Pokazuj liczbę otwartych okien (jeśli więcej niż 2)"
 
-#: src/_dialogs.ui:182
+#: src/_dialogs.ui:196
 msgid "Middle mouse button:"
 msgstr "Środkowy przycisk myszy:"
 
-#: src/_dialogs.ui:195
+#: src/_dialogs.ui:209
 msgid "Close all"
 msgstr "Zamknij wszystkie"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:210
 msgid "Launch new instance"
 msgstr "Uruchom nowe wystąpienie"
 
-#: src/_dialogs.ui:197
+#: src/_dialogs.ui:211
 msgid "Do Nothing"
 msgstr "Nic nie rób"
 
-#: src/_dialogs.ui:219
+#: src/_dialogs.ui:233
 msgid "Behavior"
 msgstr "Zachowanie"
 
-#: src/_dialogs.ui:252
+#: src/_dialogs.ui:266
 msgid "Active indicator style:"
 msgstr "Styl wskaźnika aktywnych:"
 
-#: src/_dialogs.ui:265 src/_dialogs.ui:296
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
 msgid "Bars"
 msgstr "Paski"
 
-#: src/_dialogs.ui:266 src/_dialogs.ui:297
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
 msgid "Dots"
 msgstr "Kropki"
 
-#: src/_dialogs.ui:267 src/_dialogs.ui:298
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
 msgid "Rectangles"
 msgstr "Prostokąty"
 
-#: src/_dialogs.ui:268 src/_dialogs.ui:299
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:269 src/_dialogs.ui:300
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
 msgid "Circles"
 msgstr "Kręgi"
 
-#: src/_dialogs.ui:270 src/_dialogs.ui:301
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "None"
 msgstr "Brak"
 
-#: src/_dialogs.ui:283
+#: src/_dialogs.ui:297
 msgid "Inactive indicator style:"
 msgstr "Styl wskaźnika nieaktywnych:"
 
-#: src/_dialogs.ui:314
+#: src/_dialogs.ui:328
 msgid "Indicator orientation:"
 msgstr "Orientacja wskaźnika:"
 
-#: src/_dialogs.ui:326
+#: src/_dialogs.ui:340
 msgid "Automatic"
 msgstr "Automatyczna"
 
-#: src/_dialogs.ui:327
+#: src/_dialogs.ui:341
 msgid "Bottom"
 msgstr "Dolna"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:342
 msgid "Right"
 msgstr "Prawa"
 
-#: src/_dialogs.ui:329
+#: src/_dialogs.ui:343
 msgid "Top"
 msgstr "Górna"
 
-#: src/_dialogs.ui:330
+#: src/_dialogs.ui:344
 msgid "Left"
 msgstr "Lewa"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:354
 msgid "Get indicator color from theme"
 msgstr "Pobierz kolor wskaźnika z motywu"
 
-#: src/_dialogs.ui:366
+#: src/_dialogs.ui:380
 msgid "Active indicator:"
 msgstr "Wskaźnik aktywnych:"
 
-#: src/_dialogs.ui:390
+#: src/_dialogs.ui:404
 msgid "Inactive indicator:"
 msgstr "Wskaźnik nieaktywnych:"
 
-#: src/_dialogs.ui:417
+#: src/_dialogs.ui:431
 msgid "Force icon size:"
 msgstr "Wymuś rozmiar ikon:"
 
-#: src/_dialogs.ui:462
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr "Szerokość podglądu:"
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr "Wysokość podglądu:"
+
+#: src/_dialogs.ui:532
 msgid "Appearance"
 msgstr "Wygląd"
 
-#: src/_dialogs.ui:492
+#: src/_dialogs.ui:562
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Przełączaj się między programami za pomocą <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:519
+#: src/_dialogs.ui:589
 msgid "Switch to the last window with <SUPER>"
 msgstr "Przechodź do ostatniego okna za pomocą <SUPER>"
 
-#: src/_dialogs.ui:535
+#: src/_dialogs.ui:605
 msgid ""
 "<b>This feature is disabled.</b>\n"
 "It requires X11 XInput2.0 extension which is is not provided by your system."
@@ -233,6 +241,6 @@ msgstr ""
 "<b>Ta funkcja jest wyłączona.</b>\n"
 "Wymaga rozszerzenia XInput2.0 X11, które nie zostało dostarczone przez ten system."
 
-#: src/_dialogs.ui:553
+#: src/_dialogs.ui:623
 msgid "Keyboard hotkeys"
 msgstr "Skróty klawiszowe"
