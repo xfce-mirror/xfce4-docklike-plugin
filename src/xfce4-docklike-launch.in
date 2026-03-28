@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# xfce4-docklike-launch - Launch or focus an application group in the
+#                         xfce4-docklike-plugin dock via xfce4-panel remote-event.
+#
+# Usage: xfce4-docklike-launch <appname>
+#
+#   <appname>  The .desktop filename without path and without the .desktop
+#              extension (e.g. "firefox", "org.gnome.Evolution"), or the full
+#              path to a .desktop file for an exact path match.
+#
+# The plugin instance id is resolved automatically from the panel configuration.
+
+PANEL_XML="${XDG_CONFIG_HOME:-$HOME/.config}/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $(basename "$0") <appname>" >&2
+    exit 1
+fi
+
+APPNAME="$1"
+
+INSTANCE_ID=$(grep -o 'plugin-[0-9]*" type="string" value="docklike"' "$PANEL_XML" 2>/dev/null \
+    | grep -o '[0-9]*')
+
+if [ -z "$INSTANCE_ID" ]; then
+    echo "$(basename "$0"): could not find a docklike plugin instance in $PANEL_XML" >&2
+    exit 1
+fi
+
+exec xfce4-panel --plugin-event="docklike-${INSTANCE_ID}:activate-group-by-path:string:${APPNAME}"
