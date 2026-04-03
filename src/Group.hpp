@@ -76,6 +76,7 @@ public:
 
 	void resize();
 	void updateStyle();
+	void updateIconFromWindows();
 
 	void onDraw(cairo_t* cr);
 	void onWindowActivate(GroupWindow* groupWindow);
