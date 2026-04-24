@@ -78,3 +78,15 @@ i18n.merge_file(
   install: true,
   install_dir: get_option('prefix') / get_option('datadir') / plugin_install_subdir,
 )
+
+launch_script = configure_file(
+  input: 'xfce4-docklike-launch.in',
+  output: 'xfce4-docklike-launch',
+  configuration: configuration_data(),
+)
+
+install_data(
+  launch_script,
+  install_dir: get_option('prefix') / get_option('bindir'),
+  install_mode: 'rwxr-xr-x',
+)
