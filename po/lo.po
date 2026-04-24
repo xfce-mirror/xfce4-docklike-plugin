@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# BoneNI, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2026-03-14 00:59+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: BoneNI, 2026\n"
+"Language-Team: Lao (https://app.transifex.com/xfce/teams/16840/lo/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/AppInfos.cpp:340
+msgid "Select Launcher"
+msgstr "ເລືອກຕົວເປີດໃຊ້"
+
+#: src/AppInfos.cpp:341
+msgid "_Cancel"
+msgstr "_ຍົກເລີກ"
+
+#: src/AppInfos.cpp:341
+msgid "_Open"
+msgstr "_ເປີດ"
+
+#: src/Group.cpp:860
+msgid "Pinned to Dock"
+msgstr "ປັກໝຸດໄວ້ທີ່ດັອກແລ້ວ"
+
+#: src/Group.cpp:860
+msgid "Pin to Dock"
+msgstr "ປັກໝຸດໃສ່ດັອກ"
+
+#: src/Group.cpp:872
+msgid "Edit Launcher..."
+msgstr "ແກ້ໄຂຕົວເປີດໃຊ້..."
+
+#: src/Group.cpp:899
+msgid "Close All"
+msgstr "ປິດທັງໝົດ"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:913
+msgid "Remove"
+msgstr "ລຶບ"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:926
+msgid "Select Launcher..."
+msgstr "ເລືອກຕົວເປີດໃຊ້..."
+
+#: src/Group.cpp:935
+msgid "Create Launcher..."
+msgstr "ສ້າງຕົວເປີດໃຊ້..."
+
+#: src/Plugin.cpp:113
+msgid "translator-credits"
+msgstr "ເຄຣດິດຜູ້ແປ"
+
+#: src/SettingsDialog.cpp:300
+#, c-format
+msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
+msgstr "<b>ເປີດໃຊ້ງານສະເພາະປຸ່ມລັດ %u ອັນທຳອິດເທົ່ານັ້ນ.</b>\n"
+
+#: src/SettingsDialog.cpp:305
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
+"Check your Xfce settings."
+msgstr ""
+"ປຸ່ມປະສົມ &lt;SUPER&gt;+%u ເບິ່ງຄືວ່າຖືກໃຊ້ໂດຍໂປຣແກຣມອື່ນແລ້ວ.\n"
+"ກະລຸນາກວດສອບການຕັ້ງຄ່າ Xfce ຂອງທ່ານ."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "ແຖບວຽກແບບດັອກ (Docklike Taskbar)"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "ແຖບວຽກທີ່ທັນສະໄໝ ແລະ ລຽບງ່າຍສຳລັບ Xfce"
+
+#: src/_dialogs.ui:49
+msgid "_Help"
+msgstr "_ຊ່ວຍເຫຼືອ"
+
+#: src/_dialogs.ui:65
+msgid "_Close"
+msgstr "_ປິດ"
+
+#: src/_dialogs.ui:110
+msgid "Don't show the window list for a single window"
+msgstr "ບໍ່ສະແດງລາຍຊື່ປ່ອງຢ້ຽມຫາກມີພຽງປ່ອງຢ້ຽມດຽວ"
+
+#: src/_dialogs.ui:125
+msgid "Only show applications on the current workspace"
+msgstr "ສະແດງສະເພາະແອັບພລິເຄຊັນໃນພື້ນທີ່ເຮັດວຽກປັດຈຸບັນ"
+
+#: src/_dialogs.ui:140
+msgid "Only show applications on the current display"
+msgstr "ສະແດງສະເພາະແອັບພລິເຄຊັນໃນໜ້າຈໍປັດຈຸບັນ"
+
+#: src/_dialogs.ui:155
+msgid "Show preview thumbnails for open windows"
+msgstr "ສະແດງຮູບຕົວຢ່າງຂະໜາດນ້ອຍສຳລັບປ່ອງຢ້ຽມທີ່ເປີດຢູ່"
+
+#: src/_dialogs.ui:171
+msgid "Show the number of open windows (if more than 2)"
+msgstr "ສະແດງຈຳນວນປ່ອງຢ້ຽມທີ່ເປີດຢູ່ (ຖ້າມີຫຼາຍກວ່າ 2)"
+
+#: src/_dialogs.ui:196
+msgid "Middle mouse button:"
+msgstr "ປຸ່ມກາງຂອງເມົ້າ:"
+
+#: src/_dialogs.ui:209
+msgid "Close all"
+msgstr "ປິດທັງໝົດ"
+
+#: src/_dialogs.ui:210
+msgid "Launch new instance"
+msgstr "ເປີດຕົວຢ່າງໃໝ່"
+
+#: src/_dialogs.ui:211
+msgid "Do Nothing"
+msgstr "ບໍ່ຕ້ອງເຮັດຫຍັງ"
+
+#: src/_dialogs.ui:233
+msgid "Behavior"
+msgstr "ພຶດຕິກຳ"
+
+#: src/_dialogs.ui:266
+msgid "Active indicator style:"
+msgstr "ຮູບແບບຕົວບົ່ງຊີ້ສະຖານະເປີດໃຊ້:"
+
+#: src/_dialogs.ui:279 src/_dialogs.ui:310
+msgid "Bars"
+msgstr "ແຖບ"
+
+#: src/_dialogs.ui:280 src/_dialogs.ui:311
+msgid "Dots"
+msgstr "ຈຸດ"
+
+#: src/_dialogs.ui:281 src/_dialogs.ui:312
+msgid "Rectangles"
+msgstr "ຮູບສີ່ຫຼ່ຽມ"
+
+#: src/_dialogs.ui:282 src/_dialogs.ui:313
+msgid "Ciliora"
+msgstr "ຊີລີໂອຣາ (Ciliora)"
+
+#: src/_dialogs.ui:283 src/_dialogs.ui:314
+msgid "Circles"
+msgstr "ວົງມົນ"
+
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
+msgid "None"
+msgstr "ບໍ່ມີ"
+
+#: src/_dialogs.ui:297
+msgid "Inactive indicator style:"
+msgstr "ຮູບແບບຕົວບົ່ງຊີ້ສະຖານະບໍ່ໄດ້ໃຊ້:"
+
+#: src/_dialogs.ui:328
+msgid "Indicator orientation:"
+msgstr "ທິດທາງຂອງຕົວບົ່ງຊີ້:"
+
+#: src/_dialogs.ui:340
+msgid "Automatic"
+msgstr "ອັດຕະໂນມັດ"
+
+#: src/_dialogs.ui:341
+msgid "Bottom"
+msgstr "ລຸ່ມ"
+
+#: src/_dialogs.ui:342
+msgid "Right"
+msgstr "ຂວາ"
+
+#: src/_dialogs.ui:343
+msgid "Top"
+msgstr "ເທິງ"
+
+#: src/_dialogs.ui:344
+msgid "Left"
+msgstr "ຊ້າຍ"
+
+#: src/_dialogs.ui:354
+msgid "Get indicator color from theme"
+msgstr "ໃຊ້ສີຕົວບົ່ງຊີ້ຈາກທີມ (Theme)"
+
+#: src/_dialogs.ui:380
+msgid "Active indicator:"
+msgstr "ຕົວບົ່ງຊີ້ສະຖານະເປີດໃຊ້:"
+
+#: src/_dialogs.ui:404
+msgid "Inactive indicator:"
+msgstr "ຕົວບົ່ງຊີ້ສະຖານະບໍ່ໄດ້ໃຊ້:"
+
+#: src/_dialogs.ui:431
+msgid "Force icon size:"
+msgstr "ບັງຄັບຂະໜາດໄອຄອນ:"
+
+#: src/_dialogs.ui:475
+msgid "Preview width:"
+msgstr "ຄວາມກວ້າງຂອງຕົວຢ່າງ:"
+
+#: src/_dialogs.ui:504
+msgid "Preview height:"
+msgstr "ຄວາມສູງຂອງຕົວຢ່າງ:"
+
+#: src/_dialogs.ui:532
+msgid "Appearance"
+msgstr "ຮູບລັກສະນະ"
+
+#: src/_dialogs.ui:562
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "ສະຫຼັບລະຫວ່າງແອັບພລິເຄຊັນດ້ວຍ <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:589
+msgid "Switch to the last window with <SUPER>"
+msgstr "ສະຫຼັບໄປຫາປ່ອງຢ້ຽມຫຼ້າສຸດດ້ວຍ <SUPER>"
+
+#: src/_dialogs.ui:605
+msgid ""
+"<b>This feature is disabled.</b>\n"
+"It requires X11 XInput2.0 extension which is is not provided by your system."
+msgstr ""
+"<b>ຄຸນສົມບັດນີ້ຖືກປິດໃຊ້ງານ.</b>\n"
+"ມັນຕ້ອງການສ່ວນເສີມ X11 XInput2.0 ເຊິ່ງບໍ່ມີຢູ່ໃນລະບົບຂອງທ່ານ."
+
+#: src/_dialogs.ui:623
+msgid "Keyboard hotkeys"
+msgstr "ປຸ່ມລັດຄີບອດ"
