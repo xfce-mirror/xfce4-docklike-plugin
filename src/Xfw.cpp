@@ -39,6 +39,7 @@ namespace Xfw
 		"brave-browser", "chromium", "google-chrome", "vivaldi-stable", "microsoft-edge",
 	};
 	// clang-format on
+	XfwWindow* mPreviousActiveWindow = nullptr;
 
 	namespace // private:
 	{
@@ -109,6 +110,8 @@ namespace Xfw
 		g_signal_connect(G_OBJECT(mXfwScreen), "window-closed",
 			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
 				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(xfwWindow);
+				if (xfwWindow == mPreviousActiveWindow)
+					mPreviousActiveWindow = nullptr;
 			}),
 			nullptr);
 
@@ -128,6 +131,7 @@ namespace Xfw
 					{
 						Help::Gtk::cssClassRemove(GTK_WIDGET(prevWindow->mGroupMenuItem->mItem), "active_menu_item");
 						gtk_widget_queue_draw(prevWindow->mGroup->mButton);
+						mPreviousActiveWindow = previousActiveWindow;
 					}
 				}
 				setActiveWindow(previousActiveWindow);
@@ -244,21 +248,11 @@ namespace Xfw
 
 	void switchToLastWindow(guint32 timestamp)
 	{
-		auto it = mGroupWindows.mList.begin();
-
-		while (it != mGroupWindows.mList.end() && it->second->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			++it; // skip dialogs
-		if (it != mGroupWindows.mList.end())
-			++it; // skip current window
-
-		while (it != mGroupWindows.mList.end())
+		if (mPreviousActiveWindow != nullptr)
 		{
-			if (!it->second->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			{
-				it->second->activate(timestamp);
-				return;
-			}
-			++it;
+			std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(mPreviousActiveWindow);
+			if (prevWindow)
+				prevWindow->activate(timestamp);
 		}
 	}
 } // namespace Xfw
