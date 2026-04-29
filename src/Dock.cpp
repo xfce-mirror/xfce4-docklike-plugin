@@ -17,9 +17,6 @@
  */
 
 #include "Dock.hpp"
-#ifdef ENABLE_X11
-#include "Hotkeys.hpp"
-#endif
 
 namespace Dock
 {
@@ -124,29 +121,6 @@ namespace Dock
 		}
 
 		gtk_widget_queue_draw(mBox);
-	}
-
-	void hoverSupered(bool on)
-	{
-#ifdef ENABLE_X11
-		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-		{
-			int grabbedKeys = Hotkeys::mGrabbedKeys;
-			GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
-
-			for (GList* child = children; child != nullptr && grabbedKeys; child = child->next)
-			{
-				GtkWidget* widget = (GtkWidget*)child->data;
-
-				if (!gtk_widget_get_visible(widget))
-					continue;
-
-				--grabbedKeys;
-			}
-
-			g_list_free(children);
-		}
-#endif
 	}
 
 	void activateGroup(int nb, guint32 timestamp)

@@ -26,8 +26,6 @@
 #include <iostream>
 #include <string>
 
-#define ModifierChange 85 //? this event type isn't listed in libX11
-
 namespace Hotkeys
 {
 	int mGrabbedKeys;
@@ -47,12 +45,6 @@ namespace Hotkeys
 
 		switch (xevent->type)
 		{
-		case ModifierChange:
-			if (GDK_MOD4_MASK & xevent->xkey.keycode)
-				Dock::hoverSupered(true);
-			else
-				Dock::hoverSupered(false);
-			break;
 		case KeyPress:
 			if (xevent->xkey.keycode >= m1Keycode && xevent->xkey.keycode <= m1Keycode + NbHotkeys)
 				Dock::activateGroup(xevent->xkey.keycode - m1Keycode, xevent->xkey.time);

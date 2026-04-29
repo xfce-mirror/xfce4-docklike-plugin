@@ -44,7 +44,6 @@ namespace Dock
 	void savePinned();
 	void drawGroups();
 
-	void hoverSupered(bool on);
 	void activateGroup(int nb, guint32 timestamp);
 
 	void onPanelResize(int size = -1);
