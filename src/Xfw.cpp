@@ -16,10 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef ENABLE_X11
-#include <gdk/gdkx.h>
-#endif
-
 #include "Xfw.hpp"
 
 #include <libxfce4ui/libxfce4ui.h>
@@ -197,26 +193,20 @@ namespace Xfw
 
 	void activate(GroupWindow* groupWindow, guint32 timestamp)
 	{
-#ifdef ENABLE_X11
-		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
-#endif
-
 		XfwWorkspace* workspace = xfw_window_get_workspace(groupWindow->mXfwWindow);
 		if (workspace != nullptr)
 			xfw_workspace_activate(workspace, nullptr);
 
-		xfw_window_activate(groupWindow->mXfwWindow, nullptr, timestamp, nullptr);
+		xfw_window_activate(groupWindow->mXfwWindow, nullptr,
+			timestamp != GDK_CURRENT_TIME ? timestamp : g_get_monotonic_time() / 1000,
+			nullptr);
 	}
 
 	void close(GroupWindow* groupWindow, guint32 timestamp)
 	{
-#ifdef ENABLE_X11
-		if (!timestamp && GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-			timestamp = gdk_x11_get_server_time(gdk_get_default_root_window());
-#endif
-
-		xfw_window_close(groupWindow->mXfwWindow, timestamp, nullptr);
+		xfw_window_close(groupWindow->mXfwWindow,
+			timestamp != GDK_CURRENT_TIME ? timestamp : g_get_monotonic_time() / 1000,
+			nullptr);
 	}
 
 	void setActiveWindow(XfwWindow* previousActiveWindow)
