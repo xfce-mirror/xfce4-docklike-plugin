@@ -22,12 +22,15 @@
 namespace Hotkeys
 {
 	void init();
+	void finalize();
 	void updateSettings();
+	void resetShortcuts();
 
-	extern bool mXIExtAvailable;
+	extern bool mKeyAloneGrabbed;
 	extern int mGrabbedKeys;
+	extern bool mAddShortcutUIAvailable;
 
-	const int NbHotkeys = 10;
+	const int mNbHotkeys = 9;
 } // namespace Hotkeys
 
 #endif // HOTKEYS_HPP

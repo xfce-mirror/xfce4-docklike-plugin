@@ -17,14 +17,54 @@
  */
 
 #include "SettingsDialog.hpp"
-#include "Plugin.hpp"
-#ifdef ENABLE_X11
 #include "Hotkeys.hpp"
-#endif
+#include "Plugin.hpp"
 
 namespace SettingsDialog
 {
 	GtkWidget* mSettingsDialog = nullptr;
+
+	static void updateKeyComboActiveWarning(GtkWidget* widget)
+	{
+		if (!Settings::keyComboActive || Hotkeys::mGrabbedKeys == Hotkeys::mNbHotkeys)
+			gtk_widget_hide(widget);
+		else
+		{
+			std::string tooltip = "";
+			gchar* markup;
+
+			if (Hotkeys::mGrabbedKeys > 1)
+			{
+				markup = g_strdup_printf(
+					_("<b>Only the first %u hotkeys are enabled.</b>\n"),
+					Hotkeys::mGrabbedKeys);
+				tooltip += markup;
+				g_free(markup);
+			}
+			else if (Hotkeys::mGrabbedKeys == 1)
+			{
+				tooltip += _("<b>Only the first hotkey is enabled.</b>\n");
+			}
+			else
+			{
+				tooltip += _("<b>No hotkeys enabled.</b>\n");
+			}
+
+			markup = g_strdup_printf(
+				_("The &lt;SUPER&gt;+%u combination seems already mapped to another command.\nCheck your Xfce keyboard settings."),
+				Hotkeys::mGrabbedKeys + 1);
+			tooltip += markup;
+			g_free(markup);
+
+			gtk_widget_set_tooltip_markup(widget, tooltip.c_str());
+			gtk_widget_show(widget);
+		}
+	}
+
+	static void updateKeyAloneActiveWarning(GtkWidget* widget)
+	{
+		gtk_widget_set_visible(widget, Settings::keyAloneActive && !Hotkeys::mKeyAloneGrabbed);
+	}
 
 	void popup()
 	{
@@ -249,67 +289,52 @@ namespace SettingsDialog
 
 		// =====================================================================
 
-#ifdef ENABLE_X11
-		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-		{
-			GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
-			GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
-			g_signal_connect(keyComboActive, "toggled",
-				G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
-					Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
-					updateKeyComboActiveWarning(tooltip);
-				}),
-				keyComboActiveWarning);
+		GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
+		GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
+		g_signal_connect(keyComboActive, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
+				Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
+				updateKeyComboActiveWarning(tooltip);
+			}),
+			keyComboActiveWarning);
 
-			GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);
-			g_signal_connect(keyAloneActive, "toggled",
-				G_CALLBACK(+[](GtkToggleButton* _keyAloneActive) {
-					Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
+		GObject* keyAloneActiveWarning = gtk_builder_get_object(builder, "c_keyAloneActiveWarning");
+		GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);
+		g_signal_connect(keyAloneActive, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _keyAloneActive, GtkWidget* tooltip) {
+				Settings::keyAloneActive.set(gtk_toggle_button_get_active(_keyAloneActive));
+				updateKeyAloneActiveWarning(tooltip);
+			}),
+			keyAloneActiveWarning);
+
+		updateKeyComboActiveWarning(GTK_WIDGET(keyComboActiveWarning));
+		updateKeyAloneActiveWarning(GTK_WIDGET(keyAloneActiveWarning));
+
+		GObject* shortcutsButton = gtk_builder_get_object(builder, "c_shortcutsButton");
+		gchar* path = g_find_program_in_path("xfce4-keyboard-settings");
+		if (path != nullptr)
+		{
+			g_signal_connect(shortcutsButton, "clicked",
+				G_CALLBACK(+[](GtkButton* _shortcutsButton) {
+					std::string command = "xfce4-keyboard-settings";
+					if (Hotkeys::mAddShortcutUIAvailable)
+						command += " --shortcuts";
+
+					GError* error = nullptr;
+					if (!g_spawn_command_line_async(command.c_str(), &error))
+					{
+						g_warning("Failed to launch %s: %s", command.c_str(), error->message);
+						g_error_free(error);
+					}
 				}),
 				nullptr);
-
-			if (!Hotkeys::mXIExtAvailable)
-			{
-				gtk_widget_set_sensitive(GTK_WIDGET(keyAloneActive), false);
-				gtk_widget_show(GTK_WIDGET(gtk_builder_get_object(builder, "c_keyAloneActiveWarning")));
-			}
-
-			updateKeyComboActiveWarning(GTK_WIDGET(keyComboActiveWarning));
+			g_free(path);
 		}
 		else
-#endif
 		{
-			gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "hotkeysFrame")));
+			gtk_widget_hide(GTK_WIDGET(shortcutsButton));
 		}
 	}
-
-#ifdef ENABLE_X11
-	void updateKeyComboActiveWarning(GtkWidget* widget)
-	{
-		if (!Settings::keyComboActive || Hotkeys::mGrabbedKeys == Hotkeys::NbHotkeys)
-			gtk_widget_hide(widget);
-		else
-		{
-			std::string tooltip = "";
-			gchar* markup;
-
-			if (Hotkeys::mGrabbedKeys > 0)
-			{
-				markup = g_strdup_printf(_("<b>Only the first %u hotkeys(s) are enabled.</b>\n"), Hotkeys::mGrabbedKeys);
-				tooltip += markup;
-				g_free(markup);
-			}
-
-			markup = g_strdup_printf(_("The &lt;SUPER&gt;+%u combination seems already in use by another process.\nCheck your Xfce settings."), Hotkeys::mGrabbedKeys + 1);
-			tooltip += markup;
-			g_free(markup);
-
-			gtk_widget_set_tooltip_markup(widget, tooltip.c_str());
-			gtk_image_set_from_icon_name(GTK_IMAGE(widget), (Hotkeys::mGrabbedKeys == 0) ? "dialog-error" : "dialog-warning", GTK_ICON_SIZE_SMALL_TOOLBAR);
-			gtk_widget_show(widget);
-		}
-	}
-#endif
 } // namespace SettingsDialog

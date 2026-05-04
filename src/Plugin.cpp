@@ -19,11 +19,9 @@
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
 #endif
-#include "Plugin.hpp"
 #include "Helpers.hpp"
-#ifdef ENABLE_X11
 #include "Hotkeys.hpp"
-#endif
+#include "Plugin.hpp"
 
 namespace Plugin
 {
@@ -44,10 +42,7 @@ namespace Plugin
 		Xfw::init();
 		Dock::init();
 		Theme::init();
-#ifdef ENABLE_X11
-		if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
-			Hotkeys::init();
-#endif
+		Hotkeys::init();
 
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
@@ -93,7 +88,14 @@ namespace Plugin
 				Xfw::finalize();
 				Dock::mGroups.clear();
 				AppInfos::finalize();
+				Hotkeys::finalize();
 				Settings::finalize();
+			}),
+			nullptr);
+
+		g_signal_connect(G_OBJECT(mXfPlugin), "removed",
+			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
+				Hotkeys::resetShortcuts();
 			}),
 			nullptr);
 	}
@@ -122,6 +124,13 @@ namespace Plugin
 			SettingsDialog::popup();
 		else if (g_strcmp0(name, "about") == 0)
 			aboutDialog();
+		else if (g_strcmp0(name, "switch-to-last-window") == 0 && Settings::keyAloneActive)
+			Xfw::switchToLastWindow();
+		else if (g_strcmp0(name, "activate-group") == 0)
+		{
+			if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
+				Dock::activateGroup(g_value_get_int64(value));
+		}
 	}
 
 } // namespace Plugin
