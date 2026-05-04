@@ -19,214 +19,170 @@
 #include "Hotkeys.hpp"
 #include "Settings.hpp"
 
-#include <X11/XKBlib.h>
-#include <X11/extensions/XInput2.h>
-#include <gdk/gdkx.h>
-
-#include <iostream>
-#include <string>
+#include <xfconf/xfconf.h>
 
 namespace Hotkeys
 {
-	int mGrabbedKeys;
-	bool mHotkeysHandling;
+	bool mKeyAloneGrabbed = false;
+	int mGrabbedKeys = 0;
 
-	bool mXIExtAvailable;
-	int mXIOpcode;
-	pthread_t mThread;
-
-	uint mSuperLKeycode, mSuperRKeycode, m1Keycode;
+	XfconfChannel* mChannel = nullptr;
+	auto mStrEqual = [](gpointer key, gpointer _value, gpointer data) {
+		GValue* value = (GValue*)_value;
+		if (G_VALUE_HOLDS_STRING(value))
+			return (gboolean)g_str_equal(g_value_get_string(value), (gchar*)data);
+		return (gboolean) false;
+	};
 
 	// =========================================================================
 
-	static GdkFilterReturn hotkeysHandler(GdkXEvent* gdk_xevent, GdkEvent* event, gpointer data)
+	static void addKeyComboShortcuts()
 	{
-		XEvent* xevent = (XEvent*)gdk_xevent;
-
-		switch (xevent->type)
+		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+		mGrabbedKeys = mNbHotkeys;
+		for (gint n = 0; n < mNbHotkeys; n++)
 		{
-		case KeyPress:
-			if (xevent->xkey.keycode >= m1Keycode && xevent->xkey.keycode <= m1Keycode + NbHotkeys)
-				Dock::activateGroup(xevent->xkey.keycode - m1Keycode, xevent->xkey.time);
-			break;
-		}
-		return GDK_FILTER_CONTINUE;
-	}
+			gchar* command = g_strdup_printf(
+				"xfce4-panel --plugin-event=docklike-%d:activate-group:int:%d",
+				xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+				n);
+			if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
+			{
+				GdkKeymap* keymap = gdk_keymap_get_for_display(gdk_display_get_default());
+				GdkKeymapKey* keys;
+				gint n_keys = 0;
+				gchar* shortcut = nullptr;
 
-	static void startStopHotkeysHandler(bool start)
-	{
-		if (start && !mHotkeysHandling)
-		{
-			gdk_window_add_filter(nullptr, hotkeysHandler, nullptr);
-			mHotkeysHandling = true;
-		}
-		else if (!start && mHotkeysHandling)
-		{
-			gdk_window_remove_filter(nullptr, hotkeysHandler, nullptr);
-			mHotkeysHandling = false;
-		}
-	}
-
-	static void grabUngrabHotkeys(bool grab, unsigned int startKey = 0)
-	{
-		GdkWindow* rootwin = gdk_get_default_root_window();
-		GdkDisplay* display = gdk_window_get_display(rootwin);
-
-		if (grab)
-			mGrabbedKeys = NbHotkeys;
-		else
-			mGrabbedKeys = startKey;
-
-		for (uint k = m1Keycode + startKey; k < m1Keycode + NbHotkeys; k++)
-		{
-			for (int ignoredModifiers : {0, (int)GDK_MOD2_MASK, (int)GDK_LOCK_MASK, (int)(GDK_MOD2_MASK | GDK_LOCK_MASK)})
-				if (grab)
+				gdk_keymap_get_entries_for_keyval(keymap, GDK_KEY_1 + n, &keys, &n_keys);
+				if (n_keys > 0)
 				{
-					gdk_x11_display_error_trap_push(display);
-
-					XGrabKey(
-						GDK_WINDOW_XDISPLAY(rootwin),
-						k, GDK_MOD4_MASK | ignoredModifiers,
-						GDK_WINDOW_XID(rootwin),
-						False,
-						GrabModeAsync,
-						GrabModeAsync);
-
-					if (gdk_x11_display_error_trap_pop(display))
+					guint* keyvals = nullptr;
+					guint keycode = keys[0].keycode;
+					g_free(keys);
+					keys = nullptr;
+					gdk_keymap_get_entries_for_keycode(keymap, keycode, &keys, &keyvals, &n_keys);
+					gint m = 0;
+					for (m = 0; m < n_keys; m++)
 					{
-						grabUngrabHotkeys(false, k - m1Keycode);
-						return;
+						if (keys[m].group == 0 && keys[m].level == 0)
+						{
+							shortcut = gtk_accelerator_name(keyvals[m], GDK_SUPER_MASK);
+							break;
+						}
 					}
+					if (m == n_keys)
+					{
+						g_debug("Failed to map keycode %d to keyval", keycode);
+					}
+					g_free(keys);
+					g_free(keyvals);
 				}
 				else
 				{
-					XUngrabKey(
-						GDK_WINDOW_XDISPLAY(rootwin),
-						k, GDK_MOD4_MASK | ignoredModifiers,
-						GDK_WINDOW_XID(rootwin));
+					g_debug("Failed to map keyval %d to keycode", GDK_KEY_1 + n);
 				}
-		}
-	}
 
-	/* =========================================================================
-	 *
-	 * The method used here to listen keyboard events globaly is taken from :
-	 * github.com/anko/xkbcat
-	 * It create a direct connection to X11 keyboard events without any grabbing,
-	 * allowing us to determine the state (consumed or not) of the modifier key when released.
-	 */
-
-	static gboolean threadSafeSwitch(gpointer data)
-	{
-		Xfw::switchToLastWindow(g_get_monotonic_time() / 1000);
-		return false;
-	}
-
-	static void* threadedXIKeyListenner(void* data)
-	{
-		pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, nullptr);
-		pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);
-
-		Display* display = XOpenDisplay(nullptr);
-
-		// Register events
-		Window root = DefaultRootWindow(display);
-		XIEventMask m;
-		m.deviceid = XIAllMasterDevices;
-		m.mask_len = XIMaskLen(XI_LASTEVENT);
-		m.mask = g_new0(unsigned char, m.mask_len);
-		XISetMask(m.mask, XI_RawKeyPress);
-		XISetMask(m.mask, XI_RawKeyRelease);
-		XISelectEvents(display, root, &m, 1);
-		XSync(display, false);
-		free(m.mask);
-
-		bool toTrigger = false;
-		while (true)
-		{
-			XEvent event;
-			XGenericEventCookie* cookie = (XGenericEventCookie*)&event.xcookie;
-			XNextEvent(display, &event);
-			if (XGetEventData(display, cookie) && cookie->type == GenericEvent && cookie->extension == mXIOpcode)
-			{
-				uint keycode = ((XIRawEvent*)cookie->data)->detail;
-				if (cookie->evtype == XI_RawKeyRelease)
-					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
-						if (toTrigger)
-							gdk_threads_add_idle(threadSafeSwitch, nullptr);
-				if (cookie->evtype == XI_RawKeyPress)
+				if (shortcut == nullptr)
 				{
-					if (keycode == mSuperLKeycode || keycode == mSuperRKeycode)
-						toTrigger = true;
-					else
-						toTrigger = false;
+					g_debug("Falling back to direct mapping of GDK_KEY_%d", n + 1);
+					shortcut = gtk_accelerator_name(GDK_KEY_1 + n, GDK_SUPER_MASK);
+				}
+
+				std::string property = "/commands/custom/";
+				property += shortcut;
+				g_free(shortcut);
+				if (xfconf_channel_has_property(mChannel, property.c_str()))
+				{
+					mGrabbedKeys = n;
+					break;
+				}
+				else
+				{
+					xfconf_channel_set_string(mChannel, property.c_str(), command);
 				}
 			}
+			g_free(command);
 		}
+		g_hash_table_destroy(commands);
 	}
 
-	static void startStopXIKeyListenner(bool start)
+	static void addKeyAloneShortcut()
 	{
-		if (mXIExtAvailable && start)
+		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+		gchar* command = g_strdup_printf(
+			"xfce4-panel --plugin-event=docklike-%d:switch-to-last-window",
+			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin));
+		mKeyAloneGrabbed = true;
+		if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
 		{
-			if (!mThread)
-				pthread_create(&mThread, nullptr, threadedXIKeyListenner, nullptr);
-			else if (mThread)
-			{
-				pthread_cancel(mThread); // also close the XDisplay in the thread
-				void* ret = nullptr;
-				pthread_join(mThread, &ret);
-				mThread = 0;
-			}
+			gchar* shortcut = gtk_accelerator_name(GDK_KEY_Super_L, (GdkModifierType)0);
+			gchar* property = g_strdup_printf("/commands/custom/%s", shortcut);
+			if (xfconf_channel_has_property(mChannel, property))
+				mKeyAloneGrabbed = false;
+			else
+				xfconf_channel_set_string(mChannel, property, command);
+			g_free(property);
+			g_free(shortcut);
 		}
-	}
-
-	static void checkXIExtension(Display* display)
-	{
-		mXIExtAvailable = false;
-
-		// Test for XInput 2 extension
-		int queryEvent, queryError;
-		if (!XQueryExtension(display, "XInputExtension", &mXIOpcode, &queryEvent, &queryError))
-			return;
-
-		// Request XInput 2.0, guarding against changes in future versions
-		int major = 2, minor = 0;
-		int queryResult = XIQueryVersion(display, &major, &minor);
-		if (queryResult == BadRequest)
-			return;
-		else if (queryResult != Success)
-			return;
-
-		mXIExtAvailable = true;
-		mThread = 0;
+		g_free(command);
+		g_hash_table_destroy(commands);
 	}
 
 	// =========================================================================
 
-	void updateSettings()
-	{
-		startStopXIKeyListenner(Settings::keyAloneActive);
-
-		grabUngrabHotkeys(Settings::keyComboActive);
-		startStopHotkeysHandler(mGrabbedKeys > 0);
-	}
-
 	void init()
 	{
-		Display* display = XOpenDisplay(nullptr);
+		GError* error = nullptr;
+		if (xfconf_init(&error))
+		{
+			mChannel = xfconf_channel_get("xfce4-keyboard-shortcuts");
+		}
+		else
+		{
+			g_critical("Failed to initialize Xfconf: %s", error->message);
+			g_error_free(error);
+		}
+	}
 
-		checkXIExtension(display);
+	void finalize()
+	{
+		if (mChannel != nullptr)
+			xfconf_shutdown();
+	}
 
-		mSuperLKeycode = XKeysymToKeycode(display, XK_Super_L);
-		mSuperRKeycode = XKeysymToKeycode(display, XK_Super_R);
-		m1Keycode = XKeysymToKeycode(display, XK_1);
+	void updateSettings()
+	{
+		if (mChannel == nullptr)
+			return;
 
-		XCloseDisplay(display);
+		if (Settings::keyAloneActive)
+			addKeyAloneShortcut();
+		if (Settings::keyComboActive)
+			addKeyComboShortcuts();
+	}
 
-		mGrabbedKeys = 0;
-		mHotkeysHandling = false;
+	void resetShortcuts()
+	{
+		if (mChannel == nullptr)
+			return;
 
-		updateSettings();
+		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+		gchar* prefix = g_strdup_printf(
+			"xfce4-panel --plugin-event=docklike-%d:",
+			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin));
+		gchar* property;
+		GValue* command;
+		GHashTableIter iter;
+		g_hash_table_iter_init(&iter, commands);
+		while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&command))
+		{
+			if (G_VALUE_HOLDS_STRING(command))
+			{
+				if (g_str_has_prefix(g_value_get_string(command), prefix))
+					xfconf_channel_reset_property(mChannel, property, true);
+			}
+		}
+		g_free(prefix);
+		g_hash_table_destroy(commands);
 	}
 } // namespace Hotkeys

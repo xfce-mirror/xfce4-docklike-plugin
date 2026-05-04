@@ -236,13 +236,13 @@ namespace Xfw
 		}
 	}
 
-	void switchToLastWindow(guint32 timestamp)
+	void switchToLastWindow()
 	{
 		if (mPreviousActiveWindow != nullptr)
 		{
 			std::shared_ptr<GroupWindow> prevWindow = mGroupWindows.get(mPreviousActiveWindow);
 			if (prevWindow)
-				prevWindow->activate(timestamp);
+				prevWindow->activate(GDK_CURRENT_TIME);
 		}
 	}
 } // namespace Xfw

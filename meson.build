@@ -38,6 +38,7 @@ libxfce4ui = dependency('libxfce4ui-2', version: dependency_versions['xfce4'])
 libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['xfce4'])
 libxfce4windowing = dependency('libxfce4windowing-0', version: dependency_versions['libxfce4windowing'])
 libxfce4windowingui = dependency('libxfce4windowingui-0', version: dependency_versions['libxfce4windowing'])
+xfconf = dependency('libxfconf-0', version: dependency_versions['xfce4'])
 
 # Feature: 'x11'
 x11_deps = []
