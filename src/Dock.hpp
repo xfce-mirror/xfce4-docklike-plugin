@@ -44,7 +44,7 @@ namespace Dock
 	void savePinned();
 	void drawGroups();
 
-	void activateGroup(int nb, guint32 timestamp);
+	void activateGroup(int nb);
 
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);

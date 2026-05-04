@@ -13,6 +13,8 @@ plugin_sources = [
   'GroupWindow.hpp',
   'Helpers.cpp',
   'Helpers.hpp',
+  'Hotkeys.cpp',
+  'Hotkeys.hpp',
   'Plugin.cpp',
   'Plugin.hpp',
   'register.c',
@@ -28,13 +30,6 @@ plugin_sources = [
   'Xfw.hpp',
   xfce_revision_h,
 ]
-
-if enable_x11
-  plugin_sources += [
-    'Hotkeys.cpp',
-    'Hotkeys.hpp',
-  ]
-endif
 
 plugin_sources += gnome.compile_resources(
   'docklike-plugin-resources',
@@ -63,6 +58,7 @@ plugin_lib = shared_module(
     libxfce4util,
     libxfce4windowing,
     libxfce4windowingui,
+    xfconf,
     wayland_deps,
     x11_deps,
   ],

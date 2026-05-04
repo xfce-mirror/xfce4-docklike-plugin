@@ -27,6 +27,11 @@
     <property name="can_focus">False</property>
     <property name="icon_name">help-browser</property>
   </object>
+  <object class="GtkImage" id="i_shortcuts">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">input-keyboard</property>
+  </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="can_focus">False</property>
     <property name="title">Docklike Taskbar</property>
@@ -577,7 +582,7 @@
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
-                        <property name="stock">dialog-warning</property>
+                        <property name="icon-name">dialog-warning</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -602,15 +607,30 @@
                     <child>
                       <object class="GtkImage" id="c_keyAloneActiveWarning">
                         <property name="can_focus">False</property>
-                        <property name="tooltip_markup" translatable="yes">&lt;b&gt;This feature is disabled.&lt;/b&gt;
-It requires X11 XInput2.0 extension which is is not provided by your system.</property>
+                        <property name="tooltip-markup" translatable="yes">The left &amp;lt;SUPER&amp;gt; key seems already mapped to another command.&#xA;Check your Xfce keyboard settings.</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
-                        <property name="stock">dialog-warning</property>
+                        <property name="icon-name">dialog-warning</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="c_shortcutsButton">
+                        <property name="label" translatable="yes">Manage shortcuts...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="receives_default">False</property>
+                        <property name="image">i_shortcuts</property>
+                        <property name="use_underline">True</property>
+                        <property name="hexpand">False</property>
+                        <property name="halign">start</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
                       </packing>
                     </child>
                   </object>

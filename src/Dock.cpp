@@ -123,7 +123,7 @@ namespace Dock
 		gtk_widget_queue_draw(mBox);
 	}
 
-	void activateGroup(int nb, guint32 timestamp)
+	void activateGroup(int nb)
 	{
 		int i = 0;
 		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
@@ -139,9 +139,9 @@ namespace Dock
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
 					if (group->mActive)
-						group->scrollWindows(timestamp, GDK_SCROLL_DOWN);
+						group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
 					else if (group->mWindowsCount > 0)
-						group->activate(timestamp);
+						group->activate(GDK_CURRENT_TIME);
 					else
 						group->mAppInfo->launch();
 
