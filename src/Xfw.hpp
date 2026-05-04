@@ -44,7 +44,7 @@ namespace Xfw
 	void close(GroupWindow* groupWindow, guint32 timestamp);
 	void activate(GroupWindow* groupWindow, guint32 timestamp);
 
-	void switchToLastWindow(guint32 timestamp);
+	void switchToLastWindow();
 
 	void setActiveWindow(XfwWindow* previousActiveWindow = nullptr);
 	void setVisibleGroups();
