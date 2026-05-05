@@ -130,6 +130,8 @@ namespace Plugin
 		{
 			if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
 				Dock::activateGroup(g_value_get_int64(value));
+			else if (G_VALUE_HOLDS_STRING(value))
+				Dock::activateGroup(g_value_get_string(value));
 		}
 	}
 
