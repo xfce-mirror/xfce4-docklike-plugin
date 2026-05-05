@@ -45,6 +45,7 @@ namespace Dock
 	void drawGroups();
 
 	void activateGroup(int nb);
+	void activateGroup(std::string appId);
 
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);

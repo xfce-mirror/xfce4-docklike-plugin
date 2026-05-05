@@ -123,6 +123,16 @@ namespace Dock
 		gtk_widget_queue_draw(mBox);
 	}
 
+	static void activateGroup(Group* group)
+	{
+		if (group->mActive)
+			group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
+		else if (group->mWindowsCount > 0)
+			group->activate(GDK_CURRENT_TIME);
+		else
+			group->mAppInfo->launch();
+	}
+
 	void activateGroup(int nb)
 	{
 		int i = 0;
@@ -137,14 +147,7 @@ namespace Dock
 				if (i == nb)
 				{
 					Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
-
-					if (group->mActive)
-						group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
-					else if (group->mWindowsCount > 0)
-						group->activate(GDK_CURRENT_TIME);
-					else
-						group->mAppInfo->launch();
-
+					activateGroup(group);
 					return;
 				}
 				else
@@ -153,6 +156,16 @@ namespace Dock
 		}
 
 		g_list_free(children);
+	}
+
+	void activateGroup(std::string appId)
+	{
+		std::shared_ptr<Group> group =
+			mGroups.findIf([appId](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> bool {
+				return g.first->mId == appId;
+			});
+		if (group)
+			activateGroup(group.get());
 	}
 
 	void onPanelResize(int size)
