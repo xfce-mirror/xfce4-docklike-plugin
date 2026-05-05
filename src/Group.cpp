@@ -17,6 +17,7 @@
  */
 
 #include "Group.hpp"
+#include "Hotkeys.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
@@ -868,6 +869,45 @@ GtkWidget* Group::buildContextMenu()
 				Dock::savePinned();
 			}),
 			this);
+
+		if (Hotkeys::mAddShortcutUIAvailable)
+		{
+			std::string shortcut = Hotkeys::getShortcut(mAppInfo->mId);
+			gchar* command = g_strdup("xfce4-keyboard-settings --shortcuts");
+			if (shortcut.empty())
+			{
+				item = gtk_menu_item_new_with_label(_("Add activation shortcut..."));
+				gchar* temp = g_strdup_printf(
+					"%s 'xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s'",
+					command,
+					xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+					mAppInfo->mId.c_str());
+				g_free(command);
+				command = temp;
+			}
+			else
+			{
+				item = gtk_menu_item_new_with_label(_("Manage activation shortcut..."));
+				GtkWidget* label = gtk_bin_get_child(GTK_BIN(item));
+				guint key;
+				GdkModifierType mods;
+				gtk_accelerator_parse(shortcut.c_str(), &key, &mods);
+				gtk_accel_label_set_accel(GTK_ACCEL_LABEL(label), key, mods);
+			}
+			g_object_set_data_full(G_OBJECT(item), "command", command, g_free);
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+			g_signal_connect(G_OBJECT(item), "activate",
+				G_CALLBACK(+[](GtkMenuItem* _item) {
+					GError* error = nullptr;
+					const gchar* _command = (const gchar*)g_object_get_data(G_OBJECT(_item), "command");
+					if (!g_spawn_command_line_async(_command, &error))
+					{
+						g_warning("Failed to launch %s: %s", _command, error->message);
+						g_error_free(error);
+					}
+				}),
+				nullptr);
+		}
 
 		item = gtk_menu_item_new_with_label(_("Edit Launcher..."));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
