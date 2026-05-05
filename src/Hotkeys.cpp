@@ -203,4 +203,33 @@ namespace Hotkeys
 		g_free(prefix);
 		g_hash_table_destroy(commands);
 	}
+
+	std::string getShortcut(std::string appId)
+	{
+		std::string shortcut = std::string();
+		if (mChannel == nullptr)
+			return shortcut;
+
+		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+		gchar* command = g_strdup_printf(
+			"xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s",
+			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+			appId.c_str());
+		const gchar* property;
+		GValue* value;
+		GHashTableIter iter;
+		g_hash_table_iter_init(&iter, commands);
+		while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&value))
+		{
+			if (G_VALUE_HOLDS_STRING(value) && g_str_equal(g_value_get_string(value), command))
+			{
+				shortcut = g_strrstr(property, "/") + 1;
+				break;
+			}
+		}
+		g_free(command);
+		g_hash_table_destroy(commands);
+
+		return shortcut;
+	}
 } // namespace Hotkeys

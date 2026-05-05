@@ -19,12 +19,15 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include <string>
+
 namespace Hotkeys
 {
 	void init();
 	void finalize();
 	void updateSettings();
 	void resetShortcuts();
+	std::string getShortcut(std::string appId);
 
 	extern bool mKeyAloneGrabbed;
 	extern int mGrabbedKeys;
