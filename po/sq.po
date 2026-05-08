@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-03-14 00:59+0100\n"
+"POT-Creation-Date: 2026-05-08 12:57+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2026\n"
 "Language-Team: Albanian (https://app.transifex.com/xfce/teams/16840/sq/)\n"
@@ -22,67 +22,83 @@ msgstr ""
 "Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/AppInfos.cpp:340
+#: src/AppInfos.cpp:354
 msgid "Select Launcher"
 msgstr "Përzgjidhni Nisës"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Cancel"
 msgstr "_Anuloje"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Open"
 msgstr "_Hape"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pinned to Dock"
 msgstr "U fiksua te Paneli"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pin to Dock"
 msgstr "Fiksoje te Paneli"
 
-#: src/Group.cpp:872
+#: src/Group.cpp:879
+msgid "Add activation shortcut..."
+msgstr "Shtoni shkurtore aktivizimi…"
+
+#: src/Group.cpp:890
+msgid "Manage activation shortcut..."
+msgstr "Administroni shkurtore aktivizimi…"
+
+#: src/Group.cpp:912
 msgid "Edit Launcher..."
 msgstr "Përpunoni Nisës…"
 
-#: src/Group.cpp:899
+#: src/Group.cpp:939
 msgid "Close All"
 msgstr "Mbylli Krejt"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: src/Group.cpp:953
 msgid "Remove"
 msgstr "Hiqe"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: src/Group.cpp:966
 msgid "Select Launcher..."
 msgstr "Përzgjidhni Nisës…"
 
-#: src/Group.cpp:935
+#: src/Group.cpp:975
 msgid "Create Launcher..."
 msgstr "Krijoni Nisës…"
 
-#: src/Plugin.cpp:113
+#: src/Plugin.cpp:117
 msgid "translator-credits"
 msgstr "Besnik Bleta"
 
-#: src/SettingsDialog.cpp:300
+#: src/SettingsDialog.cpp:39
 #, c-format
-msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>Janë aktivizuar vetëm %u tastet e parë shkurtore.</b>\n"
+msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
+msgstr "<b>Aktivizohen vetëm %u shkurtoret e para.</b>\n"
 
-#: src/SettingsDialog.cpp:305
+#: src/SettingsDialog.cpp:46
+msgid "<b>Only the first hotkey is enabled.</b>\n"
+msgstr "<b>Aktivizohet vetëm shkurtorja e parë.</b>\n"
+
+#: src/SettingsDialog.cpp:50
+msgid "<b>No hotkeys enabled.</b>\n"
+msgstr "<b>S’u aktivizuan shkurtore.</b>\n"
+
+#: src/SettingsDialog.cpp:54
 #, c-format
 msgid ""
-"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
-"Check your Xfce settings."
+"The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"Ndërthurja &lt;SUPER&gt;+%u duket tashmë e përdorur nga një tjetër proces.\n"
-"Shihni rregullimet tuaja për Xfce-në."
+"Ndërthurja &lt;SUPER&gt;+%u duket e përshoqëruar tashmë me një tjetër urdhër.\n"
+"Kontrolloni rregullimet tuaja për tastierë në Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -92,154 +108,158 @@ msgstr ""
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Një shtyllë moderne, minimaliste punësh për Xfce-në"
 
-#: src/_dialogs.ui:49
+#: src/_dialogs.ui:54
 msgid "_Help"
 msgstr "_Ndihmë"
 
-#: src/_dialogs.ui:65
+#: src/_dialogs.ui:70
 msgid "_Close"
 msgstr "_Mbylle"
 
-#: src/_dialogs.ui:110
+#: src/_dialogs.ui:115
 msgid "Don't show the window list for a single window"
 msgstr "Mos shfaq listën e dritareve për një dritare të vetme"
 
-#: src/_dialogs.ui:125
+#: src/_dialogs.ui:130
 msgid "Only show applications on the current workspace"
 msgstr "Shfaq vetëm aplikacione në hapësirën e tanishme të punës"
 
-#: src/_dialogs.ui:140
+#: src/_dialogs.ui:145
 msgid "Only show applications on the current display"
 msgstr "Shfaq vetëm aplikacione në ekranin e tanishëm"
 
-#: src/_dialogs.ui:155
+#: src/_dialogs.ui:160
 msgid "Show preview thumbnails for open windows"
 msgstr "Shfaq miniatura paraparjesh për dritare të hapura"
 
-#: src/_dialogs.ui:171
+#: src/_dialogs.ui:176
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Shfaq numrin e dritareve të hapura (nëse ka më tepër se 2)"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:201
 msgid "Middle mouse button:"
 msgstr "Butoni i mesit i miut:"
 
-#: src/_dialogs.ui:209
+#: src/_dialogs.ui:214
 msgid "Close all"
 msgstr "Mbylli krejt"
 
-#: src/_dialogs.ui:210
+#: src/_dialogs.ui:215
 msgid "Launch new instance"
 msgstr "Nis një instancë të re"
 
-#: src/_dialogs.ui:211
+#: src/_dialogs.ui:216
 msgid "Do Nothing"
 msgstr "Mos Bëj Gjë"
 
-#: src/_dialogs.ui:233
+#: src/_dialogs.ui:238
 msgid "Behavior"
 msgstr "Sjellje"
 
-#: src/_dialogs.ui:266
+#: src/_dialogs.ui:271
 msgid "Active indicator style:"
 msgstr "Stil treguesi aktivesh:"
 
-#: src/_dialogs.ui:279 src/_dialogs.ui:310
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "Bars"
 msgstr "Shtylla"
 
-#: src/_dialogs.ui:280 src/_dialogs.ui:311
+#: src/_dialogs.ui:285 src/_dialogs.ui:316
 msgid "Dots"
 msgstr "Pika"
 
-#: src/_dialogs.ui:281 src/_dialogs.ui:312
+#: src/_dialogs.ui:286 src/_dialogs.ui:317
 msgid "Rectangles"
 msgstr "Drejtkëndësha"
 
-#: src/_dialogs.ui:282 src/_dialogs.ui:313
+#: src/_dialogs.ui:287 src/_dialogs.ui:318
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:283 src/_dialogs.ui:314
+#: src/_dialogs.ui:288 src/_dialogs.ui:319
 msgid "Circles"
 msgstr "Rrathë"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:289 src/_dialogs.ui:320
 msgid "None"
 msgstr "Asnjë"
 
-#: src/_dialogs.ui:297
+#: src/_dialogs.ui:302
 msgid "Inactive indicator style:"
 msgstr "Stil treguesi joaktivesh:"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:333
 msgid "Indicator orientation:"
 msgstr "Orientim treguesi:"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:345
 msgid "Automatic"
 msgstr "Automatik"
 
-#: src/_dialogs.ui:341
+#: src/_dialogs.ui:346
 msgid "Bottom"
 msgstr "Poshtë"
 
-#: src/_dialogs.ui:342
+#: src/_dialogs.ui:347
 msgid "Right"
 msgstr "Djathtas"
 
-#: src/_dialogs.ui:343
+#: src/_dialogs.ui:348
 msgid "Top"
 msgstr "Sipër"
 
-#: src/_dialogs.ui:344
+#: src/_dialogs.ui:349
 msgid "Left"
 msgstr "Majtas"
 
-#: src/_dialogs.ui:354
+#: src/_dialogs.ui:359
 msgid "Get indicator color from theme"
 msgstr "Ngjyrën për treguesin merre nga tema"
 
-#: src/_dialogs.ui:380
+#: src/_dialogs.ui:385
 msgid "Active indicator:"
 msgstr "Tregues aktivesh:"
 
-#: src/_dialogs.ui:404
+#: src/_dialogs.ui:409
 msgid "Inactive indicator:"
 msgstr "Tregues joaktivesh:"
 
-#: src/_dialogs.ui:431
+#: src/_dialogs.ui:436
 msgid "Force icon size:"
 msgstr "Detyro madhësi ikonash:"
 
-#: src/_dialogs.ui:475
+#: src/_dialogs.ui:480
 msgid "Preview width:"
 msgstr "Gjerësi paraparjesh:"
 
-#: src/_dialogs.ui:504
+#: src/_dialogs.ui:509
 msgid "Preview height:"
 msgstr "Lartësi paraparjesh:"
 
-#: src/_dialogs.ui:532
+#: src/_dialogs.ui:537
 msgid "Appearance"
 msgstr "Dukje"
 
-#: src/_dialogs.ui:562
+#: src/_dialogs.ui:567
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Kalo nga një aplikacion në tjetër me <SUPER>+[1, 2, …]"
 
-#: src/_dialogs.ui:589
+#: src/_dialogs.ui:594
 msgid "Switch to the last window with <SUPER>"
 msgstr "Kalo te dritarja e fundit me <SUPER>"
 
-#: src/_dialogs.ui:605
+#: src/_dialogs.ui:610
 msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
+"The left &lt;SUPER&gt; key seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"<b>Kjo veçori është çaktivizuar.</b>\n"
-"Lyp zgjerimin X11 XInput2.0, i cili nuk ofrohet nga sistemi juaj."
+"Tasti &lt;SUPER&gt; i majtë duket tashmë i përshoqëruar me një tjetër urdhër.\n"
+"Kontrolloni rregullimet tuaja për tastierën në Xfce."
 
-#: src/_dialogs.ui:623
+#: src/_dialogs.ui:622
+msgid "Manage shortcuts..."
+msgstr "Administroni shkurtore…"
+
+#: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
 msgstr "Taste shkurtoresh"
