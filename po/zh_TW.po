@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-03-14 00:59+0100\n"
+"POT-Creation-Date: 2026-05-08 12:57+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2026\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/xfce/teams/16840/zh_TW/)\n"
@@ -26,67 +26,81 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:340
+#: src/AppInfos.cpp:354
 msgid "Select Launcher"
 msgstr "選取啟動器"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pinned to Dock"
 msgstr "已釘選至 Dock"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pin to Dock"
 msgstr "釘選至 Dock"
 
-#: src/Group.cpp:872
+#: src/Group.cpp:879
+msgid "Add activation shortcut..."
+msgstr ""
+
+#: src/Group.cpp:890
+msgid "Manage activation shortcut..."
+msgstr ""
+
+#: src/Group.cpp:912
 msgid "Edit Launcher..."
 msgstr "編輯啟動器……"
 
-#: src/Group.cpp:899
+#: src/Group.cpp:939
 msgid "Close All"
 msgstr "關閉全部"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: src/Group.cpp:953
 msgid "Remove"
 msgstr "移除"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: src/Group.cpp:966
 msgid "Select Launcher..."
 msgstr "選取啟動器……"
 
-#: src/Group.cpp:935
+#: src/Group.cpp:975
 msgid "Create Launcher..."
 msgstr "建立啟動器……"
 
-#: src/Plugin.cpp:113
+#: src/Plugin.cpp:117
 msgid "translator-credits"
 msgstr "Walter Cheuk <wwycheuk@gmail.com>, 2014."
 
-#: src/SettingsDialog.cpp:300
+#: src/SettingsDialog.cpp:39
 #, c-format
-msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>僅啟用第一個 %u 快捷鍵。</b>\n"
+msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
+msgstr ""
 
-#: src/SettingsDialog.cpp:305
+#: src/SettingsDialog.cpp:46
+msgid "<b>Only the first hotkey is enabled.</b>\n"
+msgstr ""
+
+#: src/SettingsDialog.cpp:50
+msgid "<b>No hotkeys enabled.</b>\n"
+msgstr ""
+
+#: src/SettingsDialog.cpp:54
 #, c-format
 msgid ""
-"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
-"Check your Xfce settings."
+"The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"&lt;SUPER&gt;+%u 組合鍵似乎已被其他處理程序使用。\n"
-"請檢查您的 Xfce 設定。"
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -96,154 +110,156 @@ msgstr "類 Dock 式工作列"
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Xfce 的現代簡約工作列"
 
-#: src/_dialogs.ui:49
+#: src/_dialogs.ui:54
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: src/_dialogs.ui:65
+#: src/_dialogs.ui:70
 msgid "_Close"
 msgstr "關閉(_C)"
 
-#: src/_dialogs.ui:110
+#: src/_dialogs.ui:115
 msgid "Don't show the window list for a single window"
 msgstr "不要在僅有一個視窗時顯示視窗清單"
 
-#: src/_dialogs.ui:125
+#: src/_dialogs.ui:130
 msgid "Only show applications on the current workspace"
 msgstr "僅顯示目前工作空間中的應用程式"
 
-#: src/_dialogs.ui:140
+#: src/_dialogs.ui:145
 msgid "Only show applications on the current display"
 msgstr "僅顯示目前螢幕中的應用程式"
 
-#: src/_dialogs.ui:155
+#: src/_dialogs.ui:160
 msgid "Show preview thumbnails for open windows"
 msgstr "顯示開啟視窗的預覽縮圖"
 
-#: src/_dialogs.ui:171
+#: src/_dialogs.ui:176
 msgid "Show the number of open windows (if more than 2)"
 msgstr "顯示開啟視窗的數量（若多於 2）"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:201
 msgid "Middle mouse button:"
 msgstr "滑鼠中鍵"
 
-#: src/_dialogs.ui:209
+#: src/_dialogs.ui:214
 msgid "Close all"
 msgstr "關閉全部"
 
-#: src/_dialogs.ui:210
+#: src/_dialogs.ui:215
 msgid "Launch new instance"
 msgstr "啟動新實體"
 
-#: src/_dialogs.ui:211
+#: src/_dialogs.ui:216
 msgid "Do Nothing"
 msgstr "不做任何動作"
 
-#: src/_dialogs.ui:233
+#: src/_dialogs.ui:238
 msgid "Behavior"
 msgstr "行為"
 
-#: src/_dialogs.ui:266
+#: src/_dialogs.ui:271
 msgid "Active indicator style:"
 msgstr "作用中的指示器樣式："
 
-#: src/_dialogs.ui:279 src/_dialogs.ui:310
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "Bars"
 msgstr "條"
 
-#: src/_dialogs.ui:280 src/_dialogs.ui:311
+#: src/_dialogs.ui:285 src/_dialogs.ui:316
 msgid "Dots"
 msgstr "點"
 
-#: src/_dialogs.ui:281 src/_dialogs.ui:312
+#: src/_dialogs.ui:286 src/_dialogs.ui:317
 msgid "Rectangles"
 msgstr "矩形"
 
-#: src/_dialogs.ui:282 src/_dialogs.ui:313
+#: src/_dialogs.ui:287 src/_dialogs.ui:318
 msgid "Ciliora"
 msgstr "睫毛"
 
-#: src/_dialogs.ui:283 src/_dialogs.ui:314
+#: src/_dialogs.ui:288 src/_dialogs.ui:319
 msgid "Circles"
 msgstr "圈圈"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:289 src/_dialogs.ui:320
 msgid "None"
 msgstr "無"
 
-#: src/_dialogs.ui:297
+#: src/_dialogs.ui:302
 msgid "Inactive indicator style:"
 msgstr "非作用中的指示器樣式："
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:333
 msgid "Indicator orientation:"
 msgstr "指示器方向："
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:345
 msgid "Automatic"
 msgstr "自動"
 
-#: src/_dialogs.ui:341
+#: src/_dialogs.ui:346
 msgid "Bottom"
 msgstr "底端"
 
-#: src/_dialogs.ui:342
+#: src/_dialogs.ui:347
 msgid "Right"
 msgstr "右側"
 
-#: src/_dialogs.ui:343
+#: src/_dialogs.ui:348
 msgid "Top"
 msgstr "頂端"
 
-#: src/_dialogs.ui:344
+#: src/_dialogs.ui:349
 msgid "Left"
 msgstr "左側"
 
-#: src/_dialogs.ui:354
+#: src/_dialogs.ui:359
 msgid "Get indicator color from theme"
 msgstr "從佈景主題取得指示器色彩"
 
-#: src/_dialogs.ui:380
+#: src/_dialogs.ui:385
 msgid "Active indicator:"
 msgstr "作用中的指示器："
 
-#: src/_dialogs.ui:404
+#: src/_dialogs.ui:409
 msgid "Inactive indicator:"
 msgstr "非作用中的指示器："
 
-#: src/_dialogs.ui:431
+#: src/_dialogs.ui:436
 msgid "Force icon size:"
 msgstr "強制圖示大小："
 
-#: src/_dialogs.ui:475
+#: src/_dialogs.ui:480
 msgid "Preview width:"
 msgstr "預覽寬度："
 
-#: src/_dialogs.ui:504
+#: src/_dialogs.ui:509
 msgid "Preview height:"
 msgstr "預覽高度："
 
-#: src/_dialogs.ui:532
+#: src/_dialogs.ui:537
 msgid "Appearance"
 msgstr "外觀"
 
-#: src/_dialogs.ui:562
+#: src/_dialogs.ui:567
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "使用 <SUPER>+[1, 2, ...] 在應用程式間切換"
 
-#: src/_dialogs.ui:589
+#: src/_dialogs.ui:594
 msgid "Switch to the last window with <SUPER>"
 msgstr "使用 <SUPER> 切換至前一個視窗"
 
-#: src/_dialogs.ui:605
+#: src/_dialogs.ui:610
 msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
+"The left &lt;SUPER&gt; key seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"<b>此功能已停用。</b>\n"
-"其需要 X11 XInput2.0 擴充功能，但您的系統並未提供。"
 
-#: src/_dialogs.ui:623
+#: src/_dialogs.ui:622
+msgid "Manage shortcuts..."
+msgstr ""
+
+#: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
 msgstr "鍵盤快捷鍵"
