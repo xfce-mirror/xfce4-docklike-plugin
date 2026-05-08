@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-03-14 00:59+0100\n"
+"POT-Creation-Date: 2026-05-08 12:57+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/xfce/teams/16840/pt/)\n"
@@ -23,69 +23,83 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: src/AppInfos.cpp:340
+#: src/AppInfos.cpp:354
 msgid "Select Launcher"
 msgstr "Selecionar iniciador"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/AppInfos.cpp:341
+#: src/AppInfos.cpp:355
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pinned to Dock"
 msgstr "Afixado na doca"
 
-#: src/Group.cpp:860
+#: src/Group.cpp:861
 msgid "Pin to Dock"
 msgstr "Afixar na doca"
 
-#: src/Group.cpp:872
+#: src/Group.cpp:879
+msgid "Add activation shortcut..."
+msgstr ""
+
+#: src/Group.cpp:890
+msgid "Manage activation shortcut..."
+msgstr ""
+
+#: src/Group.cpp:912
 msgid "Edit Launcher..."
 msgstr "Editar iniciador..."
 
-#: src/Group.cpp:899
+#: src/Group.cpp:939
 msgid "Close All"
 msgstr "Fechar tudo"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:913
+#: src/Group.cpp:953
 msgid "Remove"
 msgstr "Remover"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:926
+#: src/Group.cpp:966
 msgid "Select Launcher..."
 msgstr "Selecionar iniciador..."
 
-#: src/Group.cpp:935
+#: src/Group.cpp:975
 msgid "Create Launcher..."
 msgstr "Criar iniciador..."
 
-#: src/Plugin.cpp:113
+#: src/Plugin.cpp:117
 msgid "translator-credits"
 msgstr ""
 "Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Nuno Miguel <nunomgue@gmail.com>"
 
-#: src/SettingsDialog.cpp:300
+#: src/SettingsDialog.cpp:39
 #, c-format
-msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr "<b>Apenas o(s) %u primeiros atalhos estão ativados.</b>\n"
+msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
+msgstr ""
 
-#: src/SettingsDialog.cpp:305
+#: src/SettingsDialog.cpp:46
+msgid "<b>Only the first hotkey is enabled.</b>\n"
+msgstr ""
+
+#: src/SettingsDialog.cpp:50
+msgid "<b>No hotkeys enabled.</b>\n"
+msgstr ""
+
+#: src/SettingsDialog.cpp:54
 #, c-format
 msgid ""
-"The &lt;SUPER&gt;+%u combination seems already in use by another process.\n"
-"Check your Xfce settings."
+"The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"A combinação &lt;SUPER&gt;+%u parece já estar a ser utilizada por outro processo.\n"
-"Verifique as definições do Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -95,154 +109,156 @@ msgstr "Barra de tarefas Docklike"
 msgid "A modern, minimalist taskbar for Xfce"
 msgstr "Uma barra de tarefas moderna e minimalista para o Xfce"
 
-#: src/_dialogs.ui:49
+#: src/_dialogs.ui:54
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: src/_dialogs.ui:65
+#: src/_dialogs.ui:70
 msgid "_Close"
 msgstr "Fe_char"
 
-#: src/_dialogs.ui:110
+#: src/_dialogs.ui:115
 msgid "Don't show the window list for a single window"
 msgstr "Não mostrar a lista de janelas para uma única janela"
 
-#: src/_dialogs.ui:125
+#: src/_dialogs.ui:130
 msgid "Only show applications on the current workspace"
 msgstr "Mostrar apenas aplicações na área de trabalho atual"
 
-#: src/_dialogs.ui:140
+#: src/_dialogs.ui:145
 msgid "Only show applications on the current display"
 msgstr "Mostrar apenas aplicações no ecrã atual"
 
-#: src/_dialogs.ui:155
+#: src/_dialogs.ui:160
 msgid "Show preview thumbnails for open windows"
 msgstr "Mostrar miniaturas de pré-visualização para janelas abertas"
 
-#: src/_dialogs.ui:171
+#: src/_dialogs.ui:176
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Mostrar o número de janelas abertas (se mais de 2)"
 
-#: src/_dialogs.ui:196
+#: src/_dialogs.ui:201
 msgid "Middle mouse button:"
 msgstr "Botão do meio do rato:"
 
-#: src/_dialogs.ui:209
+#: src/_dialogs.ui:214
 msgid "Close all"
 msgstr "Fechar tudo"
 
-#: src/_dialogs.ui:210
+#: src/_dialogs.ui:215
 msgid "Launch new instance"
 msgstr "Lançar nova instância"
 
-#: src/_dialogs.ui:211
+#: src/_dialogs.ui:216
 msgid "Do Nothing"
 msgstr "Não fazer nada"
 
-#: src/_dialogs.ui:233
+#: src/_dialogs.ui:238
 msgid "Behavior"
 msgstr "Comportamento"
 
-#: src/_dialogs.ui:266
+#: src/_dialogs.ui:271
 msgid "Active indicator style:"
 msgstr "Estilo do indicador ativo:"
 
-#: src/_dialogs.ui:279 src/_dialogs.ui:310
+#: src/_dialogs.ui:284 src/_dialogs.ui:315
 msgid "Bars"
 msgstr "Barras"
 
-#: src/_dialogs.ui:280 src/_dialogs.ui:311
+#: src/_dialogs.ui:285 src/_dialogs.ui:316
 msgid "Dots"
 msgstr "Pontos"
 
-#: src/_dialogs.ui:281 src/_dialogs.ui:312
+#: src/_dialogs.ui:286 src/_dialogs.ui:317
 msgid "Rectangles"
 msgstr "Retângulos"
 
-#: src/_dialogs.ui:282 src/_dialogs.ui:313
+#: src/_dialogs.ui:287 src/_dialogs.ui:318
 msgid "Ciliora"
 msgstr "Cílios"
 
-#: src/_dialogs.ui:283 src/_dialogs.ui:314
+#: src/_dialogs.ui:288 src/_dialogs.ui:319
 msgid "Circles"
 msgstr "Círculos"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:289 src/_dialogs.ui:320
 msgid "None"
 msgstr "Nenhum"
 
-#: src/_dialogs.ui:297
+#: src/_dialogs.ui:302
 msgid "Inactive indicator style:"
 msgstr "Estilo do indicador inativo:"
 
-#: src/_dialogs.ui:328
+#: src/_dialogs.ui:333
 msgid "Indicator orientation:"
 msgstr "Orientação do indicador:"
 
-#: src/_dialogs.ui:340
+#: src/_dialogs.ui:345
 msgid "Automatic"
 msgstr "Automática"
 
-#: src/_dialogs.ui:341
+#: src/_dialogs.ui:346
 msgid "Bottom"
 msgstr "Inferior"
 
-#: src/_dialogs.ui:342
+#: src/_dialogs.ui:347
 msgid "Right"
 msgstr "Direita"
 
-#: src/_dialogs.ui:343
+#: src/_dialogs.ui:348
 msgid "Top"
 msgstr "Superior"
 
-#: src/_dialogs.ui:344
+#: src/_dialogs.ui:349
 msgid "Left"
 msgstr "Esquerda"
 
-#: src/_dialogs.ui:354
+#: src/_dialogs.ui:359
 msgid "Get indicator color from theme"
 msgstr "Obter cor do indicador a partir do tema"
 
-#: src/_dialogs.ui:380
+#: src/_dialogs.ui:385
 msgid "Active indicator:"
 msgstr "Indicador ativo:"
 
-#: src/_dialogs.ui:404
+#: src/_dialogs.ui:409
 msgid "Inactive indicator:"
 msgstr "Indicador inativo:"
 
-#: src/_dialogs.ui:431
+#: src/_dialogs.ui:436
 msgid "Force icon size:"
 msgstr "Forçar tamanho dos ícones:"
 
-#: src/_dialogs.ui:475
+#: src/_dialogs.ui:480
 msgid "Preview width:"
 msgstr "Largura da pré-visualização:"
 
-#: src/_dialogs.ui:504
+#: src/_dialogs.ui:509
 msgid "Preview height:"
 msgstr "Altura da pré-visualização:"
 
-#: src/_dialogs.ui:532
+#: src/_dialogs.ui:537
 msgid "Appearance"
 msgstr "Aparência"
 
-#: src/_dialogs.ui:562
+#: src/_dialogs.ui:567
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Alternar entre aplicações com <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:589
+#: src/_dialogs.ui:594
 msgid "Switch to the last window with <SUPER>"
 msgstr "Alternar para a última janela com <SUPER>"
 
-#: src/_dialogs.ui:605
+#: src/_dialogs.ui:610
 msgid ""
-"<b>This feature is disabled.</b>\n"
-"It requires X11 XInput2.0 extension which is is not provided by your system."
+"The left &lt;SUPER&gt; key seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
 msgstr ""
-"<b>Esta funcionalidade está desativada.</b>\n"
-"Requer a extensão X11 XInput2.0, que não é fornecida pelo seu sistema."
 
-#: src/_dialogs.ui:623
+#: src/_dialogs.ui:622
+msgid "Manage shortcuts..."
+msgstr ""
+
+#: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
 msgstr "Teclas de atalho"
