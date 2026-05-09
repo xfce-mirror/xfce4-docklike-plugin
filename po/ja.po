@@ -46,11 +46,11 @@ msgstr "ドックにピン留め"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "アクティベーションショートカットを追加..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "アクティベーションショートカットを管理..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -85,15 +85,15 @@ msgstr ""
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>最初の %u 個のショートカットキーのみが有効になります。</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>最初のショートカットキーのみが有効になります。</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>ショートカットキーは有効になっていません。</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -101,6 +101,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt;+%u の組み合わせは別のコマンドに割り当てられているようです。\n"
+"Xfce のキーボード設定を確認してください。"
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -255,10 +257,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"左の &lt;SUPER&gt; キーは別のコマンドに割り当てられているようです。\n"
+"Xfce のキーボード設定を確認してください。"
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "ショートカットを管理..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
