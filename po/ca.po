@@ -46,11 +46,11 @@ msgstr "Ancora al Dock"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Afegeix una drecera d'activació..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Gestioneu la drecera d'activació..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -88,15 +88,15 @@ msgstr ""
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Només les primeres %u dreceres estan habilitades.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Només la primera drecera està habilitada.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>No hi ha cap drecera habilitada.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -104,6 +104,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"La combinació &lt;SÚPER&gt;+%u sembla que ja està assignada a una altra ordre.\n"
+"Comproveu la configuració del teclat de l'Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -258,10 +260,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"La tecla esquerra <SÚPER> sembla que ja està assignada a una altra ordre.\n"
+"Comproveu la configuració del teclat de l'Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Gestioneu les dreceres..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
