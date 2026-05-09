@@ -45,11 +45,11 @@ msgstr "Afixar na doca"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Adicionar atalho de ativação..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Gerir o atalho de ativação..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -84,15 +84,15 @@ msgstr ""
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Apenas as primeiras %u teclas de atalho estão ativadas.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Apenas a primeira tecla de atalho está ativada.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Não há teclas de atalho ativadas.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -100,6 +100,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Parece que a combinação &lt;SUPER&gt;+%u já está atribuída a outro comando.\n"
+"Verifique as definições do teclado do Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -254,10 +256,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"A tecla &lt;SUPER&gt; da esquerda parece já estar atribuída a outro comando.\n"
+"Verifique as definições do teclado do Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Gerir atalhos..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
