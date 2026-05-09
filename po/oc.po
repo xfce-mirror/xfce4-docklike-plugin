@@ -44,11 +44,11 @@ msgstr "Penjar al Dock"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Apondre un acorchi d’activacion..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Gestion dels acorchis d’activacion..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -83,15 +83,15 @@ msgstr ""
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Sonque las primièras %u comandas de clavièr son activadas.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Sonque la primièra comanda de clavièr es activada.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Cap de comanda pas activada.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -99,6 +99,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"La combinason &lt;SUPER&gt;+%u sembla ja assignada a una autra comanda.\n"
+"Verificatz los paramètres del clavièr Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -253,10 +255,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"La tòca esquèrra &lt;SUPER&gt;+%u sembla ja assignada a una autra comanda.\n"
+"Verificatz los paramètres del clavièr Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Gerir los acorchis..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
