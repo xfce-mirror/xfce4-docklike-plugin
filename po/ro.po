@@ -45,11 +45,11 @@ msgstr "Fixează la doc"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Adaugă o comandă rapidă de activare..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Gestionează comanda rapidă de activare..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -78,20 +78,24 @@ msgstr "Creează un lansator..."
 #: src/Plugin.cpp:117
 msgid "translator-credits"
 msgstr ""
-"Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024., 2025, 2026"
+"Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024. 2025, 2026"
 
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
 msgstr ""
+"<b>Numai primele %u combinații de taste de comenzi rapide sunt "
+"activate.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
 msgstr ""
+"<b>Numai prima combinație de taste de comenzi rapide este activată.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
 msgstr ""
+"<b>Nu există nicio combinație de taste de comenzi rapide activată.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -99,6 +103,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Combinația &lt;SUPER&gt;+%u pare să fie deja asociată unei alte comenzi.\n"
+"Verificați configurația tastaturii Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -253,10 +259,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Tasta &lt;SUPER&gt; din stânga pare să fie deja asociată unei alte comenzi.\n"
+"Verificați configurația tastaturii Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Gestionează comenzile rapide..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
