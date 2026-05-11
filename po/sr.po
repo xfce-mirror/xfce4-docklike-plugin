@@ -44,11 +44,11 @@ msgstr "Закачи за док"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Додај пречицу покретања..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Управљај пречицом покретања..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -81,15 +81,15 @@ msgstr "Саша Петровић <salepetronije@gmail.com>"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Само првих %u пречица је омогућено.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Само прва пречица је омогућена.</b> \n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Нема омогућених пречица.</b> \n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -97,6 +97,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Низ &lt;SUPER&gt;+%u изгледа већ придодат другачијој наредби. \n"
+"Проверите поставке дугмади Иксфцеа."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -251,10 +253,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Дугме леви &lt;SUPER&gt; изгледа већ додато другачијој наредби. \n"
+"Проверите поставке Иксфцеа."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Управљај пречицама..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
