@@ -48,11 +48,11 @@ msgstr "釘選至 Dock"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "新增啟用捷徑……"
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "管理啟用捷徑……"
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -85,15 +85,17 @@ msgstr "Walter Cheuk <wwycheuk@gmail.com>, 2014."
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>僅啟用第一個 %u 快捷鍵。</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>僅啟用第一個快捷鍵。</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
 msgstr ""
+"<b>未啟用快捷鍵。</b>\n"
+"\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -101,6 +103,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt;+%u 組合鍵似乎已對映至其他命令。\n"
+"請檢查您的 Xfce 鍵盤設定。"
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -255,10 +259,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"左 &lt;SUPER&gt; 鍵似乎已對映至其他命令。\n"
+"請檢查您的 Xfce 鍵盤設定。"
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "管理捷徑……"
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
