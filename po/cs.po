@@ -47,11 +47,11 @@ msgstr "Připnout k doku"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Přidat aktivační klávesovou zkratku..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Spravovat aktivační klávesovou zkratku..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -84,15 +84,15 @@ msgstr "Michal Várady <miko.vaji@gmail.com>"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Povoleny jsou pouze první %u klávesové zkratky.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Povolena je pouze první klávesová zkratka.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Klávesové zkratky nejsou povoleny.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -100,6 +100,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Kombinace &lt;SUPER&gt;+%u je již pravděpodobně mapována na jiný příkaz.\n"
+"Ověřte nastavení klávesnice v Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -254,10 +256,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Levá klávesa &lt;SUPER&gt; je již pravděpodobně mapována na jiný příkaz.\n"
+"Ověřte nastavení klávesnice v Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Spravovat klávesové zkratky..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
