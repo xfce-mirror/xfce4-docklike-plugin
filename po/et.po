@@ -43,11 +43,11 @@ msgstr "Kinnita tegumiribale"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Lisa käivitamise kiirklahv..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Halda käivitamise kiirklahvi..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -75,20 +75,20 @@ msgstr "Loo käiviaja..."
 
 #: src/Plugin.cpp:117
 msgid "translator-credits"
-msgstr "Priit Jõerüüt 2020-2025"
+msgstr "Priit Jõerüüt 2020-2026"
 
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Kasutusel on vaid %u esimest kiirklahvi.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Vaid esimesed kiirklahvid on kasutusel.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Ühtegi kiirklahvi pole kasutusel.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -96,6 +96,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt;+%u klahvikombinatsioon tundub juba olema vastendatud muu käsuga.\n"
+"Palun vaata Xfce klahvistiku seadistused üle."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -250,10 +252,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt; klahv tundub juba olema vastendatud muu käsuga.\n"
+"Palun vaata Xfce klahvistiku seadistused üle."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Halda kiirklahve..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
