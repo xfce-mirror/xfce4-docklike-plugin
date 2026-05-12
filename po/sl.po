@@ -47,7 +47,7 @@ msgstr "Pripni v sidrišče"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Dodaj bližnjico za aktivacijo..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
