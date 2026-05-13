@@ -47,11 +47,11 @@ msgstr "Pripni v sidrišče"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr "Dodaj bližnjico za aktivacijo..."
+msgstr "Dodaj bližnjično tipko..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Uredi bližnjično tipko..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -84,15 +84,15 @@ msgstr "Prevod: Kiberpipa, KaBUM"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Samo prvih %u tipk je omogočenih.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Samo prva tipka je omogočena.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Nobena tipka ni omogočena.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -100,6 +100,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Kombinacijo &lt;SUPER&gt;+%u že uporablja nek drug ukaz.\n"
+"Preverite nastavitev tipkovnice."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -243,21 +245,23 @@ msgstr "Videz"
 
 #: src/_dialogs.ui:567
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
-msgstr "Preklopi med programi s/z <SUPER>+[1, 2, ...]"
+msgstr "Preklapljaj med programi s <SUPER>+[1, 2, ...]"
 
 #: src/_dialogs.ui:594
 msgid "Switch to the last window with <SUPER>"
-msgstr "Preklopi na zadnje okno s/z <SUPER>"
+msgstr "Preklopi na zadnje okno s <SUPER>"
 
 #: src/_dialogs.ui:610
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Kombinacijo levi &lt;SUPER&gt;+%u že uporablja nek drug ukaz.\n"
+"Preverite nastavitev tipkovnice."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Uredi bližnjične tipke..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
