@@ -44,11 +44,11 @@ msgstr "Прикачване към дока"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Добавяне на клавишна комбинация за активиране..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Управление на клавишна комбинация за активиране..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -81,15 +81,15 @@ msgstr "Kiril Kirilov Cybercop <cybercop_montana@abv.bg>"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Само първите %uбързи клавиши са активирани.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Само първият бърз клавиш е разрешен.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Няма разрешени бързи клавиши.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -97,6 +97,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Комбинацията &lt;SUPER&gt;+%u, изглежда вече е свързана с друга команда.\n"
+"Проверете настройките на клавиатурата си в Xfce."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -251,10 +253,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Левият клавиш &lt;SUPER&gt; изглежда вече е свързан с друга команда.\n"
+"Проверете настройките на клавиатурата си в Xfce."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Управление на бързите клавиши..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
