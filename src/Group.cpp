@@ -973,14 +973,17 @@ GtkWidget* Group::buildContextMenu()
 		}
 	}
 
-	GtkWidget* item = gtk_menu_item_new_with_label(_("Close All"));
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-	g_signal_connect(G_OBJECT(item), "activate",
-		G_CALLBACK(+[](GtkMenuItem* _item, Group* group) {
-			group->closeAll();
-		}),
-		this);
+	if (mWindows.size() > 0)
+	{
+		GtkWidget* item = gtk_menu_item_new_with_label(_("Close All"));
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		g_signal_connect(G_OBJECT(item), "activate",
+			G_CALLBACK(+[](GtkMenuItem* _item, Group* group) {
+				group->closeAll();
+			}),
+			this);
+	}
 
 	gtk_widget_show_all(menu);
 
