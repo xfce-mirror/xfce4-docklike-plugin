@@ -6,17 +6,17 @@
 # Translators:
 # 785411ef824cced88d3e197f5af1b61a_da6a977 <e5fae5b35c0c625157d991b31e113de3_956341>, 2025
 # Slavko <linux@slavino.sk>, 2025
-# Nick Schermer <nick@xfce.org>, 2025
 # Dušan Kazik <prescott66@gmail.com>, 2025
+# Nick Schermer <nick@xfce.org>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-08 12:57+0200\n"
+"POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>, 2025\n"
+"Last-Translator: Nick Schermer <nick@xfce.org>, 2026\n"
 "Language-Team: Slovak (https://app.transifex.com/xfce/teams/16840/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,27 +56,35 @@ msgstr ""
 msgid "Edit Launcher..."
 msgstr ""
 
-#: src/Group.cpp:939
-msgid "Close All"
-msgstr "Zatvoriť všetko"
-
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:953
+#: src/Group.cpp:944
 msgid "Remove"
 msgstr "Odstrániť"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:966
+#: src/Group.cpp:957
 msgid "Select Launcher..."
 msgstr ""
 
-#: src/Group.cpp:975
+#: src/Group.cpp:966
 msgid "Create Launcher..."
 msgstr ""
 
-#: src/Plugin.cpp:117
+#: src/Group.cpp:978
+msgid "Window Actions"
+msgstr ""
+
+#: src/Group.cpp:985
+msgid "Close"
+msgstr "Zatvoriť"
+
+#: src/Group.cpp:985
+msgid "Close All"
+msgstr "Zatvoriť všetko"
+
+#: src/Plugin.cpp:118
 msgid "translator-credits"
 msgstr "Tomáš Vadina <kyberdev@gmail.com>"
 
