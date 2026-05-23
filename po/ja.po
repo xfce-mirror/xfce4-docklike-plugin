@@ -5,18 +5,18 @@
 # 
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2025
-# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2025
 # Xfce Bot <transifex@xfce.org>, 2025
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2026
+# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-08 12:57+0200\n"
+"POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2026\n"
+"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2026\n"
 "Language-Team: Japanese (https://app.transifex.com/xfce/teams/16840/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,27 +56,35 @@ msgstr "アクティベーションショートカットを管理..."
 msgid "Edit Launcher..."
 msgstr "ランチャーを編集..."
 
-#: src/Group.cpp:939
-msgid "Close All"
-msgstr "全てのウィンドウを閉じる"
-
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:953
+#: src/Group.cpp:944
 msgid "Remove"
 msgstr "削除"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:966
+#: src/Group.cpp:957
 msgid "Select Launcher..."
 msgstr "ランチャーを選択..."
 
-#: src/Group.cpp:975
+#: src/Group.cpp:966
 msgid "Create Launcher..."
 msgstr "ランチャーを作成..."
 
-#: src/Plugin.cpp:117
+#: src/Group.cpp:978
+msgid "Window Actions"
+msgstr ""
+
+#: src/Group.cpp:985
+msgid "Close"
+msgstr "閉じる"
+
+#: src/Group.cpp:985
+msgid "Close All"
+msgstr "全てのウィンドウを閉じる"
+
+#: src/Plugin.cpp:118
 msgid "translator-credits"
 msgstr ""
 "Nobuhiro Iwamatsu <iwamatsu@nigauri.org>\n"
