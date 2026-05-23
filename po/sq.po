@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-08 12:57+0200\n"
+"POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2026\n"
 "Language-Team: Albanian (https://app.transifex.com/xfce/teams/16840/sq/)\n"
@@ -54,27 +54,35 @@ msgstr "Administroni shkurtore aktivizimi…"
 msgid "Edit Launcher..."
 msgstr "Përpunoni Nisës…"
 
-#: src/Group.cpp:939
-msgid "Close All"
-msgstr "Mbylli Krejt"
-
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:953
+#: src/Group.cpp:944
 msgid "Remove"
 msgstr "Hiqe"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:966
+#: src/Group.cpp:957
 msgid "Select Launcher..."
 msgstr "Përzgjidhni Nisës…"
 
-#: src/Group.cpp:975
+#: src/Group.cpp:966
 msgid "Create Launcher..."
 msgstr "Krijoni Nisës…"
 
-#: src/Plugin.cpp:117
+#: src/Group.cpp:978
+msgid "Window Actions"
+msgstr "Veprime Dritareje"
+
+#: src/Group.cpp:985
+msgid "Close"
+msgstr "Mbylle"
+
+#: src/Group.cpp:985
+msgid "Close All"
+msgstr "Mbylli Krejt"
+
+#: src/Plugin.cpp:118
 msgid "translator-credits"
 msgstr "Besnik Bleta"
 
