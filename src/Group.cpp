@@ -973,9 +973,7 @@ GtkWidget* Group::buildContextMenu()
 		}
 	}
 
-	gboolean is_single = mWindows.size() == 1;
-
-	if (is_single && Settings::noWindowsListIfSingle)
+	if (mWindows.size() == 1 && Settings::noWindowsListIfSingle)
 	{
 		GtkWidget* item = gtk_menu_item_new_with_label(_("Window Actions"));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
@@ -984,7 +982,7 @@ GtkWidget* Group::buildContextMenu()
 	}
 	else if (mWindows.size() > 0)
 	{
-		GtkWidget* item = gtk_menu_item_new_with_label(is_single ? _("Close") : _("Close All"));
+		GtkWidget* item = gtk_menu_item_new_with_label(mWindows.size() == 1 ? _("Close") : _("Close All"));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 		g_signal_connect(G_OBJECT(item), "activate",
