@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Xfce Bot <transifex@xfce.org>, 2025
+# Nick Schermer <nick@xfce.org>, 2026
 # Pjotr <pjotrvertaalt@gmail.com>, 2026
 # 
 #, fuzzy
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-08 12:57+0200\n"
+"POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/xfce/teams/16840/nl/)\n"
@@ -54,27 +55,35 @@ msgstr "Activatie-sneltoets beheren..."
 msgid "Edit Launcher..."
 msgstr "Starter bewerken..."
 
-#: src/Group.cpp:939
-msgid "Close All"
-msgstr "Alles sluiten"
-
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:953
+#: src/Group.cpp:944
 msgid "Remove"
 msgstr "Verwijderen"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:966
+#: src/Group.cpp:957
 msgid "Select Launcher..."
 msgstr "Starter kiezen..."
 
-#: src/Group.cpp:975
+#: src/Group.cpp:966
 msgid "Create Launcher..."
 msgstr "Starter maken..."
 
-#: src/Plugin.cpp:117
+#: src/Group.cpp:978
+msgid "Window Actions"
+msgstr "Vensteracties"
+
+#: src/Group.cpp:985
+msgid "Close"
+msgstr "Sluiten"
+
+#: src/Group.cpp:985
+msgid "Close All"
+msgstr "Alles sluiten"
+
+#: src/Plugin.cpp:118
 msgid "translator-credits"
 msgstr "Pjotr <pjotrvertaalt@gmail.com>"
 
