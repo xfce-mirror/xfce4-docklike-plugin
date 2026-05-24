@@ -8,8 +8,8 @@
 # nortio <savi.napolitano@gmail.com>, 2025
 # Dmytro Tokayev, 2025
 # Xfce Bot <transifex@xfce.org>, 2025
-# Emanuele Petriglia <inbox@emanuelepetriglia.com>, 2026
 # Nick Schermer <nick@xfce.org>, 2026
+# Emanuele Petriglia <inbox@emanuelepetriglia.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Nick Schermer <nick@xfce.org>, 2026\n"
+"Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.com>, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/xfce/teams/16840/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +76,7 @@ msgstr "Crea avviatore…"
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "Azioni Finestra"
 
 #: src/Group.cpp:985
 msgid "Close"
