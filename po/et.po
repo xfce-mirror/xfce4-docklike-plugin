@@ -71,7 +71,7 @@ msgstr "Loo käiviaja..."
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "Tegevused akendega"
 
 #: src/Group.cpp:985
 msgid "Close"
