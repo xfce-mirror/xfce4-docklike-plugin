@@ -193,7 +193,6 @@ namespace Dock
 
 		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 			g.second->resize();
-			g.second->updateIconGeometry();
 		});
 	}
 

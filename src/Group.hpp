@@ -111,8 +111,6 @@ public:
 	GdkPixbuf* mIconPixbuf;
 	GtkWidget* mContextMenu;
 
-	gulong mSizeAllocateId;
-
 	Help::Gtk::Timeout mLeaveTimeout;
 	Help::Gtk::Timeout mMenuShowTimeout;
 };
