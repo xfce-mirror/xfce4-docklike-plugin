@@ -76,6 +76,7 @@ public:
 
 	void resize();
 	void updateStyle();
+	void updateIconGeometry();
 
 	void onDraw(cairo_t* cr);
 	void onWindowActivate(GroupWindow* groupWindow);
@@ -109,6 +110,8 @@ public:
 	GtkWidget* mImage;
 	GdkPixbuf* mIconPixbuf;
 	GtkWidget* mContextMenu;
+
+	gulong mSizeAllocateId;
 
 	Help::Gtk::Timeout mLeaveTimeout;
 	Help::Gtk::Timeout mMenuShowTimeout;
