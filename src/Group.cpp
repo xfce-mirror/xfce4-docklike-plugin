@@ -195,6 +195,12 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
 		}),
 		this);
 
+	g_signal_connect(G_OBJECT(mButton), "size-allocate",
+		G_CALLBACK(+[](GtkWidget* widget, GtkAllocation* allocation, Group* me) {
+			me->updateIconGeometry();
+		}),
+		this);
+
 	//--------------------------------------------------
 
 	if (mPinned)
@@ -326,6 +332,8 @@ void Group::resize()
 
 	gtk_widget_set_valign(mImage, GTK_ALIGN_CENTER);
 	gtk_widget_queue_draw(mButton);
+
+	updateIconGeometry();
 }
 
 void Group::onDraw(cairo_t* cr)
@@ -813,6 +821,31 @@ void Group::updateStyle()
 	{
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 	}
+}
+
+void Group::updateIconGeometry()
+{
+	if (!gtk_widget_get_realized(mButton) || mWindowsCount == 0)
+		return;
+
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(mButton, &allocation);
+
+	gint x, y;
+	gdk_window_get_root_coords(gtk_widget_get_window(mButton),
+		allocation.x, allocation.y, &x, &y);
+
+	GdkRectangle rect;
+	rect.x = x;
+	rect.y = y;
+	rect.width = allocation.width;
+	rect.height = allocation.height;
+
+	GdkWindow* button_window = gtk_widget_get_window(mButton);
+
+	mWindows.forEach([&](GroupWindow* w) {
+		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, NULL);
+	});
 }
 
 void Group::electNewTopWindow()
