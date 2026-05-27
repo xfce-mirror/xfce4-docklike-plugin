@@ -191,7 +191,10 @@ namespace Dock
 				mIconSize = mPanelSize * 0.8;
 		}
 
-		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void { g.second->resize(); });
+		mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+			g.second->resize();
+			g.second->updateIconGeometry();
+		});
 	}
 
 	void onPanelOrientationChange(GtkOrientation orientation)
