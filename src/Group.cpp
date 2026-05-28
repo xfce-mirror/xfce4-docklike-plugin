@@ -828,11 +828,13 @@ void Group::updateIconGeometry()
 	if (!gtk_widget_get_realized(mButton) || mWindowsCount == 0)
 		return;
 
+	GdkWindow* button_window = gtk_widget_get_window(mButton);
+
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(mButton, &allocation);
 
 	gint x, y;
-	gdk_window_get_root_coords(gtk_widget_get_window(mButton),
+	gdk_window_get_root_coords(button_window,
 		allocation.x, allocation.y, &x, &y);
 
 	GdkRectangle rect;
@@ -840,8 +842,6 @@ void Group::updateIconGeometry()
 	rect.y = y;
 	rect.width = allocation.width;
 	rect.height = allocation.height;
-
-	GdkWindow* button_window = gtk_widget_get_window(mButton);
 
 	mWindows.forEach([&](GroupWindow* w) {
 		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, NULL);
