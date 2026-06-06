@@ -113,7 +113,7 @@ msgstr ""
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
-msgstr "Dokový Panel úloh"
+msgstr "Dokový panel úloh"
 
 #: src/docklike.desktop.in:6
 msgid "A modern, minimalist taskbar for Xfce"
@@ -137,7 +137,7 @@ msgstr "Zobrazit pouze aplikace na této pracovní ploše"
 
 #: src/_dialogs.ui:145
 msgid "Only show applications on the current display"
-msgstr "Zobrazit pouze aplikace na timto displeji"
+msgstr "Zobrazit pouze aplikace na tomto displeji"
 
 #: src/_dialogs.ui:160
 msgid "Show preview thumbnails for open windows"
@@ -149,7 +149,7 @@ msgstr "Zobrazit počet otevřených oken (pokud je jich více než dvě)"
 
 #: src/_dialogs.ui:201
 msgid "Middle mouse button:"
-msgstr "Kliknutí prostředního tlačítka myši"
+msgstr "Kliknutí prostředního tlačítka myši:"
 
 #: src/_dialogs.ui:214
 msgid "Close all"
@@ -229,11 +229,11 @@ msgstr "Získat barvu indikátor z motivu"
 
 #: src/_dialogs.ui:385
 msgid "Active indicator:"
-msgstr "Indikátor aktivity"
+msgstr "Indikátor aktivity:"
 
 #: src/_dialogs.ui:409
 msgid "Inactive indicator:"
-msgstr "Indikátor neaktivity"
+msgstr "Indikátor neaktivity:"
 
 #: src/_dialogs.ui:436
 msgid "Force icon size:"
