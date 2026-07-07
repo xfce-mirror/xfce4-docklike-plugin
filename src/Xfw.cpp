@@ -45,6 +45,12 @@ namespace Xfw
 			const gchar* const* class_ids = xfw_window_get_class_ids(xfwWindow);
 			if (!xfce_str_is_empty(class_ids[0]))
 			{
+				// Chromium browsers use "crx_<appid>" as the instance-id for installed web
+				// apps/PWAs, regardless of the browser (fork) name, so prefer it directly.
+				// https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/issues/118
+				if (!xfce_str_is_empty(class_ids[1]) && g_str_has_prefix(class_ids[1], "crx_"))
+					return class_ids[1];
+
 				// On X11, the class-id is generally the right app-id, but there is sometimes
 				// an inversion with the instance-id. If there is only one 'class_ids' (wayland),
 				// it's considered valid anyway
