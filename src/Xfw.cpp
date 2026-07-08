@@ -32,6 +32,8 @@ namespace Xfw
 		// https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/issues/75
 		"wine",
 		// https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/issues/21
+  // In theory, the "crx_*" fix below for #118 should cover all these cases,
+  // but it doesn't hurt to keep this as well, just in case…
 		"brave-browser", "chromium", "google-chrome", "vivaldi-stable", "microsoft-edge",
 	};
 	// clang-format on
