@@ -73,7 +73,7 @@ namespace Hotkeys
 					}
 					if (m == nKeys)
 					{
-						g_debug("Failed to map keycode %d to keyval", keycode);
+						g_debug("Failed to map keycode %u to keyval", keycode);
 					}
 					g_free(keys);
 					g_free(keyvals);
