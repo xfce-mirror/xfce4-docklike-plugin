@@ -27,7 +27,7 @@ namespace Hotkeys
 	void finalize();
 	void updateSettings();
 	void resetShortcuts();
-	std::string getShortcut(std::string appId);
+	std::string getShortcut(const std::string& appId);
 
 	extern bool mKeyAloneGrabbed;
 	extern int mGrabbedKeys;

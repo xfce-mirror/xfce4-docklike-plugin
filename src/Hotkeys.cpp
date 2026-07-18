@@ -204,7 +204,7 @@ namespace Hotkeys
 		g_hash_table_destroy(commands);
 	}
 
-	std::string getShortcut(std::string appId)
+	std::string getShortcut(const std::string& appId)
 	{
 		std::string shortcut = std::string();
 		if (mChannel == nullptr)

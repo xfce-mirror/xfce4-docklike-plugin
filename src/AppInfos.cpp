@@ -125,7 +125,7 @@ namespace AppInfos
 		// clang-format on
 	};
 
-	static void loadDesktopEntry(const std::string& xdgDir, std::string filename)
+	static void loadDesktopEntry(const std::string& xdgDir, const std::string& filename)
 	{
 		if (!g_str_has_suffix(filename.c_str(), ".desktop"))
 			return;
@@ -203,7 +203,7 @@ namespace AppInfos
 		}
 	}
 
-	static bool addUserSetApp(std::string classId, std::string filename)
+	static bool addUserSetApp(const std::string& classId, const std::string& filename)
 	{
 		loadDesktopEntry(Help::String::pathDirname(filename), Help::String::pathBasename(filename));
 

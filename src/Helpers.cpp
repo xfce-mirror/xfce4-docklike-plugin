@@ -48,15 +48,15 @@ namespace Help
 			return str;
 		}
 
-		std::string getWord(std::string str, int index, char separator)
+		std::string getWord(const std::string& str, int index, char separator)
 		{
 			if (index == (int)std::string::npos)
 			{
-				std::string::iterator it = --str.end();
+				auto it = --str.end();
 				while (it != str.begin() && *it == separator)
 					--it;
 
-				std::string::iterator end = it + 1;
+				auto end = it + 1;
 
 				while (it != str.begin() && *it != separator)
 					--it;
@@ -67,7 +67,7 @@ namespace Help
 				return std::string(it, end);
 			}
 
-			std::string::iterator it = str.begin();
+			auto it = str.begin();
 			while (it != str.end() && *it == separator)
 				++it;
 
@@ -82,7 +82,7 @@ namespace Help
 			if (it == str.end())
 				return "";
 
-			std::string::iterator start = it;
+			auto start = it;
 
 			while (it != str.end() && *it != separator)
 				++it;
@@ -90,7 +90,7 @@ namespace Help
 			return std::string(start, it);
 		}
 
-		std::string pathBasename(const std::string str, bool removeSuffix)
+		std::string pathBasename(const std::string& str, bool removeSuffix)
 		{
 			gchar* basename = g_path_get_basename(str.c_str());
 			if (removeSuffix)
@@ -108,7 +108,7 @@ namespace Help
 			return str_out;
 		}
 
-		std::string pathDirname(const std::string str)
+		std::string pathDirname(const std::string& str)
 		{
 			gchar* dirname = g_path_get_dirname(str.c_str());
 			std::string str_out = dirname;
@@ -116,7 +116,7 @@ namespace Help
 			return str_out;
 		}
 
-		std::string trim(const std::string str)
+		std::string trim(const std::string& str)
 		{
 			std::string::const_iterator s = str.begin();
 			std::string::const_iterator e = str.end();

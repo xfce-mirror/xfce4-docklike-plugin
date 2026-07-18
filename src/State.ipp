@@ -25,13 +25,13 @@ template <typename V>
 class State
 {
 public:
-	void setup(V value, std::function<void(V)> feedback)
+	void setup(const V& value, std::function<void(V)> feedback)
 	{
 		v = value;
 		f = feedback;
 	}
 
-	void set(V value)
+	void set(const V& value)
 	{
 		bool change = (v != value);
 		v = value;

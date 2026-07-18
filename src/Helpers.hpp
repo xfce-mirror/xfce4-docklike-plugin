@@ -37,10 +37,10 @@ namespace Help
 		void split(const std::string& str, std::list<std::string>& list, char delim);
 		std::string toLowercase(std::string str);
 		std::string numericOnly(std::string str);
-		std::string getWord(std::string str, int index, char separator = ' ');
-		std::string pathBasename(const std::string str, bool removeSuffix = false);
-		std::string pathDirname(const std::string str);
-		std::string trim(const std::string str);
+		std::string getWord(const std::string& str, int index, char separator = ' ');
+		std::string pathBasename(const std::string& str, bool removeSuffix = false);
+		std::string pathDirname(const std::string& str);
+		std::string trim(const std::string& str);
 	} // namespace String
 
 	namespace Gtk

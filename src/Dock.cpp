@@ -158,7 +158,7 @@ namespace Dock
 		g_list_free(children);
 	}
 
-	void activateGroup(std::string appId)
+	void activateGroup(const std::string& appId)
 	{
 		std::shared_ptr<Group> group =
 			mGroups.findIf([appId](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> bool {

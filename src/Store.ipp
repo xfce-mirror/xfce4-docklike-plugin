@@ -97,9 +97,9 @@ namespace Store
 	class Map
 	{
 	public:
-		void set(K k, V v) { mMap[k] = v; }
+		void set(const K& k, V v) { mMap[k] = v; }
 
-		V get(K k)
+		V get(const K& k)
 		{
 			typename std::map<const K, V>::iterator it = mMap.find(k);
 			if (it != mMap.end())
@@ -108,7 +108,7 @@ namespace Store
 			return nullptr;
 		}
 
-		void remove(K k)
+		void remove(const K& k)
 		{
 			typename std::map<const K, V>::iterator it = mMap.find(k);
 			if (it != mMap.end())
