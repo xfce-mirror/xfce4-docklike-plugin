@@ -363,7 +363,7 @@ namespace AppInfos
 			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "/usr/share/applications");
 		else
 			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), mXdgDataDirs.front().c_str());
-		for (auto dir : mXdgDataDirs)
+		for (const auto& dir : mXdgDataDirs)
 		{
 			if (g_str_has_suffix(dir.c_str(), "/applications/"))
 				gtk_file_chooser_add_shortcut_folder(GTK_FILE_CHOOSER(dialog), dir.c_str(), nullptr);
