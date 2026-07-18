@@ -113,7 +113,7 @@ namespace Xfw
 
 		g_signal_connect(G_OBJECT(mXfwScreen), "window-closed",
 			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
-				std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.pop(xfwWindow);
+				mGroupWindows.pop(xfwWindow);
 				if (xfwWindow == mPreviousActiveWindow)
 					mPreviousActiveWindow = nullptr;
 			}),
