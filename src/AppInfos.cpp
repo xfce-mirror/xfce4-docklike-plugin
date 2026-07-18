@@ -102,7 +102,7 @@ namespace AppInfos
 				topdir_list.push_back(dir);
 		}
 
-		for (std::string& dir : topdir_list)
+		for (const std::string& dir : topdir_list)
 		{
 			// Recursively add subdirectories of mXdgDataDirs to mXdgDataDirs.
 			// Wine (and maybe some others) create their own directory tree.
