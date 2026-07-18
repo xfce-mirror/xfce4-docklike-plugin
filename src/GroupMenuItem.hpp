@@ -32,7 +32,7 @@ class GroupWindow;
 class GroupMenuItem
 {
 public:
-	GroupMenuItem(GroupWindow* groupWindow);
+	explicit GroupMenuItem(GroupWindow* groupWindow);
 	~GroupMenuItem();
 
 	void updateLabel();

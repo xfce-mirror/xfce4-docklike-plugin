@@ -31,7 +31,7 @@ class GroupMenuItem;
 class GroupMenu
 {
 public:
-	GroupMenu(Group* dockButton);
+	explicit GroupMenu(Group* dockButton);
 	~GroupMenu();
 
 	void add(GroupMenuItem* menuItem);
