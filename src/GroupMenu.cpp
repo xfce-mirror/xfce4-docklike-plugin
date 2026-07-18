@@ -28,7 +28,7 @@
 static GtkWidget*
 create_window()
 {
-	GtkWidget* window = gtk_window_new(GtkWindowType::GTK_WINDOW_POPUP);
+	GtkWidget* window = gtk_window_new(GTK_WINDOW_POPUP);
 	gtk_widget_add_events(window, GDK_SCROLL_MASK);
 	gtk_window_set_default_size(GTK_WINDOW(window), 1, 1);
 
