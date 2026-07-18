@@ -22,18 +22,8 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mGroupMenu(this)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
-	mIconPixbuf = nullptr;
-	mContextMenu = nullptr;
-	mAppInfo = appInfo;
-	mPinned = pinned;
-	mTopWindowIndex = 0;
-	mActive = false;
-	mWindowMenuShown = false;
-
-	//--------------------------------------------------
-
 	mWindowsCount.setup(
 		0,
 		[this]() -> uint {

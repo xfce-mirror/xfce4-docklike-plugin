@@ -178,10 +178,7 @@ namespace Help
 			gtk_style_context_remove_class(gtk_widget_get_style_context(widget), className);
 		}
 
-		Timeout::Timeout()
-		{
-			mDuration = mTimeoutId = 0;
-		}
+		Timeout::Timeout() : mDuration(0), mTimeoutId(0) {}
 
 		void Timeout::setup(uint ms, std::function<bool()> function)
 		{
@@ -211,10 +208,7 @@ namespace Help
 			}
 		}
 
-		Idle::Idle()
-		{
-			mIdleId = 0;
-		}
+		Idle::Idle() : mIdleId(0) {}
 
 		void Idle::setup(std::function<bool()> function)
 		{
