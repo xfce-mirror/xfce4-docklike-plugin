@@ -265,7 +265,7 @@ namespace Settings
 
 		pinnedAppList.setup(Help::Gtk::bufferToStdStringList(pinnedListBuffer),
 			[](std::list<std::string> list) -> void {
-				std::vector<char*> buf = Help::Gtk::stdToBufferStringList(list);
+				std::vector<const char*> buf = Help::Gtk::stdToBufferStringList(list);
 				g_key_file_set_string_list(mFile.get(), "user", "pinned", buf.data(), buf.size());
 				saveFile();
 			});
@@ -296,7 +296,7 @@ namespace Settings
 
 		userSetApps.setup(_userSetApps,
 			[](std::pair<std::list<std::string>, std::list<std::string>> pair) -> void {
-				std::vector<char*> buf = Help::Gtk::stdToBufferStringList(pair.first);
+				std::vector<const char*> buf = Help::Gtk::stdToBufferStringList(pair.first);
 				g_key_file_set_string_list(mFile.get(), "user", "userSetIds", buf.data(), buf.size());
 				buf = Help::Gtk::stdToBufferStringList(pair.second);
 				g_key_file_set_string_list(mFile.get(), "user", "userSetPaths", buf.data(), buf.size());

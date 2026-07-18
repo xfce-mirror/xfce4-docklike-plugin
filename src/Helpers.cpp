@@ -145,12 +145,12 @@ namespace Help
 			return ret;
 		}
 
-		std::vector<char*> stdToBufferStringList(std::list<std::string>& stringList)
+		std::vector<const char*> stdToBufferStringList(std::list<std::string>& stringList)
 		{
-			std::vector<char*> buf;
+			std::vector<const char*> buf(stringList.size());
 
-			for (std::string& s : stringList)
-				buf.push_back(&s[0]);
+			std::transform(stringList.begin(), stringList.end(), buf.begin(),
+				[](const std::string& s) { return s.empty() ? nullptr : s.data(); });
 
 			return buf;
 		}
