@@ -4,10 +4,10 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Arve Eriksson <031299870@telia.com>, 2025
+# Arve Eriksson <arve.eriksson@startmail.com>, 2025
 # Påvel Nicklasson <pavel2@frimix.se>, 2025
-# Luna Jernberg <droidbittin@gmail.com>, 2026
 # Nick Schermer <nick@xfce.org>, 2026
+# Luna Jernberg <droidbittin@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Nick Schermer <nick@xfce.org>, 2026\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/xfce/teams/16840/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,11 +46,11 @@ msgstr "Fäst till Dock"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Lägg till aktiveringsgenväg..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Hantera aktiveringsgenväg..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -74,7 +74,7 @@ msgstr "Skapa programstartare..."
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "Fönsteråtgärder"
 
 #: src/Group.cpp:985
 msgid "Close"
@@ -91,15 +91,15 @@ msgstr "Påvel Nicklasson"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Endast den första %u snabbtangenten är aktiverad.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Endast den första snabbtangenten är aktiverad.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Inga snabbtangenter aktiverade.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -107,6 +107,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt;+%u kombinationen används tydligen redan av ett annat kommando.\n"
+"Kontrollera dina Xfce-tangentbordsinställningar."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -261,10 +263,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Den vänstra &lt;SUPER&gt; tangenten verkar redan vara mappad till ett annat kommando.\n"
+"Kontrollera dina Xfce-tangentbordsinställningar."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Hantera genvägar..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
