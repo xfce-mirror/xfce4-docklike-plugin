@@ -44,11 +44,11 @@ msgstr "Докқа бекіту"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Белсендіру жарлығын қосу..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Белсендіру жарлығын басқару..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -72,7 +72,7 @@ msgstr "Жөнелткішті жасау..."
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "Терезе әрекеттері"
 
 #: src/Group.cpp:985
 msgid "Close"
@@ -89,15 +89,15 @@ msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Тек алғашқы %u жедел перне іске қосылған.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Тек алғашқы жедел перне іске қосылған.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Жедел пернелер іске қосылмаған.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -105,6 +105,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"&lt;SUPER&gt;+%u комбинациясы басқа командаға сәйкестендірілген сияқты.\n"
+"Xfce пернетақта баптауларын тексеріңіз."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -259,10 +261,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Сол жақ &lt;SUPER&gt; пернесі басқа командаға сәйкестендірілген сияқты.\n"
+"Xfce пернетақта баптауларын тексеріңіз."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Жарлықтарды басқару..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
