@@ -5,9 +5,9 @@
 # 
 # Translators:
 # 785411ef824cced88d3e197f5af1b61a_da6a977 <e5fae5b35c0c625157d991b31e113de3_956341>, 2025
-# Slavko <linux@slavino.sk>, 2025
 # Dušan Kazik <prescott66@gmail.com>, 2025
 # Nick Schermer <nick@xfce.org>, 2026
+# Slavko <linux@slavino.sk>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
 "POT-Creation-Date: 2026-05-23 12:58+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Nick Schermer <nick@xfce.org>, 2026\n"
+"Last-Translator: Slavko <linux@slavino.sk>, 2026\n"
 "Language-Team: Slovak (https://app.transifex.com/xfce/teams/16840/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: src/AppInfos.cpp:354
 msgid "Select Launcher"
-msgstr ""
+msgstr "Vybrať spúšťač"
 
 #: src/AppInfos.cpp:355
 msgid "_Cancel"
@@ -46,15 +46,15 @@ msgstr "Pripnúť do doku"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "Pridať klávesovú skratku"
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "Upraviť klávesovú skratku"
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
-msgstr ""
+msgstr "Upraviť spúšťač…"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
@@ -66,15 +66,15 @@ msgstr "Odstrániť"
 #. manually
 #: src/Group.cpp:957
 msgid "Select Launcher..."
-msgstr ""
+msgstr "Vybrať spúšťač…"
 
 #: src/Group.cpp:966
 msgid "Create Launcher..."
-msgstr ""
+msgstr "Vytvoriť spúšťač…"
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "Akcie okna"
 
 #: src/Group.cpp:985
 msgid "Close"
@@ -91,15 +91,15 @@ msgstr "Tomáš Vadina <kyberdev@gmail.com>"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>Len prvé %u klávesové skratky sú zapnuté.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>Len prvá klávesová skratka je zapnutá.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>Žiadne zapnuté klávesové skratky.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -107,6 +107,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Kombinácia &lt;SUPER&gt;+%u sa javí ako už použitá iným príkazom.\n"
+"Skontrolujte svoje nastavenia klávesnice XFCE."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -238,11 +240,11 @@ msgstr "Vynútiť veľkosť ikony:"
 
 #: src/_dialogs.ui:480
 msgid "Preview width:"
-msgstr ""
+msgstr "Šírka ukážky:"
 
 #: src/_dialogs.ui:509
 msgid "Preview height:"
-msgstr ""
+msgstr "Výška ukážky:"
 
 #: src/_dialogs.ui:537
 msgid "Appearance"
@@ -261,10 +263,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"Kláves &lt;SUPER&gt; sa javí ako už použitá iným príkazom.\n"
+"Skontrolujte svoje nastavenia klávesnice XFCE."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "Spravovať klávesové skratky…"
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
