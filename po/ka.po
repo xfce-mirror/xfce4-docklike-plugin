@@ -44,11 +44,11 @@ msgstr "დოკზე მიმაგრება"
 
 #: src/Group.cpp:879
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "აქტივაციის მალსახმობის დამატება..."
 
 #: src/Group.cpp:890
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "აქტივაციის მალსახმობის მართვა..."
 
 #: src/Group.cpp:912
 msgid "Edit Launcher..."
@@ -72,7 +72,7 @@ msgstr "გამშვების შექმნა..."
 
 #: src/Group.cpp:978
 msgid "Window Actions"
-msgstr ""
+msgstr "ფანჯრის ქმედებები"
 
 #: src/Group.cpp:985
 msgid "Close"
@@ -89,15 +89,15 @@ msgstr "ეკატერინე პაპავა"
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b>ჩართულია, მხოლოდ, პირველი %u კლავიატურის მალსახმობი.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>ჩართულია, მხოლოდ, პირველი კლავიატურის მალსახმობი.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>კლავიატურის მალსახმობები ჩართული არაა</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -105,6 +105,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"როგორც ჩანს, კომბინაციას &lt;SUPER&gt;+%u უკვე იყენებს სხვა ბრძანება.\n"
+"შეამოწმეთ თქვენი Xfce-ის პარამეტრები."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -236,11 +238,11 @@ msgstr "ნაძალადევი ხატულას ზომა:"
 
 #: src/_dialogs.ui:480
 msgid "Preview width:"
-msgstr ""
+msgstr "მინიატურის სიგანე:"
 
 #: src/_dialogs.ui:509
 msgid "Preview height:"
-msgstr ""
+msgstr "მინიატურის სიმაღლე:"
 
 #: src/_dialogs.ui:537
 msgid "Appearance"
@@ -259,10 +261,12 @@ msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"როგორც ჩანს, კომბინაციას მარცხენა &lt;SUPER&gt;+%u უკვე იყენებს სხვა ბრძანება.\n"
+"შეამოწმეთ თქვენი Xfce-ის პარამეტრები."
 
 #: src/_dialogs.ui:622
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "მალსახმობების მართვა..."
 
 #: src/_dialogs.ui:643
 msgid "Keyboard hotkeys"
