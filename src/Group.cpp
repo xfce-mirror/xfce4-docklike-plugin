@@ -38,7 +38,7 @@ static std::shared_ptr<Group> getDragGroup(const std::string& dragId)
 		});
 }
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mLauncherCount(0), mLauncherCountVisible(false), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -76,20 +76,27 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
+	mLauncherLabel = gtk_label_new("");
 	GtkWidget* overlay = gtk_overlay_new();
 
-	// The button contains a GtkOverlay, so that the label can be placed on top of the image.
+	// The button contains a GtkOverlay, so that the labels can be placed on top of the image.
 	gtk_label_set_use_markup(GTK_LABEL(mLabel), true);
+	gtk_label_set_use_markup(GTK_LABEL(mLauncherLabel), true);
 	gtk_container_add(GTK_CONTAINER(overlay), mImage);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLabel);
+	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLauncherLabel);
 	gtk_widget_set_halign(mLabel, GTK_ALIGN_START);
 	gtk_widget_set_valign(mLabel, GTK_ALIGN_START);
+	gtk_widget_set_halign(mLauncherLabel, GTK_ALIGN_END);
+	gtk_widget_set_valign(mLauncherLabel, GTK_ALIGN_START);
 	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLabel, true);
+	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLauncherLabel, true);
 	gtk_container_add(GTK_CONTAINER(mButton), overlay);
 
 	Help::Gtk::cssClassAdd(mButton, "flat");
 	Help::Gtk::cssClassAdd(mButton, "group");
 	Help::Gtk::cssClassAdd(mLabel, "window_count");
+	Help::Gtk::cssClassAdd(mLauncherLabel, "launcher_count");
 
 	g_object_set_data(G_OBJECT(mButton), "group", this);
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
@@ -813,20 +820,39 @@ void Group::updateStyle()
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
-
-		if (mWindowsCount > 2 && Settings::showWindowCount)
-		{
-			gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
-			gtk_label_set_markup(GTK_LABEL(mLabel), markup);
-			g_free(markup);
-		}
-		else
-			gtk_label_set_markup(GTK_LABEL(mLabel), "");
 	}
 	else
-	{
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
+
+	if (mWindowsCount > 2 && Settings::showWindowCount)
+	{
+		gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
+		gtk_label_set_markup(GTK_LABEL(mLabel), markup);
+		g_free(markup);
 	}
+	else
+		gtk_label_set_markup(GTK_LABEL(mLabel), "");
+
+	if (mLauncherCountVisible && mLauncherCount > 0)
+	{
+		gchar* count = g_strdup_printf("%" G_GINT64_FORMAT, mLauncherCount);
+		gchar* markup = g_markup_printf_escaped("<b>%s</b>", count);
+		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), markup);
+		g_free(markup);
+		g_free(count);
+	}
+	else
+		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), "");
+}
+
+void Group::setLauncherCount(gint64 count, bool visible)
+{
+	if (mLauncherCount == count && mLauncherCountVisible == visible)
+		return;
+
+	mLauncherCount = count;
+	mLauncherCountVisible = visible;
+	updateStyle();
 }
 
 void Group::updateIconGeometry()
