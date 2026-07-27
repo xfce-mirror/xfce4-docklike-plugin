@@ -102,8 +102,6 @@ public:
 	uint mTopWindowIndex;
 	Store::List<GroupWindow*> mWindows;
 	LogicalState<uint> mWindowsCount;
-	gint64 mLauncherCount;
-	bool mLauncherCountVisible;
 
 	std::shared_ptr<AppInfo> mAppInfo;
 	GroupMenu mGroupMenu;

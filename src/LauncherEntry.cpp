@@ -20,9 +20,10 @@
 
 namespace LauncherEntry
 {
+	using EntryKey = std::pair<std::string, std::string>;
+
 	struct Entry
 	{
-		std::string appId;
 		gint64 count = 0;
 		bool countVisible = false;
 		std::uint64_t updateSerial = 0;
@@ -33,7 +34,6 @@ namespace LauncherEntry
 	static guint mNameOwnerChangedSignalId = 0;
 	static guint mUnityNameOwnerId = 0;
 	static std::uint64_t mUpdateSerial = 0;
-	using EntryKey = std::pair<std::string, std::string>;
 	static std::map<EntryKey, Entry> mEntries;
 
 	static std::string appIdFromUri(const gchar* appUri)
@@ -72,7 +72,7 @@ namespace LauncherEntry
 		for (const auto& item : mEntries)
 		{
 			const Entry& entry = item.second;
-			if (entry.appId == groupId && (selected == nullptr || entry.updateSerial > selected->updateSerial))
+			if (item.first.second == groupId && (selected == nullptr || entry.updateSerial > selected->updateSerial))
 				selected = &entry;
 		}
 
@@ -107,7 +107,6 @@ namespace LauncherEntry
 		}
 
 		Entry& entry = mEntries[EntryKey(senderName, appId)];
-		entry.appId = appId;
 		entry.updateSerial = ++mUpdateSerial;
 		g_variant_lookup(properties, "count", "x", &entry.count);
 		gboolean countVisible;
@@ -117,7 +116,7 @@ namespace LauncherEntry
 
 		refreshGroups();
 		g_debug("Launcher count update for '%s': count=%" G_GINT64_FORMAT ", visible=%s",
-			entry.appId.c_str(), entry.count, entry.countVisible ? "true" : "false");
+			appId.c_str(), entry.count, entry.countVisible ? "true" : "false");
 	}
 
 	static void onNameOwnerChanged(GDBusConnection*, const gchar*, const gchar*,
