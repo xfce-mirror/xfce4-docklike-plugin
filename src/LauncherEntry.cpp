@@ -16,6 +16,7 @@
 #include <cstdint>
 #include <map>
 #include <string>
+#include <utility>
 
 namespace LauncherEntry
 {
@@ -32,7 +33,8 @@ namespace LauncherEntry
 	static guint mNameOwnerChangedSignalId = 0;
 	static guint mUnityNameOwnerId = 0;
 	static std::uint64_t mUpdateSerial = 0;
-	static std::map<std::string, Entry> mEntries;
+	using EntryKey = std::pair<std::string, std::string>;
+	static std::map<EntryKey, Entry> mEntries;
 
 	static std::string appIdFromUri(const gchar* appUri)
 	{
@@ -104,7 +106,7 @@ namespace LauncherEntry
 			return;
 		}
 
-		Entry& entry = mEntries[senderName];
+		Entry& entry = mEntries[EntryKey(senderName, appId)];
 		entry.appId = appId;
 		entry.updateSerial = ++mUpdateSerial;
 		g_variant_lookup(properties, "count", "x", &entry.count);
@@ -127,7 +129,22 @@ namespace LauncherEntry
 		g_variant_get(parameters, "(&s&s&s)", &name, &previousOwner, &newOwner);
 		(void)previousOwner;
 
-		if (newOwner[0] == '\0' && mEntries.erase(name) > 0)
+		if (newOwner[0] != '\0')
+			return;
+
+		bool removed = false;
+		for (auto entry = mEntries.begin(); entry != mEntries.end();)
+		{
+			if (entry->first.first == name)
+			{
+				entry = mEntries.erase(entry);
+				removed = true;
+			}
+			else
+				++entry;
+		}
+
+		if (removed)
 			refreshGroups();
 	}
 
