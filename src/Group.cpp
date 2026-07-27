@@ -38,7 +38,7 @@ static std::shared_ptr<Group> getDragGroup(const std::string& dragId)
 		});
 }
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mLauncherCount(0), mLauncherCountVisible(false), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -82,7 +82,6 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 
 	// The button contains a GtkOverlay, so that the labels can be placed on top of the image.
 	gtk_label_set_use_markup(GTK_LABEL(mLabel), true);
-	gtk_label_set_use_markup(GTK_LABEL(mLauncherLabel), true);
 	gtk_container_add(GTK_CONTAINER(overlay), mImage);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLabel);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLauncherLabel);
@@ -833,31 +832,18 @@ void Group::updateStyle()
 	}
 	else
 		gtk_label_set_markup(GTK_LABEL(mLabel), "");
-
-	if (mLauncherCountVisible && mLauncherCount > 0)
-	{
-		gchar* count = g_strdup_printf("%" G_GINT64_FORMAT, mLauncherCount);
-		gchar* markup = g_markup_printf_escaped("<b>%s</b>", count);
-		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), markup);
-		gtk_widget_show(mLauncherLabel);
-		g_free(markup);
-		g_free(count);
-	}
-	else
-	{
-		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), "");
-		gtk_widget_hide(mLauncherLabel);
-	}
 }
 
 void Group::setLauncherCount(gint64 count, bool visible)
 {
-	if (mLauncherCount == count && mLauncherCountVisible == visible)
+	if (!visible)
+	{
+		gtk_widget_hide(mLauncherLabel);
 		return;
+	}
 
-	mLauncherCount = count;
-	mLauncherCountVisible = visible;
-	updateStyle();
+	gtk_label_set_text(GTK_LABEL(mLauncherLabel), std::to_string(count).c_str());
+	gtk_widget_show(mLauncherLabel);
 }
 
 void Group::updateIconGeometry()

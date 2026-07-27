@@ -29,6 +29,7 @@
 							 "background-color: @launcher_count_bgcolor; "       \
 							 "border-radius: 999px; "                            \
 							 "min-width: 12px; "                                 \
+							 "font-weight: bold; "                               \
 							 "padding: 1px 4px; "                                \
 							 "margin: 1px; }\n";
 
