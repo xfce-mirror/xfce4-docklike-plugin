@@ -10,6 +10,7 @@
 #include "LauncherEntry.hpp"
 #include "Dock.hpp"
 #include "Group.hpp"
+#include "Settings.hpp"
 
 #include <gio/gio.h>
 
@@ -64,6 +65,12 @@ namespace LauncherEntry
 
 	static void applyEntryToGroup(Group* group)
 	{
+		if (Settings::disableLauncherCounts)
+		{
+			group->setLauncherCount(0, false);
+			return;
+		}
+
 		const Entry* selected = nullptr;
 		std::string groupId = group->mAppInfo == nullptr
 			? ""
@@ -114,7 +121,8 @@ namespace LauncherEntry
 			entry.countVisible = countVisible;
 		g_variant_unref(properties);
 
-		refreshGroups();
+		if (!Settings::disableLauncherCounts)
+			refreshGroups();
 		g_debug("Launcher count update for '%s': count=%" G_GINT64_FORMAT ", visible=%s",
 			appId.c_str(), entry.count, entry.countVisible ? "true" : "false");
 	}
@@ -143,7 +151,7 @@ namespace LauncherEntry
 				++entry;
 		}
 
-		if (removed)
+		if (removed && !Settings::disableLauncherCounts)
 			refreshGroups();
 	}
 
