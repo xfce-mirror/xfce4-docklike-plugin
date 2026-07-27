@@ -1,5 +1,6 @@
 0.5.1 (2026-03-02)
 =====
+- Add support for D-Bus launcher counts similar to GNOME Dash-to-dock, Plank, KDE Dock.
 - build: Rename POTFILES.in to POTFILES
 - AppInfos: Remove GIO search
 - Update debug instructions

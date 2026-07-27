@@ -77,6 +77,7 @@ public:
 	void resize();
 	void updateStyle();
 	void updateIconGeometry();
+	void setLauncherCount(gint64 count, bool visible);
 
 	void onDraw(cairo_t* cr);
 	void onWindowActivate(GroupWindow* groupWindow);
@@ -101,12 +102,15 @@ public:
 	uint mTopWindowIndex;
 	Store::List<GroupWindow*> mWindows;
 	LogicalState<uint> mWindowsCount;
+	gint64 mLauncherCount;
+	bool mLauncherCountVisible;
 
 	std::shared_ptr<AppInfo> mAppInfo;
 	GroupMenu mGroupMenu;
 
 	GtkWidget* mButton;
 	GtkWidget* mLabel;
+	GtkWidget* mLauncherLabel;
 	GtkWidget* mImage;
 	GdkPixbuf* mIconPixbuf;
 	GtkWidget* mContextMenu;
