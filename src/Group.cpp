@@ -61,6 +61,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	mLauncherLabel = gtk_label_new("");
+	gtk_widget_set_no_show_all(mLauncherLabel, true);
 	GtkWidget* overlay = gtk_overlay_new();
 
 	// The button contains a GtkOverlay, so that the labels can be placed on top of the image.
@@ -822,11 +823,15 @@ void Group::updateStyle()
 		gchar* count = g_strdup_printf("%" G_GINT64_FORMAT, mLauncherCount);
 		gchar* markup = g_markup_printf_escaped("<b>%s</b>", count);
 		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), markup);
+		gtk_widget_show(mLauncherLabel);
 		g_free(markup);
 		g_free(count);
 	}
 	else
+	{
 		gtk_label_set_markup(GTK_LABEL(mLauncherLabel), "");
+		gtk_widget_hide(mLauncherLabel);
+	}
 }
 
 void Group::setLauncherCount(gint64 count, bool visible)
