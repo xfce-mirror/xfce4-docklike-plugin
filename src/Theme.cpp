@@ -29,6 +29,7 @@ void Theme::load()
 {
 	GtkCssProvider* css_provider = gtk_css_provider_new();
 	std::string css = get_theme_colors();
+	css += LAUNCHER_COUNT_THEME;
 	gchar* filename = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4-docklike-plugin/gtk.css");
 
 	if (filename != nullptr && g_file_test(filename, G_FILE_TEST_IS_REGULAR))
@@ -90,6 +91,20 @@ std::string Theme::get_theme_colors()
 	g_free(str);
 	g_value_unset(&gv);
 
+	gv = G_VALUE_INIT;
+	gtk_style_context_get_property(sc, "background-color", GTK_STATE_FLAG_SELECTED, &gv);
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string launcherCountBg = str;
+	g_free(str);
+	g_value_unset(&gv);
+
+	gv = G_VALUE_INIT;
+	gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_SELECTED, &gv);
+	str = gdk_rgba_to_string((GdkRGBA*)g_value_get_boxed(&gv));
+	std::string launcherCountFg = str;
+	g_free(str);
+	g_value_unset(&gv);
+
 	str = gdk_rgba_to_string(Settings::indicatorColor.get().get());
 	std::string indicatorColor = str;
 	g_free(str);
@@ -114,6 +129,8 @@ std::string Theme::get_theme_colors()
 	css += "@define-color menu_item_color " + itemLabel + ";\n";
 	css += "@define-color menu_item_color_hover " + itemLabelHover + ";\n";
 	css += "@define-color menu_item_bgcolor_hover " + itemBgHover + ";\n";
+	css += "@define-color launcher_count_bgcolor " + launcherCountBg + ";\n";
+	css += "@define-color launcher_count_fgcolor " + launcherCountFg + ";\n";
 	css += "@define-color active_indicator_color " + indicatorColor + ";\n";
 	css += "@define-color inactive_indicator_color " + inactiveColor + ";\n";
 	return css;

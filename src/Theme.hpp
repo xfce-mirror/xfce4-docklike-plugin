@@ -24,6 +24,14 @@
 					  ".xfce-docklike-window .menu_item .preview { margin:2px 0px }\n"                                             \
 					  ".xfce-docklike-window .hover_menu_item { background-color: alpha(@menu_item_color_hover, 0.2); }\n";
 
+#define LAUNCHER_COUNT_THEME "#docklike-plugin .launcher_count { " \
+							 "color: @launcher_count_fgcolor; "                 \
+							 "background-color: @launcher_count_bgcolor; "       \
+							 "border-radius: 999px; "                            \
+							 "min-width: 12px; "                                 \
+							 "padding: 1px 4px; "                                \
+							 "margin: 1px; }\n";
+
 #include "Dock.hpp"
 
 #include <gtk/gtk.h>
