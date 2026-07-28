@@ -27,7 +27,7 @@
 #include <string>
 #include <utility>
 
-namespace LauncherEntry
+struct LauncherEntry::Impl
 {
 	using EntryKey = std::pair<std::string, std::string>;
 
@@ -38,12 +38,12 @@ namespace LauncherEntry
 		std::uint64_t updateSerial = 0;
 	};
 
-	static GDBusConnection* mConnection = nullptr;
-	static guint mLauncherSignalId = 0;
-	static guint mNameOwnerChangedSignalId = 0;
-	static guint mUnityNameOwnerId = 0;
-	static std::uint64_t mUpdateSerial = 0;
-	static std::map<EntryKey, Entry> mEntries;
+	GDBusConnection* connection = nullptr;
+	guint launcherSignalId = 0;
+	guint nameOwnerChangedSignalId = 0;
+	guint unityNameOwnerId = 0;
+	std::uint64_t updateSerial = 0;
+	std::map<EntryKey, Entry> entries;
 
 	static std::string appIdFromUri(const gchar* appUri)
 	{
@@ -71,7 +71,7 @@ namespace LauncherEntry
 		return appId;
 	}
 
-	static void applyEntryToGroup(Group* group)
+	void applyEntryToGroup(Group* group)
 	{
 		if (Settings::disableLauncherCounts)
 		{
@@ -84,7 +84,7 @@ namespace LauncherEntry
 			? ""
 			: Help::String::toLowercase(group->mAppInfo->mId);
 
-		for (const auto& item : mEntries)
+		for (const auto& item : entries)
 		{
 			const Entry& entry = item.second;
 			if (item.first.second == groupId && (selected == nullptr || entry.updateSerial > selected->updateSerial))
@@ -99,14 +99,15 @@ namespace LauncherEntry
 
 	void refreshGroups()
 	{
-		Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
+		Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
 			applyEntryToGroup(group.second.get());
 		});
 	}
 
 	static void onLauncherUpdate(GDBusConnection*, const gchar* senderName, const gchar*,
-		const gchar*, const gchar*, GVariant* parameters, gpointer)
+		const gchar*, const gchar*, GVariant* parameters, gpointer userData)
 	{
+		Impl* impl = static_cast<Impl*>(userData);
 		if (senderName == nullptr || parameters == nullptr || !g_variant_is_of_type(parameters, G_VARIANT_TYPE("(sa{sv})")))
 			return;
 
@@ -121,8 +122,8 @@ namespace LauncherEntry
 			return;
 		}
 
-		Entry& entry = mEntries[EntryKey(senderName, appId)];
-		entry.updateSerial = ++mUpdateSerial;
+		Entry& entry = impl->entries[EntryKey(senderName, appId)];
+		entry.updateSerial = ++impl->updateSerial;
 		g_variant_lookup(properties, "count", "x", &entry.count);
 		gboolean countVisible;
 		if (g_variant_lookup(properties, "count-visible", "b", &countVisible))
@@ -130,14 +131,15 @@ namespace LauncherEntry
 		g_variant_unref(properties);
 
 		if (!Settings::disableLauncherCounts)
-			refreshGroups();
+			impl->refreshGroups();
 		g_debug("Launcher count update for '%s': count=%" G_GINT64_FORMAT ", visible=%s",
 			appId.c_str(), entry.count, entry.countVisible ? "true" : "false");
 	}
 
 	static void onNameOwnerChanged(GDBusConnection*, const gchar*, const gchar*,
-		const gchar*, const gchar*, GVariant* parameters, gpointer)
+		const gchar*, const gchar*, GVariant* parameters, gpointer userData)
 	{
+		Impl* impl = static_cast<Impl*>(userData);
 		const gchar* name;
 		const gchar* previousOwner;
 		const gchar* newOwner;
@@ -148,11 +150,11 @@ namespace LauncherEntry
 			return;
 
 		bool removed = false;
-		for (auto entry = mEntries.begin(); entry != mEntries.end();)
+		for (auto entry = impl->entries.begin(); entry != impl->entries.end();)
 		{
 			if (entry->first.first == name)
 			{
-				entry = mEntries.erase(entry);
+				entry = impl->entries.erase(entry);
 				removed = true;
 			}
 			else
@@ -160,14 +162,14 @@ namespace LauncherEntry
 		}
 
 		if (removed && !Settings::disableLauncherCounts)
-			refreshGroups();
+			impl->refreshGroups();
 	}
 
 	void init()
 	{
 		GError* error = nullptr;
-		mConnection = g_bus_get_sync(G_BUS_TYPE_SESSION, nullptr, &error);
-		if (mConnection == nullptr)
+		connection = g_bus_get_sync(G_BUS_TYPE_SESSION, nullptr, &error);
+		if (connection == nullptr)
 		{
 			g_warning("Unable to listen for Unity launcher counts: %s",
 				error == nullptr ? "unknown error" : error->message);
@@ -175,36 +177,44 @@ namespace LauncherEntry
 			return;
 		}
 
-		mLauncherSignalId = g_dbus_connection_signal_subscribe(mConnection,
+		launcherSignalId = g_dbus_connection_signal_subscribe(connection,
 			nullptr, "com.canonical.Unity.LauncherEntry", "Update", nullptr, nullptr,
-			G_DBUS_SIGNAL_FLAGS_NONE, onLauncherUpdate, nullptr, nullptr);
-		mNameOwnerChangedSignalId = g_dbus_connection_signal_subscribe(mConnection,
+			G_DBUS_SIGNAL_FLAGS_NONE, onLauncherUpdate, this, nullptr);
+		nameOwnerChangedSignalId = g_dbus_connection_signal_subscribe(connection,
 			"org.freedesktop.DBus", "org.freedesktop.DBus", "NameOwnerChanged",
 			"/org/freedesktop/DBus", nullptr, G_DBUS_SIGNAL_FLAGS_NONE,
-			onNameOwnerChanged, nullptr, nullptr);
+			onNameOwnerChanged, this, nullptr);
 
-		mUnityNameOwnerId = g_bus_own_name(G_BUS_TYPE_SESSION, "com.canonical.Unity",
+		unityNameOwnerId = g_bus_own_name(G_BUS_TYPE_SESSION, "com.canonical.Unity",
 			G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT, nullptr, nullptr, nullptr, nullptr, nullptr);
 	}
 
 	void finalize()
 	{
-		if (mConnection != nullptr)
+		if (connection != nullptr)
 		{
-			if (mLauncherSignalId != 0)
-				g_dbus_connection_signal_unsubscribe(mConnection, mLauncherSignalId);
-			if (mNameOwnerChangedSignalId != 0)
-				g_dbus_connection_signal_unsubscribe(mConnection, mNameOwnerChangedSignalId);
+			if (launcherSignalId != 0)
+				g_dbus_connection_signal_unsubscribe(connection, launcherSignalId);
+			if (nameOwnerChangedSignalId != 0)
+				g_dbus_connection_signal_unsubscribe(connection, nameOwnerChangedSignalId);
 		}
 
-		if (mUnityNameOwnerId != 0)
-			g_bus_unown_name(mUnityNameOwnerId);
+		if (unityNameOwnerId != 0)
+			g_bus_unown_name(unityNameOwnerId);
 
-		g_clear_object(&mConnection);
-		mLauncherSignalId = 0;
-		mNameOwnerChangedSignalId = 0;
-		mUnityNameOwnerId = 0;
-		mUpdateSerial = 0;
-		mEntries.clear();
+		g_clear_object(&connection);
+		launcherSignalId = 0;
+		nameOwnerChangedSignalId = 0;
+		unityNameOwnerId = 0;
+		updateSerial = 0;
+		entries.clear();
 	}
-} // namespace LauncherEntry
+};
+
+LauncherEntry::Impl LauncherEntry::mImpl;
+
+void LauncherEntry::init() { mImpl.init(); }
+
+void LauncherEntry::finalize() { mImpl.finalize(); }
+
+void LauncherEntry::refreshGroups() { mImpl.refreshGroups(); }
