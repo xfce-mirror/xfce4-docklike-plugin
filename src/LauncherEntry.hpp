@@ -18,11 +18,18 @@
 #ifndef LAUNCHERENTRY_HPP
 #define LAUNCHERENTRY_HPP
 
-namespace LauncherEntry
+class LauncherEntry
 {
-	void init();
-	void finalize();
-	void refreshGroups();
-} // namespace LauncherEntry
+public:
+	static void init();
+	static void finalize();
+	static void refreshGroups();
+
+private:
+	LauncherEntry() = delete;
+
+	struct Impl;
+	static Impl mImpl;
+};
 
 #endif // LAUNCHERENTRY_HPP
