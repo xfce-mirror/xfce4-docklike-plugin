@@ -17,6 +17,7 @@
  */
 
 #include "Dock.hpp"
+#include "LauncherEntry.hpp"
 
 namespace Dock
 {
@@ -121,6 +122,7 @@ namespace Dock
 		}
 
 		gtk_widget_queue_draw(mBox);
+		LauncherEntry::refreshGroups();
 	}
 
 	static void activateGroup(Group* group)
