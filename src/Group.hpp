@@ -109,6 +109,7 @@ public:
 	GtkWidget* mButton;
 	GtkWidget* mLabel;
 	GtkWidget* mLauncherLabel;
+	GtkCssProvider* mLauncherCountCssProvider;
 	GtkWidget* mImage;
 	GdkPixbuf* mIconPixbuf;
 	GtkWidget* mContextMenu;
