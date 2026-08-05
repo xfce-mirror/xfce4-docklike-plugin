@@ -219,6 +219,7 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 #ifdef ENABLE_WAYLAND
 	if (gtk_layer_is_supported())
 	{
+		gtk_layer_set_monitor(GTK_WINDOW(mWindow), monitor);
 		gtk_layer_set_margin(GTK_WINDOW(mWindow), GTK_LAYER_SHELL_EDGE_LEFT, wx - geometry.x);
 		gtk_layer_set_margin(GTK_WINDOW(mWindow), GTK_LAYER_SHELL_EDGE_TOP, wy - geometry.y);
 	}
