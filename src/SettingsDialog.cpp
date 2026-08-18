@@ -175,6 +175,14 @@ namespace SettingsDialog
 			}),
 			nullptr);
 
+		GObject* disableLauncherCounts = gtk_builder_get_object(builder, "c_disableLauncherCounts");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(disableLauncherCounts), Settings::disableLauncherCounts);
+		g_signal_connect(disableLauncherCounts, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _disableLauncherCounts) {
+				Settings::disableLauncherCounts.set(gtk_toggle_button_get_active(_disableLauncherCounts));
+			}),
+			nullptr);
+
 		GObject* middleButtonBehavior = gtk_builder_get_object(builder, "co_middleButtonBehavior");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(middleButtonBehavior), Settings::middleButtonBehavior);
 		g_signal_connect(middleButtonBehavior, "changed",

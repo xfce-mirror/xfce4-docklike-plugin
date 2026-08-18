@@ -18,6 +18,7 @@
 
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
+#include "LauncherEntry.hpp"
 
 namespace Settings
 {
@@ -47,6 +48,7 @@ namespace Settings
 	State<std::pair<std::list<std::string>, std::list<std::string>>> userSetApps;
 
 	State<bool> showWindowCount;
+	State<bool> disableLauncherCounts;
 	State<int> dockSize;
 	State<int> previewWidth;
 	State<int> previewHeight;
@@ -124,6 +126,14 @@ namespace Settings
 				saveFile();
 
 				Dock::drawGroups();
+			});
+
+		disableLauncherCounts.setup(g_key_file_get_boolean(file, "user", "disableLauncherCounts", nullptr),
+			[](bool _disableLauncherCounts) -> void {
+				g_key_file_set_boolean(mFile.get(), "user", "disableLauncherCounts", _disableLauncherCounts);
+				saveFile();
+
+				LauncherEntry::refreshGroups();
 			});
 
 		intValue = g_key_file_get_integer(file, "user", "middleButtonBehavior", &error);

@@ -76,20 +76,30 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
+	mLauncherLabel = gtk_label_new("");
+	mLauncherCountCssProvider = gtk_css_provider_new();
+	gtk_widget_set_no_show_all(mLauncherLabel, true);
 	GtkWidget* overlay = gtk_overlay_new();
 
-	// The button contains a GtkOverlay, so that the label can be placed on top of the image.
+	// The button contains a GtkOverlay, so that the labels can be placed on top of the image.
 	gtk_label_set_use_markup(GTK_LABEL(mLabel), true);
 	gtk_container_add(GTK_CONTAINER(overlay), mImage);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLabel);
+	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), mLauncherLabel);
 	gtk_widget_set_halign(mLabel, GTK_ALIGN_START);
 	gtk_widget_set_valign(mLabel, GTK_ALIGN_START);
+	gtk_widget_set_halign(mLauncherLabel, GTK_ALIGN_END);
+	gtk_widget_set_valign(mLauncherLabel, GTK_ALIGN_START);
 	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLabel, true);
+	gtk_overlay_set_overlay_pass_through(GTK_OVERLAY(overlay), mLauncherLabel, true);
 	gtk_container_add(GTK_CONTAINER(mButton), overlay);
 
 	Help::Gtk::cssClassAdd(mButton, "flat");
 	Help::Gtk::cssClassAdd(mButton, "group");
 	Help::Gtk::cssClassAdd(mLabel, "window_count");
+	Help::Gtk::cssClassAdd(mLauncherLabel, "launcher_count");
+	gtk_style_context_add_provider(gtk_widget_get_style_context(mLauncherLabel),
+		GTK_STYLE_PROVIDER(mLauncherCountCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 	g_object_set_data(G_OBJECT(mButton), "group", this);
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
@@ -238,6 +248,8 @@ Group::~Group()
 
 	if (mIconPixbuf != nullptr)
 		g_object_unref(mIconPixbuf);
+
+	g_object_unref(mLauncherCountCssProvider);
 }
 
 void Group::add(GroupWindow* window)
@@ -316,6 +328,22 @@ void Group::closeAll()
 
 void Group::resize()
 {
+	// The badge's current proportions look right on a 56 px panel. Scale all of its
+	// dimensions from that baseline, but limit growth to 125% so it does not dominate
+	// large panels and keep a 60% floor so the count remains legible on very small ones.
+	const double launcherCountScale = CLAMP(Dock::mPanelSize / 56.0, 0.6, 1.25);
+	const int launcherCountFontSize = round(100 * launcherCountScale);
+	const int launcherCountMinWidth = round(12 * launcherCountScale);
+	const int launcherCountVerticalPadding = std::max(1, (int)round(launcherCountScale));
+	const int launcherCountHorizontalPadding = round(4 * launcherCountScale);
+	const int launcherCountMargin = std::max(1, (int)round(launcherCountScale));
+	gchar* launcherCountCss = g_strdup_printf(
+		".launcher_count { min-width: %dpx; font-size: %d%%; padding: %dpx %dpx; margin: %dpx; }",
+		launcherCountMinWidth, launcherCountFontSize, launcherCountVerticalPadding,
+		launcherCountHorizontalPadding, launcherCountMargin);
+	gtk_css_provider_load_from_data(mLauncherCountCssProvider, launcherCountCss, -1, nullptr);
+	g_free(launcherCountCss);
+
 	// TODO: set `min-width` / `min-height` CSS property on button?
 	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
 
@@ -813,20 +841,30 @@ void Group::updateStyle()
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
-
-		if (mWindowsCount > 2 && Settings::showWindowCount)
-		{
-			gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
-			gtk_label_set_markup(GTK_LABEL(mLabel), markup);
-			g_free(markup);
-		}
-		else
-			gtk_label_set_markup(GTK_LABEL(mLabel), "");
 	}
 	else
-	{
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
+
+	if (mWindowsCount > 2 && Settings::showWindowCount)
+	{
+		gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
+		gtk_label_set_markup(GTK_LABEL(mLabel), markup);
+		g_free(markup);
 	}
+	else
+		gtk_label_set_markup(GTK_LABEL(mLabel), "");
+}
+
+void Group::setLauncherCount(gint64 count, bool visible)
+{
+	if (!visible)
+	{
+		gtk_widget_hide(mLauncherLabel);
+		return;
+	}
+
+	gtk_label_set_text(GTK_LABEL(mLauncherLabel), std::to_string(count).c_str());
+	gtk_widget_show(mLauncherLabel);
 }
 
 void Group::updateIconGeometry()

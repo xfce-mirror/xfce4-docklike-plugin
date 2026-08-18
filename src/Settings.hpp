@@ -53,6 +53,7 @@ namespace Settings
 	extern State<int> previewWidth;
 	extern State<int> previewHeight;
 	extern State<bool> showWindowCount;
+	extern State<bool> disableLauncherCounts;
 	extern State<int> middleButtonBehavior;
 
 	extern State<int> indicatorOrientation;
