@@ -21,6 +21,7 @@
 #endif
 #include "Helpers.hpp"
 #include "Hotkeys.hpp"
+#include "LauncherEntry.hpp"
 #include "Plugin.hpp"
 
 namespace Plugin
@@ -41,6 +42,7 @@ namespace Plugin
 		AppInfos::init();
 		Xfw::init();
 		Dock::init();
+		LauncherEntry::init();
 		Theme::init();
 		Hotkeys::init();
 
@@ -85,6 +87,7 @@ namespace Plugin
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
+				LauncherEntry::finalize();
 				Xfw::finalize();
 				Dock::mGroups.clear();
 				AppInfos::finalize();

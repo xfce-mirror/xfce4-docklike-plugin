@@ -77,6 +77,7 @@ public:
 	void resize();
 	void updateStyle();
 	void updateIconGeometry();
+	void setLauncherCount(gint64 count, bool visible);
 
 	void onDraw(cairo_t* cr);
 	void onWindowActivate(GroupWindow* groupWindow);
@@ -107,6 +108,8 @@ public:
 
 	GtkWidget* mButton;
 	GtkWidget* mLabel;
+	GtkWidget* mLauncherLabel;
+	GtkCssProvider* mLauncherCountCssProvider;
 	GtkWidget* mImage;
 	GdkPixbuf* mIconPixbuf;
 	GtkWidget* mContextMenu;
