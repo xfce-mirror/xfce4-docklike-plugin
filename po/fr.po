@@ -12,16 +12,16 @@
 # Xfce Bot <transifex@xfce.org>, 2025
 # Gaël Bonithon <gael@xfce.org>, 2026
 # Nick Schermer <nick@xfce.org>, 2026
-# Wallon Wallon, 2026
+# Wallon <wallon@ik.me>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
-"Last-Translator: Wallon Wallon, 2026\n"
+"Last-Translator: Wallon <wallon@ik.me>, 2026\n"
 "Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,55 +41,55 @@ msgstr "_Annuler"
 msgid "_Open"
 msgstr "_Ouvrir"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "Épinglé"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "Épingler"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
 msgstr "Ajouter un raccourci d’activation…"
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
 msgstr "Gérer le raccourci d’activation…"
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "Modifier le lanceur…"
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "Enlever"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "Choisir un lanceur…"
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "Créer un lanceur…"
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
 msgstr "Actions des fenêtres"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "Fermer"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "Tout fermer"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr "L’équipe de traduction francophone de Xfce"
 
@@ -151,119 +151,123 @@ msgstr "Afficher les vignettes d’aperçu des fenêtres ouvertes"
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Afficher le nombre de fenêtres ouvertes (si plus de 2)"
 
-#: src/_dialogs.ui:201
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "Désactiver le comptage des lanceurs D-Bus"
+
+#: src/_dialogs.ui:217
 msgid "Middle mouse button:"
 msgstr "Bouton du milieu de la souris :"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "Tout fermer"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "Lancer une nouvelle instance"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "Ne rien faire"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "Comportement"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "Style de l’indicateur actif :"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "Barres"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "Points"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "Rectangles"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "Cercles"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "Rien"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "Style de l’indicateur inactif :"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "Orientation de l’indicateur :"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "Automatique"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "Bas"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "Droite"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "Haut"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "Gauche"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "Obtenir la couleur de l’indicateur à partir du thème"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "Indicateur actif :"
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "Indicateur inactif :"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "Forcer la taille des icônes :"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "Largeur de l’aperçu :"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "Hauteur de l’aperçu :"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "Apparence"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Changer d’application avec <SUPER>+[1, 2, …]"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "Basculer vers la fenêtre précédente avec <SUPER>"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -271,10 +275,10 @@ msgstr ""
 "La touche &lt;SUPER&gt; gauche semble déjà associée à une autre commande.\n"
 "Vérifiez les paramètres clavier de Xfce."
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
 msgstr "Gérer les raccourcis…"
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "Raccourcis clavier"
