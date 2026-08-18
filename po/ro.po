@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/xfce/teams/16840/ro/)\n"
@@ -35,55 +35,55 @@ msgstr "_Renunță"
 msgid "_Open"
 msgstr "_Deschide"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "Fixat la doc"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "Fixează la doc"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
 msgstr "Adaugă o comandă rapidă de activare..."
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
 msgstr "Gestionează comanda rapidă de activare..."
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "Editează lansatorul..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "Elimină"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "Selectează lansatorul..."
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "Creează un lansator..."
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
 msgstr "Acțiuni fereastră"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "Închide"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "Închide tot"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr ""
 "Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024. 2025, 2026"
@@ -150,119 +150,123 @@ msgstr "Afișează miniaturi de previzualizare pentru ferestrele deschise"
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Afișează numărul de ferestre deschise (dacă sunt mai mult de 2)"
 
-#: src/_dialogs.ui:201
-msgid "Middle mouse button:"
-msgstr "Butonul din mijloc al mouse-ului:"
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "Dezactivează afișarea numărului de lansări D-Bus"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:217
+msgid "Middle mouse button:"
+msgstr "Butonul din mijloc al mausului:"
+
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "Închide tot"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "Lansează o nouă instanță"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "Nu face nimic"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "Comportament"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "Stilul indicatorului activ:"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "Bare"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "Puncte"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "Dreptunghiuri"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "Cercuri"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "Niciunul"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "Stilul indicatorului inactiv:"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "Orientare indicator:"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "Automată"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "Jos"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "Dreapta"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "Sus"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "Stânga"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "Obțineți culoarea indicatorului din temă"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "Indicator activ:"
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "Indicator inactiv:"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "Forțează dimensiunea pictogramei:"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "Lățime previzualizare:"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "Înălțime previzualizare:"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "Aspect"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Alternați între aplicații cu <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "Treceți la ultima fereastră cu <SUPER>"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -270,10 +274,10 @@ msgstr ""
 "Tasta &lt;SUPER&gt; din stânga pare să fie deja asociată unei alte comenzi.\n"
 "Verificați configurația tastaturii Xfce."
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
 msgstr "Gestionează comenzile rapide..."
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "Tastele de comenzi rapide ale tastaturii"
