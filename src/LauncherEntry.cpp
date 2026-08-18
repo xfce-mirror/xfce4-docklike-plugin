@@ -52,7 +52,7 @@ struct LauncherEntry::Impl
 			return "";
 
 		gchar* unescaped = g_uri_unescape_string(appUri + sizeof(prefix) - 1, nullptr);
-		if (unescaped == nullptr || unescaped[0] == '\0')
+		if (xfce_str_is_empty(unescaped))
 		{
 			g_free(unescaped);
 			return "";
@@ -146,7 +146,7 @@ struct LauncherEntry::Impl
 		g_variant_get(parameters, "(&s&s&s)", &name, &previousOwner, &newOwner);
 		(void)previousOwner;
 
-		if (newOwner[0] != '\0')
+		if (!xfce_str_is_empty(newOwner))
 			return;
 
 		bool removed = false;
@@ -171,8 +171,7 @@ struct LauncherEntry::Impl
 		connection = g_bus_get_sync(G_BUS_TYPE_SESSION, nullptr, &error);
 		if (connection == nullptr)
 		{
-			g_warning("Unable to listen for Unity launcher counts: %s",
-				error == nullptr ? "unknown error" : error->message);
+			g_warning("Unable to listen for Unity launcher counts: %s", error->message);
 			g_clear_error(&error);
 			return;
 		}
