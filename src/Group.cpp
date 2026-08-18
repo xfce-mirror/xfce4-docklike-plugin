@@ -1087,6 +1087,13 @@ void Group::onButtonRelease(GdkEventButton* event)
 
 bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int y, guint time)
 {
+	GdkModifierType mask;
+	GdkDevice* device = gdk_drag_context_get_device(context);
+	gdk_window_get_device_position(gtk_widget_get_window(widget), device, nullptr, nullptr, &mask);
+
+	if (mask & GDK_CONTROL_MASK)
+		gtk_drag_cancel(context);
+
 	GList* tmp_list = gdk_drag_context_list_targets(context);
 
 	if (tmp_list != nullptr)
