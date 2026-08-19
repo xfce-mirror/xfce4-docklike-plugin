@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Kiril Kirilov <cybercop_montana@abv.bg>, 2026\n"
 "Language-Team: Bulgarian (https://app.transifex.com/xfce/teams/16840/bg/)\n"
@@ -34,55 +34,55 @@ msgstr "Отказ"
 msgid "_Open"
 msgstr "_Отваряне"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "Прикачено към дока"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "Прикачване към дока"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
 msgstr "Добавяне на клавишна комбинация за активиране..."
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
 msgstr "Управление на клавишна комбинация за активиране..."
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "Редактиране на стартер..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "Премахване"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "Избор на стартер..."
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "Създаване на стартер..."
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
 msgstr "Действия с прозорците"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "Затваряне"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "Затваряне на всички"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr "Kiril Kirilov Cybercop <cybercop_montana@abv.bg>"
 
@@ -144,119 +144,123 @@ msgstr "Показване на миниатюри за визуализация
 msgid "Show the number of open windows (if more than 2)"
 msgstr "Показване на броя отворени прозорци (ако са повече от 2)"
 
-#: src/_dialogs.ui:201
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "Деактивиране на броячите на стартери на D-Bus"
+
+#: src/_dialogs.ui:217
 msgid "Middle mouse button:"
 msgstr "Среден бутон на мишката:"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "Затваряне на всички"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "Стартиране на ново копие"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "Не прави нищо"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "Поведение"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "Стил на активният индикатор:"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "Ленти"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "Точки"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "Правоъгълници"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "Кръгове"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "Без"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "Стил на неактивният индикатор:"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "Ориентация на индикатора:"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "Отдолу"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "Отдясно"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "Отгоре"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "Отляво"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "Вземи цвят за индикатора от темата"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "Активен индикатор:"
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "Неактивен индикатор:"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "Форсиран размер на икона:"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "Ширина на предварителния преглед:"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "Височина на предварителния преглед:"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "Външен вид"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Превключване между приложенията с<SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "Преминаване към последния прозорец с <SUPER>"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -264,10 +268,10 @@ msgstr ""
 "Левият клавиш &lt;SUPER&gt; изглежда вече е свързан с друга команда.\n"
 "Проверете настройките на клавиатурата си в Xfce."
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
 msgstr "Управление на бързите клавиши..."
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "Бързи клавиши на клавиатурата"
