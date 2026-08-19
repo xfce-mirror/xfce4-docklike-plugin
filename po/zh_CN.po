@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/xfce/teams/16840/zh_CN/)\n"
@@ -34,55 +34,55 @@ msgstr "取消(_C)"
 msgid "_Open"
 msgstr "打开(_O)"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "已固定到 Dock"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "固定到 Dock"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
 msgstr "添加激活快捷键..."
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
 msgstr "管理激活快捷键... "
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "编辑启动器..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "移除"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "选择启动器..."
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "创建启动器..."
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
 msgstr "窗口操作"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "关闭"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "全部关闭"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr ""
 "Hunt Xu <huntxu@live.cn>, 2009, 2010.\n"
@@ -146,128 +146,132 @@ msgstr "显示打开窗口的预览缩略图"
 msgid "Show the number of open windows (if more than 2)"
 msgstr "显示打开的窗口数 (如果超过 2 个)"
 
-#: src/_dialogs.ui:201
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "禁用 D-Bus 启动器计数"
+
+#: src/_dialogs.ui:217
 msgid "Middle mouse button:"
 msgstr "鼠标中键:"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "全部关闭"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "启动新实例"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "什么都不做"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "行为"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "活动指示器样式："
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "长条"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "点"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "矩形"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "Ciliora"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "圆圈"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "无"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "非活动指示器样式:"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "指示器方向:"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "自动"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "底部"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "右边"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "顶部"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "左边"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "从主题获取指示器颜色"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "活动指示器："
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "非活动指示器:"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "强制图标大小:"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "预览宽度:"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "预览高度:"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "外观"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "使用 <SUPER>+[1, 2, ...] 在应用程序之间切换"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "使用 <SUPER> 切换到最后一个窗口"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr "左 &lt;SUPER&gt; 键似乎已经映射到另一个命令。请检查你的 Xfce 键盘设置。"
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
 msgstr "管理快捷键..."
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "键盘热键"
