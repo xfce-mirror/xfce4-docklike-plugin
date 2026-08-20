@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Warut Bunprasert <warut.b@disroot.org>, 2026\n"
 "Language-Team: Thai (https://app.transifex.com/xfce/teams/16840/th/)\n"
@@ -34,55 +34,55 @@ msgstr "_ยกเลิก"
 msgid "_Open"
 msgstr "_เปิด"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "ปักหมุดไว้ที่ด็อกแล้ว"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "ปักหมุดไว้ที่ด็อก"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
 msgstr "เพิ่มปุ่มลัดการเปิดใช้งาน..."
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
 msgstr "จัดการปุ่มลัดการเปิดใช้งาน..."
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "แก้ไขตัวเรียกใช้..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "ลบออก"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "เลือกตัวเรียกใช้..."
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "สร้างตัวเรียกใช้..."
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
 msgstr "การกระทำหน้าต่าง"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "ปิด"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "ปิดทั้งหมด"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr "Theppitak Karoonboonyanan"
 
@@ -144,119 +144,123 @@ msgstr "แสดงภาพย่อสำหรับหน้าต่าง
 msgid "Show the number of open windows (if more than 2)"
 msgstr "แสดงจำนวนหน้าต่างที่เปิดอยู่ (ถ้ามีมากกว่า 2)"
 
-#: src/_dialogs.ui:201
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "ปิดการใช้งานการนับตัวเรียกใช้ D-Bus"
+
+#: src/_dialogs.ui:217
 msgid "Middle mouse button:"
 msgstr "ปุ่มกลางของเมาส์:"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "ปิดทั้งหมด"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "เปิดอินสแตนซ์ใหม่"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "ไม่ต้องทำอะไรเลย"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "พฤติกรรม"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "รูปแบบตัวบ่งชี้ที่ใช้งานอยู่:"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "แถบ"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "จุด"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "สี่เหลี่ยม"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "ซิลิอารี"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "วงกลม"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "ไม่ใช้"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "รูปแบบตัวบ่งชี้ที่ไม่ได้ใช้งาน:"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "การวางแนวตัวบ่งชี้:"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "อัตโนมัติ"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "ด้านล่าง"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "ด้านขวา"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "ด้านบน"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "ด้านซ้าย"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "รับสีตัวบ่งชี้จากชุดตกแต่ง"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "ตัวบ่งชี้ที่ใช้งานอยู่:"
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "ตัวบ่งชี้ที่ไม่ได้ใช้งาน:"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "ขนาดไอคอนบังคับ:"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "ความกว้างตัวอย่าง:"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "ความสูงตัวอย่าง:"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "รูปลักษณ์"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "สลับโปรแกรมด้วย <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "สลับไปที่หน้าต่างสุดท้ายด้วย<SUPER>"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -264,10 +268,10 @@ msgstr ""
 "ดูเหมือนว่า &lt;SUPER&gt; ซ้ายถูกใช้โดยคำสั่งอื่นแล้ว\n"
 "ตรวจสอบการตั้งค่าแป้นพิมพ์ Xfce ของคุณ"
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
 msgstr "จัดการปุ่มลัด..."
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "ปุ่มลัดแป้นพิมพ์"
