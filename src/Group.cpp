@@ -1146,6 +1146,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 			{
 				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
 				groupWindow->activate(time);
+
 				if (!mGroupMenu.mVisible)
 					onMouseEnter();
 			}

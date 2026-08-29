@@ -110,8 +110,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "drag-motion",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context,
-						gint x, gint y, guint time, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) {
 			me->mGroupWindow->activate(time);
 			gdk_drag_status(context, GDK_ACTION_MOVE, time);
 			return true;
@@ -119,8 +118,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "drag-leave",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context,
-						guint time, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, guint time, GroupMenuItem* me) {
 			g_idle_add(+[](gpointer data) -> gboolean {
 				GroupMenuItem* me_check = static_cast<GroupMenuItem*>(data);
 				GroupMenu* menu = &me_check->mGroupWindow->mGroup->mGroupMenu;
