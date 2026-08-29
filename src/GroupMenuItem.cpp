@@ -109,6 +109,27 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		}),
 		this);
 
+	g_signal_connect(G_OBJECT(mItem), "drag-motion",
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) {
+			me->mGroupWindow->activate(time);
+			gdk_drag_status(context, GDK_ACTION_MOVE, time);
+			return true;
+		}),
+		this);
+
+	g_signal_connect(G_OBJECT(mItem), "drag-leave",
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, guint time, GroupMenuItem* me) {
+			g_idle_add(+[](gpointer data) -> gboolean {
+				GroupMenuItem* me_check = static_cast<GroupMenuItem*>(data);
+				GroupMenu* menu = &me_check->mGroupWindow->mGroup->mGroupMenu;
+
+				if (menu->mVisible && menu->getPointerDistance() > 0)
+					menu->hide();
+
+				return G_SOURCE_REMOVE; }, me);
+		}),
+		this);
+
 	g_signal_connect(G_OBJECT(mItem), "enter-notify-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
 			if (event->state & GDK_BUTTON1_MASK)
