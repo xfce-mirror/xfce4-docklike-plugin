@@ -1146,7 +1146,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 			{
 				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
 				groupWindow->activate(time);
-
 				if (!mGroupMenu.mVisible)
 					onMouseEnter();
 			}
@@ -1164,6 +1163,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
 	gtk_drag_unhighlight(mButton);
+	onMouseLeave();
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
