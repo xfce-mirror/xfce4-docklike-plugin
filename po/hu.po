@@ -1,0 +1,280 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# László Varga, 2025
+# kelemeng <kelemeng@ubuntu.com>, 2025
+# Balázs Meskó <meskobalazs@mailbox.org>, 2025
+# Nick Schermer <nick@xfce.org>, 2026
+# Hrotkó Gábor <hrotko.gabor@gmail.com>, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Hrotkó Gábor <hrotko.gabor@gmail.com>, 2026\n"
+"Language-Team: Hungarian (https://app.transifex.com/xfce/teams/16840/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/AppInfos.cpp:354
+msgid "Select Launcher"
+msgstr "Indító kiválasztása"
+
+#: src/AppInfos.cpp:355
+msgid "_Cancel"
+msgstr "_Mégsem"
+
+#: src/AppInfos.cpp:355
+msgid "_Open"
+msgstr "_Megnyitás"
+
+#: src/Group.cpp:938
+msgid "Pinned to Dock"
+msgstr "Rögzítve a dokkon"
+
+#: src/Group.cpp:938
+msgid "Pin to Dock"
+msgstr "Rögzítés a dokkon"
+
+#: src/Group.cpp:956
+msgid "Add activation shortcut..."
+msgstr "Aktiválási gyorsbillentyű hozzáadása..."
+
+#: src/Group.cpp:967
+msgid "Manage activation shortcut..."
+msgstr "Aktiválási gyorsbillentyű kezelése..."
+
+#: src/Group.cpp:989
+msgid "Edit Launcher..."
+msgstr "Indító szerkesztése..."
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:1021
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:1034
+msgid "Select Launcher..."
+msgstr "Indító kiválasztása..."
+
+#: src/Group.cpp:1043
+msgid "Create Launcher..."
+msgstr "Indító létrehozása..."
+
+#: src/Group.cpp:1055
+msgid "Window Actions"
+msgstr "Ablakműveletek"
+
+#: src/Group.cpp:1062
+msgid "Close"
+msgstr "Bezárás"
+
+#: src/Group.cpp:1062
+msgid "Close All"
+msgstr "Összes bezárása"
+
+#: src/Plugin.cpp:122
+msgid "translator-credits"
+msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
+
+#: src/SettingsDialog.cpp:39
+#, c-format
+msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
+msgstr "<b>Csak az első %u gyorsbillentyű van engedélyezve.</b>\n"
+
+#: src/SettingsDialog.cpp:46
+msgid "<b>Only the first hotkey is enabled.</b>\n"
+msgstr "<b>Csak az első gyorsbillentyű van engedélyezve.</b>\n"
+
+#: src/SettingsDialog.cpp:50
+msgid "<b>No hotkeys enabled.</b>\n"
+msgstr "<b>Nincsenek engedélyezett gyorsbillentyűk.</b>\n"
+
+#: src/SettingsDialog.cpp:54
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
+msgstr ""
+"Úgy tűnik hogy a &lt;SUPER&gt;+%u billentyű már egy másik parancshoz van rendelve.\n"
+"Ellenőrizze az Xfce billentyűzetbeállításait."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "Docklike tálca"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Modern, minimalista tálca Xfce-hez"
+
+#: src/_dialogs.ui:54
+msgid "_Help"
+msgstr "_Súgó"
+
+#: src/_dialogs.ui:70
+msgid "_Close"
+msgstr "_Bezárás"
+
+#: src/_dialogs.ui:115
+msgid "Don't show the window list for a single window"
+msgstr "Ne jelenítse meg az ablaklistát egyetlen ablak esetén"
+
+#: src/_dialogs.ui:130
+msgid "Only show applications on the current workspace"
+msgstr "Csak az aktuális munkaterületen lévő alkalmazások megjelenítése"
+
+#: src/_dialogs.ui:145
+msgid "Only show applications on the current display"
+msgstr "Csak az aktuális kijelzőn lévő alkalmazások megjelenítése"
+
+#: src/_dialogs.ui:160
+msgid "Show preview thumbnails for open windows"
+msgstr "Előnézeti bélyegképek megjelenítése a megnyitott ablakokhoz"
+
+#: src/_dialogs.ui:176
+msgid "Show the number of open windows (if more than 2)"
+msgstr "A megnyitott ablakok számának megjelenítése (ha több mint 2)"
+
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "A D-Bus indítószámlálók letiltása"
+
+#: src/_dialogs.ui:217
+msgid "Middle mouse button:"
+msgstr "Középső egérgomb:"
+
+#: src/_dialogs.ui:230
+msgid "Close all"
+msgstr "Összes bezárása"
+
+#: src/_dialogs.ui:231
+msgid "Launch new instance"
+msgstr "Új példány indítása"
+
+#: src/_dialogs.ui:232
+msgid "Do Nothing"
+msgstr "Ne tegyen semmit"
+
+#: src/_dialogs.ui:254
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#: src/_dialogs.ui:287
+msgid "Active indicator style:"
+msgstr "Aktív jelző stílusa:"
+
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
+msgid "Bars"
+msgstr "Sávok"
+
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
+msgid "Dots"
+msgstr "Pontok"
+
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
+msgid "Rectangles"
+msgstr "Téglalapok"
+
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
+msgid "Circles"
+msgstr "Körök"
+
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
+msgid "None"
+msgstr "Nincs"
+
+#: src/_dialogs.ui:318
+msgid "Inactive indicator style:"
+msgstr "Inaktív jelző stílusa:"
+
+#: src/_dialogs.ui:349
+msgid "Indicator orientation:"
+msgstr "Jelző tájolása:"
+
+#: src/_dialogs.ui:361
+msgid "Automatic"
+msgstr "Automatikus"
+
+#: src/_dialogs.ui:362
+msgid "Bottom"
+msgstr "Lent"
+
+#: src/_dialogs.ui:363
+msgid "Right"
+msgstr "Jobbra"
+
+#: src/_dialogs.ui:364
+msgid "Top"
+msgstr "Fent"
+
+#: src/_dialogs.ui:365
+msgid "Left"
+msgstr "Balra"
+
+#: src/_dialogs.ui:375
+msgid "Get indicator color from theme"
+msgstr "A jelző színének átvétele a témából"
+
+#: src/_dialogs.ui:401
+msgid "Active indicator:"
+msgstr "Aktív jelző:"
+
+#: src/_dialogs.ui:425
+msgid "Inactive indicator:"
+msgstr "Inaktív jelző:"
+
+#: src/_dialogs.ui:452
+msgid "Force icon size:"
+msgstr "Ikonméret kényszerítése:"
+
+#: src/_dialogs.ui:496
+msgid "Preview width:"
+msgstr "Előnézet szélessége:"
+
+#: src/_dialogs.ui:525
+msgid "Preview height:"
+msgstr "Előnézet magassága:"
+
+#: src/_dialogs.ui:553
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: src/_dialogs.ui:583
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Váltás az alkalmazások között a <SUPER>+[1, 2, ...] billentyűkkel"
+
+#: src/_dialogs.ui:610
+msgid "Switch to the last window with <SUPER>"
+msgstr "Váltás az utolsó ablakra a <SUPER> billentyűvel"
+
+#: src/_dialogs.ui:626
+msgid ""
+"The left &lt;SUPER&gt; key seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
+msgstr ""
+"Úgy tűnik, hogy a bal oldali <SUPER> billentyű már egy másik parancshoz van rendelve.\n"
+"Ellenőrizze az Xfce billentyűzetbeállításait."
+
+#: src/_dialogs.ui:638
+msgid "Manage shortcuts..."
+msgstr "Gyorsbillentyűk kezelése..."
+
+#: src/_dialogs.ui:659
+msgid "Keyboard hotkeys"
+msgstr "Billentyűparancsok"
