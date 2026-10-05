@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-05-23 12:58+0200\n"
+"POT-Creation-Date: 2026-08-18 12:59+0200\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (https://app.transifex.com/xfce/teams/16840/lo/)\n"
@@ -33,70 +33,70 @@ msgstr "_ຍົກເລີກ"
 msgid "_Open"
 msgstr "_ເປີດ"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pinned to Dock"
 msgstr "ປັກໝຸດໄວ້ທີ່ດັອກແລ້ວ"
 
-#: src/Group.cpp:861
+#: src/Group.cpp:938
 msgid "Pin to Dock"
 msgstr "ປັກໝຸດໃສ່ດັອກ"
 
-#: src/Group.cpp:879
+#: src/Group.cpp:956
 msgid "Add activation shortcut..."
-msgstr ""
+msgstr "ເພີ່ມປຸ່ມລັດເປີດໃຊ້ງານ..."
 
-#: src/Group.cpp:890
+#: src/Group.cpp:967
 msgid "Manage activation shortcut..."
-msgstr ""
+msgstr "ຈັດການປຸ່ມລັດເປີດໃຊ້ງານ..."
 
-#: src/Group.cpp:912
+#: src/Group.cpp:989
 msgid "Edit Launcher..."
 msgstr "ແກ້ໄຂຕົວເປີດໃຊ້..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:944
+#: src/Group.cpp:1021
 msgid "Remove"
 msgstr "ລຶບ"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:957
+#: src/Group.cpp:1034
 msgid "Select Launcher..."
 msgstr "ເລືອກຕົວເປີດໃຊ້..."
 
-#: src/Group.cpp:966
+#: src/Group.cpp:1043
 msgid "Create Launcher..."
 msgstr "ສ້າງຕົວເປີດໃຊ້..."
 
-#: src/Group.cpp:978
+#: src/Group.cpp:1055
 msgid "Window Actions"
-msgstr ""
+msgstr "ການກະທຳຂອງໜ້າຕ່າງ"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close"
 msgstr "ປິດ"
 
-#: src/Group.cpp:985
+#: src/Group.cpp:1062
 msgid "Close All"
 msgstr "ປິດທັງໝົດ"
 
-#: src/Plugin.cpp:118
+#: src/Plugin.cpp:122
 msgid "translator-credits"
 msgstr "ເຄຣດິດຜູ້ແປ"
 
 #: src/SettingsDialog.cpp:39
 #, c-format
 msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
-msgstr ""
+msgstr "<b> ເປີດໃຊ້ງານສະເພາະປຸ່ມລັດ%u ອັນທຳອິດເທົ່ານັ້ນ.</b>\n"
 
 #: src/SettingsDialog.cpp:46
 msgid "<b>Only the first hotkey is enabled.</b>\n"
-msgstr ""
+msgstr "<b>ເປີດໃຊ້ງານສະເພາະປຸ່ມລັດທຳອິດເທົ່ານັ້ນ.</b>\n"
 
 #: src/SettingsDialog.cpp:50
 msgid "<b>No hotkeys enabled.</b>\n"
-msgstr ""
+msgstr "<b>.ບໍ່ມີປຸ່ມລັດທີ່ຖືກເປີດໃຊ້ງານ.</b>\n"
 
 #: src/SettingsDialog.cpp:54
 #, c-format
@@ -104,6 +104,8 @@ msgid ""
 "The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"ປຸ່ມ &lt;SUPER&gt;+%u ດ້ານຊ້າຍ ເບິ່ງຄືວ່າຖືກກຳນົດໃຫ້ກັບຄຳສັ່ງອື່ນແລ້ວ..\n"
+"ກວດສອບການຕັ້ງຄ່າແປ້ນພິມ Xfce ຂອງທ່ານ."
 
 #: src/docklike.desktop.in:5
 msgid "Docklike Taskbar"
@@ -141,128 +143,134 @@ msgstr "ສະແດງຮູບຕົວຢ່າງຂະໜາດນ້ອຍ
 msgid "Show the number of open windows (if more than 2)"
 msgstr "ສະແດງຈຳນວນປ່ອງຢ້ຽມທີ່ເປີດຢູ່ (ຖ້າມີຫຼາຍກວ່າ 2)"
 
-#: src/_dialogs.ui:201
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "ປິດໃຊ້ງານການນັບຈຳນວນຕົວເປີດ D-Bus"
+
+#: src/_dialogs.ui:217
 msgid "Middle mouse button:"
 msgstr "ປຸ່ມກາງຂອງເມົ້າ:"
 
-#: src/_dialogs.ui:214
+#: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "ປິດທັງໝົດ"
 
-#: src/_dialogs.ui:215
+#: src/_dialogs.ui:231
 msgid "Launch new instance"
 msgstr "ເປີດຕົວຢ່າງໃໝ່"
 
-#: src/_dialogs.ui:216
+#: src/_dialogs.ui:232
 msgid "Do Nothing"
 msgstr "ບໍ່ຕ້ອງເຮັດຫຍັງ"
 
-#: src/_dialogs.ui:238
+#: src/_dialogs.ui:254
 msgid "Behavior"
 msgstr "ພຶດຕິກຳ"
 
-#: src/_dialogs.ui:271
+#: src/_dialogs.ui:287
 msgid "Active indicator style:"
 msgstr "ຮູບແບບຕົວບົ່ງຊີ້ສະຖານະເປີດໃຊ້:"
 
-#: src/_dialogs.ui:284 src/_dialogs.ui:315
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
 msgid "Bars"
 msgstr "ແຖບ"
 
-#: src/_dialogs.ui:285 src/_dialogs.ui:316
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
 msgid "Dots"
 msgstr "ຈຸດ"
 
-#: src/_dialogs.ui:286 src/_dialogs.ui:317
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
 msgid "Rectangles"
 msgstr "ຮູບສີ່ຫຼ່ຽມ"
 
-#: src/_dialogs.ui:287 src/_dialogs.ui:318
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
 msgid "Ciliora"
 msgstr "ຊີລີໂອຣາ (Ciliora)"
 
-#: src/_dialogs.ui:288 src/_dialogs.ui:319
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
 msgid "Circles"
 msgstr "ວົງມົນ"
 
-#: src/_dialogs.ui:289 src/_dialogs.ui:320
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
 msgid "None"
 msgstr "ບໍ່ມີ"
 
-#: src/_dialogs.ui:302
+#: src/_dialogs.ui:318
 msgid "Inactive indicator style:"
 msgstr "ຮູບແບບຕົວບົ່ງຊີ້ສະຖານະບໍ່ໄດ້ໃຊ້:"
 
-#: src/_dialogs.ui:333
+#: src/_dialogs.ui:349
 msgid "Indicator orientation:"
 msgstr "ທິດທາງຂອງຕົວບົ່ງຊີ້:"
 
-#: src/_dialogs.ui:345
+#: src/_dialogs.ui:361
 msgid "Automatic"
 msgstr "ອັດຕະໂນມັດ"
 
-#: src/_dialogs.ui:346
+#: src/_dialogs.ui:362
 msgid "Bottom"
 msgstr "ລຸ່ມ"
 
-#: src/_dialogs.ui:347
+#: src/_dialogs.ui:363
 msgid "Right"
 msgstr "ຂວາ"
 
-#: src/_dialogs.ui:348
+#: src/_dialogs.ui:364
 msgid "Top"
 msgstr "ເທິງ"
 
-#: src/_dialogs.ui:349
+#: src/_dialogs.ui:365
 msgid "Left"
 msgstr "ຊ້າຍ"
 
-#: src/_dialogs.ui:359
+#: src/_dialogs.ui:375
 msgid "Get indicator color from theme"
 msgstr "ໃຊ້ສີຕົວບົ່ງຊີ້ຈາກທີມ (Theme)"
 
-#: src/_dialogs.ui:385
+#: src/_dialogs.ui:401
 msgid "Active indicator:"
 msgstr "ຕົວບົ່ງຊີ້ສະຖານະເປີດໃຊ້:"
 
-#: src/_dialogs.ui:409
+#: src/_dialogs.ui:425
 msgid "Inactive indicator:"
 msgstr "ຕົວບົ່ງຊີ້ສະຖານະບໍ່ໄດ້ໃຊ້:"
 
-#: src/_dialogs.ui:436
+#: src/_dialogs.ui:452
 msgid "Force icon size:"
 msgstr "ບັງຄັບຂະໜາດໄອຄອນ:"
 
-#: src/_dialogs.ui:480
+#: src/_dialogs.ui:496
 msgid "Preview width:"
 msgstr "ຄວາມກວ້າງຂອງຕົວຢ່າງ:"
 
-#: src/_dialogs.ui:509
+#: src/_dialogs.ui:525
 msgid "Preview height:"
 msgstr "ຄວາມສູງຂອງຕົວຢ່າງ:"
 
-#: src/_dialogs.ui:537
+#: src/_dialogs.ui:553
 msgid "Appearance"
 msgstr "ຮູບລັກສະນະ"
 
-#: src/_dialogs.ui:567
+#: src/_dialogs.ui:583
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "ສະຫຼັບລະຫວ່າງແອັບພລິເຄຊັນດ້ວຍ <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:594
+#: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "ສະຫຼັບໄປຫາປ່ອງຢ້ຽມຫຼ້າສຸດດ້ວຍ <SUPER>"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:626
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
 msgstr ""
+"ຊຸດປຸ່ມ &lt;SUPER&gt;+%u ເບິ່ງຄືວ່າຖືກກຳນົດໃຫ້ກັບຄຳສັ່ງອື່ນແລ້ວ.\n"
+"ກວດສອບການຕັ້ງຄ່າແປ້ນພິມ Xfce ຂອງທ່ານ."
 
-#: src/_dialogs.ui:622
+#: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
-msgstr ""
+msgstr "ຈັດການປຸ່ມລັດ..."
 
-#: src/_dialogs.ui:643
+#: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
 msgstr "ປຸ່ມລັດຄີບອດ"
