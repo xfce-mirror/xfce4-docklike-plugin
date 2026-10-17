@@ -97,6 +97,9 @@ public:
 	bool mPinned;
 	bool mActive;
 	bool mWindowMenuShown;
+	bool mDragging;
+	gdouble mDragStartX;
+	gdouble mDragStartY;
 
 	uint mTolerablePointerDistance;
 	uint mTopWindowIndex;
