@@ -40,6 +40,9 @@ namespace Dock
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
+	void pinApp(std::shared_ptr<AppInfo> appInfo, Group* at = nullptr);
+	void pinFromUris(const gchar* const* uris, Group* at = nullptr);
+
 	void moveButton(Group* moving, Group* dest);
 	void savePinned();
 	void drawGroups();

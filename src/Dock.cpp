@@ -17,6 +17,7 @@
  */
 
 #include "Dock.hpp"
+#include "AppInfos.hpp"
 #include "LauncherEntry.hpp"
 #include "Settings.hpp"
 
@@ -28,6 +29,19 @@ namespace Dock
 	int mPanelSize;
 	int mIconSize;
 
+	static GtkTargetEntry dockDestEntries[1] = {{(gchar*)"text/uri-list", 0, 0}};
+
+	static void onDockDragDataReceived(GtkWidget* widget, GdkDragContext* context, gint x, gint y, GtkSelectionData* data, guint info, guint time)
+	{
+		gchar** uris = gtk_selection_data_get_uris(data);
+
+		if (uris != nullptr)
+		{
+			pinFromUris((const gchar* const*)uris, nullptr);
+			g_strfreev(uris);
+		}
+	}
+
 	void init()
 	{
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -35,6 +49,9 @@ namespace Dock
 
 		if (Settings::dockSize)
 			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
+
+		gtk_drag_dest_set(mBox, GtkDestDefaults(GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP), dockDestEntries, 1, GDK_ACTION_COPY);
+		g_signal_connect(G_OBJECT(mBox), "drag-data-received", G_CALLBACK(onDockDragDataReceived), nullptr);
 
 		gtk_widget_show(mBox);
 		drawGroups();
@@ -52,6 +69,72 @@ namespace Dock
 		}
 
 		return group.get();
+	}
+
+	void pinApp(std::shared_ptr<AppInfo> appInfo, Group* at)
+	{
+		if (!appInfo || appInfo->mPath.empty())
+			return;
+
+		std::shared_ptr<Group> group = mGroups.findIf(
+			[&appInfo](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> bool {
+				return g.first == appInfo || (!appInfo->mId.empty() && g.first->mId == appInfo->mId);
+			});
+
+		if (group)
+		{
+			if (group->mPinned)
+				return;
+
+			group->mPinned = true;
+			group->updateStyle();
+		}
+		else
+		{
+			group = std::make_shared<Group>(appInfo, true);
+			mGroups.push(appInfo, group);
+			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
+		}
+
+		if (at != nullptr && at != group.get())
+			moveButton(group.get(), at);
+
+		savePinned();
+	}
+
+	void pinFromUris(const gchar* const* uris, Group* at)
+	{
+		bool first = true;
+
+		for (const gchar* const* uri = uris; uri != nullptr && *uri != nullptr; uri++)
+		{
+			if (!g_str_has_prefix(*uri, "file:"))
+				continue;
+
+			GError* error = nullptr;
+			gchar* path = g_filename_from_uri(*uri, nullptr, &error);
+
+			if (path == nullptr)
+			{
+				g_clear_error(&error);
+				continue;
+			}
+
+			std::string pathStr = path;
+			g_free(path);
+
+			if (!g_str_has_suffix(pathStr.c_str(), ".desktop"))
+				continue;
+
+			std::string id = Help::String::toLowercase(Help::String::pathBasename(pathStr, true));
+			std::shared_ptr<AppInfo> appInfo = AppInfos::search(id);
+
+			if (appInfo && !appInfo->mPath.empty())
+			{
+				pinApp(appInfo, first ? at : nullptr);
+				first = false;
+			}
+		}
 	}
 
 	void moveButton(Group* moving, Group* dest)
