@@ -1011,6 +1011,14 @@ GtkWidget* Group::buildContextMenu()
 				nullptr);
 		}
 
+		item = gtk_menu_item_new_with_label(_("Launch application"));
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		g_signal_connect(G_OBJECT(item), "activate",
+			G_CALLBACK(+[](GtkMenuItem* _item, AppInfo* appInfo) {
+				appInfo->launch();
+			}),
+			mAppInfo.get());
+
 		item = gtk_menu_item_new_with_label(_("Edit Launcher..."));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 		g_signal_connect(G_OBJECT(item), "activate",
