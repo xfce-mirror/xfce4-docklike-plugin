@@ -38,7 +38,7 @@ static std::shared_ptr<Group> getDragGroup(const std::string& dragId)
 		});
 }
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -104,12 +104,20 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	g_object_set_data(G_OBJECT(mButton), "group", this);
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
 	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
-	gtk_widget_add_events(mButton, GDK_SCROLL_MASK);
+	gtk_widget_add_events(mButton, GDK_SCROLL_MASK | GDK_POINTER_MOTION_MASK);
 
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mButton), "button-press-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
+			me->mDragging = false;
+
+			if (event->button == GDK_BUTTON_PRIMARY)
+			{
+				me->mDragStartX = event->x;
+				me->mDragStartY = event->y;
+			}
+
 			if (event->button != GDK_BUTTON_SECONDARY && event->state & GDK_CONTROL_MASK)
 				gtk_drag_begin_with_coordinates(widget, targetList, GDK_ACTION_MOVE, event->button, (GdkEvent*)event, -1, -1);
 
@@ -124,9 +132,26 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		}),
 		this);
 
+	g_signal_connect(G_OBJECT(mButton), "motion-notify-event",
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventMotion* event, Group* me) {
+			if (me->mDragging || !(event->state & GDK_BUTTON1_MASK))
+				return false;
+
+			if (gtk_drag_check_threshold(widget, me->mDragStartX, me->mDragStartY, event->x, event->y))
+			{
+				me->mDragging = true;
+				gtk_drag_begin_with_coordinates(widget, targetList, GDK_ACTION_MOVE, GDK_BUTTON_PRIMARY, (GdkEvent*)event, -1, -1);
+			}
+
+			return false;
+		}),
+		this);
+
 	g_signal_connect(G_OBJECT(mButton), "button-release-event",
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
 			if (event->button != GDK_BUTTON_PRIMARY && event->button != GDK_BUTTON_MIDDLE)
+				return false;
+			if (me->mDragging)
 				return false;
 			me->onButtonRelease(event);
 			return true;
@@ -1192,6 +1217,8 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 
 void Group::onDragBegin(GdkDragContext* context)
 {
+	mDragging = true;
+
 	if (mIconPixbuf != nullptr)
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
