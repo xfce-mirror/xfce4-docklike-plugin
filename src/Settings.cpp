@@ -28,6 +28,8 @@ namespace Settings
 	State<bool> forceIconSize;
 	State<int> iconSize;
 
+	State<bool> expandDock;
+
 	State<bool> noWindowsListIfSingle;
 	State<bool> onlyDisplayVisible;
 	State<bool> onlyDisplayScreen;
@@ -118,6 +120,21 @@ namespace Settings
 				Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 					g.second->mGroupMenu.showPreviewsChanged();
 				});
+			});
+
+		GError* expandError = nullptr;
+		gboolean expandValue = g_key_file_get_boolean(file, "user", "expandDock", &expandError);
+		if (expandError != nullptr)
+		{
+			expandValue = xfce_panel_plugin_get_expand(Plugin::mXfPlugin);
+			g_clear_error(&expandError);
+		}
+		expandDock.setup(expandValue,
+			[](bool _expandDock) -> void {
+				g_key_file_set_boolean(mFile.get(), "user", "expandDock", _expandDock);
+				saveFile();
+
+				xfce_panel_plugin_set_expand(Plugin::mXfPlugin, _expandDock);
 			});
 
 		showWindowCount.setup(g_key_file_get_boolean(file, "user", "showWindowCount", nullptr),

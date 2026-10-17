@@ -47,6 +47,7 @@ namespace Plugin
 		Hotkeys::init();
 
 		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
+		xfce_panel_plugin_set_expand(mXfPlugin, Settings::expandDock);
 		xfce_panel_plugin_menu_show_configure(mXfPlugin);
 		xfce_panel_plugin_menu_show_about(mXfPlugin);
 
