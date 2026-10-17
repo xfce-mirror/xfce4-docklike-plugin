@@ -20,8 +20,12 @@
 
 #include <math.h>
 
-static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
-static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
+static GtkTargetEntry sourceEntries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
+static GtkTargetList* targetList = gtk_target_list_new(sourceEntries, 1);
+static GtkTargetEntry destEntries[2] = {
+	{(gchar*)"application/docklike_group", 0, 0},
+	{(gchar*)"text/uri-list", 0, 1},
+};
 
 Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mPlugin(plugin), mPinned(pinned), mAppInfo(appInfo), mGroupMenu(this)
 {
@@ -93,7 +97,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mP
 
 	g_object_set_data(G_OBJECT(mButton), "group", this);
 	gtk_button_set_relief(GTK_BUTTON(mButton), GTK_RELIEF_NONE);
-	gtk_drag_dest_set(mButton, GTK_DEST_DEFAULT_DROP, entries, 1, GDK_ACTION_MOVE);
+	gtk_drag_dest_set(mButton, GtkDestDefaults(GTK_DEST_DEFAULT_DROP), destEntries, 2, GdkDragAction(GDK_ACTION_MOVE | GDK_ACTION_COPY));
 	gtk_widget_add_events(mButton, GDK_SCROLL_MASK | GDK_POINTER_MOTION_MASK);
 
 	//--------------------------------------------------
@@ -1180,35 +1184,37 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 	GdkDevice* device = gdk_drag_context_get_device(context);
 	gdk_window_get_device_position(gtk_widget_get_window(widget), device, nullptr, nullptr, &mask);
 
-	if (mask & GDK_CONTROL_MASK)
-		gtk_drag_cancel(context);
+	gchar* name = gdk_atom_name(gtk_drag_dest_find_target(widget, context, nullptr));
+	std::string target = (name != nullptr) ? name : "";
+	g_free(name);
 
-	GList* tmp_list = gdk_drag_context_list_targets(context);
-
-	if (tmp_list != nullptr)
+	if (target == "application/docklike_group")
 	{
-		gchar* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
-		std::string target = name;
-		g_free(name);
+		if (mask & GDK_CONTROL_MASK)
+			gtk_drag_cancel(context);
 
-		if (target != "application/docklike_group")
-		{
-			if (mWindowsCount)
-			{
-				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
-				groupWindow->activate(time);
-
-				if (!mGroupMenu.mVisible)
-					onMouseEnter();
-			}
-
-			gdk_drag_status(context, GDK_ACTION_DEFAULT, time);
-			return true;
-		}
+		gtk_drag_highlight(mButton);
+		gdk_drag_status(context, GDK_ACTION_MOVE, time);
+		return true;
 	}
 
-	gtk_drag_highlight(mButton);
-	gdk_drag_status(context, GDK_ACTION_MOVE, time);
+	if (target == "text/uri-list")
+	{
+		gtk_drag_highlight(mButton);
+		gdk_drag_status(context, GDK_ACTION_COPY, time);
+		return true;
+	}
+
+	if (mWindowsCount)
+	{
+		GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
+		groupWindow->activate(time);
+
+		if (!mGroupMenu.mVisible)
+			onMouseEnter();
+	}
+
+	gdk_drag_status(context, GDK_ACTION_DEFAULT, time);
 	return true;
 }
 
@@ -1227,6 +1233,23 @@ void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selec
 
 void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time)
 {
+	gchar* targetName = gdk_atom_name(gtk_selection_data_get_target(selectionData));
+	std::string target = (targetName != nullptr) ? targetName : "";
+	g_free(targetName);
+
+	if (target == "text/uri-list")
+	{
+		gchar** uris = gtk_selection_data_get_uris(selectionData);
+
+		if (uris != nullptr)
+		{
+			mPlugin->mDock->pinFromUris((const gchar* const*)uris, this);
+			g_strfreev(uris);
+		}
+
+		return;
+	}
+
 	const guchar* data = gtk_selection_data_get_data(selectionData);
 	int length = gtk_selection_data_get_length(selectionData);
 
