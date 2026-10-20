@@ -277,6 +277,14 @@ namespace SettingsDialog
 			}),
 			iconSize);
 
+		GObject* expandDock = gtk_builder_get_object(builder, "c_expandDock");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(expandDock), Settings::expandDock);
+		g_signal_connect(expandDock, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _expandDock) {
+				Settings::expandDock.set(gtk_toggle_button_get_active(_expandDock));
+			}),
+			nullptr);
+
 		GObject* previewWidthButton = gtk_builder_get_object(builder, "previewWidthButton");
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(previewWidthButton), Settings::previewWidth);
 		g_object_bind_property(showPreviews, "active", previewWidthButton, "sensitive", G_BINDING_SYNC_CREATE);
