@@ -47,15 +47,15 @@ msgstr "Pripni v sidrišče"
 
 #: src/Group.cpp:956
 msgid "Add activation shortcut..."
-msgstr "Dodaj bližnjično tipko..."
+msgstr "Dodaj bližnjično tipko ..."
 
 #: src/Group.cpp:967
 msgid "Manage activation shortcut..."
-msgstr "Uredi bližnjično tipko..."
+msgstr "Uredi bližnjično tipko ..."
 
 #: src/Group.cpp:989
 msgid "Edit Launcher..."
-msgstr "Uredi zaganjalnik..."
+msgstr "Uredi zaganjalnik ..."
 
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
@@ -67,11 +67,11 @@ msgstr "Odstrani"
 #. manually
 #: src/Group.cpp:1034
 msgid "Select Launcher..."
-msgstr "Izberi zaganjalnik..."
+msgstr "Izberi zaganjalnik ..."
 
 #: src/Group.cpp:1043
 msgid "Create Launcher..."
-msgstr "Ustvari zaganjalnik..."
+msgstr "Ustvari zaganjalnik ..."
 
 #: src/Group.cpp:1055
 msgid "Window Actions"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: src/_dialogs.ui:638
 msgid "Manage shortcuts..."
-msgstr "Uredi bližnjične tipke..."
+msgstr "Uredi bližnjične tipke ..."
 
 #: src/_dialogs.ui:659
 msgid "Keyboard hotkeys"
