@@ -200,6 +200,14 @@ namespace Dock
 	{
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), orientation);
 
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+		for (GList* lp = children; lp != nullptr; lp = lp->next)
+		{
+			Group* group = (Group*)g_object_get_data(G_OBJECT(lp->data), "group");
+			group->onPanelOrientationChange(orientation);
+		}
+		g_list_free(children);
+
 		if (Settings::dockSize)
 		{
 			if (orientation == GTK_ORIENTATION_HORIZONTAL)

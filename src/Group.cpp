@@ -74,6 +74,11 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	//--------------------------------------------------
 
 	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
+	mButtonCssProvider = gtk_css_provider_new();
+	gtk_style_context_add_provider(gtk_widget_get_style_context(mButton),
+		GTK_STYLE_PROVIDER(mButtonCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	onPanelOrientationChange(xfce_panel_plugin_get_orientation(Plugin::mXfPlugin));
+
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	mLauncherLabel = gtk_label_new("");
@@ -275,6 +280,7 @@ Group::~Group()
 		g_object_unref(mIconPixbuf);
 
 	g_object_unref(mLauncherCountCssProvider);
+	g_object_unref(mButtonCssProvider);
 }
 
 void Group::add(GroupWindow* window)
@@ -366,9 +372,6 @@ void Group::resize()
 	gtk_css_provider_load_from_data(mLauncherCountCssProvider, launcherCountCss, -1, nullptr);
 	g_free(launcherCountCss);
 
-	// TODO: set `min-width` / `min-height` CSS property on button?
-	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
-
 	// may not yet be initialized
 	if (Dock::mIconSize == 0)
 		return;
@@ -390,6 +393,26 @@ void Group::resize()
 	gtk_widget_queue_draw(mButton);
 
 	updateIconGeometry();
+}
+
+void Group::onPanelOrientationChange(GtkOrientation orientation)
+{
+	const gchar* css;
+	if (orientation == GTK_ORIENTATION_HORIZONTAL)
+	{
+		css = "* { padding-top: 1px; padding-bottom: 1px; min-width: 16px; min-height: 16px;}";
+		gtk_widget_set_valign(mButton, GTK_ALIGN_FILL);
+		gtk_widget_set_vexpand(mButton, true);
+		gtk_widget_set_hexpand(mButton, false);
+	}
+	else
+	{
+		css = "* { padding-left: 1px; padding-right: 1px; min-width: 16px; min-height: 16px;}";
+		gtk_widget_set_halign(mButton, GTK_ALIGN_FILL);
+		gtk_widget_set_hexpand(mButton, true);
+		gtk_widget_set_vexpand(mButton, false);
+	}
+	gtk_css_provider_load_from_data(mButtonCssProvider, css, -1, nullptr);
 }
 
 void Group::onDraw(cairo_t* cr)
