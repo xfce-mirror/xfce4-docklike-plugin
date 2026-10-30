@@ -917,7 +917,7 @@ void Group::updateIconGeometry()
 	rect.height = allocation.height;
 
 	mWindows.forEach([&](GroupWindow* w) {
-		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, NULL);
+		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, nullptr);
 	});
 }
 
