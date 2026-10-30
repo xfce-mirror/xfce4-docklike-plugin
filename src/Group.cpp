@@ -917,11 +917,11 @@ void Group::updateIconGeometry()
 	rect.height = allocation.height;
 
 	mWindows.forEach([&](GroupWindow* w) {
-		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, NULL);
+		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, nullptr);
 	});
 }
 
-void Group::electNewTopWindow()
+void Group::electNewTopWindow ()
 {
 	if (mWindows.size() > 0)
 	{
@@ -932,7 +932,7 @@ void Group::electNewTopWindow()
 		else
 			newTopWindow = (Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
-					return true;
+					return TRUE;
 				return false;
 			})).get();
 
