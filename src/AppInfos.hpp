@@ -42,6 +42,7 @@ struct AppInfo
 	void launch();
 	void launchAction(const gchar* action);
 	void edit();
+	std::string getId();
 };
 
 namespace AppInfos

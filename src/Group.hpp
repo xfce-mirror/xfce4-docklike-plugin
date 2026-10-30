@@ -75,6 +75,7 @@ public:
 	void closeAll();
 
 	void resize();
+	void onPanelOrientationChange(GtkOrientation orientation);
 	void updateStyle();
 	void updateIconGeometry();
 	void setLauncherCount(gint64 count, bool visible);
@@ -110,6 +111,7 @@ public:
 	GroupMenu mGroupMenu;
 
 	GtkWidget* mButton;
+	GtkCssProvider* mButtonCssProvider;
 	GtkWidget* mLabel;
 	GtkWidget* mLauncherLabel;
 	GtkCssProvider* mLauncherCountCssProvider;

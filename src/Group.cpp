@@ -22,22 +22,6 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-static std::string getDragId(const std::shared_ptr<AppInfo>& appInfo)
-{
-	if (appInfo->mId.empty())
-		return "name:" + appInfo->mName;
-
-	return "id:" + appInfo->mId;
-}
-
-static std::shared_ptr<Group> getDragGroup(const std::string& dragId)
-{
-	return Dock::mGroups.findIf(
-		[&dragId](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) -> bool {
-			return getDragId(group.first) == dragId;
-		});
-}
-
 Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
@@ -74,6 +58,11 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	//--------------------------------------------------
 
 	mButton = GTK_WIDGET(g_object_ref(gtk_button_new()));
+	mButtonCssProvider = gtk_css_provider_new();
+	gtk_style_context_add_provider(gtk_widget_get_style_context(mButton),
+		GTK_STYLE_PROVIDER(mButtonCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	onPanelOrientationChange(xfce_panel_plugin_get_orientation(Plugin::mXfPlugin));
+
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
 	mLauncherLabel = gtk_label_new("");
@@ -275,6 +264,7 @@ Group::~Group()
 		g_object_unref(mIconPixbuf);
 
 	g_object_unref(mLauncherCountCssProvider);
+	g_object_unref(mButtonCssProvider);
 }
 
 void Group::add(GroupWindow* window)
@@ -283,9 +273,6 @@ void Group::add(GroupWindow* window)
 	mWindowsCount.updateState();
 	mGroupMenu.add(window->mGroupMenuItem);
 	Help::Gtk::cssClassAdd(mButton, "open_group");
-
-	if (mWindowsCount == 1 && !mPinned)
-		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
 
 	if (!mActive && xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
@@ -369,9 +356,6 @@ void Group::resize()
 	gtk_css_provider_load_from_data(mLauncherCountCssProvider, launcherCountCss, -1, nullptr);
 	g_free(launcherCountCss);
 
-	// TODO: set `min-width` / `min-height` CSS property on button?
-	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
-
 	// may not yet be initialized
 	if (Dock::mIconSize == 0)
 		return;
@@ -393,6 +377,26 @@ void Group::resize()
 	gtk_widget_queue_draw(mButton);
 
 	updateIconGeometry();
+}
+
+void Group::onPanelOrientationChange(GtkOrientation orientation)
+{
+	const gchar* css;
+	if (orientation == GTK_ORIENTATION_HORIZONTAL)
+	{
+		css = "* { padding-top: 1px; padding-bottom: 1px; min-width: 16px; min-height: 16px;}";
+		gtk_widget_set_valign(mButton, GTK_ALIGN_FILL);
+		gtk_widget_set_vexpand(mButton, true);
+		gtk_widget_set_hexpand(mButton, false);
+	}
+	else
+	{
+		css = "* { padding-left: 1px; padding-right: 1px; min-width: 16px; min-height: 16px;}";
+		gtk_widget_set_halign(mButton, GTK_ALIGN_FILL);
+		gtk_widget_set_hexpand(mButton, true);
+		gtk_widget_set_vexpand(mButton, false);
+	}
+	gtk_css_provider_load_from_data(mButtonCssProvider, css, -1, nullptr);
 }
 
 void Group::onDraw(cairo_t* cr)
@@ -913,7 +917,7 @@ void Group::updateIconGeometry()
 	rect.height = allocation.height;
 
 	mWindows.forEach([&](GroupWindow* w) {
-		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, NULL);
+		xfw_window_set_button_geometry(w->mXfwWindow, button_window, &rect, nullptr);
 	});
 }
 
@@ -1202,7 +1206,7 @@ void Group::onDragLeave(const GdkDragContext* context, guint time)
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
 {
-	std::string dragId = getDragId(mAppInfo);
+	std::string dragId = mAppInfo->getId();
 	gtk_selection_data_set(selectionData, gtk_selection_data_get_target(selectionData), 8,
 		(const guchar*)dragId.data(), static_cast<gint>(dragId.size()));
 }
@@ -1217,7 +1221,10 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 		return;
 
 	std::string dragId((const char*)data, length);
-	std::shared_ptr<Group> moving = getDragGroup(dragId);
+	std::shared_ptr<Group> moving = Dock::mGroups.findIf(
+		[&dragId](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) -> bool {
+			return group.first->getId() == dragId;
+		});
 
 	if (moving)
 		Dock::moveButton(moving.get(), this);

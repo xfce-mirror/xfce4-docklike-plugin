@@ -86,6 +86,17 @@ namespace Dock
 
 	void drawGroups()
 	{
+		// store launcher positions
+		int i = 0;
+		std::map<int, std::string> AppIds;
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+		for (GList* lp = children; lp != nullptr; lp = lp->next)
+		{
+			Group* group = (Group*)g_object_get_data(G_OBJECT(lp->data), "group");
+			AppIds[i++] = group->mAppInfo->getId();
+		}
+		g_list_free(children);
+
 		// Remove old groups
 		Xfw::mGroupWindows.clear();
 		mGroups.clear();
@@ -119,6 +130,26 @@ namespace Dock
 
 			Xfw::mGroupWindows.push(xfwWindow, groupWindow);
 			groupWindow->updateState();
+		}
+
+		// restore launcher positions, skipping dead ones
+		Store::Map<std::string, GtkWidget*> buttons;
+		children = gtk_container_get_children(GTK_CONTAINER(mBox));
+		for (GList* lp = children; lp != nullptr; lp = lp->next)
+		{
+			GtkWidget* button = GTK_WIDGET(lp->data);
+			Group* group = (Group*)g_object_get_data(G_OBJECT(button), "group");
+			buttons.set(group->mAppInfo->getId(), button);
+		}
+		g_list_free(children);
+		i = 0;
+		for (const auto& _it : AppIds)
+		{
+			GtkWidget* button = buttons.get(_it.second);
+			if (button != nullptr)
+				gtk_box_reorder_child(GTK_BOX(mBox), button, _it.first - i);
+			else
+				i++;
 		}
 
 		gtk_widget_queue_draw(mBox);
@@ -199,6 +230,14 @@ namespace Dock
 	void onPanelOrientationChange(GtkOrientation orientation)
 	{
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), orientation);
+
+		GList* children = gtk_container_get_children(GTK_CONTAINER(mBox));
+		for (GList* lp = children; lp != nullptr; lp = lp->next)
+		{
+			Group* group = (Group*)g_object_get_data(G_OBJECT(lp->data), "group");
+			group->onPanelOrientationChange(orientation);
+		}
+		g_list_free(children);
 
 		if (Settings::dockSize)
 		{
