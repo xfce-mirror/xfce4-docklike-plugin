@@ -1,3 +1,10 @@
 include:
   - project: 'xfce/xfce4-dev-tools'
     file: '/ci/build_project.yml'
+
+clang-format++:
+  extends:
+    - clang-format
+  after_script:
+    # check for some C-style constants we don't want to be used in this C++ project
+    - '! git diff -U0 --no-color "${CI_MERGE_REQUEST_DIFF_BASE_SHA:-.}" | grep -E "TRUE|FALSE|NULL"'
