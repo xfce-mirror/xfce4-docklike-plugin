@@ -69,6 +69,14 @@ void AppInfo::edit()
 	g_free(quoted);
 }
 
+std::string AppInfo::getId()
+{
+	if (this->mId.empty())
+		return this->mName;
+
+	return this->mId;
+}
+
 namespace AppInfos
 {
 	std::list<std::string> mXdgDataDirs;

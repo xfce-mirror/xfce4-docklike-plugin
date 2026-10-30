@@ -22,22 +22,6 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-static std::string getDragId(const std::shared_ptr<AppInfo>& appInfo)
-{
-	if (appInfo->mId.empty())
-		return "name:" + appInfo->mName;
-
-	return "id:" + appInfo->mId;
-}
-
-static std::shared_ptr<Group> getDragGroup(const std::string& dragId)
-{
-	return Dock::mGroups.findIf(
-		[&dragId](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) -> bool {
-			return getDragId(group.first) == dragId;
-		});
-}
-
 Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
@@ -1222,7 +1206,7 @@ void Group::onDragLeave(const GdkDragContext* context, guint time)
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)
 {
-	std::string dragId = getDragId(mAppInfo);
+	std::string dragId = mAppInfo->getId();
 	gtk_selection_data_set(selectionData, gtk_selection_data_get_target(selectionData), 8,
 		(const guchar*)dragId.data(), static_cast<gint>(dragId.size()));
 }
@@ -1237,7 +1221,10 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 		return;
 
 	std::string dragId((const char*)data, length);
-	std::shared_ptr<Group> moving = getDragGroup(dragId);
+	std::shared_ptr<Group> moving = Dock::mGroups.findIf(
+		[&dragId](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) -> bool {
+			return group.first->getId() == dragId;
+		});
 
 	if (moving)
 		Dock::moveButton(moving.get(), this);
