@@ -284,9 +284,6 @@ void Group::add(GroupWindow* window)
 	mGroupMenu.add(window->mGroupMenuItem);
 	Help::Gtk::cssClassAdd(mButton, "open_group");
 
-	if (mWindowsCount == 1 && !mPinned)
-		gtk_box_reorder_child(GTK_BOX(Dock::mBox), mButton, -1);
-
 	if (!mActive && xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
 
