@@ -159,7 +159,15 @@ namespace Dock
 	static void activateGroup(Group* group)
 	{
 		if (group->mActive)
+		{
+			// if there's only one window in the group and it's active, minimize it
+			if (group->mWindowsCount == 1)
+			{
+				group->mWindows.get(0)->minimize();
+				return;
+			}
 			group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
+		}
 		else if (group->mWindowsCount > 0)
 			group->activate(GDK_CURRENT_TIME);
 		else
