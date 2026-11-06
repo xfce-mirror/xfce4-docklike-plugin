@@ -224,7 +224,12 @@ namespace Xfw
 		{
 			std::shared_ptr<GroupWindow> groupWindow = mGroupWindows.get(previousActiveWindow);
 			if (groupWindow)
+			{
 				groupWindow->onUnactivate();
+
+				// deactivate group (this makes minimize on <SUPER>+[number] more reliable with multiple workspaces)
+				groupWindow->mGroup->onWindowUnactivate();
+			}
 		}
 		if (activeWindow != nullptr)
 			mGroupWindows.get(activeWindow)->onActivate();

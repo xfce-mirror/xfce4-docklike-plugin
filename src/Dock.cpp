@@ -18,6 +18,7 @@
 
 #include "Dock.hpp"
 #include "LauncherEntry.hpp"
+#include "Settings.hpp"
 
 namespace Dock
 {
@@ -160,8 +161,7 @@ namespace Dock
 	{
 		if (group->mActive)
 		{
-			// if there's only one window in the group and it's active, minimize it
-			if (group->mWindowsCount == 1)
+			if (Settings::keyComboMinimize && group->mWindowsCount == 1)
 			{
 				group->mWindows.get(0)->minimize();
 				return;
