@@ -266,6 +266,9 @@ msgstr "Apariencia"
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Cambiar de aplicación con <SUPER>+[1, 2, ...]"
 
+msgid "Minimize active window with <SUPER>+[1, 2, ...]"
+msgstr "Minimizar ventana activa con <SUPER>+[1, 2, ...]"
+
 #: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "Cambiar a la última aplicación con <SUPER>"

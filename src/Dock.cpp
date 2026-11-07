@@ -18,6 +18,7 @@
 
 #include "Dock.hpp"
 #include "LauncherEntry.hpp"
+#include "Settings.hpp"
 
 namespace Dock
 {
@@ -159,7 +160,14 @@ namespace Dock
 	static void activateGroup(Group* group)
 	{
 		if (group->mActive)
+		{
+			if (Settings::keyComboMinimize && group->mWindowsCount == 1)
+			{
+				group->mWindows.get(0)->minimize();
+				return;
+			}
 			group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
+		}
 		else if (group->mWindowsCount > 0)
 			group->activate(GDK_CURRENT_TIME);
 		else
