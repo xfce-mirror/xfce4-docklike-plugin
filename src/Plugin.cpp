@@ -111,7 +111,11 @@ namespace Plugin
 			"David Keogh <davidtkeogh@gmail.com>",
 			nullptr};
 
+#if LIBXFCE4PANEL_CHECK_VERSION(4, 21, 4)
+		xfce_panel_gtk_show_about_dialog(
+#else
 		gtk_show_about_dialog(nullptr,
+#endif
 			"program-name", PACKAGE_NAME,
 			"logo-icon-name", "preferences-system",
 			"version", VERSION_FULL,
