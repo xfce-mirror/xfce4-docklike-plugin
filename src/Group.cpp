@@ -338,6 +338,13 @@ void Group::closeAll()
 	});
 }
 
+void Group::minimizeAll()
+{
+	mWindows.forEach([](GroupWindow* w) -> void {
+		w->minimize();
+	});
+}
+
 void Group::resize()
 {
 	// The badge's current proportions look right on a 56 px panel. Scale all of its

@@ -302,13 +302,13 @@ namespace SettingsDialog
 		GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
 
-		GObject* keyComboMinimize = gtk_builder_get_object(builder, "c_keyComboMinimizeActive");
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboMinimize), Settings::keyComboMinimize);
-		gtk_widget_set_sensitive(GTK_WIDGET(keyComboMinimize), Settings::keyComboActive);
+		GObject* keyComboAlwaysMinimize = gtk_builder_get_object(builder, "c_keyComboAlwaysMinimizeActive");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboAlwaysMinimize), Settings::keyComboAlwaysMinimize);
+		gtk_widget_set_sensitive(GTK_WIDGET(keyComboAlwaysMinimize), Settings::keyComboActive);
 
-		g_signal_connect(keyComboMinimize, "toggled",
+		g_signal_connect(keyComboAlwaysMinimize, "toggled",
 			G_CALLBACK(+[](GtkToggleButton* _keyComboMinimize, GtkWidget* tooltip) {
-				Settings::keyComboMinimize.set(gtk_toggle_button_get_active(_keyComboMinimize));
+				Settings::keyComboAlwaysMinimize.set(gtk_toggle_button_get_active(_keyComboMinimize));
 			}),
 			nullptr);
 
@@ -316,7 +316,7 @@ namespace SettingsDialog
 			// it's impossible to pass several data variables to g_signal_connect, so i use this crutch. perhaps there is a better way?
 			GObject** toggleKeyComboData = (GObject**)malloc(sizeof(GObject*) * 2);
 			toggleKeyComboData[0] = keyComboActiveWarning;
-			toggleKeyComboData[1] = keyComboMinimize;
+			toggleKeyComboData[1] = keyComboAlwaysMinimize;
 
 			g_signal_connect(keyComboActive, "toggled",
 				G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GObject** data) {

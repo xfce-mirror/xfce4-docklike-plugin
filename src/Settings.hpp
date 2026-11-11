@@ -64,7 +64,7 @@ namespace Settings
 	extern State<std::shared_ptr<GdkRGBA>> inactiveColor;
 
 	extern State<bool> keyComboActive;
-	extern State<bool> keyComboMinimize;
+	extern State<bool> keyComboAlwaysMinimize;
 	extern State<bool> keyAloneActive;
 
 	extern State<std::list<std::string>> pinnedAppList;

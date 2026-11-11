@@ -263,9 +263,6 @@ msgstr "Внешний вид"
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Переключать окна с помощью <SUPER>+[1, 2, ...]"
 
-msgid "Minimize active window with <SUPER>+[1, 2, ...]"
-msgstr "Свернуть активное окно на <SUPER>+[1, 2, ...]"
-
 #: src/_dialogs.ui:610
 msgid "Switch to the last window with <SUPER>"
 msgstr "Переключать ранее выбранные окна с помощью <SUPER>"
