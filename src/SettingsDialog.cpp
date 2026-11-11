@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Settings.hpp"
 #include "SettingsDialog.hpp"
 #include "Hotkeys.hpp"
 #include "Plugin.hpp"
@@ -300,12 +301,31 @@ namespace SettingsDialog
 		GObject* keyComboActiveWarning = gtk_builder_get_object(builder, "c_keyComboActiveWarning");
 		GObject* keyComboActive = gtk_builder_get_object(builder, "c_keyComboActive");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboActive), Settings::keyComboActive);
-		g_signal_connect(keyComboActive, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GtkWidget* tooltip) {
-				Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
-				updateKeyComboActiveWarning(tooltip);
+
+		GObject* keyComboAlwaysMinimize = gtk_builder_get_object(builder, "c_keyComboAlwaysMinimizeActive");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboAlwaysMinimize), Settings::keyComboAlwaysMinimize);
+		gtk_widget_set_sensitive(GTK_WIDGET(keyComboAlwaysMinimize), Settings::keyComboActive);
+
+		g_signal_connect(keyComboAlwaysMinimize, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _keyComboMinimize, GtkWidget* tooltip) {
+				Settings::keyComboAlwaysMinimize.set(gtk_toggle_button_get_active(_keyComboMinimize));
 			}),
-			keyComboActiveWarning);
+			nullptr);
+
+		{
+			// it's impossible to pass several data variables to g_signal_connect, so i use this crutch. perhaps there is a better way?
+			GObject** toggleKeyComboData = (GObject**)malloc(sizeof(GObject*) * 2);
+			toggleKeyComboData[0] = keyComboActiveWarning;
+			toggleKeyComboData[1] = keyComboAlwaysMinimize;
+
+			g_signal_connect(keyComboActive, "toggled",
+				G_CALLBACK(+[](GtkToggleButton* _keyComboActive, GObject** data) {
+					Settings::keyComboActive.set(gtk_toggle_button_get_active(_keyComboActive));
+					updateKeyComboActiveWarning((GtkWidget*)data[0]);
+					gtk_widget_set_sensitive(GTK_WIDGET((GtkToggleButton*)data[1]), Settings::keyComboActive);
+				}),
+				toggleKeyComboData);
+		}
 
 		GObject* keyAloneActiveWarning = gtk_builder_get_object(builder, "c_keyAloneActiveWarning");
 		GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
