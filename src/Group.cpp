@@ -263,6 +263,9 @@ Group::~Group()
 	if (mIconPixbuf != nullptr)
 		g_object_unref(mIconPixbuf);
 
+	if (mContextMenu != nullptr)
+		gtk_menu_shell_deactivate(GTK_MENU_SHELL(mContextMenu));
+
 	g_object_unref(mLauncherCountCssProvider);
 	g_object_unref(mButtonCssProvider);
 }
@@ -1119,7 +1122,11 @@ void Group::onButtonPress(GdkEventButton* event)
 	{
 		mContextMenu = GTK_WIDGET(g_object_ref_sink(buildContextMenu()));
 		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
-		g_signal_connect_swapped(mContextMenu, "deactivate", G_CALLBACK(g_clear_object), &mContextMenu);
+		g_signal_connect(mContextMenu, "deactivate",
+			G_CALLBACK(+[](GtkMenuShell* menu, Group* group) {
+				g_clear_object(&group->mContextMenu);
+			}),
+			this);
 		gtk_menu_popup_at_widget(GTK_MENU(mContextMenu), mButton, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, (GdkEvent*)event);
 		mGroupMenu.hide();
 	}
