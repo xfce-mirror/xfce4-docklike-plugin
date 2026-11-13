@@ -24,7 +24,7 @@
 namespace Hotkeys
 {
 	bool mKeyAloneGrabbed = false;
-	int mGrabbedKeys = 0;
+	int mGrabbedKeys = mNbHotkeys;
 	bool mAddShortcutUIAvailable = false;
 
 	XfconfChannel* mChannel = nullptr;
@@ -40,7 +40,6 @@ namespace Hotkeys
 	static void addKeyComboShortcuts()
 	{
 		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
-		mGrabbedKeys = mNbHotkeys;
 		for (gint n = 0; n < mNbHotkeys; n++)
 		{
 			gchar* command = g_strdup_printf(
