@@ -594,9 +594,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton" id="c_keyComboAlwaysMinimizeActive">
+                      <object class="GtkCheckButton" id="c_keyComboMinimize">
                         <property name="label" translatable="yes">Minimize active group instead of switching between its windows</property>
-                        <property name="visible">True</property>
+                        <property name="visible" bind-source="c_keyComboActive" bind-property="active" bind-flags="sync-create">False</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
                         <property name="halign">end</property>
@@ -638,8 +638,7 @@
                     <child>
                       <object class="GtkImage" id="c_keyAloneActiveWarning">
                         <property name="can_focus">False</property>
-                        <property name="tooltip-markup" translatable="yes">The left &amp;lt;SUPER&amp;gt; key seems already mapped to another command.
-Check your Xfce keyboard settings.</property>
+                        <property name="tooltip-markup" translatable="yes">The left &amp;lt;SUPER&amp;gt; key seems already mapped to another command.&#xA;Check your Xfce keyboard settings.</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="icon-name">dialog-warning</property>

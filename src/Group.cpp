@@ -341,7 +341,8 @@ void Group::closeAll()
 void Group::minimizeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
-		w->minimize();
+		if (!w->getState(XFW_WINDOW_STATE_MINIMIZED))
+			w->minimize();
 	});
 }
 
@@ -1157,12 +1158,7 @@ void Group::onButtonRelease(GdkEventButton* event)
 	else if (event->state & GDK_SHIFT_MASK || (mPinned && !mWindowsCount))
 		mAppInfo->launch();
 	else if (mActive)
-	{
-		mWindows.forEach([](GroupWindow* w) -> void {
-			if (!w->getState(XFW_WINDOW_STATE_MINIMIZED))
-				w->minimize();
-		});
-	}
+		minimizeAll();
 	else
 		activate(event->time);
 }

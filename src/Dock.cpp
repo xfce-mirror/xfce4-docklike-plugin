@@ -161,7 +161,7 @@ namespace Dock
 	{
 		if (group->mActive)
 		{
-			if (Settings::keyComboAlwaysMinimize || group->mWindowsCount == 1)
+			if (Settings::keyComboMinimize || group->mWindowsCount == 1)
 			{
 				group->minimizeAll();
 			}
