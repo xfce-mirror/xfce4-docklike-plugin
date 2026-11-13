@@ -42,6 +42,7 @@ namespace Settings
 	State<std::shared_ptr<GdkRGBA>> inactiveColor;
 
 	State<bool> keyComboActive;
+	State<bool> keyComboMinimize;
 	State<bool> keyAloneActive;
 
 	State<std::list<std::string>> pinnedAppList;
@@ -262,6 +263,12 @@ namespace Settings
 				g_key_file_set_boolean(mFile.get(), "user", "keyComboActive", _keyComboActive);
 				saveFile();
 				Hotkeys::updateSettings();
+			});
+
+		keyComboMinimize.setup(g_key_file_get_boolean(file, "user", "keyComboMinimize", nullptr),
+			[](bool _keyComboMinimize) -> void {
+				g_key_file_set_boolean(mFile.get(), "user", "keyComboMinimize", _keyComboMinimize);
+				saveFile();
 			});
 
 		keyAloneActive.setup(g_key_file_get_boolean(file, "user", "keyAloneActive", nullptr),

@@ -307,6 +307,14 @@ namespace SettingsDialog
 			}),
 			keyComboActiveWarning);
 
+		GObject* keyComboMinimize = gtk_builder_get_object(builder, "c_keyComboMinimize");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyComboMinimize), Settings::keyComboMinimize);
+		g_signal_connect(keyComboMinimize, "toggled",
+			G_CALLBACK(+[](GtkToggleButton* _keyComboMinimize, GtkWidget* tooltip) {
+				Settings::keyComboMinimize.set(gtk_toggle_button_get_active(_keyComboMinimize));
+			}),
+			nullptr);
+
 		GObject* keyAloneActiveWarning = gtk_builder_get_object(builder, "c_keyAloneActiveWarning");
 		GObject* keyAloneActive = gtk_builder_get_object(builder, "c_keyAloneActive");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(keyAloneActive), Settings::keyAloneActive);

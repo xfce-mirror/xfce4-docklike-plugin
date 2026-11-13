@@ -73,6 +73,7 @@ public:
 	void activate(guint32 timestamp);
 	void scrollWindows(guint32 timestamp, GdkScrollDirection direction);
 	void closeAll();
+	void minimizeAll();
 
 	void resize();
 	void onPanelOrientationChange(GtkOrientation orientation);
