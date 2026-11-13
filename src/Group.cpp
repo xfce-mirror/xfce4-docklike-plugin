@@ -274,7 +274,7 @@ void Group::add(GroupWindow* window)
 	mGroupMenu.add(window->mGroupMenuItem);
 	Help::Gtk::cssClassAdd(mButton, "open_group");
 
-	if (!mActive && xfw_window_is_active(window->mXfwWindow))
+	if (xfw_window_is_active(window->mXfwWindow))
 		onWindowActivate(window);
 
 	gtk_widget_queue_draw(mButton);
@@ -291,6 +291,9 @@ void Group::remove(GroupWindow* window)
 
 	if (!mWindowsCount)
 		Help::Gtk::cssClassRemove(mButton, "open_group");
+
+	if (xfw_window_is_active(window->mXfwWindow))
+		onWindowUnactivate();
 
 	gtk_widget_queue_draw(mButton);
 }
