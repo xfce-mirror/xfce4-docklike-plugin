@@ -75,7 +75,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mWindow), "enter-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) -> gboolean {
 			me->mMouseHover = true;
 
 			if (Settings::showPreviews)
@@ -88,7 +88,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		this);
 
 	g_signal_connect(G_OBJECT(mWindow), "leave-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenu* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenu* me) -> gboolean {
 			if (event->detail == GDK_NOTIFY_INFERIOR)
 			{
 				return false;
@@ -101,7 +101,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		this);
 
 	g_signal_connect(G_OBJECT(mWindow), "scroll-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, GroupMenu* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, GroupMenu* me) -> gboolean {
 			((Group*)me->mGroup)->scrollWindows(event->time, event->direction);
 			return true;
 		}),

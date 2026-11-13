@@ -98,7 +98,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mButton), "button-press-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) -> gboolean {
 			me->mDragging = false;
 
 			if (event->button == GDK_BUTTON_PRIMARY)
@@ -122,7 +122,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "motion-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventMotion* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventMotion* event, Group* me) -> gboolean {
 			if (me->mDragging || !(event->state & GDK_BUTTON1_MASK))
 				return false;
 
@@ -137,7 +137,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "button-release-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, Group* me) -> gboolean {
 			if (event->button != GDK_BUTTON_PRIMARY && event->button != GDK_BUTTON_MIDDLE)
 				return false;
 			if (me->mDragging)
@@ -148,7 +148,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "scroll-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventScroll* event, Group* me) -> gboolean {
 			me->scrollWindows(event->time, event->direction);
 			return true;
 		}),
@@ -161,7 +161,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "drag-motion",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, Group* me) -> gboolean {
 			return me->onDragMotion(widget, context, x, y, time);
 		}),
 		this);
@@ -185,7 +185,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "enter-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) -> gboolean {
 			Help::Gtk::cssClassAdd(me->mButton, "hover_group");
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
@@ -200,7 +200,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect(G_OBJECT(mButton), "leave-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, Group* me) -> gboolean {
 			Help::Gtk::cssClassRemove(me->mButton, "hover_group");
 			me->mMenuShowTimeout.stop();
 
@@ -219,7 +219,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 		this);
 
 	g_signal_connect_after(G_OBJECT(mButton), "draw",
-		G_CALLBACK(+[](GtkWidget* widget, cairo_t* cr, Group* me) {
+		G_CALLBACK(+[](GtkWidget* widget, cairo_t* cr, Group* me) -> gboolean {
 			me->onDraw(cr);
 			return false;
 		}),
