@@ -136,7 +136,8 @@ void GroupWindow::onUnactivate() const
 	gtk_widget_queue_draw(GTK_WIDGET(mGroupMenuItem->mItem));
 	mGroupMenuItem->updateLabel();
 
-	mGroup->onWindowUnactivate();
+	if (mGroupAssociated)
+		mGroup->onWindowUnactivate();
 }
 
 void GroupWindow::updateState()
