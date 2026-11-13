@@ -162,9 +162,7 @@ namespace Dock
 		if (group->mActive)
 		{
 			if (Settings::keyComboMinimize || group->mWindowsCount == 1)
-			{
 				group->minimizeAll();
-			}
 			else
 				group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
 		}
