@@ -53,7 +53,7 @@ namespace Plugin
 		//--------------------------------------------------
 
 		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "size-changed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gint size) {
+			G_CALLBACK(+[](XfcePanelPlugin* plugin, gint size) -> gboolean {
 				Dock::onPanelResize(size);
 				return true;
 			}),
@@ -78,7 +78,7 @@ namespace Plugin
 			nullptr);
 
 		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) {
+			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) -> gboolean {
 				remoteEvent(name, value);
 				// stop signal emission to other plugins
 				return true;

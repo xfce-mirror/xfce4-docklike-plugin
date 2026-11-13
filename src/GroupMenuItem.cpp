@@ -86,7 +86,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mItem), "button-press-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) -> gboolean {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
 			else if (event->button == GDK_BUTTON_MIDDLE && Settings::middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
@@ -110,7 +110,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "drag-motion",
-		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) -> gboolean {
 			me->mGroupWindow->activate(time);
 			gdk_drag_status(context, GDK_ACTION_MOVE, time);
 			return true;
@@ -131,7 +131,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "enter-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEventCrossing* event, GroupMenuItem* me) -> gboolean {
 			if (event->state & GDK_BUTTON1_MASK)
 				me->mGroupWindow->activate(event->time);
 			Help::Gtk::cssClassAdd(widget, "hover_menu_item");
@@ -141,7 +141,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		this);
 
 	g_signal_connect(G_OBJECT(mItem), "leave-notify-event",
-		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) {
+		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenuItem* me) -> gboolean {
 			Help::Gtk::cssClassRemove(widget, "hover_menu_item");
 			gtk_widget_queue_draw(widget);
 			gtk_widget_queue_draw(me->mGroupWindow->mGroup->mButton);

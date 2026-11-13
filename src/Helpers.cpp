@@ -189,7 +189,7 @@ namespace Help
 		void Timeout::start()
 		{
 			stop();
-			mTimeoutId = g_timeout_add(mDuration, G_SOURCE_FUNC(+[](Timeout* me) {
+			mTimeoutId = g_timeout_add(mDuration, G_SOURCE_FUNC(+[](Timeout* me) -> gboolean {
 				bool cont = me->mFunction();
 
 				if (!cont)
@@ -218,7 +218,7 @@ namespace Help
 		void Idle::start()
 		{
 			stop();
-			mIdleId = g_idle_add(G_SOURCE_FUNC(+[](Idle* me) {
+			mIdleId = g_idle_add(G_SOURCE_FUNC(+[](Idle* me) -> gboolean {
 				bool cont = me->mFunction();
 				if (!cont)
 					me->mIdleId = 0;
