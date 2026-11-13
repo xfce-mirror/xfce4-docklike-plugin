@@ -595,7 +595,7 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="c_keyComboAlwaysMinimizeActive">
-                        <property name="label" translatable="yes">Always minimize active group with &lt;SUPER&gt;+[1, 2, ...]</property>
+                        <property name="label" translatable="yes">Minimize active group instead of switching between its windows</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="receives_default">False</property>
