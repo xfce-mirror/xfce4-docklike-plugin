@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-08-18 12:59+0200\n"
+"POT-Creation-Date: 2026-11-14 01:00+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/xfce/teams/16840/ro/)\n"
@@ -23,70 +23,74 @@ msgstr ""
 "Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: src/AppInfos.cpp:354
+#: src/AppInfos.cpp:362
 msgid "Select Launcher"
 msgstr "Selectează lansatorul"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Cancel"
 msgstr "_Renunță"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Open"
 msgstr "_Deschide"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pinned to Dock"
 msgstr "Fixat la doc"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pin to Dock"
 msgstr "Fixează la doc"
 
-#: src/Group.cpp:956
+#: src/Group.cpp:999
 msgid "Add activation shortcut..."
 msgstr "Adaugă o comandă rapidă de activare..."
 
-#: src/Group.cpp:967
+#: src/Group.cpp:1010
 msgid "Manage activation shortcut..."
 msgstr "Gestionează comanda rapidă de activare..."
 
-#: src/Group.cpp:989
+#: src/Group.cpp:1032
 msgid "Edit Launcher..."
 msgstr "Editează lansatorul..."
 
+#: src/Group.cpp:1040 src/_dialogs.ui:231
+msgid "Launch new instance"
+msgstr "Lansează o nouă instanță"
+
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:1021
+#: src/Group.cpp:1072
 msgid "Remove"
 msgstr "Elimină"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:1034
+#: src/Group.cpp:1085
 msgid "Select Launcher..."
 msgstr "Selectează lansatorul..."
 
-#: src/Group.cpp:1043
+#: src/Group.cpp:1094
 msgid "Create Launcher..."
 msgstr "Creează un lansator..."
 
-#: src/Group.cpp:1055
+#: src/Group.cpp:1106
 msgid "Window Actions"
 msgstr "Acțiuni fereastră"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close"
 msgstr "Închide"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close All"
 msgstr "Închide tot"
 
-#: src/Plugin.cpp:122
+#: src/Plugin.cpp:126
 msgid "translator-credits"
 msgstr ""
-"Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024. 2025, 2026"
+"Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2024. 2025, 2026."
 
 #: src/SettingsDialog.cpp:39
 #, c-format
@@ -161,10 +165,6 @@ msgstr "Butonul din mijloc al mausului:"
 #: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "Închide tot"
-
-#: src/_dialogs.ui:231
-msgid "Launch new instance"
-msgstr "Lansează o nouă instanță"
 
 #: src/_dialogs.ui:232
 msgid "Do Nothing"
@@ -262,11 +262,15 @@ msgstr "Aspect"
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Alternați între aplicații cu <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:615
+msgid "Minimize active group instead of switching between its windows"
+msgstr "Minimizează grupul activ în loc să comute între ferestrele acestuia"
+
+#: src/_dialogs.ui:649
 msgid "Switch to the last window with <SUPER>"
 msgstr "Treceți la ultima fereastră cu <SUPER>"
 
-#: src/_dialogs.ui:626
+#: src/_dialogs.ui:665
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -274,10 +278,10 @@ msgstr ""
 "Tasta &lt;SUPER&gt; din stânga pare să fie deja asociată unei alte comenzi.\n"
 "Verificați configurația tastaturii Xfce."
 
-#: src/_dialogs.ui:638
+#: src/_dialogs.ui:677
 msgid "Manage shortcuts..."
 msgstr "Gestionează comenzile rapide..."
 
-#: src/_dialogs.ui:659
+#: src/_dialogs.ui:698
 msgid "Keyboard hotkeys"
 msgstr "Tastele de comenzi rapide ale tastaturii"
