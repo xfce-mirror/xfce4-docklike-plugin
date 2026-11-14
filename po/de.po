@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-08-18 12:59+0200\n"
+"POT-Creation-Date: 2026-11-14 01:00+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: Andreas Eitel <github-aneitel@online.de>, 2026\n"
 "Language-Team: German (https://app.transifex.com/xfce/teams/16840/de/)\n"
@@ -25,67 +25,71 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/AppInfos.cpp:354
+#: src/AppInfos.cpp:362
 msgid "Select Launcher"
 msgstr "Launcher auswählen"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Cancel"
 msgstr "_Abbrechen"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Open"
 msgstr "_Öffnen"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pinned to Dock"
 msgstr "Ans Dock angeheftet"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pin to Dock"
 msgstr "Ans Dock anheften"
 
-#: src/Group.cpp:956
+#: src/Group.cpp:999
 msgid "Add activation shortcut..."
 msgstr "Aktivierungsverknüpfung hinzufügen..."
 
-#: src/Group.cpp:967
+#: src/Group.cpp:1010
 msgid "Manage activation shortcut..."
 msgstr "Aktivierungsverknüpfung verwalten..."
 
-#: src/Group.cpp:989
+#: src/Group.cpp:1032
 msgid "Edit Launcher..."
 msgstr "Launcher bearbeiten..."
 
+#: src/Group.cpp:1040 src/_dialogs.ui:231
+msgid "Launch new instance"
+msgstr "Neue Instanz starten"
+
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:1021
+#: src/Group.cpp:1072
 msgid "Remove"
 msgstr "Entfernen"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:1034
+#: src/Group.cpp:1085
 msgid "Select Launcher..."
 msgstr "Launcher auswählen..."
 
-#: src/Group.cpp:1043
+#: src/Group.cpp:1094
 msgid "Create Launcher..."
 msgstr "Launcher erstellen..."
 
-#: src/Group.cpp:1055
+#: src/Group.cpp:1106
 msgid "Window Actions"
 msgstr "Fensteraktionen"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close"
 msgstr "Schließen"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close All"
 msgstr "Alle schließen"
 
-#: src/Plugin.cpp:122
+#: src/Plugin.cpp:126
 msgid "translator-credits"
 msgstr ""
 "Enrico Tröger\n"
@@ -162,10 +166,6 @@ msgstr "Mittlere Maustaste:"
 #: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "Alle schließen"
-
-#: src/_dialogs.ui:231
-msgid "Launch new instance"
-msgstr "Neue Instanz starten"
 
 #: src/_dialogs.ui:232
 msgid "Do Nothing"
@@ -263,11 +263,15 @@ msgstr "Erscheinungsbild"
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "Wechseln Sie zwischen Anwendungen mit <SUPER>+[1, 2, ...]"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:615
+msgid "Minimize active group instead of switching between its windows"
+msgstr "Aktive Gruppe minimieren, anstatt zwischen ihren Fenstern zu wechseln"
+
+#: src/_dialogs.ui:649
 msgid "Switch to the last window with <SUPER>"
 msgstr "Wechseln Sie zum letzten Fenster mit <SUPER>"
 
-#: src/_dialogs.ui:626
+#: src/_dialogs.ui:665
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -275,10 +279,10 @@ msgstr ""
 "Die linke &lt;SUPER&gt;-Taste scheint bereits einem anderen Befehl zugewiesen zu sein.\n"
 "Überprüfen Sie Ihre Xfce-Tastatureinstellungen."
 
-#: src/_dialogs.ui:638
+#: src/_dialogs.ui:677
 msgid "Manage shortcuts..."
 msgstr "Verknüpfungen verwalten..."
 
-#: src/_dialogs.ui:659
+#: src/_dialogs.ui:698
 msgid "Keyboard hotkeys"
 msgstr "Tastenkürzel"
