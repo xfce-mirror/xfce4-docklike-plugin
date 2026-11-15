@@ -34,6 +34,7 @@
 							 "margin: 1px; }\n";
 
 #include "Dock.hpp"
+#include "Settings.hpp"
 
 #include <gtk/gtk.h>
 
@@ -42,7 +43,7 @@
 
 namespace Theme
 {
-	void init();
+	void init(Settings* settings);
 	void load();
 	std::string get_theme_colors();
 } // namespace Theme

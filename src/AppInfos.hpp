@@ -20,6 +20,7 @@
 #define APPINFOS_HPP
 
 #include "Helpers.hpp"
+#include "Settings.hpp"
 #include "Store.ipp"
 
 #include <ftw.h>
@@ -47,11 +48,13 @@ struct AppInfo
 
 namespace AppInfos
 {
-	void init();
+	void init(Settings* settings);
 	void finalize();
 	std::shared_ptr<AppInfo> search(std::string id);
 	bool selectLauncher(const gchar* classId);
 	void createLauncher(const gchar* classId);
+
+	extern Settings* mSettings;
 } // namespace AppInfos
 
 #endif // APPINFOS_HPP

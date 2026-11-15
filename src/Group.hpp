@@ -23,6 +23,7 @@
 #include "GroupMenu.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
+#include "Settings.hpp"
 #include "State.ipp"
 
 #include <gtk/gtk.h>
@@ -63,7 +64,7 @@ class GroupWindow;
 class Group
 {
 public:
-	Group(std::shared_ptr<AppInfo> appInfo, bool pinned);
+	Group(std::shared_ptr<AppInfo> appInfo, Settings* settings, bool pinned);
 	~Group();
 
 	void add(GroupWindow* window);
@@ -96,6 +97,8 @@ public:
 	void onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time);
 	void onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time);
 	void onDragBegin(GdkDragContext* context);
+
+	Settings* mSettings;
 
 	bool mPinned;
 	bool mActive;

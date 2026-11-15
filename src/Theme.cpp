@@ -18,8 +18,11 @@
 
 #include "Theme.hpp"
 
-void Theme::init()
+static Settings* mSettings = nullptr;
+
+void Theme::init(Settings* settings)
 {
+	mSettings = settings;
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
 		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
 		nullptr);
@@ -105,14 +108,14 @@ std::string Theme::get_theme_colors()
 	g_free(str);
 	g_value_unset(&gv);
 
-	str = gdk_rgba_to_string(Settings::indicatorColor.get().get());
+	str = gdk_rgba_to_string(mSettings->indicatorColor.get().get());
 	std::string indicatorColor = str;
 	g_free(str);
-	str = gdk_rgba_to_string(Settings::inactiveColor.get().get());
+	str = gdk_rgba_to_string(mSettings->inactiveColor.get().get());
 	std::string inactiveColor = str;
 	g_free(str);
 
-	if (Settings::indicatorColorFromTheme)
+	if (mSettings->indicatorColorFromTheme)
 	{
 		gv = G_VALUE_INIT;
 		gtk_style_context_get_property(sc, "color", GTK_STATE_FLAG_NORMAL, &gv);
