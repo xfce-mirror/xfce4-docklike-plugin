@@ -36,7 +36,7 @@ class Group;
 
 namespace Dock
 {
-	void init(XfcePanelPlugin* xfPlugin);
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -51,6 +51,7 @@ namespace Dock
 	void onPanelOrientationChange(GtkOrientation orientation);
 
 	extern XfcePanelPlugin* mXfPlugin;
+	extern Settings* mSettings;
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;

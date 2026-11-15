@@ -29,7 +29,7 @@
 
 namespace SettingsDialog
 {
-	void popup();
+	void popup(Settings* settings);
 } // namespace SettingsDialog
 
 #endif // SETTINGS_DIALOG_HPP
