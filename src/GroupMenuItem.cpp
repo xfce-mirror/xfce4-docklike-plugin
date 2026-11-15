@@ -94,7 +94,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
 				GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow)));
-				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+				xfce_panel_plugin_register_menu(Dock::mPlugin->mXfPlugin, GTK_MENU(menu));
 				g_signal_connect(G_OBJECT(menu), "deactivate",
 					G_CALLBACK(+[](GtkMenuShell* _menu, GroupMenuItem* _me) {
 						g_object_unref(_menu);
@@ -209,13 +209,13 @@ void GroupMenuItem::updatePreview()
 	// GDK doesn't expose an API to get a foreign window on X11 anymore (so X11 code).
 	// Wayland may never have a public protocol for obtaining a preview of a foreign window,
 	// which goes against its security principles (so private protocol).
-	if (GDK_IS_X11_DISPLAY(Plugin::mDisplay))
+	if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 	{
 		GdkWindow* window;
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
-		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
+		window = gdk_x11_window_foreign_new_for_display(gdk_display_get_default(),
 			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
 
 		if (window != nullptr)

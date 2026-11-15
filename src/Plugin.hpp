@@ -19,37 +19,22 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
-#include "AppInfos.hpp"
-#include "Dock.hpp"
-#include "Settings.hpp"
-#include "SettingsDialog.hpp"
-#include "Theme.hpp"
-
 #include <gtk/gtk.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-
-#include <iostream>
-#include <string>
-#include <vector>
+#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4util/libxfce4util.h>
 
 extern "C"
 {
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
 	void construct(XfcePanelPlugin* xfPlugin);
 }
 
-#define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
-
-namespace Plugin
+class Plugin
 {
-	extern XfcePanelPlugin* mXfPlugin;
-	extern GdkDevice* mPointer;
-	extern GdkDisplay* mDisplay;
+public:
+	explicit Plugin(XfcePanelPlugin* xfPlugin);
+	~Plugin();
 
-	void aboutDialog();
-	void remoteEvent(gchar* name, GValue* value);
-} // namespace Plugin
+	XfcePanelPlugin* mXfPlugin;
+};
 
 #endif // PLUGIN_HPP

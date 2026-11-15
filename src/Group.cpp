@@ -61,7 +61,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	mButtonCssProvider = gtk_css_provider_new();
 	gtk_style_context_add_provider(gtk_widget_get_style_context(mButton),
 		GTK_STYLE_PROVIDER(mButtonCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	onPanelOrientationChange(xfce_panel_plugin_get_orientation(Plugin::mXfPlugin));
+	onPanelOrientationChange(xfce_panel_plugin_get_orientation(Dock::mPlugin->mXfPlugin));
 
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
@@ -461,8 +461,8 @@ void Group::onDraw(cairo_t* cr)
 	// TODO: make this a hidden setting now
 	if (orientation == ORIENTATION_AUTOMATIC)
 	{
-		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
-		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(Plugin::mXfPlugin);
+		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mPlugin->mXfPlugin);
+		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(Dock::mPlugin->mXfPlugin);
 
 		if (panelMode == XFCE_PANEL_PLUGIN_MODE_VERTICAL || panelMode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 		{
@@ -1000,7 +1000,7 @@ GtkWidget* Group::buildContextMenu()
 				gchar* temp = g_strdup_printf(
 					"%s 'xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s'",
 					command,
-					xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+					xfce_panel_plugin_get_unique_id(Dock::mPlugin->mXfPlugin),
 					mAppInfo->mId.c_str());
 				g_free(command);
 				command = temp;
@@ -1132,7 +1132,7 @@ void Group::onButtonPress(GdkEventButton* event)
 		&& (mWindowsCount > 0 || mPinned))
 	{
 		mContextMenu = GTK_WIDGET(g_object_ref_sink(buildContextMenu()));
-		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
+		xfce_panel_plugin_register_menu(Dock::mPlugin->mXfPlugin, GTK_MENU(mContextMenu));
 		g_signal_connect(mContextMenu, "deactivate",
 			G_CALLBACK(+[](GtkMenuShell* menu, Group* group) {
 				g_clear_object(&group->mContextMenu);

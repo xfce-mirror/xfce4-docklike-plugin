@@ -107,7 +107,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(Plugin::mXfPlugin), "notify::scale-factor",
+	g_signal_connect(G_OBJECT(Dock::mPlugin->mXfPlugin), "notify::scale-factor",
 		G_CALLBACK(+[](GtkWidget* widget, GParamSpec* pspec, GroupMenu* me) {
 			g_object_ref(me->mBox);
 			gtk_container_remove(GTK_CONTAINER(me->mWindow), me->mBox);
@@ -163,7 +163,7 @@ void GroupMenu::popup()
 			gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 		}
 
-		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
+		xfce_panel_plugin_position_widget(Dock::mPlugin->mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		updatePosition(wx, wy);
 		gtk_widget_show(mWindow);
 	}
@@ -171,7 +171,7 @@ void GroupMenu::popup()
 
 void GroupMenu::updateOrientation()
 {
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mPlugin->mXfPlugin);
 
 	if (Settings::showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
@@ -197,7 +197,7 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 	gint button_width = gtk_widget_get_allocated_width(mGroup->mButton);
 	gint button_height = gtk_widget_get_allocated_height(mGroup->mButton);
 
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mPlugin->mXfPlugin);
 
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
@@ -247,13 +247,14 @@ void GroupMenu::showPreviewsChanged()
 
 uint GroupMenu::getPointerDistance()
 {
+	GdkDevice* device = gdk_seat_get_pointer(gdk_display_get_default_seat(gdk_display_get_default()));
 	gint wx, wy, ww, wh, px, py;
 	guint dx, dy;
 	dx = dy = 0;
 
 	gtk_window_get_position(GTK_WINDOW(mWindow), &wx, &wy);
 	gtk_window_get_size(GTK_WINDOW(mWindow), &ww, &wh);
-	gdk_device_get_position(Plugin::mPointer, nullptr, &px, &py);
+	gdk_device_get_position(device, nullptr, &px, &py);
 
 	if (px < wx)
 		dx = wx - px;

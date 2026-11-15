@@ -19,15 +19,19 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include "Plugin.hpp"
+
 #include <string>
 
 namespace Hotkeys
 {
-	void init();
+	void init(Plugin* plugin);
 	void finalize();
 	void updateSettings();
 	void resetShortcuts();
 	std::string getShortcut(const std::string& appId);
+
+	extern Plugin* mPlugin;
 
 	extern bool mKeyAloneGrabbed;
 	extern int mGrabbedKeys;
