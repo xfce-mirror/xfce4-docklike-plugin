@@ -19,6 +19,7 @@
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
+#include "Theme.hpp"
 
 namespace Settings
 {
@@ -55,9 +56,9 @@ namespace Settings
 	State<int> previewHeight;
 	State<int> previewSleep;
 
-	void init()
+	void init(XfcePanelPlugin* xfPlugin)
 	{
-		gchar* path = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
+		gchar* path = xfce_panel_plugin_save_location(xfPlugin, true);
 		GKeyFile* file = g_key_file_new();
 		mPath = Store::AutoPtr<gchar>(path, g_free);
 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);

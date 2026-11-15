@@ -24,7 +24,6 @@
 #include "Group.hpp"
 #include "GroupMenuItem.hpp"
 #include "Helpers.hpp"
-#include "Plugin.hpp"
 #include "Xfw.hpp"
 
 #include <gtk/gtk.h>
