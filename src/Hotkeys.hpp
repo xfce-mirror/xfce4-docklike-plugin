@@ -19,15 +19,19 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include <libxfce4panel/libxfce4panel.h>
+
 #include <string>
 
 namespace Hotkeys
 {
-	void init();
+	void init(XfcePanelPlugin* xfPlugin);
 	void finalize();
 	void updateSettings();
 	void resetShortcuts();
 	std::string getShortcut(const std::string& appId);
+
+	extern XfcePanelPlugin* mXfPlugin;
 
 	extern bool mKeyAloneGrabbed;
 	extern int mGrabbedKeys;

@@ -24,127 +24,106 @@
 #include "LauncherEntry.hpp"
 #include "Plugin.hpp"
 
-namespace Plugin
+Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 {
-	XfcePanelPlugin* mXfPlugin;
-	GdkDevice* mPointer;
-	GdkDisplay* mDisplay;
+	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
-	static void init(XfcePanelPlugin* xfPlugin)
-	{
-		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
+	Settings::init(xfPlugin);
+	AppInfos::init();
+	Xfw::init();
+	Dock::init(xfPlugin);
+	LauncherEntry::init();
+	Theme::init();
+	Hotkeys::init(xfPlugin);
 
-		mXfPlugin = xfPlugin;
-		mDisplay = gdk_display_get_default();
-		mPointer = gdk_seat_get_pointer(gdk_display_get_default_seat(mDisplay));
+	gtk_container_add(GTK_CONTAINER(xfPlugin), Dock::mBox);
+	xfce_panel_plugin_menu_show_configure(xfPlugin);
+	xfce_panel_plugin_menu_show_about(xfPlugin);
 
-		Settings::init();
-		AppInfos::init();
-		Xfw::init();
-		Dock::init();
-		LauncherEntry::init();
-		Theme::init();
-		Hotkeys::init();
+	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "size-changed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gint size) -> gboolean {
+			Dock::onPanelResize(size);
+			return true;
+		}),
+		nullptr);
 
-		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
-		xfce_panel_plugin_menu_show_configure(mXfPlugin);
-		xfce_panel_plugin_menu_show_about(mXfPlugin);
+	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "orientation-changed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, GtkOrientation orientation) {
+			Dock::onPanelOrientationChange(orientation);
+		}),
+		nullptr);
 
-		//--------------------------------------------------
+	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin) {
+			SettingsDialog::popup();
+		}),
+		nullptr);
 
-		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "size-changed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gint size) -> gboolean {
-				Dock::onPanelResize(size);
-				return true;
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "orientation-changed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, GtkOrientation orientation) {
-				Dock::onPanelOrientationChange(orientation);
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "configure-plugin",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				SettingsDialog::popup();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "about",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Plugin::aboutDialog();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) -> gboolean {
-				remoteEvent(name, value);
-				// stop signal emission to other plugins
-				return true;
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				LauncherEntry::finalize();
-				Xfw::finalize();
-				Dock::mGroups.clear();
-				AppInfos::finalize();
-				Hotkeys::finalize();
-				Settings::finalize();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "removed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Hotkeys::resetShortcuts();
-			}),
-			nullptr);
-	}
-
-	void aboutDialog()
-	{
-		const gchar* AUTHORS[] = {
-			"Nicolas Szabo <nszabo@vivaldi.net>",
-			"David Keogh <davidtkeogh@gmail.com>",
-			nullptr};
+	g_signal_connect(G_OBJECT(xfPlugin), "about",
+		G_CALLBACK((+[](XfcePanelPlugin* _xfPlugin) {
+			const gchar* AUTHORS[] = {
+				"Nicolas Szabo <nszabo@vivaldi.net>",
+				"David Keogh <davidtkeogh@gmail.com>",
+				nullptr};
 
 #if LIBXFCE4PANEL_CHECK_VERSION(4, 21, 4)
-		xfce_panel_gtk_show_about_dialog(
+			xfce_panel_gtk_show_about_dialog(
 #else
-		gtk_show_about_dialog(nullptr,
+			gtk_show_about_dialog(nullptr,
 #endif
-			"program-name", PACKAGE_NAME,
-			"logo-icon-name", "preferences-system",
-			"version", VERSION_FULL,
-			"copyright", "Copyright \302\251 2019-" COPYRIGHT_YEAR " The Xfce development team",
-			"license-type", GTK_LICENSE_GPL_3_0,
-			"website", PACKAGE_URL,
-			"authors", AUTHORS,
-			"translator-credits", _("translator-credits"),
-			nullptr);
-	}
+				"program-name", PACKAGE_NAME,
+				"logo-icon-name", "preferences-system",
+				"version", VERSION_FULL,
+				"copyright", "Copyright \302\251 2019-" COPYRIGHT_YEAR " The Xfce development team",
+				"license-type", GTK_LICENSE_GPL_3_0,
+				"website", PACKAGE_URL,
+				"authors", AUTHORS,
+				"translator-credits", _("translator-credits"),
+				nullptr);
+		})),
+		nullptr);
 
-	void remoteEvent(gchar* name, GValue* value)
-	{
-		if (g_strcmp0(name, "settings") == 0)
-			SettingsDialog::popup();
-		else if (g_strcmp0(name, "about") == 0)
-			aboutDialog();
-		else if (g_strcmp0(name, "switch-to-last-window") == 0 && Settings::keyAloneActive)
-			Xfw::switchToLastWindow();
-		else if (g_strcmp0(name, "activate-group") == 0)
-		{
-			if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
-				Dock::activateGroup(g_value_get_int64(value));
-			else if (G_VALUE_HOLDS_STRING(value))
-				Dock::activateGroup(g_value_get_string(value));
-		}
-	}
+	g_signal_connect(G_OBJECT(xfPlugin), "remote-event",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value) -> gboolean {
+			if (g_strcmp0(name, "settings") == 0)
+				SettingsDialog::popup();
+			else if (g_strcmp0(name, "about") == 0)
+				g_signal_emit_by_name(_xfPlugin, "about");
+			else if (g_strcmp0(name, "switch-to-last-window") == 0 && Settings::keyAloneActive)
+				Xfw::switchToLastWindow();
+			else if (g_strcmp0(name, "activate-group") == 0)
+			{
+				if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
+					Dock::activateGroup(g_value_get_int64(value));
+				else if (G_VALUE_HOLDS_STRING(value))
+					Dock::activateGroup(g_value_get_string(value));
+			}
+			// stop signal emission to other plugins
+			return true;
+		}),
+		nullptr);
 
-} // namespace Plugin
+	g_signal_connect(G_OBJECT(xfPlugin), "free-data",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			delete plugin;
+		}),
+		this);
 
-//----------------------------------------------------------------------------------------------------------------------
+	g_signal_connect(G_OBJECT(xfPlugin), "removed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin) {
+			Hotkeys::resetShortcuts();
+		}),
+		nullptr);
+}
 
-extern "C" void construct(XfcePanelPlugin* xfPlugin) { Plugin::init(xfPlugin); }
+Plugin::~Plugin()
+{
+	LauncherEntry::finalize();
+	Xfw::finalize();
+	Dock::mGroups.clear();
+	AppInfos::finalize();
+	Hotkeys::finalize();
+	Settings::finalize();
+}
+
+extern "C" void construct(XfcePanelPlugin* xfPlugin) { new Plugin(xfPlugin); }

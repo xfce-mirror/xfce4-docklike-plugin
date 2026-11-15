@@ -24,6 +24,7 @@
 #include "Settings.hpp"
 
 #include <gtk/gtk.h>
+#include <libxfce4ui/libxfce4ui.h>
 
 #include <string>
 

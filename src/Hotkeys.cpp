@@ -23,6 +23,7 @@
 
 namespace Hotkeys
 {
+	XfcePanelPlugin* mXfPlugin = nullptr;
 	bool mKeyAloneGrabbed = false;
 	int mGrabbedKeys = mNbHotkeys;
 	bool mAddShortcutUIAvailable = false;
@@ -44,7 +45,7 @@ namespace Hotkeys
 		{
 			gchar* command = g_strdup_printf(
 				"xfce4-panel --plugin-event=docklike-%d:activate-group:int:%d",
-				xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+				xfce_panel_plugin_get_unique_id(mXfPlugin),
 				n);
 			if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
 			{
@@ -111,7 +112,7 @@ namespace Hotkeys
 		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
 		gchar* command = g_strdup_printf(
 			"xfce4-panel --plugin-event=docklike-%d:switch-to-last-window",
-			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin));
+			xfce_panel_plugin_get_unique_id(mXfPlugin));
 		mKeyAloneGrabbed = true;
 		if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
 		{
@@ -130,8 +131,10 @@ namespace Hotkeys
 
 	// =========================================================================
 
-	void init()
+	void init(XfcePanelPlugin* xfPlugin)
 	{
+		mXfPlugin = xfPlugin;
+
 		GError* error = nullptr;
 		if (xfconf_init(&error))
 		{
@@ -189,7 +192,7 @@ namespace Hotkeys
 		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
 		gchar* prefix = g_strdup_printf(
 			"xfce4-panel --plugin-event=docklike-%d:",
-			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin));
+			xfce_panel_plugin_get_unique_id(mXfPlugin));
 		const gchar* property;
 		GValue* command;
 		GHashTableIter iter;
@@ -212,7 +215,7 @@ namespace Hotkeys
 		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
 		gchar* command = g_strdup_printf(
 			"xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s",
-			xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+			xfce_panel_plugin_get_unique_id(mXfPlugin),
 			appId.c_str());
 		const gchar* property;
 		GValue* value;
