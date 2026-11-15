@@ -77,7 +77,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) -> gboolean {
 			me->mMouseHover = true;
 
-			if (Settings::showPreviews)
+			if (me->mGroup->mSettings->showPreviews)
 				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->updatePreview();
 				});
@@ -137,7 +137,7 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 	gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(menuItem->mItem));
 	gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 
-	if (mGroup->mWindowsCount < (Settings::noWindowsListIfSingle ? 2 : 1))
+	if (mGroup->mWindowsCount < (mGroup->mSettings->noWindowsListIfSingle ? 2 : 1))
 		gtk_widget_hide(mWindow);
 
 	if (mVisible)
@@ -146,7 +146,7 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 
 void GroupMenu::popup()
 {
-	if (mGroup->mWindowsCount >= (Settings::noWindowsListIfSingle ? 2 : 1))
+	if (mGroup->mWindowsCount >= (mGroup->mSettings->noWindowsListIfSingle ? 2 : 1))
 	{
 		gint wx, wy;
 		mVisible = true;
@@ -154,7 +154,7 @@ void GroupMenu::popup()
 		updateOrientation();
 
 		// Update the previews before showing the window
-		if (Settings::showPreviews)
+		if (mGroup->mSettings->showPreviews)
 		{
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
@@ -172,7 +172,7 @@ void GroupMenu::updateOrientation()
 {
 	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mXfPlugin);
 
-	if (Settings::showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+	if (mGroup->mSettings->showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
 	else
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_VERTICAL);
@@ -238,7 +238,7 @@ void GroupMenu::hide()
 void GroupMenu::showPreviewsChanged()
 {
 	mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-		gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+		gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), w->mGroup->mSettings->showPreviews);
 		w->mGroupMenuItem->mPreviewTimeout.stop();
 	});
 	gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);

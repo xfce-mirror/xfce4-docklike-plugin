@@ -31,6 +31,9 @@ class Plugin
 public:
 	explicit Plugin(XfcePanelPlugin* xfPlugin);
 	~Plugin();
+
+private:
+	Settings* mSettings;
 };
 
 #endif // PLUGIN_HPP

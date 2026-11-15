@@ -23,20 +23,23 @@
 namespace Dock
 {
 	XfcePanelPlugin* mXfPlugin = nullptr;
+	Settings* mSettings = nullptr;
+
 	GtkWidget* mBox;
 	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
 
 	int mPanelSize;
 	int mIconSize;
 
-	void init(XfcePanelPlugin* xfPlugin)
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings)
 	{
 		mXfPlugin = xfPlugin;
+		mSettings = settings;
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_widget_set_name(mBox, "docklike-plugin");
 
-		if (Settings::dockSize)
-			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
+		if (mSettings->dockSize)
+			gtk_widget_set_size_request(mBox, mSettings->dockSize, -1);
 
 		gtk_widget_show(mBox);
 		drawGroups();
@@ -48,7 +51,7 @@ namespace Dock
 
 		if (!group)
 		{
-			group = std::make_shared<Group>(appInfo, false);
+			group = std::make_shared<Group>(appInfo, false, mSettings);
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
@@ -83,7 +86,7 @@ namespace Dock
 				pinnedList.push_back(group->mAppInfo->mId);
 		}
 
-		Settings::pinnedAppList.set(pinnedList);
+		mSettings->pinnedAppList.set(pinnedList);
 		g_list_free(children);
 	}
 
@@ -105,13 +108,13 @@ namespace Dock
 		mGroups.clear();
 
 		// Add pinned groups
-		std::list<std::string> pinnedApps = Settings::pinnedAppList;
+		std::list<std::string> pinnedApps = mSettings->pinnedAppList;
 		std::list<std::string>::iterator it = pinnedApps.begin();
 
 		while (it != pinnedApps.end())
 		{
 			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(*it));
-			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true);
+			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mSettings);
 
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
@@ -163,7 +166,7 @@ namespace Dock
 	{
 		if (group->mActive)
 		{
-			if (Settings::keyComboMinimize || group->mWindowsCount == 1)
+			if (mSettings->keyComboMinimize || group->mWindowsCount == 1)
 				group->minimizeAll();
 			else
 				group->scrollWindows(GDK_CURRENT_TIME, GDK_SCROLL_DOWN);
@@ -216,8 +219,8 @@ namespace Dock
 
 		gtk_box_set_spacing(GTK_BOX(mBox), mPanelSize / 10);
 
-		if (Settings::forceIconSize)
-			mIconSize = Settings::iconSize;
+		if (mSettings->forceIconSize)
+			mIconSize = mSettings->iconSize;
 		else
 		{
 			if (mPanelSize <= 20)
@@ -247,12 +250,12 @@ namespace Dock
 		}
 		g_list_free(children);
 
-		if (Settings::dockSize)
+		if (mSettings->dockSize)
 		{
 			if (orientation == GTK_ORIENTATION_HORIZONTAL)
-				gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
+				gtk_widget_set_size_request(mBox, mSettings->dockSize, -1);
 			else
-				gtk_widget_set_size_request(mBox, -1, Settings::dockSize);
+				gtk_widget_set_size_request(mBox, -1, mSettings->dockSize);
 		}
 	}
 } // namespace Dock

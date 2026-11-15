@@ -18,10 +18,12 @@
 #ifndef LAUNCHERENTRY_HPP
 #define LAUNCHERENTRY_HPP
 
+#include "Settings.hpp"
+
 class LauncherEntry
 {
 public:
-	static void init();
+	static void init(Settings* settings);
 	static void finalize();
 	static void refreshGroups();
 
