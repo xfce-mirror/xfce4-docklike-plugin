@@ -21,10 +21,10 @@
 
 #include "Dock.hpp"
 #include "Helpers.hpp"
-#include "Plugin.hpp"
 #include "State.ipp"
 
 #include <glib.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #include <iostream>
 #include <list>
@@ -33,7 +33,7 @@
 
 namespace Settings
 {
-	void init();
+	void init(XfcePanelPlugin* xfPlugin);
 	void finalize();
 
 	void saveFile();

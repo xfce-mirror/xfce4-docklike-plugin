@@ -22,14 +22,16 @@
 
 namespace Dock
 {
+	XfcePanelPlugin* mXfPlugin = nullptr;
 	GtkWidget* mBox;
 	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
 
 	int mPanelSize;
 	int mIconSize;
 
-	void init()
+	void init(XfcePanelPlugin* xfPlugin)
 	{
+		mXfPlugin = xfPlugin;
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_widget_set_name(mBox, "docklike-plugin");
 

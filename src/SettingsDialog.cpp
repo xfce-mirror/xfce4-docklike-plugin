@@ -18,7 +18,6 @@
 
 #include "SettingsDialog.hpp"
 #include "Hotkeys.hpp"
-#include "Plugin.hpp"
 
 namespace SettingsDialog
 {
@@ -96,7 +95,7 @@ namespace SettingsDialog
 		g_signal_connect(
 			gtk_builder_get_object(builder, "b_help"), "clicked",
 			G_CALLBACK(+[](GtkButton* button, GtkWindow* dialogWindow) {
-				gtk_show_uri_on_window(dialogWindow, HELP_WEBSITE, GDK_CURRENT_TIME, nullptr);
+				gtk_show_uri_on_window(dialogWindow, PACKAGE_URL, GDK_CURRENT_TIME, nullptr);
 			}),
 			dialog);
 
