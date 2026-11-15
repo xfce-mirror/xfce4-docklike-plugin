@@ -18,10 +18,12 @@
 #ifndef LAUNCHERENTRY_HPP
 #define LAUNCHERENTRY_HPP
 
+#include "Plugin.hpp"
+
 class LauncherEntry
 {
 public:
-	static void init();
+	static void init(Plugin* plugin);
 	static void finalize();
 	static void refreshGroups();
 

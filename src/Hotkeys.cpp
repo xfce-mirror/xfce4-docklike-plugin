@@ -179,9 +179,9 @@ namespace Hotkeys
 		if (mChannel == nullptr)
 			return;
 
-		if (Settings::keyAloneActive)
+		if (mPlugin->mSettings->keyAloneActive)
 			addKeyAloneShortcut();
-		if (Settings::keyComboActive)
+		if (mPlugin->mSettings->keyComboActive)
 			addKeyComboShortcuts();
 	}
 

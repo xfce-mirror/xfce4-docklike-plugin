@@ -17,6 +17,7 @@
  */
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "Settings.hpp"
 
 #include <libxfce4ui/libxfce4ui.h>
@@ -79,6 +80,8 @@ std::string AppInfo::getId()
 
 namespace AppInfos
 {
+	Plugin* mPlugin = nullptr;
+
 	std::list<std::string> mXdgDataDirs;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
@@ -228,8 +231,9 @@ namespace AppInfos
 		return false;
 	}
 
-	void init()
+	void init(Plugin* plugin)
 	{
+		mPlugin = plugin;
 		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
 
 		g_signal_connect(G_OBJECT(mMonitor.get()), "changed",
@@ -245,8 +249,8 @@ namespace AppInfos
 		findXDGDirectories();
 		loadXDGDirectories();
 
-		std::list<std::string> ids = Settings::userSetApps.get().first;
-		std::list<std::string> paths = Settings::userSetApps.get().second;
+		std::list<std::string> ids = mPlugin->mSettings->userSetApps.get().first;
+		std::list<std::string> paths = mPlugin->mSettings->userSetApps.get().second;
 		for (auto id = ids.begin(), path = paths.begin();
 			id != ids.end() && path != paths.end();
 			id++, path++)
@@ -386,11 +390,11 @@ namespace AppInfos
 				added = addUserSetApp(classId, filename);
 				if (added)
 				{
-					std::list<std::string> ids = Settings::userSetApps.get().first;
-					std::list<std::string> paths = Settings::userSetApps.get().second;
+					std::list<std::string> ids = mPlugin->mSettings->userSetApps.get().first;
+					std::list<std::string> paths = mPlugin->mSettings->userSetApps.get().second;
 					ids.push_back(classId);
 					paths.push_back(filename);
-					Settings::userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
+					mPlugin->mSettings->userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
 				}
 				g_free(filename);
 			}

@@ -69,14 +69,14 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mPreview = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mPreview), "preview");
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
-	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+	gtk_widget_set_visible(GTK_WIDGET(mPreview), mGroupWindow->mGroup->mPlugin->mSettings->showPreviews);
 
 	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
 	int sleepMS = 1000;
-	if (Settings::previewSleep)
-		sleepMS = Settings::previewSleep;
+	if (mGroupWindow->mGroup->mPlugin->mSettings->previewSleep)
+		sleepMS = mGroupWindow->mGroup->mPlugin->mSettings->previewSleep;
 
 	mPreviewTimeout.setup(sleepMS, [this]() {
 		updatePreview();
@@ -89,7 +89,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) -> gboolean {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
-			else if (event->button == GDK_BUTTON_MIDDLE && Settings::middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
+			else if (event->button == GDK_BUTTON_MIDDLE && me->mGroupWindow->mGroup->mPlugin->mSettings->middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
 				Xfw::close(me->mGroupWindow, event->time);
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
@@ -231,8 +231,8 @@ void GroupMenuItem::updatePreview()
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
 
-				gint previewWidth = Settings::previewWidth * scale_factor;
-				gint previewHeight = Settings::previewHeight * scale_factor;
+				gint previewWidth = mGroupWindow->mGroup->mPlugin->mSettings->previewWidth * scale_factor;
+				gint previewHeight = mGroupWindow->mGroup->mPlugin->mSettings->previewHeight * scale_factor;
 
 				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
 				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);

@@ -24,6 +24,8 @@
 
 namespace Xfw
 {
+	Plugin* mPlugin = nullptr;
+
 	XfwScreen* mXfwScreen;
 	XfwWorkspaceGroup* mXfwWorkspaceGroup = nullptr;
 	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
@@ -95,8 +97,9 @@ namespace Xfw
 
 	// public:
 
-	void init()
+	void init(Plugin* plugin)
 	{
+		mPlugin = plugin;
 		xfw_set_client_type(XFW_CLIENT_TYPE_PAGER);
 		mXfwScreen = xfw_screen_get_default();
 
@@ -106,7 +109,7 @@ namespace Xfw
 				mGroupWindows.pushSecond(xfwWindow, newWindow);
 				newWindow->mGroup->updateStyle();
 
-				if (Settings::showPreviews && newWindow->mGroup->mGroupMenu.mVisible)
+				if (mPlugin->mSettings->showPreviews && newWindow->mGroup->mGroupMenu.mVisible)
 					newWindow->mGroupMenuItem->mPreviewTimeout.start();
 			}),
 			nullptr);

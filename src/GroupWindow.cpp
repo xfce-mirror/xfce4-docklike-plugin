@@ -21,15 +21,14 @@
 GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 {
 	mXfwWindow = xfwWindow;
-	mGroupMenuItem = new GroupMenuItem(this);
-	mGroupAssociated = false;
-
 	std::string groupName = Xfw::getGroupName(this);
-
 	g_debug("NEW: %s", groupName.c_str());
 
 	std::shared_ptr<AppInfo> appInfo = AppInfos::search(groupName);
 	mGroup = Dock::prepareGroup(appInfo);
+
+	mGroupMenuItem = new GroupMenuItem(this);
+	mGroupAssociated = false;
 
 	//--------------------------------------------------
 
@@ -147,7 +146,7 @@ void GroupWindow::updateState()
 	bool onTasklist = !(mState & XfwWindowState::XFW_WINDOW_STATE_SKIP_TASKLIST);
 	mState = xfw_window_get_state(this->mXfwWindow);
 
-	if (Settings::onlyDisplayVisible)
+	if (mGroup->mPlugin->mSettings->onlyDisplayVisible)
 	{
 		XfwWorkspace* windowWorkspace = xfw_window_get_workspace(mXfwWindow);
 
@@ -160,7 +159,7 @@ void GroupWindow::updateState()
 		}
 	}
 
-	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(gdk_display_get_default()) > 1)
+	if (mGroup->mPlugin->mSettings->onlyDisplayScreen && gdk_display_get_n_monitors(gdk_display_get_default()) > 1)
 	{
 		GList* monitors = xfw_window_get_monitors(mXfwWindow);
 		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Dock::mPlugin->mXfPlugin));

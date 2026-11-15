@@ -22,6 +22,7 @@
 #include "Group.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
+#include "Plugin.hpp"
 #include "Store.ipp"
 
 #include <fcntl.h>
@@ -35,7 +36,7 @@ class GroupWindow;
 
 namespace Xfw
 {
-	void init();
+	void init(Plugin* plugin);
 	void finalize();
 
 	XfwWindow* getActiveWindow();
@@ -48,6 +49,8 @@ namespace Xfw
 
 	void setActiveWindow(XfwWindow* previousActiveWindow = nullptr);
 	void setVisibleGroups();
+
+	extern Plugin* mPlugin;
 
 	extern XfwScreen* mXfwScreen;
 	extern XfwWorkspaceGroup* mXfwWorkspaceGroup;

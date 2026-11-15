@@ -19,6 +19,8 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#include "Settings.hpp"
+
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4util/libxfce4util.h>
@@ -28,6 +30,8 @@ extern "C"
 	void construct(XfcePanelPlugin* xfPlugin);
 }
 
+class Settings;
+
 class Plugin
 {
 public:
@@ -35,6 +39,7 @@ public:
 	~Plugin();
 
 	XfcePanelPlugin* mXfPlugin;
+	Settings* mSettings;
 };
 
 #endif // PLUGIN_HPP
