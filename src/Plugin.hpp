@@ -19,6 +19,8 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#include "Settings.hpp"
+
 #include <libxfce4panel/libxfce4panel.h>
 
 extern "C"
@@ -31,6 +33,9 @@ class Plugin
 public:
 	explicit Plugin(XfcePanelPlugin* xfPlugin);
 	~Plugin();
+
+private:
+	Settings* mSettings;
 };
 
 #endif // PLUGIN_HPP

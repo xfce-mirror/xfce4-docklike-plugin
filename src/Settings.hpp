@@ -19,60 +19,58 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 
-#include "Dock.hpp"
-#include "Helpers.hpp"
 #include "State.ipp"
+#include "Store.ipp"
 
 #include <glib.h>
 #include <libxfce4panel/libxfce4panel.h>
 
-#include <iostream>
-#include <list>
-#include <string>
-#include <vector>
-
-namespace Settings
+class Settings
 {
-	void init(XfcePanelPlugin* xfPlugin);
-	void finalize();
-
-	void saveFile();
+public:
+	explicit Settings(XfcePanelPlugin* xfPlugin);
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;
 	const int defPreviewWidth = 288;
 	const int defPreviewHeight = 162;
 
-	extern State<bool> forceIconSize;
-	extern State<int> iconSize;
+	State<bool> forceIconSize;
+	State<int> iconSize;
 
-	extern State<bool> noWindowsListIfSingle;
-	extern State<bool> onlyDisplayVisible;
-	extern State<bool> onlyDisplayScreen;
-	extern State<bool> showPreviews;
-	extern State<int> previewWidth;
-	extern State<int> previewHeight;
-	extern State<bool> showWindowCount;
-	extern State<bool> disableLauncherCounts;
-	extern State<int> middleButtonBehavior;
+	State<bool> noWindowsListIfSingle;
+	State<bool> onlyDisplayVisible;
+	State<bool> onlyDisplayScreen;
+	State<bool> showPreviews;
+	State<int> previewWidth;
+	State<int> previewHeight;
+	State<bool> showWindowCount;
+	State<bool> disableLauncherCounts;
+	State<int> middleButtonBehavior;
 
-	extern State<int> indicatorOrientation;
-	extern State<int> indicatorStyle;
-	extern State<int> inactiveIndicatorStyle;
-	extern State<bool> indicatorColorFromTheme;
-	extern State<std::shared_ptr<GdkRGBA>> indicatorColor;
-	extern State<std::shared_ptr<GdkRGBA>> inactiveColor;
+	State<int> indicatorOrientation;
+	State<int> indicatorStyle;
+	State<int> inactiveIndicatorStyle;
+	State<bool> indicatorColorFromTheme;
+	State<std::shared_ptr<GdkRGBA>> indicatorColor;
+	State<std::shared_ptr<GdkRGBA>> inactiveColor;
 
-	extern State<bool> keyComboActive;
-	extern State<bool> keyComboMinimize;
-	extern State<bool> keyAloneActive;
+	State<bool> keyComboActive;
+	State<bool> keyComboMinimize;
+	State<bool> keyAloneActive;
 
-	extern State<std::list<std::string>> pinnedAppList;
-	extern State<std::pair<std::list<std::string>, std::list<std::string>>> userSetApps;
+	State<std::list<std::string>> pinnedAppList;
+	State<std::pair<std::list<std::string>, std::list<std::string>>> userSetApps;
 
 	// HIDDEN SETTINGS:
-	extern State<int> dockSize;
-	extern State<int> previewSleep;
-}; // namespace Settings
+	State<int> dockSize;
+	State<int> previewSleep;
+
+private:
+	void saveFile();
+
+	Store::AutoPtr<gchar> mPath;
+	Store::AutoPtr<GKeyFile> mFile;
+};
 
 #endif // SETTINGS_HPP

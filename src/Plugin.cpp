@@ -21,7 +21,6 @@
 #include "Dock.hpp"
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
-#include "Settings.hpp"
 #include "SettingsDialog.hpp"
 #include "Theme.hpp"
 
@@ -35,13 +34,13 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 {
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
-	Settings::init(xfPlugin);
-	AppInfos::init();
-	Xfw::init();
-	Dock::init(xfPlugin);
-	LauncherEntry::init();
-	Theme::init();
-	Hotkeys::init(xfPlugin);
+	mSettings = new Settings(xfPlugin);
+	AppInfos::init(mSettings);
+	Xfw::init(mSettings);
+	Dock::init(xfPlugin, mSettings);
+	LauncherEntry::init(mSettings);
+	Theme::init(mSettings);
+	Hotkeys::init(xfPlugin, mSettings);
 
 	gtk_container_add(GTK_CONTAINER(xfPlugin), Dock::mBox);
 	xfce_panel_plugin_menu_show_configure(xfPlugin);
@@ -61,10 +60,10 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 		nullptr);
 
 	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
-		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin) {
-			SettingsDialog::popup();
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			SettingsDialog::popup(plugin->mSettings);
 		}),
-		nullptr);
+		this);
 
 	// cppcheck doesn't want this in G_CALLBACK() as long as LIBXFCE4PANEL_CHECK_VERSION is used
 	auto aboutDialog = +[](XfcePanelPlugin* _xfPlugin) {
@@ -93,16 +92,16 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 		nullptr);
 
 	g_signal_connect(G_OBJECT(xfPlugin), "remote-event",
-		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value) -> gboolean {
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value, Plugin* plugin) -> gboolean {
 			if (g_strcmp0(name, "settings") == 0)
-				SettingsDialog::popup();
+				SettingsDialog::popup(plugin->mSettings);
 			else if (g_strcmp0(name, "about") == 0)
 				g_signal_emit_by_name(_xfPlugin, "about");
-			else if (g_strcmp0(name, "switch-to-last-window") == 0 && Settings::keyAloneActive)
+			else if (g_strcmp0(name, "switch-to-last-window") == 0 && plugin->mSettings->keyAloneActive)
 				Xfw::switchToLastWindow();
 			else if (g_strcmp0(name, "activate-group") == 0)
 			{
-				if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
+				if (G_VALUE_HOLDS_INT64(value) && plugin->mSettings->keyComboActive)
 					Dock::activateGroup(g_value_get_int64(value));
 				else if (G_VALUE_HOLDS_STRING(value))
 					Dock::activateGroup(g_value_get_string(value));
@@ -110,7 +109,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 			// stop signal emission to other plugins
 			return true;
 		}),
-		nullptr);
+		this);
 
 	g_signal_connect(G_OBJECT(xfPlugin), "free-data",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
@@ -132,7 +131,7 @@ Plugin::~Plugin()
 	Dock::mGroups.clear();
 	AppInfos::finalize();
 	Hotkeys::finalize();
-	Settings::finalize();
+	delete mSettings;
 }
 
 extern "C" void construct(XfcePanelPlugin* xfPlugin) { new Plugin(xfPlugin); }

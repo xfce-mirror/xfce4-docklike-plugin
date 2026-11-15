@@ -24,6 +24,8 @@
 namespace Hotkeys
 {
 	XfcePanelPlugin* mXfPlugin = nullptr;
+	Settings* mSettings = nullptr;
+
 	bool mKeyAloneGrabbed = false;
 	int mGrabbedKeys = mNbHotkeys;
 	bool mAddShortcutUIAvailable = false;
@@ -131,9 +133,10 @@ namespace Hotkeys
 
 	// =========================================================================
 
-	void init(XfcePanelPlugin* xfPlugin)
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings)
 	{
 		mXfPlugin = xfPlugin;
+		mSettings = settings;
 
 		GError* error = nullptr;
 		if (xfconf_init(&error))
@@ -178,9 +181,9 @@ namespace Hotkeys
 		if (mChannel == nullptr)
 			return;
 
-		if (Settings::keyAloneActive)
+		if (mSettings->keyAloneActive)
 			addKeyAloneShortcut();
-		if (Settings::keyComboActive)
+		if (mSettings->keyComboActive)
 			addKeyComboShortcuts();
 	}
 
