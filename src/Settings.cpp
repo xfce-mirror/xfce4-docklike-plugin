@@ -22,6 +22,8 @@
 
 namespace Settings
 {
+	XfcePanelPlugin* mXfPlugin = nullptr;
+
 	Store::AutoPtr<gchar> mPath;
 	Store::AutoPtr<GKeyFile> mFile;
 
@@ -55,9 +57,10 @@ namespace Settings
 	State<int> previewHeight;
 	State<int> previewSleep;
 
-	void init()
+	void init(XfcePanelPlugin* xfPlugin)
 	{
-		gchar* path = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
+		mXfPlugin = xfPlugin;
+		gchar* path = xfce_panel_plugin_save_location(mXfPlugin, true);
 		GKeyFile* file = g_key_file_new();
 		mPath = Store::AutoPtr<gchar>(path, g_free);
 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);

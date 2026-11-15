@@ -25,6 +25,7 @@
 #include "State.ipp"
 
 #include <glib.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #include <iostream>
 #include <list>
@@ -33,7 +34,7 @@
 
 namespace Settings
 {
-	void init();
+	void init(XfcePanelPlugin* xfPlugin);
 	void finalize();
 
 	void saveFile();
@@ -42,6 +43,8 @@ namespace Settings
 	const int maxIconSize = 128;
 	const int defPreviewWidth = 288;
 	const int defPreviewHeight = 162;
+
+	extern XfcePanelPlugin* mXfPlugin;
 
 	extern State<bool> forceIconSize;
 	extern State<int> iconSize;
