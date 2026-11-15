@@ -19,6 +19,5 @@
 #include <libxfce4panel/libxfce4panel.h>
 
 extern void construct(XfcePanelPlugin* xfPlugin);
-extern gboolean internal_unique_check(GdkScreen* screen);
 
-XFCE_PANEL_PLUGIN_REGISTER_WITH_CHECK(construct, internal_unique_check);
+XFCE_PANEL_PLUGIN_REGISTER(construct);
