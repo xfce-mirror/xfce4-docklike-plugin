@@ -36,7 +36,7 @@ class Group;
 
 namespace Dock
 {
-	void init();
+	void init(Plugin* plugin);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -49,6 +49,8 @@ namespace Dock
 
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);
+
+	extern Plugin* mPlugin;
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;

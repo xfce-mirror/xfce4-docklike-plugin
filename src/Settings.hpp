@@ -33,7 +33,7 @@
 
 namespace Settings
 {
-	void init();
+	void init(Plugin* plugin);
 	void finalize();
 
 	void saveFile();

@@ -28,7 +28,7 @@ void AppInfo::launch()
 	if (mGAppInfo)
 	{
 		GError* error = nullptr;
-		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
+		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(gdk_display_get_default());
 
 		if (!g_app_info_launch(G_APP_INFO(mGAppInfo.get()), nullptr, G_APP_LAUNCH_CONTEXT(context), &error))
 		{
@@ -43,7 +43,7 @@ void AppInfo::launchAction(const gchar* action)
 {
 	if (mGAppInfo)
 	{
-		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(Plugin::mDisplay);
+		GdkAppLaunchContext* context = gdk_display_get_app_launch_context(gdk_display_get_default());
 		g_desktop_app_info_launch_action(mGAppInfo.get(), action, G_APP_LAUNCH_CONTEXT(context));
 		g_object_unref(context);
 	}
