@@ -21,12 +21,12 @@
 
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "Plugin.hpp"
 #include "Settings.hpp"
 #include "Store.ipp"
 #include "Xfw.hpp"
 
 #include <gtk/gtk.h>
+#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
@@ -36,7 +36,7 @@ class Group;
 
 namespace Dock
 {
-	void init();
+	void init(XfcePanelPlugin* xfPlugin);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -49,6 +49,8 @@ namespace Dock
 
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);
+
+	extern XfcePanelPlugin* mXfPlugin;
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
