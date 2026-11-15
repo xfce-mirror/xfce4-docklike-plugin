@@ -38,6 +38,7 @@ struct LauncherEntry::Impl
 		std::uint64_t updateSerial = 0;
 	};
 
+	Plugin* mPlugin = nullptr;
 	GDBusConnection* connection = nullptr;
 	guint launcherSignalId = 0;
 	guint nameOwnerChangedSignalId = 0;
@@ -73,7 +74,7 @@ struct LauncherEntry::Impl
 
 	void applyEntryToGroup(Group* group)
 	{
-		if (Settings::disableLauncherCounts)
+		if (mPlugin->mSettings->disableLauncherCounts)
 		{
 			group->setLauncherCount(0, false);
 			return;
@@ -130,7 +131,7 @@ struct LauncherEntry::Impl
 			entry.countVisible = countVisible;
 		g_variant_unref(properties);
 
-		if (!Settings::disableLauncherCounts)
+		if (!impl->mPlugin->mSettings->disableLauncherCounts)
 			impl->refreshGroups();
 		g_debug("Launcher count update for '%s': count=%" G_GINT64_FORMAT ", visible=%s",
 			appId.c_str(), entry.count, entry.countVisible ? "true" : "false");
@@ -161,12 +162,13 @@ struct LauncherEntry::Impl
 				++entry;
 		}
 
-		if (removed && !Settings::disableLauncherCounts)
+		if (removed && !impl->mPlugin->mSettings->disableLauncherCounts)
 			impl->refreshGroups();
 	}
 
-	void init()
+	void init(Plugin* plugin)
 	{
+		mPlugin = plugin;
 		GError* error = nullptr;
 		connection = g_bus_get_sync(G_BUS_TYPE_SESSION, nullptr, &error);
 		if (connection == nullptr)
@@ -212,7 +214,7 @@ struct LauncherEntry::Impl
 
 LauncherEntry::Impl LauncherEntry::mImpl;
 
-void LauncherEntry::init() { mImpl.init(); }
+void LauncherEntry::init(Plugin* plugin) { mImpl.init(plugin); }
 
 void LauncherEntry::finalize() { mImpl.finalize(); }
 

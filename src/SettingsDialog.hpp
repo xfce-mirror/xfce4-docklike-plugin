@@ -21,15 +21,12 @@
 
 #include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "Settings.hpp"
-
-#include <gtk/gtk.h>
 
 #include <string>
 
 namespace SettingsDialog
 {
-	void popup();
+	void popup(Plugin* plugin);
 } // namespace SettingsDialog
 
 #endif // SETTINGS_DIALOG_HPP

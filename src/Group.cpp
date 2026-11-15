@@ -22,7 +22,7 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mPlugin(plugin), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -190,7 +190,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
-			if (Settings::showPreviews)
+			if (me->mPlugin->mSettings->showPreviews)
 				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.start();
 				});
@@ -209,7 +209,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 			else
 				me->setMouseLeaveTimeout();
 
-			if (Settings::showPreviews)
+			if (me->mPlugin->mSettings->showPreviews)
 				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.stop();
 				});
@@ -420,7 +420,7 @@ void Group::onDraw(cairo_t* cr)
 
 	double rgba[4];
 
-	if (Settings::indicatorColorFromTheme)
+	if (mPlugin->mSettings->indicatorColorFromTheme)
 	{
 		GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(gtk_menu_new()));
 		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
@@ -441,9 +441,9 @@ void Group::onDraw(cairo_t* cr)
 	{
 		std::shared_ptr<GdkRGBA> color;
 		if (mActive)
-			color = Settings::indicatorColor;
+			color = mPlugin->mSettings->indicatorColor;
 		else
-			color = Settings::inactiveColor;
+			color = mPlugin->mSettings->inactiveColor;
 
 		rgba[0] = color->red;
 		rgba[1] = color->green;
@@ -455,7 +455,7 @@ void Group::onDraw(cairo_t* cr)
 	const double DOT_RADIUS = h * 0.065;
 	const double CIRCLE_WEIGHT = 0.0375;
 
-	int orientation = Settings::indicatorOrientation;
+	int orientation = mPlugin->mSettings->indicatorOrientation;
 	// Orientation based on panel mode and position
 	// Mimics Windows 10 style, indicator stays on outside
 	// TODO: make this a hidden setting now
@@ -480,9 +480,9 @@ void Group::onDraw(cairo_t* cr)
 		}
 	}
 
-	int indicator_style = Settings::inactiveIndicatorStyle;
+	int indicator_style = mPlugin->mSettings->inactiveIndicatorStyle;
 	if (mActive)
-		indicator_style = Settings::indicatorStyle;
+		indicator_style = mPlugin->mSettings->indicatorStyle;
 
 	switch (indicator_style)
 	{
@@ -880,7 +880,7 @@ void Group::updateStyle()
 
 	if (mWindowsCount > 0)
 	{
-		if (mWindowsCount == 1 && Settings::noWindowsListIfSingle)
+		if (mWindowsCount == 1 && mPlugin->mSettings->noWindowsListIfSingle)
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
@@ -888,7 +888,7 @@ void Group::updateStyle()
 	else
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 
-	if (mWindowsCount > 2 && Settings::showWindowCount)
+	if (mWindowsCount > 2 && mPlugin->mSettings->showWindowCount)
 	{
 		gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
 		gtk_label_set_markup(GTK_LABEL(mLabel), markup);
@@ -1101,7 +1101,7 @@ GtkWidget* Group::buildContextMenu()
 		}
 	}
 
-	if (mWindows.size() == 1 && Settings::noWindowsListIfSingle)
+	if (mWindows.size() == 1 && mPlugin->mSettings->noWindowsListIfSingle)
 	{
 		GtkWidget* item = gtk_menu_item_new_with_label(_("Window Actions"));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
@@ -1147,7 +1147,7 @@ void Group::onButtonRelease(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_MIDDLE)
 	{
-		switch (Settings::middleButtonBehavior)
+		switch (mPlugin->mSettings->middleButtonBehavior)
 		{
 		case BEHAVIOR_CLOSE_ALL:
 		{
