@@ -38,7 +38,6 @@ extern "C"
 #include <libxfce4ui/libxfce4ui.h>
 #include <libxfce4util/libxfce4util.h>
 	void construct(XfcePanelPlugin* xfPlugin);
-	gboolean internal_unique_check(GdkScreen* screen);
 }
 
 #define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
