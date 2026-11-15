@@ -26,7 +26,7 @@
 
 namespace Plugin
 {
-	XfcePanelPlugin* mXfPlugin = nullptr;
+	XfcePanelPlugin* mXfPlugin;
 	GdkDevice* mPointer;
 	GdkDisplay* mDisplay;
 
@@ -99,7 +99,6 @@ namespace Plugin
 		g_signal_connect(G_OBJECT(mXfPlugin), "removed",
 			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
 				Hotkeys::resetShortcuts();
-				mXfPlugin = nullptr;
 			}),
 			nullptr);
 	}
@@ -149,18 +148,3 @@ namespace Plugin
 //----------------------------------------------------------------------------------------------------------------------
 
 extern "C" void construct(XfcePanelPlugin* xfPlugin) { Plugin::init(xfPlugin); }
-extern "C" gboolean internal_unique_check(GdkScreen* screen)
-{
-	if (Plugin::mXfPlugin != nullptr)
-	{
-		GtkWidget* dialog = gtk_message_dialog_new_with_markup(
-			nullptr, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
-			"Currently, only one internal instance of the docklike plugin can be used at a time. "
-			"See <a href=\"https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/work_items/113\">"
-			"https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/work_items/113</a>.");
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		return false;
-	}
-	return true;
-}
