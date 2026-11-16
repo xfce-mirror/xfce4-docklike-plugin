@@ -36,9 +36,9 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
 	mSettings = new Settings(xfPlugin);
-	AppInfos::init(mSettings);
-	Xfw::init(mSettings);
-	Dock::init(xfPlugin, mSettings);
+	mAppInfos = new AppInfos(mSettings);
+	Xfw::init(mSettings, mAppInfos);
+	Dock::init(xfPlugin, mSettings, mAppInfos);
 	LauncherEntry::init(mSettings);
 	Theme::init(mSettings);
 	Hotkeys::init(xfPlugin, mSettings);
@@ -130,7 +130,7 @@ Plugin::~Plugin()
 	LauncherEntry::finalize();
 	Xfw::finalize();
 	Dock::mGroups.clear();
-	AppInfos::finalize();
+	delete mAppInfos;
 	Hotkeys::finalize();
 	delete mSettings;
 }

@@ -24,6 +24,7 @@ namespace Dock
 {
 	XfcePanelPlugin* mXfPlugin = nullptr;
 	Settings* mSettings = nullptr;
+	AppInfos* mAppInfos = nullptr;
 
 	GtkWidget* mBox;
 	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
@@ -31,10 +32,11 @@ namespace Dock
 	int mPanelSize;
 	int mIconSize;
 
-	void init(XfcePanelPlugin* xfPlugin, Settings* settings)
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos)
 	{
 		mXfPlugin = xfPlugin;
 		mSettings = settings;
+		mAppInfos = appInfos;
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_widget_set_name(mBox, "docklike-plugin");
 
@@ -51,7 +53,7 @@ namespace Dock
 
 		if (!group)
 		{
-			group = std::make_shared<Group>(appInfo, false, mSettings);
+			group = std::make_shared<Group>(appInfo, false, mSettings, mAppInfos);
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
@@ -113,8 +115,8 @@ namespace Dock
 
 		while (it != pinnedApps.end())
 		{
-			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(*it));
-			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mSettings);
+			std::shared_ptr<AppInfo> appInfo = mAppInfos->search(Help::String::toLowercase(*it));
+			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mSettings, mAppInfos);
 
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
@@ -130,7 +132,7 @@ namespace Dock
 			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
-				groupWindow = std::make_shared<GroupWindow>(xfwWindow);
+				groupWindow = std::make_shared<GroupWindow>(xfwWindow, mAppInfos);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
