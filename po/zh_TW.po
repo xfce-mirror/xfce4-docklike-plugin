@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
 "Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
-"POT-Creation-Date: 2026-08-18 12:59+0200\n"
+"POT-Creation-Date: 2026-11-14 01:00+0100\n"
 "PO-Revision-Date: 2023-02-22 11:02+0000\n"
 "Last-Translator: 黃柏諺 <s8321414@gmail.com>, 2026\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/xfce/teams/16840/zh_TW/)\n"
@@ -26,67 +26,71 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/AppInfos.cpp:354
+#: src/AppInfos.cpp:362
 msgid "Select Launcher"
 msgstr "選取啟動器"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/AppInfos.cpp:355
+#: src/AppInfos.cpp:363
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pinned to Dock"
 msgstr "已釘選至 Dock"
 
-#: src/Group.cpp:938
+#: src/Group.cpp:981
 msgid "Pin to Dock"
 msgstr "釘選至 Dock"
 
-#: src/Group.cpp:956
+#: src/Group.cpp:999
 msgid "Add activation shortcut..."
 msgstr "新增啟用捷徑……"
 
-#: src/Group.cpp:967
+#: src/Group.cpp:1010
 msgid "Manage activation shortcut..."
 msgstr "管理啟用捷徑……"
 
-#: src/Group.cpp:989
+#: src/Group.cpp:1032
 msgid "Edit Launcher..."
 msgstr "編輯啟動器……"
 
+#: src/Group.cpp:1040 src/_dialogs.ui:231
+msgid "Launch new instance"
+msgstr "啟動新實體"
+
 #. when a pinned app loses its icon (typically the app is uninstalled) the
 #. user may want to remove it from the dock
-#: src/Group.cpp:1021
+#: src/Group.cpp:1072
 msgid "Remove"
 msgstr "移除"
 
 #. we weren't able to find a launcher for this app, let the user set it
 #. manually
-#: src/Group.cpp:1034
+#: src/Group.cpp:1085
 msgid "Select Launcher..."
 msgstr "選取啟動器……"
 
-#: src/Group.cpp:1043
+#: src/Group.cpp:1094
 msgid "Create Launcher..."
 msgstr "建立啟動器……"
 
-#: src/Group.cpp:1055
+#: src/Group.cpp:1106
 msgid "Window Actions"
 msgstr "視窗動作"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close"
 msgstr "關閉"
 
-#: src/Group.cpp:1062
+#: src/Group.cpp:1113
 msgid "Close All"
 msgstr "關閉全部"
 
-#: src/Plugin.cpp:122
+#: src/Plugin.cpp:126
 msgid "translator-credits"
 msgstr "Walter Cheuk <wwycheuk@gmail.com>, 2014."
 
@@ -161,10 +165,6 @@ msgstr "滑鼠中鍵"
 #: src/_dialogs.ui:230
 msgid "Close all"
 msgstr "關閉全部"
-
-#: src/_dialogs.ui:231
-msgid "Launch new instance"
-msgstr "啟動新實體"
 
 #: src/_dialogs.ui:232
 msgid "Do Nothing"
@@ -262,11 +262,15 @@ msgstr "外觀"
 msgid "Switch between applications with <SUPER>+[1, 2, ...]"
 msgstr "使用 <SUPER>+[1, 2, ...] 在應用程式間切換"
 
-#: src/_dialogs.ui:610
+#: src/_dialogs.ui:615
+msgid "Minimize active group instead of switching between its windows"
+msgstr "將活躍群組最小化，而非在該群組的視窗之間切換"
+
+#: src/_dialogs.ui:649
 msgid "Switch to the last window with <SUPER>"
 msgstr "使用 <SUPER> 切換至前一個視窗"
 
-#: src/_dialogs.ui:626
+#: src/_dialogs.ui:665
 msgid ""
 "The left &lt;SUPER&gt; key seems already mapped to another command.\n"
 "Check your Xfce keyboard settings."
@@ -274,10 +278,10 @@ msgstr ""
 "左 &lt;SUPER&gt; 鍵似乎已對映至其他命令。\n"
 "請檢查您的 Xfce 鍵盤設定。"
 
-#: src/_dialogs.ui:638
+#: src/_dialogs.ui:677
 msgid "Manage shortcuts..."
 msgstr "管理捷徑……"
 
-#: src/_dialogs.ui:659
+#: src/_dialogs.ui:698
 msgid "Keyboard hotkeys"
 msgstr "鍵盤快捷鍵"
