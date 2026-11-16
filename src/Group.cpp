@@ -22,7 +22,7 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings) : mSettings(settings), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos) : mSettings(settings), mAppInfos(appInfos), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -1085,19 +1085,19 @@ GtkWidget* Group::buildContextMenu()
 			GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					if (AppInfos::selectLauncher(classId))
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					if (me->mAppInfos->selectLauncher(me->mAppInfo->mName.c_str()))
 						Dock::drawGroups();
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 
 			item = gtk_menu_item_new_with_label(_("Create Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					AppInfos::createLauncher(classId);
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					me->mAppInfos->createLauncher(me->mAppInfo->mName.c_str());
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 		}
 	}
 

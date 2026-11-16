@@ -25,6 +25,7 @@
 namespace Xfw
 {
 	Settings* mSettings = nullptr;
+	AppInfos* mAppInfos = nullptr;
 
 	XfwScreen* mXfwScreen;
 	XfwWorkspaceGroup* mXfwWorkspaceGroup = nullptr;
@@ -97,15 +98,16 @@ namespace Xfw
 
 	// public:
 
-	void init(Settings* settings)
+	void init(Settings* settings, AppInfos* appInfos)
 	{
 		mSettings = settings;
+		mAppInfos = appInfos;
 		xfw_set_client_type(XFW_CLIENT_TYPE_PAGER);
 		mXfwScreen = xfw_screen_get_default();
 
 		g_signal_connect(G_OBJECT(mXfwScreen), "window-opened",
 			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
-				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(xfwWindow);
+				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(xfwWindow, mAppInfos);
 				mGroupWindows.pushSecond(xfwWindow, newWindow);
 				newWindow->mGroup->updateStyle();
 

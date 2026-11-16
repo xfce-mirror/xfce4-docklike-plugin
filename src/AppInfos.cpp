@@ -18,8 +18,9 @@
 
 #include "AppInfos.hpp"
 #include "Dock.hpp"
-#include "Settings.hpp"
+#include "Helpers.hpp"
 
+#include <ftw.h>
 #include <libxfce4ui/libxfce4ui.h>
 
 #include <unordered_set>
@@ -70,364 +71,341 @@ void AppInfo::edit()
 	g_free(quoted);
 }
 
-std::string AppInfo::getId()
-{
-	if (this->mId.empty())
-		return this->mName;
+// -----------------------------------------------------------------------------
 
-	return this->mId;
+void AppInfos::findXDGDirectories()
+{
+	std::unordered_set<std::string> dir_set;
+	std::list<std::string> dir_list, topdir_list;
+
+	dir_list.push_back(g_get_user_data_dir());
+	for (const gchar* const* p = g_get_system_data_dirs(); *p != nullptr; p++)
+		dir_list.push_back(*p);
+
+	for (std::string& dir : dir_list)
+	{
+		if (dir.empty())
+			continue;
+
+		if (dir.back() == '/')
+			dir += "applications/";
+		else
+			dir += "/applications/";
+
+		// ensure uniqueness and existing dirs
+		if (dir_set.insert(dir).second && g_file_test(dir.c_str(), G_FILE_TEST_IS_DIR))
+			topdir_list.push_back(dir);
+	}
+
+	// maybe there is a better solution than this hack, but I can't find it
+	// ftw()'s callback doesn't accept user data, and capturing external data
+	// breaks the compilation, so…
+	static std::list<std::string>* temp = nullptr;
+	temp = &mXdgDataDirs;
+
+	for (const std::string& dir : topdir_list)
+	{
+		// Recursively add subdirectories of mXdgDataDirs to mXdgDataDirs.
+		// Wine (and maybe some others) create their own directory tree.
+		// See man ftw(3) for more information.
+		ftw(
+			dir.c_str(),
+			[](const char* fpath, const struct stat* sb, int typeflag) -> int {
+				if (typeflag == FTW_D)
+					temp->push_back(std::string(fpath) + '/');
+				return 0;
+			},
+			16);
+	}
 }
 
-namespace AppInfos
+static std::unordered_set<std::string> mExcludedBinaries = {
+	// clang-format off
+	"env", "exo-open", "xfce-open", "xdg-open",
+	"bash", "dash", "ksh", "sh", "tcsh", "zsh",
+	// clang-format on
+};
+
+void AppInfos::loadDesktopEntry(const std::string& xdgDir, const std::string& filename)
 {
-	Settings* mSettings = nullptr;
+	if (!g_str_has_suffix(filename.c_str(), ".desktop"))
+		return;
 
-	std::list<std::string> mXdgDataDirs;
-	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
-	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
-	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoNames;
-	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoUserSet;
-	Store::AutoPtr<GAppInfoMonitor> mMonitor;
+	std::string id = Help::String::pathBasename(filename, true);
+	std::string lower_id = Help::String::toLowercase(id);
+	if (mAppInfoIds.get(lower_id) != nullptr)
+		return;
 
-	static void findXDGDirectories()
+	std::string path = xdgDir + filename;
+	GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
+	if (gAppInfo == nullptr)
+		return;
+
+	char* name_ = g_desktop_app_info_get_locale_string(gAppInfo, "Name");
+	std::string name = (name_ != nullptr) ? name_ : id;
+	g_free(name_);
+
+	char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
+	std::string icon = (icon_ != nullptr) ? icon_ : "";
+	g_free(icon_);
+
+	std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
+	mAppInfoIds.set(lower_id, info);
+
+	name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
+	name = (name_ != nullptr) ? name_ : "";
+	g_free(name_);
+
+	if (!name.empty())
 	{
-		std::unordered_set<std::string> dir_set;
-		std::list<std::string> dir_list, topdir_list;
+		name = Help::String::toLowercase(Help::String::trim(name));
 
-		dir_list.push_back(g_get_user_data_dir());
-		for (const gchar* const* p = g_get_system_data_dirs(); *p != nullptr; p++)
-			dir_list.push_back(*p);
-
-		for (std::string& dir : dir_list)
-		{
-			if (dir.empty())
-				continue;
-
-			if (dir.back() == '/')
-				dir += "applications/";
-			else
-				dir += "/applications/";
-
-			// ensure uniqueness and existing dirs
-			if (dir_set.insert(dir).second && g_file_test(dir.c_str(), G_FILE_TEST_IS_DIR))
-				topdir_list.push_back(dir);
-		}
-
-		for (const std::string& dir : topdir_list)
-		{
-			// Recursively add subdirectories of mXdgDataDirs to mXdgDataDirs.
-			// Wine (and maybe some others) create their own directory tree.
-			// See man ftw(3) for more information.
-			ftw(
-				dir.c_str(),
-				[](const char* fpath, const struct stat* sb, int typeflag) -> int {
-					if (typeflag == FTW_D)
-						mXdgDataDirs.push_back(std::string(fpath) + '/');
-					return 0;
-				},
-				16);
-		}
+		if (name.find(' ') == std::string::npos)
+			if (name != lower_id)
+				mAppInfoNames.set(name, info);
 	}
 
-	std::unordered_set<std::string> mExcludedBinaries = {
-		// clang-format off
-		"env", "exo-open", "xfce-open", "xdg-open",
-		"bash", "dash", "ksh", "sh", "tcsh", "zsh",
-		// clang-format on
-	};
-
-	static void loadDesktopEntry(const std::string& xdgDir, const std::string& filename)
+	std::string exec;
+	char* exec_ = g_desktop_app_info_get_string(gAppInfo, "Exec");
+	if (exec_ != nullptr && exec_[0] != '\0')
 	{
-		if (!g_str_has_suffix(filename.c_str(), ".desktop"))
-			return;
+		std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
+		exec = Help::String::getWord(execLine, 0);
 
-		std::string id = Help::String::pathBasename(filename, true);
-		std::string lower_id = Help::String::toLowercase(id);
-		if (mAppInfoIds.get(lower_id) != nullptr)
-			return;
+		if (exec != lower_id && exec != name && mExcludedBinaries.find(exec) == mExcludedBinaries.end())
+			mAppInfoNames.set(exec, info);
+	}
+	g_free(exec_);
 
-		std::string path = xdgDir + filename;
-		GDesktopAppInfo* gAppInfo = g_desktop_app_info_new_from_filename(path.c_str());
-		if (gAppInfo == nullptr)
-			return;
+	std::string wmclass;
+	char* wmclass_ = g_desktop_app_info_get_string(gAppInfo, "StartupWMClass");
+	if (wmclass_ != nullptr && wmclass_[0] != '\0')
+	{
+		wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
+		mAppInfoWMClasses.set(wmclass, info);
+	}
+	g_free(wmclass_);
+}
 
-		char* name_ = g_desktop_app_info_get_locale_string(gAppInfo, "Name");
-		std::string name = (name_ != nullptr) ? name_ : id;
-		g_free(name_);
+void AppInfos::loadXDGDirectories()
+{
+	for (const std::string& xdgDir : mXdgDataDirs)
+	{
+		DIR* directory = opendir(xdgDir.c_str());
+		if (directory == nullptr)
+			continue;
 
-		char* icon_ = g_desktop_app_info_get_string(gAppInfo, "Icon");
-		std::string icon = (icon_ != nullptr) ? icon_ : "";
-		g_free(icon_);
+		struct dirent* entry;
+		while ((entry = readdir(directory)) != nullptr)
+			loadDesktopEntry(xdgDir, entry->d_name);
 
-		std::shared_ptr<AppInfo> info = std::make_shared<AppInfo>(id, path, icon, name, gAppInfo);
-		mAppInfoIds.set(lower_id, info);
+		closedir(directory);
+		g_debug("APPDIR: %s", xdgDir.c_str());
+	}
+}
 
-		name_ = g_desktop_app_info_get_string(gAppInfo, "Name");
-		name = (name_ != nullptr) ? name_ : "";
-		g_free(name_);
+bool AppInfos::addUserSetApp(const std::string& classId, const std::string& filename)
+{
+	loadDesktopEntry(Help::String::pathDirname(filename), Help::String::pathBasename(filename));
 
-		if (!name.empty())
-		{
-			name = Help::String::toLowercase(Help::String::trim(name));
-
-			if (name.find(' ') == std::string::npos)
-				if (name != lower_id)
-					mAppInfoNames.set(name, info);
-		}
-
-		std::string exec;
-		char* exec_ = g_desktop_app_info_get_string(gAppInfo, "Exec");
-		if (exec_ != nullptr && exec_[0] != '\0')
-		{
-			std::string execLine = Help::String::toLowercase(Help::String::pathBasename(Help::String::trim(exec_)));
-			exec = Help::String::getWord(execLine, 0);
-
-			if (exec != lower_id && exec != name && mExcludedBinaries.find(exec) == mExcludedBinaries.end())
-				mAppInfoNames.set(exec, info);
-		}
-		g_free(exec_);
-
-		std::string wmclass;
-		char* wmclass_ = g_desktop_app_info_get_string(gAppInfo, "StartupWMClass");
-		if (wmclass_ != nullptr && wmclass_[0] != '\0')
-		{
-			wmclass = Help::String::toLowercase(Help::String::trim(wmclass_));
-			mAppInfoWMClasses.set(wmclass, info);
-		}
-		g_free(wmclass_);
+	std::string id = Help::String::toLowercase(Help::String::pathBasename(filename, true));
+	std::shared_ptr<AppInfo> info = mAppInfoIds.get(id);
+	if (info != nullptr)
+	{
+		mAppInfoUserSet.set(Help::String::toLowercase(classId), info);
+		g_debug("Added user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
+		return true;
 	}
 
-	static void loadXDGDirectories()
+	g_debug("Failed to add user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
+	return false;
+}
+
+AppInfos::AppInfos(Settings* settings) : mSettings(settings)
+{
+	mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
+
+	g_signal_connect(G_OBJECT(mMonitor.get()), "changed",
+		G_CALLBACK(+[](GAppInfoMonitor* monitor, AppInfos* me) {
+			me->mAppInfoIds.clear();
+			me->mAppInfoNames.clear();
+			me->mAppInfoWMClasses.clear();
+			me->loadXDGDirectories();
+			Dock::drawGroups();
+		}),
+		this);
+
+	findXDGDirectories();
+	loadXDGDirectories();
+
+	std::list<std::string> ids = mSettings->userSetApps.get().first;
+	std::list<std::string> paths = mSettings->userSetApps.get().second;
+	for (auto id = ids.begin(), path = paths.begin();
+		id != ids.end() && path != paths.end();
+		id++, path++)
 	{
-		for (const std::string& xdgDir : mXdgDataDirs)
-		{
-			DIR* directory = opendir(xdgDir.c_str());
-			if (directory == nullptr)
-				continue;
-
-			struct dirent* entry;
-			while ((entry = readdir(directory)) != nullptr)
-				loadDesktopEntry(xdgDir, entry->d_name);
-
-			closedir(directory);
-			g_debug("APPDIR: %s", xdgDir.c_str());
-		}
+		addUserSetApp(*id, *path);
 	}
+}
 
-	static bool addUserSetApp(const std::string& classId, const std::string& filename)
-	{
-		loadDesktopEntry(Help::String::pathDirname(filename), Help::String::pathBasename(filename));
+// some aliases we are obliged to use: these should be reserved for our apps
+// and restricted as much as possible
+static std::map<std::string, std::string> mIdMap = {
+	// the best we can do is to group all panel/plugin dialogs together
+	{"xfce4-panel", "panel-preferences"},
+	{"wrapper-2.0", "panel-preferences"},
+};
 
-		std::string id = Help::String::toLowercase(Help::String::pathBasename(filename, true));
-		std::shared_ptr<AppInfo> info = mAppInfoIds.get(id);
-		if (info != nullptr)
-		{
-			mAppInfoUserSet.set(Help::String::toLowercase(classId), info);
-			g_debug("Added user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
-			return true;
-		}
+static void translateId(std::string& id)
+{
+	auto it = mIdMap.find(id);
+	if (it != mIdMap.end())
+		id = it->second;
+}
 
-		g_debug("Failed to add user-set app '%s' for launcher '%s'", classId.c_str(), filename.c_str());
-		return false;
-	}
-
-	void init(Settings* settings)
-	{
-		mSettings = settings;
-		mMonitor = Store::AutoPtr<GAppInfoMonitor>(g_app_info_monitor_get(), g_object_unref);
-
-		g_signal_connect(G_OBJECT(mMonitor.get()), "changed",
-			G_CALLBACK(+[](GAppInfoMonitor* monitor) {
-				mAppInfoIds.clear();
-				mAppInfoNames.clear();
-				mAppInfoWMClasses.clear();
-				loadXDGDirectories();
-				Dock::drawGroups();
-			}),
-			nullptr);
-
-		findXDGDirectories();
-		loadXDGDirectories();
-
-		std::list<std::string> ids = mSettings->userSetApps.get().first;
-		std::list<std::string> paths = mSettings->userSetApps.get().second;
-		for (auto id = ids.begin(), path = paths.begin();
-			id != ids.end() && path != paths.end();
-			id++, path++)
-		{
-			addUserSetApp(*id, *path);
-		}
-	}
-
-	void finalize()
-	{
-		mXdgDataDirs.clear();
-		mAppInfoWMClasses.clear();
-		mAppInfoIds.clear();
-		mAppInfoNames.clear();
-		mAppInfoUserSet.clear();
-		mMonitor.reset();
-	}
-
-	// some aliases we are obliged to use: these should be reserved for our apps
-	// and restricted as much as possible
-	std::map<std::string, std::string> mIdMap = {
-		// the best we can do is to group all panel/plugin dialogs together
-		{"xfce4-panel", "panel-preferences"},
-		{"wrapper-2.0", "panel-preferences"},
-	};
-
-	static void translateId(std::string& id)
-	{
-		auto it = mIdMap.find(id);
-		if (it != mIdMap.end())
-			id = it->second;
-	}
-
-	static std::shared_ptr<AppInfo> searchByPrefix(const std::string& id, char sep)
-	{
-		auto pos = id.find(sep);
-		if (pos == std::string::npos)
-			return nullptr;
-
-		std::string prefix = id.substr(0, pos);
-		g_debug("Searching a match for prefix '%s' (separator '%c')", prefix.c_str(), sep);
-
-		std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
-		if (ai != nullptr)
-		{
-			g_debug("App id match");
-			return ai;
-		}
-
-		ai = mAppInfoNames.get(prefix);
-		if (ai != nullptr)
-		{
-			g_debug("App name match");
-			return ai;
-		}
-
+std::shared_ptr<AppInfo> AppInfos::searchByPrefix(const std::string& id, char sep)
+{
+	auto pos = id.find(sep);
+	if (pos == std::string::npos)
 		return nullptr;
+
+	std::string prefix = id.substr(0, pos);
+	g_debug("Searching a match for prefix '%s' (separator '%c')", prefix.c_str(), sep);
+
+	std::shared_ptr<AppInfo> ai = mAppInfoIds.get(prefix);
+	if (ai != nullptr)
+	{
+		g_debug("App id match");
+		return ai;
 	}
 
-	std::shared_ptr<AppInfo> search(std::string id)
+	ai = mAppInfoNames.get(prefix);
+	if (ai != nullptr)
 	{
-		translateId(id);
-
-		g_debug("Searching a match for '%s'", id.c_str());
-
-		std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
-		if (ai != nullptr)
-		{
-			g_debug("App WMClass match");
-			return ai;
-		}
-
-		ai = mAppInfoIds.get(id);
-		if (ai != nullptr)
-		{
-			g_debug("App id match");
-			return ai;
-		}
-
-		ai = mAppInfoNames.get(id);
-		if (ai != nullptr)
-		{
-			g_debug("App name match");
-			return ai;
-		}
-
-		// Try to use just the first word of the window class; so that
-		// virtualbox manager, virtualbox machine get grouped together etc.
-		ai = searchByPrefix(id, ' ');
-		if (ai != nullptr)
-			return ai;
-
-		// Try to remove extension, see https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/merge_requests/49
-		ai = searchByPrefix(id, '.');
-		if (ai != nullptr)
-			return ai;
-
-		ai = mAppInfoUserSet.get(id);
-		if (ai != nullptr)
-		{
-			g_debug("User-set app match");
-			return ai;
-		}
-
-		g_debug("No match");
-
-		return std::make_shared<AppInfo>("", "", "", id);
+		g_debug("App name match");
+		return ai;
 	}
 
-	bool selectLauncher(const gchar* classId)
+	return nullptr;
+}
+
+std::shared_ptr<AppInfo> AppInfos::search(std::string id)
+{
+	translateId(id);
+
+	g_debug("Searching a match for '%s'", id.c_str());
+
+	std::shared_ptr<AppInfo> ai = mAppInfoWMClasses.get(id);
+	if (ai != nullptr)
 	{
-		GtkWidget* dialog = gtk_file_chooser_dialog_new(
-			_("Select Launcher"), nullptr, GTK_FILE_CHOOSER_ACTION_OPEN,
-			_("_Cancel"), GTK_RESPONSE_CANCEL, _("_Open"), GTK_RESPONSE_ACCEPT, nullptr);
-		GtkFileFilter* filter = gtk_file_filter_new();
-		gtk_file_filter_add_pattern(filter, "*.desktop");
-		gtk_file_chooser_set_filter(GTK_FILE_CHOOSER(dialog), filter);
-		gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
-		gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), true);
+		g_debug("App WMClass match");
+		return ai;
+	}
 
-		if (g_file_test("/usr/share/applications", G_FILE_TEST_IS_DIR))
-			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "/usr/share/applications");
-		else
-			gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), mXdgDataDirs.front().c_str());
-		for (const auto& dir : mXdgDataDirs)
-		{
-			if (g_str_has_suffix(dir.c_str(), "/applications/"))
-				gtk_file_chooser_add_shortcut_folder(GTK_FILE_CHOOSER(dialog), dir.c_str(), nullptr);
-		}
+	ai = mAppInfoIds.get(id);
+	if (ai != nullptr)
+	{
+		g_debug("App id match");
+		return ai;
+	}
 
-		bool added = false;
-		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+	ai = mAppInfoNames.get(id);
+	if (ai != nullptr)
+	{
+		g_debug("App name match");
+		return ai;
+	}
+
+	// Try to use just the first word of the window class; so that
+	// virtualbox manager, virtualbox machine get grouped together etc.
+	ai = searchByPrefix(id, ' ');
+	if (ai != nullptr)
+		return ai;
+
+	// Try to remove extension, see https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/merge_requests/49
+	ai = searchByPrefix(id, '.');
+	if (ai != nullptr)
+		return ai;
+
+	ai = mAppInfoUserSet.get(id);
+	if (ai != nullptr)
+	{
+		g_debug("User-set app match");
+		return ai;
+	}
+
+	g_debug("No match");
+
+	return std::make_shared<AppInfo>("", "", "", id);
+}
+
+bool AppInfos::selectLauncher(const gchar* classId)
+{
+	GtkWidget* dialog = gtk_file_chooser_dialog_new(
+		_("Select Launcher"), nullptr, GTK_FILE_CHOOSER_ACTION_OPEN,
+		_("_Cancel"), GTK_RESPONSE_CANCEL, _("_Open"), GTK_RESPONSE_ACCEPT, nullptr);
+	GtkFileFilter* filter = gtk_file_filter_new();
+	gtk_file_filter_add_pattern(filter, "*.desktop");
+	gtk_file_chooser_set_filter(GTK_FILE_CHOOSER(dialog), filter);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+	gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), true);
+
+	if (g_file_test("/usr/share/applications", G_FILE_TEST_IS_DIR))
+		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), "/usr/share/applications");
+	else
+		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), mXdgDataDirs.front().c_str());
+	for (const auto& dir : mXdgDataDirs)
+	{
+		if (g_str_has_suffix(dir.c_str(), "/applications/"))
+			gtk_file_chooser_add_shortcut_folder(GTK_FILE_CHOOSER(dialog), dir.c_str(), nullptr);
+	}
+
+	bool added = false;
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+	{
+		gchar* filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+		if (filename != nullptr)
 		{
-			gchar* filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-			if (filename != nullptr)
+			added = addUserSetApp(classId, filename);
+			if (added)
 			{
-				added = addUserSetApp(classId, filename);
-				if (added)
-				{
-					std::list<std::string> ids = mSettings->userSetApps.get().first;
-					std::list<std::string> paths = mSettings->userSetApps.get().second;
-					ids.push_back(classId);
-					paths.push_back(filename);
-					mSettings->userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
-				}
-				g_free(filename);
+				std::list<std::string> ids = mSettings->userSetApps.get().first;
+				std::list<std::string> paths = mSettings->userSetApps.get().second;
+				ids.push_back(classId);
+				paths.push_back(filename);
+				mSettings->userSetApps.set(std::pair<std::list<std::string>, std::list<std::string>>(ids, paths));
 			}
+			g_free(filename);
 		}
-
-		gtk_widget_destroy(dialog);
-
-		return added;
 	}
 
-	void createLauncher(const gchar* classId)
-	{
-		GError* error = nullptr;
-		gchar* basename = g_strconcat(classId, ".desktop", nullptr);
-		gchar* path = g_build_filename(g_get_user_data_dir(), "applications", basename, nullptr);
-		gchar* quotedPath = g_shell_quote(path);
-		gchar* quotedId = g_shell_quote(classId);
+	gtk_widget_destroy(dialog);
+
+	return added;
+}
+
+void AppInfos::createLauncher(const gchar* classId)
+{
+	GError* error = nullptr;
+	gchar* basename = g_strconcat(classId, ".desktop", nullptr);
+	gchar* path = g_build_filename(g_get_user_data_dir(), "applications", basename, nullptr);
+	gchar* quotedPath = g_shell_quote(path);
+	gchar* quotedId = g_shell_quote(classId);
 #if LIBXFCE4UI_CHECK_VERSION(4, 21, 0)
-		gchar* command = g_strdup_printf("xfce-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+	gchar* command = g_strdup_printf("xfce-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
 #else
-		gchar* command = g_strdup_printf("exo-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
+	gchar* command = g_strdup_printf("exo-desktop-item-edit --create-new --name %s %s", quotedId, quotedPath);
 #endif
 
-		if (!g_spawn_command_line_async(command, &error))
-		{
-			g_warning("Failed to open create launcher dialog: %s", error->message);
-			g_error_free(error);
-		}
-
-		g_free(command);
-		g_free(quotedId);
-		g_free(quotedPath);
-		g_free(path);
-		g_free(basename);
+	if (!g_spawn_command_line_async(command, &error))
+	{
+		g_warning("Failed to open create launcher dialog: %s", error->message);
+		g_error_free(error);
 	}
-} // namespace AppInfos
+
+	g_free(command);
+	g_free(quotedId);
+	g_free(quotedPath);
+	g_free(path);
+	g_free(basename);
+}

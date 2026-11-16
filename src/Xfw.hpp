@@ -36,7 +36,7 @@ class GroupWindow;
 
 namespace Xfw
 {
-	void init(Settings* settings);
+	void init(Settings* settings, AppInfos* appInfos);
 	void finalize();
 
 	XfwWindow* getActiveWindow();
@@ -51,6 +51,7 @@ namespace Xfw
 	void setVisibleGroups();
 
 	extern Settings* mSettings;
+	extern AppInfos* mAppInfos;
 
 	extern XfwScreen* mXfwScreen;
 	extern XfwWorkspaceGroup* mXfwWorkspaceGroup;

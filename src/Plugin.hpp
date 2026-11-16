@@ -34,6 +34,7 @@ public:
 
 private:
 	Settings* mSettings;
+	AppInfos* mAppInfos;
 };
 
 #endif // PLUGIN_HPP
