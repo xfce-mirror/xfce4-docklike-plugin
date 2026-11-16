@@ -71,7 +71,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), mGroupWindow->mGroup->mSettings->showPreviews);
 
-	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
+	if (mGroupWindow->mGroup->mXfw->getActiveWindow() == mGroupWindow->mXfwWindow)
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
 	int sleepMS = 1000;
@@ -90,7 +90,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
 			else if (event->button == GDK_BUTTON_MIDDLE && me->mGroupWindow->mGroup->mSettings->middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
-				Xfw::close(me->mGroupWindow, event->time);
+				me->mGroupWindow->mGroup->mXfw->close(me->mGroupWindow, event->time);
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
 				GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow)));
@@ -151,7 +151,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mCloseButton), "clicked",
 		G_CALLBACK(+[](GtkButton* button, GroupMenuItem* me) {
-			Xfw::close(me->mGroupWindow, 0);
+			me->mGroupWindow->mGroup->mXfw->close(me->mGroupWindow, 0);
 		}),
 		this);
 }
@@ -166,7 +166,7 @@ void GroupMenuItem::updateLabel()
 {
 	const char* winName = xfw_window_get_name(mGroupWindow->mXfwWindow);
 
-	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
+	if (mGroupWindow->mGroup->mXfw->getActiveWindow() == mGroupWindow->mXfwWindow)
 	{
 		gchar* escaped = g_markup_escape_text(winName, -1);
 		gchar* markup = g_strdup_printf("<b>%s</b>", escaped);

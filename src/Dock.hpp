@@ -34,10 +34,11 @@
 #include <string>
 
 class Group;
+class Xfw;
 
 namespace Dock
 {
-	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos);
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos, Xfw* xfw);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -54,6 +55,7 @@ namespace Dock
 	extern XfcePanelPlugin* mXfPlugin;
 	extern Settings* mSettings;
 	extern AppInfos* mAppInfos;
+	extern Xfw* mXfw;
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
