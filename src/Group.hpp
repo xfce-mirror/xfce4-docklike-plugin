@@ -64,7 +64,7 @@ class GroupWindow;
 class Group
 {
 public:
-	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings);
+	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos);
 	~Group();
 
 	void add(GroupWindow* window);
@@ -99,6 +99,7 @@ public:
 	void onDragBegin(GdkDragContext* context);
 
 	Settings* mSettings;
+	AppInfos* mAppInfos;
 
 	bool mPinned;
 	bool mActive;

@@ -19,6 +19,7 @@
 #ifndef XFW_HPP
 #define XFW_HPP
 
+#include "AppInfos.hpp"
 #include "Group.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
@@ -36,7 +37,7 @@ class GroupWindow;
 
 namespace Xfw
 {
-	void init(Settings* settings);
+	void init(Settings* settings, AppInfos* appInfos);
 	void finalize();
 
 	XfwWindow* getActiveWindow();
@@ -51,6 +52,7 @@ namespace Xfw
 	void setVisibleGroups();
 
 	extern Settings* mSettings;
+	extern AppInfos* mAppInfos;
 
 	extern XfwScreen* mXfwScreen;
 	extern XfwWorkspaceGroup* mXfwWorkspaceGroup;
