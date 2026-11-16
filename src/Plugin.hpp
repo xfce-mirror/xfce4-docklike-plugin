@@ -19,6 +19,7 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#include "AppInfos.hpp"
 #include "Settings.hpp"
 
 #include <libxfce4panel/libxfce4panel.h>
@@ -36,6 +37,7 @@ public:
 
 private:
 	Settings* mSettings;
+	AppInfos* mAppInfos;
 };
 
 #endif // PLUGIN_HPP

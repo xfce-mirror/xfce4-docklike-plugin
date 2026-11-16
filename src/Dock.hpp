@@ -19,6 +19,7 @@
 #ifndef DOCK_HPP
 #define DOCK_HPP
 
+#include "AppInfos.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
 #include "Settings.hpp"
@@ -36,7 +37,7 @@ class Group;
 
 namespace Dock
 {
-	void init(XfcePanelPlugin* xfPlugin, Settings* settings);
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -52,6 +53,7 @@ namespace Dock
 
 	extern XfcePanelPlugin* mXfPlugin;
 	extern Settings* mSettings;
+	extern AppInfos* mAppInfos;
 
 	extern GtkWidget* mBox;
 	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
