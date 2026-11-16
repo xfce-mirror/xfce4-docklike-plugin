@@ -21,6 +21,7 @@
 
 #include "Helpers.hpp"
 #include "Settings.hpp"
+#include "Xfw.hpp"
 
 #include <gtk/gtk.h>
 #include <libxfce4ui/libxfce4ui.h>
@@ -29,7 +30,7 @@
 
 namespace SettingsDialog
 {
-	void popup(Settings* settings);
+	void popup(Settings* settings, Xfw* xfw);
 } // namespace SettingsDialog
 
 #endif // SETTINGS_DIALOG_HPP

@@ -18,7 +18,6 @@
 
 #include "SettingsDialog.hpp"
 #include "Hotkeys.hpp"
-#include "Xfw.hpp"
 
 #ifdef ENABLE_X11
 #include <gdk/gdkx.h>
@@ -71,7 +70,7 @@ namespace SettingsDialog
 		gtk_widget_set_visible(widget, mSettings->keyAloneActive && !Hotkeys::mKeyAloneGrabbed);
 	}
 
-	void popup(Settings* settings)
+	void popup(Settings* settings, Xfw* xfw)
 	{
 		if (mSettingsDialog != nullptr)
 		{
@@ -135,11 +134,11 @@ namespace SettingsDialog
 			// window<->workspace association only works on X11
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayVisible), mSettings->onlyDisplayVisible);
 			g_signal_connect(onlyDisplayVisible, "toggled",
-				G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
+				G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible, Xfw* _xfw) {
 					mSettings->onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
-					Xfw::setVisibleGroups();
+					_xfw->setVisibleGroups();
 				}),
-				nullptr);
+				xfw);
 		}
 		else
 #endif
@@ -150,11 +149,11 @@ namespace SettingsDialog
 		GObject* onlyDisplayScreen = gtk_builder_get_object(builder, "c_onlyDisplayScreen");
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(onlyDisplayScreen), mSettings->onlyDisplayScreen);
 		g_signal_connect(onlyDisplayScreen, "toggled",
-			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayScreen) {
+			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayScreen, Xfw* _xfw) {
 				mSettings->onlyDisplayScreen.set(gtk_toggle_button_get_active(_onlyDisplayScreen));
-				Xfw::setVisibleGroups();
+				_xfw->setVisibleGroups();
 			}),
-			nullptr);
+			xfw);
 
 		GObject* showPreviews = gtk_builder_get_object(builder, "c_showPreviews");
 #ifdef ENABLE_X11
