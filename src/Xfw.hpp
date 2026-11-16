@@ -19,42 +19,41 @@
 #ifndef XFW_HPP
 #define XFW_HPP
 
-#include "Group.hpp"
 #include "GroupWindow.hpp"
-#include "Helpers.hpp"
 #include "Plugin.hpp"
 #include "Store.ipp"
 
-#include <fcntl.h>
-#include <gio/gdesktopappinfo.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
 
-#include <map>
-
 class GroupWindow;
 
-namespace Xfw
+class Xfw
 {
-	void init(Plugin* plugin);
-	void finalize();
+public:
+	explicit Xfw(Plugin* plugin);
+	~Xfw();
 
 	XfwWindow* getActiveWindow();
-	std::string getGroupName(GroupWindow* groupWindow);
+	static std::string getGroupName(GroupWindow* groupWindow);
 
-	void close(GroupWindow* groupWindow, guint32 timestamp);
-	void activate(GroupWindow* groupWindow, guint32 timestamp);
+	static void close(GroupWindow* groupWindow, guint32 timestamp);
+	static void activate(GroupWindow* groupWindow, guint32 timestamp);
 
 	void switchToLastWindow();
 
 	void setActiveWindow(XfwWindow* previousActiveWindow = nullptr);
 	void setVisibleGroups();
 
-	extern Plugin* mPlugin;
+	XfwScreen* mXfwScreen;
+	XfwWorkspaceGroup* mXfwWorkspaceGroup = nullptr;
+	Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
 
-	extern XfwScreen* mXfwScreen;
-	extern XfwWorkspaceGroup* mXfwWorkspaceGroup;
-	extern Store::KeyStore<XfwWindow*, std::shared_ptr<GroupWindow>> mGroupWindows;
-} // namespace Xfw
+private:
+	static std::string getGroupNameSys(XfwWindow* xfwWindow);
+
+	Plugin* mPlugin;
+	XfwWindow* mPreviousActiveWindow = nullptr;
+};
 
 #endif // XFW_HPP

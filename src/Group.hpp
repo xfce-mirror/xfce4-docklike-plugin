@@ -57,6 +57,7 @@ enum IndicatorStyle
 	STYLE_NONE
 };
 
+struct AppInfo;
 class GroupWindow;
 
 class Group
