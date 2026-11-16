@@ -21,6 +21,7 @@
 
 #include "AppInfos.hpp"
 #include "Settings.hpp"
+#include "Xfw.hpp"
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
@@ -33,6 +34,7 @@ extern "C"
 
 class AppInfos;
 class Settings;
+class Xfw;
 
 class Plugin
 {
@@ -43,6 +45,7 @@ public:
 	XfcePanelPlugin* mXfPlugin;
 	Settings* mSettings;
 	AppInfos* mAppInfos;
+	Xfw* mXfw;
 };
 
 #endif // PLUGIN_HPP

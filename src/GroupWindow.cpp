@@ -21,7 +21,7 @@
 GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
 {
 	mXfwWindow = xfwWindow;
-	std::string groupName = Xfw::getGroupName(this);
+	std::string groupName = plugin->mXfw->getGroupName(this);
 	g_debug("NEW: %s", groupName.c_str());
 
 	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
@@ -60,20 +60,20 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
 	g_signal_connect(G_OBJECT(mXfwWindow), "notify::monitors",
 		G_CALLBACK(+[](XfwWindow* window, GParamSpec* pspec, GroupWindow* me) {
 			me->updateState();
-			Xfw::setActiveWindow();
+			me->mGroup->mPlugin->mXfw->setActiveWindow();
 		}),
 		this);
 
 	g_signal_connect(G_OBJECT(mXfwWindow), "class-changed",
 		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
-			std::string _groupName = Xfw::getGroupName(me);
+			std::string _groupName = me->mGroup->mPlugin->mXfw->getGroupName(me);
 			Group* group = Dock::prepareGroup(me->mGroup->mPlugin->mAppInfos->search(_groupName));
 			if (group != me->mGroup)
 			{
 				me->leaveGroup();
 				me->mGroup = group;
 				me->getInGroup();
-				Xfw::setActiveWindow();
+				me->mGroup->mPlugin->mXfw->setActiveWindow();
 			}
 		}),
 		this);
@@ -90,7 +90,7 @@ bool GroupWindow::getState(XfwWindowState flagMask) const
 
 void GroupWindow::activate(guint32 timestamp)
 {
-	Xfw::activate(this, timestamp);
+	mGroup->mPlugin->mXfw->activate(this, timestamp);
 }
 
 void GroupWindow::minimize()
@@ -152,7 +152,7 @@ void GroupWindow::updateState()
 
 		if (windowWorkspace != nullptr)
 		{
-			XfwWorkspace* activeWorkspace = xfw_workspace_group_get_active_workspace(Xfw::mXfwWorkspaceGroup);
+			XfwWorkspace* activeWorkspace = xfw_workspace_group_get_active_workspace(mGroup->mPlugin->mXfw->mXfwWorkspaceGroup);
 
 			if (windowWorkspace != activeWorkspace)
 				onWorkspace = false;

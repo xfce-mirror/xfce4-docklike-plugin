@@ -18,7 +18,6 @@
 
 #include "SettingsDialog.hpp"
 #include "Hotkeys.hpp"
-#include "Xfw.hpp"
 
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -139,7 +138,7 @@ namespace SettingsDialog
 			g_signal_connect(onlyDisplayVisible, "toggled",
 				G_CALLBACK(+[](GtkToggleButton* _onlyDisplayVisible) {
 					mPlugin->mSettings->onlyDisplayVisible.set(gtk_toggle_button_get_active(_onlyDisplayVisible));
-					Xfw::setVisibleGroups();
+					mPlugin->mXfw->setVisibleGroups();
 				}),
 				nullptr);
 		}
@@ -154,7 +153,7 @@ namespace SettingsDialog
 		g_signal_connect(onlyDisplayScreen, "toggled",
 			G_CALLBACK(+[](GtkToggleButton* _onlyDisplayScreen) {
 				mPlugin->mSettings->onlyDisplayScreen.set(gtk_toggle_button_get_active(_onlyDisplayScreen));
-				Xfw::setVisibleGroups();
+				mPlugin->mXfw->setVisibleGroups();
 			}),
 			nullptr);
 

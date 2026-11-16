@@ -35,7 +35,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 
 	mSettings = new Settings(this);
 	mAppInfos = new AppInfos(this);
-	Xfw::init(this);
+	mXfw = new Xfw(this);
 	Dock::init(this);
 	LauncherEntry::init(this);
 	Theme::init(this);
@@ -97,7 +97,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 			else if (g_strcmp0(name, "about") == 0)
 				g_signal_emit_by_name(_xfPlugin, "about");
 			else if (g_strcmp0(name, "switch-to-last-window") == 0 && plugin->mSettings->keyAloneActive)
-				Xfw::switchToLastWindow();
+				plugin->mXfw->switchToLastWindow();
 			else if (g_strcmp0(name, "activate-group") == 0)
 			{
 				if (G_VALUE_HOLDS_INT64(value) && plugin->mSettings->keyComboActive)
@@ -126,7 +126,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 Plugin::~Plugin()
 {
 	LauncherEntry::finalize();
-	Xfw::finalize();
+	delete mXfw;
 	Dock::mGroups.clear();
 	delete mAppInfos;
 	Hotkeys::finalize();

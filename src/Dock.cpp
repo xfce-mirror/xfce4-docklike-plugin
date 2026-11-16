@@ -102,7 +102,7 @@ namespace Dock
 		g_list_free(children);
 
 		// Remove old groups
-		Xfw::mGroupWindows.clear();
+		mPlugin->mXfw->mGroupWindows.clear();
 		mGroups.clear();
 
 		// Add pinned groups
@@ -120,19 +120,19 @@ namespace Dock
 		}
 
 		// Add open windows
-		for (GList* window_l = xfw_screen_get_windows(Xfw::mXfwScreen);
-			 window_l != nullptr;
-			 window_l = window_l->next)
+		for (GList* window_l = xfw_screen_get_windows(mPlugin->mXfw->mXfwScreen);
+			window_l != nullptr;
+			window_l = window_l->next)
 		{
 			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
-			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
+			std::shared_ptr<GroupWindow> groupWindow = mPlugin->mXfw->mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
 				groupWindow = std::make_shared<GroupWindow>(xfwWindow, mPlugin);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Xfw::mGroupWindows.push(xfwWindow, groupWindow);
+			mPlugin->mXfw->mGroupWindows.push(xfwWindow, groupWindow);
 			groupWindow->updateState();
 		}
 
