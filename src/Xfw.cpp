@@ -105,7 +105,7 @@ namespace Xfw
 
 		g_signal_connect(G_OBJECT(mXfwScreen), "window-opened",
 			G_CALLBACK(+[](XfwScreen* screen, XfwWindow* xfwWindow) {
-				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(xfwWindow);
+				std::shared_ptr<GroupWindow> newWindow = std::make_shared<GroupWindow>(xfwWindow, mPlugin);
 				mGroupWindows.pushSecond(xfwWindow, newWindow);
 				newWindow->mGroup->updateStyle();
 

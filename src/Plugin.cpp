@@ -17,7 +17,6 @@
  */
 
 #include "Plugin.hpp"
-#include "AppInfos.hpp"
 #include "Dock.hpp"
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
@@ -33,7 +32,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
 	mSettings = new Settings(this);
-	AppInfos::init(this);
+	mAppInfos = new AppInfos(this);
 	Xfw::init(this);
 	Dock::init(this);
 	LauncherEntry::init(this);
@@ -127,7 +126,7 @@ Plugin::~Plugin()
 	LauncherEntry::finalize();
 	Xfw::finalize();
 	Dock::mGroups.clear();
-	AppInfos::finalize();
+	delete mAppInfos;
 	Hotkeys::finalize();
 	delete mSettings;
 }

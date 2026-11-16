@@ -111,7 +111,7 @@ namespace Dock
 
 		while (it != pinnedApps.end())
 		{
-			std::shared_ptr<AppInfo> appInfo = AppInfos::search(Help::String::toLowercase(*it));
+			std::shared_ptr<AppInfo> appInfo = mPlugin->mAppInfos->search(Help::String::toLowercase(*it));
 			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mPlugin);
 
 			mGroups.push(appInfo, group);
@@ -128,7 +128,7 @@ namespace Dock
 			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
-				groupWindow = std::make_shared<GroupWindow>(xfwWindow);
+				groupWindow = std::make_shared<GroupWindow>(xfwWindow, mPlugin);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 

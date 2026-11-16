@@ -38,7 +38,7 @@ class Group;
 class GroupWindow
 {
 public:
-	explicit GroupWindow(XfwWindow* xfwWindow);
+	explicit GroupWindow(XfwWindow* xfwWindow, Plugin* plugin);
 	~GroupWindow();
 
 	void updateState();

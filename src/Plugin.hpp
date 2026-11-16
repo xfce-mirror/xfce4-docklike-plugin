@@ -19,6 +19,7 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
+#include "AppInfos.hpp"
 #include "Settings.hpp"
 
 #include <gtk/gtk.h>
@@ -30,6 +31,7 @@ extern "C"
 	void construct(XfcePanelPlugin* xfPlugin);
 }
 
+class AppInfos;
 class Settings;
 
 class Plugin
@@ -40,6 +42,7 @@ public:
 
 	XfcePanelPlugin* mXfPlugin;
 	Settings* mSettings;
+	AppInfos* mAppInfos;
 };
 
 #endif // PLUGIN_HPP
