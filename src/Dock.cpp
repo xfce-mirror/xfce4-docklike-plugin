@@ -25,6 +25,7 @@ namespace Dock
 	XfcePanelPlugin* mXfPlugin = nullptr;
 	Settings* mSettings = nullptr;
 	AppInfos* mAppInfos = nullptr;
+	Xfw* mXfw = nullptr;
 
 	GtkWidget* mBox;
 	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
@@ -32,11 +33,12 @@ namespace Dock
 	int mPanelSize;
 	int mIconSize;
 
-	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos)
+	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos, Xfw* xfw)
 	{
 		mXfPlugin = xfPlugin;
 		mSettings = settings;
 		mAppInfos = appInfos;
+		mXfw = xfw;
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_widget_set_name(mBox, "docklike-plugin");
 
@@ -53,7 +55,7 @@ namespace Dock
 
 		if (!group)
 		{
-			group = std::make_shared<Group>(appInfo, false, mSettings, mAppInfos);
+			group = std::make_shared<Group>(appInfo, false, mSettings, mAppInfos, mXfw);
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
@@ -106,7 +108,7 @@ namespace Dock
 		g_list_free(children);
 
 		// Remove old groups
-		Xfw::mGroupWindows.clear();
+		mXfw->mGroupWindows.clear();
 		mGroups.clear();
 
 		// Add pinned groups
@@ -116,7 +118,7 @@ namespace Dock
 		while (it != pinnedApps.end())
 		{
 			std::shared_ptr<AppInfo> appInfo = mAppInfos->search(Help::String::toLowercase(*it));
-			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mSettings, mAppInfos);
+			std::shared_ptr<Group> group = std::make_shared<Group>(appInfo, true, mSettings, mAppInfos, mXfw);
 
 			mGroups.push(appInfo, group);
 			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
@@ -124,19 +126,19 @@ namespace Dock
 		}
 
 		// Add open windows
-		for (GList* window_l = xfw_screen_get_windows(Xfw::mXfwScreen);
+		for (GList* window_l = xfw_screen_get_windows(mXfw->mXfwScreen);
 			 window_l != nullptr;
 			 window_l = window_l->next)
 		{
 			XfwWindow* xfwWindow = XFW_WINDOW(window_l->data);
-			std::shared_ptr<GroupWindow> groupWindow = Xfw::mGroupWindows.get(xfwWindow);
+			std::shared_ptr<GroupWindow> groupWindow = mXfw->mGroupWindows.get(xfwWindow);
 
 			if (!groupWindow)
-				groupWindow = std::make_shared<GroupWindow>(xfwWindow, mAppInfos);
+				groupWindow = std::make_shared<GroupWindow>(xfwWindow, mAppInfos, mXfw);
 			else
 				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Xfw::mGroupWindows.push(xfwWindow, groupWindow);
+			mXfw->mGroupWindows.push(xfwWindow, groupWindow);
 			groupWindow->updateState();
 		}
 

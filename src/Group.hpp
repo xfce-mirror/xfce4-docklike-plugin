@@ -25,6 +25,7 @@
 #include "Helpers.hpp"
 #include "Settings.hpp"
 #include "State.ipp"
+#include "Xfw.hpp"
 
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
@@ -64,7 +65,7 @@ class GroupWindow;
 class Group
 {
 public:
-	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos);
+	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos, Xfw* xfw);
 	~Group();
 
 	void add(GroupWindow* window);
@@ -100,6 +101,7 @@ public:
 
 	Settings* mSettings;
 	AppInfos* mAppInfos;
+	Xfw* mXfw;
 
 	bool mPinned;
 	bool mActive;

@@ -35,8 +35,8 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 
 	mSettings = new Settings(xfPlugin);
 	mAppInfos = new AppInfos(mSettings);
-	Xfw::init(mSettings, mAppInfos);
-	Dock::init(xfPlugin, mSettings, mAppInfos);
+	mXfw = new Xfw(mSettings, mAppInfos);
+	Dock::init(xfPlugin, mSettings, mAppInfos, mXfw);
 	LauncherEntry::init(mSettings);
 	Theme::init(mSettings);
 	Hotkeys::init(xfPlugin, mSettings);
@@ -60,7 +60,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 
 	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
-			SettingsDialog::popup(plugin->mSettings);
+			SettingsDialog::popup(plugin->mSettings, plugin->mXfw);
 		}),
 		this);
 
@@ -93,11 +93,11 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 	g_signal_connect(G_OBJECT(xfPlugin), "remote-event",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value, Plugin* plugin) -> gboolean {
 			if (g_strcmp0(name, "settings") == 0)
-				SettingsDialog::popup(plugin->mSettings);
+				SettingsDialog::popup(plugin->mSettings, plugin->mXfw);
 			else if (g_strcmp0(name, "about") == 0)
 				g_signal_emit_by_name(_xfPlugin, "about");
 			else if (g_strcmp0(name, "switch-to-last-window") == 0 && plugin->mSettings->keyAloneActive)
-				Xfw::switchToLastWindow();
+				plugin->mXfw->switchToLastWindow();
 			else if (g_strcmp0(name, "activate-group") == 0)
 			{
 				if (G_VALUE_HOLDS_INT64(value) && plugin->mSettings->keyComboActive)
@@ -126,7 +126,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin)
 Plugin::~Plugin()
 {
 	LauncherEntry::finalize();
-	Xfw::finalize();
+	delete mXfw;
 	Dock::mGroups.clear();
 	delete mAppInfos;
 	Hotkeys::finalize();
