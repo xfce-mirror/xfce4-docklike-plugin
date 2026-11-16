@@ -32,7 +32,9 @@
 #include <iostream>
 #include <string>
 
+class AppInfo;
 class Group;
+class Xfw;
 
 namespace Dock
 {

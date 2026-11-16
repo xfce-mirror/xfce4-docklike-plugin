@@ -340,7 +340,7 @@ void Group::closeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
 		if (!w->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			Xfw::close(w, 0);
+			w->mGroup->mPlugin->mXfw->close(w, 0);
 	});
 }
 
@@ -944,7 +944,7 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = (Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
+			newTopWindow = (mPlugin->mXfw->mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
