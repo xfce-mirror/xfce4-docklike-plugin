@@ -1085,19 +1085,19 @@ GtkWidget* Group::buildContextMenu()
 			GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					if (AppInfos::selectLauncher(classId))
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					if (me->mPlugin->mAppInfos->selectLauncher(me->mAppInfo->mName.c_str()))
 						Dock::drawGroups();
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 
 			item = gtk_menu_item_new_with_label(_("Create Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					AppInfos::createLauncher(classId);
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					me->mPlugin->mAppInfos->createLauncher(me->mAppInfo->mName.c_str());
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 		}
 	}
 

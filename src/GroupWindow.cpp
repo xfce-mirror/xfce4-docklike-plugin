@@ -18,13 +18,13 @@
 
 #include "GroupWindow.hpp"
 
-GroupWindow::GroupWindow(XfwWindow* xfwWindow)
+GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
 {
 	mXfwWindow = xfwWindow;
 	std::string groupName = Xfw::getGroupName(this);
 	g_debug("NEW: %s", groupName.c_str());
 
-	std::shared_ptr<AppInfo> appInfo = AppInfos::search(groupName);
+	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
 	mGroup = Dock::prepareGroup(appInfo);
 
 	mGroupMenuItem = new GroupMenuItem(this);
@@ -67,7 +67,7 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 	g_signal_connect(G_OBJECT(mXfwWindow), "class-changed",
 		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			std::string _groupName = Xfw::getGroupName(me);
-			Group* group = Dock::prepareGroup(AppInfos::search(_groupName));
+			Group* group = Dock::prepareGroup(me->mGroup->mPlugin->mAppInfos->search(_groupName));
 			if (group != me->mGroup)
 			{
 				me->leaveGroup();
