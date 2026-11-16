@@ -37,7 +37,7 @@ class Group;
 class GroupWindow
 {
 public:
-	explicit GroupWindow(XfwWindow* xfwWindow, AppInfos* appInfos);
+	explicit GroupWindow(XfwWindow* xfwWindow, AppInfos* appInfos, Xfw* xfw);
 	~GroupWindow();
 
 	void updateState();

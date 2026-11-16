@@ -21,6 +21,7 @@
 
 #include "AppInfos.hpp"
 #include "Settings.hpp"
+#include "Xfw.hpp"
 
 #include <libxfce4panel/libxfce4panel.h>
 
@@ -38,6 +39,7 @@ public:
 private:
 	Settings* mSettings;
 	AppInfos* mAppInfos;
+	Xfw* mXfw;
 };
 
 #endif // PLUGIN_HPP

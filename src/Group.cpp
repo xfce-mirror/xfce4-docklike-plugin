@@ -22,7 +22,7 @@
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos) : mSettings(settings), mAppInfos(appInfos), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos, Xfw* xfw) : mSettings(settings), mAppInfos(appInfos), mXfw(xfw), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
 {
 	mWindowsCount.setup(
 		0,
@@ -340,7 +340,7 @@ void Group::closeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
 		if (!w->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			Xfw::close(w, 0);
+			w->mGroup->mXfw->close(w, 0);
 	});
 }
 
@@ -944,7 +944,7 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = (Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
+			newTopWindow = (mXfw->mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
