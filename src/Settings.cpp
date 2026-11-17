@@ -18,7 +18,6 @@
 
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
-#include "LauncherEntry.hpp"
 #include "Theme.hpp"
 
 Settings::Settings(Plugin* plugin) : mPlugin(plugin)
@@ -99,7 +98,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_boolean(mFile.get(), "user", "disableLauncherCounts", _disableLauncherCounts);
 			saveFile();
 
-			LauncherEntry::refreshGroups();
+			mPlugin->mLauncherEntry->refreshGroups();
 		});
 
 	intValue = g_key_file_get_integer(file, "user", "middleButtonBehavior", &error);
