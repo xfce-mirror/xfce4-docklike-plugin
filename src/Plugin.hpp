@@ -23,6 +23,7 @@
 #include "Dock.hpp"
 #include "LauncherEntry.hpp"
 #include "Settings.hpp"
+#include "Theme.hpp"
 #include "Xfw.hpp"
 
 #include <gtk/gtk.h>
@@ -50,6 +51,7 @@ public:
 	Xfw* mXfw;
 	Dock* mDock;
 	LauncherEntry* mLauncherEntry = nullptr;
+	Theme* mTheme;
 };
 
 #endif // PLUGIN_HPP
