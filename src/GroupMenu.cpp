@@ -106,7 +106,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(Dock::mXfPlugin), "notify::scale-factor",
+	g_signal_connect(G_OBJECT(mGroup->mDock->mXfPlugin), "notify::scale-factor",
 		G_CALLBACK(+[](GtkWidget* widget, GParamSpec* pspec, GroupMenu* me) {
 			g_object_ref(me->mBox);
 			gtk_container_remove(GTK_CONTAINER(me->mWindow), me->mBox);
@@ -162,7 +162,7 @@ void GroupMenu::popup()
 			gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 		}
 
-		xfce_panel_plugin_position_widget(Dock::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
+		xfce_panel_plugin_position_widget(mGroup->mDock->mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		updatePosition(wx, wy);
 		gtk_widget_show(mWindow);
 	}
@@ -170,7 +170,7 @@ void GroupMenu::popup()
 
 void GroupMenu::updateOrientation()
 {
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(mGroup->mDock->mXfPlugin);
 
 	if (mGroup->mSettings->showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
@@ -196,7 +196,7 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 	gint button_width = gtk_widget_get_allocated_width(mGroup->mButton);
 	gint button_height = gtk_widget_get_allocated_height(mGroup->mButton);
 
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Dock::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(mGroup->mDock->mXfPlugin);
 
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
