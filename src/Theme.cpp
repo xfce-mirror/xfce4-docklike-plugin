@@ -20,10 +20,10 @@
 
 static Settings* mSettings = nullptr;
 
-void Theme::init(Settings* settings)
+void Theme::init(Settings* settings, Dock* dock)
 {
 	mSettings = settings;
-	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
+	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(dock->mBox)), "changed",
 		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
 		nullptr);
 }

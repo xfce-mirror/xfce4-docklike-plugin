@@ -20,6 +20,7 @@
 #define XFW_HPP
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "GroupWindow.hpp"
 #include "Settings.hpp"
 #include "Store.ipp"
@@ -27,6 +28,8 @@
 #include <libxfce4windowing/libxfce4windowing.h>
 #include <libxfce4windowingui/libxfce4windowingui.h>
 
+struct AppInfo;
+class AppInfos;
 class GroupWindow;
 
 class Xfw
@@ -34,6 +37,7 @@ class Xfw
 public:
 	Xfw(Settings* settings, AppInfos* appInfos);
 	~Xfw();
+	void setDock(Dock* dock) { mDock = dock; };
 
 	XfwWindow* getActiveWindow();
 	static std::string getGroupName(GroupWindow* groupWindow);
@@ -55,6 +59,7 @@ private:
 
 	Settings* mSettings;
 	AppInfos* mAppInfos;
+	Dock* mDock;
 	XfwWindow* mPreviousActiveWindow;
 };
 

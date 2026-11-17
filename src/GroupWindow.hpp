@@ -31,13 +31,16 @@
 
 #include <iostream>
 
-class GroupMenuItem;
+class AppInfos;
+class Dock;
 class Group;
+class GroupMenuItem;
+class Xfw;
 
 class GroupWindow
 {
 public:
-	explicit GroupWindow(XfwWindow* xfwWindow, AppInfos* appInfos, Xfw* xfw);
+	explicit GroupWindow(XfwWindow* xfwWindow, AppInfos* appInfos, Xfw* xfw, Dock* dock);
 	~GroupWindow();
 
 	void updateState();

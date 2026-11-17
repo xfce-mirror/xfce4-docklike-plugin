@@ -19,6 +19,7 @@
 #ifndef APPINFOS_HPP
 #define APPINFOS_HPP
 
+#include "Dock.hpp"
 #include "Settings.hpp"
 #include "Store.ipp"
 
@@ -26,6 +27,9 @@
 
 #include <iostream>
 #include <memory>
+
+class Dock;
+class Settings;
 
 struct AppInfo
 {
@@ -51,6 +55,7 @@ public:
 	std::shared_ptr<AppInfo> search(std::string id);
 	bool selectLauncher(const gchar* classId);
 	void createLauncher(const gchar* classId);
+	void setDock(Dock* dock) { mDock = dock; };
 
 private:
 	void findXDGDirectories();
@@ -60,6 +65,7 @@ private:
 	std::shared_ptr<AppInfo> searchByPrefix(const std::string& id, char sep);
 
 	Settings* mSettings;
+	Dock* mDock;
 	std::list<std::string> mXdgDataDirs;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
 	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
