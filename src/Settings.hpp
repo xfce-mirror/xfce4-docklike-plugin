@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 class Dock;
+class LauncherEntry;
 class Plugin;
 
 class Settings
