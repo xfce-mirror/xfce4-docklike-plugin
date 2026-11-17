@@ -23,12 +23,14 @@
 #include "LauncherEntry.hpp"
 #include "State.ipp"
 #include "Store.ipp"
+#include "Theme.hpp"
 
 #include <glib.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 class Dock;
 class LauncherEntry;
+class Theme;
 
 class Settings
 {
@@ -36,6 +38,7 @@ public:
 	explicit Settings(XfcePanelPlugin* xfPlugin);
 	void setDock(Dock* dock) { mDock = dock; };
 	void setLauncherEntry(LauncherEntry* launcherEntry) { mLauncherEntry = launcherEntry; };
+	void setTheme(Theme* theme) { mTheme = theme; };
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;
@@ -78,6 +81,7 @@ private:
 
 	Dock* mDock = nullptr;
 	LauncherEntry* mLauncherEntry = nullptr;
+	Theme* mTheme = nullptr;
 	Store::AutoPtr<gchar> mPath;
 	Store::AutoPtr<GKeyFile> mFile;
 };

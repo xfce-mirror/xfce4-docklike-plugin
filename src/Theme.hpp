@@ -36,16 +36,19 @@
 #include "Dock.hpp"
 #include "Settings.hpp"
 
-#include <gtk/gtk.h>
+class Dock;
+class Settings;
 
-#include <iostream>
-#include <string>
-
-namespace Theme
+class Theme
 {
-	void init(Settings* settings, Dock* dock);
+public:
+	Theme(Settings* settings, Dock* dock);
 	void load();
+
+private:
 	std::string get_theme_colors();
-} // namespace Theme
+
+	Settings* mSettings;
+};
 
 #endif // THEME_HPP

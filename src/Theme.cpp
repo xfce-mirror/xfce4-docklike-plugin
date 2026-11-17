@@ -18,14 +18,16 @@
 
 #include "Theme.hpp"
 
-static Settings* mSettings = nullptr;
+#include <gtk/gtk.h>
 
-void Theme::init(Settings* settings, Dock* dock)
+#include <iostream>
+#include <string>
+
+Theme::Theme(Settings* settings, Dock* dock) : mSettings(settings)
 {
-	mSettings = settings;
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(dock->mBox)), "changed",
-		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
-		nullptr);
+		G_CALLBACK(+[](GtkStyleContext* stylecontext, Theme* me) { me->load(); }),
+		this);
 }
 
 void Theme::load()

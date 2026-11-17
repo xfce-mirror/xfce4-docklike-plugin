@@ -18,7 +18,6 @@
 
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
-#include "Theme.hpp"
 
 Settings::Settings(XfcePanelPlugin* xfPlugin)
 {
@@ -165,7 +164,7 @@ Settings::Settings(XfcePanelPlugin* xfPlugin)
 			g_key_file_set_boolean(mFile.get(), "user", "indicatorColorFromTheme", _indicatorColorFromTheme);
 			saveFile();
 
-			Theme::load();
+			mTheme->load();
 			mDock->drawGroups();
 		});
 
@@ -183,7 +182,7 @@ Settings::Settings(XfcePanelPlugin* xfPlugin)
 			g_free(str);
 			saveFile();
 
-			Theme::load();
+			mTheme->load();
 			mDock->drawGroups();
 		});
 
@@ -201,7 +200,7 @@ Settings::Settings(XfcePanelPlugin* xfPlugin)
 			g_free(str);
 			saveFile();
 
-			Theme::load();
+			mTheme->load();
 			mDock->drawGroups();
 		});
 

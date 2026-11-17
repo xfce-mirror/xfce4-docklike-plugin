@@ -23,6 +23,7 @@
 #include "Dock.hpp"
 #include "LauncherEntry.hpp"
 #include "Settings.hpp"
+#include "Theme.hpp"
 #include "Xfw.hpp"
 
 #include <libxfce4panel/libxfce4panel.h>
@@ -44,6 +45,7 @@ private:
 	Xfw* mXfw;
 	Dock* mDock;
 	LauncherEntry* mLauncherEntry;
+	Theme* mTheme;
 };
 
 #endif // PLUGIN_HPP
