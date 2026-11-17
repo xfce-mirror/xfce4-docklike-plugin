@@ -18,7 +18,6 @@
 
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
-#include "Theme.hpp"
 
 Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 {
@@ -164,7 +163,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_boolean(mFile.get(), "user", "indicatorColorFromTheme", _indicatorColorFromTheme);
 			saveFile();
 
-			Theme::load();
+			mPlugin->mTheme->load();
 			mPlugin->mDock->drawGroups();
 		});
 
@@ -182,7 +181,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_free(str);
 			saveFile();
 
-			Theme::load();
+			mPlugin->mTheme->load();
 			mPlugin->mDock->drawGroups();
 		});
 
@@ -200,7 +199,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_free(str);
 			saveFile();
 
-			Theme::load();
+			mPlugin->mTheme->load();
 			mPlugin->mDock->drawGroups();
 		});
 
