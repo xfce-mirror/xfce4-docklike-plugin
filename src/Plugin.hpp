@@ -20,6 +20,7 @@
 #define PLUGIN_HPP
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "Settings.hpp"
 #include "Xfw.hpp"
 
@@ -42,10 +43,12 @@ public:
 	explicit Plugin(XfcePanelPlugin* xfPlugin);
 	~Plugin();
 
+	bool mInitialized = false;
 	XfcePanelPlugin* mXfPlugin;
 	Settings* mSettings;
 	AppInfos* mAppInfos;
 	Xfw* mXfw;
+	Dock* mDock;
 };
 
 #endif // PLUGIN_HPP

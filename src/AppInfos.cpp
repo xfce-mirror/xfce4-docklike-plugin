@@ -17,7 +17,6 @@
  */
 
 #include "AppInfos.hpp"
-#include "Dock.hpp"
 #include "Helpers.hpp"
 
 #include <ftw.h>
@@ -229,7 +228,7 @@ AppInfos::AppInfos(Plugin* plugin) : mPlugin(plugin), mMonitor(g_app_info_monito
 			me->mAppInfoNames.clear();
 			me->mAppInfoWMClasses.clear();
 			me->loadXDGDirectories();
-			Dock::drawGroups();
+			me->mPlugin->mDock->drawGroups();
 		}),
 		this);
 
