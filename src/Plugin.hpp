@@ -20,6 +20,7 @@
 #define PLUGIN_HPP
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "Settings.hpp"
 #include "Xfw.hpp"
 
@@ -40,6 +41,7 @@ private:
 	Settings* mSettings;
 	AppInfos* mAppInfos;
 	Xfw* mXfw;
+	Dock* mDock;
 };
 
 #endif // PLUGIN_HPP

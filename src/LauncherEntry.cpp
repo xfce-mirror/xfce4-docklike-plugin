@@ -16,7 +16,6 @@
  */
 
 #include "LauncherEntry.hpp"
-#include "Dock.hpp"
 #include "Group.hpp"
 #include "Settings.hpp"
 
@@ -39,6 +38,7 @@ struct LauncherEntry::Impl
 	};
 
 	Settings* mSettings = nullptr;
+	Dock* mDock = nullptr;
 	GDBusConnection* connection = nullptr;
 	guint launcherSignalId = 0;
 	guint nameOwnerChangedSignalId = 0;
@@ -100,9 +100,10 @@ struct LauncherEntry::Impl
 
 	void refreshGroups()
 	{
-		Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
-			applyEntryToGroup(group.second.get());
-		});
+		if (mDock != nullptr)
+			mDock->mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
+				applyEntryToGroup(group.second.get());
+			});
 	}
 
 	static void onLauncherUpdate(GDBusConnection*, const gchar* senderName, const gchar*,
@@ -166,9 +167,10 @@ struct LauncherEntry::Impl
 			impl->refreshGroups();
 	}
 
-	void init(Settings* settings)
+	void init(Settings* settings, Dock* dock)
 	{
 		mSettings = settings;
+		mDock = dock;
 		GError* error = nullptr;
 		connection = g_bus_get_sync(G_BUS_TYPE_SESSION, nullptr, &error);
 		if (connection == nullptr)
@@ -214,7 +216,7 @@ struct LauncherEntry::Impl
 
 LauncherEntry::Impl LauncherEntry::mImpl;
 
-void LauncherEntry::init(Settings* settings) { mImpl.init(settings); }
+void LauncherEntry::init(Settings* settings, Dock* dock) { mImpl.init(settings, dock); }
 
 void LauncherEntry::finalize() { mImpl.finalize(); }
 

@@ -19,16 +19,20 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 
+#include "Dock.hpp"
 #include "State.ipp"
 #include "Store.ipp"
 
 #include <glib.h>
 #include <libxfce4panel/libxfce4panel.h>
 
+class Dock;
+
 class Settings
 {
 public:
 	explicit Settings(XfcePanelPlugin* xfPlugin);
+	void setDock(Dock* dock) { mDock = dock; };
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;
@@ -69,6 +73,7 @@ public:
 private:
 	void saveFile();
 
+	Dock* mDock = nullptr;
 	Store::AutoPtr<gchar> mPath;
 	Store::AutoPtr<GKeyFile> mFile;
 };

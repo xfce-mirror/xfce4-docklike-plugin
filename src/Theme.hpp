@@ -43,7 +43,7 @@
 
 namespace Theme
 {
-	void init(Settings* settings);
+	void init(Settings* settings, Dock* dock);
 	void load();
 	std::string get_theme_colors();
 } // namespace Theme

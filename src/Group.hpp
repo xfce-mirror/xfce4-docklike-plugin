@@ -20,6 +20,7 @@
 #define GROUP_HPP
 
 #include "AppInfos.hpp"
+#include "Dock.hpp"
 #include "GroupMenu.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
@@ -60,12 +61,13 @@ enum IndicatorStyle
 	STYLE_NONE
 };
 
+struct AppInfo;
 class GroupWindow;
 
 class Group
 {
 public:
-	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos, Xfw* xfw);
+	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Settings* settings, AppInfos* appInfos, Xfw* xfw, Dock* dock);
 	~Group();
 
 	void add(GroupWindow* window);
@@ -102,6 +104,7 @@ public:
 	Settings* mSettings;
 	AppInfos* mAppInfos;
 	Xfw* mXfw;
+	Dock* mDock;
 
 	bool mPinned;
 	bool mActive;

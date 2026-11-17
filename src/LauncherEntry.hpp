@@ -18,12 +18,13 @@
 #ifndef LAUNCHERENTRY_HPP
 #define LAUNCHERENTRY_HPP
 
+#include "Dock.hpp"
 #include "Settings.hpp"
 
 class LauncherEntry
 {
 public:
-	static void init(Settings* settings);
+	static void init(Settings* settings, Dock* dock);
 	static void finalize();
 	static void refreshGroups();
 
