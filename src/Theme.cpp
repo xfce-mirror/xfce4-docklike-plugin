@@ -23,7 +23,7 @@ static Plugin* mPlugin = nullptr;
 void Theme::init(Plugin* plugin)
 {
 	mPlugin = plugin;
-	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(Dock::mBox)), "changed",
+	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(mPlugin->mDock->mBox)), "changed",
 		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
 		nullptr);
 }
