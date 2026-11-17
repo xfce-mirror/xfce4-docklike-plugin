@@ -18,7 +18,6 @@
 
 #include "Settings.hpp"
 #include "Hotkeys.hpp"
-#include "LauncherEntry.hpp"
 #include "Theme.hpp"
 
 Settings::Settings(XfcePanelPlugin* xfPlugin)
@@ -100,7 +99,7 @@ Settings::Settings(XfcePanelPlugin* xfPlugin)
 			g_key_file_set_boolean(mFile.get(), "user", "disableLauncherCounts", _disableLauncherCounts);
 			saveFile();
 
-			LauncherEntry::refreshGroups();
+			mLauncherEntry->refreshGroups();
 		});
 
 	intValue = g_key_file_get_integer(file, "user", "middleButtonBehavior", &error);
