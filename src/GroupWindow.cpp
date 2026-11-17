@@ -25,7 +25,7 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
 	g_debug("NEW: %s", groupName.c_str());
 
 	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
-	mGroup = Dock::prepareGroup(appInfo);
+	mGroup = plugin->mDock->prepareGroup(appInfo);
 
 	mGroupMenuItem = new GroupMenuItem(this);
 	mGroupAssociated = false;
@@ -67,7 +67,7 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
 	g_signal_connect(G_OBJECT(mXfwWindow), "class-changed",
 		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
 			std::string _groupName = me->mGroup->mPlugin->mXfw->getGroupName(me);
-			Group* group = Dock::prepareGroup(me->mGroup->mPlugin->mAppInfos->search(_groupName));
+			Group* group = me->mGroup->mPlugin->mDock->prepareGroup(me->mGroup->mPlugin->mAppInfos->search(_groupName));
 			if (group != me->mGroup)
 			{
 				me->leaveGroup();
@@ -162,7 +162,7 @@ void GroupWindow::updateState()
 	if (mGroup->mPlugin->mSettings->onlyDisplayScreen && gdk_display_get_n_monitors(gdk_display_get_default()) > 1)
 	{
 		GList* monitors = xfw_window_get_monitors(mXfwWindow);
-		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Dock::mPlugin->mXfPlugin));
+		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(mGroup->mPlugin->mXfPlugin));
 
 		if (pluginWindow == nullptr
 			|| !g_list_find_custom(

@@ -17,7 +17,6 @@
  */
 
 #include "Plugin.hpp"
-#include "Dock.hpp"
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
 #include "SettingsDialog.hpp"
@@ -36,27 +35,27 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	mSettings = new Settings(this);
 	mAppInfos = new AppInfos(this);
 	mXfw = new Xfw(this);
-	Dock::init(this);
+	mDock = new Dock(this);
 	LauncherEntry::init(this);
 	Theme::init(this);
 	Hotkeys::init(this);
 
-	gtk_container_add(GTK_CONTAINER(xfPlugin), Dock::mBox);
+	gtk_container_add(GTK_CONTAINER(xfPlugin), mDock->mBox);
 	xfce_panel_plugin_menu_show_configure(xfPlugin);
 	xfce_panel_plugin_menu_show_about(xfPlugin);
 
 	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "size-changed",
-		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gint size) -> gboolean {
-			Dock::onPanelResize(size);
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gint size, Plugin* plugin) -> gboolean {
+			plugin->mDock->onPanelResize(size);
 			return true;
 		}),
-		nullptr);
+		this);
 
 	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "orientation-changed",
-		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, GtkOrientation orientation) {
-			Dock::onPanelOrientationChange(orientation);
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, GtkOrientation orientation, Plugin* plugin) {
+			plugin->mDock->onPanelOrientationChange(orientation);
 		}),
-		nullptr);
+		this);
 
 	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
@@ -101,9 +100,9 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 			else if (g_strcmp0(name, "activate-group") == 0)
 			{
 				if (G_VALUE_HOLDS_INT64(value) && plugin->mSettings->keyComboActive)
-					Dock::activateGroup(g_value_get_int64(value));
+					plugin->mDock->activateGroup(g_value_get_int64(value));
 				else if (G_VALUE_HOLDS_STRING(value))
-					Dock::activateGroup(g_value_get_string(value));
+					plugin->mDock->activateGroup(g_value_get_string(value));
 			}
 			// stop signal emission to other plugins
 			return true;
@@ -127,7 +126,7 @@ Plugin::~Plugin()
 {
 	LauncherEntry::finalize();
 	delete mXfw;
-	Dock::mGroups.clear();
+	delete mDock;
 	delete mAppInfos;
 	Hotkeys::finalize();
 	delete mSettings;
