@@ -19,7 +19,6 @@
 #include "Dock.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "LauncherEntry.hpp"
 #include "Settings.hpp"
 
 #include <libxfce4windowing/libxfce4windowing.h>
@@ -150,7 +149,8 @@ void Dock::drawGroups()
 	}
 
 	gtk_widget_queue_draw(mBox);
-	LauncherEntry::refreshGroups();
+	if (mLauncherEntry != nullptr)
+		mLauncherEntry->refreshGroups();
 }
 
 void Dock::activateGroup(Group* group)

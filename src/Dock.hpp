@@ -21,6 +21,7 @@
 
 #include "AppInfos.hpp"
 #include "Group.hpp"
+#include "LauncherEntry.hpp"
 #include "Settings.hpp"
 #include "Store.ipp"
 #include "Xfw.hpp"
@@ -33,12 +34,14 @@
 
 struct AppInfo;
 class Group;
+class LauncherEntry;
 class Xfw;
 
 class Dock
 {
 public:
 	Dock(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos, Xfw* xfw);
+	void setLauncherEntry(LauncherEntry* launcherEntry) { mLauncherEntry = launcherEntry; };
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -66,6 +69,7 @@ private:
 	Settings* mSettings;
 	AppInfos* mAppInfos;
 	Xfw* mXfw;
+	LauncherEntry* mLauncherEntry = nullptr;
 };
 
 #endif // DOCK_HPP

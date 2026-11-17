@@ -20,6 +20,7 @@
 #define SETTINGS_HPP
 
 #include "Dock.hpp"
+#include "LauncherEntry.hpp"
 #include "State.ipp"
 #include "Store.ipp"
 
@@ -27,12 +28,14 @@
 #include <libxfce4panel/libxfce4panel.h>
 
 class Dock;
+class LauncherEntry;
 
 class Settings
 {
 public:
 	explicit Settings(XfcePanelPlugin* xfPlugin);
 	void setDock(Dock* dock) { mDock = dock; };
+	void setLauncherEntry(LauncherEntry* launcherEntry) { mLauncherEntry = launcherEntry; };
 
 	const int minIconSize = 16;
 	const int maxIconSize = 128;
@@ -74,6 +77,7 @@ private:
 	void saveFile();
 
 	Dock* mDock = nullptr;
+	LauncherEntry* mLauncherEntry = nullptr;
 	Store::AutoPtr<gchar> mPath;
 	Store::AutoPtr<GKeyFile> mFile;
 };

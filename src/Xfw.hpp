@@ -30,7 +30,9 @@
 
 struct AppInfo;
 class AppInfos;
+class Dock;
 class GroupWindow;
+class Settings;
 
 class Xfw
 {
