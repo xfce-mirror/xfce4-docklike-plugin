@@ -16,7 +16,6 @@
  */
 
 #include "LauncherEntry.hpp"
-#include "Dock.hpp"
 #include "Group.hpp"
 #include "Settings.hpp"
 
@@ -100,9 +99,10 @@ struct LauncherEntry::Impl
 
 	void refreshGroups()
 	{
-		Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
-			applyEntryToGroup(group.second.get());
-		});
+		if (mPlugin != nullptr)
+			mPlugin->mDock->mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) {
+				applyEntryToGroup(group.second.get());
+			});
 	}
 
 	static void onLauncherUpdate(GDBusConnection*, const gchar* senderName, const gchar*,

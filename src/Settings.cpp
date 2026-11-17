@@ -17,7 +17,6 @@
  */
 
 #include "Settings.hpp"
-#include "Dock.hpp"
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
 #include "Theme.hpp"
@@ -48,7 +47,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);
 			saveFile();
 
-			Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+			mPlugin->mDock->mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 				g.second->mGroupMenu.showPreviewsChanged();
 			});
 		});
@@ -65,7 +64,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "previewWidth", _previewWidth);
 			saveFile();
 
-			Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+			mPlugin->mDock->mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 				g.second->mGroupMenu.showPreviewsChanged();
 			});
 		});
@@ -82,7 +81,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "previewHeight", _previewHeight);
 			saveFile();
 
-			Dock::mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+			mPlugin->mDock->mGroups.forEach([](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 				g.second->mGroupMenu.showPreviewsChanged();
 			});
 		});
@@ -92,7 +91,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_boolean(mFile.get(), "user", "showWindowCount", _showWindowCount);
 			saveFile();
 
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	disableLauncherCounts.setup(g_key_file_get_boolean(file, "user", "disableLauncherCounts", nullptr),
@@ -120,7 +119,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "indicatorOrientation", _indicatorOrientation);
 			saveFile();
 
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	forceIconSize.setup(g_key_file_get_boolean(file, "user", "forceIconSize", nullptr),
@@ -128,7 +127,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_boolean(mFile.get(), "user", "forceIconSize", _forceIconSize);
 			saveFile();
 
-			Dock::onPanelResize();
+			mPlugin->mDock->onPanelResize();
 		});
 
 	iconSize.setup(CLAMP(g_key_file_get_integer(file, "user", "iconSize", nullptr), minIconSize, maxIconSize),
@@ -142,7 +141,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "iconSize", _iconSize);
 			saveFile();
 
-			Dock::onPanelResize();
+			mPlugin->mDock->onPanelResize();
 		});
 
 	indicatorStyle.setup(g_key_file_get_integer(file, "user", "indicatorStyle", nullptr),
@@ -150,7 +149,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "indicatorStyle", _indicatorStyle);
 			saveFile();
 
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	inactiveIndicatorStyle.setup(g_key_file_get_integer(file, "user", "inactiveIndicatorStyle", nullptr),
@@ -158,7 +157,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			g_key_file_set_integer(mFile.get(), "user", "inactiveIndicatorStyle", _inactiveIndicatorStyle);
 			saveFile();
 
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	indicatorColorFromTheme.setup(g_key_file_get_boolean(file, "user", "indicatorColorFromTheme", nullptr),
@@ -167,7 +166,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			saveFile();
 
 			Theme::load();
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	gchar* colorString = g_key_file_get_string(file, "user", "indicatorColor", nullptr);
@@ -185,7 +184,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			saveFile();
 
 			Theme::load();
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	colorString = g_key_file_get_string(file, "user", "inactiveColor", nullptr);
@@ -203,7 +202,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 			saveFile();
 
 			Theme::load();
-			Dock::drawGroups();
+			mPlugin->mDock->drawGroups();
 		});
 
 	noWindowsListIfSingle.setup(g_key_file_get_boolean(file, "user", "noWindowsListIfSingle", nullptr),

@@ -94,7 +94,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
 				GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow)));
-				xfce_panel_plugin_register_menu(Dock::mPlugin->mXfPlugin, GTK_MENU(menu));
+				xfce_panel_plugin_register_menu(me->mGroupWindow->mGroup->mPlugin->mXfPlugin, GTK_MENU(menu));
 				g_signal_connect(G_OBJECT(menu), "deactivate",
 					G_CALLBACK(+[](GtkMenuShell* _menu, GroupMenuItem* _me) {
 						g_object_unref(_menu);

@@ -32,8 +32,11 @@
 
 #include <iostream>
 
-class GroupMenuItem;
+class AppInfos;
+class Dock;
 class Group;
+class GroupMenuItem;
+class Xfw;
 
 class GroupWindow
 {

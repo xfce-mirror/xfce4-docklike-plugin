@@ -25,10 +25,12 @@
 #include "Helpers.hpp"
 #include "Plugin.hpp"
 #include "State.ipp"
+#include "Store.ipp"
 
 #include <math.h>
 
 #include <algorithm>
+#include <memory>
 #include <iostream>
 
 enum MiddleButtonBehavior
@@ -59,6 +61,7 @@ enum IndicatorStyle
 
 struct AppInfo;
 class GroupWindow;
+class Plugin;
 
 class Group
 {
