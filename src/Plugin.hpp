@@ -21,6 +21,7 @@
 
 #include "AppInfos.hpp"
 #include "Dock.hpp"
+#include "LauncherEntry.hpp"
 #include "Settings.hpp"
 #include "Xfw.hpp"
 
@@ -48,6 +49,7 @@ public:
 	AppInfos* mAppInfos;
 	Xfw* mXfw;
 	Dock* mDock;
+	LauncherEntry* mLauncherEntry = nullptr;
 };
 
 #endif // PLUGIN_HPP
