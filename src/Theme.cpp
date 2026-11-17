@@ -18,14 +18,14 @@
 
 #include "Theme.hpp"
 
-static Plugin* mPlugin = nullptr;
+#include <iostream>
+#include <string>
 
-void Theme::init(Plugin* plugin)
+Theme::Theme(Plugin* plugin) : mPlugin(plugin)
 {
-	mPlugin = plugin;
 	g_signal_connect(G_OBJECT(gtk_widget_get_style_context(mPlugin->mDock->mBox)), "changed",
-		G_CALLBACK(+[](GtkStyleContext* stylecontext) { load(); }),
-		nullptr);
+		G_CALLBACK(+[](GtkStyleContext* stylecontext, Theme* me) { me->load(); }),
+		this);
 }
 
 void Theme::load()

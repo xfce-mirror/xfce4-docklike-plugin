@@ -19,7 +19,6 @@
 #include "Plugin.hpp"
 #include "Hotkeys.hpp"
 #include "SettingsDialog.hpp"
-#include "Theme.hpp"
 
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
@@ -36,7 +35,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	mXfw = new Xfw(this);
 	mDock = new Dock(this);
 	mLauncherEntry = new LauncherEntry(this);
-	Theme::init(this);
+	mTheme = new Theme(this);
 	Hotkeys::init(this);
 
 	gtk_container_add(GTK_CONTAINER(xfPlugin), mDock->mBox);
@@ -127,6 +126,7 @@ Plugin::~Plugin()
 	delete mXfw;
 	delete mDock;
 	delete mAppInfos;
+	delete mTheme;
 	Hotkeys::finalize();
 	delete mSettings;
 }
