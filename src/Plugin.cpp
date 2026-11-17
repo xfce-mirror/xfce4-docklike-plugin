@@ -18,7 +18,6 @@
 
 #include "Plugin.hpp"
 #include "Hotkeys.hpp"
-#include "LauncherEntry.hpp"
 #include "SettingsDialog.hpp"
 #include "Theme.hpp"
 
@@ -34,7 +33,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	mAppInfos = new AppInfos(this);
 	mXfw = new Xfw(this);
 	mDock = new Dock(this);
-	LauncherEntry::init(this);
+	mLauncherEntry = new LauncherEntry(this);
 	Theme::init(this);
 	Hotkeys::init(this);
 
@@ -125,7 +124,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 
 Plugin::~Plugin()
 {
-	LauncherEntry::finalize();
+	delete mLauncherEntry;
 	delete mXfw;
 	delete mDock;
 	delete mAppInfos;
