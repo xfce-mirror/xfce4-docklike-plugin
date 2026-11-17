@@ -20,25 +20,25 @@
 #define DOCK_HPP
 
 #include "AppInfos.hpp"
-#include "GroupWindow.hpp"
-#include "Helpers.hpp"
+#include "Group.hpp"
 #include "Settings.hpp"
 #include "Store.ipp"
 #include "Xfw.hpp"
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4windowing/libxfce4windowing.h>
 
 #include <iostream>
 #include <string>
 
+struct AppInfo;
 class Group;
 class Xfw;
 
-namespace Dock
+class Dock
 {
-	void init(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos, Xfw* xfw);
+public:
+	Dock(XfcePanelPlugin* xfPlugin, Settings* settings, AppInfos* appInfos, Xfw* xfw);
 
 	Group* prepareGroup(std::shared_ptr<AppInfo> appInfo);
 
@@ -52,16 +52,20 @@ namespace Dock
 	void onPanelResize(int size = -1);
 	void onPanelOrientationChange(GtkOrientation orientation);
 
-	extern XfcePanelPlugin* mXfPlugin;
-	extern Settings* mSettings;
-	extern AppInfos* mAppInfos;
-	extern Xfw* mXfw;
+	XfcePanelPlugin* mXfPlugin;
 
-	extern GtkWidget* mBox;
-	extern Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
+	GtkWidget* mBox;
+	Store::KeyStore<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> mGroups;
 
-	extern int mPanelSize;
-	extern int mIconSize;
-} // namespace Dock
+	int mPanelSize;
+	int mIconSize;
+
+private:
+	void activateGroup(Group* group);
+
+	Settings* mSettings;
+	AppInfos* mAppInfos;
+	Xfw* mXfw;
+};
 
 #endif // DOCK_HPP

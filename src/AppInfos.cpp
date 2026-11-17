@@ -17,7 +17,6 @@
  */
 
 #include "AppInfos.hpp"
-#include "Dock.hpp"
 #include "Helpers.hpp"
 
 #include <ftw.h>
@@ -229,7 +228,7 @@ AppInfos::AppInfos(Settings* settings) : mSettings(settings), mMonitor(g_app_inf
 			me->mAppInfoNames.clear();
 			me->mAppInfoWMClasses.clear();
 			me->loadXDGDirectories();
-			Dock::drawGroups();
+			me->mDock->drawGroups();
 		}),
 		this);
 
