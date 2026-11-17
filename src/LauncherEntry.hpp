@@ -20,18 +20,46 @@
 
 #include "Plugin.hpp"
 
+#include <gio/gio.h>
+
+#include <cstdint>
+#include <map>
+#include <string>
+#include <utility>
+
+class Dock;
+class Group;
+class Settings;
+
 class LauncherEntry
 {
 public:
-	static void init(Plugin* plugin);
-	static void finalize();
-	static void refreshGroups();
+	LauncherEntry(Plugin* plugin);
+	~LauncherEntry();
+
+	void refreshGroups();
 
 private:
-	LauncherEntry() = delete;
+	static std::string appIdFromUri(const gchar* appUri);
+	void applyEntryToGroup(Group* group);
+	static void onLauncherUpdate(GDBusConnection*, const gchar* senderName, const gchar*, const gchar*, const gchar*, GVariant* parameters, gpointer userData);
+	static void onNameOwnerChanged(GDBusConnection*, const gchar*, const gchar*, const gchar*, const gchar*, GVariant* parameters, gpointer userData);
 
-	struct Impl;
-	static Impl mImpl;
+	Plugin* mPlugin;
+
+	GDBusConnection* mConnection = nullptr;
+	guint mLauncherSignalId = 0;
+	guint mNameOwnerChangedSignalId = 0;
+	guint mUnityNameOwnerId = 0;
+	std::uint64_t mUpdateSerial = 0;
+	using EntryKey = std::pair<std::string, std::string>;
+	struct Entry
+	{
+		gint64 count = 0;
+		bool countVisible = false;
+		std::uint64_t updateSerial = 0;
+	};
+	std::map<EntryKey, Entry> mEntries;
 };
 
 #endif // LAUNCHERENTRY_HPP
