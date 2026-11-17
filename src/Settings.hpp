@@ -25,6 +25,7 @@
 
 #include <gtk/gtk.h>
 
+class Dock;
 class Plugin;
 
 class Settings

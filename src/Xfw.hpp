@@ -27,6 +27,7 @@
 #include <libxfce4windowingui/libxfce4windowingui.h>
 
 class GroupWindow;
+class Plugin;
 
 class Xfw
 {
