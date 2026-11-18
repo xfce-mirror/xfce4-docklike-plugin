@@ -17,222 +17,204 @@
  */
 
 #include "Hotkeys.hpp"
-#include "Settings.hpp"
 
-#include <xfconf/xfconf.h>
-
-namespace Hotkeys
+gboolean Hotkeys::mStrEqual(gpointer key, gpointer _value, gpointer data)
 {
-	Plugin* mPlugin = nullptr;
+	GValue* value = (GValue*)_value;
+	if (G_VALUE_HOLDS_STRING(value))
+		return g_str_equal(g_value_get_string(value), (gchar*)data);
+	return false;
+};
 
-	bool mKeyAloneGrabbed = false;
-	int mGrabbedKeys = mNbHotkeys;
-	bool mAddShortcutUIAvailable = false;
-
-	XfconfChannel* mChannel = nullptr;
-	auto mStrEqual = [](gpointer key, gpointer _value, gpointer data) {
-		GValue* value = (GValue*)_value;
-		if (G_VALUE_HOLDS_STRING(value))
-			return (gboolean)g_str_equal(g_value_get_string(value), (gchar*)data);
-		return (gboolean) false;
-	};
-
-	// =========================================================================
-
-	static void addKeyComboShortcuts()
+void Hotkeys::addKeyComboShortcuts()
+{
+	GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+	for (gint n = 0; n < mNbHotkeys; n++)
 	{
-		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
-		for (gint n = 0; n < mNbHotkeys; n++)
-		{
-			gchar* command = g_strdup_printf(
-				"xfce4-panel --plugin-event=docklike-%d:activate-group:int:%d",
-				xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin),
-				n);
-			if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
-			{
-				GdkKeymap* keymap = gdk_keymap_get_for_display(gdk_display_get_default());
-				GdkKeymapKey* keys;
-				gint nKeys = 0;
-				gchar* shortcut = nullptr;
-
-				gdk_keymap_get_entries_for_keyval(keymap, GDK_KEY_1 + n, &keys, &nKeys);
-				if (nKeys > 0)
-				{
-					guint* keyvals = nullptr;
-					guint keycode = keys[0].keycode;
-					g_free(keys);
-					keys = nullptr;
-					gdk_keymap_get_entries_for_keycode(keymap, keycode, &keys, &keyvals, &nKeys);
-					gint m = 0;
-					for (m = 0; m < nKeys; m++)
-					{
-						if (keys[m].group == 0 && keys[m].level == 0)
-						{
-							shortcut = gtk_accelerator_name(keyvals[m], GDK_SUPER_MASK);
-							break;
-						}
-					}
-					if (m == nKeys)
-					{
-						g_debug("Failed to map keycode %u to keyval", keycode);
-					}
-					g_free(keys);
-					g_free(keyvals);
-				}
-				else
-				{
-					g_debug("Failed to map keyval %d to keycode", GDK_KEY_1 + n);
-				}
-
-				if (shortcut == nullptr)
-				{
-					g_debug("Falling back to direct mapping of GDK_KEY_%d", n + 1);
-					shortcut = gtk_accelerator_name(GDK_KEY_1 + n, GDK_SUPER_MASK);
-				}
-
-				std::string property = "/commands/custom/";
-				property += shortcut;
-				g_free(shortcut);
-				if (xfconf_channel_has_property(mChannel, property.c_str()))
-				{
-					mGrabbedKeys = n;
-					break;
-				}
-				else
-				{
-					xfconf_channel_set_string(mChannel, property.c_str(), command);
-				}
-			}
-			g_free(command);
-		}
-		g_hash_table_destroy(commands);
-	}
-
-	static void addKeyAloneShortcut()
-	{
-		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
 		gchar* command = g_strdup_printf(
-			"xfce4-panel --plugin-event=docklike-%d:switch-to-last-window",
-			xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin));
-		mKeyAloneGrabbed = true;
+			"xfce4-panel --plugin-event=docklike-%d:activate-group:int:%d",
+			xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin),
+			n);
 		if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
 		{
-			gchar* shortcut = gtk_accelerator_name(GDK_KEY_Super_L, (GdkModifierType)0);
-			gchar* property = g_strdup_printf("/commands/custom/%s", shortcut);
-			if (xfconf_channel_has_property(mChannel, property))
-				mKeyAloneGrabbed = false;
+			GdkKeymap* keymap = gdk_keymap_get_for_display(gdk_display_get_default());
+			GdkKeymapKey* keys;
+			gint nKeys = 0;
+			gchar* shortcut = nullptr;
+
+			gdk_keymap_get_entries_for_keyval(keymap, GDK_KEY_1 + n, &keys, &nKeys);
+			if (nKeys > 0)
+			{
+				guint* keyvals = nullptr;
+				guint keycode = keys[0].keycode;
+				g_free(keys);
+				keys = nullptr;
+				gdk_keymap_get_entries_for_keycode(keymap, keycode, &keys, &keyvals, &nKeys);
+				gint m = 0;
+				for (m = 0; m < nKeys; m++)
+				{
+					if (keys[m].group == 0 && keys[m].level == 0)
+					{
+						shortcut = gtk_accelerator_name(keyvals[m], GDK_SUPER_MASK);
+						break;
+					}
+				}
+				if (m == nKeys)
+				{
+					g_debug("Failed to map keycode %u to keyval", keycode);
+				}
+				g_free(keys);
+				g_free(keyvals);
+			}
 			else
-				xfconf_channel_set_string(mChannel, property, command);
-			g_free(property);
+			{
+				g_debug("Failed to map keyval %d to keycode", GDK_KEY_1 + n);
+			}
+
+			if (shortcut == nullptr)
+			{
+				g_debug("Falling back to direct mapping of GDK_KEY_%d", n + 1);
+				shortcut = gtk_accelerator_name(GDK_KEY_1 + n, GDK_SUPER_MASK);
+			}
+
+			std::string property = "/commands/custom/";
+			property += shortcut;
 			g_free(shortcut);
+			if (xfconf_channel_has_property(mChannel, property.c_str()))
+			{
+				mGrabbedKeys = n;
+				break;
+			}
+			else
+			{
+				xfconf_channel_set_string(mChannel, property.c_str(), command);
+			}
 		}
 		g_free(command);
-		g_hash_table_destroy(commands);
+	}
+	g_hash_table_destroy(commands);
+}
+
+void Hotkeys::addKeyAloneShortcut()
+{
+	GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+	gchar* command = g_strdup_printf(
+		"xfce4-panel --plugin-event=docklike-%d:switch-to-last-window",
+		xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin));
+	mKeyAloneGrabbed = true;
+	if (g_hash_table_find(commands, mStrEqual, command) == nullptr)
+	{
+		gchar* shortcut = gtk_accelerator_name(GDK_KEY_Super_L, (GdkModifierType)0);
+		gchar* property = g_strdup_printf("/commands/custom/%s", shortcut);
+		if (xfconf_channel_has_property(mChannel, property))
+			mKeyAloneGrabbed = false;
+		else
+			xfconf_channel_set_string(mChannel, property, command);
+		g_free(property);
+		g_free(shortcut);
+	}
+	g_free(command);
+	g_hash_table_destroy(commands);
+}
+
+Hotkeys::Hotkeys(Plugin* plugin) : mPlugin(plugin)
+{
+	GError* error = nullptr;
+	if (xfconf_init(&error))
+	{
+		mChannel = xfconf_channel_get("xfce4-keyboard-shortcuts");
+	}
+	else
+	{
+		g_critical("Failed to initialize Xfconf: %s", error->message);
+		g_clear_error(&error);
 	}
 
-	// =========================================================================
-
-	void init(Plugin* plugin)
+	gchar* path = g_find_program_in_path("xfce4-keyboard-settings");
+	if (path != nullptr)
 	{
-		mPlugin = plugin;
-
-		GError* error = nullptr;
-		if (xfconf_init(&error))
+		// --shortcuts option is only available since xfce4-settings 4.21.2
+		gchar* output = nullptr;
+		const gchar* command = "xfce4-keyboard-settings --help";
+		if (g_spawn_command_line_sync(command, &output, nullptr, nullptr, &error))
 		{
-			mChannel = xfconf_channel_get("xfce4-keyboard-shortcuts");
+			if (output != nullptr && g_strstr_len(output, -1, "--shortcuts") != nullptr)
+				mAddShortcutUIAvailable = true;
+			g_free(output);
 		}
 		else
 		{
-			g_critical("Failed to initialize Xfconf: %s", error->message);
+			g_warning("Failed to launch %s: %s", command, error->message);
 			g_clear_error(&error);
 		}
-
-		gchar* path = g_find_program_in_path("xfce4-keyboard-settings");
-		if (path != nullptr)
-		{
-			// --shortcuts option is only available since xfce4-settings 4.21.2
-			gchar* output = nullptr;
-			const gchar* command = "xfce4-keyboard-settings --help";
-			if (g_spawn_command_line_sync(command, &output, nullptr, nullptr, &error))
-			{
-				if (output != nullptr && g_strstr_len(output, -1, "--shortcuts") != nullptr)
-					mAddShortcutUIAvailable = true;
-				g_free(output);
-			}
-			else
-			{
-				g_warning("Failed to launch %s: %s", command, error->message);
-				g_clear_error(&error);
-			}
-			g_free(path);
-		}
+		g_free(path);
 	}
+}
 
-	void finalize()
+Hotkeys::~Hotkeys()
+{
+	if (mChannel != nullptr)
+		xfconf_shutdown();
+}
+
+void Hotkeys::updateSettings()
+{
+	if (mChannel == nullptr)
+		return;
+
+	if (mPlugin->mSettings->keyAloneActive)
+		addKeyAloneShortcut();
+	if (mPlugin->mSettings->keyComboActive)
+		addKeyComboShortcuts();
+}
+
+void Hotkeys::resetShortcuts()
+{
+	if (mChannel == nullptr)
+		return;
+
+	GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+	gchar* prefix = g_strdup_printf(
+		"xfce4-panel --plugin-event=docklike-%d:",
+		xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin));
+	const gchar* property;
+	GValue* command;
+	GHashTableIter iter;
+	g_hash_table_iter_init(&iter, commands);
+	while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&command))
 	{
-		if (mChannel != nullptr)
-			xfconf_shutdown();
+		if (G_VALUE_HOLDS_STRING(command) && g_str_has_prefix(g_value_get_string(command), prefix))
+			xfconf_channel_reset_property(mChannel, property, true);
 	}
+	g_free(prefix);
+	g_hash_table_destroy(commands);
+}
 
-	void updateSettings()
-	{
-		if (mChannel == nullptr)
-			return;
-
-		if (mPlugin->mSettings->keyAloneActive)
-			addKeyAloneShortcut();
-		if (mPlugin->mSettings->keyComboActive)
-			addKeyComboShortcuts();
-	}
-
-	void resetShortcuts()
-	{
-		if (mChannel == nullptr)
-			return;
-
-		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
-		gchar* prefix = g_strdup_printf(
-			"xfce4-panel --plugin-event=docklike-%d:",
-			xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin));
-		const gchar* property;
-		GValue* command;
-		GHashTableIter iter;
-		g_hash_table_iter_init(&iter, commands);
-		while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&command))
-		{
-			if (G_VALUE_HOLDS_STRING(command) && g_str_has_prefix(g_value_get_string(command), prefix))
-				xfconf_channel_reset_property(mChannel, property, true);
-		}
-		g_free(prefix);
-		g_hash_table_destroy(commands);
-	}
-
-	std::string getShortcut(const std::string& appId)
-	{
-		std::string shortcut = std::string();
-		if (mChannel == nullptr)
-			return shortcut;
-
-		GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
-		gchar* command = g_strdup_printf(
-			"xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s",
-			xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin),
-			appId.c_str());
-		const gchar* property;
-		GValue* value;
-		GHashTableIter iter;
-		g_hash_table_iter_init(&iter, commands);
-		while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&value))
-		{
-			if (G_VALUE_HOLDS_STRING(value) && g_str_equal(g_value_get_string(value), command))
-			{
-				shortcut = g_strrstr(property, "/") + 1;
-				break;
-			}
-		}
-		g_free(command);
-		g_hash_table_destroy(commands);
-
+std::string Hotkeys::getShortcut(const std::string& appId)
+{
+	std::string shortcut = std::string();
+	if (mChannel == nullptr)
 		return shortcut;
+
+	GHashTable* commands = xfconf_channel_get_properties(mChannel, "/commands/custom");
+	gchar* command = g_strdup_printf(
+		"xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s",
+		xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin),
+		appId.c_str());
+	const gchar* property;
+	GValue* value;
+	GHashTableIter iter;
+	g_hash_table_iter_init(&iter, commands);
+	while (g_hash_table_iter_next(&iter, (gpointer*)&property, (gpointer*)&value))
+	{
+		if (G_VALUE_HOLDS_STRING(value) && g_str_equal(g_value_get_string(value), command))
+		{
+			shortcut = g_strrstr(property, "/") + 1;
+			break;
+		}
 	}
-} // namespace Hotkeys
+	g_free(command);
+	g_hash_table_destroy(commands);
+
+	return shortcut;
+}
