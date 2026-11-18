@@ -17,7 +17,6 @@
  */
 
 #include "Group.hpp"
-#include "Hotkeys.hpp"
 
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
@@ -990,9 +989,9 @@ GtkWidget* Group::buildContextMenu()
 			}),
 			this);
 
-		if (Hotkeys::mAddShortcutUIAvailable)
+		if (mPlugin->mHotkeys->mAddShortcutUIAvailable)
 		{
-			std::string shortcut = Hotkeys::getShortcut(mAppInfo->mId);
+			std::string shortcut = mPlugin->mHotkeys->getShortcut(mAppInfo->mId);
 			gchar* command = g_strdup("xfce4-keyboard-settings --shortcuts");
 			if (shortcut.empty())
 			{

@@ -17,7 +17,6 @@
  */
 
 #include "Plugin.hpp"
-#include "Hotkeys.hpp"
 #include "SettingsDialog.hpp"
 
 #ifdef HAVE_XFCE_REVISION_H
@@ -36,7 +35,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	mDock = new Dock(this);
 	mLauncherEntry = new LauncherEntry(this);
 	mTheme = new Theme(this);
-	Hotkeys::init(this);
+	mHotkeys = new Hotkeys(this);
 
 	gtk_container_add(GTK_CONTAINER(xfPlugin), mDock->mBox);
 	xfce_panel_plugin_menu_show_configure(xfPlugin);
@@ -114,10 +113,10 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 		this);
 
 	g_signal_connect(G_OBJECT(xfPlugin), "removed",
-		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin) {
-			Hotkeys::resetShortcuts();
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			plugin->mHotkeys->resetShortcuts();
 		}),
-		nullptr);
+		this);
 }
 
 Plugin::~Plugin()
@@ -127,7 +126,7 @@ Plugin::~Plugin()
 	delete mDock;
 	delete mAppInfos;
 	delete mTheme;
-	Hotkeys::finalize();
+	delete mHotkeys;
 	delete mSettings;
 }
 
