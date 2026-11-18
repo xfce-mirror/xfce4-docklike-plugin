@@ -19,17 +19,23 @@
 #ifndef SETTINGS_DIALOG_HPP
 #define SETTINGS_DIALOG_HPP
 
-#include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "Settings.hpp"
 
-#include <gtk/gtk.h>
-
-#include <string>
-
-namespace SettingsDialog
+class SettingsDialog
 {
+public:
+	explicit SettingsDialog(Plugin* plugin);
+	~SettingsDialog();
+
 	void popup();
-} // namespace SettingsDialog
+
+private:
+	void updateKeyComboActiveWarning(GtkWidget* widget);
+	void updateKeyAloneActiveWarning(GtkWidget* widget);
+
+	Plugin* mPlugin;
+	GtkBuilder* mBuilder = nullptr;
+	GtkWidget* mSettingsDialog = nullptr;
+};
 
 #endif // SETTINGS_DIALOG_HPP

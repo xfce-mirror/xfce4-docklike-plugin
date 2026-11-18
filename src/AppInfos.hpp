@@ -19,39 +19,56 @@
 #ifndef APPINFOS_HPP
 #define APPINFOS_HPP
 
-#include "Helpers.hpp"
+#include "Plugin.hpp"
 #include "Store.ipp"
 
-#include <ftw.h>
 #include <gio/gdesktopappinfo.h>
 
-#include <iostream>
 #include <memory>
+#include <string>
 
-struct AppInfo
+class Plugin;
+
+class AppInfo
 {
+public:
+	AppInfo(std::string id, std::string path, std::string icon, std::string name, GDesktopAppInfo* gAppInfo = nullptr) : mId(id), mPath(path), mIcon(icon), mName(name), mGAppInfo(gAppInfo, [](gpointer o) { if (o) g_object_unref(o); }) {}
+	const gchar* const* getActions() { return mGAppInfo ? g_desktop_app_info_list_actions(mGAppInfo.get()) : nullptr; };
+	std::string getId() { return mId.empty() ? mName : mId; };
+	void launch();
+	void launchAction(const gchar* action);
+	void edit();
+
 	const std::string mId;
 	const std::string mPath;
 	const std::string mIcon;
 	const std::string mName;
 	const Store::AutoPtr<GDesktopAppInfo> mGAppInfo;
-
-	AppInfo(std::string id, std::string path, std::string icon, std::string name, GDesktopAppInfo* gAppInfo = nullptr)
-		: mId(id), mPath(path), mIcon(icon), mName(name), mGAppInfo(gAppInfo, [](gpointer o) { if (o) g_object_unref(o); }) {}
-	const gchar* const* getActions() { return mGAppInfo ? g_desktop_app_info_list_actions(mGAppInfo.get()) : nullptr; };
-	void launch();
-	void launchAction(const gchar* action);
-	void edit();
-	std::string getId();
 };
 
-namespace AppInfos
+class AppInfos
 {
-	void init();
-	void finalize();
+public:
+	explicit AppInfos(Plugin* plugin);
+
 	std::shared_ptr<AppInfo> search(std::string id);
 	bool selectLauncher(const gchar* classId);
 	void createLauncher(const gchar* classId);
-} // namespace AppInfos
+
+private:
+	void findXDGDirectories();
+	void loadDesktopEntry(const std::string& xdgDir, const std::string& filename);
+	void loadXDGDirectories();
+	bool addUserSetApp(const std::string& classId, const std::string& filename);
+	std::shared_ptr<AppInfo> searchByPrefix(const std::string& id, char sep);
+
+	Plugin* mPlugin;
+	std::list<std::string> mXdgDataDirs;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoWMClasses;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoIds;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoNames;
+	Store::Map<const std::string, std::shared_ptr<AppInfo>> mAppInfoUserSet;
+	Store::AutoPtr<GAppInfoMonitor> mMonitor;
+};
 
 #endif // APPINFOS_HPP

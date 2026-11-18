@@ -17,12 +17,13 @@
  */
 
 #include "Group.hpp"
-#include "Hotkeys.hpp"
+
+#include <math.h>
 
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mPlugin(plugin), mPinned(pinned), mAppInfo(appInfo), mGroupMenu(this)
 {
 	mWindowsCount.setup(
 		0,
@@ -61,7 +62,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 	mButtonCssProvider = gtk_css_provider_new();
 	gtk_style_context_add_provider(gtk_widget_get_style_context(mButton),
 		GTK_STYLE_PROVIDER(mButtonCssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	onPanelOrientationChange(xfce_panel_plugin_get_orientation(Plugin::mXfPlugin));
+	onPanelOrientationChange(xfce_panel_plugin_get_orientation(mPlugin->mXfPlugin));
 
 	mImage = gtk_image_new();
 	mLabel = gtk_label_new("");
@@ -190,7 +191,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 			me->mLeaveTimeout.stop();
 			me->mMenuShowTimeout.start();
 
-			if (Settings::showPreviews)
+			if (me->mPlugin->mSettings->showPreviews)
 				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.start();
 				});
@@ -209,7 +210,7 @@ Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned) : mPinned(pinned), m
 			else
 				me->setMouseLeaveTimeout();
 
-			if (Settings::showPreviews)
+			if (me->mPlugin->mSettings->showPreviews)
 				me->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->mPreviewTimeout.stop();
 				});
@@ -340,7 +341,7 @@ void Group::closeAll()
 {
 	mWindows.forEach([](GroupWindow* w) -> void {
 		if (!w->getState(XFW_WINDOW_STATE_SKIP_TASKLIST))
-			Xfw::close(w, 0);
+			w->mGroup->mPlugin->mXfw->close(w, 0);
 	});
 }
 
@@ -357,7 +358,7 @@ void Group::resize()
 	// The badge's current proportions look right on a 56 px panel. Scale all of its
 	// dimensions from that baseline, but limit growth to 125% so it does not dominate
 	// large panels and keep a 60% floor so the count remains legible on very small ones.
-	const double launcherCountScale = CLAMP(Dock::mPanelSize / 56.0, 0.6, 1.25);
+	const double launcherCountScale = CLAMP(mPlugin->mDock->mPanelSize / 56.0, 0.6, 1.25);
 	const int launcherCountFontSize = round(100 * launcherCountScale);
 	const int launcherCountMinWidth = round(12 * launcherCountScale);
 	const int launcherCountVerticalPadding = std::max(1, (int)round(launcherCountScale));
@@ -371,13 +372,13 @@ void Group::resize()
 	g_free(launcherCountCss);
 
 	// may not yet be initialized
-	if (Dock::mIconSize == 0)
+	if (mPlugin->mDock->mIconSize == 0)
 		return;
 
 	if (mIconPixbuf != nullptr)
 	{
 		gint scale_factor = gtk_widget_get_scale_factor(mButton);
-		gint size = Dock::mIconSize * scale_factor;
+		gint size = mPlugin->mDock->mIconSize * scale_factor;
 		GdkPixbuf* scaled = gdk_pixbuf_scale_simple(mIconPixbuf, size, size, GDK_INTERP_BILINEAR);
 		cairo_surface_t* surface = gdk_cairo_surface_create_from_pixbuf(scaled, scale_factor, nullptr);
 		gtk_image_set_from_surface(GTK_IMAGE(mImage), surface);
@@ -385,7 +386,7 @@ void Group::resize()
 		g_object_unref(scaled);
 	}
 	else
-		gtk_image_set_pixel_size(GTK_IMAGE(mImage), Dock::mIconSize);
+		gtk_image_set_pixel_size(GTK_IMAGE(mImage), mPlugin->mDock->mIconSize);
 
 	gtk_widget_set_valign(mImage, GTK_ALIGN_CENTER);
 	gtk_widget_queue_draw(mButton);
@@ -420,7 +421,7 @@ void Group::onDraw(cairo_t* cr)
 
 	double rgba[4];
 
-	if (Settings::indicatorColorFromTheme)
+	if (mPlugin->mSettings->indicatorColorFromTheme)
 	{
 		GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(gtk_menu_new()));
 		GtkStyleContext* sc = gtk_widget_get_style_context(menu);
@@ -441,9 +442,9 @@ void Group::onDraw(cairo_t* cr)
 	{
 		std::shared_ptr<GdkRGBA> color;
 		if (mActive)
-			color = Settings::indicatorColor;
+			color = mPlugin->mSettings->indicatorColor;
 		else
-			color = Settings::inactiveColor;
+			color = mPlugin->mSettings->inactiveColor;
 
 		rgba[0] = color->red;
 		rgba[1] = color->green;
@@ -455,14 +456,14 @@ void Group::onDraw(cairo_t* cr)
 	const double DOT_RADIUS = h * 0.065;
 	const double CIRCLE_WEIGHT = 0.0375;
 
-	int orientation = Settings::indicatorOrientation;
+	int orientation = mPlugin->mSettings->indicatorOrientation;
 	// Orientation based on panel mode and position
 	// Mimics Windows 10 style, indicator stays on outside
 	// TODO: make this a hidden setting now
 	if (orientation == ORIENTATION_AUTOMATIC)
 	{
-		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
-		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(Plugin::mXfPlugin);
+		XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(mPlugin->mXfPlugin);
+		XfceScreenPosition screenPosition = xfce_panel_plugin_get_screen_position(mPlugin->mXfPlugin);
 
 		if (panelMode == XFCE_PANEL_PLUGIN_MODE_VERTICAL || panelMode == XFCE_PANEL_PLUGIN_MODE_DESKBAR)
 		{
@@ -480,9 +481,9 @@ void Group::onDraw(cairo_t* cr)
 		}
 	}
 
-	int indicator_style = Settings::inactiveIndicatorStyle;
+	int indicator_style = mPlugin->mSettings->inactiveIndicatorStyle;
 	if (mActive)
-		indicator_style = Settings::indicatorStyle;
+		indicator_style = mPlugin->mSettings->indicatorStyle;
 
 	switch (indicator_style)
 	{
@@ -850,7 +851,7 @@ void Group::onDraw(cairo_t* cr)
 
 void Group::onMouseEnter()
 {
-	Dock::mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
+	mPlugin->mDock->mGroups.forEach([this](std::pair<std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> void {
 		if (&(g.second->mGroupMenu) != &(this->mGroupMenu))
 			g.second->mGroupMenu.mGroup->onMouseLeave();
 	});
@@ -880,7 +881,7 @@ void Group::updateStyle()
 
 	if (mWindowsCount > 0)
 	{
-		if (mWindowsCount == 1 && Settings::noWindowsListIfSingle)
+		if (mWindowsCount == 1 && mPlugin->mSettings->noWindowsListIfSingle)
 			gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 		else
 			gtk_widget_set_tooltip_text(mButton, nullptr);
@@ -888,7 +889,7 @@ void Group::updateStyle()
 	else
 		gtk_widget_set_tooltip_text(mButton, mAppInfo->mName.c_str());
 
-	if (mWindowsCount > 2 && Settings::showWindowCount)
+	if (mWindowsCount > 2 && mPlugin->mSettings->showWindowCount)
 	{
 		gchar* markup = g_strdup_printf("<b>%d</b>", (int)mWindowsCount);
 		gtk_label_set_markup(GTK_LABEL(mLabel), markup);
@@ -944,7 +945,7 @@ void Group::electNewTopWindow()
 		if (mWindows.size() == 1)
 			newTopWindow = mWindows.get(0);
 		else
-			newTopWindow = (Xfw::mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
+			newTopWindow = (mPlugin->mXfw->mGroupWindows.findIf([this](std::pair<XfwWindow*, std::shared_ptr<GroupWindow>> e) -> bool {
 				if (e.second->mGroup == this)
 					return true;
 				return false;
@@ -986,13 +987,13 @@ GtkWidget* Group::buildContextMenu()
 				group->mPinned = !group->mPinned;
 				if (!group->mPinned)
 					group->updateStyle();
-				Dock::savePinned();
+				group->mPlugin->mDock->savePinned();
 			}),
 			this);
 
-		if (Hotkeys::mAddShortcutUIAvailable)
+		if (mPlugin->mHotkeys->mAddShortcutUIAvailable)
 		{
-			std::string shortcut = Hotkeys::getShortcut(mAppInfo->mId);
+			std::string shortcut = mPlugin->mHotkeys->getShortcut(mAppInfo->mId);
 			gchar* command = g_strdup("xfce4-keyboard-settings --shortcuts");
 			if (shortcut.empty())
 			{
@@ -1000,7 +1001,7 @@ GtkWidget* Group::buildContextMenu()
 				gchar* temp = g_strdup_printf(
 					"%s 'xfce4-panel --plugin-event=docklike-%d:activate-group:string:%s'",
 					command,
-					xfce_panel_plugin_get_unique_id(Plugin::mXfPlugin),
+					xfce_panel_plugin_get_unique_id(mPlugin->mXfPlugin),
 					mAppInfo->mId.c_str());
 				g_free(command);
 				command = temp;
@@ -1074,8 +1075,8 @@ GtkWidget* Group::buildContextMenu()
 			g_signal_connect(G_OBJECT(item), "activate",
 				G_CALLBACK(+[](GtkMenuItem* _item, Group* group) {
 					group->mPinned = false;
-					Dock::savePinned();
-					Dock::drawGroups();
+					group->mPlugin->mDock->savePinned();
+					group->mPlugin->mDock->drawGroups();
 				}),
 				this);
 		}
@@ -1085,23 +1086,23 @@ GtkWidget* Group::buildContextMenu()
 			GtkWidget* item = gtk_menu_item_new_with_label(_("Select Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					if (AppInfos::selectLauncher(classId))
-						Dock::drawGroups();
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					if (me->mPlugin->mAppInfos->selectLauncher(me->mAppInfo->mName.c_str()))
+						me->mPlugin->mDock->drawGroups();
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 
 			item = gtk_menu_item_new_with_label(_("Create Launcher..."));
 			gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 			g_signal_connect(G_OBJECT(item), "activate",
-				G_CALLBACK(+[](GtkMenuItem* _item, const gchar* classId) {
-					AppInfos::createLauncher(classId);
+				G_CALLBACK(+[](GtkMenuItem* _item, Group* me) {
+					me->mPlugin->mAppInfos->createLauncher(me->mAppInfo->mName.c_str());
 				}),
-				(gpointer)mAppInfo->mName.c_str());
+				this);
 		}
 	}
 
-	if (mWindows.size() == 1 && Settings::noWindowsListIfSingle)
+	if (mWindows.size() == 1 && mPlugin->mSettings->noWindowsListIfSingle)
 	{
 		GtkWidget* item = gtk_menu_item_new_with_label(_("Window Actions"));
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
@@ -1132,7 +1133,7 @@ void Group::onButtonPress(GdkEventButton* event)
 		&& (mWindowsCount > 0 || mPinned))
 	{
 		mContextMenu = GTK_WIDGET(g_object_ref_sink(buildContextMenu()));
-		xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(mContextMenu));
+		xfce_panel_plugin_register_menu(mPlugin->mXfPlugin, GTK_MENU(mContextMenu));
 		g_signal_connect(mContextMenu, "deactivate",
 			G_CALLBACK(+[](GtkMenuShell* menu, Group* group) {
 				g_clear_object(&group->mContextMenu);
@@ -1147,7 +1148,7 @@ void Group::onButtonRelease(GdkEventButton* event)
 {
 	if (event->button == GDK_BUTTON_MIDDLE)
 	{
-		switch (Settings::middleButtonBehavior)
+		switch (mPlugin->mSettings->middleButtonBehavior)
 		{
 		case BEHAVIOR_CLOSE_ALL:
 		{
@@ -1234,13 +1235,13 @@ void Group::onDragDataReceived(const GdkDragContext* context, int x, int y, cons
 		return;
 
 	std::string dragId((const char*)data, length);
-	std::shared_ptr<Group> moving = Dock::mGroups.findIf(
+	std::shared_ptr<Group> moving = mPlugin->mDock->mGroups.findIf(
 		[&dragId](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> group) -> bool {
 			return group.first->getId() == dragId;
 		});
 
 	if (moving)
-		Dock::moveButton(moving.get(), this);
+		mPlugin->mDock->moveButton(moving.get(), this);
 }
 
 void Group::onDragBegin(GdkDragContext* context)

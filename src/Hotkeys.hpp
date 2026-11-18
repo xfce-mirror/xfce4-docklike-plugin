@@ -19,21 +19,36 @@
 #ifndef HOTKEYS_HPP
 #define HOTKEYS_HPP
 
+#include "Plugin.hpp"
+
+#include <xfconf/xfconf.h>
+
 #include <string>
 
-namespace Hotkeys
+class Plugin;
+
+class Hotkeys
 {
-	void init();
-	void finalize();
+public:
+	explicit Hotkeys(Plugin* plugin);
+	~Hotkeys();
+
 	void updateSettings();
 	void resetShortcuts();
 	std::string getShortcut(const std::string& appId);
 
-	extern bool mKeyAloneGrabbed;
-	extern int mGrabbedKeys;
-	extern bool mAddShortcutUIAvailable;
-
 	const int mNbHotkeys = 9;
-} // namespace Hotkeys
+	bool mKeyAloneGrabbed = false;
+	int mGrabbedKeys = mNbHotkeys;
+	bool mAddShortcutUIAvailable = false;
+
+private:
+	static gboolean mStrEqual(gpointer key, gpointer _value, gpointer data);
+	void addKeyComboShortcuts();
+	void addKeyAloneShortcut();
+
+	Plugin* mPlugin;
+	XfconfChannel* mChannel = nullptr;
+};
 
 #endif // HOTKEYS_HPP

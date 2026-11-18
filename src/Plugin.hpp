@@ -21,36 +21,49 @@
 
 #include "AppInfos.hpp"
 #include "Dock.hpp"
+#include "Hotkeys.hpp"
+#include "LauncherEntry.hpp"
 #include "Settings.hpp"
 #include "SettingsDialog.hpp"
 #include "Theme.hpp"
+#include "Xfw.hpp"
 
 #include <gtk/gtk.h>
-#include <libxfce4windowing/libxfce4windowing.h>
-
-#include <iostream>
-#include <string>
-#include <vector>
+#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4util/libxfce4util.h>
 
 extern "C"
 {
-#include <libxfce4panel/libxfce4panel.h>
-#include <libxfce4ui/libxfce4ui.h>
-#include <libxfce4util/libxfce4util.h>
 	void construct(XfcePanelPlugin* xfPlugin);
-	gboolean internal_unique_check(GdkScreen* screen);
 }
 
-#define HELP_WEBSITE "https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start"
+class AppInfos;
+class Dock;
+class Hotkeys;
+class LauncherEntry;
+class Settings;
+class SettingsDialog;
+class Theme;
+class Xfw;
 
-namespace Plugin
+class Plugin
 {
-	extern XfcePanelPlugin* mXfPlugin;
-	extern GdkDevice* mPointer;
-	extern GdkDisplay* mDisplay;
+public:
+	explicit Plugin(XfcePanelPlugin* xfPlugin);
+	~Plugin();
 
-	void aboutDialog();
-	void remoteEvent(gchar* name, GValue* value);
-} // namespace Plugin
+	bool mInitialized = false;
+	XfcePanelPlugin* mXfPlugin;
+	Settings* mSettings;
+	AppInfos* mAppInfos;
+	Xfw* mXfw;
+	Dock* mDock;
+	LauncherEntry* mLauncherEntry = nullptr;
+	Theme* mTheme;
+	Hotkeys* mHotkeys;
+
+private:
+	SettingsDialog* mSettingsDialog;
+};
 
 #endif // PLUGIN_HPP

@@ -33,18 +33,18 @@
 							 "padding: 1px 4px; "                          \
 							 "margin: 1px; }\n";
 
-#include "Dock.hpp"
+#include "Plugin.hpp"
 
-#include <gtk/gtk.h>
-
-#include <iostream>
-#include <string>
-
-namespace Theme
+class Theme
 {
-	void init();
+public:
+	explicit Theme(Plugin* plugin);
 	void load();
+
+private:
 	std::string get_theme_colors();
-} // namespace Theme
+
+	Plugin* mPlugin;
+};
 
 #endif // THEME_HPP

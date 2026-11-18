@@ -16,19 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "GroupMenuItem.hpp"
+
 #ifdef ENABLE_X11
 #include <gdk/gdkx.h>
 #include <libxfce4windowing/xfw-x11.h>
 #endif
 
-#include "GroupMenuItem.hpp"
-
 static GtkTargetEntry entries[1] = {{(gchar*)"any", 0, 0}};
 
-GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
+GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow) : mGroupWindow(groupWindow)
 {
-	mGroupWindow = groupWindow;
-
 	// This needs work to survive porting to GTK4.
 	// GtkEventBox is removed, all events are supported by all widgets.
 
@@ -69,14 +67,14 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	mPreview = GTK_IMAGE(gtk_image_new());
 	Help::Gtk::cssClassAdd(GTK_WIDGET(mPreview), "preview");
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
-	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+	gtk_widget_set_visible(GTK_WIDGET(mPreview), mGroupWindow->mGroup->mPlugin->mSettings->showPreviews);
 
-	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
+	if (mGroupWindow->mGroup->mPlugin->mXfw->getActiveWindow() == mGroupWindow->mXfwWindow)
 		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
 	int sleepMS = 1000;
-	if (Settings::previewSleep)
-		sleepMS = Settings::previewSleep;
+	if (mGroupWindow->mGroup->mPlugin->mSettings->previewSleep)
+		sleepMS = mGroupWindow->mGroup->mPlugin->mSettings->previewSleep;
 
 	mPreviewTimeout.setup(sleepMS, [this]() {
 		updatePreview();
@@ -89,12 +87,12 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEventButton* event, GroupMenuItem* me) -> gboolean {
 			if (event->button == GDK_BUTTON_PRIMARY)
 				me->mGroupWindow->activate((event)->time);
-			else if (event->button == GDK_BUTTON_MIDDLE && Settings::middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
-				Xfw::close(me->mGroupWindow, event->time);
+			else if (event->button == GDK_BUTTON_MIDDLE && me->mGroupWindow->mGroup->mPlugin->mSettings->middleButtonBehavior == BEHAVIOR_CLOSE_ALL)
+				me->mGroupWindow->mGroup->mPlugin->mXfw->close(me->mGroupWindow, event->time);
 			else if (event->button == GDK_BUTTON_SECONDARY)
 			{
 				GtkWidget* menu = GTK_WIDGET(g_object_ref_sink(xfw_window_action_menu_new(me->mGroupWindow->mXfwWindow)));
-				xfce_panel_plugin_register_menu(Plugin::mXfPlugin, GTK_MENU(menu));
+				xfce_panel_plugin_register_menu(me->mGroupWindow->mGroup->mPlugin->mXfPlugin, GTK_MENU(menu));
 				g_signal_connect(G_OBJECT(menu), "deactivate",
 					G_CALLBACK(+[](GtkMenuShell* _menu, GroupMenuItem* _me) {
 						g_object_unref(_menu);
@@ -151,7 +149,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 
 	g_signal_connect(G_OBJECT(mCloseButton), "clicked",
 		G_CALLBACK(+[](GtkButton* button, GroupMenuItem* me) {
-			Xfw::close(me->mGroupWindow, 0);
+			me->mGroupWindow->mGroup->mPlugin->mXfw->close(me->mGroupWindow, 0);
 		}),
 		this);
 }
@@ -166,7 +164,7 @@ void GroupMenuItem::updateLabel()
 {
 	const char* winName = xfw_window_get_name(mGroupWindow->mXfwWindow);
 
-	if (Xfw::getActiveWindow() == mGroupWindow->mXfwWindow)
+	if (mGroupWindow->mGroup->mPlugin->mXfw->getActiveWindow() == mGroupWindow->mXfwWindow)
 	{
 		gchar* escaped = g_markup_escape_text(winName, -1);
 		gchar* markup = g_strdup_printf("<b>%s</b>", escaped);
@@ -209,13 +207,13 @@ void GroupMenuItem::updatePreview()
 	// GDK doesn't expose an API to get a foreign window on X11 anymore (so X11 code).
 	// Wayland may never have a public protocol for obtaining a preview of a foreign window,
 	// which goes against its security principles (so private protocol).
-	if (GDK_IS_X11_DISPLAY(Plugin::mDisplay))
+	if (GDK_IS_X11_DISPLAY(gdk_display_get_default()))
 	{
 		GdkWindow* window;
 		GdkPixbuf* pixbuf;
 		GdkPixbuf* thumbnail;
 
-		window = gdk_x11_window_foreign_new_for_display(Plugin::mDisplay,
+		window = gdk_x11_window_foreign_new_for_display(gdk_display_get_default(),
 			xfw_window_x11_get_xid(mGroupWindow->mXfwWindow));
 
 		if (window != nullptr)
@@ -231,8 +229,8 @@ void GroupMenuItem::updatePreview()
 			{
 				gint scale_factor = gtk_widget_get_scale_factor(GTK_WIDGET(mPreview));
 
-				gint previewWidth = Settings::previewWidth * scale_factor;
-				gint previewHeight = Settings::previewHeight * scale_factor;
+				gint previewWidth = mGroupWindow->mGroup->mPlugin->mSettings->previewWidth * scale_factor;
+				gint previewHeight = mGroupWindow->mGroup->mPlugin->mSettings->previewHeight * scale_factor;
 
 				gint pixbufWidth = gdk_pixbuf_get_width(pixbuf);
 				gint pixbufHeight = gdk_pixbuf_get_height(pixbuf);

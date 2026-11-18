@@ -23,13 +23,11 @@
 #include "GroupMenu.hpp"
 #include "GroupWindow.hpp"
 #include "Helpers.hpp"
+#include "Plugin.hpp"
 #include "State.ipp"
+#include "Store.ipp"
 
-#include <gtk/gtk.h>
-#include <math.h>
-
-#include <algorithm>
-#include <iostream>
+#include <memory>
 
 enum MiddleButtonBehavior
 {
@@ -57,12 +55,14 @@ enum IndicatorStyle
 	STYLE_NONE
 };
 
+class AppInfo;
 class GroupWindow;
+class Plugin;
 
 class Group
 {
 public:
-	Group(std::shared_ptr<AppInfo> appInfo, bool pinned);
+	Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin);
 	~Group();
 
 	void add(GroupWindow* window);
@@ -96,15 +96,17 @@ public:
 	void onDragDataReceived(const GdkDragContext* context, int x, int y, const GtkSelectionData* selectionData, guint info, guint time);
 	void onDragBegin(GdkDragContext* context);
 
+	Plugin* mPlugin;
+
 	bool mPinned;
-	bool mActive;
-	bool mWindowMenuShown;
-	bool mDragging;
-	gdouble mDragStartX;
-	gdouble mDragStartY;
+	bool mActive = false;
+	bool mWindowMenuShown = false;
+	bool mDragging = false;
+	gdouble mDragStartX = 0;
+	gdouble mDragStartY = 0;
 
 	uint mTolerablePointerDistance;
-	uint mTopWindowIndex;
+	uint mTopWindowIndex = 0;
 	Store::List<GroupWindow*> mWindows;
 	LogicalState<uint> mWindowsCount;
 
@@ -117,8 +119,8 @@ public:
 	GtkWidget* mLauncherLabel;
 	GtkCssProvider* mLauncherCountCssProvider;
 	GtkWidget* mImage;
-	GdkPixbuf* mIconPixbuf;
-	GtkWidget* mContextMenu;
+	GdkPixbuf* mIconPixbuf = nullptr;
+	GtkWidget* mContextMenu = nullptr;
 
 	Help::Gtk::Timeout mLeaveTimeout;
 	Help::Gtk::Timeout mMenuShowTimeout;

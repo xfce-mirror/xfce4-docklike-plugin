@@ -18,18 +18,13 @@
 
 #include "GroupWindow.hpp"
 
-GroupWindow::GroupWindow(XfwWindow* xfwWindow)
+GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwWindow)
 {
-	mXfwWindow = xfwWindow;
-	mGroupMenuItem = new GroupMenuItem(this);
-	mGroupAssociated = false;
-
-	std::string groupName = Xfw::getGroupName(this);
-
+	std::string groupName = plugin->mXfw->getGroupName(this);
 	g_debug("NEW: %s", groupName.c_str());
-
-	std::shared_ptr<AppInfo> appInfo = AppInfos::search(groupName);
-	mGroup = Dock::prepareGroup(appInfo);
+	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
+	mGroup = plugin->mDock->prepareGroup(appInfo);
+	mGroupMenuItem = new GroupMenuItem(this);
 
 	//--------------------------------------------------
 
@@ -61,20 +56,20 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow)
 	g_signal_connect(G_OBJECT(mXfwWindow), "notify::monitors",
 		G_CALLBACK(+[](XfwWindow* window, GParamSpec* pspec, GroupWindow* me) {
 			me->updateState();
-			Xfw::setActiveWindow();
+			me->mGroup->mPlugin->mXfw->setActiveWindow();
 		}),
 		this);
 
 	g_signal_connect(G_OBJECT(mXfwWindow), "class-changed",
 		G_CALLBACK(+[](XfwWindow* window, GroupWindow* me) {
-			std::string _groupName = Xfw::getGroupName(me);
-			Group* group = Dock::prepareGroup(AppInfos::search(_groupName));
+			std::string _groupName = me->mGroup->mPlugin->mXfw->getGroupName(me);
+			Group* group = me->mGroup->mPlugin->mDock->prepareGroup(me->mGroup->mPlugin->mAppInfos->search(_groupName));
 			if (group != me->mGroup)
 			{
 				me->leaveGroup();
 				me->mGroup = group;
 				me->getInGroup();
-				Xfw::setActiveWindow();
+				me->mGroup->mPlugin->mXfw->setActiveWindow();
 			}
 		}),
 		this);
@@ -91,7 +86,7 @@ bool GroupWindow::getState(XfwWindowState flagMask) const
 
 void GroupWindow::activate(guint32 timestamp)
 {
-	Xfw::activate(this, timestamp);
+	mGroup->mPlugin->mXfw->activate(this, timestamp);
 }
 
 void GroupWindow::minimize()
@@ -147,28 +142,28 @@ void GroupWindow::updateState()
 	bool onTasklist = !(mState & XfwWindowState::XFW_WINDOW_STATE_SKIP_TASKLIST);
 	mState = xfw_window_get_state(this->mXfwWindow);
 
-	if (Settings::onlyDisplayVisible)
+	if (mGroup->mPlugin->mSettings->onlyDisplayVisible)
 	{
 		XfwWorkspace* windowWorkspace = xfw_window_get_workspace(mXfwWindow);
 
 		if (windowWorkspace != nullptr)
 		{
-			XfwWorkspace* activeWorkspace = xfw_workspace_group_get_active_workspace(Xfw::mXfwWorkspaceGroup);
+			XfwWorkspace* activeWorkspace = xfw_workspace_group_get_active_workspace(mGroup->mPlugin->mXfw->mXfwWorkspaceGroup);
 
 			if (windowWorkspace != activeWorkspace)
 				onWorkspace = false;
 		}
 	}
 
-	if (Settings::onlyDisplayScreen && gdk_display_get_n_monitors(Plugin::mDisplay) > 1)
+	if (mGroup->mPlugin->mSettings->onlyDisplayScreen && gdk_display_get_n_monitors(gdk_display_get_default()) > 1)
 	{
 		GList* monitors = xfw_window_get_monitors(mXfwWindow);
-		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(Plugin::mXfPlugin));
+		GdkWindow* pluginWindow = gtk_widget_get_window(GTK_WIDGET(mGroup->mPlugin->mXfPlugin));
 
 		if (pluginWindow == nullptr
 			|| !g_list_find_custom(
 				monitors,
-				gdk_display_get_monitor_at_window(Plugin::mDisplay, pluginWindow),
+				gdk_display_get_monitor_at_window(gdk_display_get_default(), pluginWindow),
 				[](gconstpointer a, gconstpointer b) { return xfw_monitor_get_gdk_monitor((XfwMonitor*)a) == b ? 0 : 1; }))
 		{
 			onScreen = false;

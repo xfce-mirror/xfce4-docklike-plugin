@@ -16,14 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "GroupMenu.hpp"
+#include "Group.hpp"
+#include "GroupMenuItem.hpp"
+
 #ifdef ENABLE_WAYLAND
 #include <gtk-layer-shell.h>
 #endif
-
-#include "Group.hpp"
-#include "GroupMenu.hpp"
-#include "GroupMenuItem.hpp"
-#include "Plugin.hpp"
 
 static GtkWidget*
 create_window()
@@ -53,11 +52,8 @@ create_window()
 	return window;
 }
 
-GroupMenu::GroupMenu(Group* dockButton)
+GroupMenu::GroupMenu(Group* dockButton) : mGroup(dockButton)
 {
-	mGroup = dockButton;
-	mVisible = false;
-	mMouseHover = false;
 	mWindow = create_window();
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
@@ -78,7 +74,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		G_CALLBACK(+[](GtkWidget* widget, GdkEvent* event, GroupMenu* me) -> gboolean {
 			me->mMouseHover = true;
 
-			if (Settings::showPreviews)
+			if (me->mGroup->mPlugin->mSettings->showPreviews)
 				me->mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 					w->mGroupMenuItem->updatePreview();
 				});
@@ -107,7 +103,7 @@ GroupMenu::GroupMenu(Group* dockButton)
 		}),
 		this);
 
-	g_signal_connect(G_OBJECT(Plugin::mXfPlugin), "notify::scale-factor",
+	g_signal_connect(G_OBJECT(mGroup->mPlugin->mXfPlugin), "notify::scale-factor",
 		G_CALLBACK(+[](GtkWidget* widget, GParamSpec* pspec, GroupMenu* me) {
 			g_object_ref(me->mBox);
 			gtk_container_remove(GTK_CONTAINER(me->mWindow), me->mBox);
@@ -138,7 +134,7 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 	gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(menuItem->mItem));
 	gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 
-	if (mGroup->mWindowsCount < (Settings::noWindowsListIfSingle ? 2 : 1))
+	if (mGroup->mWindowsCount < (mGroup->mPlugin->mSettings->noWindowsListIfSingle ? 2 : 1))
 		gtk_widget_hide(mWindow);
 
 	if (mVisible)
@@ -147,7 +143,7 @@ void GroupMenu::remove(GroupMenuItem* menuItem)
 
 void GroupMenu::popup()
 {
-	if (mGroup->mWindowsCount >= (Settings::noWindowsListIfSingle ? 2 : 1))
+	if (mGroup->mWindowsCount >= (mGroup->mPlugin->mSettings->noWindowsListIfSingle ? 2 : 1))
 	{
 		gint wx, wy;
 		mVisible = true;
@@ -155,7 +151,7 @@ void GroupMenu::popup()
 		updateOrientation();
 
 		// Update the previews before showing the window
-		if (Settings::showPreviews)
+		if (mGroup->mPlugin->mSettings->showPreviews)
 		{
 			mGroup->mWindows.forEach([](GroupWindow* w) -> void {
 				w->mGroupMenuItem->updatePreview();
@@ -163,7 +159,7 @@ void GroupMenu::popup()
 			gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
 		}
 
-		xfce_panel_plugin_position_widget(Plugin::mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
+		xfce_panel_plugin_position_widget(mGroup->mPlugin->mXfPlugin, mWindow, mGroup->mButton, &wx, &wy);
 		updatePosition(wx, wy);
 		gtk_widget_show(mWindow);
 	}
@@ -171,9 +167,9 @@ void GroupMenu::popup()
 
 void GroupMenu::updateOrientation()
 {
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(mGroup->mPlugin->mXfPlugin);
 
-	if (Settings::showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
+	if (mGroup->mPlugin->mSettings->showPreviews && panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_HORIZONTAL);
 	else
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(mBox), GTK_ORIENTATION_VERTICAL);
@@ -197,7 +193,7 @@ void GroupMenu::updatePosition(gint wx, gint wy)
 	gint button_width = gtk_widget_get_allocated_width(mGroup->mButton);
 	gint button_height = gtk_widget_get_allocated_height(mGroup->mButton);
 
-	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(Plugin::mXfPlugin);
+	XfcePanelPluginMode panelMode = xfce_panel_plugin_get_mode(mGroup->mPlugin->mXfPlugin);
 
 	if (panelMode == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL)
 	{
@@ -239,7 +235,7 @@ void GroupMenu::hide()
 void GroupMenu::showPreviewsChanged()
 {
 	mGroup->mWindows.forEach([](GroupWindow* w) -> void {
-		gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), Settings::showPreviews);
+		gtk_widget_set_visible(GTK_WIDGET(w->mGroupMenuItem->mPreview), w->mGroup->mPlugin->mSettings->showPreviews);
 		w->mGroupMenuItem->mPreviewTimeout.stop();
 	});
 	gtk_window_resize(GTK_WINDOW(mWindow), 1, 1);
@@ -247,13 +243,14 @@ void GroupMenu::showPreviewsChanged()
 
 uint GroupMenu::getPointerDistance()
 {
+	GdkDevice* device = gdk_seat_get_pointer(gdk_display_get_default_seat(gdk_display_get_default()));
 	gint wx, wy, ww, wh, px, py;
 	guint dx, dy;
 	dx = dy = 0;
 
 	gtk_window_get_position(GTK_WINDOW(mWindow), &wx, &wy);
 	gtk_window_get_size(GTK_WINDOW(mWindow), &ww, &wh);
-	gdk_device_get_position(Plugin::mPointer, nullptr, &px, &py);
+	gdk_device_get_position(device, nullptr, &px, &py);
 
 	if (px < wx)
 		dx = wx - px;

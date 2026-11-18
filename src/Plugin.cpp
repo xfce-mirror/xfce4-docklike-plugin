@@ -16,96 +16,53 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Plugin.hpp"
+
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
 #endif
-#include "Helpers.hpp"
-#include "Hotkeys.hpp"
-#include "LauncherEntry.hpp"
-#include "Plugin.hpp"
 
-namespace Plugin
+Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 {
-	XfcePanelPlugin* mXfPlugin = nullptr;
-	GdkDevice* mPointer;
-	GdkDisplay* mDisplay;
+	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
 
-	static void init(XfcePanelPlugin* xfPlugin)
-	{
-		xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, nullptr);
+	mSettings = new Settings(this);
+	mAppInfos = new AppInfos(this);
+	mXfw = new Xfw(this);
+	mDock = new Dock(this);
+	mLauncherEntry = new LauncherEntry(this);
+	mTheme = new Theme(this);
+	mHotkeys = new Hotkeys(this);
+	mSettingsDialog = new SettingsDialog(this);
 
-		mXfPlugin = xfPlugin;
-		mDisplay = gdk_display_get_default();
-		mPointer = gdk_seat_get_pointer(gdk_display_get_default_seat(mDisplay));
+	mInitialized = true;
+	mDock->drawGroups();
 
-		Settings::init();
-		AppInfos::init();
-		Xfw::init();
-		Dock::init();
-		LauncherEntry::init();
-		Theme::init();
-		Hotkeys::init();
+	gtk_container_add(GTK_CONTAINER(xfPlugin), mDock->mBox);
+	xfce_panel_plugin_menu_show_configure(xfPlugin);
+	xfce_panel_plugin_menu_show_about(xfPlugin);
 
-		gtk_container_add(GTK_CONTAINER(mXfPlugin), Dock::mBox);
-		xfce_panel_plugin_menu_show_configure(mXfPlugin);
-		xfce_panel_plugin_menu_show_about(mXfPlugin);
+	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "size-changed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gint size, Plugin* plugin) -> gboolean {
+			plugin->mDock->onPanelResize(size);
+			return true;
+		}),
+		this);
 
-		//--------------------------------------------------
+	g_signal_connect(G_OBJECT(GTK_WIDGET(xfPlugin)), "orientation-changed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, GtkOrientation orientation, Plugin* plugin) {
+			plugin->mDock->onPanelOrientationChange(orientation);
+		}),
+		this);
 
-		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "size-changed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gint size) -> gboolean {
-				Dock::onPanelResize(size);
-				return true;
-			}),
-			nullptr);
+	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			plugin->mSettingsDialog->popup();
+		}),
+		this);
 
-		g_signal_connect(G_OBJECT(GTK_WIDGET(mXfPlugin)), "orientation-changed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, GtkOrientation orientation) {
-				Dock::onPanelOrientationChange(orientation);
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "configure-plugin",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				SettingsDialog::popup();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "about",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Plugin::aboutDialog();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "remote-event",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin, gchar* name, GValue* value) -> gboolean {
-				remoteEvent(name, value);
-				// stop signal emission to other plugins
-				return true;
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "free-data",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				LauncherEntry::finalize();
-				Xfw::finalize();
-				Dock::mGroups.clear();
-				AppInfos::finalize();
-				Hotkeys::finalize();
-				Settings::finalize();
-			}),
-			nullptr);
-
-		g_signal_connect(G_OBJECT(mXfPlugin), "removed",
-			G_CALLBACK(+[](XfcePanelPlugin* plugin) {
-				Hotkeys::resetShortcuts();
-				mXfPlugin = nullptr;
-			}),
-			nullptr);
-	}
-
-	void aboutDialog()
-	{
+	// cppcheck doesn't want this in G_CALLBACK() as long as LIBXFCE4PANEL_CHECK_VERSION is used
+	auto aboutDialog = +[](XfcePanelPlugin* _xfPlugin) {
 		const gchar* AUTHORS[] = {
 			"Nicolas Szabo <nszabo@vivaldi.net>",
 			"David Keogh <davidtkeogh@gmail.com>",
@@ -125,42 +82,54 @@ namespace Plugin
 			"authors", AUTHORS,
 			"translator-credits", _("translator-credits"),
 			nullptr);
-	}
+	};
+	g_signal_connect(G_OBJECT(xfPlugin), "about",
+		G_CALLBACK(aboutDialog),
+		nullptr);
 
-	void remoteEvent(gchar* name, GValue* value)
-	{
-		if (g_strcmp0(name, "settings") == 0)
-			SettingsDialog::popup();
-		else if (g_strcmp0(name, "about") == 0)
-			aboutDialog();
-		else if (g_strcmp0(name, "switch-to-last-window") == 0 && Settings::keyAloneActive)
-			Xfw::switchToLastWindow();
-		else if (g_strcmp0(name, "activate-group") == 0)
-		{
-			if (G_VALUE_HOLDS_INT64(value) && Settings::keyComboActive)
-				Dock::activateGroup(g_value_get_int64(value));
-			else if (G_VALUE_HOLDS_STRING(value))
-				Dock::activateGroup(g_value_get_string(value));
-		}
-	}
+	g_signal_connect(G_OBJECT(xfPlugin), "remote-event",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value, Plugin* plugin) -> gboolean {
+			if (g_strcmp0(name, "settings") == 0)
+				plugin->mSettingsDialog->popup();
+			else if (g_strcmp0(name, "about") == 0)
+				g_signal_emit_by_name(_xfPlugin, "about");
+			else if (g_strcmp0(name, "switch-to-last-window") == 0 && plugin->mSettings->keyAloneActive)
+				plugin->mXfw->switchToLastWindow();
+			else if (g_strcmp0(name, "activate-group") == 0)
+			{
+				if (G_VALUE_HOLDS_INT64(value) && plugin->mSettings->keyComboActive)
+					plugin->mDock->activateGroup(g_value_get_int64(value));
+				else if (G_VALUE_HOLDS_STRING(value))
+					plugin->mDock->activateGroup(g_value_get_string(value));
+			}
+			// stop signal emission to other plugins
+			return true;
+		}),
+		this);
 
-} // namespace Plugin
+	g_signal_connect(G_OBJECT(xfPlugin), "free-data",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			delete plugin;
+		}),
+		this);
 
-//----------------------------------------------------------------------------------------------------------------------
-
-extern "C" void construct(XfcePanelPlugin* xfPlugin) { Plugin::init(xfPlugin); }
-extern "C" gboolean internal_unique_check(GdkScreen* screen)
-{
-	if (Plugin::mXfPlugin != nullptr)
-	{
-		GtkWidget* dialog = gtk_message_dialog_new_with_markup(
-			nullptr, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
-			"Currently, only one internal instance of the docklike plugin can be used at a time. "
-			"See <a href=\"https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/work_items/113\">"
-			"https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin/-/work_items/113</a>.");
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		return false;
-	}
-	return true;
+	g_signal_connect(G_OBJECT(xfPlugin), "removed",
+		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
+			plugin->mHotkeys->resetShortcuts();
+		}),
+		this);
 }
+
+Plugin::~Plugin()
+{
+	delete mSettingsDialog;
+	delete mLauncherEntry;
+	delete mXfw;
+	delete mDock;
+	delete mAppInfos;
+	delete mTheme;
+	delete mHotkeys;
+	delete mSettings;
+}
+
+extern "C" void construct(XfcePanelPlugin* xfPlugin) { new Plugin(xfPlugin); }
