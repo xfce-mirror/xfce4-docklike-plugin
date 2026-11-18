@@ -24,6 +24,7 @@
 #include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
 #include "Settings.hpp"
+#include "SettingsDialog.hpp"
 #include "Theme.hpp"
 #include "Xfw.hpp"
 
@@ -39,6 +40,7 @@ extern "C"
 class AppInfos;
 class Hotkeys;
 class Settings;
+class SettingsDialog;
 class Xfw;
 
 class Plugin
@@ -56,6 +58,9 @@ public:
 	LauncherEntry* mLauncherEntry = nullptr;
 	Theme* mTheme;
 	Hotkeys* mHotkeys;
+
+private:
+	SettingsDialog* mSettingsDialog;
 };
 
 #endif // PLUGIN_HPP

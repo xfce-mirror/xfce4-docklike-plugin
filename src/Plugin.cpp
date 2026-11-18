@@ -17,7 +17,6 @@
  */
 
 #include "Plugin.hpp"
-#include "SettingsDialog.hpp"
 
 #ifdef HAVE_XFCE_REVISION_H
 #include "xfce-revision.h"
@@ -34,6 +33,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	mLauncherEntry = new LauncherEntry(this);
 	mTheme = new Theme(this);
 	mHotkeys = new Hotkeys(this);
+	mSettingsDialog = new SettingsDialog(this);
 
 	mInitialized = true;
 	mDock->drawGroups();
@@ -57,7 +57,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 
 	g_signal_connect(G_OBJECT(xfPlugin), "configure-plugin",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, Plugin* plugin) {
-			SettingsDialog::popup(plugin);
+			plugin->mSettingsDialog->popup();
 		}),
 		this);
 
@@ -90,7 +90,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 	g_signal_connect(G_OBJECT(xfPlugin), "remote-event",
 		G_CALLBACK(+[](XfcePanelPlugin* _xfPlugin, gchar* name, GValue* value, Plugin* plugin) -> gboolean {
 			if (g_strcmp0(name, "settings") == 0)
-				SettingsDialog::popup(plugin);
+				plugin->mSettingsDialog->popup();
 			else if (g_strcmp0(name, "about") == 0)
 				g_signal_emit_by_name(_xfPlugin, "about");
 			else if (g_strcmp0(name, "switch-to-last-window") == 0 && plugin->mSettings->keyAloneActive)
@@ -122,6 +122,7 @@ Plugin::Plugin(XfcePanelPlugin* xfPlugin) : mXfPlugin(xfPlugin)
 
 Plugin::~Plugin()
 {
+	delete mSettingsDialog;
 	delete mLauncherEntry;
 	delete mXfw;
 	delete mDock;
