@@ -16,19 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "GroupMenuItem.hpp"
+
 #ifdef ENABLE_X11
 #include <gdk/gdkx.h>
 #include <libxfce4windowing/xfw-x11.h>
 #endif
 
-#include "GroupMenuItem.hpp"
-
 static GtkTargetEntry entries[1] = {{(gchar*)"any", 0, 0}};
 
-GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
+GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow) : mGroupWindow(groupWindow)
 {
-	mGroupWindow = groupWindow;
-
 	// This needs work to survive porting to GTK4.
 	// GtkEventBox is removed, all events are supported by all widgets.
 

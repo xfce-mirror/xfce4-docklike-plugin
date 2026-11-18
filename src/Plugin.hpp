@@ -38,9 +38,12 @@ extern "C"
 }
 
 class AppInfos;
+class Dock;
 class Hotkeys;
+class LauncherEntry;
 class Settings;
 class SettingsDialog;
+class Theme;
 class Xfw;
 
 class Plugin

@@ -17,11 +17,7 @@
  */
 
 #include "Dock.hpp"
-#include "GroupWindow.hpp"
 #include "Helpers.hpp"
-#include "Settings.hpp"
-
-#include <libxfce4windowing/libxfce4windowing.h>
 
 Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 {

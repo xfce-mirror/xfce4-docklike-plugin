@@ -35,8 +35,6 @@
 
 #include "Plugin.hpp"
 
-class Settings;
-
 class Theme
 {
 public:

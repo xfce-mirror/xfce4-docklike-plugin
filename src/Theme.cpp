@@ -18,7 +18,6 @@
 
 #include "Theme.hpp"
 
-#include <iostream>
 #include <string>
 
 Theme::Theme(Plugin* plugin) : mPlugin(plugin)

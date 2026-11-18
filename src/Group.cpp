@@ -18,10 +18,12 @@
 
 #include "Group.hpp"
 
+#include <math.h>
+
 static GtkTargetEntry entries[1] = {{(gchar*)"application/docklike_group", 0, 0}};
 static GtkTargetList* targetList = gtk_target_list_new(entries, 1);
 
-Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mPlugin(plugin), mPinned(pinned), mActive(false), mWindowMenuShown(false), mDragging(false), mDragStartX(0), mDragStartY(0), mTopWindowIndex(0), mAppInfo(appInfo), mGroupMenu(this), mIconPixbuf(nullptr), mContextMenu(nullptr)
+Group::Group(std::shared_ptr<AppInfo> appInfo, bool pinned, Plugin* plugin) : mPlugin(plugin), mPinned(pinned), mAppInfo(appInfo), mGroupMenu(this)
 {
 	mWindowsCount.setup(
 		0,

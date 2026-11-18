@@ -19,24 +19,15 @@
 #ifndef GROUP_WINDOW_HPP
 #define GROUP_WINDOW_HPP
 
-#include "AppInfos.hpp"
-#include "Dock.hpp"
 #include "Group.hpp"
 #include "GroupMenuItem.hpp"
-#include "Helpers.hpp"
 #include "Plugin.hpp"
-#include "Xfw.hpp"
 
-#include <gtk/gtk.h>
 #include <libxfce4windowing/libxfce4windowing.h>
 
-#include <iostream>
-
-class AppInfos;
-class Dock;
 class Group;
 class GroupMenuItem;
-class Xfw;
+class Plugin;
 
 class GroupWindow
 {
@@ -59,7 +50,7 @@ public:
 	XfwWindow* mXfwWindow;
 
 	unsigned short mState{};
-	bool mGroupAssociated;
+	bool mGroupAssociated = false;
 };
 
 #endif // GROUP_WINDOW_HPP
