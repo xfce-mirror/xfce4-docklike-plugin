@@ -17,7 +17,6 @@
  */
 
 #include "Settings.hpp"
-#include "Hotkeys.hpp"
 
 Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 {
@@ -225,7 +224,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 		[this](bool _keyComboActive) -> void {
 			g_key_file_set_boolean(mFile.get(), "user", "keyComboActive", _keyComboActive);
 			saveFile();
-			Hotkeys::updateSettings();
+			mPlugin->mHotkeys->updateSettings();
 		});
 
 	keyComboMinimize.setup(g_key_file_get_boolean(file, "user", "keyComboMinimize", nullptr),
@@ -238,7 +237,7 @@ Settings::Settings(Plugin* plugin) : mPlugin(plugin)
 		[this](bool _keyAloneActive) -> void {
 			g_key_file_set_boolean(mFile.get(), "user", "keyAloneActive", _keyAloneActive);
 			saveFile();
-			Hotkeys::updateSettings();
+			mPlugin->mHotkeys->updateSettings();
 		});
 
 	gchar** pinnedListBuffer = g_key_file_get_string_list(file, "user", "pinned", nullptr, nullptr);

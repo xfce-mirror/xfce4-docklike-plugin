@@ -21,6 +21,7 @@
 
 #include "AppInfos.hpp"
 #include "Dock.hpp"
+#include "Hotkeys.hpp"
 #include "LauncherEntry.hpp"
 #include "Settings.hpp"
 #include "Theme.hpp"
@@ -36,6 +37,7 @@ extern "C"
 }
 
 class AppInfos;
+class Hotkeys;
 class Settings;
 class Xfw;
 
@@ -52,6 +54,7 @@ public:
 	Dock* mDock;
 	LauncherEntry* mLauncherEntry = nullptr;
 	Theme* mTheme;
+	Hotkeys* mHotkeys;
 };
 
 #endif // PLUGIN_HPP
