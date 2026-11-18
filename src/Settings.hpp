@@ -22,14 +22,8 @@
 #include "Plugin.hpp"
 #include "State.ipp"
 #include "Store.ipp"
-#include "Theme.hpp"
 
 #include <gtk/gtk.h>
-
-class Dock;
-class LauncherEntry;
-class Plugin;
-class Theme;
 
 class Settings
 {

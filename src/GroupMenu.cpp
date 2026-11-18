@@ -16,14 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "GroupMenu.hpp"
+#include "Group.hpp"
+#include "GroupMenuItem.hpp"
+
 #ifdef ENABLE_WAYLAND
 #include <gtk-layer-shell.h>
 #endif
-
-#include "Group.hpp"
-#include "GroupMenu.hpp"
-#include "GroupMenuItem.hpp"
-#include "Plugin.hpp"
 
 static GtkWidget*
 create_window()
@@ -53,11 +52,8 @@ create_window()
 	return window;
 }
 
-GroupMenu::GroupMenu(Group* dockButton)
+GroupMenu::GroupMenu(Group* dockButton) : mGroup(dockButton)
 {
-	mGroup = dockButton;
-	mVisible = false;
-	mMouseHover = false;
 	mWindow = create_window();
 	mBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 

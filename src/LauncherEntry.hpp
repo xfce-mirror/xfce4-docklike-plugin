@@ -27,10 +27,7 @@
 #include <string>
 #include <utility>
 
-class Dock;
 class Group;
-class Plugin;
-class Settings;
 
 class LauncherEntry
 {

@@ -24,8 +24,8 @@
 
 #include <gio/gdesktopappinfo.h>
 
-#include <iostream>
 #include <memory>
+#include <string>
 
 class Plugin;
 

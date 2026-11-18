@@ -17,7 +17,6 @@
  */
 
 #include "Xfw.hpp"
-#include "Group.hpp"
 #include "Helpers.hpp"
 
 #include <fcntl.h>

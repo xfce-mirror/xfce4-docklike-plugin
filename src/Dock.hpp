@@ -25,8 +25,7 @@
 
 #include <gtk/gtk.h>
 
-#include <iostream>
-#include <string>
+#include <memory>
 
 class AppInfo;
 class Group;

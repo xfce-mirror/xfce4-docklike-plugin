@@ -18,17 +18,13 @@
 
 #include "GroupWindow.hpp"
 
-GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin)
+GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwWindow)
 {
-	mXfwWindow = xfwWindow;
 	std::string groupName = plugin->mXfw->getGroupName(this);
 	g_debug("NEW: %s", groupName.c_str());
-
 	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
 	mGroup = plugin->mDock->prepareGroup(appInfo);
-
 	mGroupMenuItem = new GroupMenuItem(this);
-	mGroupAssociated = false;
 
 	//--------------------------------------------------
 

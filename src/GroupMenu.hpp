@@ -23,8 +23,6 @@
 
 #include <gtk/gtk.h>
 
-#include <iostream>
-
 class Group;
 class GroupMenuItem;
 
@@ -50,8 +48,8 @@ public:
 	GtkWidget* mWindow;
 	GtkWidget* mBox;
 
-	bool mVisible;
-	bool mMouseHover;
+	bool mVisible = false;
+	bool mMouseHover = false;
 
 	Help::Gtk::Idle mPopupIdle;
 };
