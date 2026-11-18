@@ -17,7 +17,6 @@
  */
 
 #include "SettingsDialog.hpp"
-#include "Hotkeys.hpp"
 
 #include <libxfce4ui/libxfce4ui.h>
 
@@ -32,22 +31,22 @@ namespace SettingsDialog
 
 	static void updateKeyComboActiveWarning(GtkWidget* widget)
 	{
-		if (!mPlugin->mSettings->keyComboActive || Hotkeys::mGrabbedKeys == Hotkeys::mNbHotkeys)
+		if (!mPlugin->mSettings->keyComboActive || mPlugin->mHotkeys->mGrabbedKeys == mPlugin->mHotkeys->mNbHotkeys)
 			gtk_widget_hide(widget);
 		else
 		{
 			std::string tooltip = "";
 			gchar* markup;
 
-			if (Hotkeys::mGrabbedKeys > 1)
+			if (mPlugin->mHotkeys->mGrabbedKeys > 1)
 			{
 				markup = g_strdup_printf(
 					_("<b>Only the first %u hotkeys are enabled.</b>\n"),
-					Hotkeys::mGrabbedKeys);
+					mPlugin->mHotkeys->mGrabbedKeys);
 				tooltip += markup;
 				g_free(markup);
 			}
-			else if (Hotkeys::mGrabbedKeys == 1)
+			else if (mPlugin->mHotkeys->mGrabbedKeys == 1)
 			{
 				tooltip += _("<b>Only the first hotkey is enabled.</b>\n");
 			}
@@ -58,7 +57,7 @@ namespace SettingsDialog
 
 			markup = g_strdup_printf(
 				_("The &lt;SUPER&gt;+%u combination seems already mapped to another command.\nCheck your Xfce keyboard settings."),
-				Hotkeys::mGrabbedKeys + 1);
+				mPlugin->mHotkeys->mGrabbedKeys + 1);
 			tooltip += markup;
 			g_free(markup);
 
@@ -69,7 +68,7 @@ namespace SettingsDialog
 
 	static void updateKeyAloneActiveWarning(GtkWidget* widget)
 	{
-		gtk_widget_set_visible(widget, mPlugin->mSettings->keyAloneActive && !Hotkeys::mKeyAloneGrabbed);
+		gtk_widget_set_visible(widget, mPlugin->mSettings->keyAloneActive && !mPlugin->mHotkeys->mKeyAloneGrabbed);
 	}
 
 	void popup(Plugin* plugin)
@@ -342,7 +341,7 @@ namespace SettingsDialog
 			g_signal_connect(shortcutsButton, "clicked",
 				G_CALLBACK(+[](GtkButton* _shortcutsButton) {
 					std::string command = "xfce4-keyboard-settings";
-					if (Hotkeys::mAddShortcutUIAvailable)
+					if (mPlugin->mHotkeys->mAddShortcutUIAvailable)
 						command += " --shortcuts";
 
 					GError* error = nullptr;
