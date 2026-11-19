@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-docklike-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Nick Schermer <nick@xfce.org>, 2026
+# Rihards Priedītis <rprieditis@gmail.com>, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-docklike-plugin\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2026-11-14 01:00+0100\n"
+"PO-Revision-Date: 2023-02-22 11:02+0000\n"
+"Last-Translator: Rihards Priedītis <rprieditis@gmail.com>, 2026\n"
+"Language-Team: Latvian (https://app.transifex.com/xfce/teams/16840/lv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+
+#: src/AppInfos.cpp:362
+msgid "Select Launcher"
+msgstr "Izvēlieties palaidēju"
+
+#: src/AppInfos.cpp:363
+msgid "_Cancel"
+msgstr "A_tcelt"
+
+#: src/AppInfos.cpp:363
+msgid "_Open"
+msgstr "_Atvērt"
+
+#: src/Group.cpp:981
+msgid "Pinned to Dock"
+msgstr "Piesprausts dokam"
+
+#: src/Group.cpp:981
+msgid "Pin to Dock"
+msgstr "Piespraust dokam"
+
+#: src/Group.cpp:999
+msgid "Add activation shortcut..."
+msgstr "Pievienot aktivizēšanas īsinājumtaustiņu..."
+
+#: src/Group.cpp:1010
+msgid "Manage activation shortcut..."
+msgstr "Pārvaldīt aktivizēšanas īsinājumtaustiņu..."
+
+#: src/Group.cpp:1032
+msgid "Edit Launcher..."
+msgstr "Rediģēt palaidēju..."
+
+#: src/Group.cpp:1040 src/_dialogs.ui:231
+msgid "Launch new instance"
+msgstr "Palaist jaunu instanci"
+
+#. when a pinned app loses its icon (typically the app is uninstalled) the
+#. user may want to remove it from the dock
+#: src/Group.cpp:1072
+msgid "Remove"
+msgstr "Noņemt"
+
+#. we weren't able to find a launcher for this app, let the user set it
+#. manually
+#: src/Group.cpp:1085
+msgid "Select Launcher..."
+msgstr "Izvēlēties palaidēju..."
+
+#: src/Group.cpp:1094
+msgid "Create Launcher..."
+msgstr "Izveidot palaidēju..."
+
+#: src/Group.cpp:1106
+msgid "Window Actions"
+msgstr "Logu darbības"
+
+#: src/Group.cpp:1113
+msgid "Close"
+msgstr "Aizvērt"
+
+#: src/Group.cpp:1113
+msgid "Close All"
+msgstr "Aizvērt visus"
+
+#: src/Plugin.cpp:126
+msgid "translator-credits"
+msgstr "Rihards Priedītis <rprieditis@gmail.com>"
+
+#: src/SettingsDialog.cpp:39
+#, c-format
+msgid "<b>Only the first %u hotkeys are enabled.</b>\n"
+msgstr "<b>Iespējoti tikai pirmie īsinājumtaustiņi (%u).</b>\n"
+
+#: src/SettingsDialog.cpp:46
+msgid "<b>Only the first hotkey is enabled.</b>\n"
+msgstr "<b>Iespējots tikai pirmais īsinājumtaustiņš.</b>\n"
+
+#: src/SettingsDialog.cpp:50
+msgid "<b>No hotkeys enabled.</b>\n"
+msgstr "<b>Nav iespējots neviens īsinājumtaustiņš.</b>\n"
+
+#: src/SettingsDialog.cpp:54
+#, c-format
+msgid ""
+"The &lt;SUPER&gt;+%u combination seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
+msgstr ""
+"Šķiet, ka kombinācija &lt;SUPER&gt;+%u jau piesaistīta citai komandai.\n"
+"Pārbaudiet Xfce tastatūras iestatījumus."
+
+#: src/docklike.desktop.in:5
+msgid "Docklike Taskbar"
+msgstr "Docklike uzdevumjosla"
+
+#: src/docklike.desktop.in:6
+msgid "A modern, minimalist taskbar for Xfce"
+msgstr "Moderna, minimālistiska uzdevumjosla Xfce videi"
+
+#: src/_dialogs.ui:54
+msgid "_Help"
+msgstr "_Palīdzība"
+
+#: src/_dialogs.ui:70
+msgid "_Close"
+msgstr "_Aizvērt"
+
+#: src/_dialogs.ui:115
+msgid "Don't show the window list for a single window"
+msgstr "Nerādīt logu sarakstu vienam logam"
+
+#: src/_dialogs.ui:130
+msgid "Only show applications on the current workspace"
+msgstr "Rādīt tikai pašreizējās darba vietas lietotnes"
+
+#: src/_dialogs.ui:145
+msgid "Only show applications on the current display"
+msgstr "Rādīt tikai pašreizējā displeja lietotnes"
+
+#: src/_dialogs.ui:160
+msgid "Show preview thumbnails for open windows"
+msgstr "Rādīt atvērto logu priekšskatījuma sīktēlus"
+
+#: src/_dialogs.ui:176
+msgid "Show the number of open windows (if more than 2)"
+msgstr "Rādīt atvērto logu skaitu (ja vairāk nekā 2)"
+
+#: src/_dialogs.ui:192
+msgid "Disable D-Bus launcher counts"
+msgstr "Atspējot D-Bus palaidēju skaitītājus"
+
+#: src/_dialogs.ui:217
+msgid "Middle mouse button:"
+msgstr "Peles vidējā poga:"
+
+#: src/_dialogs.ui:230
+msgid "Close all"
+msgstr "Aizvērt visus"
+
+#: src/_dialogs.ui:232
+msgid "Do Nothing"
+msgstr "Neko nedarīt"
+
+#: src/_dialogs.ui:254
+msgid "Behavior"
+msgstr "Uzvedība"
+
+#: src/_dialogs.ui:287
+msgid "Active indicator style:"
+msgstr "Aktīvā indikatora stils:"
+
+#: src/_dialogs.ui:300 src/_dialogs.ui:331
+msgid "Bars"
+msgstr "Joslas"
+
+#: src/_dialogs.ui:301 src/_dialogs.ui:332
+msgid "Dots"
+msgstr "Punkti"
+
+#: src/_dialogs.ui:302 src/_dialogs.ui:333
+msgid "Rectangles"
+msgstr "Taisnstūri"
+
+#: src/_dialogs.ui:303 src/_dialogs.ui:334
+msgid "Ciliora"
+msgstr "Ciliora"
+
+#: src/_dialogs.ui:304 src/_dialogs.ui:335
+msgid "Circles"
+msgstr "Apļi"
+
+#: src/_dialogs.ui:305 src/_dialogs.ui:336
+msgid "None"
+msgstr "Nav"
+
+#: src/_dialogs.ui:318
+msgid "Inactive indicator style:"
+msgstr "Neaktīvā indikatora stils:"
+
+#: src/_dialogs.ui:349
+msgid "Indicator orientation:"
+msgstr "Indikatora novietojums:"
+
+#: src/_dialogs.ui:361
+msgid "Automatic"
+msgstr "Automātiski"
+
+#: src/_dialogs.ui:362
+msgid "Bottom"
+msgstr "Apakšā"
+
+#: src/_dialogs.ui:363
+msgid "Right"
+msgstr "Pa labi"
+
+#: src/_dialogs.ui:364
+msgid "Top"
+msgstr "Augšā"
+
+#: src/_dialogs.ui:365
+msgid "Left"
+msgstr "Pa kreisi"
+
+#: src/_dialogs.ui:375
+msgid "Get indicator color from theme"
+msgstr "Ņemt indikatora krāsu no motīva"
+
+#: src/_dialogs.ui:401
+msgid "Active indicator:"
+msgstr "Aktīvais indikators:"
+
+#: src/_dialogs.ui:425
+msgid "Inactive indicator:"
+msgstr "Neaktīvais indikators:"
+
+#: src/_dialogs.ui:452
+msgid "Force icon size:"
+msgstr "Piespiedu ikonu izmērs:"
+
+#: src/_dialogs.ui:496
+msgid "Preview width:"
+msgstr "Priekšskatījuma platums:"
+
+#: src/_dialogs.ui:525
+msgid "Preview height:"
+msgstr "Priekšskatījuma augstums:"
+
+#: src/_dialogs.ui:553
+msgid "Appearance"
+msgstr "Izskats"
+
+#: src/_dialogs.ui:583
+msgid "Switch between applications with <SUPER>+[1, 2, ...]"
+msgstr "Pārslēgties starp lietotnēm ar <SUPER>+[1, 2, ...]"
+
+#: src/_dialogs.ui:615
+msgid "Minimize active group instead of switching between its windows"
+msgstr "Minimizēt aktīvo grupu, nevis pārslēgties starp tās logiem"
+
+#: src/_dialogs.ui:649
+msgid "Switch to the last window with <SUPER>"
+msgstr "Pārslēgties uz pēdējo logu ar <SUPER>"
+
+#: src/_dialogs.ui:665
+msgid ""
+"The left &lt;SUPER&gt; key seems already mapped to another command.\n"
+"Check your Xfce keyboard settings."
+msgstr ""
+"Šķiet, ka kreisais taustiņš &lt;SUPER&gt; jau piesaistīts citai komandai.\n"
+"Pārbaudiet Xfce tastatūras iestatījumus."
+
+#: src/_dialogs.ui:677
+msgid "Manage shortcuts..."
+msgstr "Pārvaldīt īsinājumtaustiņus..."
+
+#: src/_dialogs.ui:698
+msgid "Keyboard hotkeys"
+msgstr "Tastatūras īsinājumtaustiņi"
