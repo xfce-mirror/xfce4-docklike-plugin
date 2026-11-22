@@ -19,6 +19,8 @@
 #ifndef STORE_IPP
 #define STORE_IPP
 
+#include <gtk/gtk.h>
+
 #include <algorithm>
 #include <functional>
 #include <list>
