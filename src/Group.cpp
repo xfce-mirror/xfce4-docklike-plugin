@@ -1184,37 +1184,42 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 	GdkDevice* device = gdk_drag_context_get_device(context);
 	gdk_window_get_device_position(gtk_widget_get_window(widget), device, nullptr, nullptr, &mask);
 
-	gchar* name = gdk_atom_name(gtk_drag_dest_find_target(widget, context, nullptr));
-	std::string target = (name != nullptr) ? name : "";
-	g_free(name);
+	if (mask & GDK_CONTROL_MASK)
+		gtk_drag_cancel(context);
 
-	if (target == "application/docklike_group")
+	GList* tmp_list = gdk_drag_context_list_targets(context);
+
+	if (tmp_list != nullptr)
 	{
-		if (mask & GDK_CONTROL_MASK)
-			gtk_drag_cancel(context);
+		gchar* name = gdk_atom_name(GDK_POINTER_TO_ATOM(tmp_list->data));
+		std::string target = name;
+		g_free(name);
 
-		gtk_drag_highlight(mButton);
-		gdk_drag_status(context, GDK_ACTION_MOVE, time);
-		return true;
+		if (target == "text/uri-list")
+		{
+			gtk_drag_highlight(mButton);
+			gdk_drag_status(context, GDK_ACTION_COPY, time);
+			return true;
+		}
+		
+		if (target != "application/docklike_group")
+		{
+			if (mWindowsCount)
+			{
+				GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
+				groupWindow->activate(time);
+
+				if (!mGroupMenu.mVisible)
+					onMouseEnter();
+			}
+
+			gdk_drag_status(context, GDK_ACTION_DEFAULT, time);
+			return true;
+		}
 	}
 
-	if (target == "text/uri-list")
-	{
-		gtk_drag_highlight(mButton);
-		gdk_drag_status(context, GDK_ACTION_COPY, time);
-		return true;
-	}
-
-	if (mWindowsCount)
-	{
-		GroupWindow* groupWindow = mWindows.get(mTopWindowIndex);
-		groupWindow->activate(time);
-
-		if (!mGroupMenu.mVisible)
-			onMouseEnter();
-	}
-
-	gdk_drag_status(context, GDK_ACTION_DEFAULT, time);
+	gtk_drag_highlight(mButton);
+	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
