@@ -22,22 +22,6 @@
 
 static GtkTargetEntry dockDestEntries[1] = {{(gchar*)"text/uri-list", 0, 0}};
 
-static void onDockDragDataReceived(GtkWidget* widget, GdkDragContext* context, gint x, gint y, GtkSelectionData* data, guint info, guint time)
-{
-	Dock* dock = (Dock*)g_object_get_data(G_OBJECT(widget), "dock");
-
-	if (dock == nullptr)
-		return;
-
-	gchar** uris = gtk_selection_data_get_uris(data);
-
-	if (uris != nullptr)
-	{
-		dock->pinFromUris((const gchar* const*)uris, nullptr);
-		g_strfreev(uris);
-	}
-}
-
 Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 {
 	mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -46,9 +30,16 @@ Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 	if (mPlugin->mSettings->dockSize)
 		gtk_widget_set_size_request(mBox, mPlugin->mSettings->dockSize, -1);
 
-	g_object_set_data(G_OBJECT(mBox), "dock", this);
 	gtk_drag_dest_set(mBox, GtkDestDefaults(GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP), dockDestEntries, 1, GDK_ACTION_COPY);
-	g_signal_connect(G_OBJECT(mBox), "drag-data-received", G_CALLBACK(onDockDragDataReceived), nullptr);
+	g_signal_connect(G_OBJECT(mBox), "drag-data-received", G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, GtkSelectionData* data, guint info, guint time, Dock* me) {
+		gchar** uris = gtk_selection_data_get_uris(data);
+
+		if (uris != nullptr)
+		{
+			me->pinFromUris((const gchar* const*)uris, nullptr);
+			g_strfreev(uris);
+		}
+	}), this);
 
 	gtk_widget_show(mBox);
 }
@@ -69,12 +60,9 @@ Group* Dock::prepareGroup(std::shared_ptr<AppInfo> appInfo)
 
 void Dock::pinApp(std::shared_ptr<AppInfo> appInfo, Group* at)
 {
-	if (!appInfo || appInfo->mPath.empty())
-		return;
-
 	std::shared_ptr<Group> group = mGroups.findIf(
 		[&appInfo](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> bool {
-			return g.first == appInfo || (!appInfo->mId.empty() && g.first->mId == appInfo->mId);
+			return g.first->mId == appInfo->mId;
 		});
 
 	if (group)
@@ -100,21 +88,15 @@ void Dock::pinApp(std::shared_ptr<AppInfo> appInfo, Group* at)
 
 void Dock::pinFromUris(const gchar* const* uris, Group* at)
 {
-	bool first = true;
-
 	for (const gchar* const* uri = uris; uri != nullptr && *uri != nullptr; uri++)
 	{
 		if (!g_str_has_prefix(*uri, "file:"))
 			continue;
 
-		GError* error = nullptr;
-		gchar* path = g_filename_from_uri(*uri, nullptr, &error);
+		gchar* path = g_filename_from_uri(*uri, nullptr, nullptr);
 
 		if (path == nullptr)
-		{
-			g_clear_error(&error);
 			continue;
-		}
 
 		std::string pathStr = path;
 		g_free(path);
@@ -125,10 +107,9 @@ void Dock::pinFromUris(const gchar* const* uris, Group* at)
 		std::string id = Help::String::toLowercase(Help::String::pathBasename(pathStr, true));
 		std::shared_ptr<AppInfo> appInfo = mPlugin->mAppInfos->search(id);
 
-		if (appInfo && !appInfo->mPath.empty())
+		if (appInfo->mGAppInfo != nullptr)
 		{
-			pinApp(appInfo, first ? at : nullptr);
-			first = false;
+			pinApp(appInfo, at);
 		}
 	}
 }
