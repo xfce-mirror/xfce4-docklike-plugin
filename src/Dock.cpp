@@ -39,7 +39,8 @@ Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 			me->pinFromUris((const gchar* const*)uris, nullptr);
 			g_strfreev(uris);
 		}
-	}), this);
+	}),
+		this);
 
 	gtk_widget_show(mBox);
 }

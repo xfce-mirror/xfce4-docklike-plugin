@@ -58,7 +58,7 @@ public:
 private:
 	void activateGroup(Group* group);
 	void pinApp(std::shared_ptr<AppInfo> appInfo, Group* at = nullptr);
-	
+
 	Plugin* mPlugin;
 };
 

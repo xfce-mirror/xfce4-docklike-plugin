@@ -1201,7 +1201,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 			gdk_drag_status(context, GDK_ACTION_COPY, time);
 			return true;
 		}
-		
+
 		if (target != "application/docklike_group")
 		{
 			if (mWindowsCount)
