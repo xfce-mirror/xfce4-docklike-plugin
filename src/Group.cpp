@@ -1195,13 +1195,6 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		std::string target = name;
 		g_free(name);
 
-		if (target == "text/uri-list")
-		{
-			gtk_drag_highlight(mButton);
-			gdk_drag_status(context, GDK_ACTION_COPY, time);
-			return true;
-		}
-
 		if (target != "application/docklike_group")
 		{
 			if (mWindowsCount)
@@ -1211,6 +1204,13 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 				if (!mGroupMenu.mVisible)
 					onMouseEnter();
+			}
+
+			if (target == "text/uri-list")
+			{
+				gtk_drag_highlight(mButton);
+				gdk_drag_status(context, GDK_ACTION_COPY, time);
+				return true;
 			}
 
 			gdk_drag_status(context, GDK_ACTION_DEFAULT, time);
