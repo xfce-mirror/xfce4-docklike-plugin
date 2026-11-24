@@ -109,6 +109,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow) : mGroupWindow(groupWindo
 
 	g_signal_connect(G_OBJECT(mItem), "drag-motion",
 		G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, guint time, GroupMenuItem* me) -> gboolean {
+			gtk_drag_unhighlight(me->mGroupWindow->mGroup->mButton);
 			me->mGroupWindow->activate(time);
 			gdk_drag_status(context, GDK_ACTION_MOVE, time);
 			return true;

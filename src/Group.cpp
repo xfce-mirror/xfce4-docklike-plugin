@@ -1208,6 +1208,7 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 
 			if (target == "text/uri-list")
 			{
+				gtk_drag_highlight(mButton);
 				gdk_drag_status(context, GDK_ACTION_COPY, time);
 				return true;
 			}
