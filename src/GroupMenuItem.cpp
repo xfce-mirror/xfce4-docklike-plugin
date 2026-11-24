@@ -81,6 +81,10 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow) : mGroupWindow(groupWindo
 		return true;
 	});
 
+	// get a preview at startup if possible, then window state is tracked in GroupWindow
+	if (mGroupWindow->mGroup->mPlugin->mSettings->showPreviews)
+		updatePreview();
+
 	//--------------------------------------------------
 
 	g_signal_connect(G_OBJECT(mItem), "button-press-event",

@@ -18,13 +18,17 @@
 
 #include "GroupWindow.hpp"
 
-GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwWindow)
+GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwWindow), mState(xfw_window_get_state(xfwWindow))
 {
 	std::string groupName = plugin->mXfw->getGroupName(this);
 	g_debug("NEW: %s", groupName.c_str());
 	std::shared_ptr<AppInfo> appInfo = plugin->mAppInfos->search(groupName);
 	mGroup = plugin->mDock->prepareGroup(appInfo);
 	mGroupMenuItem = new GroupMenuItem(this);
+	mPreviewTimeout.setup(1000, [this]() {
+		mGroupMenuItem->updatePreview();
+		return false;
+	});
 
 	//--------------------------------------------------
 
@@ -44,6 +48,18 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwW
 		G_CALLBACK(+[](XfwWindow* window, XfwWindowState changed_mask,
 						XfwWindowState new_state, GroupWindow* me) {
 			me->updateState();
+
+			if (me->mGroup->mPlugin->mSettings->showPreviews
+				&& changed_mask & XFW_WINDOW_STATE_MINIMIZED
+				&& !(new_state & XFW_WINDOW_STATE_MINIMIZED))
+			{
+				// get a preview as soon as the window is unminimized, after startup or any Dock::drawGroups()
+				cairo_surface_t* surface = nullptr;
+				g_object_get(G_OBJECT(me->mGroupMenuItem->mPreview), "surface", &surface, nullptr);
+				if (surface == nullptr)
+					// we nedd to wait a bit, otherwise the pixbuf is blank
+					me->mPreviewTimeout.start();
+			}
 		}),
 		this);
 
@@ -98,6 +114,7 @@ GroupWindow::~GroupWindow()
 {
 	leaveGroup();
 	g_signal_handlers_disconnect_by_data(this->mXfwWindow, this);
+	mPreviewTimeout.stop();
 	delete mGroupMenuItem;
 }
 
