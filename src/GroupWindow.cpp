@@ -26,7 +26,8 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwW
 	mGroup = plugin->mDock->prepareGroup(appInfo);
 	mGroupMenuItem = new GroupMenuItem(this);
 	mPreviewTimeout.setup(1000, [this]() {
-		mGroupMenuItem->updatePreview();
+		if (mGroup->mPlugin->mSettings->showPreviews)
+			mGroupMenuItem->updatePreview();
 		return false;
 	});
 
@@ -93,6 +94,11 @@ GroupWindow::GroupWindow(XfwWindow* xfwWindow, Plugin* plugin) : mXfwWindow(xfwW
 	updateState();
 	mGroupMenuItem->updateIcon();
 	mGroupMenuItem->updateLabel();
+
+	// get a preview at startup if possible, then window state is tracked above
+	// we need to wait a bit here as well, to cover all possible cases
+	if (mGroup->mPlugin->mSettings->showPreviews)
+		mPreviewTimeout.start();
 }
 
 bool GroupWindow::getState(XfwWindowState flagMask) const
