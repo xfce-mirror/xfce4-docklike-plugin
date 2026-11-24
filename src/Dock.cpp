@@ -17,7 +17,10 @@
  */
 
 #include "Dock.hpp"
+#include "AppInfos.hpp"
 #include "Helpers.hpp"
+
+static GtkTargetEntry dockDestEntries[1] = {{(gchar*)"text/uri-list", 0, 0}};
 
 Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 {
@@ -26,6 +29,18 @@ Dock::Dock(Plugin* plugin) : mPlugin(plugin)
 
 	if (mPlugin->mSettings->dockSize)
 		gtk_widget_set_size_request(mBox, mPlugin->mSettings->dockSize, -1);
+
+	gtk_drag_dest_set(mBox, GtkDestDefaults(GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP), dockDestEntries, 1, GDK_ACTION_COPY);
+	g_signal_connect(G_OBJECT(mBox), "drag-data-received", G_CALLBACK(+[](GtkWidget* widget, GdkDragContext* context, gint x, gint y, GtkSelectionData* data, guint info, guint time, Dock* me) {
+		gchar** uris = gtk_selection_data_get_uris(data);
+
+		if (uris != nullptr)
+		{
+			me->pinFromUris((const gchar* const*)uris, nullptr);
+			g_strfreev(uris);
+		}
+	}),
+		this);
 
 	gtk_widget_show(mBox);
 }
@@ -42,6 +57,62 @@ Group* Dock::prepareGroup(std::shared_ptr<AppInfo> appInfo)
 	}
 
 	return group.get();
+}
+
+void Dock::pinApp(std::shared_ptr<AppInfo> appInfo, Group* at)
+{
+	std::shared_ptr<Group> group = mGroups.findIf(
+		[&appInfo](std::pair<const std::shared_ptr<AppInfo>, std::shared_ptr<Group>> g) -> bool {
+			return g.first->mId == appInfo->mId;
+		});
+
+	if (group)
+	{
+		if (group->mPinned)
+			return;
+
+		group->mPinned = true;
+		group->updateStyle();
+	}
+	else
+	{
+		group = std::make_shared<Group>(appInfo, true, mPlugin);
+		mGroups.push(appInfo, group);
+		gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
+	}
+
+	if (at != nullptr && at != group.get())
+		moveButton(group.get(), at);
+
+	savePinned();
+}
+
+void Dock::pinFromUris(const gchar* const* uris, Group* at)
+{
+	for (const gchar* const* uri = uris; uri != nullptr && *uri != nullptr; uri++)
+	{
+		if (!g_str_has_prefix(*uri, "file:"))
+			continue;
+
+		gchar* path = g_filename_from_uri(*uri, nullptr, nullptr);
+
+		if (path == nullptr)
+			continue;
+
+		std::string pathStr = path;
+		g_free(path);
+
+		if (!g_str_has_suffix(pathStr.c_str(), ".desktop"))
+			continue;
+
+		std::string id = Help::String::toLowercase(Help::String::pathBasename(pathStr, true));
+		std::shared_ptr<AppInfo> appInfo = mPlugin->mAppInfos->search(id);
+
+		if (appInfo->mGAppInfo != nullptr)
+		{
+			pinApp(appInfo, at);
+		}
+	}
 }
 
 void Dock::moveButton(Group* moving, Group* dest)
