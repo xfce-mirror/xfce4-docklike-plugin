@@ -41,6 +41,7 @@ public:
 	void moveButton(Group* moving, Group* dest);
 	void savePinned();
 	void drawGroups();
+	void pinFromUris(const gchar* const* uris, Group* at = nullptr);
 
 	void activateGroup(int nb);
 	void activateGroup(const std::string& appId);
@@ -56,6 +57,7 @@ public:
 
 private:
 	void activateGroup(Group* group);
+	void pinApp(std::shared_ptr<AppInfo> appInfo, Group* at = nullptr);
 
 	Plugin* mPlugin;
 };
