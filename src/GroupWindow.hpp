@@ -21,6 +21,7 @@
 
 #include "Group.hpp"
 #include "GroupMenuItem.hpp"
+#include "Helpers.hpp"
 #include "Plugin.hpp"
 
 #include <libxfce4windowing/libxfce4windowing.h>
@@ -49,8 +50,11 @@ public:
 
 	XfwWindow* mXfwWindow;
 
-	unsigned short mState{};
+	int mState;
 	bool mGroupAssociated = false;
+
+private:
+	Help::Gtk::Timeout mPreviewTimeout;
 };
 
 #endif // GROUP_WINDOW_HPP
